@@ -1,0 +1,39 @@
+{
+  "name": "@mysigmail-card/root",
+  "private": true,
+  "version": "0.1.0",
+  "description": "An open source html email template builder with drag & drop editor",
+  "scripts": {
+    "release": "bumpp -c 'build: release v' -t",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mysigmail/card.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mysigmail/card/issues"
+  },
+  "homepage": "https://github.com/mysigmail/card#readme",
+  "author": "Anton Reshetov",
+  "lint-staged": {
+    "./client/*.{js,ts,vue}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "./server/*.{js,ts}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "bumpp": "^7.1.1",
+    "eslint": "^8.10.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.6",
+    "prettier": "^2.5.1"
+  }
+}

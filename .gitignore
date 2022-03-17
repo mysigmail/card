@@ -12,8 +12,6 @@ dist
 dist-ssr
 *.local
 .env
-src/types/auto-imports.d.ts
-src/types/components.d.ts
 
 # Editor directories and files
 .vscode/*
