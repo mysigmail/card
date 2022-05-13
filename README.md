@@ -16,3 +16,5 @@ The project was written almost 3 years ago and so its code base is outdated. So 
 In the process of writing from scratch I think there will be a lot of rethinking, so no help is needed until I get a stable release. But I don't mind if someone else wants to. 
 
 Now a good help would be your recognition and star for the project to gain visibility on GitHub.
+
+![](./subscribe.gif)
