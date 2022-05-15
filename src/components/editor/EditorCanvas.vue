@@ -1,5 +1,7 @@
 <template>
-  <TheEditor />
+  <div class="editor-canvas">
+    canvas
+  </div>
 </template>
 
 <script setup lang="ts"></script>

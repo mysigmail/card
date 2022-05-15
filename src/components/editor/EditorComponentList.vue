@@ -1,5 +1,7 @@
 <template>
-  <TheEditor />
+  <div class="component-list">
+    list
+  </div>
 </template>
 
 <script setup lang="ts"></script>
