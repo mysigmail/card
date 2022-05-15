@@ -1,4 +1,5 @@
-
+<h1 align="center">MySigMail Card</h1>
+<p align="center">An open source html email template builder with drag & drop editor</p>
 <img src="./hero.jpg">
 
 ## Motivation
@@ -18,3 +19,14 @@ In the process of writing from scratch I think there will be a lot of rethinking
 Now a good help would be your recognition and star for the project to gain visibility on GitHub.
 
 ![](./subscribe.gif)
+
+## Follow
+
+- News and updates on [Twitter](https://twitter.com/mysigmail).
+- [Discussions](https://github.com/mysigmail/card/discussions)
+
+## License
+
+[AGPL-3.0](https://github.com/mysigmail/card/blob/master/LICENSE)
+
+Copyright (c) 2022-present, Anton Reshetov.
