@@ -11,14 +11,7 @@ const router = createRouter({
       meta: {
         layout: 'Default'
       },
-      component: () => import('./views/Home.vue')
-    },
-    {
-      path: '/about',
-      meta: {
-        layout: 'Blank'
-      },
-      component: () => import('./views/About.vue')
+      component: () => import('./views/Main.vue')
     }
   ]
 })

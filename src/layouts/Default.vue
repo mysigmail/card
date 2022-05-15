@@ -1,5 +1,6 @@
 <template>
   <div class="default">
+    <TheHeader />
     <slot />
   </div>
 </template>
@@ -8,10 +9,8 @@
 
 <style lang="scss" scoped>
 .default {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr;
   height: 100vh;
 }
 </style>
