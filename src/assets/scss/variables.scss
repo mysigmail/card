@@ -14,6 +14,7 @@
   --text-xs: calc(var(--text-base-size) * 1);
   --text-sm: calc(var(--text-base-size) * 1.2);
   --text-md: calc(var(--text-base-size) * 1.4);
+  --text-md2: calc(var(--text-base-size) * 1.6);
   --text-lg: calc(var(--text-base-size) * 1.8);
   --text-xl: calc(var(--text-base-size) * 2.4);
   --text-xxl: calc(var(--text-base-size) * 3.2);
@@ -30,4 +31,6 @@
   --color-contrast-medium: hsl(0, 0%, 50%);
   --color-contrast-high: hsl(0, 0%, 15%);
   --color-contrast-higher: hsl(0, 0%, 0%);
+
+  --color-border: var(--color-contrast-lower-alt);
 }
