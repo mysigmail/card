@@ -24,14 +24,17 @@ export default defineConfig({
         ElementPlusResolver(),
         IconsResolver({
           prefix: '',
-          customCollections: ['svg']
+          customCollections: ['svg', 'unicons']
         })
       ],
       dirs: ['src/layouts', 'src/components']
     }),
     Icons({
       customCollections: {
-        svg: FileSystemIconLoader('./src/assets/svg')
+        svg: FileSystemIconLoader('./src/assets/svg'),
+        unicons: FileSystemIconLoader(
+          './node_modules/@iconscout/unicons/svg/line'
+        )
       }
     })
   ],
