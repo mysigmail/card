@@ -10,6 +10,17 @@
       <div class="title">
         {{ title }}
       </div>
+      <div
+        v-if="showActions"
+        class="actions"
+      >
+        <EditorActionButton
+          type="danger"
+          @click.stop="onClick('delete')"
+        >
+          <UniconsTrashAlt />
+        </EditorActionButton>
+      </div>
       <UniconsAngleRight
         class="icon"
         :class="{ 'is-show': isShow }"
@@ -29,9 +40,18 @@ import { ref, inject } from 'vue'
 
 interface Props {
   title: string
+  showActions?: boolean
 }
 
-defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  showActions: false
+})
+
+interface Emits {
+  (e: 'action', value: string): void
+}
+
+const emit = defineEmits<Emits>()
 
 const rootType = inject<'default' | 'bordered'>('type')
 
@@ -39,6 +59,10 @@ const isShow = ref(false)
 
 const onShow = () => {
   isShow.value = !isShow.value
+}
+
+const onClick = (action: string) => {
+  emit('action', action)
 }
 </script>
 
@@ -71,6 +95,9 @@ const onShow = () => {
   }
   .body {
     padding-bottom: var(--spacing-xs);
+  }
+  .actions {
+    margin-right: var(--spacing-xs);
   }
 }
 </style>
