@@ -2,7 +2,7 @@
   <div class="editor">
     <EditorComponentList />
     <EditorCanvas />
-    <EditorTools />
+    <EditorToolsPanel />
   </div>
 </template>
 
