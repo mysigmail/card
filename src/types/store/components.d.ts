@@ -7,4 +7,6 @@ interface ComponentList {
 
 export interface ComponentsState {
   list: ComponentList[]
+  installed?: Component[]
+  editable?: Component
 }

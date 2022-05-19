@@ -22,6 +22,7 @@
   "dependencies": {
     "@iconscout/unicons": "^4.0.1",
     "element-plus": "^2.2.0",
+    "nanoid": "^3.3.4",
     "pinia": "^2.0.11",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14"
