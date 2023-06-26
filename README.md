@@ -1,3 +1,5 @@
+> We haven't given up on the development and we will resume it as soon as we have the time. In the meantime, we have prepared a collection of high-quality, unstyled [components](https://github.com/mysigmail/vue-email) that you can use to create beautiful emails using Vue.
+
 <h1 align="center">MySigMail Card</h1>
 <p align="center">An open source html email template builder with drag & drop editor</p>
 <img src="./hero.jpg">
