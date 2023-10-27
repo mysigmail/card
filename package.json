@@ -30,14 +30,18 @@
     "@vitejs/plugin-vue": "^4.4.0",
     "bumpp": "^9.2.0",
     "eslint": "^8.52.0",
-    "husky": "^8.0.3",
     "lint-staged": "^15.0.2",
     "sass": "^1.69.5",
+    "simple-git-hooks": "^2.9.0",
     "typescript": "^5.2.2",
     "unplugin-auto-import": "^0.16.7",
     "unplugin-icons": "^0.17.1",
     "unplugin-vue-components": "^0.25.2",
     "vite": "^4.5.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged",
+    "commit-msg": "pnpm commitlint --edit $1"
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
