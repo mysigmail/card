@@ -4,6 +4,10 @@
   "version": "0.1.0",
   "private": true,
   "author": "Anton Reshetov",
+  "engines": {
+    "pnpm": ">=8.0.0",
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit --skipLibCheck && vite build",
@@ -50,5 +54,8 @@
     "*.{js,ts,vue}": [
       "eslint --fix"
     ]
+  },
+  "volta": {
+    "node": "20.9.0"
   }
 }
