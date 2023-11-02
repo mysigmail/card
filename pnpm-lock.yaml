@@ -26,9 +26,6 @@ dependencies:
   vue:
     specifier: ^3.3.7
     version: 3.3.7(typescript@5.2.2)
-  vue-router:
-    specifier: ^4.2.5
-    version: 4.2.5(vue@3.3.7)
 
 devDependencies:
   '@antfu/eslint-config':
@@ -5885,15 +5882,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
-
-  /vue-router@4.2.5(vue@3.3.7):
-    resolution: {integrity: sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==}
-    peerDependencies:
-      vue: ^3.2.0
-    dependencies:
-      '@vue/devtools-api': 6.5.1
-      vue: 3.3.7(typescript@5.2.2)
-    dev: false
 
   /vue-template-compiler@2.7.15:
     resolution: {integrity: sha512-yQxjxMptBL7UAog00O8sANud99C6wJF+7kgbcwqkvA38vCGF7HWE66w0ZFnS/kX5gSoJr/PQ4/oS3Ne2pW37Og==}
