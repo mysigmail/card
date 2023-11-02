@@ -1,6 +1,13 @@
 import { computed } from 'vue'
 import { getMenuItems } from './utils'
-import type { ColorPickerTool, ImageTool, InputNumberTool, PaddingTool, Tool } from '@/types/editor'
+import type {
+  ColorPickerTool,
+  ImageTool,
+  InputNumberTool,
+  PaddingTool,
+  ToggleTool,
+  Tool,
+} from '@/types/editor'
 import { getToolsByGroup, getValueFromToolsByType } from '@/store/components/utils'
 
 export function useMenu(tools: Tool[]) {
@@ -48,6 +55,10 @@ export function useMenu(tools: Tool[]) {
 
   const items = computed(() => getMenuItems(tools))
 
+  const isShowMenu = computed(() => {
+    return getValueFromToolsByType<ToggleTool>(toolsByGroup.value.Menu, 'toggle')
+  })
+
   return {
     generalPadding,
     generalBg,
@@ -55,5 +66,6 @@ export function useMenu(tools: Tool[]) {
     layoutAttrs,
     logoAttrs,
     items,
+    isShowMenu,
   }
 }

@@ -10,7 +10,7 @@
     >
       <MImg v-bind="logoAttrs" />
     </MColumn>
-    <MColumn>
+    <MColumn v-if="isShowMenu">
       <MenuItems
         v-if="items"
         :items="items"
@@ -31,7 +31,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { logoContainerWidth, layoutAttrs, logoAttrs, items } = useMenu(props.tools)
+const { logoContainerWidth, layoutAttrs, logoAttrs, items, isShowMenu } = useMenu(props.tools)
 </script>
 
 <style lang="scss" scoped></style>

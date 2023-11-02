@@ -2,13 +2,19 @@ import { nanoid } from 'nanoid'
 import { images } from '../images'
 import { THEME_COLOR } from '../../constants'
 import { toolBuilder } from '../../utils'
-import type { ColorPickerTool, ComponentBuilder, ImageTool, InputNumberTool, InputTool, MultiTool, PaddingTool } from '@/types/editor'
+import type {
+  ColorPickerTool,
+  ComponentBuilder,
+  ImageTool,
+  InputNumberTool,
+  InputTool,
+  MultiTool,
+  PaddingTool,
+  ToggleTool,
+} from '@/types/editor'
 
 const menu1: ComponentBuilder = (theme, label) => {
-  const preview
-    = theme === 'dark'
-      ? images.components.menu1.dark
-      : images.components.menu1.light
+  const preview = theme === 'dark' ? images.components.menu1.dark : images.components.menu1.light
   const logo = theme === 'dark' ? images.logo.white : images.logo.black
   const bgColor = theme === 'dark' ? THEME_COLOR.dark : THEME_COLOR.light
   const linkColor = theme === 'dark' ? THEME_COLOR.light : THEME_COLOR.dark
@@ -136,6 +142,12 @@ const menu1: ComponentBuilder = (theme, label) => {
             ],
           },
         ],
+      }),
+      toolBuilder<ToggleTool>({
+        group: 'Menu',
+        label: 'Show / Hide',
+        type: 'toggle',
+        value: true,
       }),
     ],
   }
