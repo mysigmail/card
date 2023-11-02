@@ -1,5 +1,3 @@
-> We haven't given up on the development and we will resume it as soon as we have the time. In the meantime, we have prepared a collection of high-quality, unstyled [components](https://github.com/mysigmail/vue-email) that you can use to create beautiful emails using Vue.
-
 <h1 align="center">MySigMail Card</h1>
 <p align="center">An open source html email template builder with drag & drop editor</p>
 <img src="./hero.jpg">
@@ -10,9 +8,29 @@ In the world of development there are more and more dependencies and vendor-lock
 
 I love open source, and I contribute to it. Right now I want to give back to the community my commercial project [MySigMail Card](https://card.mysigmail.com). 
 
-## Development path
+## Roadmap
 
 The project was written almost 3 years ago and so its code base is outdated. So before I give it to the community I will rewrite it from scratch using modern solutions. 
+
+## Support
+
+MySigMail Card is open source project and completely free to use.
+
+However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing. You can support MySigMail Card development via the following methods:
+
+<div align="center">
+
+[![Donate via Open Collective](https://img.shields.io/badge/donate-Open%20Collective-blue.svg?style=popout&logo=opencollective)](https://opencollective.com/mysigmail)
+[![Donate via PayPal](https://img.shields.io/badge/donate-PayPal-blue.svg?style=popout&logo=paypal)](https://paypal.me/antongithub)
+
+</div>
+
+## Development
+
+```sh
+pnpm i
+pnpm dev
+```
 
 ## How can I help?
 
