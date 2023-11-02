@@ -1,0 +1,25 @@
+name: Add GitHub Release Tag
+
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+
+      - name: Create Release for Tag
+        id: release_tag
+        uses: massCodeIO/release-tag@conventional
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          draft: true
+          preset: angular
