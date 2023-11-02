@@ -2,14 +2,14 @@
   <MContainer
     class="p-container"
     :class="{
-      'is-editable': componentStore.editableIndex === props.index,
+      'is-editable': editableIndex === props.index,
     }"
     :style="style"
     @mouseover="showOverflow = true"
     @mouseleave="showOverflow = false"
   >
     <slot />
-    <TheOverflow :show="!componentStore.isDragging && showOverflow" :index="index" />
+    <TheOverflow :show="!isDragging && showOverflow" :index="index" />
   </MContainer>
 </template>
 
@@ -25,7 +25,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const componentStore = useComponentsStore()
+const { isDragging, editableIndex } = useComponentsStore()
 const showOverflow = ref(false)
 
 const style: CSSProperties = {

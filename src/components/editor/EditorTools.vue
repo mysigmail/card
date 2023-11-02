@@ -1,8 +1,8 @@
 <template>
   <div class="editor-tools-panel">
-    <EditorGeneralTools v-if="componentsStore.editableIndex === -1" />
+    <EditorGeneralTools v-if="editableIndex === -1" />
     <EditorPanel
-      v-for="(v, k) in componentsStore.editableToolsByGroup"
+      v-for="(v, k) in editableToolsByGroup"
       :key="k"
     >
       <EditorPanelItem :title="k">
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { useComponentsStore } from '@/store/components'
 
-const componentsStore = useComponentsStore()
+const { editableToolsByGroup, editableIndex } = useComponentsStore()
 </script>
 
 <style lang="scss" scoped>

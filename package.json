@@ -23,7 +23,6 @@
     "@mysigmail/vue-email-components": "^0.2.2",
     "element-plus": "^2.4.1",
     "nanoid": "^5.0.2",
-    "pinia": "^2.1.7",
     "sortablejs": "^1.15.0",
     "vue": "^3.3.7"
   },

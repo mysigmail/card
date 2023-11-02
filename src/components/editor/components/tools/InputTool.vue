@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'string',
 })
 
-const componentsStore = useComponentsStore()
+const { updateToolById } = useComponentsStore()
 
 const localValue = ref(props.value)
 
@@ -45,7 +45,7 @@ watch(
 )
 
 function onInput() {
-  componentsStore.updateToolById<InputTool>(
+  updateToolById<InputTool>(
     props.id,
     'value',
     localValue.value,

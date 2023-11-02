@@ -5,7 +5,7 @@
       ref="previewRef"
       class="preview"
       :style="{
-        backgroundColor: generalStore.$state.background.color,
+        backgroundColor: general.background.color,
       }"
       @click="onClick"
     />
@@ -18,15 +18,13 @@ import { onMounted, ref } from 'vue'
 import { renderToShadowDom } from '@/utils'
 import Editor from '@/components/editor/EditorCanvas.vue'
 import { useComponentsStore } from '@/store/components'
-import { useGeneralStore } from '@/store/general'
 
 const previewRef = ref()
 
-const componentStore = useComponentsStore()
-const generalStore = useGeneralStore()
+const { setEditable, general } = useComponentsStore()
 
 function onClick() {
-  componentStore.setEditable(null)
+  setEditable(null)
 }
 
 onMounted(() => {

@@ -52,21 +52,21 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const componentStore = useComponentsStore()
+const { installed, setEditable, removeComponent, duplicateComponent } = useComponentsStore()
 
-const component = computed(() => componentStore.installed?.[props.index])
+const component = computed(() => installed.value?.[props.index])
 
 function onClick(type: 'edit' | 'copy' | 'remove') {
   if (!component.value)
     return
 
   if (type === 'edit')
-    componentStore.setEditable(component.value)
+    setEditable(component.value)
 
   if (type === 'remove')
-    componentStore.remove(props.index)
+    removeComponent(props.index)
 
   if (type === 'copy')
-    componentStore.duplicateComponent(component.value, props.index)
+    duplicateComponent(component.value, props.index)
 }
 </script>

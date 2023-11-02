@@ -4,10 +4,10 @@
       <MContainer :style="container">
         <div
           ref="listRef" :class="{
-            'p-is-empty': componentsStore.installed?.length === 0,
+            'p-is-empty': installed.length === 0,
           }"
         >
-          <template v-for="(i, index) in componentsStore.installed" :key="i.id">
+          <template v-for="(i, index) in installed" :key="i.id">
             <Component
               :is="components[i.name]"
               :data-name="i.label"
@@ -31,10 +31,8 @@ import { addGhost, removeGhost } from '../email-components/utils'
 import { useComponentsStore } from '@/store/components'
 
 import Menu1 from '@/components/email-components/menu/Menu1.vue'
-import { useGeneralStore } from '@/store/general'
 
-const componentsStore = useComponentsStore()
-const generalStore = useGeneralStore()
+const { installed, isDragging, moveComponent, general } = useComponentsStore()
 
 const components: Record<string, any> = {
   Menu1,
@@ -48,7 +46,7 @@ const container: CSSProperties = {
 
 const body = computed(() => {
   return {
-    backgroundColor: generalStore.$state.background.color,
+    backgroundColor: general.background.color,
   } as CSSProperties
 })
 
@@ -59,16 +57,16 @@ function initSortable() {
     ghostClass: 'p-ghost',
 
     onStart() {
-      componentsStore.isDragging = true
+      isDragging.value = true
     },
     onEnd() {
       removeGhost()
-      componentsStore.isDragging = false
+      isDragging.value = false
     },
     onUpdate(e) {
       if (e.oldIndex === undefined || e.newIndex === undefined)
         return
-      componentsStore.moveComponent(e.oldIndex, e.newIndex)
+      moveComponent(e.oldIndex, e.newIndex)
     },
     setData(dataTransfer, el) {
       const name = el.getAttribute('data-name')

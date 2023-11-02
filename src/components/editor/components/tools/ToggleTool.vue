@@ -20,12 +20,12 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const componentsStore = useComponentsStore()
+const { updateToolById } = useComponentsStore()
 
 const localValue = ref(props.value)
 
 watch(localValue, () => {
-  componentsStore.updateToolById<ToggleTool>(props.id, 'value', localValue.value)
+  updateToolById<ToggleTool>(props.id, 'value', localValue.value)
 })
 </script>
 
