@@ -14,10 +14,15 @@
       </div>
       <div class="footer">
         <div class="footer__item">
-          v{{ version }}
+          v{{ version }}&nbsp;•&nbsp;
+          <a
+            href="https://github.com/mysigmail/card"
+            target="_blank"
+            rel="noopener noreferrer"
+          >GitHub</a>
         </div>
         <div class="footer__item">
-          ©{{ year }} • Anton Reshetov
+          ©{{ year }}&nbsp;•&nbsp;Anton Reshetov
         </div>
       </div>
     </div>
@@ -57,10 +62,6 @@ function onMouseLeave() {
 
 <style lang="scss" scoped>
 .component-list {
-  // height: 100%;
-  // width: 100%;
-  // z-index: 1030;
-
   background-color: #fff;
   .body {
     position: relative;
@@ -109,6 +110,12 @@ function onMouseLeave() {
     padding: var(--spacing-sm);
     color: var(--color-contrast-medium);
     font-size: var(--text-sm);
+    &__item {
+      line-height: 18px;
+    }
+    a {
+      color: var(--color-contrast-medium);
+    }
   }
 }
 </style>
