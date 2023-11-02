@@ -6,13 +6,13 @@
   "author": "Anton Reshetov",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit --skipLibCheck && vite build",
     "preview": "vite preview",
     "lint": "vue-tsc --noEmit && eslint --ext .js,.ts,.vue . src",
     "lint:fix": "eslint --ext .js,.ts,.vue . --fix src",
     "release": "bumpp -c 'build: release v' -t",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "prepare": "husky install"
+    "prepare": "simple-git-hooks"
   },
   "dependencies": {
     "@iconscout/unicons": "^4.0.8",
@@ -39,7 +39,8 @@
     "unplugin-auto-import": "^0.16.7",
     "unplugin-icons": "^0.17.1",
     "unplugin-vue-components": "^0.25.2",
-    "vite": "^4.5.0"
+    "vite": "^4.5.0",
+    "vue-tsc": "^1.8.22"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",
