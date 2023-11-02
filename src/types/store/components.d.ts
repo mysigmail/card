@@ -9,4 +9,5 @@ export interface ComponentsState {
   list: ComponentList[]
   installed?: Component[]
   editable?: Component
+  isDragging: boolean
 }

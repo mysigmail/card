@@ -8,8 +8,9 @@
 </template>
 
 <script setup lang="ts">
-import { useComponentsStore } from '@/store/components'
 import { ref, watch } from 'vue'
+import { useComponentsStore } from '@/store/components'
+import type { ToggleTool } from '@/types/editor'
 
 interface Props {
   id: string
@@ -24,7 +25,7 @@ const componentsStore = useComponentsStore()
 const localValue = ref(props.value)
 
 watch(localValue, () => {
-  componentsStore.updateToolById<boolean>(props.id, 'value', localValue.value)
+  componentsStore.updateToolById<ToggleTool>(props.id, 'value', localValue.value)
 })
 </script>
 

@@ -1,28 +1,28 @@
 export const images = {
   logo: {
     black: '/img/logo-black.png',
-    white: '/img/logo-white.png'
+    white: '/img/logo-white.png',
   },
   components: {
     menu1: {
       dark: '/img/components/menu-1-dark.jpg',
-      light: '/img/components/menu-1-light.jpg'
+      light: '/img/components/menu-1-light.jpg',
     },
     menu2: {
       dark: '/img/components/menu-2-dark.jpg',
-      light: '/img/components/menu-2-light.jpg'
+      light: '/img/components/menu-2-light.jpg',
     },
     menu3: {
       dark: '/img/components/menu-3-dark.jpg',
-      light: '/img/components/menu-3-light.jpg'
+      light: '/img/components/menu-3-light.jpg',
     },
     menu4: {
       dark: '/img/components/menu-4-dark.jpg',
-      light: '/img/components/menu-4-light.jpg'
+      light: '/img/components/menu-4-light.jpg',
     },
     menu5: {
       dark: '/img/components/menu-5-dark.jpg',
-      light: '/img/components/menu-5-light.jpg'
+      light: '/img/components/menu-5-light.jpg',
     },
     header1: '/img/components/header-1.jpg',
     header2: '/img/components/header-2.jpg',
@@ -59,33 +59,33 @@ export const images = {
     ecommerce5: '/img/components/ecommerce-5.jpg',
     footer1: {
       dark: '/img/components/footer-1-dark.jpg',
-      light: '/img/components/footer-1-light.jpg'
+      light: '/img/components/footer-1-light.jpg',
     },
     footer2: {
       dark: '/img/components/footer-2-dark.jpg',
-      light: '/img/components/footer-2-light.jpg'
+      light: '/img/components/footer-2-light.jpg',
     },
     footer3: {
       dark: '/img/components/footer-3-dark.jpg',
-      light: '/img/components/footer-3-light.jpg'
+      light: '/img/components/footer-3-light.jpg',
     },
     footer4: {
       dark: '/img/components/footer-4-dark.jpg',
-      light: '/img/components/footer-4-light.jpg'
-    }
+      light: '/img/components/footer-4-light.jpg',
+    },
   },
   socials: {
     facebook: {
       black: '/img/facebook-black.png',
-      white: '/img/facebook-white.png'
+      white: '/img/facebook-white.png',
     },
     twitter: {
       black: '/img/twitter-black.png',
-      white: '/img/twitter-white.png'
+      white: '/img/twitter-white.png',
     },
     instagram: {
       black: '/img/instagram-black.png',
-      white: '/img/instagram-white.png'
-    }
-  }
+      white: '/img/instagram-white.png',
+    },
+  },
 }
