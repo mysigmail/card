@@ -1,14 +1,17 @@
 <!-- eslint-disable vue/no-extra-parens ломает подсевку синтаксиса -->
 <template>
   <div class="tools">
-    <template v-for="(i, index) in tools" :key="index">
+    <template
+      v-for="i in tools"
+      :key="i.id"
+    >
       <InputTool
         v-if="i.type === 'input' || i.type === 'inputNumber'"
         :id="i.id"
         :key="i.id"
         :title="i.label"
         :type="i.type === 'input' ? 'string' : 'number'"
-        :value="(i.value as string)"
+        :value="i.value as string"
       />
       <PaddingTool
         v-if="i.type === 'padding'"
