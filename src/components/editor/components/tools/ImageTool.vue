@@ -48,12 +48,12 @@
 
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue'
-import type { ImageToolValue } from '@/types/editor'
+import type { ImageTool } from '@/types/editor'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
   id: string
-  value: ImageToolValue
+  value: ImageTool['value']
   title: string
 }
 
@@ -61,18 +61,18 @@ const props = defineProps<Props>()
 
 const componentsStore = useComponentsStore()
 
-const localValue = reactive<ImageToolValue>(props.value)
+const localValue = reactive<ImageTool['value']>(props.value)
 
 watch(
   localValue,
   () => {
-    componentsStore.updateToolById<ImageToolValue>(
+    componentsStore.updateToolById<ImageTool>(
       props.id,
       'value',
-      localValue
+      localValue,
     )
   },
-  { deep: true }
+  { deep: true },
 )
 </script>
 

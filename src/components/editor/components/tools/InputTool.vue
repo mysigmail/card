@@ -6,6 +6,7 @@
     <div class="body">
       <ElInput
         v-model="localValue"
+        :placeholder="placeholder"
         :type="type"
         @input="onInput"
       />
@@ -14,51 +15,41 @@
 </template>
 
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import { useComponentsStore } from '@/store/components'
-import { inject, ref, watch } from 'vue'
+import type { InputTool } from '@/types/editor'
 
 interface Props {
   id: string
-  value: string | number | null
+  value: InputTool['value']
   type: 'string' | 'number'
   title: string
+  placeholder?: string
   updateParentLabel?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: 'string'
+  type: 'string',
 })
-
-const parentMultiToolId = inject<string>('parentMultiToolId')
 
 const componentsStore = useComponentsStore()
 
 const localValue = ref(props.value)
-
-console.log(parentMultiToolId)
 
 watch(
   () => props.value,
   () => {
     localValue.value = props.value
   },
-  { deep: true }
+  { deep: true },
 )
 
-const onInput = () => {
-  componentsStore.updateToolById<string | number | null>(
+function onInput() {
+  componentsStore.updateToolById<InputTool>(
     props.id,
     'value',
-    localValue.value
+    localValue.value,
   )
-
-  if (props.updateParentLabel && parentMultiToolId) {
-    componentsStore.updateToolById<string | number | null>(
-      parentMultiToolId,
-      'label',
-      localValue.value
-    )
-  }
 }
 </script>
 
