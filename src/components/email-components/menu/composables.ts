@@ -1,7 +1,7 @@
 import { computed } from 'vue'
-import { getToolsByGroup, getValueFromToolsByType } from '../utils'
 import { getMenuItems } from './utils'
 import type { ColorPickerTool, ImageTool, InputNumberTool, PaddingTool, Tool } from '@/types/editor'
+import { getToolsByGroup, getValueFromToolsByType } from '@/store/components/utils'
 
 export function useMenu(tools: Tool[]) {
   const toolsByGroup = computed(() => getToolsByGroup(tools))
