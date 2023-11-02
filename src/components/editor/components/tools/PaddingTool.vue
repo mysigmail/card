@@ -4,11 +4,7 @@
       {{ title }}
     </EditorToolLabel>
     <div class="padding-tool__inputs">
-      <div
-        v-for="(i, index) in localValue"
-        :key="index"
-        class="item"
-      >
+      <div v-for="(i, index) in localValue" :key="index" class="item">
         <div class="title">
           <EditorToolLabel type="secondary">
             <span v-if="index === 0">Top</span>
@@ -18,10 +14,7 @@
           </EditorToolLabel>
         </div>
         <div class="body">
-          <ElInput
-            v-model="localValue[index]"
-            type="number"
-          />
+          <ElInput v-model="localValue[index]" type="number" />
         </div>
       </div>
     </div>
@@ -29,13 +22,13 @@
 </template>
 
 <script setup lang="ts">
-import { useComponentsStore } from '@/store/components'
-import type { PaddingToolValue } from '@/types/editor'
 import { ref, watch } from 'vue'
+import { useComponentsStore } from '@/store/components'
+import type { PaddingTool } from '@/types/editor'
 
 interface Props {
   id: string
-  value: PaddingToolValue
+  value: PaddingTool['value']
   title: string
 }
 
@@ -43,15 +36,15 @@ const props = defineProps<Props>()
 
 const componentsStore = useComponentsStore()
 
-const localValue = ref<PaddingToolValue>([...props.value])
+const localValue = ref([...props.value])
 
 watch(
   localValue,
   () => {
-    const value = localValue.value.map(i => Number(i)) as PaddingToolValue
-    componentsStore.updateToolById<PaddingToolValue>(props.id, 'value', value)
+    const value = localValue.value.map(i => Number(i)) as PaddingTool['value']
+    componentsStore.updateToolById<PaddingTool>(props.id, 'value', value)
   },
-  { deep: true }
+  { deep: true },
 )
 </script>
 

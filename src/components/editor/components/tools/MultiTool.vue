@@ -5,19 +5,19 @@
     </EditorToolLabel>
     <div class="body">
       <div
-        v-for="(group, index) in localValue"
+        v-for="(group, index) in value"
         :key="index"
         class="multi-tool-group"
       >
         <EditorPanel type="bordered">
           <EditorPanelItem
             :index="index"
-            :title="group.label"
+            :title="group.tools[0].value as string"
             :show-actions="index !== 0 && localValue.length > 1"
             @action="onAction($event, index)"
           >
-            <EditorTools
-              :tools="(group.value as Tool[])"
+            <EditorComponentTools
+              :tools="group.tools"
               :parent-multi-tool-id="group.id"
             />
           </EditorPanelItem>
@@ -36,13 +36,13 @@
 </template>
 
 <script setup lang="ts">
-import { useComponentsStore } from '@/store/components'
-import type { Tool } from '@/types/editor'
 import { ref } from 'vue'
+import { useComponentsStore } from '@/store/components'
+import type { MultiTool } from '@/types/editor'
 
 interface Props {
   id: string
-  value: Tool[]
+  value: MultiTool['value']
   title: string
 }
 
@@ -52,14 +52,13 @@ const componentsStore = useComponentsStore()
 
 const localValue = ref(props.value)
 
-const onAddNew = () => {
+function onAddNew() {
   componentsStore.addNewToolToMultiTool(props.id)
 }
 
-const onAction = (action: string, index: number) => {
-  if (action === 'delete') {
+function onAction(action: string, index: number) {
+  if (action === 'delete')
     componentsStore.deleteMultiToolItem(props.id, index)
-  }
 }
 </script>
 

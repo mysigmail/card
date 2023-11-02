@@ -20,9 +20,9 @@
   --text-xxl: calc(var(--text-base-size) * 3.2);
   --text-xxxl: calc(var(--text-base-size) * 3.6);
 
-  --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-primary: "Fira Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 
-  --color-primary: hsl(210, 100%, 63%) ;
+  --color-primary: hsl(210, 100%, 63%);
   --color-danger: hsl(0, 87%, 69%) ;
   --color-bg: hsl(0, 0%, 100%);
 

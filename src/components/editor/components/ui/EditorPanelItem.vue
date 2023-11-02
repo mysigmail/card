@@ -5,7 +5,7 @@
   >
     <div
       class="header"
-      @click="onShow"
+      @click="onOpen"
     >
       <div class="title">
         {{ title }}
@@ -22,8 +22,9 @@
         </EditorActionButton>
       </div>
       <UniconsAngleRight
+        v-if="type === 'collapsed'"
         class="icon"
-        :class="{ 'is-show': isShow }"
+        :class="{ 'is-open': isOpen }"
       />
     </div>
     <div
@@ -36,32 +37,41 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue'
+import { computed, inject, ref } from 'vue'
 
 interface Props {
   title: string
   showActions?: boolean
+  type?: 'collapsed' | 'opened'
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  showActions: false
+  showActions: false,
+  type: 'collapsed',
 })
+
+const emit = defineEmits<Emits>()
 
 interface Emits {
   (e: 'action', value: string): void
 }
 
-const emit = defineEmits<Emits>()
-
 const rootType = inject<'default' | 'bordered'>('type')
 
-const isShow = ref(false)
+const isOpen = ref(false)
 
-const onShow = () => {
-  isShow.value = !isShow.value
+const isShow = computed(() => {
+  if (props.type === 'collapsed')
+    return isOpen.value
+
+  return true
+})
+
+function onOpen() {
+  isOpen.value = !isOpen.value
 }
 
-const onClick = (action: string) => {
+function onClick(action: string) {
   emit('action', action)
 }
 </script>
@@ -88,7 +98,7 @@ const onClick = (action: string) => {
     }
     .icon {
       fill: var(--color-contrast-middle);
-      &.is-show {
+      &.is-open {
         transform: rotate(90deg);
       }
     }

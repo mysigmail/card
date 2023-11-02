@@ -1,63 +1,32 @@
 <template>
-  <div class="tools">
-    <template
-      v-for="(i, index) in tools"
-      :key="index"
+  <div class="editor-tools-panel">
+    <EditorGeneralTools v-if="componentsStore.editableIndex === -1" />
+    <EditorPanel
+      v-for="(v, k) in componentsStore.editableToolsByGroup"
+      :key="k"
     >
-      <InputTool
-        v-if="i.type === 'input' || i.type === 'inputNumber'"
-        :id="i.id"
-        :title="i.label"
-        :type="i.type === 'input' ? 'string' : 'number'"
-        :value="(i.value as string)"
-        :update-parent-label="i.updateParentLabel"
-      />
-      <PaddingTool
-        v-if="i.type === 'padding'"
-        :id="i.id"
-        :value="(i.value as PaddingToolValue)"
-        :title="i.label"
-      />
-      <ColorPickerTool
-        v-if="i.type === 'colorPicker'"
-        :id="i.id"
-        :title="i.label"
-        :value="(i.value as string)"
-      />
-      <ToggleTool
-        v-if="i.type === 'toggle'"
-        :id="i.id"
-        :title="i.label"
-        :value="(i.value as boolean)"
-      />
-      <ImageTool
-        v-if="i.type === 'image'"
-        :id="i.id"
-        :title="i.label"
-        :value="(i.value as ImageToolValue)"
-      />
-      <MultiTool
-        v-if="i.type === 'multi'"
-        :id="i.id"
-        :value="(i.value as Tool[])"
-        :title="i.label"
-      />
-    </template>
+      <EditorPanelItem :title="k">
+        <EditorComponentTools :tools="v" />
+      </EditorPanelItem>
+    </EditorPanel>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Tool, PaddingToolValue, ImageToolValue } from '@/types/editor'
-import { provide } from 'vue'
+import { useComponentsStore } from '@/store/components'
 
-interface Props {
-  tools: Tool[]
-  parentMultiToolId?: string
-}
-
-const props = defineProps<Props>()
-
-provide('parentMultiToolId', props.parentMultiToolId)
+const componentsStore = useComponentsStore()
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.editor-tools-panel {
+  height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  border-left: 1px solid var(--color-border);
+  .item {
+    + .item {
+      margin-top: var(--spacing-sm);
+    }
+  }
+}
+</style>

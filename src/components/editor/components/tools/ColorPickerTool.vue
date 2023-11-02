@@ -12,23 +12,40 @@
 </template>
 
 <script setup lang="ts">
-import { useComponentsStore } from '@/store/components'
 import { ref, watch } from 'vue'
+import { useComponentsStore } from '@/store/components'
+import type { ColorPickerTool } from '@/types/editor'
 
 interface Props {
   id: string
-  value: string
+  value?: string
+  modelValue?: string
   title: string
+  autoUpdate?: boolean
 }
 
-const props = defineProps<Props>()
+interface Emits {
+  (e: 'update:modelValue', value: string): void
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  autoUpdate: true,
+})
+
+const emit = defineEmits<Emits>()
 
 const componentsStore = useComponentsStore()
 
-const localValue = ref(props.value)
+const localValue = ref(props.modelValue)
 
 watch(localValue, () => {
-  componentsStore.updateToolById<string>(props.id, 'value', localValue.value)
+  if (!localValue.value)
+    return
+
+  if (props.autoUpdate)
+    componentsStore.updateToolById<ColorPickerTool>(props.id, 'value', localValue.value)
+  else
+    emit('update:modelValue', localValue.value)
 })
 </script>
 

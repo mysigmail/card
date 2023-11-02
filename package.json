@@ -1,7 +1,9 @@
 {
-  "name": "vue-vite-ts-boilerplate",
+  "name": "@mysigmail/card",
+  "type": "module",
+  "version": "0.0.0",
   "private": true,
-  "version": "1.0.0",
+  "author": "Anton Reshetov",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
@@ -12,47 +14,40 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "prepare": "husky install"
   },
-  "author": "Anton Reshetov",
-  "lint-staged": {
-    "*.{js,ts,vue}": [
-      "prettier --write",
-      "eslint --fix"
-    ]
-  },
   "dependencies": {
-    "@iconscout/unicons": "^4.0.1",
-    "element-plus": "^2.2.0",
-    "nanoid": "^3.3.4",
-    "pinia": "^2.0.11",
-    "vue": "^3.2.25",
-    "vue-router": "^4.0.14"
+    "@iconscout/unicons": "^4.0.8",
+    "@mysigmail/vue-email-components": "^0.2.2",
+    "element-plus": "^2.4.1",
+    "nanoid": "^5.0.2",
+    "pinia": "^2.1.7",
+    "sortablejs": "^1.15.0",
+    "vue": "^3.3.7",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.2.1",
-    "@commitlint/config-conventional": "^16.2.1",
-    "@typescript-eslint/eslint-plugin": "^5.13.0",
-    "@typescript-eslint/parser": "^5.13.0",
-    "@vitejs/plugin-vue": "^2.2.0",
-    "@vue/eslint-config-standard": "^6.1.0",
-    "@vue/eslint-config-typescript": "^10.0.0",
-    "bumpp": "^7.1.1",
-    "eslint": "^8.10.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-vue": "^8.5.0",
-    "husky": "^7.0.0",
-    "lint-staged": "^12.3.4",
-    "prettier": "^2.5.1",
-    "sass": "^1.49.9",
-    "typescript": "^4.5.4",
-    "unplugin-auto-import": "^0.6.1",
-    "unplugin-icons": "^0.13.3",
-    "unplugin-vue-components": "^0.17.21",
-    "vite": "^2.8.0",
-    "vite-plugin-style-import": "^2.0.0",
-    "vue-tsc": "^0.29.8"
+    "@antfu/eslint-config": "1.0.0-beta.29",
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
+    "@types/sortablejs": "^1.15.4",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "bumpp": "^9.2.0",
+    "eslint": "^8.52.0",
+    "lint-staged": "^15.0.2",
+    "sass": "^1.69.5",
+    "simple-git-hooks": "^2.9.0",
+    "typescript": "^5.2.2",
+    "unplugin-auto-import": "^0.16.7",
+    "unplugin-icons": "^0.17.1",
+    "unplugin-vue-components": "^0.25.2",
+    "vite": "^4.5.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged",
+    "commit-msg": "pnpm commitlint --edit $1"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "eslint --fix"
+    ]
   }
 }
