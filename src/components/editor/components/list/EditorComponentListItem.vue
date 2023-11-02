@@ -31,7 +31,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const componentsStore = useComponentsStore()
+const { addComponent } = useComponentsStore()
 
 const { showList } = useList()
 
@@ -52,7 +52,7 @@ function initSortable() {
       const componentIndex = Number(e.oldIndex)
       const toIndex = Number(e.newIndex)
 
-      componentsStore.addComponent(props.components[componentIndex], toIndex)
+      addComponent(props.components[componentIndex], toIndex)
 
       e.item.remove()
       removeGhost()

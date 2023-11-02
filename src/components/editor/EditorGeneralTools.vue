@@ -3,7 +3,7 @@
     <EditorPanelItem title="Background" type="opened">
       <ColorPickerTool
         id="bgColor"
-        v-model="generalStore.$state.background.color"
+        v-model="general.background.color"
         title="Color"
         :auto-update="false"
       />
@@ -12,9 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import { useGeneralStore } from '@/store/general'
+import { useComponentsStore } from '@/store/components'
 
-const generalStore = useGeneralStore()
+const { general } = useComponentsStore()
 </script>
 
 <style lang="scss" scoped></style>

@@ -48,17 +48,17 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const componentsStore = useComponentsStore()
+const { addNewToolToMultiTool, deleteMultiToolItem } = useComponentsStore()
 
 const localValue = ref(props.value)
 
 function onAddNew() {
-  componentsStore.addNewToolToMultiTool(props.id)
+  addNewToolToMultiTool(props.id)
 }
 
 function onAction(action: string, index: number) {
   if (action === 'delete')
-    componentsStore.deleteMultiToolItem(props.id, index)
+    deleteMultiToolItem(props.id, index)
 }
 </script>
 

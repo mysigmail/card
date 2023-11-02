@@ -34,7 +34,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const componentsStore = useComponentsStore()
+const { updateToolById } = useComponentsStore()
 
 const localValue = ref([...props.value])
 
@@ -42,7 +42,7 @@ watch(
   localValue,
   () => {
     const value = localValue.value.map(i => Number(i)) as PaddingTool['value']
-    componentsStore.updateToolById<PaddingTool>(props.id, 'value', value)
+    updateToolById<PaddingTool>(props.id, 'value', value)
   },
   { deep: true },
 )

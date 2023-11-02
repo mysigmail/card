@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<Emits>()
 
-const componentsStore = useComponentsStore()
+const { updateToolById } = useComponentsStore()
 
 const localValue = ref(props.modelValue)
 
@@ -43,7 +43,7 @@ watch(localValue, () => {
     return
 
   if (props.autoUpdate)
-    componentsStore.updateToolById<ColorPickerTool>(props.id, 'value', localValue.value)
+    updateToolById<ColorPickerTool>(props.id, 'value', localValue.value)
   else
     emit('update:modelValue', localValue.value)
 })

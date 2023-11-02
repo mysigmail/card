@@ -59,14 +59,14 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const componentsStore = useComponentsStore()
+const { updateToolById } = useComponentsStore()
 
 const localValue = reactive<ImageTool['value']>(props.value)
 
 watch(
   localValue,
   () => {
-    componentsStore.updateToolById<ImageTool>(
+    updateToolById<ImageTool>(
       props.id,
       'value',
       localValue,
