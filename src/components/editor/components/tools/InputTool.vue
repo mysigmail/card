@@ -17,11 +17,10 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useComponentsStore } from '@/store/components'
-import type { InputTool } from '@/types/editor'
 
 interface Props {
   id: string
-  value: InputTool['value']
+  value: string | number
   type: 'string' | 'number'
   title: string
   placeholder?: string
