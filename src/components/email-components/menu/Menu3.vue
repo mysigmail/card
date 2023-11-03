@@ -5,6 +5,7 @@
   >
     <MColumn
       v-if="isShowLogo"
+      class="sss"
       :style="{
         width: `${logoContainerWidth}px`,
       }"
@@ -15,17 +16,17 @@
         </MLink>
       </MRow>
     </MColumn>
-    <MColumn v-if="isShowMenu">
-      <MenuItems
-        v-if="itemsText"
-        :items="itemsText"
+    <MColumn>
+      <MenuItemsImg
+        v-if="isShowMenu"
+        :items="itemsImg"
       />
     </MColumn>
   </EmailBase>
 </template>
 
 <script setup lang="ts">
-import { MColumn, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
+import { MColumn, MImg, MLink, MRow, MSection } from '@mysigmail/vue-email-components'
 import { useCommon } from './composables/common'
 import type { Tool } from '@/types/editor'
 
@@ -36,7 +37,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { logoContainerWidth, layoutAttrs, logoAttrs, logoImage, isShowMenu, isShowLogo, itemsText }
+const { isShowLogo, isShowMenu, itemsImg, layoutAttrs, logoAttrs, logoContainerWidth, logoImage }
   = useCommon(props.tools)
 </script>
 

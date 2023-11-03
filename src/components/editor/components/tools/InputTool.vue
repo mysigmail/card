@@ -17,6 +17,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useComponentsStore } from '@/store/components'
+import type { InputNumberTool, InputTool } from '@/types/editor'
 
 interface Props {
   id: string
@@ -44,7 +45,7 @@ watch(
 )
 
 function onInput() {
-  updateToolById<InputTool>(
+  updateToolById<InputTool | InputNumberTool>(
     props.id,
     'value',
     localValue.value,

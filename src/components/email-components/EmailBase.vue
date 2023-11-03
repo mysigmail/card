@@ -1,6 +1,6 @@
 <template>
   <MContainer
-    class="p-container"
+    class="p-container main-container"
     :class="{
       'is-editable': editableIndex === props.index,
     }"
@@ -8,13 +8,18 @@
     @mouseover="showOverflow = true"
     @mouseleave="showOverflow = false"
   >
-    <slot />
-    <TheOverflow :show="!isDragging && showOverflow" :index="index" />
+    <MRow class="main-row">
+      <slot />
+    </MRow>
+    <TheOverflow
+      :show="!isDragging && showOverflow"
+      :index="index"
+    />
   </MContainer>
 </template>
 
 <script setup lang="ts">
-import { MContainer } from '@mysigmail/vue-email-components'
+import { MContainer, MRow } from '@mysigmail/vue-email-components'
 import type { CSSProperties } from 'vue'
 import { ref } from 'vue'
 import { useComponentsStore } from '@/store/components'

@@ -13,12 +13,12 @@ export const images = {
       light: '/img/components/menu-2-light.jpg',
     },
     menu3: {
-      dark: '/img/components/menu-3-dark.jpg',
-      light: '/img/components/menu-3-light.jpg',
+      dark: '/img/components/menu-3-dark.png',
+      light: '/img/components/menu-3-light.png',
     },
     menu4: {
-      dark: '/img/components/menu-4-dark.jpg',
-      light: '/img/components/menu-4-light.jpg',
+      dark: '/img/components/menu-4-dark.png',
+      light: '/img/components/menu-4-light.png',
     },
     menu5: {
       dark: '/img/components/menu-5-dark.jpg',

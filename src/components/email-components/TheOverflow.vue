@@ -1,35 +1,44 @@
 <template>
   <Transition name="fade">
-    <div v-if="show" class="p-overflow" _style="main">
+    <div
+      v-if="show"
+      class="p-overflow"
+    >
       <div class="p-overflow__left">
-        <Transition name="slide-fade-left" appear>
+        <Transition
+          name="slide-fade-left"
+          appear
+        >
           <div v-if="show">
-            <div class="p-overflow__name" _style="toolsItem">
+            <div class="p-overflow__name">
               {{ component?.label }}
             </div>
           </div>
         </Transition>
       </div>
       <div class="p-overflow__right">
-        <Transition name="slide-fade-right" appear>
-          <div v-if="show" class="p-overflow-tools" _style="tools">
+        <Transition
+          name="slide-fade-right"
+          appear
+        >
+          <div
+            v-if="show"
+            class="p-overflow-tools"
+          >
             <div
               class="p-overflow-tools__item"
-              _style="toolsItem"
               @click.stop="onClick('edit')"
             >
               <UniconsPen />
             </div>
             <div
               class="p-overflow-tools__item"
-              _style="toolsItem"
               @click.stop="onClick('copy')"
             >
               <UniconsCopy />
             </div>
             <div
               class="p-overflow-tools__item"
-              _style="toolsItem"
               @click.stop="onClick('remove')"
             >
               <UniconsTrashAlt />
