@@ -4,22 +4,25 @@
     :index="index"
   >
     <MColumn
-      v-if="isShowLogo"
       :style="{
         width: `${logoContainerWidth}px`,
       }"
     >
-      <MRow>
+      <MRow v-if="isShowLogo">
         <MLink :href="logoImage?.link">
           <MImg v-bind="logoAttrs" />
         </MLink>
       </MRow>
-    </MColumn>
-    <MColumn v-if="isShowMenu">
-      <MenuItems
-        v-if="itemsText"
-        :items="itemsText"
-      />
+      <MRow v-if="isShowMenu">
+        <MenuItems
+          v-if="itemsText"
+          :items="itemsText"
+          align="left"
+          :style="{
+            marginTop: isShowLogo ? '20px' : null,
+          }"
+        />
+      </MRow>
     </MColumn>
   </EmailBase>
 </template>

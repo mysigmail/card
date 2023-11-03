@@ -1,33 +1,46 @@
 <template>
-  <MContainer>
-    <MColumn
-      v-for="(i, index) in items"
-      :key="index"
-      :style="{ paddingRight: items.length === index + 1 ? '0' : '10px' }"
-    >
-      <MLink
-        :href="i.link"
-        :style="{
-          color: i.color,
-          fontSize: `${i.fontSize}px`,
-        }"
-      >
-        {{ i.text }}
-      </MLink>
+  <MRow
+    class="menu-items"
+    width="auto"
+  >
+    <MColumn align="center">
+      <MRow>
+        <MColumn
+          v-for="(i, index) in items"
+          :key="index"
+          class="link"
+          :style="{ paddingRight: items.length === index + 1 ? '0' : '10px' }"
+        >
+          <MLink
+            :href="i.link"
+            :style="{
+              color: i.color,
+              fontSize: `${i.fontSize}px`,
+            }"
+          >
+            <template v-if="!$slots.item">
+              {{ i.text }}
+            </template>
+            <slot
+              name="item"
+              :item="i"
+            />
+          </MLink>
+        </MColumn>
+      </MRow>
     </MColumn>
-  </MContainer>
+  </MRow>
 </template>
 
 <script setup lang="ts">
-import { MColumn, MContainer, MLink } from '@mysigmail/vue-email-components'
-import type { Menu } from '@/types/email-components/menu'
+import { MColumn, MLink, MRow } from '@mysigmail/vue-email-components'
+import type { MenuItemText } from '@/types/email-components/menu'
 
 interface Props {
-  items: Menu[]
+  items: MenuItemText[]
 }
 
 defineProps<Props>()
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -3,11 +3,15 @@
     <MBody :style="body">
       <MContainer :style="container">
         <div
-          ref="listRef" :class="{
+          ref="listRef"
+          :class="{
             'p-is-empty': installed.length === 0,
           }"
         >
-          <template v-for="(i, index) in installed" :key="i.id">
+          <template
+            v-for="(i, index) in installed"
+            :key="i.id"
+          >
             <Component
               :is="components[i.name]"
               :data-name="i.label"
@@ -31,11 +35,17 @@ import { addGhost, removeGhost } from '../email-components/utils'
 import { useComponentsStore } from '@/store/components'
 
 import Menu1 from '@/components/email-components/menu/Menu1.vue'
+import Menu2 from '@/components/email-components/menu/Menu2.vue'
+import Menu3 from '@/components/email-components/menu/Menu3.vue'
+import Menu4 from '@/components/email-components/menu/Menu4.vue'
 
 const { installed, isDragging, moveComponent, general } = useComponentsStore()
 
 const components: Record<string, any> = {
   Menu1,
+  Menu2,
+  Menu3,
+  Menu4,
 }
 
 const listRef = ref<HTMLElement>()
