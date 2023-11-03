@@ -1,3 +1,12 @@
+# [0.2.0](https://github.com/mysigmail/card/compare/v0.1.0...v0.2.0) (2023-11-03)
+
+
+### Features
+
+* add menu components ([#12](https://github.com/mysigmail/card/issues/12)) ([ff0be27](https://github.com/mysigmail/card/commit/ff0be273162c27dafc7c366272ecf7fc84242ffe))
+
+
+
 # [0.1.0](https://github.com/mysigmail/card/compare/a3a31dc8677d0c57a9ced691b2b218f5030822f5...v0.1.0) (2023-11-02)
 
 
