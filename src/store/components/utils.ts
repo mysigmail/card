@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import type { Component, MultiTool, Tool, ToolType } from '@/types/editor'
+import type { Component, MultiTool, Tool } from '@/types/editor'
 import { clone } from '@/utils'
 
 export function cloneComponent(component: Component) {
@@ -24,10 +24,21 @@ export function findToolById(id: string, tools: Tool[]): Tool | undefined {
   }
 }
 
-export function getValueFromToolsByType<T extends { value: unknown }>(tools: Tool[], type: ToolType) {
-  const value = tools.find(i => i.type === type)?.value
+export function getValueFromToolsByName<T extends { value: unknown }>(tools: Tool[], name: string) {
+  const value = tools.find(i => i.label === name)?.value
 
-  return value as T['value']
+  if (!value)
+    return console.warn(`Could not find tool with name "${name}"`)
+
+  return value as T['value'] | undefined
+}
+
+export function getValueFromToolsByGroupByName<T extends { value: unknown }>(
+  toolsByGroup: Record<string, Tool[]>,
+  group: string,
+  name: string,
+) {
+  return getValueFromToolsByName<T>(toolsByGroup[group], name)
 }
 
 export function getToolsByGroup(tools: Tool[]) {

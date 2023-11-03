@@ -8,29 +8,37 @@ import type {
   ToggleTool,
   Tool,
 } from '@/types/editor'
-import { getToolsByGroup, getValueFromToolsByType } from '@/store/components/utils'
+import { getToolsByGroup, getValueFromToolsByGroupByName } from '@/store/components/utils'
 
 export function useMenu(tools: Tool[]) {
   const toolsByGroup = computed(() => getToolsByGroup(tools))
 
   const generalPadding = computed(() => {
-    return getValueFromToolsByType<PaddingTool>(toolsByGroup.value.General, 'padding')
+    return getValueFromToolsByGroupByName<PaddingTool>(toolsByGroup.value, 'General', 'Padding')
   })
 
   const generalBg = computed(() => {
-    return getValueFromToolsByType<ColorPickerTool>(toolsByGroup.value.General, 'colorPicker')
+    return getValueFromToolsByGroupByName<ColorPickerTool>(
+      toolsByGroup.value,
+      'General',
+      'Background Color',
+    )
   })
 
   const logoContainerWidth = computed(() => {
-    return getValueFromToolsByType<InputNumberTool>(toolsByGroup.value.Logo, 'inputNumber')
+    return getValueFromToolsByGroupByName<InputNumberTool>(
+      toolsByGroup.value,
+      'Logo',
+      'Container Width',
+    )
   })
 
   const logoImage = computed(() => {
-    return getValueFromToolsByType<ImageTool>(toolsByGroup.value.Logo, 'image')
+    return getValueFromToolsByGroupByName<ImageTool>(toolsByGroup.value, 'Logo', 'Image')
   })
 
   const layoutAttrs = computed(() => {
-    const padding = generalPadding.value.map(i => `${i}px`).join(' ')
+    const padding = generalPadding.value?.map(i => `${i}px`).join(' ')
 
     return {
       style: {
@@ -41,6 +49,9 @@ export function useMenu(tools: Tool[]) {
   })
 
   const logoAttrs = computed(() => {
+    if (!logoImage.value)
+      return
+
     const { src, width, height, alt } = logoImage.value
 
     return {
@@ -56,7 +67,7 @@ export function useMenu(tools: Tool[]) {
   const items = computed(() => getMenuItems(tools))
 
   const isShowMenu = computed(() => {
-    return getValueFromToolsByType<ToggleTool>(toolsByGroup.value.Menu, 'toggle')
+    return getValueFromToolsByGroupByName<ToggleTool>(toolsByGroup.value, 'Menu', 'Show / Hide')
   })
 
   return {
