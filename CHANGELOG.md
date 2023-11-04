@@ -1,3 +1,12 @@
+# [0.3.0](https://github.com/mysigmail/card/compare/v0.2.0...v0.3.0) (2023-11-04)
+
+
+### Features
+
+* add general tools & settings ([#13](https://github.com/mysigmail/card/issues/13)) ([a940fa8](https://github.com/mysigmail/card/commit/a940fa8fcd8c01c18ee2889abe2957abe0d70ecd))
+
+
+
 # [0.2.0](https://github.com/mysigmail/card/compare/v0.1.0...v0.2.0) (2023-11-03)
 
 
