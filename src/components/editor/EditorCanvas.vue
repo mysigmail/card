@@ -1,6 +1,10 @@
 <template>
-  <MHtml>
-    <MBody :style="body">
+  <MHtml class="p-html">
+    <MPreview :text="general.previewText" />
+    <MBody
+      :style="style"
+      class="p-body"
+    >
       <MContainer :style="container">
         <div
           ref="listRef"
@@ -27,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { MBody, MContainer, MHtml } from '@mysigmail/vue-email-components'
+import { MBody, MContainer, MHtml, MPreview } from '@mysigmail/vue-email-components'
 import type { CSSProperties } from 'vue'
 import { computed, onMounted, ref } from 'vue'
 import Sortable from 'sortablejs'
@@ -54,10 +58,15 @@ const container: CSSProperties = {
   position: 'relative',
 }
 
-const body = computed(() => {
+const style = computed<CSSProperties>(() => {
   return {
+    backgroundImage: general.background.image ? `url(${general.background.image})` : '',
+    backgroundRepeat: general.background.repeat,
     backgroundColor: general.background.color,
-  } as CSSProperties
+    backgroundSize: general.background.size,
+    backgroundPosition: general.background.position,
+    fontFamily: general.font,
+  }
 })
 
 function initSortable() {

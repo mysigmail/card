@@ -1,5 +1,4 @@
 import { computed } from 'vue'
-import { getMenuItems } from './utils'
 import type {
   ColorPickerTool,
   ImageTool,

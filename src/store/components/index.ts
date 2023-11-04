@@ -2,8 +2,8 @@ import { nanoid } from 'nanoid'
 import { computed, reactive, ref, shallowRef } from 'vue'
 import { cloneComponent, findToolById } from './utils'
 import { menu } from '@/components/email-components/db/menu'
-import type { Component, MultiTool, Tool } from '@/types/editor'
-import type { ComponentList } from '@/types/store/components'
+import type { Component, GeneralTool, MultiTool, Tool } from '@/types/editor'
+import type { ComponentList } from '@/types/email-components/components'
 import { clone } from '@/utils'
 
 const list = shallowRef<ComponentList[]>([
@@ -20,7 +20,7 @@ const installed = ref<Component[]>([])
 const editable = ref<Component | undefined>(undefined)
 const isDragging = ref(false)
 
-const general = reactive({
+const general = reactive<GeneralTool>({
   background: {
     color: '#F5F5F5',
     image: '',
@@ -29,7 +29,7 @@ const general = reactive({
     position: 'center',
   },
   font: 'Arial',
-  preHeaderText: '',
+  previewText: '',
 })
 
 const editableToolsByGroup = computed(() => {
@@ -64,8 +64,7 @@ function addComponent(component: Component, index?: number) {
 
   if (index !== undefined)
     installed.value.splice(index, 0, cloned)
-  else
-    installed.value.push(cloned)
+  else installed.value.push(cloned)
 }
 
 function duplicateComponent(component: Component, index: number) {
@@ -117,9 +116,7 @@ function addNewToolToMultiTool(id: string) {
   if (!tool)
     return
 
-  const clonedLastItem = clone<MultiTool['value'][0]>(
-    tool.value[tool.value.length - 1],
-  )
+  const clonedLastItem = clone<MultiTool['value'][0]>(tool.value[tool.value.length - 1])
 
   clonedLastItem.id = nanoid(8)
   clonedLastItem.tools.forEach((i) => {

@@ -13,6 +13,8 @@ export function renderToShadowDom(el: HTMLDivElement, component: Component) {
   const shadow = el.attachShadow({ mode: 'open' })
   const mount = document.createElement('div')
 
+  mount.style.height = '100%'
+
   shadow.appendChild(mount)
   shadow.appendChild(style)
   createApp(component).use(VueEmail).mount(mount)

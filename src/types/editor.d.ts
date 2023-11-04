@@ -99,7 +99,16 @@ export interface Component {
   tools: Tool[]
 }
 
-export type ComponentBuilder = (
-  theme: ComponentTheme,
-  label: string
-) => Component
+export type ComponentBuilder = (theme: ComponentTheme, label: string) => Component
+
+export interface GeneralTool {
+  background: {
+    color?: string
+    image?: string
+    repeat: 'repeat' | 'no-repeat'
+    size: 'unset' | 'cover' | 'contain'
+    position: 'top' | 'center' | 'bottom' | 'left' | 'right'
+  }
+  font: string
+  previewText: string
+}
