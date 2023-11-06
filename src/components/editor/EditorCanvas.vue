@@ -74,7 +74,7 @@ function initSortable() {
     group: 'components',
     animation: 150,
     ghostClass: 'p-ghost',
-
+    swapThreshold: 0.5,
     onStart() {
       isDragging.value = true
     },
