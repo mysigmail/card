@@ -1,13 +1,19 @@
 <template>
-  <div class="component-list" @mouseleave="onMouseLeave">
+  <div
+    class="component-list"
+    @mouseleave="onMouseLeave"
+  >
     <div class="body">
-      <div class="items">
+      <div
+        ref="menuRef"
+        class="items"
+      >
         <div
           v-for="(i, index) in list"
           :key="index"
           class="item"
+          :data-index="index"
           :class="{ 'is-active': hovered === index }"
-          @mouseover="onMouseOver(index)"
         >
           {{ i.name }}
         </div>
@@ -26,8 +32,14 @@
         </div>
       </div>
     </div>
-    <div class="panel" :class="{ 'is-open': showList }">
-      <template v-for="(c, idx) in list" :key="idx">
+    <div
+      class="panel"
+      :class="{ 'is-open': showList }"
+    >
+      <template
+        v-for="(c, idx) in list"
+        :key="idx"
+      >
         <EditorComponentListItem
           v-show="hovered === idx"
           :components="c.components"
@@ -38,9 +50,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { MenuAim } from '@mysigmail/menu-aim'
 import { version } from '../../../../../package.json'
 import { useList } from './composables'
+
 import { useComponentsStore } from '@/store/components'
 
 const { list } = useComponentsStore()
@@ -49,18 +63,30 @@ const { showList } = useList()
 const hovered = ref<number>()
 const year = new Date().getFullYear()
 
-function onMouseOver(index: number) {
-  hovered.value = index
-  showList.value = true
-}
+const menuRef = ref<HTMLElement>()
+
+let menu: MenuAim
+
+onMounted(() => {
+  menu = new MenuAim(menuRef.value!, {
+    rowSelector: '.item',
+    activate: (row: HTMLElement) => {
+      hovered.value = Number(row.dataset.index)
+      showList.value = true
+    },
+    deactivate: () => {
+      showList.value = false
+      hovered.value = undefined
+    },
+  })
+})
 
 function onMouseLeave() {
-  showList.value = false
-  hovered.value = undefined
+  menu.deactivateRow()
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .component-list {
   background-color: #fff;
   .body {
