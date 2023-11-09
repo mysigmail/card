@@ -8,6 +8,9 @@ dependencies:
   '@iconscout/unicons':
     specifier: ^4.0.8
     version: 4.0.8
+  '@mysigmail/menu-aim':
+    specifier: ^1.0.5
+    version: 1.0.5
   '@mysigmail/vue-email-components':
     specifier: ^0.2.2
     version: 0.2.2(typescript@5.2.2)
@@ -701,6 +704,10 @@ packages:
       string-argv: 0.3.2
       type-detect: 4.0.8
     dev: true
+
+  /@mysigmail/menu-aim@1.0.5:
+    resolution: {integrity: sha512-cctUxjjuhv111+u5yjpPpjFOWXIafpsoBT9NahqCq+87bi9kkMA4zHOZ6l18Moh5Ysa9Dbl8iqiJ5RcKbO+QvA==}
+    dev: false
 
   /@mysigmail/vue-email-components@0.2.2(typescript@5.2.2):
     resolution: {integrity: sha512-KmezX7T39dl25pRVoO0JJXK0AcTlmHSQPb06RgA19VAbbFdse5s/1zzUGNQaRrxHzU6O7gJcvF7XpFTxAXwsUQ==}
