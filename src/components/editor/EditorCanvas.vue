@@ -66,6 +66,7 @@ const style = computed<CSSProperties>(() => {
     backgroundSize: general.background.size,
     backgroundPosition: general.background.position,
     fontFamily: general.font,
+    padding: general.padding.map(i => `${i}px`).join(' '),
   }
 })
 

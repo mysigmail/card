@@ -126,7 +126,7 @@ function onMouseLeave() {
     left: -100px;
     transition: all 0.3s ease;
     opacity: 0;
-    overflow: hidden;
+    overflow-y: auto;
     &.is-open {
       opacity: 1;
       left: var(--editor-component-list-width);

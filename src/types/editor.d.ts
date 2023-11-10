@@ -102,8 +102,9 @@ export interface Component {
 export type ComponentBuilder = (theme: ComponentTheme, label: string) => Component
 
 export interface GeneralTool {
+  padding: [number, number, number, number]
   background: {
-    color?: string
+    color: string
     image?: string
     repeat: 'repeat' | 'no-repeat'
     size: 'unset' | 'cover' | 'contain'

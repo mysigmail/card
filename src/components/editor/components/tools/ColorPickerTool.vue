@@ -18,14 +18,13 @@ import type { ColorPickerTool } from '@/types/editor'
 
 interface Props {
   id: string
-  value?: string
-  modelValue?: string
+  value: string
   title: string
   autoUpdate?: boolean
 }
 
 interface Emits {
-  (e: 'update:modelValue', value: string): void
+  (e: 'update:value', value: string): void
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -36,16 +35,12 @@ const emit = defineEmits<Emits>()
 
 const { updateToolById } = useComponentsStore()
 
-const localValue = ref(props.modelValue)
+const localValue = ref(props.value)
 
 watch(localValue, () => {
-  if (!localValue.value)
-    return
-
   if (props.autoUpdate)
     updateToolById<ColorPickerTool>(props.id, 'value', localValue.value)
-  else
-    emit('update:modelValue', localValue.value)
+  else emit('update:value', localValue.value)
 })
 </script>
 
