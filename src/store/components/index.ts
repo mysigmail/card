@@ -21,6 +21,7 @@ const editable = ref<Component | undefined>(undefined)
 const isDragging = ref(false)
 
 const general = reactive<GeneralTool>({
+  padding: [24, 0, 24, 0],
   background: {
     color: '#F5F5F5',
     image: '',

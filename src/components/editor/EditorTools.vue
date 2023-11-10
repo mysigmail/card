@@ -23,6 +23,7 @@ const { editableToolsByGroup, editableIndex } = useComponentsStore()
   height: calc(100vh - var(--header-height));
   overflow-y: auto;
   border-left: 1px solid var(--color-border);
+  padding-bottom: var(--spacing-lg);
   .item {
     + .item {
       margin-top: var(--spacing-sm);

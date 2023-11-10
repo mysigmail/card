@@ -1,12 +1,23 @@
 <template>
   <EditorPanel>
     <EditorPanelItem
+      title="Layout"
+      type="opened"
+    >
+      <PaddingTool
+        id="generalPadding"
+        v-model:value="general.padding"
+        title="Padding"
+        :auto-update="false"
+      />
+    </EditorPanelItem>
+    <EditorPanelItem
       title="Background"
       type="opened"
     >
       <ColorPickerTool
         id="bgColor"
-        v-model="general.background.color"
+        v-model:value="general.background.color"
         title="Color"
         :auto-update="false"
       />

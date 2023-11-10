@@ -4,7 +4,11 @@
       {{ title }}
     </EditorToolLabel>
     <div class="padding-tool__inputs">
-      <div v-for="(i, index) in localValue" :key="index" class="item">
+      <div
+        v-for="(i, index) in localValue"
+        :key="index"
+        class="item"
+      >
         <div class="title">
           <EditorToolLabel type="secondary">
             <span v-if="index === 0">Top</span>
@@ -14,7 +18,10 @@
           </EditorToolLabel>
         </div>
         <div class="body">
-          <ElInput v-model="localValue[index]" type="number" />
+          <ElInput
+            v-model="localValue[index]"
+            type="number"
+          />
         </div>
       </div>
     </div>
@@ -30,19 +37,33 @@ interface Props {
   id: string
   value: PaddingTool['value']
   title: string
+  autoUpdate?: boolean
 }
 
-const props = defineProps<Props>()
+interface Emits {
+  (e: 'update:value', value: PaddingTool['value']): void
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  autoUpdate: true,
+})
+
+const emit = defineEmits<Emits>()
 
 const { updateToolById } = useComponentsStore()
 
-const localValue = ref([...props.value])
+const localValue = ref<PaddingTool['value']>([...props.value])
 
 watch(
   localValue,
   () => {
-    const value = localValue.value.map(i => Number(i)) as PaddingTool['value']
-    updateToolById<PaddingTool>(props.id, 'value', value)
+    if (props.autoUpdate) {
+      const value = localValue.value.map(i => Number(i)) as PaddingTool['value']
+      updateToolById<PaddingTool>(props.id, 'value', value)
+    }
+    else {
+      emit('update:value', localValue.value)
+    }
   },
   { deep: true },
 )
