@@ -1,3 +1,18 @@
+# [0.4.0](https://github.com/mysigmail/card/compare/v0.3.0...v0.4.0) (2023-11-10)
+
+
+### Bug Fixes
+
+* increase swap zone ([9edeef1](https://github.com/mysigmail/card/commit/9edeef1cfc91f1db9d5bfb1dbb97d98c5792537b))
+
+
+### Features
+
+* add layout padding ([#15](https://github.com/mysigmail/card/issues/15)) ([a66deba](https://github.com/mysigmail/card/commit/a66debafc33236b6980684aff78081611a9194db))
+* menu diagonal movement ([#14](https://github.com/mysigmail/card/issues/14)) ([a5f9b06](https://github.com/mysigmail/card/commit/a5f9b06f31aad65527f54190bdbf56bf62335a2a))
+
+
+
 # [0.3.0](https://github.com/mysigmail/card/compare/v0.2.0...v0.3.0) (2023-11-04)
 
 
