@@ -22,7 +22,7 @@
       <ColorPickerTool
         v-if="i.type === 'colorPicker'"
         :id="i.id"
-        v-model="i.value"
+        v-model:value="i.value"
         :title="i.label"
       />
       <ToggleTool
