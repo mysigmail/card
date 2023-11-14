@@ -18,19 +18,7 @@
           {{ i.name }}
         </div>
       </div>
-      <div class="footer">
-        <div class="footer__item">
-          v{{ version }}&nbsp;•&nbsp;
-          <a
-            href="https://github.com/mysigmail/card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >GitHub</a>
-        </div>
-        <div class="footer__item">
-          ©{{ year }}&nbsp;•&nbsp;Anton Reshetov
-        </div>
-      </div>
+      <EditorComponentListFooter />
     </div>
     <div
       class="panel"
@@ -52,16 +40,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { MenuAim } from '@mysigmail/menu-aim'
-import { version } from '../../../../../package.json'
 import { useList } from './composables'
-
 import { useComponentsStore } from '@/store/components'
 
 const { list } = useComponentsStore()
 const { showList } = useList()
 
 const hovered = ref<number>()
-const year = new Date().getFullYear()
 
 const menuRef = ref<HTMLElement>()
 
@@ -130,17 +115,6 @@ function onMouseLeave() {
     &.is-open {
       opacity: 1;
       left: var(--editor-component-list-width);
-    }
-  }
-  .footer {
-    padding: var(--spacing-sm);
-    color: var(--color-contrast-medium);
-    font-size: var(--text-sm);
-    &__item {
-      line-height: 18px;
-    }
-    a {
-      color: var(--color-contrast-medium);
     }
   }
 }
