@@ -5,7 +5,11 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useTelemetry } from '@/services/telemetry'
+
+useTelemetry()
+</script>
 
 <style lang="scss" scoped>
 #app {
