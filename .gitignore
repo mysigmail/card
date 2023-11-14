@@ -10,8 +10,9 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
-*.local
 .env
+.env.*
+!.env.example
 src/types/auto-imports.d.ts
 src/types/components.d.ts
 
