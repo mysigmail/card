@@ -1,3 +1,13 @@
+## [0.4.1](https://github.com/mysigmail/card/compare/v0.4.0...v0.4.1) (2023-11-15)
+
+
+### Bug Fixes
+
+* color picker v-model ([1383c8c](https://github.com/mysigmail/card/commit/1383c8c54a95bbef1cd70e0c63ca3da715772170))
+* components overflow ([a66483a](https://github.com/mysigmail/card/commit/a66483a15849dc72105f5910f67b248ac72da4e3))
+
+
+
 # [0.4.0](https://github.com/mysigmail/card/compare/v0.3.0...v0.4.0) (2023-11-10)
 
 
