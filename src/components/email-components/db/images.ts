@@ -82,8 +82,8 @@ export const images = {
       white: `${path}img/facebook-white.png`,
     },
     twitter: {
-      black: `${path}img/twitter-black.png`,
-      white: `${path}img/twitter-white.png`,
+      black: `${path}img/twitter-x-black.png`,
+      white: `${path}img/twitter-x-white.png`,
     },
     instagram: {
       black: `${path}img/instagram-black.png`,

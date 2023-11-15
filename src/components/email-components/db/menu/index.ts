@@ -310,6 +310,10 @@ const menu3: ComponentBuilder = (theme, label) => {
   const preview = theme === 'dark' ? images.components.menu3.dark : images.components.menu3.light
   const logo = theme === 'dark' ? images.logo.white : images.logo.black
   const bgColor = theme === 'dark' ? COLOR.theme.dark : COLOR.theme.light
+  const facebook = theme === 'dark' ? images.socials.facebook.white : images.socials.facebook.black
+  const twitter = theme === 'dark' ? images.socials.twitter.white : images.socials.twitter.black
+  const instagram
+    = theme === 'dark' ? images.socials.instagram.white : images.socials.instagram.black
 
   return {
     id: nanoid(8),
@@ -382,7 +386,7 @@ const menu3: ComponentBuilder = (theme, label) => {
                 label: 'Image',
                 type: 'image',
                 value: {
-                  src: theme === 'light' ? '/img/facebook-black.png' : '/img/facebook-white.png',
+                  src: facebook,
                   link: 'https://example.com',
                   alt: 'Some alt',
                   width: 16,
@@ -409,7 +413,7 @@ const menu3: ComponentBuilder = (theme, label) => {
                 label: 'Image',
                 type: 'image',
                 value: {
-                  src: theme === 'light' ? '/img/twitter-x-black.png' : '/img/twitter-x-white.png',
+                  src: twitter,
                   link: 'https://example.com',
                   alt: 'Some alt',
                   width: 16,
@@ -436,7 +440,7 @@ const menu3: ComponentBuilder = (theme, label) => {
                 label: 'Image',
                 type: 'image',
                 value: {
-                  src: theme === 'light' ? '/img/instagram-black.png' : '/img/instagram-white.png',
+                  src: instagram,
                   link: 'https://example.com',
                   alt: 'Some alt',
                   width: 16,
