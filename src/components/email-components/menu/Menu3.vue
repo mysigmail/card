@@ -2,7 +2,7 @@
   <EmailBase
     v-bind="layoutAttrs"
     :index="index"
-    @click.self="onEditTool('General', index)"
+    @click.self="onEditTool('Layout', index)"
   >
     <MColumn
       v-if="isShowLogo"
@@ -50,15 +50,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const {
-  isShowLogo,
-  isShowMenu,
-  itemsImg,
-  layoutAttrs,
-  logoAttrs,
-  logoContainerWidth,
-  logoImage,
-} = useCommon(props.tools)
+const { isShowLogo, isShowMenu, itemsImg, layoutAttrs, logoAttrs, logoContainerWidth, logoImage }
+  = useCommon(props.tools)
 
 const { onEditTool, editableToolName, editableId } = useComponentsStore()
 </script>

@@ -19,14 +19,14 @@ import type { MenuItemImg, MenuItemText } from '@/types/email-components/menu'
 export function useCommon(tools: Tool[]) {
   const toolsByGroup = computed(() => getToolsByGroup(tools))
 
-  const generalPadding = computed(() => {
-    return getValueFromToolsByGroupByName<PaddingTool>(toolsByGroup.value, 'General', 'Padding')
+  const layoutPadding = computed(() => {
+    return getValueFromToolsByGroupByName<PaddingTool>(toolsByGroup.value, 'Layout', 'Padding')
   })
 
-  const generalBg = computed(() => {
+  const layoutBackground = computed(() => {
     return getValueFromToolsByGroupByName<ColorPickerTool>(
       toolsByGroup.value,
-      'General',
+      'Layout',
       'Background Color',
     )
   })
@@ -44,12 +44,12 @@ export function useCommon(tools: Tool[]) {
   })
 
   const layoutAttrs = computed(() => {
-    const padding = generalPadding.value?.map(i => `${i}px`).join(' ')
+    const padding = layoutPadding.value?.map(i => `${i}px`).join(' ')
 
     return {
       style: {
         padding,
-        backgroundColor: generalBg.value,
+        backgroundColor: layoutBackground.value,
       },
     } as HTMLElement
   })
@@ -103,7 +103,7 @@ export function useCommon(tools: Tool[]) {
   })
 
   return {
-    generalBg,
+    layoutBackground,
     isShowLogo,
     isShowMenu,
     itemsImg,

@@ -8,7 +8,7 @@
     <div class="body">
       <div
         class="header"
-        @click="onEditTool('General', index)"
+        @click="onEditTool('Layout', index)"
       >
         {{ name }}
         <div class="actions">

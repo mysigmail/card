@@ -2,7 +2,7 @@
   <EmailBase
     v-bind="layoutAttrs"
     :index="index"
-    @click.self="onEditTool('General', index)"
+    @click.self="onEditTool('Layout', index)"
   >
     <MColumn
       :style="{
@@ -54,15 +54,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const {
-  logoContainerWidth,
-  layoutAttrs,
-  logoAttrs,
-  logoImage,
-  isShowMenu,
-  isShowLogo,
-  itemsText,
-} = useCommon(props.tools)
+const { logoContainerWidth, layoutAttrs, logoAttrs, logoImage, isShowMenu, isShowLogo, itemsText }
+  = useCommon(props.tools)
 
 const { onEditTool, editableToolName, editableId } = useComponentsStore()
 </script>

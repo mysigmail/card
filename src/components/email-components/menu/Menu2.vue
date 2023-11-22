@@ -2,7 +2,7 @@
   <EmailBase
     v-bind="layoutAttrs"
     :index="index"
-    @click.self="onEditTool('General', index)"
+    @click.self="onEditTool('Layout', index)"
   >
     <MColumn
       :style="{
@@ -55,13 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  MColumn,
-  MHr,
-  MImg,
-  MLink,
-  MRow,
-} from '@mysigmail/vue-email-components'
+import { MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
 import { useMenu2 } from './composables/menu-2'
 import type { Tool } from '@/types/editor'
 import { useComponentsStore } from '@/store/components'

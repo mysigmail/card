@@ -5,7 +5,7 @@
       type="opened"
     >
       <PaddingTool
-        id="generalPadding"
+        id="layoutPadding"
         v-model:value="general.padding"
         title="Padding"
         :auto-update="false"
