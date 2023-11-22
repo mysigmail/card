@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid'
 import { computed, reactive, ref, shallowRef } from 'vue'
-import { cloneComponent, findToolById } from './utils'
+import { cloneComponent, findToolById, getEditableToolsByGroup } from './utils'
 import { menu } from '@/components/email-components/db/menu'
 import type { Component, GeneralTool, MultiTool, Tool } from '@/types/editor'
 import type { ComponentList } from '@/types/email-components/components'
@@ -45,24 +45,13 @@ const editable = computed(() => {
 })
 
 const editableToolsByGroup = computed(() => {
-  const groupsWithTools: Record<string, Tool[]> = {}
-
-  editable.value?.tools.forEach((i) => {
-    if (!i.group)
-      return
-
-    if (!groupsWithTools[i.group])
-      groupsWithTools[i.group] = []
-
-    if (groupsWithTools[i.group])
-      groupsWithTools[i.group].push(i)
-  })
-
-  return groupsWithTools
+  if (!editable.value)
+    return
+  return getEditableToolsByGroup(editable.value?.tools)
 })
 
 const editableTools = computed(() => {
-  if (!editableToolsGroupName.value)
+  if (!editableToolsGroupName.value || !editableToolsByGroup.value)
     return undefined
 
   return editableToolsByGroup.value[editableToolsGroupName.value]
@@ -75,6 +64,16 @@ const editableIndex = computed(() => {
   return installed.value?.findIndex(i => i.id === editable.value?.id)
 })
 
+const installedToolsByGroup = computed(() => {
+  return installed.value.map((i) => {
+    return {
+      id: i.id,
+      name: i.label,
+      tools: getEditableToolsByGroup(i.tools),
+    }
+  })
+})
+
 // Methods
 function addComponent(component: Component, index?: number) {
   const cloned = cloneComponent(component)
@@ -84,10 +83,10 @@ function addComponent(component: Component, index?: number) {
   else installed.value.push(cloned)
 }
 
-function duplicateComponent(component: Component, index: number) {
-  const cloned = cloneComponent(component)
+function duplicateComponent(installedIndex: number) {
+  const cloned = cloneComponent(installed.value[installedIndex])
 
-  installed.value.splice(index + 1, 0, cloned)
+  installed.value.splice(installedIndex + 1, 0, cloned)
 }
 
 function moveComponent(oldIndex: number, newIndex: number) {
@@ -175,6 +174,7 @@ export function useComponentsStore() {
     editableToolsGroupName,
     general,
     installed,
+    installedToolsByGroup,
     isDragging,
     list,
     moveComponent,

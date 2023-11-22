@@ -1,6 +1,6 @@
 <template>
   <div class="editor">
-    <EditorComponentList />
+    <TheSidebar />
     <div
       ref="previewRef"
       class="preview"
@@ -38,6 +38,5 @@ onMounted(() => {
   grid-template-columns: var(--editor-component-list-width) 1fr var(
       --editor-tools-width
     );
-
 }
 </style>

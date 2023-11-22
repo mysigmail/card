@@ -18,7 +18,6 @@
           {{ i.name }}
         </div>
       </div>
-      <EditorComponentListFooter />
     </div>
     <div
       class="panel"
@@ -74,6 +73,7 @@ function onMouseLeave() {
 <style lang="scss">
 .component-list {
   background-color: #fff;
+  height: 100%;
   .body {
     position: relative;
     display: flex;
