@@ -7,7 +7,6 @@
       :style="{
         backgroundColor: general.background.color,
       }"
-      @click="onClick"
     />
     <EditorTools />
   </div>
@@ -21,22 +20,21 @@ import { useComponentsStore } from '@/store/components'
 
 const previewRef = ref()
 
-const { setEditable, general } = useComponentsStore()
-
-function onClick() {
-  setEditable(null)
-}
+const { general, editableId } = useComponentsStore()
 
 onMounted(() => {
-  renderToShadowDom(previewRef.value!, Editor)
+  const shadow = renderToShadowDom(previewRef.value!, Editor)
+
+  shadow.addEventListener('click', (e) => {
+    if (e.target instanceof HTMLBodyElement)
+      editableId.value = undefined
+  })
 })
 </script>
 
 <style lang="scss" scoped>
 .editor {
   display: grid;
-  grid-template-columns: var(--editor-component-list-width) 1fr var(
-      --editor-tools-width
-    );
+  grid-template-columns: var(--editor-component-list-width) 1fr var(--editor-tools-width);
 }
 </style>
