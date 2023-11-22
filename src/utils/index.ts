@@ -17,5 +17,10 @@ export function renderToShadowDom(el: HTMLDivElement, component: Component) {
 
   shadow.appendChild(mount)
   shadow.appendChild(style)
+
+  shadow.addEventListener('click', e => e.stopPropagation())
+  shadow.addEventListener('click', e => e.preventDefault())
+
   createApp(component).use(VueEmail).mount(mount)
+  return shadow
 }

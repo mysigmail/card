@@ -27,13 +27,13 @@ const menu1: ComponentBuilder = (theme, label) => {
     preview,
     tools: [
       toolBuilder<PaddingTool>({
-        group: 'General',
+        group: 'Layout',
         label: 'Padding',
         type: 'padding',
         value: [30, 35, 30, 35],
       }),
       toolBuilder<ColorPickerTool>({
-        group: 'General',
+        group: 'Layout',
         label: 'Background Color',
         type: 'colorPicker',
         value: bgColor,
@@ -174,13 +174,13 @@ const menu2: ComponentBuilder = (theme, label) => {
     preview,
     tools: [
       toolBuilder<PaddingTool>({
-        group: 'General',
+        group: 'Layout',
         label: 'Padding',
         type: 'padding',
         value: [30, 35, 30, 35],
       }),
       toolBuilder<ColorPickerTool>({
-        group: 'General',
+        group: 'Layout',
         label: 'Background Color',
         type: 'colorPicker',
         value: bgColor,
@@ -323,13 +323,13 @@ const menu3: ComponentBuilder = (theme, label) => {
     preview,
     tools: [
       toolBuilder<PaddingTool>({
-        group: 'General',
+        group: 'Layout',
         label: 'Padding',
         type: 'padding',
         value: [30, 35, 30, 35],
       }),
       toolBuilder<ColorPickerTool>({
-        group: 'General',
+        group: 'Layout',
         label: 'Background Color',
         type: 'colorPicker',
         value: bgColor,
@@ -475,13 +475,13 @@ const menu4: ComponentBuilder = (theme, label) => {
     preview,
     tools: [
       toolBuilder<PaddingTool>({
-        group: 'General',
+        group: 'Layout',
         label: 'Padding',
         type: 'padding',
         value: [30, 35, 30, 35],
       }),
       toolBuilder<ColorPickerTool>({
-        group: 'General',
+        group: 'Layout',
         label: 'Background Color',
         type: 'colorPicker',
         value: bgColor,

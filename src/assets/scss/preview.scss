@@ -90,6 +90,17 @@ body {
   padding: 8px 16px;
 }
 
+.p-hover-tools {
+  cursor: pointer;
+  &:hover {
+    outline: 1px solid var(--color-primary);
+  }
+}
+
+.p-edit-tool {
+  outline: 1px solid var(--color-primary);
+}
+
 .p-is-empty {
   position: absolute;
   left: 0;

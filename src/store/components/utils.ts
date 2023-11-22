@@ -24,7 +24,10 @@ export function findToolById(id: string, tools: Tool[]): Tool | undefined {
   }
 }
 
-export function getValueFromToolsByName<T extends { value: unknown }>(tools: Tool[], name: string) {
+export function getValueFromToolsByName<T extends { value: unknown }>(
+  tools: Tool[],
+  name: string,
+) {
   const value = tools.find(i => i.label === name)?.value
 
   if (!value)
@@ -42,6 +45,23 @@ export function getValueFromToolsByGroupByName<T extends { value: unknown }>(
 }
 
 export function getToolsByGroup(tools: Tool[]) {
+  const groupsWithTools: Record<string, Tool[]> = {}
+
+  tools.forEach((i) => {
+    if (!i.group)
+      return
+
+    if (!groupsWithTools[i.group])
+      groupsWithTools[i.group] = []
+
+    if (groupsWithTools[i.group])
+      groupsWithTools[i.group].push(i)
+  })
+
+  return groupsWithTools
+}
+
+export function getEditableToolsByGroup(tools: Tool[]): Record<string, Tool[]> {
   const groupsWithTools: Record<string, Tool[]> = {}
 
   tools.forEach((i) => {

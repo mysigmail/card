@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="footer__item">
       <div class="cta">
-        If you like this project, please give it a
+        If you like this project,<br>please give it a
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
