@@ -12,15 +12,17 @@
         />
       </EditorPanelItem>
     </EditorPanel>
-    {{ installed.map((i) => i.id) }}
   </div>
 </template>
 
 <script setup lang="ts">
 import { useComponentsStore } from '@/store/components'
 
-const { editableToolsGroupName, editableTools, editableId, installed }
-  = useComponentsStore()
+const {
+  editableToolsGroupName,
+  editableTools,
+  editableId,
+} = useComponentsStore()
 </script>
 
 <style lang="scss" scoped>
