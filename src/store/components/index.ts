@@ -16,8 +16,11 @@ const list = shallowRef<ComponentList[]>([
   { name: 'Footer', components: [] },
 ])
 
+// State
 const installed = ref<Component[]>([])
-const editable = ref<Component | undefined>(undefined)
+const editableId = ref<string>()
+const editableToolsGroupName = ref<string>()
+const editableToolName = ref<string>()
 const isDragging = ref(false)
 
 const general = reactive<GeneralTool>({
@@ -33,13 +36,18 @@ const general = reactive<GeneralTool>({
   previewText: '',
 })
 
-const editableToolsByGroup = computed(() => {
-  if (!editable.value)
-    return {}
+// Computed
+const editable = computed(() => {
+  if (!editableId.value)
+    return undefined
 
+  return installed.value.find(i => i.id === editableId.value)
+})
+
+const editableToolsByGroup = computed(() => {
   const groupsWithTools: Record<string, Tool[]> = {}
 
-  editable.value.tools.forEach((i) => {
+  editable.value?.tools.forEach((i) => {
     if (!i.group)
       return
 
@@ -53,6 +61,13 @@ const editableToolsByGroup = computed(() => {
   return groupsWithTools
 })
 
+const editableTools = computed(() => {
+  if (!editableToolsGroupName.value)
+    return undefined
+
+  return editableToolsByGroup.value[editableToolsGroupName.value]
+})
+
 const editableIndex = computed(() => {
   if (!installed.value?.length)
     return -1
@@ -60,6 +75,7 @@ const editableIndex = computed(() => {
   return installed.value?.findIndex(i => i.id === editable.value?.id)
 })
 
+// Methods
 function addComponent(component: Component, index?: number) {
   const cloned = cloneComponent(component)
 
@@ -88,16 +104,11 @@ function removeComponent(index: number) {
   installed.value.splice(index, 1)
 }
 
-function setEditable(component: Component | null) {
-  if (!component) {
-    editable.value = undefined
-    return
-  }
-
-  editable.value = component
-}
-
-function updateToolById<T extends Tool>(id: string, key: 'value' | 'label', value: T['value']) {
+function updateToolById<T extends Tool>(
+  id: string,
+  key: 'value' | 'label',
+  value: T['value'],
+) {
   if (!editable.value?.tools)
     return
 
@@ -117,7 +128,9 @@ function addNewToolToMultiTool(id: string) {
   if (!tool)
     return
 
-  const clonedLastItem = clone<MultiTool['value'][0]>(tool.value[tool.value.length - 1])
+  const clonedLastItem = clone<MultiTool['value'][0]>(
+    tool.value[tool.value.length - 1],
+  )
 
   clonedLastItem.id = nanoid(8)
   clonedLastItem.tools.forEach((i) => {
@@ -137,22 +150,36 @@ function deleteMultiToolItem(id: string, index: number) {
   }
 }
 
+function onEditTool(name: string, index: number) {
+  const id = installed.value[index].id
+
+  if (editableId.value !== id)
+    editableId.value = id
+
+  editableToolName.value = name
+  editableToolsGroupName.value = name
+}
+
 export function useComponentsStore() {
   return {
-    list,
-    installed,
-    editable,
-    isDragging,
-    editableToolsByGroup,
-    editableIndex,
-    general,
     addComponent,
-    duplicateComponent,
-    moveComponent,
-    removeComponent,
-    setEditable,
-    updateToolById,
     addNewToolToMultiTool,
     deleteMultiToolItem,
+    duplicateComponent,
+    editable,
+    editableId,
+    editableIndex,
+    editableToolName,
+    editableTools,
+    editableToolsByGroup,
+    editableToolsGroupName,
+    general,
+    installed,
+    isDragging,
+    list,
+    moveComponent,
+    onEditTool,
+    removeComponent,
+    updateToolById,
   }
 }

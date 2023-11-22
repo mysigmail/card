@@ -18,6 +18,7 @@
           >
             <Component
               :is="components[i.name]"
+              :id="i.id"
               :data-name="i.label"
               :label="i.label"
               :index="index"
@@ -31,7 +32,12 @@
 </template>
 
 <script setup lang="ts">
-import { MBody, MContainer, MHtml, MPreview } from '@mysigmail/vue-email-components'
+import {
+  MBody,
+  MContainer,
+  MHtml,
+  MPreview,
+} from '@mysigmail/vue-email-components'
 import type { CSSProperties } from 'vue'
 import { computed, onMounted, ref } from 'vue'
 import Sortable from 'sortablejs'
@@ -60,7 +66,9 @@ const container: CSSProperties = {
 
 const style = computed<CSSProperties>(() => {
   return {
-    backgroundImage: general.background.image ? `url(${general.background.image})` : '',
+    backgroundImage: general.background.image
+      ? `url(${general.background.image})`
+      : '',
     backgroundRepeat: general.background.repeat,
     backgroundColor: general.background.color,
     backgroundSize: general.background.size,
