@@ -34,7 +34,7 @@
           :class="{
             'is-active': k === editableToolsGroupName && id === editableId,
           }"
-          @click="onEditTool(v, index)"
+          @click="onEditTool(k, index)"
         >
           {{ k }}
         </div>
@@ -56,13 +56,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const {
-  onEditTool,
-  editableToolsGroupName,
-  editableId,
-  removeComponent,
-  duplicateComponent,
-} = useComponentsStore()
+const { onEditTool, editableToolsGroupName, editableId, removeComponent, duplicateComponent }
+  = useComponentsStore()
 
 function onClick(type: 'copy' | 'remove') {
   if (type === 'remove')
