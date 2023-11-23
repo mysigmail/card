@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="content">
-        <EditorComponentList v-if="activeTab === 'components'" />
+        <ComponentList v-if="activeTab === 'components'" />
         <TreeComponents v-if="activeTab === 'tree'" />
       </div>
     </div>

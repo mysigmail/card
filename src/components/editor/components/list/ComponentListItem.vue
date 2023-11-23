@@ -1,5 +1,8 @@
 <template>
-  <div ref="listRef" class="component-list-items">
+  <div
+    ref="listRef"
+    class="component-list-items"
+  >
     <div
       v-for="i in components"
       :key="i.id"

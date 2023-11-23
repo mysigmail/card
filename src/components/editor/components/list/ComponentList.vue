@@ -27,7 +27,7 @@
         v-for="(c, idx) in list"
         :key="idx"
       >
-        <EditorComponentListItem
+        <ComponentListItem
           v-show="hovered === idx"
           :components="c.components"
         />
