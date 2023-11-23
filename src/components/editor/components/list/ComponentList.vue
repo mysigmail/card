@@ -74,6 +74,7 @@ function onMouseLeave() {
 .component-list {
   background-color: #fff;
   height: 100%;
+  user-select: none;
   .body {
     position: relative;
     display: flex;
