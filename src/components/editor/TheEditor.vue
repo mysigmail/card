@@ -20,14 +20,16 @@ import { useComponentsStore } from '@/store/components'
 
 const previewRef = ref()
 
-const { general, editableId } = useComponentsStore()
+const { general, editableId, editableToolsGroupName } = useComponentsStore()
 
 onMounted(() => {
   const shadow = renderToShadowDom(previewRef.value!, Editor)
 
   shadow.addEventListener('click', (e) => {
-    if (e.target instanceof HTMLBodyElement)
+    if (e.target instanceof HTMLBodyElement) {
       editableId.value = undefined
+      editableToolsGroupName.value = undefined
+    }
   })
 })
 </script>
