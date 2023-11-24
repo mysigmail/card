@@ -4,53 +4,53 @@
     :index="index"
     @click.self="onEditTool('Layout', index)"
   >
-    <MColumn
-      :style="{
-        width: `${logoContainerWidth}px`,
+    <MRow
+      v-if="isShowLogo"
+      class="p-hover-tools"
+      :class="{
+        'p-edit-tool': editableId === id && editableToolName === 'Logo',
       }"
+      @click="onEditTool('Logo', index)"
     >
-      <MRow
-        v-if="isShowLogo"
-        class="p-hover-tools"
-        :class="{
-          'p-edit-tool': editableId === id && editableToolName === 'Logo',
-        }"
-        @click="onEditTool('Logo', index)"
-      >
+      <MColumn align="center">
         <MLink :href="logoImage?.link">
           <MImg
             v-bind="logoAttrs"
-            style="margin: 0 auto"
+            style="display: unset"
           />
         </MLink>
-      </MRow>
-      <MRow
-        v-if="isShowDivider"
-        class="p-hover-tools"
-        :class="{
-          'p-edit-tool': editableId === id && editableToolName === 'Divider',
-        }"
-        @click="onEditTool('Divider', index)"
-      >
+      </MColumn>
+    </MRow>
+    <MRow
+      v-if="isShowDivider"
+      class="p-hover-tools"
+      :class="{
+        'p-edit-tool': editableId === id && editableToolName === 'Divider',
+      }"
+      @click="onEditTool('Divider', index)"
+    >
+      <MColumn>
         <MHr v-bind="dividerAttrs" />
-      </MRow>
-      <MRow
-        v-if="isShowMenu"
-        :style="{
-          marginTop: !isShowDivider && isShowLogo ? '20px' : null,
-        }"
-        class="p-hover-tools"
-        :class="{
-          'p-edit-tool': editableId === id && editableToolName === 'Menu',
-        }"
-        @click="onEditTool('Menu', index)"
-      >
+      </MColumn>
+    </MRow>
+    <MRow
+      v-if="isShowMenu"
+      :style="{
+        marginTop: !isShowDivider && isShowLogo ? '20px' : null,
+      }"
+      class="p-hover-tools"
+      :class="{
+        'p-edit-tool': editableId === id && editableToolName === 'Menu',
+      }"
+      @click="onEditTool('Menu', index)"
+    >
+      <MColumn align="center">
         <MenuItems
           v-if="itemsText"
           :items="itemsText"
         />
-      </MRow>
-    </MColumn>
+      </MColumn>
+    </MRow>
   </EmailBase>
 </template>
 
@@ -69,7 +69,6 @@ interface Props {
 const props = defineProps<Props>()
 
 const {
-  logoContainerWidth,
   layoutAttrs,
   logoAttrs,
   itemsText,

@@ -1,16 +1,24 @@
 import { computed } from 'vue'
 import { useCommon } from './common'
-import type { ColorPickerTool, Tool } from '@/types/editor'
+import type { ColorPickerTool, PaddingTool, Tool } from '@/types/editor'
 import { getValueFromToolsByGroupByName } from '@/store/components/utils'
 
 export function useMenu2(tools: Tool[]) {
   const common = useCommon(tools)
 
-  const generalDividerColor = computed(() => {
+  const dividerColor = computed(() => {
     return getValueFromToolsByGroupByName<ColorPickerTool>(
       common.toolsByGroup.value,
       'Divider',
       'Color',
+    )
+  })
+
+  const dividerColorPadding = computed(() => {
+    return getValueFromToolsByGroupByName<PaddingTool>(
+      common.toolsByGroup.value,
+      'Divider',
+      'Padding',
     )
   })
 
@@ -21,8 +29,12 @@ export function useMenu2(tools: Tool[]) {
   const dividerAttrs = computed(() => {
     return {
       style: {
-        borderColor: generalDividerColor.value,
-        margin: '20px 0',
+        borderColor: dividerColor.value,
+        margin: dividerColorPadding.value
+          ?.map((i, index) => {
+            return index % 2 === 0 ? `${i}px` : 0
+          })
+          .join(' '),
       },
     } as HTMLElement
   })

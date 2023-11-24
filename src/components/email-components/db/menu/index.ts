@@ -38,12 +38,6 @@ const menu1: ComponentBuilder = (theme, label) => {
         type: 'colorPicker',
         value: bgColor,
       }),
-      toolBuilder<InputNumberTool>({
-        group: 'Logo',
-        label: 'Container Width',
-        type: 'inputNumber',
-        value: 372,
-      }),
       toolBuilder<ImageTool>({
         group: 'Logo',
         label: 'Image',
@@ -60,12 +54,6 @@ const menu1: ComponentBuilder = (theme, label) => {
         label: 'Show / Hide',
         type: 'toggle',
         value: true,
-      }),
-      toolBuilder<InputNumberTool>({
-        group: 'Menu',
-        label: 'Container Width',
-        type: 'inputNumber',
-        value: 0,
       }),
       toolBuilder<MultiTool>({
         group: 'Menu',
@@ -184,6 +172,12 @@ const menu2: ComponentBuilder = (theme, label) => {
         label: 'Background Color',
         type: 'colorPicker',
         value: bgColor,
+      }),
+      toolBuilder<PaddingTool>({
+        group: 'Divider',
+        label: 'Padding',
+        type: 'padding',
+        value: [20, 0, 20, 0],
       }),
       toolBuilder<ColorPickerTool>({
         group: 'Divider',
@@ -334,12 +328,6 @@ const menu3: ComponentBuilder = (theme, label) => {
         type: 'colorPicker',
         value: bgColor,
       }),
-      toolBuilder<InputNumberTool>({
-        group: 'Logo',
-        label: 'Container Width',
-        type: 'inputNumber',
-        value: 442,
-      }),
       toolBuilder<ImageTool>({
         group: 'Logo',
         label: 'Image',
@@ -357,14 +345,8 @@ const menu3: ComponentBuilder = (theme, label) => {
         type: 'toggle',
         value: true,
       }),
-      toolBuilder<InputNumberTool>({
-        group: 'Menu',
-        label: 'Container Width',
-        type: 'inputNumber',
-        value: 0,
-      }),
       toolBuilder<MultiTool>({
-        group: 'Menu',
+        group: 'Social',
         label: 'List',
         type: 'multi',
         value: [
@@ -452,7 +434,7 @@ const menu3: ComponentBuilder = (theme, label) => {
         ],
       }),
       toolBuilder<ToggleTool>({
-        group: 'Menu',
+        group: 'Social',
         label: 'Show / Hide',
         type: 'toggle',
         value: true,

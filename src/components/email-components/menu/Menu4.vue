@@ -4,13 +4,8 @@
     :index="index"
     @click.self="onEditTool('Layout', index)"
   >
-    <MColumn
-      :style="{
-        width: `${logoContainerWidth}px`,
-      }"
-    >
-      <MRow
-        v-if="isShowLogo"
+    <MRow v-if="isShowLogo">
+      <MColumn
         class="p-hover-tools"
         :class="{
           'p-edit-tool': editableId === id && editableToolName === 'Logo',
@@ -20,8 +15,10 @@
         <MLink :href="logoImage?.link">
           <MImg v-bind="logoAttrs" />
         </MLink>
-      </MRow>
-      <MRow v-if="isShowMenu">
+      </MColumn>
+    </MRow>
+    <MRow v-if="isShowMenu">
+      <MColumn>
         <MenuItems
           v-if="itemsText"
           class="p-hover-tools"
@@ -35,8 +32,8 @@
           }"
           @click="onEditTool('Menu', index)"
         />
-      </MRow>
-    </MColumn>
+      </MColumn>
+    </MRow>
   </EmailBase>
 </template>
 
@@ -54,8 +51,9 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { logoContainerWidth, layoutAttrs, logoAttrs, logoImage, isShowMenu, isShowLogo, itemsText }
-  = useCommon(props.tools)
+const { layoutAttrs, logoAttrs, logoImage, isShowMenu, isShowLogo, itemsText } = useCommon(
+  props.tools,
+)
 
 const { onEditTool, editableToolName, editableId } = useComponentsStore()
 </script>
