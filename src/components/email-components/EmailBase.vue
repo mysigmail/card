@@ -6,9 +6,7 @@
     }"
     :style="style"
   >
-    <MRow class="main-row">
-      <slot />
-    </MRow>
+    <slot />
   </MContainer>
 </template>
 

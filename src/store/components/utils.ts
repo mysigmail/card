@@ -24,10 +24,7 @@ export function findToolById(id: string, tools: Tool[]): Tool | undefined {
   }
 }
 
-export function getValueFromToolsByName<T extends { value: unknown }>(
-  tools: Tool[],
-  name: string,
-) {
+export function getValueFromToolsByName<T extends { value: unknown }>(tools: Tool[], name: string) {
   const value = tools.find(i => i.label === name)?.value
 
   if (!value)
@@ -41,7 +38,7 @@ export function getValueFromToolsByGroupByName<T extends { value: unknown }>(
   group: string,
   name: string,
 ) {
-  return getValueFromToolsByName<T>(toolsByGroup[group], name)
+  return toolsByGroup[group] ? getValueFromToolsByName<T>(toolsByGroup[group], name) : undefined
 }
 
 export function getToolsByGroup(tools: Tool[]) {

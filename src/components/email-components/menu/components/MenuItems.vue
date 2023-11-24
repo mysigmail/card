@@ -3,7 +3,7 @@
     class="menu-items"
     width="auto"
   >
-    <MColumn align="center">
+    <MColumn>
       <MRow>
         <MColumn
           v-for="(i, index) in items"

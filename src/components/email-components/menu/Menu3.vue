@@ -4,41 +4,38 @@
     :index="index"
     @click.self="onEditTool('Layout', index)"
   >
-    <MColumn
-      v-if="isShowLogo"
-      class="p-hover-tools"
-      :class="{
-        'p-edit-tool': editableId === id && editableToolName === 'Logo',
-      }"
-      :style="{
-        width: `${logoContainerWidth}px`,
-      }"
-      @click="onEditTool('Logo', index)"
-    >
-      <MRow>
+    <MRow>
+      <MColumn
+        v-if="isShowLogo"
+        class="p-hover-tools"
+        style="width: 100%"
+        :class="{
+          'p-edit-tool': editableId === id && editableToolName === 'Logo',
+        }"
+        @click="onEditTool('Logo', index)"
+      >
         <MLink :href="logoImage?.link">
           <MImg v-bind="logoAttrs" />
         </MLink>
-      </MRow>
-    </MColumn>
-    <MColumn
-      class="p-hover-tools"
-      :class="{
-        'p-edit-tool': editableId === id && editableToolName === 'Menu',
-      }"
-      @click="onEditTool('Menu', index)"
-    >
-      <MenuItemsImg
-        v-if="isShowMenu"
-        :items="itemsImg"
-      />
-    </MColumn>
+      </MColumn>
+      <MColumn
+        v-if="isShowSocial"
+        class="p-hover-tools"
+        align="right"
+        :class="{
+          'p-edit-tool': editableId === id && editableToolName === 'Social',
+        }"
+        @click="onEditTool('Social', index)"
+      >
+        <MenuItemsImg :items="itemsImg" />
+      </MColumn>
+    </MRow>
   </EmailBase>
 </template>
 
 <script setup lang="ts">
 import { MColumn, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
-import { useCommon } from './composables/common'
+import { useMenu3 } from './composables/menu-3'
 import type { Tool } from '@/types/editor'
 import { useComponentsStore } from '@/store/components'
 
@@ -50,8 +47,9 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { isShowLogo, isShowMenu, itemsImg, layoutAttrs, logoAttrs, logoContainerWidth, logoImage }
-  = useCommon(props.tools)
+const { isShowLogo, isShowSocial, itemsImg, layoutAttrs, logoAttrs, logoImage } = useMenu3(
+  props.tools,
+)
 
 const { onEditTool, editableToolName, editableId } = useComponentsStore()
 </script>

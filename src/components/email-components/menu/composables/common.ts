@@ -35,14 +35,6 @@ export function useCommon(tools: Tool[]) {
     return getValueFromToolsByGroupByName<ImageTool>(toolsByGroup.value, 'Logo', 'Image')
   })
 
-  const logoContainerWidth = computed(() => {
-    return getValueFromToolsByGroupByName<InputNumberTool>(
-      toolsByGroup.value,
-      'Logo',
-      'Container Width',
-    )
-  })
-
   const layoutAttrs = computed(() => {
     const padding = layoutPadding.value?.map(i => `${i}px`).join(' ')
 
@@ -92,7 +84,7 @@ export function useCommon(tools: Tool[]) {
   })
 
   const itemsImg = computed(() => {
-    const items = getValueFromToolsByGroupByName<MultiTool>(toolsByGroup.value, 'Menu', 'List')
+    const items = getValueFromToolsByGroupByName<MultiTool>(toolsByGroup.value, 'Social', 'List')
 
     return items?.map((i) => {
       return {
@@ -110,7 +102,6 @@ export function useCommon(tools: Tool[]) {
     itemsText,
     layoutAttrs,
     logoAttrs,
-    logoContainerWidth,
     logoImage,
     toolsByGroup,
   }
