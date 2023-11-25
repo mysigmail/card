@@ -3,6 +3,7 @@ import { images } from '../images'
 import { COLOR } from '../../constants'
 import { toolBuilder } from '../../utils'
 import type {
+  AlignTool,
   ColorPickerTool,
   ComponentBuilder,
   ImageTool,
@@ -38,6 +39,12 @@ const menu1: ComponentBuilder = (theme, label) => {
         type: 'colorPicker',
         value: bgColor,
       }),
+      toolBuilder<AlignTool>({
+        group: 'Logo',
+        label: 'Align',
+        type: 'align',
+        value: 'left',
+      }),
       toolBuilder<ImageTool>({
         group: 'Logo',
         label: 'Image',
@@ -54,6 +61,12 @@ const menu1: ComponentBuilder = (theme, label) => {
         label: 'Show / Hide',
         type: 'toggle',
         value: true,
+      }),
+      toolBuilder<AlignTool>({
+        group: 'Menu',
+        label: 'Align',
+        type: 'align',
+        value: 'right',
       }),
       toolBuilder<MultiTool>({
         group: 'Menu',
@@ -191,6 +204,12 @@ const menu2: ComponentBuilder = (theme, label) => {
         type: 'toggle',
         value: true,
       }),
+      toolBuilder<AlignTool>({
+        group: 'Logo',
+        label: 'Align',
+        type: 'align',
+        value: 'center',
+      }),
       toolBuilder<ImageTool>({
         group: 'Logo',
         label: 'Image',
@@ -207,6 +226,12 @@ const menu2: ComponentBuilder = (theme, label) => {
         label: 'Show / Hide',
         type: 'toggle',
         value: true,
+      }),
+      toolBuilder<AlignTool>({
+        group: 'Menu',
+        label: 'Align',
+        type: 'align',
+        value: 'center',
       }),
       toolBuilder<MultiTool>({
         group: 'Menu',
@@ -328,6 +353,12 @@ const menu3: ComponentBuilder = (theme, label) => {
         type: 'colorPicker',
         value: bgColor,
       }),
+      toolBuilder<AlignTool>({
+        group: 'Logo',
+        label: 'Align',
+        type: 'align',
+        value: 'left',
+      }),
       toolBuilder<ImageTool>({
         group: 'Logo',
         label: 'Image',
@@ -344,6 +375,12 @@ const menu3: ComponentBuilder = (theme, label) => {
         label: 'Show / Hide',
         type: 'toggle',
         value: true,
+      }),
+      toolBuilder<AlignTool>({
+        group: 'Social',
+        label: 'Align',
+        type: 'align',
+        value: 'right',
       }),
       toolBuilder<MultiTool>({
         group: 'Social',
@@ -468,6 +505,12 @@ const menu4: ComponentBuilder = (theme, label) => {
         type: 'colorPicker',
         value: bgColor,
       }),
+      toolBuilder<AlignTool>({
+        group: 'Logo',
+        label: 'Align',
+        type: 'align',
+        value: 'left',
+      }),
       toolBuilder<ImageTool>({
         group: 'Logo',
         label: 'Image',
@@ -484,6 +527,12 @@ const menu4: ComponentBuilder = (theme, label) => {
         label: 'Show / Hide',
         type: 'toggle',
         value: true,
+      }),
+      toolBuilder<AlignTool>({
+        group: 'Menu',
+        label: 'Align',
+        type: 'align',
+        value: 'left',
       }),
       toolBuilder<MultiTool>({
         group: 'Menu',

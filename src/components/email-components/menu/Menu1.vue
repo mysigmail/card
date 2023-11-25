@@ -8,6 +8,7 @@
       <MColumn
         v-if="isShowLogo"
         class="p-hover-tools"
+        :align="logoAlign"
         :class="{
           'p-edit-tool': editableId === id && editableToolName === 'Logo',
         }"
@@ -20,7 +21,7 @@
       </MColumn>
       <MColumn
         v-if="isShowMenu"
-        align="right"
+        :align="menuAlign"
         class="p-hover-tools"
         :class="{
           'p-edit-tool': editableId === id && editableToolName === 'Menu',
@@ -51,9 +52,16 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { layoutAttrs, logoAttrs, logoImage, isShowMenu, isShowLogo, itemsText } = useCommon(
-  props.tools,
-)
+const {
+  layoutAttrs,
+  logoAttrs,
+  logoImage,
+  isShowMenu,
+  isShowLogo,
+  itemsText,
+  menuAlign,
+  logoAlign,
+} = useCommon(props.tools)
 
 const { onEditTool, editableToolName, editableId } = useComponentsStore()
 </script>

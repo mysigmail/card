@@ -1,6 +1,7 @@
 <template>
   <MRow
     class="menu-items"
+    align="auto"
     width="auto"
   >
     <MColumn>

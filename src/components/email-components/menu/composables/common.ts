@@ -1,5 +1,6 @@
 import { computed } from 'vue'
 import type {
+  AlignTool,
   ColorPickerTool,
   ImageTool,
   InputNumberTool,
@@ -62,6 +63,14 @@ export function useCommon(tools: Tool[]) {
     } as HTMLImageElement
   })
 
+  const logoAlign = computed(() => {
+    return getValueFromToolsByGroupByName<AlignTool>(toolsByGroup.value, 'Logo', 'Align')
+  })
+
+  const menuAlign = computed(() => {
+    return getValueFromToolsByGroupByName<AlignTool>(toolsByGroup.value, 'Menu', 'Align')
+  })
+
   const isShowMenu = computed(() => {
     return getValueFromToolsByGroupByName<ToggleTool>(toolsByGroup.value, 'Menu', 'Show / Hide')
   })
@@ -104,5 +113,7 @@ export function useCommon(tools: Tool[]) {
     logoAttrs,
     logoImage,
     toolsByGroup,
+    menuAlign,
+    logoAlign,
   }
 }
