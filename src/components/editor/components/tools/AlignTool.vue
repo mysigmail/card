@@ -37,13 +37,18 @@ watch(localValue, () => {
 })
 </script>
 
-<style lang="scss" scoped></style>
-
-<style lang="scss">
-.el-radio-button {
-  &.is-active {
+<style lang="scss" scoped>
+.is-active {
+  svg {
+    fill: #fff;
+  }
+}
+::v-deep .el-radio-button {
+  &__inner {
+    height: 32px;
     svg {
-      fill: #fff;
+      position: relative;
+      top: -1px;
     }
   }
 }
