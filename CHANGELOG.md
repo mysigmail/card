@@ -1,3 +1,17 @@
+# [0.6.0](https://github.com/mysigmail/card/compare/v0.5.0...v0.6.0) (2023-11-25)
+
+
+### Bug Fixes
+
+* hide editing tool panel via outside click ([57d2e76](https://github.com/mysigmail/card/commit/57d2e761ee2e8aac767eb853868a69e6f08192fa))
+
+
+### Features
+
+* add align tool ([#19](https://github.com/mysigmail/card/issues/19)) ([3d63b3f](https://github.com/mysigmail/card/commit/3d63b3f7f8248a762f5d4b07d51764f88a3f0494))
+
+
+
 # [0.5.0](https://github.com/mysigmail/card/compare/v0.4.1...v0.5.0) (2023-11-22)
 
 
