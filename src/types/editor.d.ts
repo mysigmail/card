@@ -58,6 +58,11 @@ export interface ToggleTool extends BaseTool {
   value: boolean
 }
 
+export interface AlignTool extends BaseTool {
+  type: 'align'
+  value: 'left' | 'center' | 'right'
+}
+
 export type SingleTool =
   | PaddingTool
   | ImageTool
@@ -65,6 +70,7 @@ export type SingleTool =
   | InputTool
   | InputNumberTool
   | ToggleTool
+  | AlignTool
 
 export interface MultiTool extends BaseTool {
   type: 'multi'

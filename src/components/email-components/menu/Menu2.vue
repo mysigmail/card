@@ -12,7 +12,7 @@
       }"
       @click="onEditTool('Logo', index)"
     >
-      <MColumn align="center">
+      <MColumn :align="logoAlign">
         <MLink :href="logoImage?.link">
           <MImg
             v-bind="logoAttrs"
@@ -44,7 +44,7 @@
       }"
       @click="onEditTool('Menu', index)"
     >
-      <MColumn align="center">
+      <MColumn :align="menuAlign">
         <MenuItems
           v-if="itemsText"
           :items="itemsText"
@@ -77,6 +77,8 @@ const {
   logoImage,
   isShowLogo,
   isShowDivider,
+  logoAlign,
+  menuAlign,
 } = useMenu2(props.tools)
 
 const { onEditTool, editableToolName, editableId } = useComponentsStore()

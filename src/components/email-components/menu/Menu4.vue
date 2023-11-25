@@ -7,6 +7,7 @@
     <MRow v-if="isShowLogo">
       <MColumn
         class="p-hover-tools"
+        :align="logoAlign"
         :class="{
           'p-edit-tool': editableId === id && editableToolName === 'Logo',
         }"
@@ -18,7 +19,7 @@
       </MColumn>
     </MRow>
     <MRow v-if="isShowMenu">
-      <MColumn>
+      <MColumn :align="menuAlign">
         <MenuItems
           v-if="itemsText"
           class="p-hover-tools"
@@ -26,7 +27,6 @@
             'p-edit-tool': editableId === id && editableToolName === 'Menu',
           }"
           :items="itemsText"
-          align="left"
           :style="{
             marginTop: isShowLogo ? '20px' : null,
           }"
@@ -51,9 +51,16 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { layoutAttrs, logoAttrs, logoImage, isShowMenu, isShowLogo, itemsText } = useCommon(
-  props.tools,
-)
+const {
+  layoutAttrs,
+  logoAttrs,
+  logoImage,
+  isShowMenu,
+  isShowLogo,
+  itemsText,
+  logoAlign,
+  menuAlign,
+} = useCommon(props.tools)
 
 const { onEditTool, editableToolName, editableId } = useComponentsStore()
 </script>

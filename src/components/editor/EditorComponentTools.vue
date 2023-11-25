@@ -37,6 +37,12 @@
         :title="i.label"
         :value="i.value"
       />
+      <AlignTool
+        v-if="i.type === 'align'"
+        :id="i.id"
+        :value="i.value"
+        :title="i.label"
+      />
       <MultiTool
         v-if="i.type === 'multi'"
         :id="i.id"
