@@ -14,34 +14,27 @@ export function useMenu2(tools: Tool[]) {
     )
   })
 
-  const dividerColorPadding = computed(() => {
-    return getValueFromToolsByGroupByName<PaddingTool>(
+  const dividerPadding = computed(() => {
+    const _padding = getValueFromToolsByGroupByName<PaddingTool>(
       common.toolsByGroup.value,
       'Divider',
       'Padding',
     )
+    const padding = _padding?.map(i => `${i}px`).join(' ')
+
+    return {
+      padding,
+    } as CSSStyleDeclaration
   })
 
   const isShowDivider = computed(() => {
     return getValueFromToolsByGroupByName(common.toolsByGroup.value, 'Divider', 'Show / Hide')
   })
 
-  const dividerAttrs = computed(() => {
-    return {
-      style: {
-        borderColor: dividerColor.value,
-        margin: dividerColorPadding.value
-          ?.map((i, index) => {
-            return index % 2 === 0 ? `${i}px` : 0
-          })
-          .join(' '),
-      },
-    } as HTMLElement
-  })
-
   return {
     ...common,
-    dividerAttrs,
+    dividerColor,
+    dividerPadding,
     isShowDivider,
   }
 }

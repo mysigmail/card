@@ -5,40 +5,32 @@
     @click.self="onEditTool('Layout', index)"
   >
     <MRow v-if="isShowLogo">
-      <MColumn
-        class="p-hover-tools"
+      <EImg
+        :id="id"
+        :img-attrs="logoAttrs"
+        group="Logo"
+        :link="logoImage?.link"
         :align="logoAlign"
-        :class="{
-          'p-edit-tool': editableId === id && editableToolName === 'Logo',
-        }"
         @click="onEditTool('Logo', index)"
-      >
-        <MLink :href="logoImage?.link">
-          <MImg v-bind="logoAttrs" />
-        </MLink>
-      </MColumn>
+      />
     </MRow>
-    <MRow v-if="isShowMenu">
-      <MColumn :align="menuAlign">
-        <MenuItems
-          v-if="itemsText"
-          class="p-hover-tools"
-          :class="{
-            'p-edit-tool': editableId === id && editableToolName === 'Menu',
-          }"
-          :items="itemsText"
-          :style="{
-            marginTop: isShowLogo ? '20px' : null,
-          }"
-          @click="onEditTool('Menu', index)"
-        />
-      </MColumn>
+    <MRow
+      v-if="isShowMenu"
+      :style="menuPadding"
+    >
+      <EMenu
+        :id="id"
+        :items="menuItems"
+        group="Menu"
+        :align="menuAlign"
+        @click="onEditTool('Menu', index)"
+      />
     </MRow>
   </EmailBase>
 </template>
 
 <script setup lang="ts">
-import { MColumn, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
+import { MRow } from '@mysigmail/vue-email-components'
 import { useCommon } from './composables/common'
 import type { Tool } from '@/types/editor'
 import { useComponentsStore } from '@/store/components'
@@ -57,12 +49,13 @@ const {
   logoImage,
   isShowMenu,
   isShowLogo,
-  itemsText,
+  menuItems,
   logoAlign,
   menuAlign,
+  menuPadding,
 } = useCommon(props.tools)
 
-const { onEditTool, editableToolName, editableId } = useComponentsStore()
+const { onEditTool } = useComponentsStore()
 </script>
 
 <style lang="scss" scoped></style>

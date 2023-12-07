@@ -4,58 +4,42 @@
     :index="index"
     @click.self="onEditTool('Layout', index)"
   >
-    <MRow
-      v-if="isShowLogo"
-      class="p-hover-tools"
-      :class="{
-        'p-edit-tool': editableId === id && editableToolName === 'Logo',
-      }"
-      @click="onEditTool('Logo', index)"
-    >
-      <MColumn :align="logoAlign">
-        <MLink :href="logoImage?.link">
-          <MImg
-            v-bind="logoAttrs"
-            style="display: unset"
-          />
-        </MLink>
-      </MColumn>
+    <MRow v-if="isShowLogo">
+      <EImg
+        :id="id"
+        group="Logo"
+        :img-attrs="logoAttrs"
+        :link="logoImage?.link"
+        :align="logoAlign"
+        @click="onEditTool('Logo', index)"
+      />
     </MRow>
-    <MRow
+
+    <EDivider
       v-if="isShowDivider"
-      class="p-hover-tools"
-      :class="{
-        'p-edit-tool': editableId === id && editableToolName === 'Divider',
-      }"
+      :id="id"
+      :color="dividerColor"
+      group="Divider"
+      :style="dividerPadding"
       @click="onEditTool('Divider', index)"
-    >
-      <MColumn>
-        <MHr v-bind="dividerAttrs" />
-      </MColumn>
-    </MRow>
+    />
     <MRow
       v-if="isShowMenu"
-      :style="{
-        marginTop: !isShowDivider && isShowLogo ? '20px' : null,
-      }"
-      class="p-hover-tools"
-      :class="{
-        'p-edit-tool': editableId === id && editableToolName === 'Menu',
-      }"
-      @click="onEditTool('Menu', index)"
+      :style="menuPadding"
     >
-      <MColumn :align="menuAlign">
-        <MenuItems
-          v-if="itemsText"
-          :items="itemsText"
-        />
-      </MColumn>
+      <EMenu
+        :id="id"
+        group="Menu"
+        :items="menuItems"
+        :align="menuAlign"
+        @click="onEditTool('Menu', index)"
+      />
     </MRow>
   </EmailBase>
 </template>
 
 <script setup lang="ts">
-import { MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
+import { MRow } from '@mysigmail/vue-email-components'
 import { useMenu2 } from './composables/menu-2'
 import type { Tool } from '@/types/editor'
 import { useComponentsStore } from '@/store/components'
@@ -71,17 +55,19 @@ const props = defineProps<Props>()
 const {
   layoutAttrs,
   logoAttrs,
-  itemsText,
+  menuItems,
   isShowMenu,
-  dividerAttrs,
+  dividerColor,
+  dividerPadding,
   logoImage,
   isShowLogo,
   isShowDivider,
   logoAlign,
   menuAlign,
+  menuPadding,
 } = useMenu2(props.tools)
 
-const { onEditTool, editableToolName, editableId } = useComponentsStore()
+const { onEditTool } = useComponentsStore()
 </script>
 
 <style lang="scss" scoped></style>

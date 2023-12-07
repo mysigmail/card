@@ -15,7 +15,7 @@ import {
   getValueFromToolsByGroupByName,
   getValueFromToolsByName,
 } from '@/store/components/utils'
-import type { MenuItemImg, MenuItemText } from '@/types/email-components/menu'
+import type { Menu } from '@/types/email-components/components'
 
 export function useCommon(tools: Tool[]) {
   const toolsByGroup = computed(() => getToolsByGroup(tools))
@@ -71,6 +71,19 @@ export function useCommon(tools: Tool[]) {
     return getValueFromToolsByGroupByName<AlignTool>(toolsByGroup.value, 'Menu', 'Align')
   })
 
+  const menuPadding = computed(() => {
+    const _padding = getValueFromToolsByGroupByName<PaddingTool>(
+      toolsByGroup.value,
+      'Menu',
+      'Padding',
+    )
+    const padding = _padding?.map(i => `${i}px`).join(' ')
+
+    return {
+      padding,
+    } as CSSStyleDeclaration
+  })
+
   const isShowMenu = computed(() => {
     return getValueFromToolsByGroupByName<ToggleTool>(toolsByGroup.value, 'Menu', 'Show / Hide')
   })
@@ -79,7 +92,7 @@ export function useCommon(tools: Tool[]) {
     return getValueFromToolsByGroupByName<ToggleTool>(toolsByGroup.value, 'Logo', 'Show / Hide')
   })
 
-  const itemsText = computed(() => {
+  const menuItems = computed(() => {
     const items = getValueFromToolsByGroupByName<MultiTool>(toolsByGroup.value, 'Menu', 'List')
 
     return items?.map((i) => {
@@ -89,31 +102,20 @@ export function useCommon(tools: Tool[]) {
         color: getValueFromToolsByName<ColorPickerTool>(i.tools, 'Color'),
         fontSize: getValueFromToolsByName<InputNumberTool>(i.tools, 'Font Size'),
       }
-    }) as MenuItemText[]
-  })
-
-  const itemsImg = computed(() => {
-    const items = getValueFromToolsByGroupByName<MultiTool>(toolsByGroup.value, 'Social', 'List')
-
-    return items?.map((i) => {
-      return {
-        image: getValueFromToolsByName<ImageTool>(i.tools, 'Image'),
-        link: getValueFromToolsByName<InputTool>(i.tools, 'Link'),
-      }
-    }) as MenuItemImg[]
+    }) as Menu[]
   })
 
   return {
-    layoutBackground,
     isShowLogo,
     isShowMenu,
-    itemsImg,
-    itemsText,
+    menuItems,
     layoutAttrs,
+    layoutBackground,
+    logoAlign,
     logoAttrs,
     logoImage,
-    toolsByGroup,
     menuAlign,
-    logoAlign,
+    menuPadding,
+    toolsByGroup,
   }
 }
