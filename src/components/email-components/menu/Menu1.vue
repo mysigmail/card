@@ -5,41 +5,29 @@
     @click.self="onEditTool('Layout', index)"
   >
     <MRow>
-      <MColumn
+      <EImg
         v-if="isShowLogo"
-        class="p-hover-tools"
+        :id="id"
+        group="Logo"
+        :img-attrs="logoAttrs"
+        :link="logoImage?.link"
         :align="logoAlign"
-        :class="{
-          'p-edit-tool': editableId === id && editableToolName === 'Logo',
-        }"
-        style="width: 100%"
         @click="onEditTool('Logo', index)"
-      >
-        <MLink :href="logoImage?.link">
-          <MImg v-bind="logoAttrs" />
-        </MLink>
-      </MColumn>
-      <MColumn
+      />
+      <EMenu
         v-if="isShowMenu"
+        :id="id"
+        group="Menu"
+        :items="menuItems"
         :align="menuAlign"
-        class="p-hover-tools"
-        :class="{
-          'p-edit-tool': editableId === id && editableToolName === 'Menu',
-        }"
         @click="onEditTool('Menu', index)"
-      >
-        <MenuItems
-          v-if="itemsText"
-          class="menu-items"
-          :items="itemsText"
-        />
-      </MColumn>
+      />
     </MRow>
   </EmailBase>
 </template>
 
 <script setup lang="ts">
-import { MColumn, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
+import { MRow } from '@mysigmail/vue-email-components'
 import { useCommon } from './composables/common'
 import type { Tool } from '@/types/editor'
 import { useComponentsStore } from '@/store/components'
@@ -58,12 +46,12 @@ const {
   logoImage,
   isShowMenu,
   isShowLogo,
-  itemsText,
+  menuItems,
   menuAlign,
   logoAlign,
 } = useCommon(props.tools)
 
-const { onEditTool, editableToolName, editableId } = useComponentsStore()
+const { onEditTool } = useComponentsStore()
 </script>
 
 <style lang="scss" scoped></style>
