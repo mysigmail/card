@@ -67,6 +67,19 @@ export function useCommon(tools: Tool[]) {
     return getValueFromToolsByGroupByName<AlignTool>(toolsByGroup.value, 'Logo', 'Align')
   })
 
+  const logoPadding = computed(() => {
+    const _padding = getValueFromToolsByGroupByName<PaddingTool>(
+      toolsByGroup.value,
+      'Logo',
+      'Padding',
+    )
+    const padding = _padding?.map(i => `${i}px`).join(' ')
+
+    return {
+      padding,
+    } as CSSStyleDeclaration
+  })
+
   const menuAlign = computed(() => {
     return getValueFromToolsByGroupByName<AlignTool>(toolsByGroup.value, 'Menu', 'Align')
   })
@@ -108,13 +121,14 @@ export function useCommon(tools: Tool[]) {
   return {
     isShowLogo,
     isShowMenu,
-    menuItems,
     layoutAttrs,
     layoutBackground,
     logoAlign,
     logoAttrs,
     logoImage,
+    logoPadding,
     menuAlign,
+    menuItems,
     menuPadding,
     toolsByGroup,
   }
