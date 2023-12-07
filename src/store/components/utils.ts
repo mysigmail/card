@@ -28,9 +28,9 @@ export function getValueFromToolsByName<T extends { value: unknown }>(tools: Too
   const value = tools.find(i => i.label === name)?.value
 
   if (!value)
-    return console.warn(`Could not find tool with name "${name}"`)
+    console.warn(`Could not find tool with name "${name}"`)
 
-  return value as T['value'] | undefined
+  return (value as T['value']) || undefined
 }
 
 export function getValueFromToolsByGroupByName<T extends { value: unknown }>(
