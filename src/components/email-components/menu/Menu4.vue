@@ -4,7 +4,10 @@
     :index="index"
     @click.self="onEditTool('Layout', index)"
   >
-    <MRow v-if="isShowLogo">
+    <MRow
+      v-if="isShowLogo"
+      :style="logoPadding"
+    >
       <EImg
         :id="id"
         :img-attrs="logoAttrs"
@@ -53,6 +56,7 @@ const {
   logoAlign,
   menuAlign,
   menuPadding,
+  logoPadding,
 } = useCommon(props.tools)
 
 const { onEditTool } = useComponentsStore()

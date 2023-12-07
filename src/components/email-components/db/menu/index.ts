@@ -190,7 +190,7 @@ const menu2: ComponentBuilder = (theme, label) => {
         group: 'Divider',
         label: 'Padding',
         type: 'padding',
-        value: [20, 0, 20, 0],
+        value: [10, 0, 10, 0],
       }),
       toolBuilder<ColorPickerTool>({
         group: 'Divider',
@@ -203,6 +203,12 @@ const menu2: ComponentBuilder = (theme, label) => {
         label: 'Show / Hide',
         type: 'toggle',
         value: true,
+      }),
+      toolBuilder<PaddingTool>({
+        group: 'Logo',
+        label: 'Padding',
+        type: 'padding',
+        value: [0, 0, 0, 0],
       }),
       toolBuilder<AlignTool>({
         group: 'Logo',
@@ -226,6 +232,12 @@ const menu2: ComponentBuilder = (theme, label) => {
         label: 'Show / Hide',
         type: 'toggle',
         value: true,
+      }),
+      toolBuilder<PaddingTool>({
+        group: 'Menu',
+        label: 'Padding',
+        type: 'padding',
+        value: [0, 0, 0, 0],
       }),
       toolBuilder<AlignTool>({
         group: 'Menu',
@@ -505,6 +517,12 @@ const menu4: ComponentBuilder = (theme, label) => {
         type: 'colorPicker',
         value: bgColor,
       }),
+      toolBuilder<PaddingTool>({
+        group: 'Logo',
+        label: 'Padding',
+        type: 'padding',
+        value: [0, 0, 0, 0],
+      }),
       toolBuilder<AlignTool>({
         group: 'Logo',
         label: 'Align',
@@ -527,6 +545,12 @@ const menu4: ComponentBuilder = (theme, label) => {
         label: 'Show / Hide',
         type: 'toggle',
         value: true,
+      }),
+      toolBuilder<PaddingTool>({
+        group: 'Menu',
+        label: 'Padding',
+        type: 'padding',
+        value: [20, 0, 0, 0],
       }),
       toolBuilder<AlignTool>({
         group: 'Menu',
