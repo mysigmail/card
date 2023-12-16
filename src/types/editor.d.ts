@@ -63,6 +63,11 @@ export interface AlignTool extends BaseTool {
   value: 'left' | 'center' | 'right'
 }
 
+export interface TextEditorTool extends BaseTool {
+  type: 'textEditor'
+  value: string
+}
+
 export type SingleTool =
   | PaddingTool
   | ImageTool
@@ -71,6 +76,7 @@ export type SingleTool =
   | InputNumberTool
   | ToggleTool
   | AlignTool
+  | TextEditorTool
 
 export interface MultiTool extends BaseTool {
   type: 'multi'
