@@ -19,6 +19,12 @@
         :value="i.value"
         :title="i.label"
       />
+      <SpacingTool
+        v-if="i.type === 'spacing'"
+        :id="i.id"
+        :value="i.value"
+        :title="i.label"
+      />
       <ColorPickerTool
         v-if="i.type === 'colorPicker'"
         :id="i.id"
@@ -33,6 +39,12 @@
       />
       <ImageTool
         v-if="i.type === 'image'"
+        :id="i.id"
+        :title="i.label"
+        :value="i.value"
+      />
+      <BackgroundImageTool
+        v-if="i.type === 'bgImage'"
         :id="i.id"
         :title="i.label"
         :value="i.value"
