@@ -21,6 +21,11 @@ body {
   box-sizing: border-box;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .p-html, .p-body {
   height: 100%;
 }
