@@ -1,3 +1,15 @@
+# [0.7.0](https://github.com/mysigmail/card/compare/v0.6.0...v0.7.0) (2023-12-18)
+
+
+### Features
+
+* add header components ([#24](https://github.com/mysigmail/card/issues/24)) ([16718a4](https://github.com/mysigmail/card/commit/16718a470b6bd0d751a539e9a10a5bcfeb2e2880))
+* **tools:** add spacing & bg image tools ([#23](https://github.com/mysigmail/card/issues/23)) ([70aef91](https://github.com/mysigmail/card/commit/70aef91dfffc3d68d8d9f7e3c953dadc85544e4e))
+* add text editor tool ([#22](https://github.com/mysigmail/card/issues/22)) ([4c2f9db](https://github.com/mysigmail/card/commit/4c2f9dbf3a10a21c635636fad6a9d57234e1248d))
+* **menu:** add padding tool for logo & menu ([#21](https://github.com/mysigmail/card/issues/21)) ([d1e26fe](https://github.com/mysigmail/card/commit/d1e26fe9f4190becbc38dec96c9ed003bfbebc7f))
+
+
+
 # [0.6.0](https://github.com/mysigmail/card/compare/v0.5.0...v0.6.0) (2023-11-25)
 
 
