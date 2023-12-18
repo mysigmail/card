@@ -27,7 +27,8 @@ export function addGhost(dataTransfer: DragEvent['dataTransfer'], name: string) 
     justifyContent: 'center',
     position: 'fixed',
     top: '99%', // фикс отображения в safari
-  }
+    cursor: 'grabbing',
+  } as HTMLElement['style']
 
   el.id = 'ghost'
   el.innerHTML = name

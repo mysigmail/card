@@ -80,6 +80,10 @@ onMounted(() => {
 .component-list-items {
   .item {
     margin-bottom: var(--spacing-sm);
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
   }
   .name {
     margin-bottom: var(--spacing-xs);
