@@ -3,7 +3,7 @@
     class="p-hover-tools"
     :align="align"
     :class="{
-      'p-edit-tool': editableId === id && editableToolName === 'Logo',
+      'p-edit-tool': editableId === id && editableToolName === group,
     }"
     style="width: 100%"
   >

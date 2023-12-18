@@ -32,12 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  MBody,
-  MContainer,
-  MHtml,
-  MPreview,
-} from '@mysigmail/vue-email-components'
+import { MBody, MContainer, MHtml, MPreview } from '@mysigmail/vue-email-components'
 import type { CSSProperties } from 'vue'
 import { computed, onMounted, ref } from 'vue'
 import Sortable from 'sortablejs'
@@ -49,6 +44,9 @@ import Menu2 from '@/components/email-components/menu/Menu2.vue'
 import Menu3 from '@/components/email-components/menu/Menu3.vue'
 import Menu4 from '@/components/email-components/menu/Menu4.vue'
 
+import Header1 from '@/components/email-components/header/Header1.vue'
+import Header2 from '@/components/email-components/header/Header2.vue'
+
 const { installed, isDragging, moveComponent, general } = useComponentsStore()
 
 const components: Record<string, any> = {
@@ -56,6 +54,8 @@ const components: Record<string, any> = {
   Menu2,
   Menu3,
   Menu4,
+  Header1,
+  Header2,
 }
 
 const listRef = ref<HTMLElement>()
@@ -66,9 +66,7 @@ const container: CSSProperties = {
 
 const style = computed<CSSProperties>(() => {
   return {
-    backgroundImage: general.background.image
-      ? `url(${general.background.image})`
-      : '',
+    backgroundImage: general.background.image ? `url(${general.background.image})` : '',
     backgroundRepeat: general.background.repeat,
     backgroundColor: general.background.color,
     backgroundSize: general.background.size,
