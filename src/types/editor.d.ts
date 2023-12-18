@@ -1,13 +1,15 @@
 export type ToolType =
-  | 'padding'
-  | 'colorPicker'
-  | 'inputNumber'
-  | 'input'
-  | 'toggle'
-  | 'image'
   | 'align'
-  | 'textEditor'
+  | 'bgImage'
+  | 'colorPicker'
+  | 'image'
+  | 'input'
+  | 'inputNumber'
   | 'multi'
+  | 'padding'
+  | 'spacing'
+  | 'textEditor'
+  | 'toggle'
 
 export enum ToolT {
   Padding = 'padding',
@@ -27,6 +29,14 @@ export interface PaddingTool extends BaseTool {
   value: [number, number, number, number]
 }
 
+export interface SpacingTool extends BaseTool {
+  type: 'spacing'
+  value: {
+    margin?: [number, number, number, number]
+    padding?: [number, number, number, number]
+  }
+}
+
 export interface ImageTool extends BaseTool {
   type: 'image'
   value: {
@@ -41,6 +51,16 @@ export interface ImageTool extends BaseTool {
 export interface ColorPickerTool extends BaseTool {
   type: 'colorPicker'
   value: string
+}
+
+export interface BackgroundImageTool extends BaseTool {
+  type: 'bgImage'
+  value: {
+    url: string
+    repeat: 'repeat' | 'no-repeat'
+    size: 'unset' | 'cover' | 'contain'
+    position: 'top' | 'center' | 'bottom' | 'left' | 'right'
+  }
 }
 
 export interface InputTool extends BaseTool {
@@ -69,14 +89,16 @@ export interface TextEditorTool extends BaseTool {
 }
 
 export type SingleTool =
-  | PaddingTool
-  | ImageTool
-  | ColorPickerTool
-  | InputTool
-  | InputNumberTool
-  | ToggleTool
   | AlignTool
+  | BackgroundImageTool
+  | ColorPickerTool
+  | ImageTool
+  | InputNumberTool
+  | InputTool
+  | PaddingTool
+  | SpacingTool
   | TextEditorTool
+  | ToggleTool
 
 export interface MultiTool extends BaseTool {
   type: 'multi'
