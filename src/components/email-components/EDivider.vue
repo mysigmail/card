@@ -3,7 +3,7 @@
     <MColumn
       class="p-hover-tools"
       :class="{
-        'p-edit-tool': editableId === id && editableToolName === 'Divider',
+        'p-edit-tool': editableId === id && editableToolName === group,
       }"
     >
       <MHr :style="{ borderColor: color }" />
