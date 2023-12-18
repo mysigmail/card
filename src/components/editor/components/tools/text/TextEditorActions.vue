@@ -33,7 +33,7 @@
               placeholder="Type a link"
             />
             <template #reference>
-              <ElButton>
+              <ElButton :class="{ 'is-active': editor?.getAttributes('link')?.href }">
                 <UniconsLinkH />
               </ElButton>
             </template>
