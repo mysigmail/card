@@ -17,6 +17,10 @@
         <img :src="i.preview">
       </div>
     </div>
+    <span
+      v-if="components.length === 0"
+      class="item"
+    > Not implemented yet </span>
   </div>
 </template>
 
