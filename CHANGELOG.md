@@ -1,3 +1,12 @@
+## [0.7.1](https://github.com/mysigmail/card/compare/v0.7.0...v0.7.1) (2023-12-18)
+
+
+### Bug Fixes
+
+* normalize path ([52bbcbc](https://github.com/mysigmail/card/commit/52bbcbcf0b143ae5f710fce62c920c3ed5ef5330))
+
+
+
 # [0.7.0](https://github.com/mysigmail/card/compare/v0.6.0...v0.7.0) (2023-12-18)
 
 
