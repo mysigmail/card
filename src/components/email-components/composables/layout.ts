@@ -1,6 +1,6 @@
 import type { ComputedRef } from 'vue'
 import { computed } from 'vue'
-import { getValueFromToolsByGroupByName } from '@/store/components/utils'
+import { getValueFromToolsByGroupByName, normalizePath } from '@/store/components/utils'
 import type { BackgroundImageTool, ColorPickerTool, SpacingTool, Tool } from '@/types/editor'
 
 export function useLayout(toolsByGroup: ComputedRef<Record<string, Tool[]>>) {
@@ -31,11 +31,13 @@ export function useLayout(toolsByGroup: ComputedRef<Record<string, Tool[]>>) {
   })
 
   const layoutAttrs = computed(() => {
+    const imgPath = normalizePath(layoutBackgroundImage.value?.url)
+
     return {
       style: {
         padding: layoutPadding.value,
         backgroundColor: layoutBackground.value,
-        backgroundImage: `url(${layoutBackgroundImage.value?.url})`,
+        backgroundImage: `url(${imgPath})`,
         backgroundSize: layoutBackgroundImage.value?.size,
         backgroundPosition: layoutBackgroundImage.value?.position,
       },

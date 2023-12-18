@@ -1,6 +1,6 @@
 import type { ComputedRef } from 'vue'
 import { computed } from 'vue'
-import { getValueFromToolsByGroupByName } from '@/store/components/utils'
+import { getValueFromToolsByGroupByName, normalizePath } from '@/store/components/utils'
 import type {
   BackgroundImageTool,
   ColorPickerTool,
@@ -48,11 +48,13 @@ export function useText(toolsByGroup: ComputedRef<Record<string, Tool[]>>) {
   })
 
   const textAttrs = computed(() => {
+    const imgPath = normalizePath(textBackgroundImage.value?.url)
+
     return {
       style: {
         color: textColor.value,
         padding: textPadding.value,
-        backgroundImage: `url(${textBackgroundImage.value?.url})`,
+        backgroundImage: `url(${imgPath})`,
         backgroundSize: textBackgroundImage.value?.size,
         backgroundRepeat: textBackgroundImage.value?.repeat,
         backgroundPosition: textBackgroundImage.value?.position,
