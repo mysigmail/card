@@ -33,6 +33,7 @@ const columnStyle = computed(() => {
     }"
   >
     <div v-html="value" />
+    <slot />
   </MColumn>
 </template>
 
