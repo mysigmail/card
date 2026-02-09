@@ -32,6 +32,7 @@ interface GroupValues {
   text?: TextEditorTool['value']
   spacing?: SpacingTool['value']
   padding?: PaddingTool['value']
+  columnWidth?: InputNumberTool['value']
   backgroundColor?: ColorPickerTool['value']
   mainColor?: ColorPickerTool['value']
   color?: ColorPickerTool['value']
@@ -49,6 +50,20 @@ function findToolByKey<T extends Tool>(tools: Tool[], key: string, type?: T['typ
 
 function toInsets(values?: [number, number, number, number]) {
   return values?.map(i => `${i}px`).join(' ')
+}
+
+function toColumnWidth(value?: InputNumberTool['value']) {
+  if (value === undefined || value === null)
+    return undefined
+
+  const normalized = Number(value)
+
+  if (!Number.isFinite(normalized))
+    return undefined
+
+  const clamped = Math.min(100, Math.max(0, normalized))
+
+  return `${clamped}%`
 }
 
 function readBackgroundImage(tool?: BackgroundImageTool['value']) {
@@ -122,6 +137,7 @@ function readGroupValues(tools: Tool[]): GroupValues {
     text: findToolByKey<TextEditorTool>(tools, 'content', 'textEditor')?.value,
     spacing: findToolByKey<SpacingTool>(tools, 'spacings', 'spacing')?.value,
     padding: findToolByKey<PaddingTool>(tools, 'padding', 'padding')?.value,
+    columnWidth: findToolByKey<InputNumberTool>(tools, 'columnWidth', 'inputNumber')?.value,
     backgroundColor: findToolByKey<ColorPickerTool>(tools, 'backgroundColor', 'colorPicker')?.value,
     mainColor: findToolByKey<ColorPickerTool>(tools, 'mainColor', 'colorPicker')?.value,
     color: findToolByKey<ColorPickerTool>(tools, 'color', 'colorPicker')?.value,
@@ -144,6 +160,7 @@ function createBaseModel(values: GroupValues, items?: Menu[] | Social[]): Schema
     padding: insets,
     show: values.show,
     value: values.text,
+    width: toColumnWidth(values.columnWidth),
   }
 }
 

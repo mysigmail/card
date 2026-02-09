@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { AlignTool } from '@/types/editor'
+import { computed } from 'vue'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
@@ -8,11 +9,22 @@ interface Props {
   imgAttrs?: HTMLImageElement
   align?: AlignTool['value']
   link?: string
+  width?: string | number
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const { editableId, editableToolName } = useComponentsStore()
+
+const columnStyle = computed(() => {
+  const value = props.width
+  if (value === undefined || value === null || value === '')
+    return { width: '100%' }
+
+  return {
+    width: typeof value === 'number' ? `${value}px` : value,
+  }
+})
 </script>
 
 <template>
@@ -22,7 +34,7 @@ const { editableId, editableToolName } = useComponentsStore()
     :class="{
       'p-edit-tool': editableId === id && editableToolName === group,
     }"
-    style="width: 100%"
+    :style="columnStyle"
   >
     <MLink :href="link">
       <MImg v-bind="imgAttrs" />

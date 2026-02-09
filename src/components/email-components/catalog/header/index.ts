@@ -8,8 +8,8 @@ import { defineEmailBlockSchema } from '@/components/email-components/schema/typ
 
 interface HeaderSchemaModel {
   Layout: SchemaGroupFields<'attrs'>
-  Logo: SchemaGroupFields<'show' | 'attrs' | 'link' | 'align'>
-  Menu: SchemaGroupFields<'show' | 'items' | 'align'>
+  Logo: SchemaGroupFields<'show' | 'attrs' | 'link' | 'align' | 'width'>
+  Menu: SchemaGroupFields<'show' | 'items' | 'align' | 'width'>
   Text: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
 }
 
@@ -29,6 +29,7 @@ const headerSchema = defineEmailBlockSchema<HeaderSchemaModel>({
           attrs: 'Logo.attrs',
           link: 'Logo.link',
           align: 'Logo.align',
+          width: 'Logo.width',
         },
         {
           type: 'menu',
@@ -36,6 +37,7 @@ const headerSchema = defineEmailBlockSchema<HeaderSchemaModel>({
           if: 'Menu.show',
           items: 'Menu.items',
           align: 'Menu.align',
+          width: 'Menu.width',
         },
       ],
     },
@@ -112,6 +114,10 @@ const header1: ComponentBuilder = (_, label) => {
         group: 'Logo',
         value: 'left',
       }),
+      f.columnWidth({
+        group: 'Logo',
+        value: 35,
+      }),
       f.image({
         group: 'Logo',
         value: {
@@ -127,6 +133,10 @@ const header1: ComponentBuilder = (_, label) => {
       f.align({
         group: 'Menu',
         value: 'right',
+      }),
+      f.columnWidth({
+        group: 'Menu',
+        value: 65,
       }),
       f.list({
         group: 'Menu',
@@ -181,6 +191,10 @@ const header2: ComponentBuilder = (_, label) => {
         group: 'Logo',
         value: 'left',
       }),
+      f.columnWidth({
+        group: 'Logo',
+        value: 35,
+      }),
       f.image({
         group: 'Logo',
         value: {
@@ -196,6 +210,10 @@ const header2: ComponentBuilder = (_, label) => {
       f.align({
         group: 'Menu',
         value: 'right',
+      }),
+      f.columnWidth({
+        group: 'Menu',
+        value: 65,
       }),
       f.list({
         group: 'Menu',
