@@ -70,6 +70,13 @@ export interface TextSchemaNode<TModel extends SchemaModelShape>
   children?: TextChildSchemaNode<TModel>[]
 }
 
+export interface GridSchemaNode<TModel extends SchemaModelShape>
+  extends BaseRowChildSchemaNode<TModel> {
+  type: 'grid'
+  items?: SchemaPath<TModel>
+  gap?: SchemaPath<TModel>
+}
+
 export interface ButtonSchemaNode<TModel extends SchemaModelShape>
   extends BaseRowChildSchemaNode<TModel> {
   type: 'button'
@@ -84,6 +91,7 @@ export type RowChildSchemaNode<TModel extends SchemaModelShape>
     | MenuSchemaNode<TModel>
     | SocialSchemaNode<TModel>
     | TextSchemaNode<TModel>
+    | GridSchemaNode<TModel>
     | ButtonSchemaNode<TModel>
 export type SchemaNode<TModel extends SchemaModelShape>
   = | RowSchemaNode<TModel>

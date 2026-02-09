@@ -38,6 +38,16 @@ interface HeaderWithImageBlockSchemaModel {
   Button: SchemaGroupFields<'show' | 'align' | 'attrs' | 'text'>
 }
 
+interface HeaderWithGridSchemaModel {
+  Layout: SchemaGroupFields<'attrs'>
+  Logo: SchemaGroupFields<'show' | 'attrs' | 'link' | 'align' | 'width'>
+  Image: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
+  Text: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
+  ImageBlock: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
+  TextSecondary: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
+  Grid: SchemaGroupFields<'show' | 'margin' | 'items' | 'align' | 'width' | 'gap'>
+}
+
 const groupBuilder = createSchemaGroups()
 const groups = {
   layout: groupBuilder.group('layout', { id: 'Layout', label: 'Layout' }),
@@ -47,6 +57,7 @@ const groups = {
   imageMain: groupBuilder.group('image', { id: 'Image', label: 'Image' }),
   imageBlock: groupBuilder.group('image', { id: 'ImageBlock', label: 'Image Block' }),
   textSecondary: groupBuilder.group('text', { id: 'TextSecondary', label: 'Secondary Text' }),
+  grid: groupBuilder.group('grid', { id: 'Grid', label: 'Grid' }),
   button: groupBuilder.group('button', { id: 'Button', label: 'Button' }),
 } as const
 
@@ -280,6 +291,103 @@ const headerWithImageBlockSchema = defineEmailBlockSchema<HeaderWithImageBlockSc
           align: 'Button.align',
           attrs: 'Button.attrs',
           text: 'Button.text',
+        },
+      ],
+    },
+  ],
+})
+
+const headerWithGridSchema = defineEmailBlockSchema<HeaderWithGridSchemaModel>({
+  ...headerRoot,
+  nodes: [
+    {
+      type: 'row',
+      children: [
+        {
+          type: 'logo',
+          group: groups.logo.id,
+          if: 'Logo.show',
+          attrs: 'Logo.attrs',
+          link: 'Logo.link',
+          align: 'Logo.align',
+          width: 'Logo.width',
+        },
+      ],
+    },
+    {
+      type: 'row',
+      if: 'Image.show',
+      styleBindings: {
+        margin: 'Image.margin',
+      },
+      children: [
+        {
+          type: 'text',
+          group: groups.imageMain.id,
+          value: 'Image.value',
+          attrs: 'Image.attrs',
+        },
+      ],
+    },
+    {
+      type: 'row',
+      if: 'Text.show',
+      styleBindings: {
+        margin: 'Text.margin',
+      },
+      children: [
+        {
+          type: 'text',
+          group: groups.textMain.id,
+          value: 'Text.value',
+          attrs: 'Text.attrs',
+        },
+      ],
+    },
+    {
+      type: 'row',
+      if: 'ImageBlock.show',
+      styleBindings: {
+        margin: 'ImageBlock.margin',
+      },
+      children: [
+        {
+          type: 'text',
+          group: groups.imageBlock.id,
+          value: 'ImageBlock.value',
+          attrs: 'ImageBlock.attrs',
+        },
+      ],
+    },
+    {
+      type: 'row',
+      if: 'TextSecondary.show',
+      styleBindings: {
+        margin: 'TextSecondary.margin',
+      },
+      children: [
+        {
+          type: 'text',
+          group: groups.textSecondary.id,
+          value: 'TextSecondary.value',
+          attrs: 'TextSecondary.attrs',
+        },
+      ],
+    },
+    {
+      type: 'row',
+      if: 'Grid.show',
+      styleBindings: {
+        margin: 'Grid.margin',
+      },
+      children: [
+        {
+          type: 'grid',
+          group: groups.grid.id,
+          items: 'Grid.items',
+          align: 'Grid.align',
+          gap: 'Grid.gap',
+          width: 'Grid.width',
         },
       ],
     },
@@ -893,10 +1001,194 @@ const header5: ComponentBuilder = (_, label) => {
   }
 }
 
+const header6: ComponentBuilder = (_, label) => {
+  return {
+    id: nanoid(8),
+    name: 'Header6',
+    label,
+    schema: headerWithGridSchema,
+    type: 'header',
+    preview: images.components.header6,
+    tools: [
+      f.spacing({
+        group: groups.layout,
+        value: {
+          padding: [30, 35, 40, 35],
+        },
+      }),
+      f.backgroundColor({
+        group: groups.layout,
+        value: '#FFFFFF',
+      }),
+      f.align({
+        group: groups.logo,
+        value: 'center',
+      }),
+      f.image({
+        group: groups.logo,
+        value: {
+          src: images.logo.black,
+          link: 'https://example.com',
+          alt: 'MySigMail',
+          width: 128,
+        },
+      }),
+      f.showHide({
+        group: groups.logo,
+      }),
+      f.spacing({
+        group: groups.imageMain,
+        value: {
+          margin: [36, 0, 0, 0],
+        },
+      }),
+      f.backgroundImage({
+        group: groups.imageMain,
+        value: {
+          url: '/img/app-icon.png',
+          position: 'center',
+          repeat: 'no-repeat',
+          size: 'contain',
+        },
+      }),
+      f.inputNumber({
+        group: groups.imageMain,
+        key: 'height',
+        label: 'Height',
+        value: 100,
+      }),
+      f.inputNumber({
+        group: groups.imageMain,
+        key: 'borderRadius',
+        label: 'Border Radius',
+        value: 0,
+      }),
+      f.showHide({
+        group: groups.imageMain,
+      }),
+      f.spacing({
+        group: groups.textMain,
+        value: {
+          margin: [0, 0, 0, 0],
+        },
+      }),
+      f.mainColor({
+        group: groups.textMain,
+        value: '#000000',
+      }),
+      f.content({
+        group: groups.textMain,
+        value:
+          '<p style="text-align: center"><span style="color: rgb(124, 134, 199); font-size: 16px">Brand new</span></p><p style="text-align: center"><strong><span style="font-size: 32px">The Circle.</span></strong></p>',
+      }),
+      f.showHide({
+        group: groups.textMain,
+      }),
+      f.spacing({
+        group: groups.imageBlock,
+        value: {
+          margin: [24, 0, 0, 0],
+        },
+      }),
+      f.backgroundImage({
+        group: groups.imageBlock,
+        value: {
+          url: '/img/iphone-angle.jpg',
+          position: 'center',
+          repeat: 'no-repeat',
+          size: 'contain',
+        },
+      }),
+      f.inputNumber({
+        group: groups.imageBlock,
+        key: 'height',
+        label: 'Height',
+        value: 185,
+      }),
+      f.inputNumber({
+        group: groups.imageBlock,
+        key: 'borderRadius',
+        label: 'Border Radius',
+        value: 0,
+      }),
+      f.showHide({
+        group: groups.imageBlock,
+      }),
+      f.spacing({
+        group: groups.textSecondary,
+        value: {
+          margin: [0, 0, 0, 0],
+        },
+      }),
+      f.mainColor({
+        group: groups.textSecondary,
+        value: '#9FA3A7',
+      }),
+      f.content({
+        group: groups.textSecondary,
+        value:
+          '<p style="text-align: center"><span style="font-size: 18px">GPS tracker for running and fitness.<br/>Unique features used by professional athletes<br/>are now also available for beginners!</span></p>',
+      }),
+      f.showHide({
+        group: groups.textSecondary,
+      }),
+      f.spacing({
+        group: groups.grid,
+        value: {
+          margin: [22, 0, 22, 0],
+        },
+      }),
+      f.inputNumber({
+        group: groups.grid,
+        key: 'gap',
+        label: 'Gap',
+        value: 12,
+      }),
+      f.grid({
+        group: groups.grid,
+        value: [
+          f.gridItem({
+            tools: [
+              f.align({
+                value: 'right',
+              }),
+              f.image({
+                value: {
+                  src: '/img/app-store.png',
+                  alt: 'Download on the App Store',
+                  width: 150,
+                },
+              }),
+            ],
+          }),
+          f.gridItem({
+            tools: [
+              f.align({
+                value: 'left',
+              }),
+              f.image({
+                value: {
+                  src: '/img/google-play.png',
+                  alt: 'Get it on Google Play',
+                  width: 150,
+                },
+              }),
+            ],
+          }),
+        ],
+      }),
+      f.showHide({
+        group: groups.grid,
+      }),
+    ],
+  }
+}
+
 export const header = [
   header1('light', 'Header 1'),
   header2('light', 'Header 2'),
   header3('light', 'Header 3'),
   header4('light', 'Header 4'),
   header5('light', 'Header 5'),
+  header6('light', 'Header 6'),
 ]

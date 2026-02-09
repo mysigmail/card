@@ -1,8 +1,10 @@
-import type { MultiTool, SingleTool } from '@/types/editor'
+import type { GridTool, MultiTool, SingleTool } from '@/types/editor'
 import type { ToolBuilderConfig } from '@/types/email-components'
 import { nanoid } from 'nanoid'
 
-export function toolBuilder<T extends SingleTool | MultiTool>(config: ToolBuilderConfig<T>): T {
+export function toolBuilder<T extends SingleTool | MultiTool | GridTool>(
+  config: ToolBuilderConfig<T>,
+): T {
   const { group, key, label, name, type, value } = config
 
   return {

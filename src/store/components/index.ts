@@ -1,4 +1,4 @@
-import type { Component, GeneralTool, MultiTool, Tool } from '@/types/editor'
+import type { Component, GeneralTool, GridTool, MultiTool, Tool } from '@/types/editor'
 import type { ComponentList } from '@/types/email-components/components'
 import { nanoid } from 'nanoid'
 import { computed, reactive, ref, shallowRef } from 'vue'
@@ -142,12 +142,14 @@ function addNewToolToMultiTool(id: string) {
   if (!editable.value?.tools)
     return
 
-  const tool = findToolById(id, editable.value.tools) as MultiTool
+  const tool = findToolById(id, editable.value.tools)
 
-  if (!tool)
+  if (!tool || (tool.type !== 'multi' && tool.type !== 'grid'))
     return
 
-  const clonedLastItem = clone<MultiTool['value'][0]>(tool.value[tool.value.length - 1])
+  const clonedLastItem = clone<MultiTool['value'][0] | GridTool['value'][0]>(
+    tool.value[tool.value.length - 1],
+  )
 
   clonedLastItem.id = nanoid(8)
   clonedLastItem.tools.forEach((i) => {
@@ -158,13 +160,18 @@ function addNewToolToMultiTool(id: string) {
 }
 
 function deleteMultiToolItem(id: string, index: number) {
-  const multiTool = editable.value?.tools.find(i => i.id === id)
-  if (multiTool) {
-    const tool = multiTool.value as unknown as Tool[]
-    if (tool.length === 1)
-      return
-    tool.splice(index, 1)
-  }
+  if (!editable.value?.tools)
+    return
+
+  const tool = findToolById(id, editable.value.tools)
+
+  if (!tool || (tool.type !== 'multi' && tool.type !== 'grid'))
+    return
+
+  if (tool.value.length === 1)
+    return
+
+  tool.value.splice(index, 1)
 }
 
 function onEditTool(groupId: string, index: number) {

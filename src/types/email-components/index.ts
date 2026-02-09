@@ -1,6 +1,6 @@
-import type { MultiTool, SingleTool, ToolGroupRef, ToolType } from '@/types/editor'
+import type { GridTool, MultiTool, SingleTool, ToolGroupRef, ToolType } from '@/types/editor'
 
-export interface ToolBuilderConfig<T extends SingleTool | MultiTool> {
+export interface ToolBuilderConfig<T extends SingleTool | MultiTool | GridTool> {
   key: string
   group?: ToolGroupRef
   label: string

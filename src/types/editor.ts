@@ -7,6 +7,7 @@ export type ToolGroupRole
     | 'menu'
     | 'button'
     | 'image'
+    | 'grid'
     | 'social'
     | 'divider'
     | 'custom'
@@ -22,6 +23,7 @@ export type ToolType
   = | 'align'
     | 'bgImage'
     | 'colorPicker'
+    | 'grid'
     | 'image'
     | 'input'
     | 'inputNumber'
@@ -111,6 +113,12 @@ export interface TextEditorTool extends BaseTool {
   value: string
 }
 
+export interface ToolCollectionItem {
+  id: string
+  // Для multi первым обычно идет InputTool, который задает заголовок группы.
+  tools: Tool[]
+}
+
 export type SingleTool
   = | AlignTool
     | BackgroundImageTool
@@ -125,16 +133,15 @@ export type SingleTool
 
 export interface MultiTool extends BaseTool {
   type: 'multi'
-  value: {
-    id: string
-    // groupName: string
-    // Первым должен быть InputTool для возможности
-    // редактирования название группы
-    tools: SingleTool[]
-  }[]
+  value: ToolCollectionItem[]
 }
 
-export type Tool = SingleTool | MultiTool
+export interface GridTool extends BaseTool {
+  type: 'grid'
+  value: ToolCollectionItem[]
+}
+
+export type Tool = SingleTool | MultiTool | GridTool
 
 export type ComponentTheme = 'light' | 'dark'
 

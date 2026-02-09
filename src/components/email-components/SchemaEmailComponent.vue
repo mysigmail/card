@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { EmailBlockSchema } from '@/components/email-components/schema/types'
 import type { AlignTool, Tool } from '@/types/editor'
-import type { Menu, Social } from '@/types/email-components/components'
+import type { GridItem, Menu, Social } from '@/types/email-components/components'
 import { MRow } from '@mysigmail/vue-email-components'
 import { computed } from 'vue'
 import {
@@ -58,6 +58,10 @@ function resolveMenuItems(path?: string) {
 
 function resolveSocialItems(path?: string) {
   return resolve<Social[]>(path) || []
+}
+
+function resolveGridItems(path?: string) {
+  return resolve<GridItem[]>(path) || []
 }
 
 function isVisible(path?: string) {
@@ -159,6 +163,17 @@ function onRootClick() {
               />
             </template>
           </EText>
+
+          <EGrid
+            v-if="child.type === 'grid' && isVisible(child.if)"
+            :id="id"
+            :group="child.group"
+            :align="resolveAlign(child.align)"
+            :gap="resolveWidth(child.gap)"
+            :width="resolveWidth(child.width)"
+            :items="resolveGridItems(child.items)"
+            @click="onEditTool(child.group, index)"
+          />
 
           <EButton
             v-if="child.type === 'button' && isVisible(child.if)"

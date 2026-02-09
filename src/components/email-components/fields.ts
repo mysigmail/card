@@ -2,6 +2,7 @@ import type {
   AlignTool,
   BackgroundImageTool,
   ColorPickerTool,
+  GridTool,
   ImageTool,
   InputNumberTool,
   InputTool,
@@ -10,6 +11,8 @@ import type {
   SpacingTool,
   TextEditorTool,
   ToggleTool,
+  Tool,
+  ToolCollectionItem,
   ToolGroupRef,
 } from '@/types/editor'
 import { nanoid } from 'nanoid'
@@ -55,6 +58,10 @@ interface ListConfig extends FieldConfig {
   value: MultiTool['value']
 }
 
+interface GridConfig extends FieldConfig {
+  value: GridTool['value']
+}
+
 interface PaddingConfig extends FieldConfig {
   value: PaddingTool['value']
 }
@@ -82,6 +89,26 @@ interface SocialItemConfig {
   image: ImageTool['value']
   link: string
   name: string
+}
+
+interface GridItemConfig {
+  tools: ToolCollectionItem['tools']
+}
+
+function cloneToolWithIds<T extends Tool>(tool: T): T {
+  const cloned = JSON.parse(JSON.stringify(tool)) as T
+
+  cloned.id = nanoid(8)
+
+  if (cloned.type === 'multi' || cloned.type === 'grid') {
+    cloned.value = cloned.value.map(item => ({
+      ...item,
+      id: nanoid(8),
+      tools: item.tools.map(childTool => cloneToolWithIds(childTool)),
+    }))
+  }
+
+  return cloned
 }
 
 export const f = {
@@ -155,6 +182,21 @@ export const f = {
       type: 'image',
       value: config.value,
     })
+  },
+  grid(config: GridConfig) {
+    return toolBuilder<GridTool>({
+      group: config.group,
+      key: 'grid',
+      label: 'Grid',
+      type: 'grid',
+      value: config.value,
+    })
+  },
+  gridItem(config: GridItemConfig): GridTool['value'][number] {
+    return {
+      id: nanoid(8),
+      tools: config.tools.map(tool => cloneToolWithIds(tool)),
+    }
   },
   input(config: InputConfig) {
     return toolBuilder<InputTool>({

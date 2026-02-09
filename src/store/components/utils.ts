@@ -1,4 +1,4 @@
-import type { Component, MultiTool, Tool, ToolGroupRole } from '@/types/editor'
+import type { Component, GridTool, MultiTool, Tool, ToolGroupRole } from '@/types/editor'
 import { nanoid } from 'nanoid'
 import { resolveToolGroup } from '@/components/email-components/schema/groups'
 import { clone } from '@/utils'
@@ -15,8 +15,8 @@ export function findToolById(id: string, tools: Tool[]): Tool | undefined {
     if (tool.id === id)
       return tool
 
-    if (tool.type === 'multi') {
-      for (const multiTool of (tool as MultiTool).value) {
+    if (tool.type === 'multi' || tool.type === 'grid') {
+      for (const multiTool of (tool as MultiTool | GridTool).value) {
         const desired = findToolById(id, multiTool.tools)
         if (desired)
           return desired

@@ -31,7 +31,7 @@ export const images = {
     header3: `${path}img/components/header-3.png`,
     header4: `${path}img/components/header-4.png`,
     header5: `${path}img/components/header-5.png`,
-    header6: `${path}img/components/header-6.jpg`,
+    header6: `${path}img/components/header-6.png`,
     content1: `${path}img/components/content-1.jpg`,
     content2: `${path}img/components/content-2.jpg`,
     content3: `${path}img/components/content-3.jpg`,
