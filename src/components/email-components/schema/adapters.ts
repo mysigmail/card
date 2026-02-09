@@ -201,11 +201,15 @@ function logoGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
 function textGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
   const values = readGroupValues(tools)
   const bgImage = readBackgroundImage(values.backgroundImage)
+  const borderRadius = findToolByKey<InputNumberTool>(tools, 'borderRadius', 'inputNumber')?.value
 
   return {
     ...createBaseModel(values),
     attrs: {
       style: {
+        borderRadius:
+          borderRadius !== undefined ? `${Math.max(0, Number(borderRadius))}px` : undefined,
+        overflow: borderRadius !== undefined ? 'hidden' : undefined,
         color: values.mainColor,
         padding: toInsets(values.spacing?.padding || values.padding),
         backgroundImage: bgImage?.url,
@@ -217,16 +221,74 @@ function textGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
   }
 }
 
+function imageGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
+  const values = readGroupValues(tools)
+  const bgImage = readBackgroundImage(values.backgroundImage)
+  const borderRadius = findToolByKey<InputNumberTool>(tools, 'borderRadius', 'inputNumber')?.value
+  const height = findToolByKey<InputNumberTool>(tools, 'height', 'inputNumber')?.value
+
+  return {
+    ...createBaseModel(values),
+    attrs: {
+      style: {
+        backgroundImage: bgImage?.url,
+        backgroundPosition: bgImage?.position,
+        backgroundRepeat: bgImage?.repeat,
+        backgroundSize: bgImage?.size,
+        borderRadius:
+          borderRadius !== undefined ? `${Math.max(0, Number(borderRadius))}px` : undefined,
+        overflow: borderRadius !== undefined ? 'hidden' : undefined,
+        height: height !== undefined ? `${Math.max(0, Number(height))}px` : undefined,
+        fontSize: '0',
+        lineHeight: '0',
+        width: '100%',
+      },
+    } as HTMLElement,
+    value: values.text || '&nbsp;',
+  }
+}
+
 function socialGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
   const values = readGroupValues(tools)
 
   return createBaseModel(values, readSocialItems(values.list))
 }
 
+function buttonGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
+  const values = readGroupValues(tools)
+  const text = findToolByKey<InputTool>(tools, 'text', 'input')?.value
+  const link = findToolByKey<InputTool>(tools, 'link', 'input')?.value
+  const borderRadius = findToolByKey<InputNumberTool>(tools, 'borderRadius', 'inputNumber')?.value
+  const fontSize = findToolByKey<InputNumberTool>(tools, 'fontSize', 'inputNumber')?.value
+
+  return {
+    ...createBaseModel(values),
+    attrs: {
+      href: link,
+      style: {
+        backgroundColor: values.backgroundColor,
+        borderRadius: borderRadius !== undefined ? `${borderRadius}px` : undefined,
+        color: values.color,
+        fontSize: fontSize !== undefined ? `${fontSize}px` : undefined,
+        fontWeight: 700,
+        margin: toInsets(values.spacing?.margin),
+        padding: toInsets(values.spacing?.padding || values.padding),
+        textDecoration: 'none',
+      },
+    } as Record<string, unknown>,
+    text,
+  }
+}
+
 const builtInGroupAdapters: Record<string, SchemaGroupAdapter> = {
+  BgImage: imageGroupAdapter,
+  Button: buttonGroupAdapter,
+  Image: imageGroupAdapter,
+  ImageBlock: imageGroupAdapter,
   Layout: layoutGroupAdapter,
   Logo: logoGroupAdapter,
   Social: socialGroupAdapter,
+  SubText: textGroupAdapter,
   Text: textGroupAdapter,
 }
 

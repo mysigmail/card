@@ -67,13 +67,24 @@ export interface TextSchemaNode<TModel extends SchemaModelShape>
   type: 'text'
   attrs?: SchemaPath<TModel>
   value?: SchemaPath<TModel>
+  children?: TextChildSchemaNode<TModel>[]
 }
+
+export interface ButtonSchemaNode<TModel extends SchemaModelShape>
+  extends BaseRowChildSchemaNode<TModel> {
+  type: 'button'
+  attrs?: SchemaPath<TModel>
+  text?: SchemaPath<TModel>
+}
+
+export type TextChildSchemaNode<TModel extends SchemaModelShape> = ButtonSchemaNode<TModel>
 
 export type RowChildSchemaNode<TModel extends SchemaModelShape>
   = | LogoSchemaNode<TModel>
     | MenuSchemaNode<TModel>
     | SocialSchemaNode<TModel>
     | TextSchemaNode<TModel>
+    | ButtonSchemaNode<TModel>
 export type SchemaNode<TModel extends SchemaModelShape>
   = | RowSchemaNode<TModel>
     | DividerSchemaNode<TModel>

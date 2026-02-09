@@ -141,6 +141,34 @@ function onRootClick() {
             :value="resolveString(child.value)"
             v-bind="resolveAttrs(child.attrs)"
             @click="onEditTool(child.group, index)"
+          >
+            <template
+              v-for="(nestedChild, nestedIndex) in child.children || []"
+              :key="`${nodeIndex}_${childIndex}_${nestedIndex}`"
+            >
+              <EButton
+                v-if="nestedChild.type === 'button' && isVisible(nestedChild.if)"
+                :id="id"
+                :group="nestedChild.group"
+                :align="resolveAlign(nestedChild.align)"
+                :width="resolveWidth(nestedChild.width)"
+                :text="resolveString(nestedChild.text)"
+                :attrs="resolveAttrs(nestedChild.attrs)"
+                inline
+                @click.stop="onEditTool(nestedChild.group, index)"
+              />
+            </template>
+          </EText>
+
+          <EButton
+            v-if="child.type === 'button' && isVisible(child.if)"
+            :id="id"
+            :group="child.group"
+            :align="resolveAlign(child.align)"
+            :width="resolveWidth(child.width)"
+            :text="resolveString(child.text)"
+            :attrs="resolveAttrs(child.attrs)"
+            @click.stop="onEditTool(child.group, index)"
           />
         </template>
       </MRow>
