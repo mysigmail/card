@@ -784,12 +784,12 @@ const header5: ComponentBuilder = (_, label) => {
       }),
       f.mainColor({
         group: groups.textMain,
-        value: '#7C86C7',
+        value: '#000000',
       }),
       f.content({
         group: groups.textMain,
         value:
-          '<p style="text-align: center"><span style="font-size: 18px"><strong>New series</strong></span></p><p style="text-align: center"><span style="font-size: 56px"><strong>The loop by loop.</strong></span></p>',
+          '<p style="text-align: center"><span style="color: rgb(124, 134, 199); font-size: 18px">New series</span></p><p style="text-align: center"><strong><span style="font-size: 32px">The loop by loop.</span></strong></p>',
       }),
       f.showHide({
         group: groups.textMain,
@@ -838,7 +838,7 @@ const header5: ComponentBuilder = (_, label) => {
       f.content({
         group: groups.textSecondary,
         value:
-          '<p style="text-align: center"><span style="font-size: 18px"><strong>With our latest model of watch,<br/>you\'ll get the most amazing features<br/>for your everyday workout.</strong></span></p>',
+          '<p style="text-align: center"><span style="font-size: 18px">With our latest model of watch,<br>you\'ll get the most amazing features<br>for your everyday workout.</span></p>',
       }),
       f.showHide({
         group: groups.textSecondary,
@@ -850,7 +850,7 @@ const header5: ComponentBuilder = (_, label) => {
       f.spacing({
         group: groups.button,
         value: {
-          margin: [20, 0, 0, 0],
+          margin: [20, 0, 20, 0],
           padding: [12, 24, 12, 24],
         },
       }),
