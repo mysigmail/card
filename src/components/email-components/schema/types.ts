@@ -68,14 +68,14 @@ export interface TextSchemaNode<TModel extends SchemaModelShape>
   value?: SchemaPath<TModel>
 }
 
-export type RowChildSchemaNode<TModel extends SchemaModelShape> =
-  | LogoSchemaNode<TModel>
-  | MenuSchemaNode<TModel>
-  | SocialSchemaNode<TModel>
-  | TextSchemaNode<TModel>
-export type SchemaNode<TModel extends SchemaModelShape> =
-  | RowSchemaNode<TModel>
-  | DividerSchemaNode<TModel>
+export type RowChildSchemaNode<TModel extends SchemaModelShape>
+  = | LogoSchemaNode<TModel>
+    | MenuSchemaNode<TModel>
+    | SocialSchemaNode<TModel>
+    | TextSchemaNode<TModel>
+export type SchemaNode<TModel extends SchemaModelShape>
+  = | RowSchemaNode<TModel>
+    | DividerSchemaNode<TModel>
 
 export function defineEmailBlockSchema<TModel extends SchemaModelShape>(
   schema: EmailBlockSchema<TModel>,

@@ -1,6 +1,6 @@
-import { nanoid } from 'nanoid'
 import type { MultiTool, SingleTool } from '@/types/editor'
 import type { ToolBuilderConfig } from '@/types/email-components'
+import { nanoid } from 'nanoid'
 
 export function toolBuilder<T extends SingleTool | MultiTool>(config: ToolBuilderConfig<T>): T {
   const { group, key, label, name, type, value } = config

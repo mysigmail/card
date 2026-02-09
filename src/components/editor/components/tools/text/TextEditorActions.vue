@@ -1,3 +1,20 @@
+<script setup lang="ts">
+import { nextTick, onMounted } from 'vue'
+import StrikeSvg from '~icons/svg/strikethrough'
+import { useEditor } from '@/components/editor/components/tools/text/composables'
+
+const { align, bold, editor, fontSize, italic, link, strike, textColor, underline } = useEditor()
+
+onMounted(() => {
+  nextTick(() => {
+    const el = document.getElementById('text-color-picker')
+    el?.addEventListener('mousedown', (e) => {
+      e.preventDefault()
+    })
+  })
+})
+</script>
+
 <template>
   <div class="text-editor-actions">
     <ElConfigProvider size="small">
@@ -87,23 +104,6 @@
     </ElConfigProvider>
   </div>
 </template>
-
-<script setup lang="ts">
-import { nextTick, onMounted } from 'vue'
-import { useEditor } from '@/components/editor/components/tools/text/composables'
-import StrikeSvg from '~icons/svg/strikethrough'
-
-const { align, bold, editor, fontSize, italic, link, strike, textColor, underline } = useEditor()
-
-onMounted(() => {
-  nextTick(() => {
-    const el = document.getElementById('text-color-picker')
-    el?.addEventListener('mousedown', (e) => {
-      e.preventDefault()
-    })
-  })
-})
-</script>
 
 <style lang="scss" scoped>
 .text-editor-actions {

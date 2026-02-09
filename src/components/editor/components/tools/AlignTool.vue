@@ -1,23 +1,6 @@
-<template>
-  <div class="align-tool">
-    <EditorToolLabel>{{ title }}</EditorToolLabel>
-    <ElRadioGroup v-model="localValue">
-      <ElRadioButton label="left">
-        <UniconsAlignLeft />
-      </ElRadioButton>
-      <ElRadioButton label="center">
-        <UniconsAlignCenter />
-      </ElRadioButton>
-      <ElRadioButton label="right">
-        <UniconsAlignRight />
-      </ElRadioButton>
-    </ElRadioGroup>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref, watch } from 'vue'
 import type { AlignTool } from '@/types/editor'
+import { ref, watch } from 'vue'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
@@ -36,6 +19,23 @@ watch(localValue, () => {
   updateToolById<AlignTool>(props.id, 'value', localValue.value)
 })
 </script>
+
+<template>
+  <div class="align-tool">
+    <EditorToolLabel>{{ title }}</EditorToolLabel>
+    <ElRadioGroup v-model="localValue">
+      <ElRadioButton label="left">
+        <UniconsAlignLeft />
+      </ElRadioButton>
+      <ElRadioButton label="center">
+        <UniconsAlignCenter />
+      </ElRadioButton>
+      <ElRadioButton label="right">
+        <UniconsAlignRight />
+      </ElRadioButton>
+    </ElRadioGroup>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .is-active {

@@ -1,3 +1,29 @@
+<script setup lang="ts">
+import type { ImageTool } from '@/types/editor'
+import { reactive, watch } from 'vue'
+import { useComponentsStore } from '@/store/components'
+
+interface Props {
+  id: string
+  value: ImageTool['value']
+  title: string
+}
+
+const props = defineProps<Props>()
+
+const { updateToolById } = useComponentsStore()
+
+const localValue = reactive<ImageTool['value']>(props.value)
+
+watch(
+  localValue,
+  () => {
+    updateToolById<ImageTool>(props.id, 'value', localValue)
+  },
+  { deep: true },
+)
+</script>
+
 <template>
   <div class="image-tool">
     <EditorToolLabel>
@@ -45,36 +71,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { reactive, watch } from 'vue'
-import type { ImageTool } from '@/types/editor'
-import { useComponentsStore } from '@/store/components'
-
-interface Props {
-  id: string
-  value: ImageTool['value']
-  title: string
-}
-
-const props = defineProps<Props>()
-
-const { updateToolById } = useComponentsStore()
-
-const localValue = reactive<ImageTool['value']>(props.value)
-
-watch(
-  localValue,
-  () => {
-    updateToolById<ImageTool>(
-      props.id,
-      'value',
-      localValue,
-    )
-  },
-  { deep: true },
-)
-</script>
 
 <style lang="scss" scoped>
 .dimensions {

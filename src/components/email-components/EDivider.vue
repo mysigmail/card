@@ -1,16 +1,3 @@
-<template>
-  <MRow>
-    <MColumn
-      class="p-hover-tools"
-      :class="{
-        'p-edit-tool': editableId === id && editableToolName === group,
-      }"
-    >
-      <MHr :style="{ borderColor: color }" />
-    </MColumn>
-  </MRow>
-</template>
-
 <script setup lang="ts">
 import { useComponentsStore } from '@/store/components'
 
@@ -24,5 +11,18 @@ defineProps<Props>()
 
 const { editableId, editableToolName } = useComponentsStore()
 </script>
+
+<template>
+  <MRow>
+    <MColumn
+      class="p-hover-tools"
+      :class="{
+        'p-edit-tool': editableId === id && editableToolName === group,
+      }"
+    >
+      <MHr :style="{ borderColor: color }" />
+    </MColumn>
+  </MRow>
+</template>
 
 <style lang="scss" scoped></style>

@@ -1,20 +1,3 @@
-<template>
-  <div class="text-editor-tool">
-    <EditorToolLabel>
-      {{ title }}
-    </EditorToolLabel>
-    <div class="body">
-      <div class="actions">
-        <TextEditorActions />
-      </div>
-      <EditorContent
-        class="content"
-        :editor="editor"
-      />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { EditorContent } from '@tiptap/vue-3'
 import { useEditor } from '@/components/editor/components/tools/text/composables'
@@ -31,6 +14,23 @@ const { editor, init } = useEditor()
 
 init(props.id, props.value)
 </script>
+
+<template>
+  <div class="text-editor-tool">
+    <EditorToolLabel>
+      {{ title }}
+    </EditorToolLabel>
+    <div class="body">
+      <div class="actions">
+        <TextEditorActions />
+      </div>
+      <EditorContent
+        class="content"
+        :editor="editor"
+      />
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .text-editor-tool {

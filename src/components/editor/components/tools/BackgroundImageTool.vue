@@ -1,3 +1,31 @@
+<script setup lang="ts">
+import type { BackgroundImageTool } from '@/types/editor'
+import { reactive, watch } from 'vue'
+import { useComponentsStore } from '@/store/components'
+
+interface Props {
+  id: string
+  value: BackgroundImageTool['value']
+  title: string
+}
+
+const props = defineProps<Props>()
+
+const { updateToolById } = useComponentsStore()
+
+const localValue = reactive<BackgroundImageTool['value']>(props.value)
+
+watch(
+  localValue,
+  () => {
+    updateToolById<BackgroundImageTool>(props.id, 'value', localValue)
+  },
+  {
+    deep: true,
+  },
+)
+</script>
+
 <template>
   <div class="background-tool">
     <EditorToolLabel>
@@ -54,33 +82,5 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { reactive, watch } from 'vue'
-import type { BackgroundImageTool } from '@/types/editor'
-import { useComponentsStore } from '@/store/components'
-
-interface Props {
-  id: string
-  value: BackgroundImageTool['value']
-  title: string
-}
-
-const props = defineProps<Props>()
-
-const { updateToolById } = useComponentsStore()
-
-const localValue = reactive<BackgroundImageTool['value']>(props.value)
-
-watch(
-  localValue,
-  () => {
-    updateToolById<BackgroundImageTool>(props.id, 'value', localValue)
-  },
-  {
-    deep: true,
-  },
-)
-</script>
 
 <style lang="scss" scoped></style>

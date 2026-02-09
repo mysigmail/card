@@ -1,4 +1,3 @@
-import { normalizePath } from '@/store/components/utils'
 import type {
   AlignTool,
   BackgroundImageTool,
@@ -14,6 +13,7 @@ import type {
   Tool,
 } from '@/types/editor'
 import type { Menu, Social } from '@/types/email-components/components'
+import { normalizePath } from '@/store/components/utils'
 
 export type SchemaGroupModel = Record<string, unknown>
 

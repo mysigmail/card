@@ -1,6 +1,6 @@
-import { createApp } from 'vue'
 import type { Component } from 'vue'
 import VueEmail from '@mysigmail/vue-email-components'
+import { createApp } from 'vue'
 
 import previewStyles from '@/assets/scss/preview.scss?inline'
 

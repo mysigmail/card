@@ -1,36 +1,10 @@
-<template>
-  <div
-    ref="listRef"
-    class="component-list-items"
-  >
-    <div
-      v-for="i in components"
-      :key="i.id"
-      :data-id="i.id"
-      :data-name="i.label"
-      class="item"
-    >
-      <div class="name">
-        {{ i.label }}
-      </div>
-      <div class="preview">
-        <img :src="i.preview">
-      </div>
-    </div>
-    <span
-      v-if="components.length === 0"
-      class="item"
-    > Not implemented yet </span>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import Sortable from 'sortablejs'
 import type { Component } from '@/types/editor'
+import Sortable from 'sortablejs'
+import { onMounted, ref } from 'vue'
 import { useList } from '@/components/editor/components/list/composables'
-import { useComponentsStore } from '@/store/components'
 import { addGhost, removeGhost } from '@/components/email-components/utils'
+import { useComponentsStore } from '@/store/components'
 
 interface Props {
   components: Component[]
@@ -75,6 +49,32 @@ onMounted(() => {
   initSortable()
 })
 </script>
+
+<template>
+  <div
+    ref="listRef"
+    class="component-list-items"
+  >
+    <div
+      v-for="i in components"
+      :key="i.id"
+      :data-id="i.id"
+      :data-name="i.label"
+      class="item"
+    >
+      <div class="name">
+        {{ i.label }}
+      </div>
+      <div class="preview">
+        <img :src="i.preview">
+      </div>
+    </div>
+    <span
+      v-if="components.length === 0"
+      class="item"
+    > Not implemented yet </span>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .component-list-items {

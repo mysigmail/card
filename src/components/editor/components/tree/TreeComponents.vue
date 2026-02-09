@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { useComponentsStore } from '@/store/components'
+
+const { installedToolsByGroup, installed } = useComponentsStore()
+</script>
+
 <template>
   <div class="tree-components">
     <TreeComponentsItem
@@ -16,12 +22,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useComponentsStore } from '@/store/components'
-
-const { installedToolsByGroup, installed } = useComponentsStore()
-</script>
 
 <style lang="scss" scoped>
 .tree-components {

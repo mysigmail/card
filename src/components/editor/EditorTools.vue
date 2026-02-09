@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { useComponentsStore } from '@/store/components'
+
+const { editableToolsGroupName, editableTools, editableId } = useComponentsStore()
+</script>
+
 <template>
   <div class="editor-tools-panel">
     <EditorGeneralTools v-if="!editableId" />
@@ -14,16 +20,6 @@
     </EditorPanel>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useComponentsStore } from '@/store/components'
-
-const {
-  editableToolsGroupName,
-  editableTools,
-  editableId,
-} = useComponentsStore()
-</script>
 
 <style lang="scss" scoped>
 .editor-tools-panel {

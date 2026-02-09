@@ -1,8 +1,8 @@
 import type { CSSProperties } from 'vue'
-import { resolveSchemaGroupAdapter } from '@/components/email-components/schema/adapters'
 import type { SchemaGroupModel } from '@/components/email-components/schema/adapters'
-import { getToolsByGroup } from '@/store/components/utils'
 import type { Tool } from '@/types/editor'
+import { resolveSchemaGroupAdapter } from '@/components/email-components/schema/adapters'
+import { getToolsByGroup } from '@/store/components/utils'
 
 export type SchemaModel = Record<string, SchemaGroupModel>
 

@@ -1,3 +1,11 @@
+<script setup lang="ts">
+interface Props {
+  type: 'default' | 'danger'
+}
+
+defineProps<Props>()
+</script>
+
 <template>
   <div
     class="editor-action-button"
@@ -6,14 +14,6 @@
     <slot />
   </div>
 </template>
-
-<script setup lang="ts">
-interface Props {
-  type: 'default' | 'danger'
-}
-
-defineProps<Props>()
-</script>
 
 <style lang="scss" scoped>
 .editor-action-button {

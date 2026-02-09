@@ -1,10 +1,10 @@
-import { nanoid } from 'nanoid'
-import { computed, reactive, ref, shallowRef } from 'vue'
-import { menu } from '@/components/email-components/catalog/menu'
-import { header } from '@/components/email-components/catalog/header'
-import { cloneComponent, findToolById, getEditableToolsByGroup } from '@/store/components/utils'
 import type { Component, GeneralTool, MultiTool, Tool } from '@/types/editor'
 import type { ComponentList } from '@/types/email-components/components'
+import { nanoid } from 'nanoid'
+import { computed, reactive, ref, shallowRef } from 'vue'
+import { header } from '@/components/email-components/catalog/header'
+import { menu } from '@/components/email-components/catalog/menu'
+import { cloneComponent, findToolById, getEditableToolsByGroup } from '@/store/components/utils'
 import { clone } from '@/utils'
 
 const list = shallowRef<ComponentList[]>([

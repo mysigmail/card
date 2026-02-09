@@ -1,10 +1,10 @@
+import type { SchemaGroupFields } from '@/components/email-components/schema/types'
+import type { ComponentBuilder } from '@/types/editor'
 import { nanoid } from 'nanoid'
 import { images } from '@/components/email-components/catalog/images'
 import { COLOR } from '@/components/email-components/constants'
 import { f } from '@/components/email-components/fields'
 import { defineEmailBlockSchema } from '@/components/email-components/schema/types'
-import type { SchemaGroupFields } from '@/components/email-components/schema/types'
-import type { ComponentBuilder } from '@/types/editor'
 
 interface HeaderSchemaModel {
   Layout: SchemaGroupFields<'attrs'>

@@ -1,5 +1,5 @@
-import { nanoid } from 'nanoid'
 import type { Component, MultiTool, Tool } from '@/types/editor'
+import { nanoid } from 'nanoid'
 import { clone } from '@/utils'
 
 export function cloneComponent(component: Component) {

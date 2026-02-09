@@ -1,5 +1,3 @@
-import { nanoid } from 'nanoid'
-import { toolBuilder } from '@/components/email-components/utils'
 import type {
   AlignTool,
   BackgroundImageTool,
@@ -13,6 +11,8 @@ import type {
   TextEditorTool,
   ToggleTool,
 } from '@/types/editor'
+import { nanoid } from 'nanoid'
+import { toolBuilder } from '@/components/email-components/utils'
 
 interface FieldConfig {
   group?: string
