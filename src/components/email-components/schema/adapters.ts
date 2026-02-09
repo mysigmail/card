@@ -11,6 +11,7 @@ import type {
   TextEditorTool,
   ToggleTool,
   Tool,
+  ToolGroupRole,
 } from '@/types/editor'
 import type { Menu, Social } from '@/types/email-components/components'
 import { normalizePath } from '@/store/components/utils'
@@ -18,7 +19,8 @@ import { normalizePath } from '@/store/components/utils'
 export type SchemaGroupModel = Record<string, unknown>
 
 export interface SchemaGroupReadContext {
-  group: string
+  groupId: string
+  groupRole: ToolGroupRole
   tools: Tool[]
 }
 
@@ -281,27 +283,26 @@ function buttonGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel
 }
 
 const builtInGroupAdapters: Record<string, SchemaGroupAdapter> = {
-  BgImage: imageGroupAdapter,
-  Button: buttonGroupAdapter,
-  Image: imageGroupAdapter,
-  ImageBlock: imageGroupAdapter,
-  Layout: layoutGroupAdapter,
-  Logo: logoGroupAdapter,
-  Social: socialGroupAdapter,
-  SubText: textGroupAdapter,
-  Text: textGroupAdapter,
+  button: buttonGroupAdapter,
+  divider: defaultGroupAdapter,
+  image: imageGroupAdapter,
+  layout: layoutGroupAdapter,
+  logo: logoGroupAdapter,
+  menu: defaultGroupAdapter,
+  social: socialGroupAdapter,
+  text: textGroupAdapter,
 }
 
 const customGroupAdapters = new Map<string, SchemaGroupAdapter>()
 
-export function registerSchemaGroupAdapter(group: string, adapter: SchemaGroupAdapter) {
-  customGroupAdapters.set(group, adapter)
+export function registerSchemaGroupAdapter(role: string, adapter: SchemaGroupAdapter) {
+  customGroupAdapters.set(role, adapter)
 }
 
-export function unregisterSchemaGroupAdapter(group: string) {
-  customGroupAdapters.delete(group)
+export function unregisterSchemaGroupAdapter(role: string) {
+  customGroupAdapters.delete(role)
 }
 
-export function resolveSchemaGroupAdapter(group: string): SchemaGroupAdapter {
-  return customGroupAdapters.get(group) || builtInGroupAdapters[group] || defaultGroupAdapter
+export function resolveSchemaGroupAdapter(role: string): SchemaGroupAdapter {
+  return customGroupAdapters.get(role) || builtInGroupAdapters[role] || defaultGroupAdapter
 }

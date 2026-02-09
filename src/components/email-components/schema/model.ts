@@ -2,16 +2,21 @@ import type { CSSProperties } from 'vue'
 import type { SchemaGroupModel } from '@/components/email-components/schema/adapters'
 import type { Tool } from '@/types/editor'
 import { resolveSchemaGroupAdapter } from '@/components/email-components/schema/adapters'
-import { getToolsByGroup } from '@/store/components/utils'
+import { getToolGroups } from '@/store/components/utils'
 
 export type SchemaModel = Record<string, SchemaGroupModel>
 
 export function buildSchemaModel(tools: Tool[]): SchemaModel {
-  const groups = getToolsByGroup(tools)
+  const groups = getToolGroups(tools)
   const model: SchemaModel = {}
 
-  for (const [group, groupTools] of Object.entries(groups))
-    model[group] = resolveSchemaGroupAdapter(group)({ group, tools: groupTools })
+  for (const group of groups) {
+    model[group.id] = resolveSchemaGroupAdapter(group.role)({
+      groupId: group.id,
+      groupRole: group.role,
+      tools: group.tools,
+    })
+  }
 
   return model
 }

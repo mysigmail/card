@@ -1,5 +1,6 @@
-import type { Component, MultiTool, Tool } from '@/types/editor'
+import type { Component, MultiTool, Tool, ToolGroupRole } from '@/types/editor'
 import { nanoid } from 'nanoid'
+import { resolveToolGroup } from '@/components/email-components/schema/groups'
 import { clone } from '@/utils'
 
 export function cloneComponent(component: Component) {
@@ -27,15 +28,8 @@ export function findToolById(id: string, tools: Tool[]): Tool | undefined {
 export function getToolsByGroup(tools: Tool[]) {
   const groupsWithTools: Record<string, Tool[]> = {}
 
-  tools.forEach((i) => {
-    if (!i.group)
-      return
-
-    if (!groupsWithTools[i.group])
-      groupsWithTools[i.group] = []
-
-    if (groupsWithTools[i.group])
-      groupsWithTools[i.group].push(i)
+  getToolGroups(tools).forEach((group) => {
+    groupsWithTools[group.id] = group.tools
   })
 
   return groupsWithTools
@@ -43,6 +37,40 @@ export function getToolsByGroup(tools: Tool[]) {
 
 export function getEditableToolsByGroup(tools: Tool[]): Record<string, Tool[]> {
   return getToolsByGroup(tools)
+}
+
+export interface ToolGroupBucket {
+  id: string
+  label: string
+  role: ToolGroupRole
+  tools: Tool[]
+}
+
+export function getToolGroups(tools: Tool[]): ToolGroupBucket[] {
+  const groups = new Map<string, ToolGroupBucket>()
+
+  tools.forEach((tool) => {
+    const group = resolveToolGroup(tool)
+
+    if (!group)
+      return
+
+    const bucket = groups.get(group.id)
+
+    if (!bucket) {
+      groups.set(group.id, {
+        id: group.id,
+        label: group.label,
+        role: group.role,
+        tools: [tool],
+      })
+      return
+    }
+
+    bucket.tools.push(tool)
+  })
+
+  return [...groups.values()]
 }
 
 export function normalizePath(path?: string) {
