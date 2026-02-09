@@ -1,41 +1,3 @@
-<template>
-  <div
-    class="app-collapse-item"
-    :class="{ 'is-bordered': rootType === 'bordered' }"
-  >
-    <div
-      class="header"
-      @click="onOpen"
-    >
-      <div class="title">
-        {{ title }}
-      </div>
-      <div
-        v-if="showActions"
-        class="actions"
-      >
-        <EditorActionButton
-          type="danger"
-          @click.stop="onClick('delete')"
-        >
-          <UniconsTrashAlt />
-        </EditorActionButton>
-      </div>
-      <UniconsAngleRight
-        v-if="type === 'collapsed'"
-        class="icon"
-        :class="{ 'is-open': isOpen }"
-      />
-    </div>
-    <div
-      v-if="isShow"
-      class="body"
-    >
-      <slot />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue'
 
@@ -75,6 +37,44 @@ function onClick(action: string) {
   emit('action', action)
 }
 </script>
+
+<template>
+  <div
+    class="app-collapse-item"
+    :class="{ 'is-bordered': rootType === 'bordered' }"
+  >
+    <div
+      class="header"
+      @click="onOpen"
+    >
+      <div class="title">
+        {{ title }}
+      </div>
+      <div
+        v-if="showActions"
+        class="actions"
+      >
+        <EditorActionButton
+          type="danger"
+          @click.stop="onClick('delete')"
+        >
+          <UniconsTrashAlt />
+        </EditorActionButton>
+      </div>
+      <UniconsAngleRight
+        v-if="type === 'collapsed'"
+        class="icon"
+        :class="{ 'is-open': isOpen }"
+      />
+    </div>
+    <div
+      v-if="isShow"
+      class="body"
+    >
+      <slot />
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .app-collapse-item {

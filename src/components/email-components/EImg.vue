@@ -1,3 +1,20 @@
+<script setup lang="ts">
+import type { AlignTool } from '@/types/editor'
+import { useComponentsStore } from '@/store/components'
+
+interface Props {
+  id: string
+  group: string
+  imgAttrs?: HTMLImageElement
+  align?: AlignTool['value']
+  link?: string
+}
+
+defineProps<Props>()
+
+const { editableId, editableToolName } = useComponentsStore()
+</script>
+
 <template>
   <MColumn
     class="p-hover-tools"
@@ -12,22 +29,5 @@
     </MLink>
   </MColumn>
 </template>
-
-<script setup lang="ts">
-import { useComponentsStore } from '@/store/components'
-import type { AlignTool } from '@/types/editor'
-
-interface Props {
-  id: string
-  group: string
-  imgAttrs?: HTMLImageElement
-  align?: AlignTool['value']
-  link?: string
-}
-
-defineProps<Props>()
-
-const { editableId, editableToolName } = useComponentsStore()
-</script>
 
 <style lang="scss" scoped></style>

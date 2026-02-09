@@ -1,4 +1,19 @@
 <!-- eslint-disable vue/no-extra-parens ломает подсевку синтаксиса -->
+<script setup lang="ts">
+import type { Tool } from '@/types/editor'
+
+import { provide } from 'vue'
+
+interface Props {
+  tools: Tool[]
+  parentMultiToolId?: string
+}
+
+const props = defineProps<Props>()
+
+provide('parentMultiToolId', props.parentMultiToolId)
+</script>
+
 <template>
   <div class="tools">
     <template
@@ -70,20 +85,5 @@
     </template>
   </div>
 </template>
-
-<script setup lang="ts">
-import { provide } from 'vue'
-
-import type { Tool } from '@/types/editor'
-
-interface Props {
-  tools: Tool[]
-  parentMultiToolId?: string
-}
-
-const props = defineProps<Props>()
-
-provide('parentMultiToolId', props.parentMultiToolId)
-</script>
 
 <style lang="scss" scoped></style>

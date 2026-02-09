@@ -1,9 +1,3 @@
-<template>
-  <div class="app-collapse">
-    <slot />
-  </div>
-</template>
-
 <script setup lang="ts">
 import { provide } from 'vue'
 
@@ -17,5 +11,11 @@ const props = withDefaults(defineProps<Props>(), {
 
 provide('type', props.type)
 </script>
+
+<template>
+  <div class="app-collapse">
+    <slot />
+  </div>
+</template>
 
 <style lang="scss" scoped></style>

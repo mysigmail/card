@@ -1,11 +1,3 @@
-<template>
-  <input
-    v-model="localValue"
-    class="spacing-input"
-    type="number"
-  >
-</template>
-
 <script setup lang="ts">
 import { computed } from 'vue'
 
@@ -28,6 +20,14 @@ const localValue = computed({
   },
 })
 </script>
+
+<template>
+  <input
+    v-model="localValue"
+    class="spacing-input"
+    type="number"
+  >
+</template>
 
 <style lang="scss" scoped>
 .spacing-input {

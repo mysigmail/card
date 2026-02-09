@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { version } from '#/package.json'
+
+const year = new Date().getFullYear()
+</script>
+
 <template>
   <div class="footer">
     <div class="footer__item">
@@ -34,12 +40,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { version } from '../../../../../package.json'
-
-const year = new Date().getFullYear()
-</script>
 
 <style lang="scss" scoped>
 .footer {

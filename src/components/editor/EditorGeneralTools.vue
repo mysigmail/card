@@ -1,3 +1,21 @@
+<script setup lang="ts">
+import { ElRadioGroup } from 'element-plus'
+import { useComponentsStore } from '@/store/components'
+
+const { general } = useComponentsStore()
+
+const fontOptions = [
+  { label: 'Arial', value: 'Arial, Helvetica, sans-serif' },
+  { label: 'Comic Sans MS', value: '"Comic Sans MS", sans-serif' },
+  { label: 'Courier New', value: '"Courier New", Courier, monospace' },
+  { label: 'Lucida Console', value: '"Lucida Console", Monaco, monospace' },
+  { label: 'Lucida Grande', value: '"Lucida Grande", sans-serif' },
+  { label: 'Tahoma', value: 'Tahoma, sans-serif' },
+  { label: 'Trebuchet MS', value: '"Trebuchet MS", sans-serif' },
+  { label: 'Verdana', value: 'Verdana, sans-serif' },
+]
+</script>
+
 <template>
   <EditorPanel>
     <EditorPanelItem
@@ -98,23 +116,5 @@
     </EditorPanelItem>
   </EditorPanel>
 </template>
-
-<script setup lang="ts">
-import { ElRadioGroup } from 'element-plus'
-import { useComponentsStore } from '@/store/components'
-
-const { general } = useComponentsStore()
-
-const fontOptions = [
-  { label: 'Arial', value: 'Arial, Helvetica, sans-serif' },
-  { label: 'Comic Sans MS', value: '"Comic Sans MS", sans-serif' },
-  { label: 'Courier New', value: '"Courier New", Courier, monospace' },
-  { label: 'Lucida Console', value: '"Lucida Console", Monaco, monospace' },
-  { label: 'Lucida Grande', value: '"Lucida Grande", sans-serif' },
-  { label: 'Tahoma', value: 'Tahoma, sans-serif' },
-  { label: 'Trebuchet MS', value: '"Trebuchet MS", sans-serif' },
-  { label: 'Verdana', value: 'Verdana, sans-serif' },
-]
-</script>
 
 <style lang="scss" scoped></style>

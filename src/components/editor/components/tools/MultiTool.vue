@@ -1,3 +1,30 @@
+<script setup lang="ts">
+import type { MultiTool } from '@/types/editor'
+import { ref } from 'vue'
+import { useComponentsStore } from '@/store/components'
+
+interface Props {
+  id: string
+  value: MultiTool['value']
+  title: string
+}
+
+const props = defineProps<Props>()
+
+const { addNewToolToMultiTool, deleteMultiToolItem } = useComponentsStore()
+
+const localValue = ref(props.value)
+
+function onAddNew() {
+  addNewToolToMultiTool(props.id)
+}
+
+function onAction(action: string, index: number) {
+  if (action === 'delete')
+    deleteMultiToolItem(props.id, index)
+}
+</script>
+
 <template>
   <div class="multi-tool">
     <EditorToolLabel>
@@ -34,32 +61,5 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import { useComponentsStore } from '@/store/components'
-import type { MultiTool } from '@/types/editor'
-
-interface Props {
-  id: string
-  value: MultiTool['value']
-  title: string
-}
-
-const props = defineProps<Props>()
-
-const { addNewToolToMultiTool, deleteMultiToolItem } = useComponentsStore()
-
-const localValue = ref(props.value)
-
-function onAddNew() {
-  addNewToolToMultiTool(props.id)
-}
-
-function onAction(action: string, index: number) {
-  if (action === 'delete')
-    deleteMultiToolItem(props.id, index)
-}
-</script>
 
 <style lang="scss" scoped></style>

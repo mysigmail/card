@@ -1,7 +1,7 @@
+<script setup lang="ts"></script>
+
 <template>
   <TheEditor />
 </template>
-
-<script setup lang="ts"></script>
 
 <style lang="scss" scoped></style>

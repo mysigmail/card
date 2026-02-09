@@ -1,74 +1,6 @@
-<template>
-  <div class="spacing-tool">
-    <EditorToolLabel>
-      {{ title }}
-    </EditorToolLabel>
-    <div class="body">
-      <div class="margin">
-        <div class="label">
-          Margin
-        </div>
-        <div class="top">
-          <SpacingInput
-            v-model="localMarginTop"
-            :disabled="!value.margin"
-          />
-        </div>
-        <div class="right">
-          <SpacingInput
-            v-model="localMarginRight"
-            :disabled="!value.margin"
-          />
-        </div>
-        <div class="bottom">
-          <SpacingInput
-            v-model="localMarginBottom"
-            :disabled="!value.margin"
-          />
-        </div>
-        <div class="left">
-          <SpacingInput
-            v-model="localMarginLeft"
-            :disabled="!value.margin"
-          />
-        </div>
-      </div>
-      <div class="padding">
-        <div class="label">
-          Padding
-        </div>
-        <div class="top">
-          <SpacingInput
-            v-model="localPaddingTop"
-            :disabled="!value.padding"
-          />
-        </div>
-        <div class="right">
-          <SpacingInput
-            v-model="localPaddingRight"
-            :disabled="!value.padding"
-          />
-        </div>
-        <div class="bottom">
-          <SpacingInput
-            v-model="localPaddingBottom"
-            :disabled="!value.padding"
-          />
-        </div>
-        <div class="left">
-          <SpacingInput
-            v-model="localPaddingLeft"
-            :disabled="!value.padding"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref, watch } from 'vue'
 import type { SpacingTool } from '@/types/editor'
+import { ref, watch } from 'vue'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
@@ -139,6 +71,74 @@ watch(
   },
 )
 </script>
+
+<template>
+  <div class="spacing-tool">
+    <EditorToolLabel>
+      {{ title }}
+    </EditorToolLabel>
+    <div class="body">
+      <div class="margin">
+        <div class="label">
+          Margin
+        </div>
+        <div class="top">
+          <SpacingInput
+            v-model="localMarginTop"
+            :disabled="!value.margin"
+          />
+        </div>
+        <div class="right">
+          <SpacingInput
+            v-model="localMarginRight"
+            :disabled="!value.margin"
+          />
+        </div>
+        <div class="bottom">
+          <SpacingInput
+            v-model="localMarginBottom"
+            :disabled="!value.margin"
+          />
+        </div>
+        <div class="left">
+          <SpacingInput
+            v-model="localMarginLeft"
+            :disabled="!value.margin"
+          />
+        </div>
+      </div>
+      <div class="padding">
+        <div class="label">
+          Padding
+        </div>
+        <div class="top">
+          <SpacingInput
+            v-model="localPaddingTop"
+            :disabled="!value.padding"
+          />
+        </div>
+        <div class="right">
+          <SpacingInput
+            v-model="localPaddingRight"
+            :disabled="!value.padding"
+          />
+        </div>
+        <div class="bottom">
+          <SpacingInput
+            v-model="localPaddingBottom"
+            :disabled="!value.padding"
+          />
+        </div>
+        <div class="left">
+          <SpacingInput
+            v-model="localPaddingLeft"
+            :disabled="!value.padding"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .spacing-tool {

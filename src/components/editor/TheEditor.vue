@@ -1,22 +1,8 @@
-<template>
-  <div class="editor">
-    <TheSidebar />
-    <div
-      ref="previewRef"
-      class="preview"
-      :style="{
-        backgroundColor: general.background.color,
-      }"
-    />
-    <EditorTools />
-  </div>
-</template>
-
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { renderToShadowDom } from '@/utils'
 import Editor from '@/components/editor/EditorCanvas.vue'
 import { useComponentsStore } from '@/store/components'
+import { renderToShadowDom } from '@/utils'
 
 const previewRef = ref()
 
@@ -33,6 +19,20 @@ onMounted(() => {
   })
 })
 </script>
+
+<template>
+  <div class="editor">
+    <TheSidebar />
+    <div
+      ref="previewRef"
+      class="preview"
+      :style="{
+        backgroundColor: general.background.color,
+      }"
+    />
+    <EditorTools />
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .editor {

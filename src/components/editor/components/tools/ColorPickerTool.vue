@@ -1,20 +1,7 @@
-<template>
-  <div class="color-picker-tool">
-    <EditorToolLabel>{{ title }}</EditorToolLabel>
-    <div class="body">
-      <ElColorPicker
-        v-model="localValue"
-        color-format="hex"
-      />
-      <ElInput v-model="localValue" />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
+import type { ColorPickerTool } from '@/types/editor'
 import { ref, watch } from 'vue'
 import { useComponentsStore } from '@/store/components'
-import type { ColorPickerTool } from '@/types/editor'
 
 interface Props {
   id: string
@@ -43,6 +30,19 @@ watch(localValue, () => {
   else emit('update:value', localValue.value)
 })
 </script>
+
+<template>
+  <div class="color-picker-tool">
+    <EditorToolLabel>{{ title }}</EditorToolLabel>
+    <div class="body">
+      <ElColorPicker
+        v-model="localValue"
+        color-format="hex"
+      />
+      <ElInput v-model="localValue" />
+    </div>
+  </div>
+</template>
 
 <style lang="scss" scoped>
 .body {

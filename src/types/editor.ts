@@ -1,15 +1,17 @@
-export type ToolType =
-  | 'align'
-  | 'bgImage'
-  | 'colorPicker'
-  | 'image'
-  | 'input'
-  | 'inputNumber'
-  | 'multi'
-  | 'padding'
-  | 'spacing'
-  | 'textEditor'
-  | 'toggle'
+import type { EmailBlockSchema } from '@/components/email-components/schema/types'
+
+export type ToolType
+  = | 'align'
+    | 'bgImage'
+    | 'colorPicker'
+    | 'image'
+    | 'input'
+    | 'inputNumber'
+    | 'multi'
+    | 'padding'
+    | 'spacing'
+    | 'textEditor'
+    | 'toggle'
 
 export enum ToolT {
   Padding = 'padding',
@@ -17,8 +19,9 @@ export enum ToolT {
 
 export interface BaseTool {
   id: string
+  key: string
   group?: string
-  name: string
+  name?: string
   label: string
   type: ToolType
   value: any
@@ -88,17 +91,17 @@ export interface TextEditorTool extends BaseTool {
   value: string
 }
 
-export type SingleTool =
-  | AlignTool
-  | BackgroundImageTool
-  | ColorPickerTool
-  | ImageTool
-  | InputNumberTool
-  | InputTool
-  | PaddingTool
-  | SpacingTool
-  | TextEditorTool
-  | ToggleTool
+export type SingleTool
+  = | AlignTool
+    | BackgroundImageTool
+    | ColorPickerTool
+    | ImageTool
+    | InputNumberTool
+    | InputTool
+    | PaddingTool
+    | SpacingTool
+    | TextEditorTool
+    | ToggleTool
 
 export interface MultiTool extends BaseTool {
   type: 'multi'
@@ -115,14 +118,14 @@ export type Tool = SingleTool | MultiTool
 
 export type ComponentTheme = 'light' | 'dark'
 
-export type ComponentType =
-  | 'content'
-  | 'cta'
-  | 'ecommerce'
-  | 'feature'
-  | 'footer'
-  | 'header'
-  | 'menu'
+export type ComponentType
+  = | 'content'
+    | 'cta'
+    | 'ecommerce'
+    | 'feature'
+    | 'footer'
+    | 'header'
+    | 'menu'
 
 export interface Component {
   id: string
@@ -131,6 +134,7 @@ export interface Component {
   type: ComponentType
   preview: string
   tools: Tool[]
+  schema: EmailBlockSchema
 }
 
 export type ComponentBuilder = (theme: ComponentTheme, label: string) => Component

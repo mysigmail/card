@@ -6,14 +6,14 @@
   "author": "Anton Reshetov",
   "engines": {
     "pnpm": ">=8.0.0",
-    "node": ">=20.0.0"
+    "node": ">=20.18.3"
   },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit --skipLibCheck && vite build",
     "preview": "vite preview",
-    "lint": "vue-tsc --noEmit && eslint --ext .js,.ts,.vue . src",
-    "lint:fix": "eslint --ext .js,.ts,.vue . --fix src",
+    "lint": "vue-tsc --noEmit && eslint .",
+    "lint:fix": "eslint . --fix",
     "release": "bumpp -c 'build: release v' -t",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "prepare": "simple-git-hooks"
@@ -40,13 +40,13 @@
     "vue": "^3.3.7"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "1.0.0-beta.29",
+    "@antfu/eslint-config": "^7.3.0",
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
     "@types/sortablejs": "^1.15.4",
     "@vitejs/plugin-vue": "^4.4.0",
     "bumpp": "^9.2.0",
-    "eslint": "^8.52.0",
+    "eslint": "^10.0.0",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
     "sass": "^1.69.5",
@@ -69,6 +69,6 @@
     ]
   },
   "volta": {
-    "node": "20.9.0"
+    "node": "20.18.3"
   }
 }

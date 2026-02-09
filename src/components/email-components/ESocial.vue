@@ -1,3 +1,21 @@
+<script setup lang="ts">
+import type { AlignTool } from '@/types/editor'
+import type { Social } from '@/types/email-components/components'
+import { MColumn, MLink, MRow } from '@mysigmail/vue-email-components'
+import { useComponentsStore } from '@/store/components'
+
+interface Props {
+  id: string
+  group: string
+  align?: AlignTool['value']
+  items: Social[]
+}
+
+defineProps<Props>()
+
+const { editableId, editableToolName } = useComponentsStore()
+</script>
+
 <template>
   <MColumn
     class="e-list p-hover-tools"
@@ -29,23 +47,5 @@
     </MRow>
   </MColumn>
 </template>
-
-<script setup lang="ts">
-import { MColumn, MLink, MRow } from '@mysigmail/vue-email-components'
-import type { Social } from '@/types/email-components/components'
-import type { AlignTool } from '@/types/editor'
-import { useComponentsStore } from '@/store/components'
-
-interface Props {
-  id: string
-  group: string
-  align?: AlignTool['value']
-  items: Social[]
-}
-
-defineProps<Props>()
-
-const { editableId, editableToolName } = useComponentsStore()
-</script>
 
 <style lang="scss" scoped></style>

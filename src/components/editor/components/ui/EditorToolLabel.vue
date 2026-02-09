@@ -1,3 +1,13 @@
+<script setup lang="ts">
+interface Props {
+  type?: 'primary' | 'secondary'
+}
+
+withDefaults(defineProps<Props>(), {
+  type: 'primary',
+})
+</script>
+
 <template>
   <div
     class="app-tool-label"
@@ -6,16 +16,6 @@
     <slot />
   </div>
 </template>
-
-<script setup lang="ts">
-interface Props {
-  type?: 'primary' | 'secondary'
-}
-
-withDefaults(defineProps<Props>(), {
-  type: 'primary'
-})
-</script>
 
 <style lang="scss" scoped>
 .app-tool-label {

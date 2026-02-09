@@ -1,3 +1,28 @@
+<script setup lang="ts">
+import type { Tool } from '@/types/editor'
+import { useComponentsStore } from '@/store/components'
+
+interface Props {
+  id: string
+  name: string
+  index: number
+  tools: Record<string, Tool[]>
+}
+
+const props = defineProps<Props>()
+
+const { onEditTool, editableToolsGroupName, editableId, removeComponent, duplicateComponent }
+  = useComponentsStore()
+
+function onClick(type: 'copy' | 'remove') {
+  if (type === 'remove')
+    removeComponent(props.index)
+
+  if (type === 'copy')
+    duplicateComponent(props.index)
+}
+</script>
+
 <template>
   <div
     class="tree-components-item"
@@ -42,31 +67,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useComponentsStore } from '@/store/components'
-import type { Tool } from '@/types/editor'
-
-interface Props {
-  id: string
-  name: string
-  index: number
-  tools: Record<string, Tool[]>
-}
-
-const props = defineProps<Props>()
-
-const { onEditTool, editableToolsGroupName, editableId, removeComponent, duplicateComponent }
-  = useComponentsStore()
-
-function onClick(type: 'copy' | 'remove') {
-  if (type === 'remove')
-    removeComponent(props.index)
-
-  if (type === 'copy')
-    duplicateComponent(props.index)
-}
-</script>
 
 <style lang="scss" scoped>
 .tree-components-item {

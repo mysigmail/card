@@ -1,3 +1,20 @@
+<script setup lang="ts">
+import { EditorContent } from '@tiptap/vue-3'
+import { useEditor } from '@/components/editor/components/tools/text/composables'
+
+interface Props {
+  id: string
+  value: string
+  title: string
+}
+
+const props = defineProps<Props>()
+
+const { editor, init } = useEditor()
+
+init(props.id, props.value)
+</script>
+
 <template>
   <div class="text-editor-tool">
     <EditorToolLabel>
@@ -14,23 +31,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { EditorContent } from '@tiptap/vue-3'
-import { useEditor } from './composables'
-
-interface Props {
-  id: string
-  value: string
-  title: string
-}
-
-const props = defineProps<Props>()
-
-const { editor, init } = useEditor()
-
-init(props.id, props.value)
-</script>
 
 <style lang="scss" scoped>
 .text-editor-tool {

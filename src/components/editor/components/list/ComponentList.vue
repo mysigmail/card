@@ -1,3 +1,37 @@
+<script setup lang="ts">
+import { MenuAim } from '@mysigmail/menu-aim'
+import { onMounted, ref } from 'vue'
+import { useList } from '@/components/editor/components/list/composables'
+import { useComponentsStore } from '@/store/components'
+
+const { list } = useComponentsStore()
+const { showList } = useList()
+
+const hovered = ref<number>()
+
+const menuRef = ref<HTMLElement>()
+
+let menu: MenuAim
+
+onMounted(() => {
+  menu = new MenuAim(menuRef.value!, {
+    rowSelector: '.item',
+    activate: (row: HTMLElement) => {
+      hovered.value = Number(row.dataset.index)
+      showList.value = true
+    },
+    deactivate: () => {
+      showList.value = false
+      hovered.value = undefined
+    },
+  })
+})
+
+function onMouseLeave() {
+  menu.deactivateRow()
+}
+</script>
+
 <template>
   <div
     class="component-list"
@@ -35,40 +69,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { MenuAim } from '@mysigmail/menu-aim'
-import { useList } from './composables'
-import { useComponentsStore } from '@/store/components'
-
-const { list } = useComponentsStore()
-const { showList } = useList()
-
-const hovered = ref<number>()
-
-const menuRef = ref<HTMLElement>()
-
-let menu: MenuAim
-
-onMounted(() => {
-  menu = new MenuAim(menuRef.value!, {
-    rowSelector: '.item',
-    activate: (row: HTMLElement) => {
-      hovered.value = Number(row.dataset.index)
-      showList.value = true
-    },
-    deactivate: () => {
-      showList.value = false
-      hovered.value = undefined
-    },
-  })
-})
-
-function onMouseLeave() {
-  menu.deactivateRow()
-}
-</script>
 
 <style lang="scss">
 .component-list {

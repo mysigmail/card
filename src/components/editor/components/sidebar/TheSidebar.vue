@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const activeTab = ref<'components' | 'tree'>('components')
+</script>
+
 <template>
   <div class="sidebar">
     <div class="body">
@@ -27,12 +33,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const activeTab = ref<'components' | 'tree'>('components')
-</script>
 
 <style lang="scss" scoped>
 .sidebar {
