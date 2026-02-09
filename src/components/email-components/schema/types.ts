@@ -40,6 +40,7 @@ export interface DividerSchemaNode<TModel extends SchemaModelShape> extends Base
 interface BaseRowChildSchemaNode<TModel extends SchemaModelShape> extends BaseSchemaNode<TModel> {
   group: SchemaGroup<TModel>
   align?: SchemaPath<TModel>
+  width?: SchemaPath<TModel>
 }
 
 export interface LogoSchemaNode<TModel extends SchemaModelShape>

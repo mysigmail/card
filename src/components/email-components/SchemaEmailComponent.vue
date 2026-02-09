@@ -40,6 +40,10 @@ function resolveAlign(path?: string) {
   return resolve<AlignTool['value']>(path)
 }
 
+function resolveWidth(path?: string) {
+  return resolve<string | number>(path)
+}
+
 function resolveAttrs(path?: string) {
   return resolve<Record<string, unknown>>(path)
 }
@@ -103,6 +107,7 @@ function onRootClick() {
             :id="id"
             :group="child.group"
             :align="resolveAlign(child.align)"
+            :width="resolveWidth(child.width)"
             :img-attrs="resolveImageAttrs(child.attrs)"
             :link="resolveString(child.link)"
             @click="onEditTool(child.group, index)"
@@ -113,6 +118,7 @@ function onRootClick() {
             :id="id"
             :group="child.group"
             :align="resolveAlign(child.align)"
+            :width="resolveWidth(child.width)"
             :items="resolveMenuItems(child.items)"
             @click="onEditTool(child.group, index)"
           />
@@ -122,6 +128,7 @@ function onRootClick() {
             :id="id"
             :group="child.group"
             :align="resolveAlign(child.align)"
+            :width="resolveWidth(child.width)"
             :items="resolveSocialItems(child.items)"
             @click="onEditTool(child.group, index)"
           />
@@ -130,6 +137,7 @@ function onRootClick() {
             v-if="child.type === 'text' && isVisible(child.if)"
             :id="id"
             :group="child.group"
+            :width="resolveWidth(child.width)"
             :value="resolveString(child.value)"
             v-bind="resolveAttrs(child.attrs)"
             @click="onEditTool(child.group, index)"

@@ -8,10 +8,10 @@ import { defineEmailBlockSchema } from '@/components/email-components/schema/typ
 
 interface MenuSchemaModel {
   Layout: SchemaGroupFields<'attrs'>
-  Logo: SchemaGroupFields<'show' | 'attrs' | 'link' | 'align' | 'padding'>
-  Menu: SchemaGroupFields<'show' | 'items' | 'align' | 'padding'>
+  Logo: SchemaGroupFields<'show' | 'attrs' | 'link' | 'align' | 'padding' | 'width'>
+  Menu: SchemaGroupFields<'show' | 'items' | 'align' | 'padding' | 'width'>
   Divider: SchemaGroupFields<'show' | 'color' | 'padding'>
-  Social: SchemaGroupFields<'show' | 'items' | 'align'>
+  Social: SchemaGroupFields<'show' | 'items' | 'align' | 'width'>
 }
 
 const menuRootSchema = {
@@ -32,6 +32,7 @@ const menu1Schema = defineEmailBlockSchema<MenuSchemaModel>({
           attrs: 'Logo.attrs',
           link: 'Logo.link',
           align: 'Logo.align',
+          width: 'Logo.width',
         },
         {
           type: 'menu',
@@ -39,6 +40,7 @@ const menu1Schema = defineEmailBlockSchema<MenuSchemaModel>({
           if: 'Menu.show',
           items: 'Menu.items',
           align: 'Menu.align',
+          width: 'Menu.width',
         },
       ],
     },
@@ -104,6 +106,7 @@ const menu3Schema = defineEmailBlockSchema<MenuSchemaModel>({
           attrs: 'Logo.attrs',
           link: 'Logo.link',
           align: 'Logo.align',
+          width: 'Logo.width',
         },
         {
           type: 'social',
@@ -111,6 +114,7 @@ const menu3Schema = defineEmailBlockSchema<MenuSchemaModel>({
           if: 'Social.show',
           items: 'Social.items',
           align: 'Social.align',
+          width: 'Social.width',
         },
       ],
     },
@@ -241,6 +245,10 @@ const menu1: ComponentBuilder = (theme, label) => {
         group: 'Logo',
         value: 'left',
       }),
+      f.columnWidth({
+        group: 'Logo',
+        value: 35,
+      }),
       f.image({
         group: 'Logo',
         value: {
@@ -256,6 +264,10 @@ const menu1: ComponentBuilder = (theme, label) => {
       f.align({
         group: 'Menu',
         value: 'right',
+      }),
+      f.columnWidth({
+        group: 'Menu',
+        value: 65,
       }),
       f.list({
         group: 'Menu',
@@ -370,6 +382,10 @@ const menu3: ComponentBuilder = (theme, label) => {
         group: 'Logo',
         value: 'left',
       }),
+      f.columnWidth({
+        group: 'Logo',
+        value: 35,
+      }),
       f.image({
         group: 'Logo',
         value: {
@@ -385,6 +401,10 @@ const menu3: ComponentBuilder = (theme, label) => {
       f.align({
         group: 'Social',
         value: 'right',
+      }),
+      f.columnWidth({
+        group: 'Social',
+        value: 65,
       }),
       f.list({
         group: 'Social',

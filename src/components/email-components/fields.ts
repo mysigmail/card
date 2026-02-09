@@ -30,6 +30,10 @@ interface ColorConfig extends FieldConfig {
   value: string
 }
 
+interface ColumnWidthConfig extends FieldConfig {
+  value: number
+}
+
 interface ImageConfig extends FieldConfig {
   value: ImageTool['value']
 }
@@ -113,6 +117,15 @@ export const f = {
       key: 'color',
       label: 'Color',
       type: 'colorPicker',
+      value: config.value,
+    })
+  },
+  columnWidth(config: ColumnWidthConfig) {
+    return toolBuilder<InputNumberTool>({
+      group: config.group,
+      key: 'columnWidth',
+      label: 'Column Width (%)',
+      type: 'inputNumber',
       value: config.value,
     })
   },
