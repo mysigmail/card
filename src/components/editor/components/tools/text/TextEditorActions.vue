@@ -90,7 +90,7 @@
 
 <script setup lang="ts">
 import { nextTick, onMounted } from 'vue'
-import { useEditor } from './composables'
+import { useEditor } from '@/components/editor/components/tools/text/composables'
 import StrikeSvg from '~icons/svg/strikethrough'
 
 const { align, bold, editor, fontSize, italic, link, strike, textColor, underline } = useEditor()

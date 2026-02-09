@@ -1,4 +1,4 @@
-import type { Component, ImageTool } from '../editor'
+import type { Component, ImageTool } from '@/types/editor'
 
 export interface ComponentList {
   name: string

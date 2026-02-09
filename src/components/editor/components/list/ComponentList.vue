@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { MenuAim } from '@mysigmail/menu-aim'
-import { useList } from './composables'
+import { useList } from '@/components/editor/components/list/composables'
 import { useComponentsStore } from '@/store/components'
 
 const { list } = useComponentsStore()

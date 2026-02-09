@@ -3,9 +3,10 @@ import type { MultiTool, SingleTool } from '@/types/editor'
 import type { ToolBuilderConfig } from '@/types/email-components'
 
 export function toolBuilder<T extends SingleTool | MultiTool>(config: ToolBuilderConfig<T>): T {
-  const { group, label, name, type, value } = config
+  const { group, key, label, name, type, value } = config
   return {
     id: nanoid(8),
+    key,
     label,
     group,
     name,

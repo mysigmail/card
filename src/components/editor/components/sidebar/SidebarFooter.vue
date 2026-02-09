@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { version } from '../../../../../package.json'
+import { version } from '#/package.json'
 
 const year = new Date().getFullYear()
 </script>

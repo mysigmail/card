@@ -16,12 +16,11 @@
             v-for="(i, index) in installed"
             :key="i.id"
           >
-            <Component
-              :is="components[i.name]"
+            <SchemaEmailComponent
               :id="i.id"
               :data-name="i.label"
-              :label="i.label"
               :index="index"
+              :schema="i.schema"
               :tools="i.tools"
             />
           </template>
@@ -36,27 +35,11 @@ import { MBody, MContainer, MHtml, MPreview } from '@mysigmail/vue-email-compone
 import type { CSSProperties } from 'vue'
 import { computed, onMounted, ref } from 'vue'
 import Sortable from 'sortablejs'
-import { addGhost, removeGhost } from '../email-components/utils'
+import SchemaEmailComponent from '@/components/email-components/SchemaEmailComponent.vue'
+import { addGhost, removeGhost } from '@/components/email-components/utils'
 import { useComponentsStore } from '@/store/components'
 
-import Menu1 from '@/components/email-components/menu/Menu1.vue'
-import Menu2 from '@/components/email-components/menu/Menu2.vue'
-import Menu3 from '@/components/email-components/menu/Menu3.vue'
-import Menu4 from '@/components/email-components/menu/Menu4.vue'
-
-import Header1 from '@/components/email-components/header/Header1.vue'
-import Header2 from '@/components/email-components/header/Header2.vue'
-
 const { installed, isDragging, moveComponent, general } = useComponentsStore()
-
-const components: Record<string, any> = {
-  Menu1,
-  Menu2,
-  Menu3,
-  Menu4,
-  Header1,
-  Header2,
-}
 
 const listRef = ref<HTMLElement>()
 

@@ -11,8 +11,8 @@ import Text from '@tiptap/extension-text'
 import TextAlign from '@tiptap/extension-text-align'
 import TextStyle from '@tiptap/extension-text-style'
 import Underline from '@tiptap/extension-underline'
-import { Strike } from '../extensions/strike'
-import { FontSize } from '../extensions/font-size'
+import { FontSize } from '@/components/editor/components/tools/text/extensions/font-size'
+import { Strike } from '@/components/editor/components/tools/text/extensions/strike'
 import { useComponentsStore } from '@/store/components'
 
 const { updateToolById } = useComponentsStore()

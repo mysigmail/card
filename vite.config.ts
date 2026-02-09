@@ -10,6 +10,7 @@ import Icons from 'unplugin-icons/vite'
 import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 
 const pathSrc = path.resolve(__dirname, './src')
+const pathRoot = path.resolve(__dirname, './')
 
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
@@ -42,6 +43,7 @@ export default ({ mode }) => {
     ],
     resolve: {
       alias: {
+        '#': pathRoot,
         '@': pathSrc,
       },
       dedupe: ['vue'],

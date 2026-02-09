@@ -8,7 +8,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "#/*": ["./*"]
     },
     "resolveJsonModule": true,
     "types": ["unplugin-icons/types/vue", "element-plus/global"],

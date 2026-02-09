@@ -27,8 +27,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import Sortable from 'sortablejs'
-import { useList } from './composables'
 import type { Component } from '@/types/editor'
+import { useList } from '@/components/editor/components/list/composables'
 import { useComponentsStore } from '@/store/components'
 import { addGhost, removeGhost } from '@/components/email-components/utils'
 

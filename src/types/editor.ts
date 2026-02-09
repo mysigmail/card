@@ -1,3 +1,5 @@
+import type { EmailBlockSchema } from '@/components/email-components/schema/types'
+
 export type ToolType =
   | 'align'
   | 'bgImage'
@@ -17,8 +19,9 @@ export enum ToolT {
 
 export interface BaseTool {
   id: string
+  key: string
   group?: string
-  name: string
+  name?: string
   label: string
   type: ToolType
   value: any
@@ -131,6 +134,7 @@ export interface Component {
   type: ComponentType
   preview: string
   tools: Tool[]
+  schema: EmailBlockSchema
 }
 
 export type ComponentBuilder = (theme: ComponentTheme, label: string) => Component
