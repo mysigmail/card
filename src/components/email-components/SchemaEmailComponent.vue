@@ -85,12 +85,23 @@ function onNodeClick(group?: string) {
 function onRootClick() {
   onNodeClick(props.schema.root?.clickGroup)
 }
+
+function onPreviewClick(event: MouseEvent) {
+  const target = event.target
+
+  if (!(target instanceof Element))
+    return
+
+  if (target.closest('a'))
+    event.preventDefault()
+}
 </script>
 
 <template>
   <EmailBase
     :index="index"
     v-bind="rootAttrs"
+    @click.capture="onPreviewClick"
     @click.self="onRootClick"
   >
     <template
