@@ -18,7 +18,7 @@ interface MenuSchemaModel {
 const groupBuilder = createSchemaGroups()
 const groups = {
   layout: groupBuilder.group('layout', { id: 'layout', label: 'Layout' }),
-  logo: groupBuilder.group('logo', { id: 'logo', label: 'Logo' }),
+  logo: groupBuilder.group('image', { id: 'logo', label: 'Logo' }),
   menu: groupBuilder.group('menu', { id: 'menu', label: 'Menu' }),
   divider: groupBuilder.group('divider', { id: 'divider', label: 'Divider' }),
   social: groupBuilder.group('social', { id: 'social', label: 'Social' }),

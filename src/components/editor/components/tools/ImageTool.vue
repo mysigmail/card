@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import type { ImageTool } from '@/types/editor'
-import { reactive, watch } from 'vue'
+import type { BackgroundImageTool, ImageTool } from '@/types/editor'
+import { computed, reactive, watch } from 'vue'
 import { useComponentsStore } from '@/store/components'
+
+type UnifiedImageValue = ImageTool['value'] | BackgroundImageTool['value']
 
 interface Props {
   id: string
-  value: ImageTool['value']
+  type: 'image' | 'bgImage'
+  value: UnifiedImageValue
   title: string
 }
 
@@ -13,12 +16,21 @@ const props = defineProps<Props>()
 
 const { updateToolById } = useComponentsStore()
 
-const localValue = reactive<ImageTool['value']>(props.value)
+const localValue = reactive<UnifiedImageValue>(props.value)
+const isBackground = computed(() => props.type === 'bgImage')
+
+const imageValue = localValue as ImageTool['value']
+const backgroundValue = localValue as BackgroundImageTool['value']
 
 watch(
   localValue,
   () => {
-    updateToolById<ImageTool>(props.id, 'value', localValue)
+    if (isBackground.value) {
+      updateToolById<BackgroundImageTool>(props.id, 'value', backgroundValue)
+      return
+    }
+
+    updateToolById<ImageTool>(props.id, 'value', imageValue)
   },
   { deep: true },
 )
@@ -29,12 +41,75 @@ watch(
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>
-    <div class="body">
+    <div
+      v-if="isBackground"
+      class="body"
+    >
+      <EditorToolLabel type="secondary">
+        URL
+      </EditorToolLabel>
+      <ElInput
+        v-model="backgroundValue.url"
+        placeholder="Image URL"
+      />
+
+      <EditorToolLabel type="secondary">
+        Repeat
+      </EditorToolLabel>
+      <ElRadioGroup v-model="backgroundValue.repeat">
+        <ElRadioButton label="no-repeat">
+          No Repeat
+        </ElRadioButton>
+        <ElRadioButton label="repeat">
+          Repeat
+        </ElRadioButton>
+      </ElRadioGroup>
+
+      <EditorToolLabel type="secondary">
+        Size
+      </EditorToolLabel>
+      <ElRadioGroup v-model="backgroundValue.size">
+        <ElRadioButton label="unset">
+          None
+        </ElRadioButton>
+        <ElRadioButton label="cover">
+          Cover
+        </ElRadioButton>
+        <ElRadioButton label="contain">
+          Contain
+        </ElRadioButton>
+      </ElRadioGroup>
+
+      <EditorToolLabel type="secondary">
+        Position
+      </EditorToolLabel>
+      <ElRadioGroup v-model="backgroundValue.position">
+        <ElRadioButton label="top">
+          Top
+        </ElRadioButton>
+        <ElRadioButton label="bottom">
+          Bottom
+        </ElRadioButton>
+        <ElRadioButton label="center">
+          Center
+        </ElRadioButton>
+        <ElRadioButton label="left">
+          Left
+        </ElRadioButton>
+        <ElRadioButton label="right">
+          Right
+        </ElRadioButton>
+      </ElRadioGroup>
+    </div>
+    <div
+      v-else
+      class="body"
+    >
       <div>
         <EditorToolLabel type="secondary">
           URL
         </EditorToolLabel>
-        <ElInput v-model="localValue.src" />
+        <ElInput v-model="imageValue.src" />
       </div>
       <div class="dimensions">
         <div style="width: 100%">
@@ -42,7 +117,7 @@ watch(
             Width
           </EditorToolLabel>
           <ElInput
-            v-model="localValue.width"
+            v-model="imageValue.width"
             type="number"
           />
         </div>
@@ -51,7 +126,7 @@ watch(
             Height
           </EditorToolLabel>
           <ElInput
-            v-model="localValue.height"
+            v-model="imageValue.height"
             type="number"
           />
         </div>
@@ -60,13 +135,13 @@ watch(
         <EditorToolLabel type="secondary">
           Alternate Text
         </EditorToolLabel>
-        <ElInput v-model="localValue.alt" />
+        <ElInput v-model="imageValue.alt" />
       </div>
       <div>
         <EditorToolLabel type="secondary">
           Image Link
         </EditorToolLabel>
-        <ElInput v-model="localValue.link" />
+        <ElInput v-model="imageValue.link" />
       </div>
     </div>
   </div>

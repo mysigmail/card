@@ -53,14 +53,9 @@ provide('parentMultiToolId', props.parentMultiToolId)
         :value="i.value"
       />
       <ImageTool
-        v-if="i.type === 'image'"
+        v-if="i.type === 'image' || i.type === 'bgImage'"
         :id="i.id"
-        :title="i.label"
-        :value="i.value"
-      />
-      <BackgroundImageTool
-        v-if="i.type === 'bgImage'"
-        :id="i.id"
+        :type="i.type"
         :title="i.label"
         :value="i.value"
       />

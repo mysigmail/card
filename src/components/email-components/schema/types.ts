@@ -66,6 +66,7 @@ export interface TextSchemaNode<TModel extends SchemaModelShape>
   extends BaseRowChildSchemaNode<TModel> {
   type: 'text'
   attrs?: SchemaPath<TModel>
+  link?: SchemaPath<TModel>
   value?: SchemaPath<TModel>
   children?: TextChildSchemaNode<TModel>[]
 }

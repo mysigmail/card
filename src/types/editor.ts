@@ -3,10 +3,10 @@ import type { EmailBlockSchema } from '@/components/email-components/schema/type
 export type ToolGroupRole
   = | 'layout'
     | 'text'
-    | 'logo'
     | 'menu'
     | 'button'
     | 'image'
+    | 'imageBlock'
     | 'grid'
     | 'social'
     | 'divider'

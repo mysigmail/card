@@ -24,7 +24,7 @@ interface HeaderWithButtonSchemaModel {
 interface HeaderWithImageSchemaModel {
   Layout: SchemaGroupFields<'attrs'>
   Logo: SchemaGroupFields<'show' | 'attrs' | 'link' | 'align' | 'width'>
-  Image: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
+  Image: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs' | 'link'>
   Text: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
   Button: SchemaGroupFields<'show' | 'align' | 'attrs' | 'text'>
 }
@@ -33,7 +33,7 @@ interface HeaderWithImageBlockSchemaModel {
   Layout: SchemaGroupFields<'attrs'>
   Logo: SchemaGroupFields<'show' | 'attrs' | 'link' | 'align' | 'width'>
   Text: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
-  ImageBlock: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
+  ImageBlock: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs' | 'link'>
   TextSecondary: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
   Button: SchemaGroupFields<'show' | 'align' | 'attrs' | 'text'>
 }
@@ -41,9 +41,9 @@ interface HeaderWithImageBlockSchemaModel {
 interface HeaderWithGridSchemaModel {
   Layout: SchemaGroupFields<'attrs'>
   Logo: SchemaGroupFields<'show' | 'attrs' | 'link' | 'align' | 'width'>
-  Image: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
+  Image: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs' | 'link'>
   Text: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
-  ImageBlock: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
+  ImageBlock: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs' | 'link'>
   TextSecondary: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
   Grid: SchemaGroupFields<'show' | 'margin' | 'items' | 'align' | 'width' | 'gap'>
 }
@@ -51,11 +51,11 @@ interface HeaderWithGridSchemaModel {
 const groupBuilder = createSchemaGroups()
 const groups = {
   layout: groupBuilder.group('layout', { id: 'Layout', label: 'Layout' }),
-  logo: groupBuilder.group('logo', { id: 'Logo', label: 'Logo' }),
+  logo: groupBuilder.group('image', { id: 'Logo', label: 'Logo' }),
   menu: groupBuilder.group('menu', { id: 'Menu', label: 'Menu' }),
   textMain: groupBuilder.group('text', { id: 'Text', label: 'Text' }),
-  imageMain: groupBuilder.group('image', { id: 'Image', label: 'Image' }),
-  imageBlock: groupBuilder.group('image', { id: 'ImageBlock', label: 'Image Block' }),
+  imageMain: groupBuilder.group('imageBlock', { id: 'Image', label: 'Image' }),
+  imageBlock: groupBuilder.group('imageBlock', { id: 'ImageBlock', label: 'Image Block' }),
   textSecondary: groupBuilder.group('text', { id: 'TextSecondary', label: 'Secondary Text' }),
   grid: groupBuilder.group('grid', { id: 'Grid', label: 'Grid' }),
   button: groupBuilder.group('button', { id: 'Button', label: 'Button' }),
@@ -183,6 +183,7 @@ const headerWithImageSchema = defineEmailBlockSchema<HeaderWithImageSchemaModel>
         {
           type: 'text',
           group: groups.imageMain.id,
+          link: 'Image.link',
           value: 'Image.value',
           attrs: 'Image.attrs',
         },
@@ -261,6 +262,7 @@ const headerWithImageBlockSchema = defineEmailBlockSchema<HeaderWithImageBlockSc
         {
           type: 'text',
           group: groups.imageBlock.id,
+          link: 'ImageBlock.link',
           value: 'ImageBlock.value',
           attrs: 'ImageBlock.attrs',
         },
@@ -324,6 +326,7 @@ const headerWithGridSchema = defineEmailBlockSchema<HeaderWithGridSchemaModel>({
         {
           type: 'text',
           group: groups.imageMain.id,
+          link: 'Image.link',
           value: 'Image.value',
           attrs: 'Image.attrs',
         },
@@ -354,6 +357,7 @@ const headerWithGridSchema = defineEmailBlockSchema<HeaderWithGridSchemaModel>({
         {
           type: 'text',
           group: groups.imageBlock.id,
+          link: 'ImageBlock.link',
           value: 'ImageBlock.value',
           attrs: 'ImageBlock.attrs',
         },
@@ -776,6 +780,12 @@ const header4: ComponentBuilder = (_, label) => {
         label: 'Border Radius',
         value: 5,
       }),
+      f.input({
+        group: groups.imageMain,
+        key: 'link',
+        label: 'Link',
+        value: 'https://example.com',
+      }),
       f.showHide({
         group: groups.imageMain,
       }),
@@ -929,6 +939,12 @@ const header5: ComponentBuilder = (_, label) => {
         label: 'Border Radius',
         value: 0,
       }),
+      f.input({
+        group: groups.imageBlock,
+        key: 'link',
+        label: 'Link',
+        value: 'https://example.com',
+      }),
       f.showHide({
         group: groups.imageBlock,
       }),
@@ -1063,6 +1079,12 @@ const header6: ComponentBuilder = (_, label) => {
         label: 'Border Radius',
         value: 0,
       }),
+      f.input({
+        group: groups.imageMain,
+        key: 'link',
+        label: 'Link',
+        value: 'https://example.com',
+      }),
       f.showHide({
         group: groups.imageMain,
       }),
@@ -1110,6 +1132,12 @@ const header6: ComponentBuilder = (_, label) => {
         key: 'borderRadius',
         label: 'Border Radius',
         value: 0,
+      }),
+      f.input({
+        group: groups.imageBlock,
+        key: 'link',
+        label: 'Link',
+        value: 'https://example.com',
       }),
       f.showHide({
         group: groups.imageBlock,

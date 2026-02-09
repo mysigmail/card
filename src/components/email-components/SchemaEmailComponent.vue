@@ -141,6 +141,7 @@ function onRootClick() {
             v-if="child.type === 'text' && isVisible(child.if)"
             :id="id"
             :group="child.group"
+            :link="resolveString(child.link)"
             :width="resolveWidth(child.width)"
             :value="resolveString(child.value)"
             v-bind="resolveAttrs(child.attrs)"

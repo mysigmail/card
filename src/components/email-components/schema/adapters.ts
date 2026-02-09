@@ -31,6 +31,7 @@ interface GroupValues {
   align?: AlignTool['value']
   show?: ToggleTool['value']
   image?: ImageTool['value']
+  link?: InputTool['value']
   list?: MultiTool['value']
   grid?: GridTool['value']
   gap?: InputNumberTool['value']
@@ -109,6 +110,20 @@ function readImageAttrs(image?: ImageTool['value']) {
       height: image.height ? `${image.height}px` : undefined,
     },
   } as HTMLImageElement
+}
+
+function buildImageBlockValue(value: string | undefined, height?: number) {
+  if (value)
+    return value
+
+  if (height !== undefined) {
+    const normalizedHeight = Math.max(0, Number(height))
+    const minHeight = `${normalizedHeight}px`
+
+    return `<span style="display:block;min-height:${minHeight};line-height:${minHeight};font-size:0;">&nbsp;</span>`
+  }
+
+  return '&nbsp;'
 }
 
 function readMenuItems(items?: MultiTool['value']) {
@@ -269,6 +284,7 @@ function readGroupValues(tools: Tool[]): GroupValues {
     align: findToolByKey<AlignTool>(tools, 'align', 'align')?.value,
     show: findToolByKey<ToggleTool>(tools, 'showHide', 'toggle')?.value,
     image: findToolByKey<ImageTool>(tools, 'image', 'image')?.value,
+    link: findToolByKey<InputTool>(tools, 'link', 'input')?.value,
     list: findToolByKey<MultiTool>(tools, 'list', 'multi')?.value,
     grid: findToolByKey<GridTool>(tools, 'grid', 'grid')?.value,
     gap: findToolByKey<InputNumberTool>(tools, 'gap', 'inputNumber')?.value,
@@ -296,7 +312,7 @@ function createBaseModel(
     color: values.color,
     image: values.image,
     items: items || readMenuItems(values.list),
-    link: values.image?.link,
+    link: values.link || values.image?.link,
     margin,
     gap: toGap(values.gap),
     padding: insets,
@@ -331,15 +347,6 @@ function layoutGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel
   }
 }
 
-function logoGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
-  const values = readGroupValues(tools)
-
-  return {
-    ...createBaseModel(values),
-    attrs: readImageAttrs(values.image),
-  }
-}
-
 function textGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
   const values = readGroupValues(tools)
 
@@ -351,9 +358,19 @@ function textGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
 
 function imageGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
   const values = readGroupValues(tools)
-  const bgImage = readBackgroundImage(values.backgroundImage)
+
+  return {
+    ...createBaseModel(values),
+    attrs: readImageAttrs(values.image),
+  }
+}
+
+function imageBlockGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
+  const values = readGroupValues(tools)
   const borderRadius = findToolByKey<InputNumberTool>(tools, 'borderRadius', 'inputNumber')?.value
   const height = findToolByKey<InputNumberTool>(tools, 'height', 'inputNumber')?.value
+  const bgImage = readBackgroundImage(values.backgroundImage)
+  const normalizedHeight = height !== undefined ? Math.max(0, Number(height)) : undefined
 
   return {
     ...createBaseModel(values),
@@ -366,13 +383,13 @@ function imageGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel 
         borderRadius:
           borderRadius !== undefined ? `${Math.max(0, Number(borderRadius))}px` : undefined,
         overflow: borderRadius !== undefined ? 'hidden' : undefined,
-        height: height !== undefined ? `${Math.max(0, Number(height))}px` : undefined,
+        height: normalizedHeight !== undefined ? `${normalizedHeight}px` : undefined,
         fontSize: '0',
         lineHeight: '0',
         width: '100%',
       },
     } as HTMLElement,
-    value: values.text || '&nbsp;',
+    value: buildImageBlockValue(values.text, normalizedHeight),
   }
 }
 
@@ -404,8 +421,8 @@ const builtInGroupAdapters: Record<string, SchemaGroupAdapter> = {
   divider: defaultGroupAdapter,
   grid: gridGroupAdapter,
   image: imageGroupAdapter,
+  imageBlock: imageBlockGroupAdapter,
   layout: layoutGroupAdapter,
-  logo: logoGroupAdapter,
   menu: defaultGroupAdapter,
   social: socialGroupAdapter,
   text: textGroupAdapter,
