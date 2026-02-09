@@ -4,19 +4,29 @@ import { nanoid } from 'nanoid'
 import { images } from '@/components/email-components/catalog/images'
 import { COLOR } from '@/components/email-components/constants'
 import { f } from '@/components/email-components/fields'
+import { createSchemaGroups, gp } from '@/components/email-components/schema/groups'
 import { defineEmailBlockSchema } from '@/components/email-components/schema/types'
 
 interface MenuSchemaModel {
-  Layout: SchemaGroupFields<'attrs'>
-  Logo: SchemaGroupFields<'show' | 'attrs' | 'link' | 'align' | 'padding' | 'width'>
-  Menu: SchemaGroupFields<'show' | 'items' | 'align' | 'padding' | 'width'>
-  Divider: SchemaGroupFields<'show' | 'color' | 'padding'>
-  Social: SchemaGroupFields<'show' | 'items' | 'align' | 'width'>
+  layout: SchemaGroupFields<'attrs'>
+  logo: SchemaGroupFields<'show' | 'attrs' | 'link' | 'align' | 'padding' | 'width'>
+  menu: SchemaGroupFields<'show' | 'items' | 'align' | 'padding' | 'width'>
+  divider: SchemaGroupFields<'show' | 'color' | 'padding'>
+  social: SchemaGroupFields<'show' | 'items' | 'align' | 'width'>
 }
 
+const groupBuilder = createSchemaGroups()
+const groups = {
+  layout: groupBuilder.group('layout', { id: 'layout', label: 'Layout' }),
+  logo: groupBuilder.group('logo', { id: 'logo', label: 'Logo' }),
+  menu: groupBuilder.group('menu', { id: 'menu', label: 'Menu' }),
+  divider: groupBuilder.group('divider', { id: 'divider', label: 'Divider' }),
+  social: groupBuilder.group('social', { id: 'social', label: 'Social' }),
+} as const
+
 const menuRootSchema = {
-  attrs: 'Layout.attrs',
-  clickGroup: 'Layout',
+  attrs: gp(groups.layout, 'attrs'),
+  clickGroup: groups.layout.id,
 } as const
 
 const menu1Schema = defineEmailBlockSchema<MenuSchemaModel>({
@@ -27,20 +37,20 @@ const menu1Schema = defineEmailBlockSchema<MenuSchemaModel>({
       children: [
         {
           type: 'logo',
-          group: 'Logo',
-          if: 'Logo.show',
-          attrs: 'Logo.attrs',
-          link: 'Logo.link',
-          align: 'Logo.align',
-          width: 'Logo.width',
+          group: groups.logo.id,
+          if: gp(groups.logo, 'show'),
+          attrs: gp(groups.logo, 'attrs'),
+          link: gp(groups.logo, 'link'),
+          align: gp(groups.logo, 'align'),
+          width: gp(groups.logo, 'width'),
         },
         {
           type: 'menu',
-          group: 'Menu',
-          if: 'Menu.show',
-          items: 'Menu.items',
-          align: 'Menu.align',
-          width: 'Menu.width',
+          group: groups.menu.id,
+          if: gp(groups.menu, 'show'),
+          items: gp(groups.menu, 'items'),
+          align: gp(groups.menu, 'align'),
+          width: gp(groups.menu, 'width'),
         },
       ],
     },
@@ -53,40 +63,40 @@ const menu2Schema = defineEmailBlockSchema<MenuSchemaModel>({
     {
       type: 'row',
       styleBindings: {
-        padding: 'Logo.padding',
+        padding: gp(groups.logo, 'padding'),
       },
       children: [
         {
           type: 'logo',
-          group: 'Logo',
-          if: 'Logo.show',
-          attrs: 'Logo.attrs',
-          link: 'Logo.link',
-          align: 'Logo.align',
+          group: groups.logo.id,
+          if: gp(groups.logo, 'show'),
+          attrs: gp(groups.logo, 'attrs'),
+          link: gp(groups.logo, 'link'),
+          align: gp(groups.logo, 'align'),
         },
       ],
     },
     {
       type: 'divider',
-      if: 'Divider.show',
-      group: 'Divider',
-      color: 'Divider.color',
+      if: gp(groups.divider, 'show'),
+      group: groups.divider.id,
+      color: gp(groups.divider, 'color'),
       styleBindings: {
-        padding: 'Divider.padding',
+        padding: gp(groups.divider, 'padding'),
       },
     },
     {
       type: 'row',
       styleBindings: {
-        padding: 'Menu.padding',
+        padding: gp(groups.menu, 'padding'),
       },
       children: [
         {
           type: 'menu',
-          group: 'Menu',
-          if: 'Menu.show',
-          items: 'Menu.items',
-          align: 'Menu.align',
+          group: groups.menu.id,
+          if: gp(groups.menu, 'show'),
+          items: gp(groups.menu, 'items'),
+          align: gp(groups.menu, 'align'),
         },
       ],
     },
@@ -101,20 +111,20 @@ const menu3Schema = defineEmailBlockSchema<MenuSchemaModel>({
       children: [
         {
           type: 'logo',
-          group: 'Logo',
-          if: 'Logo.show',
-          attrs: 'Logo.attrs',
-          link: 'Logo.link',
-          align: 'Logo.align',
-          width: 'Logo.width',
+          group: groups.logo.id,
+          if: gp(groups.logo, 'show'),
+          attrs: gp(groups.logo, 'attrs'),
+          link: gp(groups.logo, 'link'),
+          align: gp(groups.logo, 'align'),
+          width: gp(groups.logo, 'width'),
         },
         {
           type: 'social',
-          group: 'Social',
-          if: 'Social.show',
-          items: 'Social.items',
-          align: 'Social.align',
-          width: 'Social.width',
+          group: groups.social.id,
+          if: gp(groups.social, 'show'),
+          items: gp(groups.social, 'items'),
+          align: gp(groups.social, 'align'),
+          width: gp(groups.social, 'width'),
         },
       ],
     },
@@ -127,31 +137,31 @@ const menu4Schema = defineEmailBlockSchema<MenuSchemaModel>({
     {
       type: 'row',
       styleBindings: {
-        padding: 'Logo.padding',
+        padding: gp(groups.logo, 'padding'),
       },
       children: [
         {
           type: 'logo',
-          group: 'Logo',
-          if: 'Logo.show',
-          attrs: 'Logo.attrs',
-          link: 'Logo.link',
-          align: 'Logo.align',
+          group: groups.logo.id,
+          if: gp(groups.logo, 'show'),
+          attrs: gp(groups.logo, 'attrs'),
+          link: gp(groups.logo, 'link'),
+          align: gp(groups.logo, 'align'),
         },
       ],
     },
     {
       type: 'row',
       styleBindings: {
-        padding: 'Menu.padding',
+        padding: gp(groups.menu, 'padding'),
       },
       children: [
         {
           type: 'menu',
-          group: 'Menu',
-          if: 'Menu.show',
-          items: 'Menu.items',
-          align: 'Menu.align',
+          group: groups.menu.id,
+          if: gp(groups.menu, 'show'),
+          items: gp(groups.menu, 'items'),
+          align: gp(groups.menu, 'align'),
         },
       ],
     },
@@ -234,23 +244,23 @@ const menu1: ComponentBuilder = (theme, label) => {
     preview,
     tools: [
       f.padding({
-        group: 'Layout',
+        group: groups.layout,
         value: [30, 35, 30, 35],
       }),
       f.backgroundColor({
-        group: 'Layout',
+        group: groups.layout,
         value: backgroundColor,
       }),
       f.align({
-        group: 'Logo',
+        group: groups.logo,
         value: 'left',
       }),
       f.columnWidth({
-        group: 'Logo',
+        group: groups.logo,
         value: 35,
       }),
       f.image({
-        group: 'Logo',
+        group: groups.logo,
         value: {
           src: logo,
           link: 'https://example.com',
@@ -259,22 +269,22 @@ const menu1: ComponentBuilder = (theme, label) => {
         },
       }),
       f.showHide({
-        group: 'Logo',
+        group: groups.logo,
       }),
       f.align({
-        group: 'Menu',
+        group: groups.menu,
         value: 'right',
       }),
       f.columnWidth({
-        group: 'Menu',
+        group: groups.menu,
         value: 65,
       }),
       f.list({
-        group: 'Menu',
+        group: groups.menu,
         value: menuItems(linkColor),
       }),
       f.showHide({
-        group: 'Menu',
+        group: groups.menu,
       }),
     ],
   }
@@ -296,34 +306,34 @@ const menu2: ComponentBuilder = (theme, label) => {
     preview,
     tools: [
       f.padding({
-        group: 'Layout',
+        group: groups.layout,
         value: [30, 35, 30, 35],
       }),
       f.backgroundColor({
-        group: 'Layout',
+        group: groups.layout,
         value: backgroundColor,
       }),
       f.padding({
-        group: 'Divider',
+        group: groups.divider,
         value: [10, 0, 10, 0],
       }),
       f.color({
-        group: 'Divider',
+        group: groups.divider,
         value: dividerColor,
       }),
       f.showHide({
-        group: 'Divider',
+        group: groups.divider,
       }),
       f.padding({
-        group: 'Logo',
+        group: groups.logo,
         value: [0, 0, 0, 0],
       }),
       f.align({
-        group: 'Logo',
+        group: groups.logo,
         value: 'center',
       }),
       f.image({
-        group: 'Logo',
+        group: groups.logo,
         value: {
           src: logo,
           link: 'https://example.com',
@@ -332,22 +342,22 @@ const menu2: ComponentBuilder = (theme, label) => {
         },
       }),
       f.showHide({
-        group: 'Logo',
+        group: groups.logo,
       }),
       f.padding({
-        group: 'Menu',
+        group: groups.menu,
         value: [0, 0, 0, 0],
       }),
       f.align({
-        group: 'Menu',
+        group: groups.menu,
         value: 'center',
       }),
       f.list({
-        group: 'Menu',
+        group: groups.menu,
         value: menuItems(linkColor),
       }),
       f.showHide({
-        group: 'Menu',
+        group: groups.menu,
       }),
     ],
   }
@@ -371,23 +381,23 @@ const menu3: ComponentBuilder = (theme, label) => {
     preview,
     tools: [
       f.padding({
-        group: 'Layout',
+        group: groups.layout,
         value: [30, 35, 30, 35],
       }),
       f.backgroundColor({
-        group: 'Layout',
+        group: groups.layout,
         value: backgroundColor,
       }),
       f.align({
-        group: 'Logo',
+        group: groups.logo,
         value: 'left',
       }),
       f.columnWidth({
-        group: 'Logo',
+        group: groups.logo,
         value: 35,
       }),
       f.image({
-        group: 'Logo',
+        group: groups.logo,
         value: {
           src: logo,
           link: 'https://example.com',
@@ -396,22 +406,22 @@ const menu3: ComponentBuilder = (theme, label) => {
         },
       }),
       f.showHide({
-        group: 'Logo',
+        group: groups.logo,
       }),
       f.align({
-        group: 'Social',
+        group: groups.social,
         value: 'right',
       }),
       f.columnWidth({
-        group: 'Social',
+        group: groups.social,
         value: 65,
       }),
       f.list({
-        group: 'Social',
+        group: groups.social,
         value: socialItems(facebook, twitter, instagram),
       }),
       f.showHide({
-        group: 'Social',
+        group: groups.social,
       }),
     ],
   }
@@ -432,23 +442,23 @@ const menu4: ComponentBuilder = (theme, label) => {
     preview,
     tools: [
       f.padding({
-        group: 'Layout',
+        group: groups.layout,
         value: [30, 35, 30, 35],
       }),
       f.backgroundColor({
-        group: 'Layout',
+        group: groups.layout,
         value: backgroundColor,
       }),
       f.padding({
-        group: 'Logo',
+        group: groups.logo,
         value: [0, 0, 0, 0],
       }),
       f.align({
-        group: 'Logo',
+        group: groups.logo,
         value: 'left',
       }),
       f.image({
-        group: 'Logo',
+        group: groups.logo,
         value: {
           src: logo,
           link: 'https://example.com',
@@ -457,22 +467,22 @@ const menu4: ComponentBuilder = (theme, label) => {
         },
       }),
       f.showHide({
-        group: 'Logo',
+        group: groups.logo,
       }),
       f.padding({
-        group: 'Menu',
+        group: groups.menu,
         value: [20, 0, 0, 0],
       }),
       f.align({
-        group: 'Menu',
+        group: groups.menu,
         value: 'left',
       }),
       f.list({
-        group: 'Menu',
+        group: groups.menu,
         value: menuItems(linkColor),
       }),
       f.showHide({
-        group: 'Menu',
+        group: groups.menu,
       }),
     ],
   }

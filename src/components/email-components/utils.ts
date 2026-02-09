@@ -4,11 +4,14 @@ import { nanoid } from 'nanoid'
 
 export function toolBuilder<T extends SingleTool | MultiTool>(config: ToolBuilderConfig<T>): T {
   const { group, key, label, name, type, value } = config
+
   return {
     id: nanoid(8),
     key,
     label,
-    group,
+    groupId: group?.id,
+    groupRole: group?.role,
+    groupLabel: group?.label,
     name,
     type,
     value,

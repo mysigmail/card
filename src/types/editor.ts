@@ -1,5 +1,23 @@
 import type { EmailBlockSchema } from '@/components/email-components/schema/types'
 
+export type ToolGroupRole
+  = | 'layout'
+    | 'text'
+    | 'logo'
+    | 'menu'
+    | 'button'
+    | 'image'
+    | 'social'
+    | 'divider'
+    | 'custom'
+    | (string & {})
+
+export interface ToolGroupRef {
+  id: string
+  role: ToolGroupRole
+  label: string
+}
+
 export type ToolType
   = | 'align'
     | 'bgImage'
@@ -20,7 +38,9 @@ export enum ToolT {
 export interface BaseTool {
   id: string
   key: string
-  group?: string
+  groupId?: string
+  groupRole?: ToolGroupRole
+  groupLabel?: string
   name?: string
   label: string
   type: ToolType

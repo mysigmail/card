@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid'
 import { images } from '@/components/email-components/catalog/images'
 import { COLOR } from '@/components/email-components/constants'
 import { f } from '@/components/email-components/fields'
+import { createSchemaGroups, gp } from '@/components/email-components/schema/groups'
 import { defineEmailBlockSchema } from '@/components/email-components/schema/types'
 
 interface HeaderWithMenuSchemaModel {
@@ -33,14 +34,26 @@ interface HeaderWithImageBlockSchemaModel {
   Logo: SchemaGroupFields<'show' | 'attrs' | 'link' | 'align' | 'width'>
   Text: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
   ImageBlock: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
-  SubText: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
+  TextSecondary: SchemaGroupFields<'show' | 'margin' | 'value' | 'attrs'>
   Button: SchemaGroupFields<'show' | 'align' | 'attrs' | 'text'>
 }
 
+const groupBuilder = createSchemaGroups()
+const groups = {
+  layout: groupBuilder.group('layout', { id: 'Layout', label: 'Layout' }),
+  logo: groupBuilder.group('logo', { id: 'Logo', label: 'Logo' }),
+  menu: groupBuilder.group('menu', { id: 'Menu', label: 'Menu' }),
+  textMain: groupBuilder.group('text', { id: 'Text', label: 'Text' }),
+  imageMain: groupBuilder.group('image', { id: 'Image', label: 'Image' }),
+  imageBlock: groupBuilder.group('image', { id: 'ImageBlock', label: 'Image Block' }),
+  textSecondary: groupBuilder.group('text', { id: 'TextSecondary', label: 'Secondary Text' }),
+  button: groupBuilder.group('button', { id: 'Button', label: 'Button' }),
+} as const
+
 const headerRoot = {
   root: {
-    attrs: 'Layout.attrs',
-    clickGroup: 'Layout',
+    attrs: gp(groups.layout, 'attrs'),
+    clickGroup: groups.layout.id,
   },
 } as const
 
@@ -52,7 +65,7 @@ const headerWithMenuSchema = defineEmailBlockSchema<HeaderWithMenuSchemaModel>({
       children: [
         {
           type: 'logo',
-          group: 'Logo',
+          group: groups.logo.id,
           if: 'Logo.show',
           attrs: 'Logo.attrs',
           link: 'Logo.link',
@@ -61,7 +74,7 @@ const headerWithMenuSchema = defineEmailBlockSchema<HeaderWithMenuSchemaModel>({
         },
         {
           type: 'menu',
-          group: 'Menu',
+          group: groups.menu.id,
           if: 'Menu.show',
           items: 'Menu.items',
           align: 'Menu.align',
@@ -78,7 +91,7 @@ const headerWithMenuSchema = defineEmailBlockSchema<HeaderWithMenuSchemaModel>({
       children: [
         {
           type: 'text',
-          group: 'Text',
+          group: groups.textMain.id,
           value: 'Text.value',
           attrs: 'Text.attrs',
         },
@@ -95,7 +108,7 @@ const headerWithButtonSchema = defineEmailBlockSchema<HeaderWithButtonSchemaMode
       children: [
         {
           type: 'logo',
-          group: 'Logo',
+          group: groups.logo.id,
           if: 'Logo.show',
           attrs: 'Logo.attrs',
           link: 'Logo.link',
@@ -113,13 +126,13 @@ const headerWithButtonSchema = defineEmailBlockSchema<HeaderWithButtonSchemaMode
       children: [
         {
           type: 'text',
-          group: 'Text',
+          group: groups.textMain.id,
           value: 'Text.value',
           attrs: 'Text.attrs',
           children: [
             {
               type: 'button',
-              group: 'Button',
+              group: groups.button.id,
               if: 'Button.show',
               align: 'Button.align',
               attrs: 'Button.attrs',
@@ -140,7 +153,7 @@ const headerWithImageSchema = defineEmailBlockSchema<HeaderWithImageSchemaModel>
       children: [
         {
           type: 'logo',
-          group: 'Logo',
+          group: groups.logo.id,
           if: 'Logo.show',
           attrs: 'Logo.attrs',
           link: 'Logo.link',
@@ -158,7 +171,7 @@ const headerWithImageSchema = defineEmailBlockSchema<HeaderWithImageSchemaModel>
       children: [
         {
           type: 'text',
-          group: 'Image',
+          group: groups.imageMain.id,
           value: 'Image.value',
           attrs: 'Image.attrs',
         },
@@ -173,7 +186,7 @@ const headerWithImageSchema = defineEmailBlockSchema<HeaderWithImageSchemaModel>
       children: [
         {
           type: 'text',
-          group: 'Text',
+          group: groups.textMain.id,
           value: 'Text.value',
           attrs: 'Text.attrs',
         },
@@ -185,7 +198,7 @@ const headerWithImageSchema = defineEmailBlockSchema<HeaderWithImageSchemaModel>
       children: [
         {
           type: 'button',
-          group: 'Button',
+          group: groups.button.id,
           align: 'Button.align',
           attrs: 'Button.attrs',
           text: 'Button.text',
@@ -203,7 +216,7 @@ const headerWithImageBlockSchema = defineEmailBlockSchema<HeaderWithImageBlockSc
       children: [
         {
           type: 'logo',
-          group: 'Logo',
+          group: groups.logo.id,
           if: 'Logo.show',
           attrs: 'Logo.attrs',
           link: 'Logo.link',
@@ -221,7 +234,7 @@ const headerWithImageBlockSchema = defineEmailBlockSchema<HeaderWithImageBlockSc
       children: [
         {
           type: 'text',
-          group: 'Text',
+          group: groups.textMain.id,
           value: 'Text.value',
           attrs: 'Text.attrs',
         },
@@ -236,7 +249,7 @@ const headerWithImageBlockSchema = defineEmailBlockSchema<HeaderWithImageBlockSc
       children: [
         {
           type: 'text',
-          group: 'ImageBlock',
+          group: groups.imageBlock.id,
           value: 'ImageBlock.value',
           attrs: 'ImageBlock.attrs',
         },
@@ -244,16 +257,16 @@ const headerWithImageBlockSchema = defineEmailBlockSchema<HeaderWithImageBlockSc
     },
     {
       type: 'row',
-      if: 'SubText.show',
+      if: 'TextSecondary.show',
       styleBindings: {
-        margin: 'SubText.margin',
+        margin: 'TextSecondary.margin',
       },
       children: [
         {
           type: 'text',
-          group: 'SubText',
-          value: 'SubText.value',
-          attrs: 'SubText.attrs',
+          group: groups.textSecondary.id,
+          value: 'TextSecondary.value',
+          attrs: 'TextSecondary.attrs',
         },
       ],
     },
@@ -263,7 +276,7 @@ const headerWithImageBlockSchema = defineEmailBlockSchema<HeaderWithImageBlockSc
       children: [
         {
           type: 'button',
-          group: 'Button',
+          group: groups.button.id,
           align: 'Button.align',
           attrs: 'Button.attrs',
           text: 'Button.text',
@@ -306,17 +319,17 @@ const header1: ComponentBuilder = (_, label) => {
     preview: images.components.header1,
     tools: [
       f.spacing({
-        group: 'Layout',
+        group: groups.layout,
         value: {
           padding: [30, 35, 30, 35],
         },
       }),
       f.backgroundColor({
-        group: 'Layout',
+        group: groups.layout,
         value: COLOR.theme.dark,
       }),
       f.backgroundImage({
-        group: 'Layout',
+        group: groups.layout,
         value: {
           url: '/img/josh-nuttall-pIwu5XNvXpk-unsplash.png',
           position: 'center',
@@ -325,15 +338,15 @@ const header1: ComponentBuilder = (_, label) => {
         },
       }),
       f.align({
-        group: 'Logo',
+        group: groups.logo,
         value: 'left',
       }),
       f.columnWidth({
-        group: 'Logo',
+        group: groups.logo,
         value: 35,
       }),
       f.image({
-        group: 'Logo',
+        group: groups.logo,
         value: {
           src: images.logo.white,
           link: 'https://example.com',
@@ -342,41 +355,41 @@ const header1: ComponentBuilder = (_, label) => {
         },
       }),
       f.showHide({
-        group: 'Logo',
+        group: groups.logo,
       }),
       f.align({
-        group: 'Menu',
+        group: groups.menu,
         value: 'right',
       }),
       f.columnWidth({
-        group: 'Menu',
+        group: groups.menu,
         value: 65,
       }),
       f.list({
-        group: 'Menu',
+        group: groups.menu,
         value: menuItems(COLOR.theme.light),
       }),
       f.showHide({
-        group: 'Menu',
+        group: groups.menu,
       }),
       f.spacing({
-        group: 'Text',
+        group: groups.textMain,
         value: {
           margin: [50, 0, 0, 0],
           padding: [0, 0, 0, 0],
         },
       }),
       f.mainColor({
-        group: 'Text',
+        group: groups.textMain,
         value: COLOR.theme.light,
       }),
       f.content({
-        group: 'Text',
+        group: groups.textMain,
         value:
           '<p><strong><span style="font-size: 18px">Unleash Freedom</span></strong></p><p><span style="color: rgb(159, 249, 141); font-size: 48px">Discover</span><span style="font-size: 48px"> the Unmatched Thrill with Our </span><span style="color: #9FF98D; font-size: 48px">New Bicycle</span></p>',
       }),
       f.showHide({
-        group: 'Text',
+        group: groups.textMain,
       }),
     ],
   }
@@ -392,25 +405,25 @@ const header2: ComponentBuilder = (_, label) => {
     preview: images.components.header2,
     tools: [
       f.spacing({
-        group: 'Layout',
+        group: groups.layout,
         value: {
           padding: [30, 35, 30, 35],
         },
       }),
       f.backgroundColor({
-        group: 'Layout',
+        group: groups.layout,
         value: COLOR.theme.light,
       }),
       f.align({
-        group: 'Logo',
+        group: groups.logo,
         value: 'left',
       }),
       f.columnWidth({
-        group: 'Logo',
+        group: groups.logo,
         value: 35,
       }),
       f.image({
-        group: 'Logo',
+        group: groups.logo,
         value: {
           src: images.logo.black,
           link: 'https://example.com',
@@ -419,41 +432,41 @@ const header2: ComponentBuilder = (_, label) => {
         },
       }),
       f.showHide({
-        group: 'Logo',
+        group: groups.logo,
       }),
       f.align({
-        group: 'Menu',
+        group: groups.menu,
         value: 'right',
       }),
       f.columnWidth({
-        group: 'Menu',
+        group: groups.menu,
         value: 65,
       }),
       f.list({
-        group: 'Menu',
+        group: groups.menu,
         value: menuItems(COLOR.theme.dark),
       }),
       f.showHide({
-        group: 'Menu',
+        group: groups.menu,
       }),
       f.spacing({
-        group: 'Text',
+        group: groups.textMain,
         value: {
           margin: [30, 0, 0, 0],
           padding: [140, 20, 20, 20],
         },
       }),
       f.mainColor({
-        group: 'Text',
+        group: groups.textMain,
         value: COLOR.theme.light,
       }),
       f.content({
-        group: 'Text',
+        group: groups.textMain,
         value:
           '<p style="text-align: center"><span style="font-size: 18px">New Stool</span></p><p style="text-align: center"><span style="font-size: 36px"><u>Simplicity. Practicality. Naturality</u></span></p>',
       }),
       f.backgroundImage({
-        group: 'Text',
+        group: groups.textMain,
         value: {
           url: '/img/ruslan-bardash-4kTbAMRAHtQ-unsplash.png',
           position: 'top',
@@ -462,13 +475,13 @@ const header2: ComponentBuilder = (_, label) => {
         },
       }),
       f.inputNumber({
-        group: 'Text',
+        group: groups.textMain,
         key: 'borderRadius',
         label: 'Border Radius',
         value: 5,
       }),
       f.showHide({
-        group: 'Text',
+        group: groups.textMain,
       }),
     ],
   }
@@ -484,21 +497,21 @@ const header3: ComponentBuilder = (_, label) => {
     preview: images.components.header3,
     tools: [
       f.spacing({
-        group: 'Layout',
+        group: groups.layout,
         value: {
           padding: [30, 35, 30, 35],
         },
       }),
       f.backgroundColor({
-        group: 'Layout',
+        group: groups.layout,
         value: COLOR.theme.light,
       }),
       f.align({
-        group: 'Logo',
+        group: groups.logo,
         value: 'center',
       }),
       f.image({
-        group: 'Logo',
+        group: groups.logo,
         value: {
           src: images.logo.black,
           link: 'https://example.com',
@@ -507,26 +520,26 @@ const header3: ComponentBuilder = (_, label) => {
         },
       }),
       f.showHide({
-        group: 'Logo',
+        group: groups.logo,
       }),
       f.spacing({
-        group: 'Text',
+        group: groups.textMain,
         value: {
           margin: [30, 0, 0, 0],
           padding: [45, 20, 16, 20],
         },
       }),
       f.mainColor({
-        group: 'Text',
+        group: groups.textMain,
         value: COLOR.theme.light,
       }),
       f.content({
-        group: 'Text',
+        group: groups.textMain,
         value:
           '<p style="text-align: center"><span style="font-size: 36px"><strong>Don\'t Lose<br/>Yourself.</strong></span></p><p style="text-align: center"><span style="font-size: 18px">New album</span></p>',
       }),
       f.backgroundImage({
-        group: 'Text',
+        group: groups.textMain,
         value: {
           url: '/img/bosco-shots-ZoEdO0G0xmI-unsplash.png',
           position: 'top',
@@ -535,59 +548,59 @@ const header3: ComponentBuilder = (_, label) => {
         },
       }),
       f.inputNumber({
-        group: 'Text',
+        group: groups.textMain,
         key: 'borderRadius',
         label: 'Border Radius',
         value: 5,
       }),
       f.showHide({
-        group: 'Text',
+        group: groups.textMain,
       }),
       f.align({
-        group: 'Button',
+        group: groups.button,
         value: 'center',
       }),
       f.spacing({
-        group: 'Button',
+        group: groups.button,
         value: {
           margin: [40, 0, 40, 0],
           padding: [12, 24, 12, 24],
         },
       }),
       f.backgroundColor({
-        group: 'Button',
+        group: groups.button,
         value: '#3494FB',
       }),
       f.color({
-        group: 'Button',
+        group: groups.button,
         value: COLOR.theme.light,
       }),
       f.input({
-        group: 'Button',
+        group: groups.button,
         key: 'text',
         label: 'Text',
         value: 'Download',
       }),
       f.input({
-        group: 'Button',
+        group: groups.button,
         key: 'link',
         label: 'Link',
         value: 'https://example.com',
       }),
       f.inputNumber({
-        group: 'Button',
+        group: groups.button,
         key: 'borderRadius',
         label: 'Border Radius',
         value: 5,
       }),
       f.inputNumber({
-        group: 'Button',
+        group: groups.button,
         key: 'fontSize',
         label: 'Font Size',
         value: 14,
       }),
       f.showHide({
-        group: 'Button',
+        group: groups.button,
       }),
     ],
   }
@@ -603,21 +616,21 @@ const header4: ComponentBuilder = (_, label) => {
     preview: images.components.header4,
     tools: [
       f.spacing({
-        group: 'Layout',
+        group: groups.layout,
         value: {
           padding: [30, 35, 30, 35],
         },
       }),
       f.backgroundColor({
-        group: 'Layout',
+        group: groups.layout,
         value: COLOR.theme.light,
       }),
       f.align({
-        group: 'Logo',
+        group: groups.logo,
         value: 'center',
       }),
       f.image({
-        group: 'Logo',
+        group: groups.logo,
         value: {
           src: images.logo.black,
           link: 'https://example.com',
@@ -626,16 +639,16 @@ const header4: ComponentBuilder = (_, label) => {
         },
       }),
       f.showHide({
-        group: 'Logo',
+        group: groups.logo,
       }),
       f.spacing({
-        group: 'Image',
+        group: groups.imageMain,
         value: {
           margin: [20, 0, 0, 0],
         },
       }),
       f.backgroundImage({
-        group: 'Image',
+        group: groups.imageMain,
         value: {
           url: '/img/johannes-andersson-v5gGwubKzEA-unsplash.jpg',
           position: 'center',
@@ -644,84 +657,84 @@ const header4: ComponentBuilder = (_, label) => {
         },
       }),
       f.inputNumber({
-        group: 'Image',
+        group: groups.imageMain,
         key: 'height',
         label: 'Height',
         value: 296,
       }),
       f.inputNumber({
-        group: 'Image',
+        group: groups.imageMain,
         key: 'borderRadius',
         label: 'Border Radius',
         value: 5,
       }),
       f.showHide({
-        group: 'Image',
+        group: groups.imageMain,
       }),
       f.spacing({
-        group: 'Text',
+        group: groups.textMain,
         value: {
           margin: [10, 0, 0, 0],
           padding: [0, 0, 0, 0],
         },
       }),
       f.mainColor({
-        group: 'Text',
+        group: groups.textMain,
         value: COLOR.theme.dark,
       }),
       f.content({
-        group: 'Text',
+        group: groups.textMain,
         value:
           '<p style="text-align: center"><span style="font-size: 18px; color: #9CA3AF">Surfing Season \'19</span></p><p style="text-align: center"><span style="font-size: 32px"><strong>There\'s Change<br/>In The Air.<br/>Can You Feel It?</strong></span></p>',
       }),
       f.showHide({
-        group: 'Text',
+        group: groups.textMain,
       }),
       f.align({
-        group: 'Button',
+        group: groups.button,
         value: 'center',
       }),
       f.spacing({
-        group: 'Button',
+        group: groups.button,
         value: {
           margin: [20, 0, 0, 0],
           padding: [12, 24, 12, 24],
         },
       }),
       f.backgroundColor({
-        group: 'Button',
+        group: groups.button,
         value: '#4A98ED',
       }),
       f.color({
-        group: 'Button',
+        group: groups.button,
         value: COLOR.theme.light,
       }),
       f.input({
-        group: 'Button',
+        group: groups.button,
         key: 'text',
         label: 'Text',
         value: 'Take Part',
       }),
       f.input({
-        group: 'Button',
+        group: groups.button,
         key: 'link',
         label: 'Link',
         value: 'https://example.com',
       }),
       f.inputNumber({
-        group: 'Button',
+        group: groups.button,
         key: 'borderRadius',
         label: 'Border Radius',
         value: 5,
       }),
       f.inputNumber({
-        group: 'Button',
+        group: groups.button,
         key: 'fontSize',
         label: 'Font Size',
         value: 14,
       }),
       f.showHide({
-        group: 'Button',
+        group: groups.button,
       }),
     ],
   }
@@ -737,21 +750,21 @@ const header5: ComponentBuilder = (_, label) => {
     preview: images.components.header5,
     tools: [
       f.spacing({
-        group: 'Layout',
+        group: groups.layout,
         value: {
           padding: [30, 35, 30, 35],
         },
       }),
       f.backgroundColor({
-        group: 'Layout',
+        group: groups.layout,
         value: COLOR.theme.light,
       }),
       f.align({
-        group: 'Logo',
+        group: groups.logo,
         value: 'center',
       }),
       f.image({
-        group: 'Logo',
+        group: groups.logo,
         value: {
           src: images.logo.black,
           link: 'https://example.com',
@@ -760,35 +773,35 @@ const header5: ComponentBuilder = (_, label) => {
         },
       }),
       f.showHide({
-        group: 'Logo',
+        group: groups.logo,
       }),
       f.spacing({
-        group: 'Text',
+        group: groups.textMain,
         value: {
           margin: [30, 0, 0, 0],
           padding: [0, 0, 0, 0],
         },
       }),
       f.mainColor({
-        group: 'Text',
+        group: groups.textMain,
         value: '#7C86C7',
       }),
       f.content({
-        group: 'Text',
+        group: groups.textMain,
         value:
           '<p style="text-align: center"><span style="font-size: 18px"><strong>New series</strong></span></p><p style="text-align: center"><span style="font-size: 56px"><strong>The loop by loop.</strong></span></p>',
       }),
       f.showHide({
-        group: 'Text',
+        group: groups.textMain,
       }),
       f.spacing({
-        group: 'ImageBlock',
+        group: groups.imageBlock,
         value: {
           margin: [20, 0, 0, 0],
         },
       }),
       f.backgroundImage({
-        group: 'ImageBlock',
+        group: groups.imageBlock,
         value: {
           url: '/img/apple-watch-2.png',
           position: 'center',
@@ -797,84 +810,84 @@ const header5: ComponentBuilder = (_, label) => {
         },
       }),
       f.inputNumber({
-        group: 'ImageBlock',
+        group: groups.imageBlock,
         key: 'height',
         label: 'Height',
         value: 300,
       }),
       f.inputNumber({
-        group: 'ImageBlock',
+        group: groups.imageBlock,
         key: 'borderRadius',
         label: 'Border Radius',
         value: 0,
       }),
       f.showHide({
-        group: 'ImageBlock',
+        group: groups.imageBlock,
       }),
       f.spacing({
-        group: 'SubText',
+        group: groups.textSecondary,
         value: {
           margin: [20, 0, 0, 0],
           padding: [0, 0, 0, 0],
         },
       }),
       f.mainColor({
-        group: 'SubText',
+        group: groups.textSecondary,
         value: '#A9ADB3',
       }),
       f.content({
-        group: 'SubText',
+        group: groups.textSecondary,
         value:
           '<p style="text-align: center"><span style="font-size: 18px"><strong>With our latest model of watch,<br/>you\'ll get the most amazing features<br/>for your everyday workout.</strong></span></p>',
       }),
       f.showHide({
-        group: 'SubText',
+        group: groups.textSecondary,
       }),
       f.align({
-        group: 'Button',
+        group: groups.button,
         value: 'center',
       }),
       f.spacing({
-        group: 'Button',
+        group: groups.button,
         value: {
           margin: [20, 0, 0, 0],
           padding: [12, 24, 12, 24],
         },
       }),
       f.backgroundColor({
-        group: 'Button',
+        group: groups.button,
         value: '#4A98ED',
       }),
       f.color({
-        group: 'Button',
+        group: groups.button,
         value: COLOR.theme.light,
       }),
       f.input({
-        group: 'Button',
+        group: groups.button,
         key: 'text',
         label: 'Text',
         value: 'Take Yours',
       }),
       f.input({
-        group: 'Button',
+        group: groups.button,
         key: 'link',
         label: 'Link',
         value: 'https://example.com',
       }),
       f.inputNumber({
-        group: 'Button',
+        group: groups.button,
         key: 'borderRadius',
         label: 'Border Radius',
         value: 5,
       }),
       f.inputNumber({
-        group: 'Button',
+        group: groups.button,
         key: 'fontSize',
         label: 'Font Size',
         value: 14,
       }),
       f.showHide({
-        group: 'Button',
+        group: groups.button,
       }),
     ],
   }

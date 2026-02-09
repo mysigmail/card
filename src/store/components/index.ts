@@ -4,7 +4,12 @@ import { nanoid } from 'nanoid'
 import { computed, reactive, ref, shallowRef } from 'vue'
 import { header } from '@/components/email-components/catalog/header'
 import { menu } from '@/components/email-components/catalog/menu'
-import { cloneComponent, findToolById, getEditableToolsByGroup } from '@/store/components/utils'
+import {
+  cloneComponent,
+  findToolById,
+  getEditableToolsByGroup,
+  getToolGroups,
+} from '@/store/components/utils'
 import { clone } from '@/utils'
 
 const list = shallowRef<ComponentList[]>([
@@ -45,10 +50,18 @@ const editable = computed(() => {
   return installed.value.find(i => i.id === editableId.value)
 })
 
-const editableToolsByGroup = computed(() => {
+const editableToolGroups = computed(() => {
   if (!editable.value)
+    return undefined
+
+  return getToolGroups(editable.value.tools)
+})
+
+const editableToolsByGroup = computed(() => {
+  if (!editableToolGroups.value)
     return
-  return getEditableToolsByGroup(editable.value?.tools)
+
+  return getEditableToolsByGroup(editable.value!.tools)
 })
 
 const editableTools = computed(() => {
@@ -56,6 +69,16 @@ const editableTools = computed(() => {
     return undefined
 
   return editableToolsByGroup.value[editableToolsGroupName.value]
+})
+
+const editableToolsGroupLabel = computed(() => {
+  if (!editableToolsGroupName.value || !editableToolGroups.value)
+    return undefined
+
+  return (
+    editableToolGroups.value.find(i => i.id === editableToolsGroupName.value)?.label
+    || editableToolsGroupName.value
+  )
 })
 
 const editableIndex = computed(() => {
@@ -70,7 +93,7 @@ const installedToolsByGroup = computed(() => {
     return {
       id: i.id,
       name: i.label,
-      tools: getEditableToolsByGroup(i.tools),
+      groups: getToolGroups(i.tools),
     }
   })
 })
@@ -144,14 +167,14 @@ function deleteMultiToolItem(id: string, index: number) {
   }
 }
 
-function onEditTool(name: string, index: number) {
+function onEditTool(groupId: string, index: number) {
   const id = installed.value[index].id
 
   if (editableId.value !== id)
     editableId.value = id
 
-  editableToolName.value = name
-  editableToolsGroupName.value = name
+  editableToolName.value = groupId
+  editableToolsGroupName.value = groupId
 }
 
 export function useComponentsStore() {
@@ -166,6 +189,7 @@ export function useComponentsStore() {
     editableToolName,
     editableTools,
     editableToolsByGroup,
+    editableToolsGroupLabel,
     editableToolsGroupName,
     general,
     installed,

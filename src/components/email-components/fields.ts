@@ -10,12 +10,13 @@ import type {
   SpacingTool,
   TextEditorTool,
   ToggleTool,
+  ToolGroupRef,
 } from '@/types/editor'
 import { nanoid } from 'nanoid'
 import { toolBuilder } from '@/components/email-components/utils'
 
 interface FieldConfig {
-  group?: string
+  group?: ToolGroupRef
 }
 
 interface AlignConfig extends FieldConfig {
@@ -273,7 +274,6 @@ export const f = {
           value: config.link,
         }),
         toolBuilder<ImageTool>({
-          group: 'Logo',
           key: 'image',
           label: 'Image',
           type: 'image',

@@ -1,8 +1,8 @@
-import type { MultiTool, SingleTool, ToolType } from '@/types/editor'
+import type { MultiTool, SingleTool, ToolGroupRef, ToolType } from '@/types/editor'
 
 export interface ToolBuilderConfig<T extends SingleTool | MultiTool> {
   key: string
-  group?: string
+  group?: ToolGroupRef
   label: string
   name?: string
   type: ToolType

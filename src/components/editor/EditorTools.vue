@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useComponentsStore } from '@/store/components'
 
-const { editableToolsGroupName, editableTools, editableId } = useComponentsStore()
+const { editableToolsGroupName, editableToolsGroupLabel, editableTools, editableId }
+  = useComponentsStore()
 </script>
 
 <template>
@@ -10,7 +11,7 @@ const { editableToolsGroupName, editableTools, editableId } = useComponentsStore
     <EditorPanel v-if="editableToolsGroupName">
       <EditorPanelItem
         type="opened"
-        :title="editableToolsGroupName"
+        :title="editableToolsGroupLabel || editableToolsGroupName"
       >
         <EditorComponentTools
           v-if="editableTools"

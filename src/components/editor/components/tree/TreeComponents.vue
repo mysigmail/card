@@ -12,7 +12,7 @@ const { installedToolsByGroup, installed } = useComponentsStore()
       :key="i.id"
       :index="index"
       :name="i.name"
-      :tools="i.tools"
+      :groups="i.groups"
     />
     <div
       v-if="!installed.length"

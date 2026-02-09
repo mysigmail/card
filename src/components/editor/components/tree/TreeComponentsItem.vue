@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import type { Tool } from '@/types/editor'
+import type { ToolGroupBucket } from '@/store/components/utils'
+import { computed } from 'vue'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
   id: string
   name: string
   index: number
-  tools: Record<string, Tool[]>
+  groups: ToolGroupBucket[]
 }
 
 const props = defineProps<Props>()
@@ -14,12 +15,23 @@ const props = defineProps<Props>()
 const { onEditTool, editableToolsGroupName, editableId, removeComponent, duplicateComponent }
   = useComponentsStore()
 
+const layoutGroupId = computed(() => {
+  return props.groups.find(group => group.role === 'layout')?.id || props.groups[0]?.id
+})
+
 function onClick(type: 'copy' | 'remove') {
   if (type === 'remove')
     removeComponent(props.index)
 
   if (type === 'copy')
     duplicateComponent(props.index)
+}
+
+function onHeaderClick() {
+  if (!layoutGroupId.value)
+    return
+
+  onEditTool(layoutGroupId.value, props.index)
 }
 </script>
 
@@ -33,7 +45,7 @@ function onClick(type: 'copy' | 'remove') {
     <div class="body">
       <div
         class="header"
-        @click="onEditTool('Layout', index)"
+        @click="onHeaderClick"
       >
         {{ name }}
         <div class="actions">
@@ -53,15 +65,15 @@ function onClick(type: 'copy' | 'remove') {
       </div>
       <div class="tools">
         <div
-          v-for="(_, k, idx) in tools"
-          :key="idx"
+          v-for="group in groups"
+          :key="group.id"
           class="tools__item"
           :class="{
-            'is-active': k === editableToolsGroupName && id === editableId,
+            'is-active': group.id === editableToolsGroupName && id === editableId,
           }"
-          @click="onEditTool(k, index)"
+          @click="onEditTool(group.id, index)"
         >
-          {{ k }}
+          {{ group.label }}
         </div>
       </div>
     </div>
