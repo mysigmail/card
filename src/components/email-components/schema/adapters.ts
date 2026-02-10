@@ -8,6 +8,7 @@ import type {
   InputTool,
   MultiTool,
   PaddingTool,
+  SelectTool,
   SpacingTool,
   TextEditorTool,
   ToggleTool,
@@ -32,6 +33,7 @@ interface GroupValues {
   show?: ToggleTool['value']
   image?: ImageTool['value']
   link?: InputTool['value']
+  verticalAlign?: SelectTool['value']
   list?: MultiTool['value']
   grid?: GridTool['value']
   gap?: InputNumberTool['value']
@@ -84,6 +86,15 @@ function toGap(value?: InputNumberTool['value']) {
   return `${Math.max(0, normalized)}px`
 }
 
+function normalizeVerticalAlign(value?: SelectTool['value']) {
+  const normalized = value?.trim().toLowerCase()
+
+  if (normalized === 'top' || normalized === 'middle' || normalized === 'bottom')
+    return normalized
+
+  return undefined
+}
+
 function readBackgroundImage(tool?: BackgroundImageTool['value']) {
   if (!tool)
     return undefined
@@ -98,9 +109,12 @@ function readBackgroundImage(tool?: BackgroundImageTool['value']) {
   }
 }
 
-function readImageAttrs(image?: ImageTool['value']) {
+function readImageAttrs(image?: ImageTool['value'], borderRadius?: number) {
   if (!image)
     return undefined
+
+  const normalizedBorderRadius
+    = borderRadius !== undefined ? Math.max(0, Number(borderRadius)) : undefined
 
   return {
     src: image.src,
@@ -108,6 +122,8 @@ function readImageAttrs(image?: ImageTool['value']) {
     style: {
       width: image.width ? `${image.width}px` : undefined,
       height: image.height ? `${image.height}px` : undefined,
+      borderRadius:
+        normalizedBorderRadius !== undefined ? `${normalizedBorderRadius}px` : undefined,
     },
   } as HTMLImageElement
 }
@@ -209,7 +225,12 @@ function readGridItems(items?: GridTool['value']) {
       const contents = item.tools
         .map((tool) => {
           if (tool.type === 'image' && tool.key === 'image') {
-            const attrs = readImageAttrs(tool.value)
+            const borderRadius = findToolByKey<InputNumberTool>(
+              item.tools,
+              'borderRadius',
+              'inputNumber',
+            )?.value
+            const attrs = readImageAttrs(tool.value, borderRadius)
 
             if (!attrs)
               return undefined
@@ -225,6 +246,7 @@ function readGridItems(items?: GridTool['value']) {
             return {
               type: 'text',
               attrs: readTextAttrs(item.tools, values),
+              link: values.link,
               value: tool.value,
             } as const
           }
@@ -274,6 +296,7 @@ function readGridItems(items?: GridTool['value']) {
         align: values.align,
         contents,
         show: values.show,
+        verticalAlign: normalizeVerticalAlign(values.verticalAlign),
       } satisfies GridItem
     })
     .filter(Boolean) as GridItem[]
@@ -285,6 +308,7 @@ function readGroupValues(tools: Tool[]): GroupValues {
     show: findToolByKey<ToggleTool>(tools, 'showHide', 'toggle')?.value,
     image: findToolByKey<ImageTool>(tools, 'image', 'image')?.value,
     link: findToolByKey<InputTool>(tools, 'link', 'input')?.value,
+    verticalAlign: findToolByKey<SelectTool>(tools, 'verticalAlign', 'select')?.value,
     list: findToolByKey<MultiTool>(tools, 'list', 'multi')?.value,
     grid: findToolByKey<GridTool>(tools, 'grid', 'grid')?.value,
     gap: findToolByKey<InputNumberTool>(tools, 'gap', 'inputNumber')?.value,
@@ -358,10 +382,11 @@ function textGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
 
 function imageGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel {
   const values = readGroupValues(tools)
+  const borderRadius = findToolByKey<InputNumberTool>(tools, 'borderRadius', 'inputNumber')?.value
 
   return {
     ...createBaseModel(values),
-    attrs: readImageAttrs(values.image),
+    attrs: readImageAttrs(values.image, borderRadius),
   }
 }
 

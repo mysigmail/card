@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid'
 export function toolBuilder<T extends SingleTool | MultiTool | GridTool>(
   config: ToolBuilderConfig<T>,
 ): T {
-  const { group, key, label, name, type, value } = config
+  const { group, key, label, name, type, value, options } = config
 
   return {
     id: nanoid(8),
@@ -16,6 +16,7 @@ export function toolBuilder<T extends SingleTool | MultiTool | GridTool>(
     groupLabel: group?.label,
     name,
     type,
+    ...(options ? { options } : {}),
     value,
   } as T
 }

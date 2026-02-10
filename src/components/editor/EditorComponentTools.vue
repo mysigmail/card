@@ -20,6 +20,14 @@ provide('parentMultiToolId', props.parentMultiToolId)
       v-for="i in tools"
       :key="i.id"
     >
+      <SelectTool
+        v-if="i.type === 'select'"
+        :id="i.id"
+        :key="i.id"
+        :title="i.label"
+        :value="i.value as string"
+        :options="i.options"
+      />
       <InputTool
         v-if="i.type === 'input' || i.type === 'inputNumber'"
         :id="i.id"

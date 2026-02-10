@@ -6,5 +6,6 @@ export interface ToolBuilderConfig<T extends SingleTool | MultiTool | GridTool> 
   label: string
   name?: string
   type: ToolType
+  options?: T extends { options: infer TOptions } ? TOptions : never
   value: T['value']
 }

@@ -26,6 +26,7 @@ export type ToolType
     | 'grid'
     | 'image'
     | 'input'
+    | 'select'
     | 'inputNumber'
     | 'multi'
     | 'padding'
@@ -93,6 +94,15 @@ export interface InputTool extends BaseTool {
   value: string
 }
 
+export interface SelectTool extends BaseTool {
+  type: 'select'
+  value: string
+  options: Array<{
+    label: string
+    value: string
+  }>
+}
+
 export interface InputNumberTool extends BaseTool {
   type: 'inputNumber'
   value: number
@@ -126,6 +136,7 @@ export type SingleTool
     | ImageTool
     | InputNumberTool
     | InputTool
+    | SelectTool
     | PaddingTool
     | SpacingTool
     | TextEditorTool
