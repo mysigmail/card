@@ -118,7 +118,7 @@ function onPreviewClick(event: MouseEvent) {
           :key="`${nodeIndex}_${childIndex}`"
         >
           <EImg
-            v-if="child.type === 'logo' && isVisible(child.if)"
+            v-if="child.type === 'image' && isVisible(child.if)"
             :id="id"
             :group="child.group"
             :align="resolveAlign(child.align)"

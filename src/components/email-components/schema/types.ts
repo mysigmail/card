@@ -43,9 +43,9 @@ interface BaseRowChildSchemaNode<TModel extends SchemaModelShape> extends BaseSc
   width?: SchemaPath<TModel>
 }
 
-export interface LogoSchemaNode<TModel extends SchemaModelShape>
+export interface ImageSchemaNode<TModel extends SchemaModelShape>
   extends BaseRowChildSchemaNode<TModel> {
-  type: 'logo'
+  type: 'image'
   attrs?: SchemaPath<TModel>
   link?: SchemaPath<TModel>
 }
@@ -88,7 +88,7 @@ export interface ButtonSchemaNode<TModel extends SchemaModelShape>
 export type TextChildSchemaNode<TModel extends SchemaModelShape> = ButtonSchemaNode<TModel>
 
 export type RowChildSchemaNode<TModel extends SchemaModelShape>
-  = | LogoSchemaNode<TModel>
+  = | ImageSchemaNode<TModel>
     | MenuSchemaNode<TModel>
     | SocialSchemaNode<TModel>
     | TextSchemaNode<TModel>
