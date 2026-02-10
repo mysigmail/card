@@ -69,7 +69,7 @@ export const content6: ComponentBuilder = (_, label) => {
         group: groups.rowOneGrid,
         key: 'gap',
         label: 'Gap',
-        value: 18,
+        value: 6,
       }),
       f.grid({
         group: groups.rowOneGrid,
@@ -93,7 +93,7 @@ export const content6: ComponentBuilder = (_, label) => {
         group: groups.rowTwoGrid,
         key: 'gap',
         label: 'Gap',
-        value: 18,
+        value: 6,
       }),
       f.grid({
         group: groups.rowTwoGrid,
