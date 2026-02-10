@@ -8,6 +8,7 @@ import type {
   InputTool,
   MultiTool,
   PaddingTool,
+  SelectTool,
   SpacingTool,
   TextEditorTool,
   ToggleTool,
@@ -76,6 +77,10 @@ interface TextConfig extends FieldConfig {
 
 interface ToggleConfig extends FieldConfig {
   value?: boolean
+}
+
+interface VerticalAlignConfig extends FieldConfig {
+  value: 'top' | 'middle' | 'bottom'
 }
 
 interface MenuItemConfig {
@@ -330,6 +335,29 @@ export const f = {
       key: 'spacings',
       label: 'Spacings',
       type: 'spacing',
+      value: config.value,
+    })
+  },
+  verticalAlign(config: VerticalAlignConfig) {
+    return toolBuilder<SelectTool>({
+      group: config.group,
+      key: 'verticalAlign',
+      label: 'Vertical Align',
+      type: 'select',
+      options: [
+        {
+          label: 'Top',
+          value: 'top',
+        },
+        {
+          label: 'Middle',
+          value: 'middle',
+        },
+        {
+          label: 'Bottom',
+          value: 'bottom',
+        },
+      ],
       value: config.value,
     })
   },

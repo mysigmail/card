@@ -26,6 +26,7 @@ export interface GridImageContent {
 export interface GridTextContent {
   type: 'text'
   attrs?: Record<string, unknown>
+  link?: string
   value?: string
 }
 
@@ -56,4 +57,5 @@ export interface GridItem {
   align?: AlignTool['value']
   contents: GridItemContent[]
   show?: boolean
+  verticalAlign?: 'top' | 'middle' | 'bottom'
 }

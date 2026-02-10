@@ -2,6 +2,7 @@ import type { Component, GeneralTool, GridTool, MultiTool, Tool } from '@/types/
 import type { ComponentList } from '@/types/email-components/components'
 import { nanoid } from 'nanoid'
 import { computed, reactive, ref, shallowRef } from 'vue'
+import { content } from '@/components/email-components/catalog/content'
 import { header } from '@/components/email-components/catalog/header'
 import { menu } from '@/components/email-components/catalog/menu'
 import {
@@ -15,7 +16,7 @@ import { clone } from '@/utils'
 const list = shallowRef<ComponentList[]>([
   { name: 'Menu', components: menu },
   { name: 'Header', components: header },
-  { name: 'Content', components: [] },
+  { name: 'Content', components: content },
   { name: 'Feature', components: [] },
   { name: 'Call to Action', components: [] },
   { name: 'E-Commerce', components: [] },

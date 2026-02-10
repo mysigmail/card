@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
 import type { AlignTool } from '@/types/editor'
 import type { GridItem, GridItemContent } from '@/types/email-components/components'
 import { computed } from 'vue'
@@ -69,10 +70,11 @@ const halfGap = computed(() => {
   return `calc(${gridGap.value} / 2)`
 })
 
-function getColumnStyle() {
+function getColumnStyle(item: GridItem) {
   return {
     width: getColumnWidth(),
-  }
+    verticalAlign: item.verticalAlign || 'top',
+  } satisfies CSSProperties
 }
 
 function getContentStyle(index: number) {
@@ -87,7 +89,8 @@ function getContentStyle(index: number) {
     '--e-grid-gap-overlay-width': isLast ? '0px' : normalizedGap,
     'paddingLeft': isFirst ? undefined : halfGap.value,
     'paddingRight': isLast ? undefined : halfGap.value,
-  }
+  } satisfies CSSProperties
+  & Record<'--e-grid-gap-overlay-offset' | '--e-grid-gap-overlay-width', string>
 }
 </script>
 
@@ -104,7 +107,7 @@ function getContentStyle(index: number) {
       <MColumn
         v-for="(item, index) in visibleItems"
         :key="index"
-        :style="getColumnStyle()"
+        :style="getColumnStyle(item)"
         :align="item.align || align"
       >
         <div
@@ -125,8 +128,18 @@ function getContentStyle(index: number) {
               <MImg v-bind="content.attrs" />
             </MLink>
 
+            <MLink
+              v-if="content.type === 'text' && content.link"
+              :href="content.link"
+            >
+              <div
+                v-bind="content.attrs"
+                v-html="content.value"
+              />
+            </MLink>
+
             <div
-              v-if="content.type === 'text'"
+              v-if="content.type === 'text' && !content.link"
               v-bind="content.attrs"
               v-html="content.value"
             />

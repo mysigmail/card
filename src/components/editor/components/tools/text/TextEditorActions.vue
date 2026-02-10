@@ -1,17 +1,22 @@
 <script setup lang="ts">
-import { nextTick, onMounted } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import StrikeSvg from '~icons/svg/strikethrough'
 import { useEditor } from '@/components/editor/components/tools/text/composables'
 
 const { align, bold, editor, fontSize, italic, link, strike, textColor, underline } = useEditor()
 
+const colorPickerWrapper = ref<HTMLElement>()
+
+function preventMouseDown(e: Event) {
+  e.preventDefault()
+}
+
 onMounted(() => {
-  nextTick(() => {
-    const el = document.getElementById('text-color-picker')
-    el?.addEventListener('mousedown', (e) => {
-      e.preventDefault()
-    })
-  })
+  colorPickerWrapper.value?.addEventListener('mousedown', preventMouseDown)
+})
+
+onBeforeUnmount(() => {
+  colorPickerWrapper.value?.removeEventListener('mousedown', preventMouseDown)
 })
 </script>
 
@@ -84,10 +89,9 @@ onMounted(() => {
         </ElButtonGroup>
       </div>
       <div class="text-editor-actions__row">
-        <ElColorPicker
-          id="text-color-picker"
-          v-model="textColor"
-        />
+        <div ref="colorPickerWrapper">
+          <ElColorPicker v-model="textColor" />
+        </div>
         <ElInput
           v-model="fontSize"
           type="number"
