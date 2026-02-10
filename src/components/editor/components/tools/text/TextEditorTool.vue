@@ -10,7 +10,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { editor, init } = useEditor()
+const { editor, init } = useEditor({ provide: true })
 
 init(props.id, props.value)
 </script>
