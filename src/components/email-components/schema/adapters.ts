@@ -117,7 +117,7 @@ function readImageAttrs(image?: ImageTool['value'], borderRadius?: number) {
     = borderRadius !== undefined ? Math.max(0, Number(borderRadius)) : undefined
 
   return {
-    src: image.src,
+    src: normalizePath(image.src),
     alt: image.alt,
     style: {
       width: image.width ? `${image.width}px` : undefined,
@@ -169,7 +169,10 @@ function readSocialItems(items?: MultiTool['value']) {
         return undefined
 
       return {
-        image,
+        image: {
+          ...image,
+          src: normalizePath(image.src) as string,
+        },
         link,
       } satisfies Social
     })
