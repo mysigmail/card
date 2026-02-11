@@ -1,16 +1,28 @@
 import type { Component, GeneralTool, GridTool, MultiTool, Tool } from '@/types/editor'
 import type { ComponentList } from '@/types/email-components/components'
+import type {
+  TemplateExportV1,
+  TemplateImportMode,
+  TemplateValidationIssue,
+} from '@/types/template'
 import { nanoid } from 'nanoid'
-import { computed, reactive, ref, shallowRef } from 'vue'
+import { computed, reactive, ref, shallowRef, watch } from 'vue'
 import { content } from '@/components/email-components/catalog/content'
 import { header } from '@/components/email-components/catalog/header'
 import { menu } from '@/components/email-components/catalog/menu'
+import {
+  createRuntimeComponents,
+  createTemplateExportPayload,
+  parseTemplateExportJson,
+  parseTemplateExportPayload,
+} from '@/store/components/template-io'
 import {
   cloneComponent,
   findToolById,
   getEditableToolsByGroup,
   getToolGroups,
 } from '@/store/components/utils'
+import { TEMPLATE_LOCAL_STORAGE_KEY } from '@/types/template'
 import { clone } from '@/utils'
 
 const list = shallowRef<ComponentList[]>([
@@ -29,6 +41,10 @@ const editableId = ref<string>()
 const editableToolsGroupName = ref<string>()
 const editableToolName = ref<string>()
 const isDragging = ref(false)
+const templateImportIssues = ref<TemplateValidationIssue[]>([])
+
+let templatePersistenceInitialized = false
+let ignoreTemplatePersist = false
 
 const general = reactive<GeneralTool>({
   padding: [24, 0, 24, 0],
@@ -99,6 +115,177 @@ const installedToolsByGroup = computed(() => {
   })
 })
 
+function resetSelection() {
+  editableId.value = undefined
+  editableToolName.value = undefined
+  editableToolsGroupName.value = undefined
+}
+
+function applyImportedTemplate(
+  payload: TemplateExportV1,
+  mode: TemplateImportMode,
+  options?: {
+    applyGeneralInAppend?: boolean
+  },
+) {
+  const components = createRuntimeComponents(payload.canvas.components)
+
+  if (mode === 'replace') {
+    installed.value = components
+  }
+  else {
+    installed.value.push(...components)
+  }
+
+  if (mode === 'replace' || options?.applyGeneralInAppend) {
+    Object.assign(general, clone(payload.editor.general))
+  }
+
+  resetSelection()
+}
+
+function exportTemplate(title?: string) {
+  return createTemplateExportPayload({
+    general,
+    installed: installed.value,
+    title,
+  })
+}
+
+function exportTemplateJson(title?: string) {
+  return JSON.stringify(exportTemplate(title), null, 2)
+}
+
+function persistTemplateToLocalStorage() {
+  if (typeof window === 'undefined' || ignoreTemplatePersist)
+    return
+
+  try {
+    window.localStorage.setItem(TEMPLATE_LOCAL_STORAGE_KEY, exportTemplateJson())
+  }
+  catch {
+    // Ignore storage write errors (private mode / quota exceeded)
+  }
+}
+
+function importTemplate(
+  payload: unknown,
+  mode: TemplateImportMode = 'replace',
+  options?: {
+    applyGeneralInAppend?: boolean
+  },
+) {
+  const result = parseTemplateExportPayload(payload)
+  templateImportIssues.value = result.issues
+
+  if (!result.payload) {
+    return {
+      ok: false as const,
+      issues: result.issues,
+    }
+  }
+
+  ignoreTemplatePersist = true
+  applyImportedTemplate(result.payload, mode, options)
+  ignoreTemplatePersist = false
+
+  persistTemplateToLocalStorage()
+
+  return {
+    ok: true as const,
+    issues: [] as TemplateValidationIssue[],
+  }
+}
+
+function importTemplateFromJson(
+  raw: string,
+  mode: TemplateImportMode = 'replace',
+  options?: {
+    applyGeneralInAppend?: boolean
+  },
+) {
+  const result = parseTemplateExportJson(raw)
+  templateImportIssues.value = result.issues
+
+  if (!result.payload) {
+    return {
+      ok: false as const,
+      issues: result.issues,
+    }
+  }
+
+  ignoreTemplatePersist = true
+  applyImportedTemplate(result.payload, mode, options)
+  ignoreTemplatePersist = false
+
+  persistTemplateToLocalStorage()
+
+  return {
+    ok: true as const,
+    issues: [] as TemplateValidationIssue[],
+  }
+}
+
+function hydrateTemplateFromLocalStorage() {
+  if (typeof window === 'undefined') {
+    return {
+      ok: false as const,
+      issues: [] as TemplateValidationIssue[],
+    }
+  }
+
+  const raw = window.localStorage.getItem(TEMPLATE_LOCAL_STORAGE_KEY)
+
+  if (!raw) {
+    return {
+      ok: true as const,
+      issues: [] as TemplateValidationIssue[],
+    }
+  }
+
+  const result = parseTemplateExportJson(raw)
+  templateImportIssues.value = result.issues
+
+  if (!result.payload) {
+    return {
+      ok: false as const,
+      issues: result.issues,
+    }
+  }
+
+  ignoreTemplatePersist = true
+  applyImportedTemplate(result.payload, 'replace')
+  ignoreTemplatePersist = false
+
+  return {
+    ok: true as const,
+    issues: [] as TemplateValidationIssue[],
+  }
+}
+
+function initTemplatePersistence() {
+  if (templatePersistenceInitialized || typeof window === 'undefined')
+    return
+
+  templatePersistenceInitialized = true
+
+  watch(
+    installed,
+    () => {
+      persistTemplateToLocalStorage()
+    },
+    { deep: true },
+  )
+
+  watch(
+    general,
+    () => {
+      persistTemplateToLocalStorage()
+    },
+    { deep: true },
+  )
+}
+
 // Methods
 function addComponent(component: Component, index?: number) {
   const cloned = cloneComponent(component)
@@ -126,6 +313,12 @@ function moveComponent(oldIndex: number, newIndex: number) {
 
 function removeComponent(index: number) {
   installed.value.splice(index, 1)
+}
+
+function clearCanvas() {
+  installed.value = []
+  templateImportIssues.value = []
+  resetSelection()
 }
 
 function updateToolById<T extends Tool>(id: string, key: 'value' | 'label', value: T['value']) {
@@ -186,6 +379,8 @@ function onEditTool(groupId: string, index: number) {
 }
 
 export function useComponentsStore() {
+  initTemplatePersistence()
+
   return {
     addComponent,
     addNewToolToMultiTool,
@@ -206,6 +401,15 @@ export function useComponentsStore() {
     list,
     moveComponent,
     onEditTool,
+    exportTemplate,
+    exportTemplateJson,
+    importTemplate,
+    importTemplateFromJson,
+    applyImportedTemplate,
+    hydrateTemplateFromLocalStorage,
+    persistTemplateToLocalStorage,
+    templateImportIssues,
+    clearCanvas,
     removeComponent,
     updateToolById,
   }

@@ -72,8 +72,8 @@ const fontOptions = [
         <ElRadioButton label="top">
           Top
         </ElRadioButton>
-        <ElRadioButton label="button">
-          Button
+        <ElRadioButton label="bottom">
+          Bottom
         </ElRadioButton>
         <ElRadioButton label="center">
           Center
