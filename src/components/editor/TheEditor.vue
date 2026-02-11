@@ -6,9 +6,12 @@ import { renderToShadowDom } from '@/utils'
 
 const previewRef = ref()
 
-const { general, editableId, editableToolsGroupName } = useComponentsStore()
+const { general, editableId, editableToolsGroupName, hydrateTemplateFromLocalStorage }
+  = useComponentsStore()
 
 onMounted(() => {
+  hydrateTemplateFromLocalStorage()
+
   const shadow = renderToShadowDom(previewRef.value!, Editor)
 
   shadow.addEventListener('click', (e) => {
