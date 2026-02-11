@@ -5,16 +5,11 @@ useTelemetry()
 </script>
 
 <template>
-  <div id="app">
+  <div
+    id="app"
+    class="grid h-screen [grid-template-rows:var(--header-height)_1fr]"
+  >
     <TheHeader />
     <TheEditor />
   </div>
 </template>
-
-<style lang="scss" scoped>
-#app {
-  display: grid;
-  grid-template-rows: var(--header-height) 1fr;
-  height: 100vh;
-}
-</style>

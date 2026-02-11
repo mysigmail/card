@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { PaddingTool } from '@/types/editor'
 import { ref, watch } from 'vue'
+import { Input } from '@/components/ui/input'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
@@ -44,7 +45,7 @@ watch(
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>
-    <div class="padding-tool__inputs">
+    <div class="flex gap-4">
       <div
         v-for="(i, index) in localValue"
         :key="index"
@@ -59,7 +60,7 @@ watch(
           </EditorToolLabel>
         </div>
         <div class="body">
-          <ElInput
+          <Input
             v-model="localValue[index]"
             type="number"
           />
@@ -68,12 +69,3 @@ watch(
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.padding-tool {
-  &__inputs {
-    display: flex;
-    gap: var(--spacing-sm);
-  }
-}
-</style>

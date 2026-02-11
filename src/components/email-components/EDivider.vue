@@ -25,4 +25,4 @@ const { editableId, editableToolName } = useComponentsStore()
   </MRow>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

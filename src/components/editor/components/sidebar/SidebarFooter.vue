@@ -5,11 +5,12 @@ const year = new Date().getFullYear()
 </script>
 
 <template>
-  <div class="footer">
-    <div class="footer__item">
-      <div class="cta">
+  <div class="p-4 text-xs text-muted-foreground">
+    <div class="leading-[18px]">
+      <div class="mb-2 rounded-md border border-input p-2">
         If you like this project,<br>please give it a
         <svg
+          class="relative top-[3px] fill-[#e5c764]"
           xmlns="http://www.w3.org/2000/svg"
           width="16"
           height="16"
@@ -21,48 +22,24 @@ const year = new Date().getFullYear()
         </svg>
         on
         <a
+          class="text-muted-foreground"
           href="https://github.com/mysigmail/card"
           target="_blank"
           rel="noopener noreferrer"
         >GitHub</a>!
       </div>
     </div>
-    <div class="footer__item">
+    <div class="leading-[18px]">
       v{{ version }}&nbsp;•&nbsp;
       <a
+        class="text-muted-foreground"
         href="https://github.com/mysigmail/card/releases"
         target="_blank"
         rel="noopener noreferrer"
       >Changelog</a>
     </div>
-    <div class="footer__item">
+    <div class="leading-[18px]">
       ©{{ year }}&nbsp;•&nbsp;Anton Reshetov
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.footer {
-  padding: var(--spacing-sm);
-  color: var(--color-contrast-medium);
-  font-size: var(--text-sm);
-  &__item {
-    line-height: 18px;
-  }
-  a {
-    color: var(--color-contrast-medium);
-  }
-}
-
-.cta {
-  border: 1px solid #aaa;
-  padding: var(--spacing-xs);
-  margin-bottom: var(--spacing-xs);
-  border-radius: 6px;
-  svg {
-    fill: #e5c764;
-    position: relative;
-    top: 3px;
-  }
-}
-</style>

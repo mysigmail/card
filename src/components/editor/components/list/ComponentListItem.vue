@@ -60,41 +60,23 @@ onMounted(() => {
       :key="i.id"
       :data-id="i.id"
       :data-name="i.label"
-      class="item"
+      class="item mb-4 cursor-grab active:cursor-grabbing"
     >
-      <div class="name">
+      <div class="mb-2">
         {{ i.label }}
       </div>
-      <div class="preview">
-        <img :src="i.preview">
+      <div class="relative">
+        <img
+          :src="i.preview"
+          class="w-full rounded-[3px] shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
+        >
       </div>
     </div>
     <span
       v-if="components.length === 0"
-      class="item"
-    > Not implemented yet </span>
+      class="item mb-4 cursor-grab active:cursor-grabbing"
+    >
+      Not implemented yet
+    </span>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.component-list-items {
-  .item {
-    margin-bottom: var(--spacing-sm);
-    cursor: grab;
-    &:active {
-      cursor: grabbing;
-    }
-  }
-  .name {
-    margin-bottom: var(--spacing-xs);
-  }
-  .preview {
-    position: relative;
-    img {
-      width: 100%;
-      border-radius: 3px;
-      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-    }
-  }
-}
-</style>

@@ -4,10 +4,6 @@
   "version": "0.8.0",
   "private": true,
   "author": "Anton Reshetov",
-  "engines": {
-    "pnpm": ">=8.0.0",
-    "node": ">=20.18.3"
-  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit --skipLibCheck && vite build",
@@ -19,7 +15,6 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "@iconscout/unicons": "^4.0.8",
     "@mysigmail/menu-aim": "^1.0.5",
     "@mysigmail/vue-email-components": "^0.2.2",
     "@tiptap/extension-bold": "^2.1.13",
@@ -34,29 +29,39 @@
     "@tiptap/extension-text-style": "^2.1.13",
     "@tiptap/extension-underline": "^2.1.13",
     "@tiptap/vue-3": "^2.1.13",
-    "element-plus": "^2.4.1",
+    "@vueuse/core": "^14.2.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-vue-next": "^0.563.0",
     "nanoid": "^5.0.2",
+    "reka-ui": "^2.8.0",
     "sortablejs": "^1.15.0",
-    "vue": "^3.3.7"
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss-animate": "^1.0.7",
+    "vanilla-colorful": "^0.7.2",
+    "vue": "^3.5.28"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.3.0",
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
+    "@iconify-json/uil": "^1.2.3",
+    "@tailwindcss/vite": "^4.1.0",
     "@types/sortablejs": "^1.15.4",
-    "@vitejs/plugin-vue": "^4.4.0",
+    "@vitejs/plugin-vue": "^6.0.4",
     "bumpp": "^9.2.0",
     "eslint": "^10.0.0",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
-    "sass": "^1.69.5",
     "simple-git-hooks": "^2.9.0",
-    "typescript": "^5.2.2",
+    "tailwindcss": "^4.1.0",
+    "tw-animate-css": "^1.4.0",
+    "typescript": "^5.9.3",
     "unplugin-auto-import": "^0.16.7",
     "unplugin-icons": "^0.17.1",
     "unplugin-vue-components": "^0.25.2",
-    "vite": "^4.5.0",
-    "vue-tsc": "^1.8.22"
+    "vite": "^7.3.1",
+    "vue-tsc": "^3.2.4"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged",
@@ -67,8 +72,5 @@
       "prettier --write",
       "eslint --fix"
     ]
-  },
-  "volta": {
-    "node": "20.18.3"
   }
 }

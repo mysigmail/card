@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import type { SelectTool } from '@/types/editor'
 import { ref, watch } from 'vue'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
@@ -32,20 +39,21 @@ watch(localValue, () => {
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>
-    <div class="body">
-      <ElSelect
-        v-model="localValue"
-        style="width: 100%"
-      >
-        <ElOption
-          v-for="option in options"
-          :key="option.value"
-          :label="option.label"
-          :value="option.value"
-        />
-      </ElSelect>
+    <div class="flex">
+      <Select v-model="localValue">
+        <SelectTrigger size="sm">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem
+            v-for="option in options"
+            :key="option.value"
+            :value="option.value"
+          >
+            {{ option.label }}
+          </SelectItem>
+        </SelectContent>
+      </Select>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped></style>

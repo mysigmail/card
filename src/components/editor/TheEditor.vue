@@ -21,11 +21,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="editor">
+  <div
+    class="grid h-full min-h-0 [grid-template-columns:var(--editor-component-list-width)_1fr_var(--editor-tools-width)]"
+  >
     <TheSidebar />
     <div
       ref="previewRef"
-      class="preview"
       :style="{
         backgroundColor: general.background.color,
       }"
@@ -33,10 +34,3 @@ onMounted(() => {
     <EditorTools />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.editor {
-  display: grid;
-  grid-template-columns: var(--editor-component-list-width) 1fr var(--editor-tools-width);
-}
-</style>

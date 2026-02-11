@@ -34,28 +34,32 @@ function onMouseLeave() {
 
 <template>
   <div
-    class="component-list"
+    class="h-full select-none bg-background"
     @mouseleave="onMouseLeave"
   >
-    <div class="body">
+    <div class="relative z-[1030] flex h-full flex-col justify-between bg-background">
       <div
         ref="menuRef"
-        class="items"
+        class="relative z-[1010]"
       >
         <div
           v-for="(i, index) in list"
           :key="index"
-          class="item"
+          class="item relative cursor-default p-4 text-base"
           :data-index="index"
-          :class="{ 'is-active': hovered === index }"
+          :class="{ 'bg-muted': hovered === index }"
         >
           {{ i.name }}
         </div>
       </div>
     </div>
     <div
-      class="panel"
-      :class="{ 'is-open': showList }"
+      class="fixed top-[var(--header-height)] bottom-0 z-[1000] w-[300px] overflow-y-auto border-r border-border bg-muted p-5 shadow-[20px_0_20px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out"
+      :class="
+        showList
+          ? 'left-[var(--editor-component-list-width)] opacity-100'
+          : '-left-[100px] opacity-0 pointer-events-none'
+      "
     >
       <template
         v-for="(c, idx) in list"
@@ -69,54 +73,3 @@ function onMouseLeave() {
     </div>
   </div>
 </template>
-
-<style lang="scss">
-.component-list {
-  background-color: #fff;
-  height: 100%;
-  user-select: none;
-  .body {
-    position: relative;
-    display: flex;
-    flex-flow: column;
-    justify-content: space-between;
-    height: 100%;
-    background-color: #fff;
-    z-index: 1030;
-  }
-  .items {
-    position: relative;
-    z-index: 1010;
-  }
-  .item {
-    $r: &;
-    padding: var(--spacing-sm);
-    position: relative;
-    cursor: default;
-    font-size: var(--text-md2);
-    &.is-active {
-      background-color: #f5f5f5;
-    }
-  }
-  .panel {
-    background-color: #f5f5f5;
-    padding: 20px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    z-index: 1000;
-    border-right: 1px solid var(--color-border);
-    box-shadow: 20px 0px 20px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    top: var(--header-height);
-    left: -100px;
-    transition: all 0.3s ease;
-    opacity: 0;
-    overflow-y: auto;
-    &.is-open {
-      opacity: 1;
-      left: var(--editor-component-list-width);
-    }
-  }
-}
-</style>

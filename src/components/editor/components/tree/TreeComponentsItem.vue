@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ToolGroupBucket } from '@/store/components/utils'
+import { Copy, Trash2 } from 'lucide-vue-next'
 import { computed } from 'vue'
 import { useComponentsStore } from '@/store/components'
 
@@ -37,29 +38,31 @@ function onHeaderClick() {
 
 <template>
   <div
-    class="tree-components-item"
-    :class="{
-      'is-active': id === editableId,
-    }"
+    class="relative select-none pt-1.5"
+    :class="
+      id === editableId
+        ? `before:absolute before:inset-y-0 before:left-0 before:w-0.5 before:bg-primary before:content-['']`
+        : ''
+    "
   >
-    <div class="body">
+    <div>
       <div
-        class="header"
+        class="flex cursor-pointer items-center justify-between px-4 py-2"
         @click="onHeaderClick"
       >
         {{ name }}
-        <div class="actions">
+        <div class="flex">
           <div
-            class="actions__item"
+            class="cursor-pointer p-0.5 text-muted-foreground hover:text-foreground"
             @click.stop="onClick('copy')"
           >
-            <UniconsCopy />
+            <Copy :size="16" />
           </div>
           <div
-            class="actions__item"
+            class="cursor-pointer p-0.5 text-muted-foreground hover:text-foreground"
             @click.stop="onClick('remove')"
           >
-            <UniconsTrashAlt />
+            <Trash2 :size="16" />
           </div>
         </div>
       </div>
@@ -67,9 +70,9 @@ function onHeaderClick() {
         <div
           v-for="group in groups"
           :key="group.id"
-          class="tools__item"
+          class="cursor-pointer px-6 py-1 text-xs text-muted-foreground first:pt-0 hover:text-foreground"
           :class="{
-            'is-active': group.id === editableToolsGroupName && id === editableId,
+            'text-foreground!': group.id === editableToolsGroupName && id === editableId,
           }"
           @click="onEditTool(group.id, index)"
         >
@@ -79,62 +82,3 @@ function onHeaderClick() {
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.tree-components-item {
-  padding-top: 6px;
-  user-select: none;
-  &.is-active {
-    position: relative;
-    &::before {
-      position: absolute;
-      content: '';
-      height: 100%;
-      width: 2px;
-      background-color: var(--color-primary);
-    }
-  }
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    cursor: pointer;
-    .actions {
-      &__item {
-        padding: 2px;
-        cursor: pointer;
-        svg {
-          fill: var(--color-grey-600);
-        }
-        &:hover {
-          svg {
-            fill: var(--color-grey-900);
-          }
-        }
-      }
-      display: flex;
-    }
-  }
-  + .tree-components-item {
-    margin-top: 0;
-  }
-  .tools {
-    &__item {
-      padding: 4px var(--spacing-md);
-      cursor: pointer;
-      color: var(--color-grey-600);
-      font-size: var(--text-sm);
-      &:first-child {
-        padding-top: 0;
-      }
-      &:hover {
-        color: var(--color-grey-700);
-      }
-      &.is-active {
-        color: var(--color-grey-900);
-      }
-    }
-  }
-}
-</style>

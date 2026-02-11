@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ColorPickerTool } from '@/types/editor'
 import { ref, watch } from 'vue'
+import { ColorPicker } from '@/components/ui/color-picker'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
   value: string
   title: string
   autoUpdate?: boolean
+  pressets?: string[]
 }
 
 interface Emits {
@@ -16,6 +18,7 @@ interface Emits {
 
 const props = withDefaults(defineProps<Props>(), {
   autoUpdate: true,
+  pressets: () => ['#F56C6C', '#E6A23C', '#67C23A', '#396BDD', '#000000', '#FFFFFF'],
 })
 
 const emit = defineEmits<Emits>()
@@ -23,6 +26,13 @@ const emit = defineEmits<Emits>()
 const { updateToolById } = useComponentsStore()
 
 const localValue = ref(props.value)
+
+watch(
+  () => props.value,
+  () => {
+    localValue.value = props.value
+  },
+)
 
 watch(localValue, () => {
   if (props.autoUpdate)
@@ -34,19 +44,9 @@ watch(localValue, () => {
 <template>
   <div class="color-picker-tool">
     <EditorToolLabel>{{ title }}</EditorToolLabel>
-    <div class="body">
-      <ElColorPicker
-        v-model="localValue"
-        color-format="hex"
-      />
-      <ElInput v-model="localValue" />
-    </div>
+    <ColorPicker
+      v-model="localValue"
+      :presets="props.pressets"
+    />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.body {
-  display: flex;
-  gap: var(--spacing-sm);
-}
-</style>

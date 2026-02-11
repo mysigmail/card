@@ -37,7 +37,7 @@ function createEditorContext() {
       return editor.value?.getAttributes('textStyle')?.color ?? ''
     },
     set(v) {
-      editor.value?.chain().focus().setColor(v).run()
+      editor.value?.chain().setColor(v).run()
     },
   })
 

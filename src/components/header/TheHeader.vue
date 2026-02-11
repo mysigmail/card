@@ -1,6 +1,6 @@
 <template>
-  <div class="header">
-    <div class="logo">
+  <div class="flex items-center justify-between bg-foreground px-4 text-secondary">
+    <div class="flex items-center">
       <SvgLogoWhite
         height="19"
         width="90"
@@ -14,19 +14,3 @@
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.header {
-  display: flex;
-  align-items: center;
-  padding: 0 var(--spacing-sm);
-  background-color: var(--color-contrast-high);
-  color: var(--color-contrast-low);
-  justify-content: space-between;
-
-  .logo {
-    display: flex;
-    align-items: center;
-  }
-}
-</style>

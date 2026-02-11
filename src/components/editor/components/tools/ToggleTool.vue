@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ToggleTool } from '@/types/editor'
 import { ref, watch } from 'vue'
+import { Switch } from '@/components/ui/switch'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
@@ -15,18 +16,23 @@ const { updateToolById } = useComponentsStore()
 
 const localValue = ref(props.value)
 
+watch(
+  () => props.value,
+  () => {
+    localValue.value = props.value
+  },
+)
+
 watch(localValue, () => {
   updateToolById<ToggleTool>(props.id, 'value', localValue.value)
 })
 </script>
 
 <template>
-  <div class="toggle-tool">
+  <div class="flex items-center justify-between gap-3">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>
-    <ElSwitch v-model="localValue" />
+    <Switch v-model="localValue" />
   </div>
 </template>
-
-<style lang="scss" scoped></style>

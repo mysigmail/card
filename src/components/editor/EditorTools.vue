@@ -6,7 +6,7 @@ const { editableToolsGroupName, editableToolsGroupLabel, editableTools, editable
 </script>
 
 <template>
-  <div class="editor-tools-panel">
+  <div class="h-full min-h-0 overflow-y-auto border-l border-border pb-8">
     <EditorGeneralTools v-if="!editableId" />
     <EditorPanel v-if="editableToolsGroupName">
       <EditorPanelItem
@@ -21,17 +21,3 @@ const { editableToolsGroupName, editableToolsGroupLabel, editableTools, editable
     </EditorPanel>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.editor-tools-panel {
-  height: calc(100vh - var(--header-height));
-  overflow-y: auto;
-  border-left: 1px solid var(--color-border);
-  padding-bottom: var(--spacing-lg);
-  .item {
-    + .item {
-      margin-top: var(--spacing-sm);
-    }
-  }
-}
-</style>
