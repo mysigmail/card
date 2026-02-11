@@ -11,8 +11,14 @@ const { installed, isDragging, moveComponent, general } = useComponentsStore()
 
 const listRef = ref<HTMLElement>()
 
+const EMAIL_TEMPLATE_WIDTH = 600
+
 const container: CSSProperties = {
   position: 'relative',
+  width: `${EMAIL_TEMPLATE_WIDTH}px`,
+  maxWidth: '100%',
+  margin: '0 auto',
+  tableLayout: 'fixed',
 }
 
 const style = computed<CSSProperties>(() => {

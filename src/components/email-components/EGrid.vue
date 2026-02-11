@@ -23,13 +23,23 @@ const isEditable = computed(
 
 const containerStyle = computed(() => {
   const value = props.width
-  if (value === undefined || value === null || value === '')
-    return undefined
+  if (value === undefined || value === null || value === '') {
+    return {
+      width: '100%',
+      maxWidth: '100%',
+    }
+  }
 
   return {
     width: typeof value === 'number' ? `${value}px` : value,
+    maxWidth: '100%',
   }
 })
+
+const rowStyle: CSSProperties = {
+  width: '100%',
+  tableLayout: 'fixed',
+}
 
 function isVisible(item: GridItem) {
   return item.show !== false
@@ -71,9 +81,14 @@ const halfGap = computed(() => {
 })
 
 function getColumnStyle(item: GridItem) {
+  const width = getColumnWidth()
+
   return {
-    width: getColumnWidth(),
+    width,
+    maxWidth: width,
     verticalAlign: item.verticalAlign || 'top',
+    overflowWrap: 'anywhere',
+    wordBreak: 'break-word',
   } satisfies CSSProperties
 }
 
@@ -103,7 +118,7 @@ function getContentStyle(index: number) {
       'p-edit-tool': isEditable,
     }"
   >
-    <MRow>
+    <MRow :style="rowStyle">
       <MColumn
         v-for="(item, index) in visibleItems"
         :key="index"

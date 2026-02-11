@@ -33,6 +33,7 @@ a {
 .p-body {
   height: calc(100vh - var(--header-height));
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 
