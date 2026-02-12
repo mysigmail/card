@@ -10,7 +10,8 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    class="my-2 text-xs font-bold text-foreground uppercase"
+    data-slot="editor-tool-label"
+    class="my-2 mt-3 text-xs font-bold text-foreground uppercase"
     :class="type === 'secondary' ? 'text-[11px] text-muted-foreground' : ''"
   >
     <slot />

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { version } from '#/package.json'
+import { Star } from 'lucide-vue-next'
 
 const year = new Date().getFullYear()
 </script>
@@ -7,26 +8,18 @@ const year = new Date().getFullYear()
 <template>
   <div class="p-4 text-xs text-muted-foreground">
     <div class="leading-[18px]">
-      <div class="mb-2 rounded-md border border-input p-2">
+      <div class="mb-2 rounded-md border border-input py-2 px-3">
         If you like this project,<br>please give it a
-        <svg
-          class="relative top-[3px] fill-[#e5c764]"
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 32 32"
-        >
-          <path
-            d="m16 2l-4.55 9.22l-10.17 1.47l7.36 7.18L6.9 30l9.1-4.78L25.1 30l-1.74-10.13l7.36-7.17l-10.17-1.48Z"
-          />
-        </svg>
-        on
-        <a
-          class="text-muted-foreground"
-          href="https://github.com/mysigmail/card"
-          target="_blank"
-          rel="noopener noreferrer"
-        >GitHub</a>!
+        <span class="">
+          <Star class="size-4 fill-yellow-500 text-yellow-500 inline-flex relative -top-[1px]" />
+          on
+          <a
+            class="text-muted-foreground underline-offset-4 underline hover:text-primary"
+            href="https://github.com/mysigmail/card"
+            target="_blank"
+            rel="noopener noreferrer"
+          >GitHub</a>!
+        </span>
       </div>
     </div>
     <div class="leading-[18px]">

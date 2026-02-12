@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { MultiTool } from '@/types/editor'
+import { Plus } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import { useComponentsStore } from '@/store/components'
@@ -27,7 +28,7 @@ function onAction(action: string, index: number) {
 </script>
 
 <template>
-  <div class="multi-tool">
+  <div data-slot="multi-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>
@@ -52,10 +53,11 @@ function onAction(action: string, index: number) {
         </EditorPanel>
       </div>
       <Button
-        variant="outline"
+        variant="ghost"
         @click="onAddNew"
       >
-        Add
+        <Plus class="size-4" />
+        Add Item
       </Button>
     </div>
   </div>

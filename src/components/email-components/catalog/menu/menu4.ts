@@ -67,17 +67,21 @@ const menu4Composition = composeEmailBlock({
   }),
   tools: ({ groups }) => {
     return [
-      f.padding({
+      f.spacing({
         group: groups.layout,
-        value: [30, 35, 30, 35],
+        value: {
+          padding: [30, 35, 30, 35],
+        },
       }),
       f.backgroundColor({
         group: groups.layout,
         value: COLOR.theme.light,
       }),
-      f.padding({
+      f.spacing({
         group: groups.logo,
-        value: [0, 0, 0, 0],
+        value: {
+          padding: [0, 0, 0, 0],
+        },
       }),
       f.align({
         group: groups.logo,
@@ -95,9 +99,11 @@ const menu4Composition = composeEmailBlock({
       f.showHide({
         group: groups.logo,
       }),
-      f.padding({
+      f.spacing({
         group: groups.menu,
-        value: [20, 0, 0, 0],
+        value: {
+          padding: [20, 0, 0, 0],
+        },
       }),
       f.align({
         group: groups.menu,

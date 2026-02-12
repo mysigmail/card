@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { Input } from '@/components/ui/input'
 
 interface Props {
   modelValue: number
@@ -22,9 +23,10 @@ const localValue = computed({
 </script>
 
 <template>
-  <input
+  <Input
     v-model="localValue"
-    class="m-0 w-10 rounded border-0 bg-transparent p-0 text-center text-foreground outline-none [appearance:textfield] hover:outline hover:outline-1 hover:outline-border focus:outline focus:outline-1 focus:outline-primary disabled:cursor-not-allowed disabled:bg-background disabled:text-muted-foreground disabled:hover:outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
     type="number"
-  >
+    size="xs"
+    class="h-5 border-none shadow-none text-center"
+  />
 </template>

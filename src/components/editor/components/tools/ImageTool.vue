@@ -39,7 +39,7 @@ watch(
 </script>
 
 <template>
-  <div class="image-tool">
+  <div data-slot="image-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>

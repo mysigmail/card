@@ -73,13 +73,13 @@ watch(
 </script>
 
 <template>
-  <div>
+  <div data-slot="spacing-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>
-    <div class="relative flex h-[120px] flex-col rounded-[5px] border border-border">
+    <div class="relative flex h-[120px] flex-col rounded-sm border border-border">
       <div class="absolute inset-0">
-        <div class="absolute left-0.5 top-0.5 select-none text-xs text-muted-foreground">
+        <div class="absolute left-1.5 top-0.5 select-none text-xs text-muted-foreground">
           Margin
         </div>
         <div
@@ -116,9 +116,9 @@ watch(
         </div>
       </div>
       <div
-        class="absolute top-[25px] right-[50px] bottom-[25px] left-[50px] border border-border bg-background"
+        class="absolute top-[25px] right-[50px] bottom-[25px] left-[50px] border border-border bg-background rounded-sm"
       >
-        <div class="absolute left-0.5 top-0.5 select-none text-xs text-muted-foreground">
+        <div class="absolute left-1.5 top-0.5 select-none text-xs text-muted-foreground">
           Padding
         </div>
         <div

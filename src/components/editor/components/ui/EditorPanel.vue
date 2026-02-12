@@ -13,7 +13,7 @@ provide('type', props.type)
 </script>
 
 <template>
-  <div class="app-collapse">
+  <div data-slot="editor-panel">
     <slot />
   </div>
 </template>

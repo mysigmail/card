@@ -7,7 +7,6 @@ import type {
   InputNumberTool,
   InputTool,
   MultiTool,
-  PaddingTool,
   SelectTool,
   SpacingTool,
   TextEditorTool,
@@ -39,7 +38,6 @@ interface GroupValues {
   gap?: InputNumberTool['value']
   text?: TextEditorTool['value']
   spacing?: SpacingTool['value']
-  padding?: PaddingTool['value']
   columnWidth?: InputNumberTool['value']
   backgroundColor?: ColorPickerTool['value']
   mainColor?: ColorPickerTool['value']
@@ -189,7 +187,7 @@ function readTextAttrs(tools: Tool[], values: GroupValues) {
         borderRadius !== undefined ? `${Math.max(0, Number(borderRadius))}px` : undefined,
       overflow: borderRadius !== undefined ? 'hidden' : undefined,
       color: values.mainColor,
-      padding: toInsets(values.spacing?.padding || values.padding),
+      padding: toInsets(values.spacing?.padding),
       backgroundImage: bgImage?.url,
       backgroundSize: bgImage?.size,
       backgroundRepeat: bgImage?.repeat,
@@ -212,7 +210,7 @@ function readButtonAttrs(tools: Tool[], values: GroupValues) {
       fontSize: fontSize !== undefined ? `${fontSize}px` : undefined,
       fontWeight: 700,
       margin: toInsets(values.spacing?.margin),
-      padding: toInsets(values.spacing?.padding || values.padding),
+      padding: toInsets(values.spacing?.padding),
       textDecoration: 'none',
     },
   } satisfies Record<string, unknown>
@@ -317,7 +315,6 @@ function readGroupValues(tools: Tool[]): GroupValues {
     gap: findToolByKey<InputNumberTool>(tools, 'gap', 'inputNumber')?.value,
     text: findToolByKey<TextEditorTool>(tools, 'content', 'textEditor')?.value,
     spacing: findToolByKey<SpacingTool>(tools, 'spacings', 'spacing')?.value,
-    padding: findToolByKey<PaddingTool>(tools, 'padding', 'padding')?.value,
     columnWidth: findToolByKey<InputNumberTool>(tools, 'columnWidth', 'inputNumber')?.value,
     backgroundColor: findToolByKey<ColorPickerTool>(tools, 'backgroundColor', 'colorPicker')?.value,
     mainColor: findToolByKey<ColorPickerTool>(tools, 'mainColor', 'colorPicker')?.value,
@@ -330,7 +327,7 @@ function createBaseModel(
   values: GroupValues,
   items?: Menu[] | Social[] | GridItem[],
 ): SchemaGroupModel {
-  const insets = toInsets(values.spacing?.padding || values.padding)
+  const insets = toInsets(values.spacing?.padding)
   const margin = toInsets(values.spacing?.margin)
 
   return {
@@ -363,7 +360,7 @@ function layoutGroupAdapter({ tools }: SchemaGroupReadContext): SchemaGroupModel
     ...createBaseModel(values),
     attrs: {
       style: {
-        padding: toInsets(values.spacing?.padding || values.padding),
+        padding: toInsets(values.spacing?.padding),
         backgroundColor: values.backgroundColor,
         backgroundImage: bgImage?.url,
         backgroundSize: bgImage?.size,

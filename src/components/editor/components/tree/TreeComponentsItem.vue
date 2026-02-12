@@ -2,6 +2,8 @@
 import type { ToolGroupBucket } from '@/store/components/utils'
 import { Copy, Trash2 } from 'lucide-vue-next'
 import { computed } from 'vue'
+import { Button } from '@/components/ui/button'
+import { ButtonGroup } from '@/components/ui/button-group'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
@@ -38,7 +40,7 @@ function onHeaderClick() {
 
 <template>
   <div
-    class="relative select-none pt-1.5"
+    class="relative select-none _pt-1.5"
     :class="
       id === editableId
         ? `before:absolute before:inset-y-0 before:left-0 before:w-0.5 before:bg-primary before:content-['']`
@@ -47,23 +49,29 @@ function onHeaderClick() {
   >
     <div>
       <div
-        class="flex cursor-pointer items-center justify-between px-4 py-2"
+        class="flex cursor-pointer items-center justify-between px-4 py-3"
         @click="onHeaderClick"
       >
         {{ name }}
         <div class="flex">
-          <div
-            class="cursor-pointer p-0.5 text-muted-foreground hover:text-foreground"
-            @click.stop="onClick('copy')"
-          >
-            <Copy :size="16" />
-          </div>
-          <div
-            class="cursor-pointer p-0.5 text-muted-foreground hover:text-foreground"
-            @click.stop="onClick('remove')"
-          >
-            <Trash2 :size="16" />
-          </div>
+          <ButtonGroup>
+            <Button
+              variant="outline"
+              size="icon-xs"
+              aria-label="More Options"
+              @click.stop="onClick('copy')"
+            >
+              <Copy class="size-3" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon-xs"
+              aria-label="More Options"
+              @click.stop="onClick('remove')"
+            >
+              <Trash2 class="size-3 text-destructive" />
+            </Button>
+          </ButtonGroup>
         </div>
       </div>
       <div class="tools">

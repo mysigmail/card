@@ -42,7 +42,7 @@ watch(localValue, () => {
 </script>
 
 <template>
-  <div class="color-picker-tool">
+  <div data-slot="color-picker-tool">
     <EditorToolLabel>{{ title }}</EditorToolLabel>
     <ColorPicker
       v-model="localValue"

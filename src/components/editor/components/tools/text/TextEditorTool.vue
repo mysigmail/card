@@ -16,7 +16,7 @@ init(props.id, props.value)
 </script>
 
 <template>
-  <div>
+  <div data-slot="text-editor-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>

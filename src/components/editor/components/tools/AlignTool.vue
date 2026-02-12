@@ -30,7 +30,7 @@ watch(localValue, () => {
 </script>
 
 <template>
-  <div>
+  <div data-slot="align-tool">
     <EditorToolLabel>{{ title }}</EditorToolLabel>
     <ToggleGroup
       v-model="localValue"

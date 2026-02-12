@@ -29,7 +29,7 @@ watch(localValue, () => {
 </script>
 
 <template>
-  <div class="flex items-center justify-between gap-3">
+  <div data-slot="toggle-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>

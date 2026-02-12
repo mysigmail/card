@@ -37,15 +37,15 @@ function onMouseLeave() {
     class="h-full select-none bg-background"
     @mouseleave="onMouseLeave"
   >
-    <div class="relative z-[1030] flex h-full flex-col justify-between bg-background">
+    <div class="relative z-30 flex h-full flex-col justify-between bg-background">
       <div
         ref="menuRef"
-        class="relative z-[1010]"
+        class="relative z-10"
       >
         <div
           v-for="(i, index) in list"
           :key="index"
-          class="item relative cursor-default p-4 text-base"
+          class="item relative cursor-default py-3 px-4 text-base"
           :data-index="index"
           :class="{ 'bg-muted': hovered === index }"
         >
@@ -54,7 +54,7 @@ function onMouseLeave() {
       </div>
     </div>
     <div
-      class="fixed top-[var(--header-height)] bottom-0 z-[1000] w-[300px] overflow-y-auto border-r border-border bg-muted p-5 shadow-[20px_0_20px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out"
+      class="fixed top-[var(--header-height)] bottom-0 z-10 w-[300px] overflow-y-auto border-r border-border bg-muted p-5 shadow-[20px_0_20px_rgba(0,0,0,0.1)] transition-all duration-300 ease-in-out"
       :class="
         showList
           ? 'left-[var(--editor-component-list-width)] opacity-100'

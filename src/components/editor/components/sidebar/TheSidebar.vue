@@ -9,13 +9,13 @@ const activeTab = ref<'components' | 'tree'>('components')
 <template>
   <div class="flex flex-col border-r border-border">
     <div class="flex grow">
-      <div class="relative z-[1010] mt-1 border-r border-border bg-background">
+      <div class="relative z-20 mt-1 border-r border-border bg-background">
         <div
           class="cursor-pointer p-2"
           @click="activeTab = 'components'"
         >
           <UilServer
-            class="size-6"
+            class="size-6 hover:text-foreground"
             :class="activeTab === 'components' ? 'text-foreground' : 'text-muted-foreground'"
           />
         </div>
@@ -24,7 +24,7 @@ const activeTab = ref<'components' | 'tree'>('components')
           @click="activeTab = 'tree'"
         >
           <UilListUiAlt
-            class="size-6"
+            class="size-6 hover:text-foreground"
             :class="activeTab === 'tree' ? 'text-foreground' : 'text-muted-foreground'"
           />
         </div>
@@ -36,7 +36,7 @@ const activeTab = ref<'components' | 'tree'>('components')
         <TreeComponents v-if="activeTab === 'tree'" />
       </div>
     </div>
-    <div class="z-[1010] h-[var(--sidebar-footer-height)] shrink-0 overflow-y-auto bg-background">
+    <div class="z-10 h-[var(--sidebar-footer-height)] shrink-0 overflow-y-auto bg-background">
       <SidebarFooter />
     </div>
   </div>

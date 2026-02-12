@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ChevronRight, Trash2 } from 'lucide-vue-next'
 import { computed, inject, ref } from 'vue'
+import { Button } from '@/components/ui/button'
 
 interface Props {
   title: string
@@ -41,14 +42,17 @@ function onClick(action: string) {
 
 <template>
   <div
+    data-slot="editor-panel-item"
+    :data-type="type"
     :class="
       rootType === 'bordered'
-        ? 'mb-2 rounded-[3px] border border-border px-4'
+        ? 'mb-2 rounded-sm border border-border px-4'
         : 'border-b border-border px-4'
     "
   >
     <div
-      class="flex cursor-pointer select-none py-4"
+      :data-type="type"
+      class="flex items-center cursor-pointer select-none pt-4 pb-1 data-[type=collapsed]:py-2"
       @click="onOpen"
     >
       <div class="grow font-bold text-foreground uppercase">
@@ -58,17 +62,17 @@ function onClick(action: string) {
         v-if="showActions"
         class="mr-2"
       >
-        <EditorActionButton
-          type="danger"
+        <Button
+          variant="ghost"
+          size="icon-sm"
           @click.stop="onClick('delete')"
         >
-          <Trash2 :size="16" />
-        </EditorActionButton>
+          <Trash2 class="size-4 text-muted-foreground hover:text-destructive" />
+        </Button>
       </div>
       <ChevronRight
         v-if="type === 'collapsed'"
-        class="text-muted-foreground transition-transform"
-        :size="16"
+        class="size-4 text-muted-foreground transition-transform"
         :class="{ 'rotate-90': isOpen }"
       />
     </div>

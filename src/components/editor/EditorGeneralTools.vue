@@ -50,11 +50,10 @@ const positionOptions = [
       title="Layout"
       type="opened"
     >
-      <PaddingTool
+      <SpacingTool
         id="layoutPadding"
-        v-model:value="general.padding"
-        title="Padding"
-        :auto-update="false"
+        :value="{ padding: general.padding }"
+        title="Spacing"
       />
     </EditorPanelItem>
     <EditorPanelItem

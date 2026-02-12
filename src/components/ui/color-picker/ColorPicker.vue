@@ -52,7 +52,7 @@ function onChange(event: Event & { target: { color: string } }) {
         data-slot="color-picker-trigger"
         :class="
           cn(
-            'inline-flex items-center rounded-md border border-input bg-background shadow-xs transition-[color,box-shadow] outline-none',
+            'inline-flex cursor-pointer items-center rounded-md border border-input bg-background shadow-xs transition-[color,box-shadow] outline-none',
             sizeClasses.trigger,
             props.class,
           )

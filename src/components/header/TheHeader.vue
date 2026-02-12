@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { TemplateImportMode } from '@/types/template'
+import { MoreHorizontal as MoreHorizontalIcon } from 'lucide-vue-next'
 import { computed, ref, watch } from 'vue'
 import { Button } from '@/components/ui/button'
+import { ButtonGroup } from '@/components/ui/button-group'
 import {
   Dialog,
   DialogContent,
@@ -9,6 +11,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { Switch } from '@/components/ui/switch'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { useComponentsStore } from '@/store/components'
@@ -86,6 +94,11 @@ function clearCanvasWithConfirm() {
   clearDialogVisible.value = true
 }
 
+function onConfirmClearCanvas() {
+  clearCanvas()
+  clearDialogVisible.value = false
+}
+
 async function onImportFileChange(event: Event) {
   const target = event.target as HTMLInputElement | null
   const file = target?.files?.[0]
@@ -131,35 +144,40 @@ watch(importDialogVisible, (open) => {
 <template>
   <div class="flex items-center justify-between bg-foreground px-4 text-secondary">
     <div class="flex items-center">
-      <SvgLogoWhite
-        height="19"
-        width="90"
-      />
+      <SvgLogoWhite width="100" />
     </div>
     <div class="tools">
       tools
     </div>
-    <div class="actions flex items-center gap-2">
-      <Button
-        variant="secondary"
-        size="sm"
-        @click="exportTemplateToFile"
-      >
-        Export JSON
-      </Button>
-      <Button
-        size="sm"
-        @click="openImportDialog"
-      >
-        Import JSON
-      </Button>
-      <Button
-        variant="outline"
-        size="sm"
-        @click="clearCanvasWithConfirm"
-      >
-        New
-      </Button>
+    <div class="actions flex items-center">
+      <ButtonGroup>
+        <Button
+          size="sm"
+          variant="outline"
+          @click="clearCanvasWithConfirm"
+        >
+          New
+        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger as-child>
+            <Button
+              variant="outline"
+              size="icon-sm"
+              aria-label="More Options"
+            >
+              <MoreHorizontalIcon />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem @select="exportTemplateToFile">
+              Export JSON
+            </DropdownMenuItem>
+            <DropdownMenuItem @select="openImportDialog">
+              Import JSON
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </ButtonGroup>
     </div>
   </div>
 
@@ -267,10 +285,7 @@ watch(importDialogVisible, (open) => {
         </Button>
         <Button
           variant="destructive"
-          @click="
-            clearCanvas()
-            clearDialogVisible = false
-          "
+          @click="onConfirmClearCanvas()"
         >
           Yes
         </Button>

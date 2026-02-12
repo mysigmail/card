@@ -35,7 +35,7 @@ watch(localValue, () => {
 </script>
 
 <template>
-  <div class="input-tool">
+  <div data-slot="input-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>

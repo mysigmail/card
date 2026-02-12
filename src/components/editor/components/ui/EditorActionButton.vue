@@ -8,7 +8,8 @@ defineProps<Props>()
 
 <template>
   <div
-    class="flex [&_svg]:text-muted-foreground [&_svg]:transition-colors"
+    data-slot="editor-action-button"
+    class="flex [&_svg]:transition-colors"
     :class="type === 'danger' ? 'hover:[&_svg]:text-destructive' : 'hover:[&_svg]:text-foreground'"
   >
     <slot />
