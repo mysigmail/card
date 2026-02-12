@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { ChevronRight, Trash2 } from 'lucide-vue-next'
 import { computed, inject, ref } from 'vue'
+import { Button } from '@/components/ui/button'
 
 interface Props {
   title: string
@@ -40,74 +42,45 @@ function onClick(action: string) {
 
 <template>
   <div
-    class="app-collapse-item"
-    :class="{ 'is-bordered': rootType === 'bordered' }"
+    data-slot="editor-panel-item"
+    :data-type="type"
+    :class="
+      rootType === 'bordered'
+        ? 'mb-2 rounded-sm border border-border px-4'
+        : 'border-b border-border px-4'
+    "
   >
     <div
-      class="header"
+      :data-type="type"
+      class="flex items-center cursor-pointer select-none pt-4 pb-1 data-[type=collapsed]:py-2"
       @click="onOpen"
     >
-      <div class="title">
+      <div class="grow font-bold text-foreground uppercase">
         {{ title }}
       </div>
       <div
         v-if="showActions"
-        class="actions"
+        class="mr-2"
       >
-        <EditorActionButton
-          type="danger"
+        <Button
+          variant="ghost"
+          size="icon-sm"
           @click.stop="onClick('delete')"
         >
-          <UniconsTrashAlt />
-        </EditorActionButton>
+          <Trash2 class="size-4 text-muted-foreground hover:text-destructive" />
+        </Button>
       </div>
-      <UniconsAngleRight
+      <ChevronRight
         v-if="type === 'collapsed'"
-        class="icon"
-        :class="{ 'is-open': isOpen }"
+        class="size-4 text-muted-foreground transition-transform"
+        :class="{ 'rotate-90': isOpen }"
       />
     </div>
     <div
       v-if="isShow"
-      class="body"
+      class="pb-2"
     >
       <slot />
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.app-collapse-item {
-  padding: 0 var(--spacing-sm);
-  border-bottom: 1px solid var(--color-border);
-  .is-bordered {
-    border: 1px solid var(--color-border);
-    margin-bottom: var(--spacing-xs);
-    border-radius: 3px;
-  }
-  .header {
-    padding: var(--spacing-sm) 0;
-    display: flex;
-    cursor: pointer;
-    user-select: none;
-    .title {
-      flex-grow: 1;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: var(--color-contrast-high);
-    }
-    .icon {
-      fill: var(--color-contrast-middle);
-      &.is-open {
-        transform: rotate(90deg);
-      }
-    }
-  }
-  .body {
-    padding-bottom: var(--spacing-xs);
-  }
-  .actions {
-    margin-right: var(--spacing-xs);
-  }
-}
-</style>

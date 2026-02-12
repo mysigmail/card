@@ -16,32 +16,18 @@ init(props.id, props.value)
 </script>
 
 <template>
-  <div class="text-editor-tool">
+  <div data-slot="text-editor-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>
-    <div class="body">
-      <div class="actions">
+    <div class="rounded-md border border-border p-2">
+      <div>
         <TextEditorActions />
       </div>
       <EditorContent
-        class="content"
+        class="[&_.tiptap]:outline-none"
         :editor="editor"
       />
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.text-editor-tool {
-  .body {
-    padding: var(--spacing-xs);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-  }
-}
-
-:deep(.tiptap) {
-  outline: none;
-}
-</style>

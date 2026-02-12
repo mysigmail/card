@@ -5,7 +5,7 @@ const { installedToolsByGroup, installed } = useComponentsStore()
 </script>
 
 <template>
-  <div class="tree-components">
+  <div>
     <TreeComponentsItem
       v-for="(i, index) in installedToolsByGroup"
       :id="i.id"
@@ -16,18 +16,9 @@ const { installedToolsByGroup, installed } = useComponentsStore()
     />
     <div
       v-if="!installed.length"
-      class="empty"
+      class="p-4 text-muted-foreground"
     >
       The component tree is empty
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.tree-components {
-  .empty {
-    padding: var(--spacing-sm);
-    color: var(--color-grey-600);
-  }
-}
-</style>

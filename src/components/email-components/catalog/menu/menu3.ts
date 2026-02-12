@@ -59,9 +59,11 @@ const menu3Composition = composeEmailBlock({
   }),
   tools: ({ groups }) => {
     return [
-      f.padding({
+      f.spacing({
         group: groups.layout,
-        value: [30, 35, 30, 35],
+        value: {
+          padding: [30, 35, 30, 35],
+        },
       }),
       f.backgroundColor({
         group: groups.layout,

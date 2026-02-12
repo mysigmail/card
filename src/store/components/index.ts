@@ -322,6 +322,11 @@ function clearCanvas() {
 }
 
 function updateToolById<T extends Tool>(id: string, key: 'value' | 'label', value: T['value']) {
+  if (id === 'layoutPadding' && key === 'value') {
+    general.padding = (value as any).padding
+    return
+  }
+
   if (!editable.value?.tools)
     return
 

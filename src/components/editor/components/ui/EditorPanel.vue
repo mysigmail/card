@@ -13,9 +13,9 @@ provide('type', props.type)
 </script>
 
 <template>
-  <div class="app-collapse">
+  <div data-slot="editor-panel">
     <slot />
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

@@ -1,68 +1,38 @@
 <script setup lang="ts">
 import { version } from '#/package.json'
+import { Star } from 'lucide-vue-next'
 
 const year = new Date().getFullYear()
 </script>
 
 <template>
-  <div class="footer">
-    <div class="footer__item">
-      <div class="cta">
+  <div class="p-4 text-xs text-muted-foreground">
+    <div class="leading-[18px]">
+      <div class="mb-2 rounded-md border border-input py-2 px-3">
         If you like this project,<br>please give it a
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 32 32"
-        >
-          <path
-            d="m16 2l-4.55 9.22l-10.17 1.47l7.36 7.18L6.9 30l9.1-4.78L25.1 30l-1.74-10.13l7.36-7.17l-10.17-1.48Z"
-          />
-        </svg>
-        on
-        <a
-          href="https://github.com/mysigmail/card"
-          target="_blank"
-          rel="noopener noreferrer"
-        >GitHub</a>!
+        <span class="">
+          <Star class="size-4 fill-yellow-500 text-yellow-500 inline-flex relative -top-[1px]" />
+          on
+          <a
+            class="text-muted-foreground underline-offset-4 underline hover:text-primary"
+            href="https://github.com/mysigmail/card"
+            target="_blank"
+            rel="noopener noreferrer"
+          >GitHub</a>!
+        </span>
       </div>
     </div>
-    <div class="footer__item">
+    <div class="leading-[18px]">
       v{{ version }}&nbsp;•&nbsp;
       <a
+        class="text-muted-foreground"
         href="https://github.com/mysigmail/card/releases"
         target="_blank"
         rel="noopener noreferrer"
       >Changelog</a>
     </div>
-    <div class="footer__item">
+    <div class="leading-[18px]">
       ©{{ year }}&nbsp;•&nbsp;Anton Reshetov
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.footer {
-  padding: var(--spacing-sm);
-  color: var(--color-contrast-medium);
-  font-size: var(--text-sm);
-  &__item {
-    line-height: 18px;
-  }
-  a {
-    color: var(--color-contrast-medium);
-  }
-}
-
-.cta {
-  border: 1px solid #aaa;
-  padding: var(--spacing-xs);
-  margin-bottom: var(--spacing-xs);
-  border-radius: 6px;
-  svg {
-    fill: #e5c764;
-    position: relative;
-    top: 3px;
-  }
-}
-</style>

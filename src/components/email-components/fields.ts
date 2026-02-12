@@ -7,7 +7,6 @@ import type {
   InputNumberTool,
   InputTool,
   MultiTool,
-  PaddingTool,
   SelectTool,
   SpacingTool,
   TextEditorTool,
@@ -64,7 +63,7 @@ interface GridConfig extends FieldConfig {
 }
 
 interface PaddingConfig extends FieldConfig {
-  value: PaddingTool['value']
+  value: [number, number, number, number]
 }
 
 interface SpacingConfig extends FieldConfig {
@@ -286,13 +285,13 @@ export const f = {
       value: config.value,
     })
   },
-  padding(config: PaddingConfig) {
-    return toolBuilder<PaddingTool>({
+  padding(config: SpacingConfig | PaddingConfig) {
+    return toolBuilder<SpacingTool>({
       group: config.group,
       key: 'padding',
       label: 'Padding',
-      type: 'padding',
-      value: config.value,
+      type: 'spacing',
+      value: Array.isArray(config.value) ? { padding: config.value } : config.value,
     })
   },
   showHide(config: ToggleConfig) {

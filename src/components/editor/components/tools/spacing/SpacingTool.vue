@@ -73,63 +73,81 @@ watch(
 </script>
 
 <template>
-  <div class="spacing-tool">
+  <div data-slot="spacing-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>
-    <div class="body">
-      <div class="margin">
-        <div class="label">
+    <div class="relative flex h-[120px] flex-col rounded-sm border border-border">
+      <div class="absolute inset-0">
+        <div class="absolute left-1.5 top-0.5 select-none text-xs text-muted-foreground">
           Margin
         </div>
-        <div class="top">
+        <div
+          class="absolute left-1/2 flex h-6 w-[50px] -translate-x-1/2 items-center justify-center p-2"
+        >
           <SpacingInput
             v-model="localMarginTop"
             :disabled="!value.margin"
           />
         </div>
-        <div class="right">
+        <div
+          class="absolute right-0 top-1/2 flex h-6 w-[50px] -translate-y-1/2 items-center justify-center p-2"
+        >
           <SpacingInput
             v-model="localMarginRight"
             :disabled="!value.margin"
           />
         </div>
-        <div class="bottom">
+        <div
+          class="absolute bottom-0 left-1/2 flex h-6 w-[50px] -translate-x-1/2 items-center justify-center p-2"
+        >
           <SpacingInput
             v-model="localMarginBottom"
             :disabled="!value.margin"
           />
         </div>
-        <div class="left">
+        <div
+          class="absolute left-0 top-1/2 flex h-6 w-[50px] -translate-y-1/2 items-center justify-center p-2"
+        >
           <SpacingInput
             v-model="localMarginLeft"
             :disabled="!value.margin"
           />
         </div>
       </div>
-      <div class="padding">
-        <div class="label">
+      <div
+        class="absolute top-[25px] right-[50px] bottom-[25px] left-[50px] border border-border bg-background rounded-sm"
+      >
+        <div class="absolute left-1.5 top-0.5 select-none text-xs text-muted-foreground">
           Padding
         </div>
-        <div class="top">
+        <div
+          class="absolute left-1/2 flex h-6 w-[50px] -translate-x-1/2 items-center justify-center p-2"
+        >
           <SpacingInput
             v-model="localPaddingTop"
             :disabled="!value.padding"
           />
         </div>
-        <div class="right">
+        <div
+          class="absolute right-0 top-1/2 flex h-6 w-[50px] -translate-y-1/2 items-center justify-center p-2"
+        >
           <SpacingInput
             v-model="localPaddingRight"
             :disabled="!value.padding"
           />
         </div>
-        <div class="bottom">
+        <div
+          class="absolute bottom-0 left-1/2 flex h-6 w-[50px] -translate-x-1/2 items-center justify-center p-2"
+        >
           <SpacingInput
             v-model="localPaddingBottom"
             :disabled="!value.padding"
           />
         </div>
-        <div class="left">
+        <div
+          class="absolute left-0 top-1/2 flex h-6 w-[50px] -translate-y-1/2 items-center justify-center p-2"
+        >
           <SpacingInput
             v-model="localPaddingLeft"
             :disabled="!value.padding"
@@ -139,87 +157,3 @@ watch(
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.spacing-tool {
-  --inner-padding-x: 50px;
-  --inner-padding-y: 25px;
-
-  .body {
-    display: flex;
-    flex-flow: column;
-
-    height: 120px;
-    position: relative;
-    border: 1px solid var(--color-border);
-    border-radius: 5px;
-
-    .margin,
-    .padding {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-
-    .padding {
-      top: var(--inner-padding-y);
-      left: var(--inner-padding-x);
-      right: var(--inner-padding-x);
-      bottom: var(--inner-padding-y);
-      border: 1px solid var(--color-border);
-      border-radius: 5px;
-      background-color: #fff;
-    }
-
-    .label {
-      position: absolute;
-      left: 2px;
-      top: 2px;
-      font-size: 12px;
-      color: var(--color-grey-600);
-      user-select: none;
-    }
-
-    .top,
-    .right,
-    .bottom,
-    .left {
-      width: 50px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--spacing-xs);
-    }
-
-    .top {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .right {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .left {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .bottom {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 0;
-    }
-  }
-}
-</style>

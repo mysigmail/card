@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { InputNumberTool, InputTool } from '@/types/editor'
 import { ref, watch } from 'vue'
+import { Input } from '@/components/ui/input'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
   id: string
   value: string | number
-  type: 'string' | 'number'
+  type?: 'string' | 'number'
   title: string
   placeholder?: string
   updateParentLabel?: boolean
@@ -28,25 +29,22 @@ watch(
   { deep: true },
 )
 
-function onInput() {
+watch(localValue, () => {
   updateToolById<InputTool | InputNumberTool>(props.id, 'value', localValue.value)
-}
+})
 </script>
 
 <template>
-  <div class="input-tool">
+  <div data-slot="input-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>
-    <div class="body">
-      <ElInput
+    <div class="flex">
+      <Input
         v-model="localValue"
         :placeholder="placeholder"
-        :type="type"
-        @input="onInput"
+        :type="type === 'number' ? 'number' : 'text'"
       />
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped></style>

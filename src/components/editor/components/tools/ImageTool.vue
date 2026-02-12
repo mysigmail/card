@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { BackgroundImageTool, ImageTool } from '@/types/editor'
 import { computed, reactive, watch } from 'vue'
+import { Input } from '@/components/ui/input'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { useComponentsStore } from '@/store/components'
 
 type UnifiedImageValue = ImageTool['value'] | BackgroundImageTool['value']
@@ -37,7 +39,7 @@ watch(
 </script>
 
 <template>
-  <div class="image-tool">
+  <div data-slot="image-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>
@@ -48,7 +50,7 @@ watch(
       <EditorToolLabel type="secondary">
         URL
       </EditorToolLabel>
-      <ElInput
+      <Input
         v-model="backgroundValue.url"
         placeholder="Image URL"
       />
@@ -56,50 +58,99 @@ watch(
       <EditorToolLabel type="secondary">
         Repeat
       </EditorToolLabel>
-      <ElRadioGroup v-model="backgroundValue.repeat">
-        <ElRadioButton label="no-repeat">
+      <ToggleGroup
+        v-model="backgroundValue.repeat"
+        type="single"
+      >
+        <ToggleGroupItem
+          size="sm"
+          value="no-repeat"
+          variant="outline"
+        >
           No Repeat
-        </ElRadioButton>
-        <ElRadioButton label="repeat">
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          size="sm"
+          value="repeat"
+          variant="outline"
+        >
           Repeat
-        </ElRadioButton>
-      </ElRadioGroup>
+        </ToggleGroupItem>
+      </ToggleGroup>
 
       <EditorToolLabel type="secondary">
         Size
       </EditorToolLabel>
-      <ElRadioGroup v-model="backgroundValue.size">
-        <ElRadioButton label="unset">
+      <ToggleGroup
+        v-model="backgroundValue.size"
+        type="single"
+      >
+        <ToggleGroupItem
+          size="sm"
+          value="unset"
+          variant="outline"
+        >
           None
-        </ElRadioButton>
-        <ElRadioButton label="cover">
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          size="sm"
+          value="cover"
+          variant="outline"
+        >
           Cover
-        </ElRadioButton>
-        <ElRadioButton label="contain">
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          size="sm"
+          value="contain"
+          variant="outline"
+        >
           Contain
-        </ElRadioButton>
-      </ElRadioGroup>
+        </ToggleGroupItem>
+      </ToggleGroup>
 
       <EditorToolLabel type="secondary">
         Position
       </EditorToolLabel>
-      <ElRadioGroup v-model="backgroundValue.position">
-        <ElRadioButton label="top">
+      <ToggleGroup
+        v-model="backgroundValue.position"
+        type="single"
+      >
+        <ToggleGroupItem
+          size="sm"
+          value="top"
+          variant="outline"
+        >
           Top
-        </ElRadioButton>
-        <ElRadioButton label="bottom">
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          size="sm"
+          value="bottom"
+          variant="outline"
+        >
           Bottom
-        </ElRadioButton>
-        <ElRadioButton label="center">
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          size="sm"
+          value="center"
+          variant="outline"
+        >
           Center
-        </ElRadioButton>
-        <ElRadioButton label="left">
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          size="sm"
+          value="left"
+          variant="outline"
+        >
           Left
-        </ElRadioButton>
-        <ElRadioButton label="right">
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          size="sm"
+          value="right"
+          variant="outline"
+        >
           Right
-        </ElRadioButton>
-      </ElRadioGroup>
+        </ToggleGroupItem>
+      </ToggleGroup>
     </div>
     <div
       v-else
@@ -109,23 +160,23 @@ watch(
         <EditorToolLabel type="secondary">
           URL
         </EditorToolLabel>
-        <ElInput v-model="imageValue.src" />
+        <Input v-model="imageValue.src" />
       </div>
-      <div class="dimensions">
-        <div style="width: 100%">
+      <div class="flex gap-4">
+        <div class="w-full">
           <EditorToolLabel type="secondary">
             Width
           </EditorToolLabel>
-          <ElInput
+          <Input
             v-model="imageValue.width"
             type="number"
           />
         </div>
-        <div style="width: 100%">
+        <div class="w-full">
           <EditorToolLabel type="secondary">
             Height
           </EditorToolLabel>
-          <ElInput
+          <Input
             v-model="imageValue.height"
             type="number"
           />
@@ -135,21 +186,14 @@ watch(
         <EditorToolLabel type="secondary">
           Alternate Text
         </EditorToolLabel>
-        <ElInput v-model="imageValue.alt" />
+        <Input v-model="imageValue.alt" />
       </div>
       <div>
         <EditorToolLabel type="secondary">
           Image Link
         </EditorToolLabel>
-        <ElInput v-model="imageValue.link" />
+        <Input v-model="imageValue.link" />
       </div>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.dimensions {
-  display: flex;
-  gap: var(--spacing-sm);
-}
-</style>

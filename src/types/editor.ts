@@ -29,13 +29,12 @@ export type ToolType
     | 'select'
     | 'inputNumber'
     | 'multi'
-    | 'padding'
     | 'spacing'
     | 'textEditor'
     | 'toggle'
 
 export enum ToolT {
-  Padding = 'padding',
+  Spacing = 'spacing',
 }
 
 export interface BaseTool {
@@ -48,11 +47,6 @@ export interface BaseTool {
   label: string
   type: ToolType
   value: any
-}
-
-export interface PaddingTool extends BaseTool {
-  type: 'padding'
-  value: [number, number, number, number]
 }
 
 export interface SpacingTool extends BaseTool {
@@ -137,7 +131,6 @@ export type SingleTool
     | InputNumberTool
     | InputTool
     | SelectTool
-    | PaddingTool
     | SpacingTool
     | TextEditorTool
     | ToggleTool

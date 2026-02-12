@@ -8,30 +8,10 @@ defineProps<Props>()
 
 <template>
   <div
-    class="editor-action-button"
-    :class="{ danger: type === 'danger' }"
+    data-slot="editor-action-button"
+    class="flex [&_svg]:transition-colors"
+    :class="type === 'danger' ? 'hover:[&_svg]:text-destructive' : 'hover:[&_svg]:text-foreground'"
   >
     <slot />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.editor-action-button {
-  display: flex;
-  &.danger {
-    &:hover {
-      :deep(svg) {
-        fill: var(--color-danger);
-      }
-    }
-  }
-  &:hover {
-    :deep(svg) {
-      fill: var(--color-contrast-hight);
-    }
-  }
-  :deep(svg) {
-    fill: var(--color-contrast-medium);
-  }
-}
-</style>

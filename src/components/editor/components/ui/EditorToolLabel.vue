@@ -10,25 +10,10 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    class="app-tool-label"
-    :class="{ secondary: type === 'secondary' }"
+    data-slot="editor-tool-label"
+    class="my-2 mt-3 text-xs font-bold text-foreground uppercase"
+    :class="type === 'secondary' ? 'text-[11px] text-muted-foreground' : ''"
   >
     <slot />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.app-tool-label {
-  margin: 0;
-  margin-top: var(--spacing-xs);
-  margin-bottom: var(--spacing-xs);
-  font-size: var(--text-sm);
-  text-transform: uppercase;
-  color: var(--color-contrast-high);
-  font-weight: bold;
-  &.secondary {
-    font-size: 11px;
-    color: var(--color-contrast-medium);
-  }
-}
-</style>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { AlignTool } from '@/types/editor'
+import { AlignCenter, AlignLeft, AlignRight } from 'lucide-vue-next'
 import { ref, watch } from 'vue'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
@@ -15,41 +17,37 @@ const localValue = ref(props.value)
 
 const { updateToolById } = useComponentsStore()
 
+watch(
+  () => props.value,
+  () => {
+    localValue.value = props.value
+  },
+)
+
 watch(localValue, () => {
   updateToolById<AlignTool>(props.id, 'value', localValue.value)
 })
 </script>
 
 <template>
-  <div class="align-tool">
+  <div data-slot="align-tool">
     <EditorToolLabel>{{ title }}</EditorToolLabel>
-    <ElRadioGroup v-model="localValue">
-      <ElRadioButton label="left">
-        <UniconsAlignLeft />
-      </ElRadioButton>
-      <ElRadioButton label="center">
-        <UniconsAlignCenter />
-      </ElRadioButton>
-      <ElRadioButton label="right">
-        <UniconsAlignRight />
-      </ElRadioButton>
-    </ElRadioGroup>
+    <ToggleGroup
+      v-model="localValue"
+      :spacing="0"
+      type="single"
+      size="sm"
+      variant="outline"
+    >
+      <ToggleGroupItem value="left">
+        <AlignLeft :size="16" />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="center">
+        <AlignCenter :size="16" />
+      </ToggleGroupItem>
+      <ToggleGroupItem value="right">
+        <AlignRight :size="16" />
+      </ToggleGroupItem>
+    </ToggleGroup>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.is-active {
-  svg {
-    fill: #fff;
-  }
-}
-::v-deep .el-radio-button {
-  &__inner {
-    height: 32px;
-    svg {
-      position: relative;
-      top: -1px;
-    }
-  }
-}
-</style>

@@ -36,12 +36,6 @@ provide('parentMultiToolId', props.parentMultiToolId)
         :type="i.type === 'input' ? 'string' : 'number'"
         :value="i.value as string"
       />
-      <PaddingTool
-        v-if="i.type === 'padding'"
-        :id="i.id"
-        :value="i.value"
-        :title="i.label"
-      />
       <SpacingTool
         v-if="i.type === 'spacing'"
         :id="i.id"
@@ -95,4 +89,4 @@ provide('parentMultiToolId', props.parentMultiToolId)
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { GridTool } from '@/types/editor'
+import { Plus } from 'lucide-vue-next'
 import { ref } from 'vue'
+import { Button } from '@/components/ui/button'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
@@ -26,7 +28,7 @@ function onAction(action: string, index: number) {
 </script>
 
 <template>
-  <div class="multi-tool">
+  <div data-slot="grid-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>
@@ -34,7 +36,6 @@ function onAction(action: string, index: number) {
       <div
         v-for="(group, index) in value"
         :key="index"
-        class="multi-tool-group"
       >
         <EditorPanel type="bordered">
           <EditorPanelItem
@@ -50,16 +51,13 @@ function onAction(action: string, index: number) {
           </EditorPanelItem>
         </EditorPanel>
       </div>
-      <ElButton
-        style="width: 100%"
-        type="primary"
-        plain
+      <Button
+        variant="ghost"
         @click="onAddNew"
       >
+        <Plus class="size-4" />
         Add Column
-      </ElButton>
+      </Button>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped></style>
