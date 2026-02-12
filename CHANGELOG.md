@@ -1,3 +1,17 @@
+# [0.9.0](https://github.com/mysigmail/card/compare/v0.8.0...v0.9.0) (2026-02-12)
+
+
+### Bug Fixes
+
+* normalize image src paths to handle base path correctly ([11e1f1b](https://github.com/mysigmail/card/commit/11e1f1bee1dd7e1f924bd3fb4457195a8aca696b))
+
+
+### Features
+
+* add template import/export ([#32](https://github.com/mysigmail/card/issues/32)) ([4e98d2f](https://github.com/mysigmail/card/commit/4e98d2f334aa4d39cad0484dc533a3b545faf2c2))
+
+
+
 # [0.8.0](https://github.com/mysigmail/card/compare/v0.7.1...v0.8.0) (2026-02-11)
 
 
