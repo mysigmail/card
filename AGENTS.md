@@ -1,96 +1,160 @@
 # AGENTS
 
-Проект: визуальный email-конструктор на Vue 3 + TypeScript.
+Этот документ описывает, как агенту безопасно менять код в проекте email-конструктора на Vue 3 + TypeScript.
+Главный принцип: **JSON-структура шаблона первична**, HTML-превью вторично.
 
-## Цель агента
+## 0. Приоритеты изменений
 
-- Ускорять добавление email-блоков без дублирования логики.
-- Сохранять единый источник правды: `tools + schema`.
-- Поддерживать единственный путь рендера без отдельных runtime-компонентов на блок.
+Перед любым изменением соблюдай порядок:
+1. Сохранить контракт данных шаблона (`version`, структура, лимиты, санитизация).
+2. Не ломать инварианты дерева `Block -> Row -> Cell -> Atom`.
+3. Не нарушать email-совместимость (табличная верстка, inline-стили).
+4. Не ломать UX редактора (выделение, дерево, импорт/экспорт, localStorage).
 
-## Архитектурный контракт (обязательно)
+## 1. Архитектурная карта (FSD-lite)
 
-- `Component` всегда должен иметь `schema`:
-  - `src/types/editor.ts`
-- Рендер блоков идет через единый рендерер:
-  - `src/components/email-components/SchemaEmailComponent.vue`
-  - `src/components/editor/EditorCanvas.vue`
-- Превью рендерится в `Shadow DOM`, чтобы изолировать стили редактора и содержимого письма:
-  - `src/components/editor/TheEditor.vue`
-  - `src/utils/index.ts` (`renderToShadowDom`)
-- Конфиги блоков хранятся в `catalog/*/index.ts` и собираются через field DSL:
-  - `src/components/email-components/fields.ts`
-- Группы инструментов описываются только через `ToolGroupRef`:
-  - `groupId`, `groupRole`, `groupLabel`
-  - `src/types/editor.ts`
-  - `src/components/email-components/schema/groups.ts`
+- `src/app` — инициализация приложения, глобальные стили.
+- `src/entities` — доменные сущности и бизнес-логика (`block`, `style`, `template`).
+- `src/features` — фичи редактора и превью (`editor`, `email-preview`).
+- `src/shared` — общие UI-компоненты, утилиты, инфраструктура.
 
-## Как добавлять новый блок
+## 2. Доменная модель и инварианты
 
-1. Добавить/обновить декларацию в `src/components/email-components/catalog/<category>/index.ts`.
-2. Создать группы через `createSchemaGroups()` и `group(...)`.
-3. Описать `tools` через `f.*` helper-ы, передавая `ToolGroupRef`.
-4. Описать `schema` через `defineEmailBlockSchema(...)` из:
-   - `src/components/email-components/schema/types.ts`
-5. Использовать `gp(group, 'field')` для путей вместо ручной конкатенации строк.
-6. При необходимости добавить новый adapter по роли (не в renderer):
-   - `src/components/email-components/schema/adapters.ts`
+Базовая иерархия:
+`BlockNode` -> `RowNode` -> `CellNode` -> `Atom`.
 
-## Typed schema paths
+Ключевые сущности:
+- `BlockNode` содержит `rows`.
+- `RowNode` содержит `cells`.
+- `CellNode` содержит `atoms` и `rows` (вложенность поддерживается рекурсивно).
+- `Atom` — контентный узел (`text`, `button`, `divider`, `image`, `menu`).
+- `CanvasBlockInstance` — элемент канваса с `id`, `version: 2`, `block`.
 
-- Использовать типизированные пути `groupId.property` через:
-  - `gp(...)`
-  - `defineEmailBlockSchema`
-  - `SchemaGroupFields`
+ID-правила:
+- В данных узлов хранятся "сырые" id (`nanoid(8)`), без префиксов.
+- Префиксы `block:`, `row:`, `cell:`, `atom:` используются в UI (`data-node-id`, tree scroll target), а не в persisted-данных.
 
-## Tools и ключи
+## 3. Source of Truth (куда идти за изменениями)
 
-- Использовать стабильные `key` для всех tools.
-- Новые инструменты добавлять через `toolBuilder` и/или `f.*` DSL.
+| Что меняем | Файл |
+| :--- | :--- |
+| Типы дерева блока | `src/entities/block/types.ts` |
+| Фабрики узлов/атомов | `src/entities/block/block-factory.ts` |
+| Типы spacing/background | `src/entities/style/types.ts` |
+| Контракт шаблона (`TemplateExportV2`, лимиты, tool types) | `src/entities/template/types.ts` |
+| Валидация/санитизация/migration/remap id шаблона | `src/entities/template/template-io.ts` |
+| Store API редактора | `src/features/editor/model/index.ts` |
+| CRUD дерева на канвасе | `src/features/editor/model/canvas.ts` |
+| Template IO интеграция со store | `src/features/editor/model/template-io.ts` |
+| Persist/Hydrate localStorage | `src/features/editor/model/persistence.ts` |
+| Главный рендер блока | `src/features/email-preview/ui/BlockRenderer.vue` |
+| Рендер row/cell/atom | `src/features/email-preview/ui/BlockRendererRowNode.vue` |
+| Панель настроек блока/атома | `src/features/editor/components/tools/BlockSettingsPanel.vue` |
+| Каталог пресетов | `src/features/email-preview/catalog/` |
 
-## Архитектурная чистота
+Важно:
+- В проекте **два `template-io.ts`** с разной ответственностью:
+  - `src/entities/template/template-io.ts` — доменный парсер/валидатор/санитайзер.
+  - `src/features/editor/model/template-io.ts` — применение шаблона к store.
 
-- Не добавлять альтернативные пути рендера.
-- Регистрировать adapters только по `groupRole`.
+## 4. Обязательные технические правила
 
-## UI-компоненты (shadcn-first)
+### 4.1 Изменение дерева только через store
 
-- Для UI всегда использовать приоритет:
-  1. Сначала проверить, есть ли готовый компонент в `src/components/ui/*`.
-  2. Если нет, добавить компонент из `shadcn-vue`.
-  3. Если в `shadcn-vue` компонента нет, создать свой в `src/components/ui/*`, следуя паттерну shadcn.
-- Не дублировать уже существующие UI-компоненты под новыми именами.
-- Не использовать прямые `reka-ui` примитивы в фичах, если уже есть обертка в `src/components/ui/*`.
-- Для установки новых shadcn-компонентов использовать `pnpm dlx shadcn-vue@latest add <component>`.
-- Кастомные стили поверх shadcn делать минимально; приоритет — штатные `variant`/`size` и `class`-расширения в местах использования.
-- Новые кастомные компоненты в `src/components/ui/*` оформлять по паттерну:
-  - `index.ts` с экспортами, `cva`-вариантами и `VariantProps` (если есть варианты).
-  - `<Component>.vue` с типами из `index.ts`, `cn(...)`, `data-slot`, и совместимым API (`class`, `variant`, `size`, `v-model` где нужно).
-  - Именование и структура должны быть консистентны с текущими `button`, `input`, `toggle`, `select`, `color-picker`.
+Использовать `useComponentsStore` и его API:
+- `insertBlockToCanvas`, `insertRowToBlock`, `insertRowToCell`
+- `insertCellToRow`, `insertAtomToCell`
+- `removeComponent`, `removeRow`, `removeCell`, `removeAtom`
+- `moveComponent`, `moveAtomWithinCell`
+- `updateToolById`, `addNewToolToMultiTool`, `deleteMultiToolItem`
+- `selectBlock/selectRow/selectCell/selectAtom`
 
-## Shadow DOM и технические классы
+Нельзя напрямую мутировать дерево внутри UI-компонентов.
 
-- Технические классы с префиксом `p-` относятся к превью письма (например, `p-html`, `p-body`, `p-ghost`, `p-is-empty`).
-- Стили для `p-*` должны жить в `src/assets/scss/preview.scss`, который инжектится в `Shadow DOM`.
-- Не опираться на стили внешнего редактора внутри email-превью; если нужен новый технический класс для превью, добавлять его в формате `p-*` и описывать в `preview.scss`.
+### 4.2 Shadow DOM и preview-стили
 
-## Проверки перед завершением задачи
+- Хост превью: `src/features/editor/ui/EditorCanvas.vue`.
+- Инфра Shadow DOM: `src/shared/lib/shadow-dom.ts`.
+- Технические preview-классы должны использовать префикс `p-`.
+- Проверять, что стили не протекают за пределы Shadow DOM.
 
-- Типы:
-  - `pnpm -s vue-tsc --noEmit --skipLibCheck`
-- Линт по измененным файлам:
-  - `pnpm -s eslint <changed-files>`
+### 4.3 Email-совместимость
 
-## Что НЕ трогать без причины
+- Базовая сетка только через `@mysigmail/vue-email-components` (`MRow`, `MColumn` и т.д.).
+- Не строить layout на Flexbox/Grid для email-каркаса.
+- Стили критичных элементов задавать inline.
 
-- Автогенерируемые декларации:
-  - `src/types/auto-imports.d.ts`
-  - `src/types/components.d.ts`
-- Ambient declarations:
-  - `src/env.d.ts`
-  - `src/types/extensions.d.ts`
+## 5. Template contract (нельзя ломать)
 
-## Формат изменений
+Источник: `src/entities/template/types.ts`, `src/entities/template/template-io.ts`.
 
-- Предпочитать небольшие, изолированные патчи.
-- В документации фиксировать архитектурные решения и ограничения.
+Обязательные константы/ограничения:
+- `TEMPLATE_EXPORT_VERSION = 2`
+- `TEMPLATE_LOCAL_STORAGE_KEY = "card.template.v2"`
+- `TEMPLATE_MAX_COMPONENTS = 200`
+- `TEMPLATE_MAX_JSON_BYTES = 2 * 1024 * 1024`
+
+Поведение:
+- Импорт обязан проходить через `parseTemplateExportPayload` / `parseTemplateExportJson`.
+- HTML (text editor) должен проходить санитизацию через доменный `template-io`.
+- При runtime-импорте id блоков/узлов/атомов ремапятся в новые значения.
+
+## 6. Playbook: типовые изменения
+
+### 6.1 Добавить новый Atom
+
+1. Добавить тип в `src/entities/block/types.ts`.
+2. Добавить фабрику в `src/entities/block/block-factory.ts`.
+3. Поддержать операции в `src/features/editor/model/canvas.ts` (если нужны спец-ветки).
+4. Добавить UI-настройки в `src/features/editor/components/tools/`.
+5. Подключить настройки в `src/features/editor/components/tools/BlockSettingsPanel.vue`.
+6. Добавить рендер в `src/features/email-preview/ui/BlockRendererRowNode.vue`.
+7. Обновить `src/entities/template/template-io.ts`:
+   - валидация структуры,
+   - санитизация,
+   - совместимость импорта/экспорта.
+
+### 6.2 Добавить новый тип Tool / поле настройки
+
+1. Добавить типы в `src/entities/template/types.ts`.
+2. Обновить трансформации в `src/features/editor/model/tools.ts` и `canvas.ts`.
+3. Обновить UI панели настроек (`tools/*`, `BlockSettingsPanel.vue`).
+4. Обновить доменный IO (`src/entities/template/template-io.ts`):
+   - разрешенный `TOOL_TYPES`,
+   - валидация/санитизация value.
+5. Проверить, что поле сохраняется в JSON и восстанавливается из localStorage.
+
+### 6.3 Изменить контракт шаблона
+
+1. Сначала определить обратную совместимость.
+2. Затем обновить `types.ts` и `template-io.ts` (validation + migration).
+3. После этого обновить feature-layer IO (`src/features/editor/model/template-io.ts`) при необходимости.
+4. Проверить `append` и `replace` режимы импорта.
+
+## 7. UI policy (shadcn-vue)
+
+- Базовые UI-компоненты размещаются в `src/shared/ui/`.
+- Если нужен новый компонент, использовать:
+  - `pnpm dlx shadcn-vue@latest add <component_name>`
+- Не создавать кастомные аналоги кнопок/инпутов, если есть стандартный shadcn-компонент.
+
+## 8. Проверки перед завершением
+
+Обязательный минимум:
+1. Types: `pnpm -s vue-tsc --noEmit`
+2. Lint: `pnpm -s eslint <changed_files>`
+
+Smoke-check вручную (критично для этого проекта):
+1. Добавление/редактирование нового поля в UI реально меняет превью.
+2. Export JSON -> Import JSON дает тот же результат (round-trip).
+3. Import в обоих режимах: `replace` и `append`.
+4. Перезагрузка страницы восстанавливает состояние из localStorage.
+5. В Shadow DOM стили элемента выглядят корректно и не текут наружу.
+
+## 9. Антипаттерны (не делать)
+
+- Не добавлять новые точки входа для состояния мимо `useComponentsStore`.
+- Не менять JSON-контракт шаблона без обновления validation/sanitize/migration.
+
+---
+Критерий качества для любого PR: после изменений пользователь может безопасно сохранить шаблон в JSON, импортировать его обратно и получить предсказуемый визуальный результат в email-превью без регрессий структуры.
