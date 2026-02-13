@@ -25,16 +25,16 @@ import { useComponentsStore } from '@/store/components'
 const {
   selectionLevel,
   selectedBlock,
-  selectedGrid,
-  selectedItem,
+  selectedRow,
+  selectedCell,
   selectedAtom,
-  addGridToBlock,
-  removeGridFromBlock,
-  addItemToGrid,
-  removeAtomFromItem,
+  insertRowToBlock,
+  removeRow,
+  insertCellToRow,
+  removeAtom,
   selectedBlockId,
-  selectedGridId,
-  selectedItemId,
+  selectedRowId,
+  selectedCellId,
 } = useComponentsStore()
 
 const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
@@ -175,7 +175,7 @@ function toMenuListToolValue(atom: MenuAtom): MultiTool['value'] {
   }))
 }
 
-function settingToolId(level: 'block' | 'grid' | 'item', id: string, field: string) {
+function settingToolId(level: 'block' | 'row' | 'cell', id: string, field: string) {
   return `v2-settings::${level}::${id}::${field}`
 }
 
@@ -233,160 +233,160 @@ const blockAppearanceTools = computed<Tool[]>(() => {
   ]
 })
 
-const gridAppearanceTools = computed<Tool[]>(() => {
-  if (!selectedGrid.value)
+const rowAppearanceTools = computed<Tool[]>(() => {
+  if (!selectedRow.value)
     return []
 
   return [
     {
-      id: settingToolId('grid', selectedGrid.value.id, 'spacing'),
+      id: settingToolId('row', selectedRow.value.id, 'spacing'),
       key: 'padding',
       label: 'Spacings',
       type: 'spacing',
-      value: normalizeSpacingValue(selectedGrid.value.settings.spacing),
+      value: normalizeSpacingValue(selectedRow.value.settings.spacing),
     },
     {
-      id: settingToolId('grid', selectedGrid.value.id, 'backgroundColor'),
+      id: settingToolId('row', selectedRow.value.id, 'backgroundColor'),
       key: 'backgroundColor',
       label: 'Background Color',
       type: 'colorPicker',
-      value: selectedGrid.value.settings.backgroundColor,
+      value: selectedRow.value.settings.backgroundColor,
     },
     {
-      id: settingToolId('grid', selectedGrid.value.id, 'backgroundImage'),
+      id: settingToolId('row', selectedRow.value.id, 'backgroundImage'),
       key: 'backgroundImage',
       label: 'Background Image',
       type: 'bgImage',
-      value: normalizeBackgroundImage(selectedGrid.value.settings.backgroundImage),
+      value: normalizeBackgroundImage(selectedRow.value.settings.backgroundImage),
     },
     {
-      id: settingToolId('grid', selectedGrid.value.id, 'gap'),
+      id: settingToolId('row', selectedRow.value.id, 'gap'),
       key: 'gap',
       label: 'Gap',
       type: 'inputNumber',
-      value: selectedGrid.value.settings.gap,
+      value: selectedRow.value.settings.gap,
     },
     {
-      id: settingToolId('grid', selectedGrid.value.id, 'height'),
+      id: settingToolId('row', selectedRow.value.id, 'height'),
       key: 'height',
       label: 'Min Height',
       type: 'inputNumber',
-      value: selectedGrid.value.settings.height ?? 0,
+      value: selectedRow.value.settings.height ?? 0,
     },
   ]
 })
 
-const itemAppearanceTools = computed<Tool[]>(() => {
-  if (!selectedItem.value)
+const cellAppearanceTools = computed<Tool[]>(() => {
+  if (!selectedCell.value)
     return []
 
   return [
     {
-      id: settingToolId('item', selectedItem.value.id, 'spacing'),
+      id: settingToolId('cell', selectedCell.value.id, 'spacing'),
       key: 'padding',
       label: 'Spacings',
       type: 'spacing',
-      value: normalizeSpacingValue(selectedItem.value.settings.spacing),
+      value: normalizeSpacingValue(selectedCell.value.settings.spacing),
     },
     {
-      id: settingToolId('item', selectedItem.value.id, 'backgroundColor'),
+      id: settingToolId('cell', selectedCell.value.id, 'backgroundColor'),
       key: 'backgroundColor',
       label: 'Background Color',
       type: 'colorPicker',
-      value: selectedItem.value.settings.backgroundColor,
+      value: selectedCell.value.settings.backgroundColor,
     },
     {
-      id: settingToolId('item', selectedItem.value.id, 'backgroundImage'),
+      id: settingToolId('cell', selectedCell.value.id, 'backgroundImage'),
       key: 'backgroundImage',
       label: 'Background Image',
       type: 'bgImage',
-      value: normalizeBackgroundImage(selectedItem.value.settings.backgroundImage),
+      value: normalizeBackgroundImage(selectedCell.value.settings.backgroundImage),
     },
     {
-      id: settingToolId('item', selectedItem.value.id, 'link'),
+      id: settingToolId('cell', selectedCell.value.id, 'link'),
       key: 'link',
       label: 'Link',
       type: 'input',
-      value: selectedItem.value.settings.link || '',
+      value: selectedCell.value.settings.link || '',
     },
     {
-      id: settingToolId('item', selectedItem.value.id, 'borderRadius'),
+      id: settingToolId('cell', selectedCell.value.id, 'borderRadius'),
       key: 'borderRadius',
       label: 'Border Radius',
       type: 'inputNumber',
-      value: selectedItem.value.settings.borderRadius ?? 0,
+      value: selectedCell.value.settings.borderRadius ?? 0,
     },
   ]
 })
 
-const canRemoveSelectedGrid = computed(() => {
-  if (!selectedBlock.value || !selectedGrid.value)
+const canRemoveSelectedRow = computed(() => {
+  if (!selectedBlock.value || !selectedRow.value)
     return false
 
-  const currentGridId = selectedGrid.value.id
-  const isTopLevelGrid = selectedBlock.value.grids.some(grid => grid.id === currentGridId)
+  const currentRowId = selectedRow.value.id
+  const isTopLevelRow = selectedBlock.value.rows.some(row => row.id === currentRowId)
 
-  if (!isTopLevelGrid)
+  if (!isTopLevelRow)
     return true
 
-  return selectedBlock.value.grids.length > 1
+  return selectedBlock.value.rows.length > 1
 })
 
 function getItemWidthMode() {
-  return selectedItem.value?.settings.width === undefined ? 'auto' : 'manual'
+  return selectedCell.value?.settings.width === undefined ? 'auto' : 'manual'
 }
 
 function onItemWidthModeChange(mode: string) {
-  if (!selectedItem.value)
+  if (!selectedCell.value)
     return
 
-  selectedItem.value.settings.width
-    = mode === 'manual' ? (selectedItem.value.settings.width ?? 50) : undefined
+  selectedCell.value.settings.width
+    = mode === 'manual' ? (selectedCell.value.settings.width ?? 50) : undefined
 }
 
 function onItemWidthChange(value: string | number) {
-  if (!selectedItem.value)
+  if (!selectedCell.value)
     return
 
-  selectedItem.value.settings.width = toOptionalNumber(value)
+  selectedCell.value.settings.width = toOptionalNumber(value)
 }
 
 function getItemHeightMode() {
-  return selectedItem.value?.settings.height === undefined ? 'auto' : 'manual'
+  return selectedCell.value?.settings.height === undefined ? 'auto' : 'manual'
 }
 
 function onItemHeightModeChange(mode: string) {
-  if (!selectedItem.value)
+  if (!selectedCell.value)
     return
 
-  selectedItem.value.settings.height
-    = mode === 'manual' ? (selectedItem.value.settings.height ?? 120) : undefined
+  selectedCell.value.settings.height
+    = mode === 'manual' ? (selectedCell.value.settings.height ?? 120) : undefined
 }
 
 function onItemHeightChange(value: string | number) {
-  if (!selectedItem.value)
+  if (!selectedCell.value)
     return
 
-  selectedItem.value.settings.height = toOptionalNumber(value)
+  selectedCell.value.settings.height = toOptionalNumber(value)
 }
 
 function onItemVerticalAlignChange(value: string) {
-  if (!selectedItem.value)
+  if (!selectedCell.value)
     return
 
-  selectedItem.value.settings.verticalAlign
+  selectedCell.value.settings.verticalAlign
     = value === 'middle' || value === 'bottom' ? value : 'top'
 }
 
 function getItemHorizontalAlign() {
-  return selectedItem.value?.settings.horizontalAlign ?? 'left'
+  return selectedCell.value?.settings.horizontalAlign ?? 'left'
 }
 
 function onItemHorizontalAlignChange(value: string) {
-  if (!selectedItem.value)
+  if (!selectedCell.value)
     return
 
-  selectedItem.value.settings.horizontalAlign
+  selectedCell.value.settings.horizontalAlign
     = value === 'center' || value === 'right' ? value : 'left'
 }
 
@@ -599,7 +599,7 @@ const atomTools = computed<Tool[]>(() => {
               variant="outline"
               size="sm"
               class="flex-1"
-              @click="addGridToBlock(selectedBlockId!)"
+              @click="insertRowToBlock(selectedBlockId!)"
             >
               + Grid
             </Button>
@@ -608,14 +608,13 @@ const atomTools = computed<Tool[]>(() => {
       </EditorPanelItem>
     </EditorPanel>
 
-    <!-- ================= GRID LEVEL ================= -->
-    <EditorPanel v-if="selectionLevel === 'grid' && selectedGrid && selectedBlock">
+    <EditorPanel v-if="selectionLevel === 'row' && selectedRow && selectedBlock">
       <EditorPanelItem
         type="opened"
-        title="Grid"
+        title="Row"
       >
         <div class="space-y-3 pb-2">
-          <EditorComponentTools :tools="gridAppearanceTools" />
+          <EditorComponentTools :tools="rowAppearanceTools" />
 
           <!-- Actions -->
           <div class="flex gap-2 pt-2 border-t border-border">
@@ -623,15 +622,15 @@ const atomTools = computed<Tool[]>(() => {
               variant="outline"
               size="sm"
               class="flex-1"
-              @click="addItemToGrid(selectedBlockId!, selectedGridId!)"
+              @click="insertCellToRow(selectedBlockId!, selectedRowId!)"
             >
-              + Item
+              + Cell
             </Button>
             <Button
-              v-if="canRemoveSelectedGrid"
+              v-if="canRemoveSelectedRow"
               variant="destructive"
               size="sm"
-              @click="removeGridFromBlock(selectedBlockId!, selectedGridId!)"
+              @click="removeRow(selectedBlockId!, selectedRowId!)"
             >
               Remove
             </Button>
@@ -640,20 +639,19 @@ const atomTools = computed<Tool[]>(() => {
       </EditorPanelItem>
     </EditorPanel>
 
-    <!-- ================= ITEM LEVEL ================= -->
-    <EditorPanel v-if="selectionLevel === 'item' && selectedItem && selectedBlock">
+    <EditorPanel v-if="selectionLevel === 'cell' && selectedCell && selectedBlock">
       <EditorPanelItem
         type="opened"
-        title="Item"
+        title="Cell"
       >
         <div class="space-y-3 pb-2">
-          <EditorComponentTools :tools="itemAppearanceTools" />
+          <EditorComponentTools :tools="cellAppearanceTools" />
 
           <!-- Vertical Align -->
           <div>
             <EditorToolLabel>Vertical Align</EditorToolLabel>
             <ToggleGroup
-              :model-value="selectedItem.settings.verticalAlign"
+              :model-value="selectedCell.settings.verticalAlign"
               type="single"
               size="sm"
               variant="outline"
@@ -742,7 +740,7 @@ const atomTools = computed<Tool[]>(() => {
               type="number"
               size="sm"
               placeholder="50"
-              :model-value="selectedItem.settings.width ?? ''"
+              :model-value="selectedCell.settings.width ?? ''"
               @update:model-value="(v: string | number) => onItemWidthChange(v)"
             />
           </div>
@@ -774,7 +772,7 @@ const atomTools = computed<Tool[]>(() => {
               type="number"
               size="sm"
               placeholder="120"
-              :model-value="selectedItem.settings.height ?? ''"
+              :model-value="selectedCell.settings.height ?? ''"
               @update:model-value="(v: string | number) => onItemHeightChange(v)"
             />
           </div>
@@ -801,12 +799,7 @@ const atomTools = computed<Tool[]>(() => {
               size="sm"
               class="w-full"
               @click="
-                removeAtomFromItem(
-                  selectedBlockId!,
-                  selectedGridId!,
-                  selectedItemId!,
-                  selectedAtom!.id,
-                )
+                removeAtom(selectedBlockId!, selectedRowId!, selectedCellId!, selectedAtom!.id)
               "
             >
               Remove Atom

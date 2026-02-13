@@ -1,31 +1,31 @@
-import type { Block } from '@/types/block'
-import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
+import type { BlockNode } from '@/types/block'
+import type { BlockPreset, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
-import { createBlock, createDividerAtom } from '@/components/email-components/block-factory'
+import { createBlockNode, createDividerAtom } from '@/components/email-components/block-factory'
 import {
-  createImageAtomNode,
-  createItemNode,
+  buildImageAtom,
+  createCell,
   createMenuTextAtom,
-  resetGrid,
+  resetRow,
 } from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
 import { COLOR } from '@/components/email-components/constants'
 
-function buildMenu2ComposerBlock(theme: ComponentTheme, label: string): Block {
+function buildMenu2Block(theme: ComponentTheme, label: string): BlockNode {
   const logo = theme === 'dark' ? images.logo.white : images.logo.black
   const backgroundColor = theme === 'dark' ? COLOR.theme.dark : COLOR.theme.light
   const linkColor = theme === 'dark' ? COLOR.theme.light : COLOR.theme.dark
   const dividerColor = theme === 'dark' ? COLOR.divider.light : COLOR.divider.dark
 
-  const block = createBlock(label)
+  const block = createBlockNode(label)
   block.settings.spacing = {
     padding: [30, 35, 30, 35],
   }
   block.settings.backgroundColor = backgroundColor
   block.settings.backgroundImage = undefined
 
-  const grid = block.grids[0]
-  resetGrid(grid)
+  const row = block.rows[0]
+  resetRow(row)
 
   const divider = createDividerAtom()
   divider.color = dividerColor
@@ -35,11 +35,11 @@ function buildMenu2ComposerBlock(theme: ComponentTheme, label: string): Block {
     padding: [10, 0, 10, 0],
   }
 
-  const item = createItemNode({
+  const item = createCell({
     horizontalAlign: 'center',
     verticalAlign: 'top',
     atoms: [
-      createImageAtomNode({
+      buildImageAtom({
         src: logo,
         width: 110,
       }),
@@ -50,22 +50,22 @@ function buildMenu2ComposerBlock(theme: ComponentTheme, label: string): Block {
     ],
   })
 
-  grid.items = [item]
-  block.grids = [grid]
+  row.cells = [item]
+  block.rows = [row]
 
   return block
 }
 
-export function menu2Composer(theme: ComponentTheme, label: string): BlockCatalogComponent {
+export function menu2Preset(theme: ComponentTheme, label: string): BlockPreset {
   const preview = theme === 'dark' ? images.components.menu2.dark : images.components.menu2.light
 
   return {
     id: nanoid(8),
     version: 2,
-    name: 'menu2-composer',
+    name: 'menu2',
     label,
     type: 'menu',
     preview,
-    block: buildMenu2ComposerBlock(theme, label),
+    block: buildMenu2Block(theme, label),
   }
 }

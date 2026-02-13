@@ -5,7 +5,7 @@ import { onMounted, ref } from 'vue'
 import { useList } from '@/components/editor/components/list/composables'
 import { useComponentsStore } from '@/store/components'
 
-const { list, addBlockToCanvas } = useComponentsStore()
+const { list, insertBlockToCanvas } = useComponentsStore()
 const { showList } = useList()
 
 const hovered = ref<number>()
@@ -55,7 +55,7 @@ function onMouseLeave() {
       </div>
       <div
         class="cursor-pointer border-t border-border px-4 py-3 text-base hover:bg-muted flex items-center gap-2"
-        @click="addBlockToCanvas('Block')"
+        @click="insertBlockToCanvas('Block')"
       >
         <Plus class="size-4" />
         Empty Block

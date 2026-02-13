@@ -1,30 +1,30 @@
-import type { Block } from '@/types/block'
-import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
+import type { BlockNode } from '@/types/block'
+import type { BlockPreset, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
-import { createBlock } from '@/components/email-components/block-factory'
+import { createBlockNode } from '@/components/email-components/block-factory'
 import {
-  createItemNode,
-  createTextAtomNode,
-  resetGrid,
+  buildTextAtom,
+  createCell,
+  resetRow,
 } from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
 
-function buildContent4ComposerBlock(label: string): Block {
-  const block = createBlock(label)
+function buildContent4Block(label: string): BlockNode {
+  const block = createBlockNode(label)
   block.settings.spacing = {
     padding: [30, 35, 30, 35],
   }
   block.settings.backgroundColor = '#FFFFFF'
   block.settings.backgroundImage = undefined
 
-  const grid = block.grids[0]
-  resetGrid(grid)
-  grid.items = [
-    createItemNode({
+  const row = block.rows[0]
+  resetRow(row)
+  row.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p style="text-align: center"><span style="color: rgb(159, 163, 167); font-size: 14px">12 July \'19</span></p><p style="text-align: center"><strong><span style="font-size: 24px">How to Stick to Your Fitness Habits the Easy</span></strong><br><strong><span style="font-size: 24px">Way, According to Science</span></strong></p><p style="text-align: center"><span style="color: rgb(159, 163, 167); font-size: 14px">Staying in shape is mostly about program compliance: it&rsquo;s not about having</span><br><span style="color: rgb(159, 163, 167); font-size: 14px">the best fitness program, but about having one that&rsquo;s good enough, and</span><br><span style="color: rgb(159, 163, 167); font-size: 14px">making sure you actually stick to it.</span></p>',
           color: '#111111',
@@ -33,19 +33,19 @@ function buildContent4ComposerBlock(label: string): Block {
     }),
   ]
 
-  block.grids = [grid]
+  block.rows = [row]
 
   return block
 }
 
-export function content4Composer(_: ComponentTheme, label: string): BlockCatalogComponent {
+export function content4Preset(_: ComponentTheme, label: string): BlockPreset {
   return {
     id: nanoid(8),
     version: 2,
-    name: 'content4-composer',
+    name: 'content4',
     label,
     type: 'content',
     preview: images.components.content4,
-    block: buildContent4ComposerBlock(label),
+    block: buildContent4Block(label),
   }
 }

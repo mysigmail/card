@@ -1,33 +1,33 @@
-import type { Block } from '@/types/block'
-import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
+import type { BlockNode } from '@/types/block'
+import type { BlockPreset, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
-import { createBlock, createGrid } from '@/components/email-components/block-factory'
+import { createBlockNode, createRowNode } from '@/components/email-components/block-factory'
 import {
-  createButtonAtomNode,
-  createImageAtomNode,
-  createItemNode,
-  createTextAtomNode,
-  resetGrid,
+  buildButtonAtom,
+  buildImageAtom,
+  buildTextAtom,
+  createCell,
+  resetRow,
 } from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
 import { COLOR } from '@/components/email-components/constants'
 
-function buildHeader3ComposerBlock(label: string): Block {
-  const block = createBlock(label)
+function buildHeader3Block(label: string): BlockNode {
+  const block = createBlockNode(label)
   block.settings.spacing = {
     padding: [30, 35, 30, 35],
   }
   block.settings.backgroundColor = COLOR.theme.light
   block.settings.backgroundImage = undefined
 
-  const topGrid = block.grids[0]
-  resetGrid(topGrid)
-  topGrid.items = [
-    createItemNode({
+  const topRow = block.rows[0]
+  resetRow(topRow)
+  topRow.cells = [
+    createCell({
       horizontalAlign: 'center',
       verticalAlign: 'top',
       atoms: [
-        createImageAtomNode({
+        buildImageAtom({
           src: images.logo.black,
           width: 110,
         }),
@@ -35,14 +35,14 @@ function buildHeader3ComposerBlock(label: string): Block {
     }),
   ]
 
-  const contentGrid = createGrid([])
-  resetGrid(contentGrid)
-  contentGrid.settings.spacing = {
+  const contentRow = createRowNode([])
+  resetRow(contentRow)
+  contentRow.settings.spacing = {
     margin: [0, 0, 0, 0],
     padding: [30, 0, 0, 0],
   }
-  contentGrid.items = [
-    createItemNode({
+  contentRow.cells = [
+    createCell({
       horizontalAlign: 'center',
       verticalAlign: 'top',
       borderRadius: 5,
@@ -57,12 +57,12 @@ function buildHeader3ComposerBlock(label: string): Block {
         padding: [45, 20, 16, 20],
       },
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p style="text-align: center"><span style="font-size: 36px"><strong>Don\'t Lose<br/>Yourself.</strong></span></p><p style="text-align: center"><span style="font-size: 18px">New album</span></p>',
           color: COLOR.theme.light,
         }),
-        createButtonAtomNode({
+        buildButtonAtom({
           text: 'Download',
           link: 'https://example.com',
           backgroundColor: '#3494FB',
@@ -79,19 +79,19 @@ function buildHeader3ComposerBlock(label: string): Block {
     }),
   ]
 
-  block.grids = [topGrid, contentGrid]
+  block.rows = [topRow, contentRow]
 
   return block
 }
 
-export function header3Composer(_: ComponentTheme, label: string): BlockCatalogComponent {
+export function header3Preset(_: ComponentTheme, label: string): BlockPreset {
   return {
     id: nanoid(8),
     version: 2,
-    name: 'header3-composer',
+    name: 'header3',
     label,
     type: 'header',
     preview: images.components.header3,
-    block: buildHeader3ComposerBlock(label),
+    block: buildHeader3Block(label),
   }
 }

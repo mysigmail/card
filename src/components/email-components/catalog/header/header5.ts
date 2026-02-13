@@ -1,35 +1,35 @@
-import type { Block } from '@/types/block'
-import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
+import type { BlockNode } from '@/types/block'
+import type { BlockPreset, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
-import { createBlock, createGrid } from '@/components/email-components/block-factory'
+import { createBlockNode, createRowNode } from '@/components/email-components/block-factory'
 import {
-  createButtonAtomNode,
-  createImageAtomNode,
-  createItemNode,
-  createTextAtomNode,
-  resetGrid,
+  buildButtonAtom,
+  buildImageAtom,
+  buildTextAtom,
+  createCell,
+  resetRow,
 } from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
 import { COLOR } from '@/components/email-components/constants'
 
-function buildHeader5ComposerBlock(label: string): Block {
+function buildHeader5Block(label: string): BlockNode {
   const imageBlockHeight = 300
 
-  const block = createBlock(label)
+  const block = createBlockNode(label)
   block.settings.spacing = {
     padding: [30, 35, 30, 35],
   }
   block.settings.backgroundColor = COLOR.theme.light
   block.settings.backgroundImage = undefined
 
-  const logoGrid = block.grids[0]
-  resetGrid(logoGrid)
-  logoGrid.items = [
-    createItemNode({
+  const logoRow = block.rows[0]
+  resetRow(logoRow)
+  logoRow.cells = [
+    createCell({
       horizontalAlign: 'center',
       verticalAlign: 'top',
       atoms: [
-        createImageAtomNode({
+        buildImageAtom({
           src: images.logo.black,
           width: 110,
         }),
@@ -37,18 +37,18 @@ function buildHeader5ComposerBlock(label: string): Block {
     }),
   ]
 
-  const mainTextGrid = createGrid([])
-  resetGrid(mainTextGrid)
-  mainTextGrid.settings.spacing = {
+  const mainTextRow = createRowNode([])
+  resetRow(mainTextRow)
+  mainTextRow.settings.spacing = {
     margin: [0, 0, 0, 0],
     padding: [30, 0, 0, 0],
   }
-  mainTextGrid.items = [
-    createItemNode({
+  mainTextRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p style="text-align: center"><span style="color: rgb(124, 134, 199); font-size: 18px">New series</span></p><p style="text-align: center"><strong><span style="font-size: 32px">The loop by loop.</span></strong></p>',
           color: '#000000',
@@ -57,19 +57,19 @@ function buildHeader5ComposerBlock(label: string): Block {
     }),
   ]
 
-  const imageBlockGrid = createGrid([])
-  resetGrid(imageBlockGrid)
-  imageBlockGrid.settings.spacing = {
+  const imageBlockRow = createRowNode([])
+  resetRow(imageBlockRow)
+  imageBlockRow.settings.spacing = {
     margin: [0, 0, 0, 0],
     padding: [20, 0, 0, 0],
   }
-  imageBlockGrid.items = [
-    createItemNode({
+  imageBlockRow.cells = [
+    createCell({
       horizontalAlign: 'center',
       verticalAlign: 'top',
       borderRadius: 0,
       atoms: [
-        createImageAtomNode({
+        buildImageAtom({
           src: '/img/apple-watch-2.png',
           width: 450,
           height: imageBlockHeight,
@@ -78,18 +78,18 @@ function buildHeader5ComposerBlock(label: string): Block {
     }),
   ]
 
-  const secondaryTextGrid = createGrid([])
-  resetGrid(secondaryTextGrid)
-  secondaryTextGrid.settings.spacing = {
+  const secondaryTextRow = createRowNode([])
+  resetRow(secondaryTextRow)
+  secondaryTextRow.settings.spacing = {
     margin: [0, 0, 0, 0],
     padding: [20, 0, 0, 0],
   }
-  secondaryTextGrid.items = [
-    createItemNode({
+  secondaryTextRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p style="text-align: center"><span style="font-size: 18px">With our latest model of watch,<br>you\'ll get the most amazing features<br>for your everyday workout.</span></p>',
           color: '#A9ADB3',
@@ -98,14 +98,14 @@ function buildHeader5ComposerBlock(label: string): Block {
     }),
   ]
 
-  const buttonGrid = createGrid([])
-  resetGrid(buttonGrid)
-  buttonGrid.items = [
-    createItemNode({
+  const buttonRow = createRowNode([])
+  resetRow(buttonRow)
+  buttonRow.cells = [
+    createCell({
       horizontalAlign: 'center',
       verticalAlign: 'top',
       atoms: [
-        createButtonAtomNode({
+        buildButtonAtom({
           text: 'Take Yours',
           link: 'https://example.com',
           backgroundColor: '#4A98ED',
@@ -122,19 +122,19 @@ function buildHeader5ComposerBlock(label: string): Block {
     }),
   ]
 
-  block.grids = [logoGrid, mainTextGrid, imageBlockGrid, secondaryTextGrid, buttonGrid]
+  block.rows = [logoRow, mainTextRow, imageBlockRow, secondaryTextRow, buttonRow]
 
   return block
 }
 
-export function header5Composer(_: ComponentTheme, label: string): BlockCatalogComponent {
+export function header5Preset(_: ComponentTheme, label: string): BlockPreset {
   return {
     id: nanoid(8),
     version: 2,
-    name: 'header5-composer',
+    name: 'header5',
     label,
     type: 'header',
     preview: images.components.header5,
-    block: buildHeader5ComposerBlock(label),
+    block: buildHeader5Block(label),
   }
 }

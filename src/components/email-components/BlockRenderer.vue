@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
-import type { Block } from '@/types/block'
+import type { BlockNode } from '@/types/block'
 import { MContainer } from '@mysigmail/vue-email-components'
 import { computed } from 'vue'
-import BlockRendererGridNode from '@/components/email-components/BlockRendererGridNode.vue'
+import BlockRendererRowNode from '@/components/email-components/BlockRendererRowNode.vue'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
   id: string
   index: number
-  block: Block
+  block: BlockNode
 }
 
 const props = defineProps<Props>()
@@ -68,11 +68,11 @@ function selectBlockNode() {
       :data-node-id="`block:${block.id}`"
       @click.stop="selectBlockNode"
     >
-      <BlockRendererGridNode
-        v-for="grid in block.grids"
-        :key="grid.id"
+      <BlockRendererRowNode
+        v-for="row in block.rows"
+        :key="row.id"
         :block-id="block.id"
-        :grid="grid"
+        :row="row"
       />
     </div>
   </MContainer>

@@ -1,21 +1,19 @@
 import type {
   Atom,
   AtomType,
-  Block,
-  BlockGrid,
-  BlockItem,
+  BlockNode,
   BlockSettings,
   ButtonAtom,
+  CellNode,
+  CellSettings,
   DividerAtom,
-  GridSettings,
   ImageAtom,
-  ItemSettings,
   MenuAtom,
+  RowNode,
+  RowSettings,
   TextAtom,
 } from '@/types/block'
 import { nanoid } from 'nanoid'
-
-// --- Default Settings ---
 
 export function createDefaultBlockSettings(): BlockSettings {
   return {
@@ -24,7 +22,7 @@ export function createDefaultBlockSettings(): BlockSettings {
   }
 }
 
-export function createDefaultGridSettings(): GridSettings {
+export function createDefaultRowSettings(): RowSettings {
   return {
     spacing: {},
     backgroundColor: 'transparent',
@@ -32,7 +30,7 @@ export function createDefaultGridSettings(): GridSettings {
   }
 }
 
-export function createDefaultItemSettings(): ItemSettings {
+export function createDefaultCellSettings(): CellSettings {
   return {
     spacing: {},
     backgroundColor: 'transparent',
@@ -49,8 +47,6 @@ function createAtomSpacing(padding: [number, number, number, number] = [0, 0, 0,
     padding: [...padding] as [number, number, number, number],
   }
 }
-
-// --- Atom Factories ---
 
 export function createTextAtom(value = '<p>Text</p>'): TextAtom {
   return {
@@ -150,30 +146,28 @@ export function createAtom(type: AtomType): Atom {
   }
 }
 
-// --- Structural Factories ---
-
-export function createItem(atoms?: Atom[]): BlockItem {
+export function createCellNode(atoms?: Atom[]): CellNode {
   return {
     id: nanoid(8),
-    settings: createDefaultItemSettings(),
+    settings: createDefaultCellSettings(),
     atoms: atoms ?? [createTextAtom()],
-    grids: [],
+    rows: [],
   }
 }
 
-export function createGrid(items?: BlockItem[]): BlockGrid {
+export function createRowNode(cells?: CellNode[]): RowNode {
   return {
     id: nanoid(8),
-    settings: createDefaultGridSettings(),
-    items: items ?? [createItem()],
+    settings: createDefaultRowSettings(),
+    cells: cells ?? [createCellNode()],
   }
 }
 
-export function createBlock(label = 'Block', grids?: BlockGrid[]): Block {
+export function createBlockNode(label = 'Block', rows?: RowNode[]): BlockNode {
   return {
     id: nanoid(8),
     label,
     settings: createDefaultBlockSettings(),
-    grids: grids ?? [createGrid()],
+    rows: rows ?? [createRowNode()],
   }
 }

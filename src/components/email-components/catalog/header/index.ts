@@ -1,15 +1,15 @@
-import { header1Composer } from './header1'
-import { header2Composer } from './header2'
-import { header3Composer } from './header3'
-import { header4Composer } from './header4'
-import { header5Composer } from './header5'
-import { header6Composer } from './header6'
+import { header1Preset } from './header1'
+import { header2Preset } from './header2'
+import { header3Preset } from './header3'
+import { header4Preset } from './header4'
+import { header5Preset } from './header5'
+import { header6Preset } from './header6'
 
 export const header = [
-  header1Composer('light', 'Header 1'),
-  header2Composer('light', 'Header 2'),
-  header3Composer('light', 'Header 3'),
-  header4Composer('light', 'Header 4'),
-  header5Composer('light', 'Header 5'),
-  header6Composer('light', 'Header 6'),
+  header1Preset('light', 'Header 1'),
+  header2Preset('light', 'Header 2'),
+  header3Preset('light', 'Header 3'),
+  header4Preset('light', 'Header 4'),
+  header5Preset('light', 'Header 5'),
+  header6Preset('light', 'Header 6'),
 ]

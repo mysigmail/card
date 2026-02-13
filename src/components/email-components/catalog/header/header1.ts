@@ -1,19 +1,19 @@
-import type { Block } from '@/types/block'
-import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
+import type { BlockNode } from '@/types/block'
+import type { BlockPreset, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
-import { createBlock, createGrid } from '@/components/email-components/block-factory'
+import { createBlockNode, createRowNode } from '@/components/email-components/block-factory'
 import {
-  createImageAtomNode,
-  createItemNode,
+  buildImageAtom,
+  buildTextAtom,
+  createCell,
   createMenuTextAtom,
-  createTextAtomNode,
-  resetGrid,
+  resetRow,
 } from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
 import { COLOR } from '@/components/email-components/constants'
 
-function buildHeader1ComposerBlock(label: string): Block {
-  const block = createBlock(label)
+function buildHeader1Block(label: string): BlockNode {
+  const block = createBlockNode(label)
   block.settings.spacing = {
     padding: [30, 35, 30, 35],
   }
@@ -25,21 +25,21 @@ function buildHeader1ComposerBlock(label: string): Block {
     size: 'cover',
   }
 
-  const topGrid = block.grids[0]
-  resetGrid(topGrid)
-  topGrid.items = [
-    createItemNode({
+  const topRow = block.rows[0]
+  resetRow(topRow)
+  topRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       width: 35,
       atoms: [
-        createImageAtomNode({
+        buildImageAtom({
           src: images.logo.white,
           width: 110,
         }),
       ],
     }),
-    createItemNode({
+    createCell({
       horizontalAlign: 'right',
       verticalAlign: 'top',
       width: 65,
@@ -47,14 +47,14 @@ function buildHeader1ComposerBlock(label: string): Block {
     }),
   ]
 
-  const textGrid = createGrid([])
-  resetGrid(textGrid)
-  textGrid.items = [
-    createItemNode({
+  const textRow = createRowNode([])
+  resetRow(textRow)
+  textRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p><strong><span style="font-size: 18px">Unleash Freedom</span></strong></p><p><span style="color: rgb(159, 249, 141); font-size: 48px">Discover</span><span style="font-size: 48px"> the Unmatched Thrill with Our </span><span style="color: #9FF98D; font-size: 48px">New Bicycle</span></p>',
           color: COLOR.theme.light,
@@ -67,19 +67,19 @@ function buildHeader1ComposerBlock(label: string): Block {
     }),
   ]
 
-  block.grids = [topGrid, textGrid]
+  block.rows = [topRow, textRow]
 
   return block
 }
 
-export function header1Composer(_: ComponentTheme, label: string): BlockCatalogComponent {
+export function header1Preset(_: ComponentTheme, label: string): BlockPreset {
   return {
     id: nanoid(8),
     version: 2,
-    name: 'header1-composer',
+    name: 'header1',
     label,
     type: 'header',
     preview: images.components.header1,
-    block: buildHeader1ComposerBlock(label),
+    block: buildHeader1Block(label),
   }
 }

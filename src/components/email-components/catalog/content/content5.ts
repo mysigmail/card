@@ -1,31 +1,31 @@
-import type { Block } from '@/types/block'
-import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
+import type { BlockNode } from '@/types/block'
+import type { BlockPreset, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
-import { createBlock, createGrid } from '@/components/email-components/block-factory'
+import { createBlockNode, createRowNode } from '@/components/email-components/block-factory'
 import {
-  createImageAtomNode,
-  createItemNode,
-  createTextAtomNode,
-  resetGrid,
+  buildImageAtom,
+  buildTextAtom,
+  createCell,
+  resetRow,
 } from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
 
-function buildContent5ComposerBlock(label: string): Block {
-  const block = createBlock(label)
+function buildContent5Block(label: string): BlockNode {
+  const block = createBlockNode(label)
   block.settings.spacing = {
     padding: [30, 35, 30, 35],
   }
   block.settings.backgroundColor = '#FFFFFF'
   block.settings.backgroundImage = undefined
 
-  const introGrid = block.grids[0]
-  resetGrid(introGrid)
-  introGrid.items = [
-    createItemNode({
+  const introRow = block.rows[0]
+  resetRow(introRow)
+  introRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p style="text-align: center"><span style="font-size: 14px">Staying in shape is mostly about program compliance: it&rsquo;s not about having</span><br><span style="font-size: 14px">the best fitness program, but about having one that&rsquo;s good enough, and</span><br><span style="font-size: 14px">making sure you actually stick to it.</span></p>',
           color: '#9FA3A7',
@@ -34,14 +34,14 @@ function buildContent5ComposerBlock(label: string): Block {
     }),
   ]
 
-  const imageGrid = createGrid([])
-  resetGrid(imageGrid)
-  imageGrid.items = [
-    createItemNode({
+  const imageRow = createRowNode([])
+  resetRow(imageRow)
+  imageRow.cells = [
+    createCell({
       horizontalAlign: 'center',
       verticalAlign: 'top',
       atoms: [
-        createImageAtomNode({
+        buildImageAtom({
           src: '/img/jack-finnigan-rriAI0nhcbc-unsplash.jpg',
           link: 'https://example.com',
           alt: 'Mike Brown',
@@ -53,14 +53,14 @@ function buildContent5ComposerBlock(label: string): Block {
     }),
   ]
 
-  const bottomTextGrid = createGrid([])
-  resetGrid(bottomTextGrid)
-  bottomTextGrid.items = [
-    createItemNode({
+  const bottomTextRow = createRowNode([])
+  resetRow(bottomTextRow)
+  bottomTextRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p style="text-align: center"><strong><span style="font-size: 18px">Mike Brown</span></strong><br><span style="color: rgb(159, 163, 167); font-size: 14px">Fitness Trainer</span></p>',
           color: '#111111',
@@ -69,19 +69,19 @@ function buildContent5ComposerBlock(label: string): Block {
     }),
   ]
 
-  block.grids = [introGrid, imageGrid, bottomTextGrid]
+  block.rows = [introRow, imageRow, bottomTextRow]
 
   return block
 }
 
-export function content5Composer(_: ComponentTheme, label: string): BlockCatalogComponent {
+export function content5Preset(_: ComponentTheme, label: string): BlockPreset {
   return {
     id: nanoid(8),
     version: 2,
-    name: 'content5-composer',
+    name: 'content5',
     label,
     type: 'content',
     preview: images.components.content5,
-    block: buildContent5ComposerBlock(label),
+    block: buildContent5Block(label),
   }
 }

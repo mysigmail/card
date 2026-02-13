@@ -1,6 +1,6 @@
 import type { IOptions } from 'sanitize-html'
-import type { Atom, Block, BlockGrid, BlockItem } from '@/types/block'
-import type { CanvasItem, GeneralTool, Tool, ToolCollectionItem } from '@/types/editor'
+import type { Atom, BlockNode, CellNode, RowNode } from '@/types/block'
+import type { CanvasBlockInstance, GeneralTool, Tool, ToolCollectionItem } from '@/types/editor'
 import type {
   TemplateExportMeta,
   TemplateExportV1,
@@ -16,7 +16,7 @@ import {
 import { clone } from '@/utils'
 
 interface CreateTemplateExportPayloadOptions {
-  installed: CanvasItem[]
+  installed: CanvasBlockInstance[]
   general: GeneralTool
   title?: string
 }
@@ -39,8 +39,8 @@ interface UnknownRecord {
 const TOOL_TYPES = new Set([
   'align',
   'bgImage',
+  'columns',
   'colorPicker',
-  'grid',
   'image',
   'input',
   'inputNumber',
@@ -673,17 +673,17 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
   pushIssue(issues, `${path}.type`, 'Unsupported atom type')
 }
 
-function validateGridItem(value: unknown, path: string, issues: TemplateValidationIssue[]) {
+function validateCellNode(value: unknown, path: string, issues: TemplateValidationIssue[]) {
   if (!isRecord(value)) {
-    pushIssue(issues, path, 'item must be an object')
+    pushIssue(issues, path, 'cell must be an object')
     return
   }
 
   if (!isString(value.id))
-    pushIssue(issues, `${path}.id`, 'item.id must be a string')
+    pushIssue(issues, `${path}.id`, 'cell.id must be a string')
 
   if (!isRecord(value.settings)) {
-    pushIssue(issues, `${path}.settings`, 'item.settings must be an object')
+    pushIssue(issues, `${path}.settings`, 'cell.settings must be an object')
   }
   else {
     validateSpacingValue(value.settings.spacing, `${path}.settings.spacing`, issues)
@@ -692,7 +692,7 @@ function validateGridItem(value: unknown, path: string, issues: TemplateValidati
       pushIssue(
         issues,
         `${path}.settings.backgroundColor`,
-        'item.settings.backgroundColor must be a string',
+        'cell.settings.backgroundColor must be a string',
       )
     }
 
@@ -703,7 +703,7 @@ function validateGridItem(value: unknown, path: string, issues: TemplateValidati
       pushIssue(
         issues,
         `${path}.settings.verticalAlign`,
-        'item.settings.verticalAlign must be "top", "middle" or "bottom"',
+        'cell.settings.verticalAlign must be "top", "middle" or "bottom"',
       )
     }
 
@@ -715,27 +715,27 @@ function validateGridItem(value: unknown, path: string, issues: TemplateValidati
       pushIssue(
         issues,
         `${path}.settings.horizontalAlign`,
-        'item.settings.horizontalAlign must be "left", "center" or "right"',
+        'cell.settings.horizontalAlign must be "left", "center" or "right"',
       )
     }
 
     if (value.settings.link !== undefined && !isString(value.settings.link)) {
-      pushIssue(issues, `${path}.settings.link`, 'item.settings.link must be a string')
+      pushIssue(issues, `${path}.settings.link`, 'cell.settings.link must be a string')
     }
 
     if (value.settings.width !== undefined && !isFiniteNumber(value.settings.width)) {
-      pushIssue(issues, `${path}.settings.width`, 'item.settings.width must be a number')
+      pushIssue(issues, `${path}.settings.width`, 'cell.settings.width must be a number')
     }
 
     if (value.settings.height !== undefined && !isFiniteNumber(value.settings.height)) {
-      pushIssue(issues, `${path}.settings.height`, 'item.settings.height must be a number')
+      pushIssue(issues, `${path}.settings.height`, 'cell.settings.height must be a number')
     }
 
     if (value.settings.borderRadius !== undefined && !isFiniteNumber(value.settings.borderRadius)) {
       pushIssue(
         issues,
         `${path}.settings.borderRadius`,
-        'item.settings.borderRadius must be a number',
+        'cell.settings.borderRadius must be a number',
       )
     }
 
@@ -747,7 +747,7 @@ function validateGridItem(value: unknown, path: string, issues: TemplateValidati
   }
 
   if (!Array.isArray(value.atoms)) {
-    pushIssue(issues, `${path}.atoms`, 'item.atoms must be an array')
+    pushIssue(issues, `${path}.atoms`, 'cell.atoms must be an array')
     return
   }
 
@@ -755,30 +755,30 @@ function validateGridItem(value: unknown, path: string, issues: TemplateValidati
     validateAtom(atom, `${path}.atoms[${atomIndex}]`, issues)
   })
 
-  if (value.grids === undefined)
+  if (value.rows === undefined)
     return
 
-  if (!Array.isArray(value.grids)) {
-    pushIssue(issues, `${path}.grids`, 'item.grids must be an array')
+  if (!Array.isArray(value.rows)) {
+    pushIssue(issues, `${path}.rows`, 'cell.rows must be an array')
     return
   }
 
-  value.grids.forEach((grid, gridIndex) => {
-    validateGridNode(grid, `${path}.grids[${gridIndex}]`, issues)
+  value.rows.forEach((row, rowIndex) => {
+    validateRowNode(row, `${path}.rows[${rowIndex}]`, issues)
   })
 }
 
-function validateGridNode(value: unknown, path: string, issues: TemplateValidationIssue[]) {
+function validateRowNode(value: unknown, path: string, issues: TemplateValidationIssue[]) {
   if (!isRecord(value)) {
-    pushIssue(issues, path, 'grid must be an object')
+    pushIssue(issues, path, 'row must be an object')
     return
   }
 
   if (!isString(value.id))
-    pushIssue(issues, `${path}.id`, 'grid.id must be a string')
+    pushIssue(issues, `${path}.id`, 'row.id must be a string')
 
   if (!isRecord(value.settings)) {
-    pushIssue(issues, `${path}.settings`, 'grid.settings must be an object')
+    pushIssue(issues, `${path}.settings`, 'row.settings must be an object')
   }
   else {
     validateSpacingValue(value.settings.spacing, `${path}.settings.spacing`, issues)
@@ -787,16 +787,16 @@ function validateGridNode(value: unknown, path: string, issues: TemplateValidati
       pushIssue(
         issues,
         `${path}.settings.backgroundColor`,
-        'grid.settings.backgroundColor must be a string',
+        'row.settings.backgroundColor must be a string',
       )
     }
 
     if (value.settings.height !== undefined && !isFiniteNumber(value.settings.height)) {
-      pushIssue(issues, `${path}.settings.height`, 'grid.settings.height must be a number')
+      pushIssue(issues, `${path}.settings.height`, 'row.settings.height must be a number')
     }
 
     if (!isFiniteNumber(value.settings.gap)) {
-      pushIssue(issues, `${path}.settings.gap`, 'grid.settings.gap must be a number')
+      pushIssue(issues, `${path}.settings.gap`, 'row.settings.gap must be a number')
     }
 
     validateBackgroundImageValue(
@@ -806,17 +806,17 @@ function validateGridNode(value: unknown, path: string, issues: TemplateValidati
     )
   }
 
-  if (!Array.isArray(value.items)) {
-    pushIssue(issues, `${path}.items`, 'grid.items must be an array')
+  if (!Array.isArray(value.cells)) {
+    pushIssue(issues, `${path}.cells`, 'row.cells must be an array')
     return
   }
 
-  value.items.forEach((item, itemIndex) => {
-    validateGridItem(item, `${path}.items[${itemIndex}]`, issues)
+  value.cells.forEach((cell, cellIndex) => {
+    validateCellNode(cell, `${path}.cells[${cellIndex}]`, issues)
   })
 }
 
-function validateBlockComponent(
+function validateCanvasBlockInstance(
   value: UnknownRecord,
   path: string,
   issues: TemplateValidationIssue[],
@@ -854,13 +854,13 @@ function validateBlockComponent(
     )
   }
 
-  if (!Array.isArray(block.grids)) {
-    pushIssue(issues, `${path}.block.grids`, 'block.grids must be an array')
+  if (!Array.isArray(block.rows)) {
+    pushIssue(issues, `${path}.block.rows`, 'block.rows must be an array')
     return
   }
 
-  block.grids.forEach((grid, gridIndex) => {
-    validateGridNode(grid, `${path}.block.grids[${gridIndex}]`, issues)
+  block.rows.forEach((row, rowIndex) => {
+    validateRowNode(row, `${path}.block.rows[${rowIndex}]`, issues)
   })
 }
 
@@ -918,26 +918,26 @@ function _validateTool(
     }
   }
 
-  if (value.type !== 'multi' && value.type !== 'grid')
+  if (value.type !== 'multi' && value.type !== 'columns')
     return
 
   if (!Array.isArray(value.value)) {
-    pushIssue(issues, `${path}.value`, 'multi/grid tool value must be an array')
+    pushIssue(issues, `${path}.value`, 'multi/columns tool value must be an array')
     return
   }
 
   value.value.forEach((item, index) => {
     const itemPath = `${path}.value[${index}]`
     if (!isRecord(item)) {
-      pushIssue(issues, itemPath, 'multi/grid item must be an object')
+      pushIssue(issues, itemPath, 'multi/columns item must be an object')
       return
     }
 
     if (!isString(item.id))
-      pushIssue(issues, `${itemPath}.id`, 'multi/grid item id must be a string')
+      pushIssue(issues, `${itemPath}.id`, 'multi/columns item id must be a string')
 
     if (!Array.isArray(item.tools)) {
-      pushIssue(issues, `${itemPath}.tools`, 'multi/grid item tools must be an array')
+      pushIssue(issues, `${itemPath}.tools`, 'multi/columns item tools must be an array')
       return
     }
 
@@ -963,7 +963,7 @@ function _sanitizeTools(tools: Tool[]): Tool[] {
       }
     }
 
-    if (tool.type === 'multi' || tool.type === 'grid') {
+    if (tool.type === 'multi' || tool.type === 'columns') {
       return {
         ...tool,
         value: tool.value.map((item: ToolCollectionItem) => ({
@@ -1070,33 +1070,33 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
   })
 }
 
-function sanitizeGridItems(items: BlockItem[]): BlockItem[] {
-  return items.map(item => ({
-    ...item,
+function sanitizeCellNodes(cells: CellNode[]): CellNode[] {
+  return cells.map(cell => ({
+    ...cell,
     settings: {
-      ...item.settings,
-      link: typeof item.settings?.link === 'string' ? item.settings.link : undefined,
+      ...cell.settings,
+      link: typeof cell.settings?.link === 'string' ? cell.settings.link : undefined,
       borderRadius:
-        isFiniteNumber(item.settings?.borderRadius) && item.settings.borderRadius >= 0
-          ? item.settings.borderRadius
+        isFiniteNumber(cell.settings?.borderRadius) && cell.settings.borderRadius >= 0
+          ? cell.settings.borderRadius
           : undefined,
     },
-    atoms: sanitizeAtoms(item.atoms),
-    grids: sanitizeGridNodes(item.grids || []),
+    atoms: sanitizeAtoms(cell.atoms),
+    rows: sanitizeRowNodes(cell.rows || []),
   }))
 }
 
-function sanitizeGridNodes(grids: BlockGrid[]): BlockGrid[] {
-  return grids.map(grid => ({
-    ...grid,
-    items: sanitizeGridItems(grid.items),
+function sanitizeRowNodes(rows: RowNode[]): RowNode[] {
+  return rows.map(row => ({
+    ...row,
+    cells: sanitizeCellNodes(row.cells),
   }))
 }
 
-function sanitizeBlock(block: Block): Block {
+function sanitizeBlock(block: BlockNode): BlockNode {
   return {
     ...block,
-    grids: sanitizeGridNodes(block.grids),
+    rows: sanitizeRowNodes(block.rows),
   }
 }
 
@@ -1186,7 +1186,7 @@ function validateTemplatePayload(
       return
     }
 
-    validateBlockComponent(component, currentPath, issues)
+    validateCanvasBlockInstance(component, currentPath, issues)
   })
 }
 
@@ -1208,7 +1208,7 @@ function migrateTemplatePayload(value: unknown): unknown {
 
 function _remapToolIds(tools: Tool[]): Tool[] {
   return tools.map((tool) => {
-    if (tool.type === 'multi' || tool.type === 'grid') {
+    if (tool.type === 'multi' || tool.type === 'columns') {
       return {
         ...tool,
         id: nanoid(8),
@@ -1234,35 +1234,36 @@ function remapAtomIds(atoms: Atom[]): Atom[] {
   }))
 }
 
-function remapGridItemIds(items: BlockItem[]): BlockItem[] {
-  return items.map(item => ({
-    ...item,
+function remapCellNodeIds(cells: CellNode[]): CellNode[] {
+  return cells.map(cell => ({
+    ...cell,
     id: nanoid(8),
-    atoms: remapAtomIds(item.atoms),
-    grids: remapGridIds(item.grids || []),
+    atoms: remapAtomIds(cell.atoms),
+    rows: remapRowNodeIds(cell.rows || []),
   }))
 }
 
-function remapGridIds(grids: BlockGrid[]): BlockGrid[] {
-  return grids.map(grid => ({
-    ...grid,
+function remapRowNodeIds(rows: RowNode[]): RowNode[] {
+  return rows.map(row => ({
+    ...row,
     id: nanoid(8),
-    items: remapGridItemIds(grid.items),
+    cells: remapCellNodeIds(row.cells),
   }))
 }
 
-function remapBlockIds(block: Block): Block {
+function remapBlockIds(block: BlockNode): BlockNode {
   return {
     ...block,
     id: nanoid(8),
-    grids: remapGridIds(block.grids),
+    rows: remapRowNodeIds(block.rows),
   }
 }
 
-export function createRuntimeComponents(components: CanvasItem[]) {
+export function createRuntimeComponents(components: CanvasBlockInstance[]) {
   return components
     .filter(
-      (component): component is Extract<CanvasItem, { version: 2 }> => component.version === 2,
+      (component): component is Extract<CanvasBlockInstance, { version: 2 }> =>
+        component.version === 2,
     )
     .map((component) => {
       return {

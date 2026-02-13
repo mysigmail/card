@@ -1,16 +1,16 @@
-import type { Block, MenuAtomImageItem } from '@/types/block'
-import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
+import type { BlockNode, MenuAtomImageItem } from '@/types/block'
+import type { BlockPreset, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
-import { createBlock, createMenuAtom } from '@/components/email-components/block-factory'
+import { createBlockNode, createMenuAtom } from '@/components/email-components/block-factory'
 import {
-  createImageAtomNode,
-  createItemNode,
-  resetGrid,
+  buildImageAtom,
+  createCell,
+  resetRow,
 } from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
 import { COLOR } from '@/components/email-components/constants'
 
-function buildMenu3ComposerBlock(theme: ComponentTheme, label: string): Block {
+function buildMenu3Block(theme: ComponentTheme, label: string): BlockNode {
   const logo = theme === 'dark' ? images.logo.white : images.logo.black
   const isDark = theme === 'dark'
   const backgroundColor = theme === 'dark' ? COLOR.theme.dark : COLOR.theme.light
@@ -54,49 +54,49 @@ function buildMenu3ComposerBlock(theme: ComponentTheme, label: string): Block {
   }
   socialMenu.items = socialItems
 
-  const block = createBlock(label)
+  const block = createBlockNode(label)
   block.settings.spacing = {
     padding: [30, 35, 30, 35],
   }
   block.settings.backgroundColor = backgroundColor
   block.settings.backgroundImage = undefined
 
-  const grid = block.grids[0]
-  resetGrid(grid)
+  const row = block.rows[0]
+  resetRow(row)
 
-  const logoItem = createItemNode({
+  const logoItem = createCell({
     horizontalAlign: 'left',
     verticalAlign: 'middle',
     atoms: [
-      createImageAtomNode({
+      buildImageAtom({
         src: logo,
         width: 110,
       }),
     ],
   })
 
-  const socialItem = createItemNode({
+  const socialItem = createCell({
     horizontalAlign: 'right',
     verticalAlign: 'middle',
     atoms: [socialMenu],
   })
 
-  grid.items = [logoItem, socialItem]
-  block.grids = [grid]
+  row.cells = [logoItem, socialItem]
+  block.rows = [row]
 
   return block
 }
 
-export function menu3Composer(theme: ComponentTheme, label: string): BlockCatalogComponent {
+export function menu3Preset(theme: ComponentTheme, label: string): BlockPreset {
   const preview = theme === 'dark' ? images.components.menu3.dark : images.components.menu3.light
 
   return {
     id: nanoid(8),
     version: 2,
-    name: 'menu3-composer',
+    name: 'menu3',
     label,
     type: 'menu',
     preview,
-    block: buildMenu3ComposerBlock(theme, label),
+    block: buildMenu3Block(theme, label),
   }
 }

@@ -1,4 +1,4 @@
-import type { CanvasItem, GeneralTool } from '@/types/editor'
+import type { CanvasBlockInstance, GeneralTool } from '@/types/editor'
 
 export const TEMPLATE_EXPORT_VERSION = 2 as const
 export const TEMPLATE_LOCAL_STORAGE_KEY = 'card.template.v2'
@@ -20,7 +20,7 @@ export interface TemplateExportEditor {
 }
 
 export interface TemplateExportCanvas {
-  components: CanvasItem[]
+  components: CanvasBlockInstance[]
 }
 
 export interface TemplateExportV1 {

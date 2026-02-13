@@ -79,8 +79,8 @@ provide('parentMultiToolId', props.parentMultiToolId)
         :value="i.value"
         :title="i.label"
       />
-      <GridTool
-        v-if="i.type === 'grid'"
+      <ColumnCollectionTool
+        v-if="i.type === 'columns'"
         :id="i.id"
         :value="i.value"
         :title="i.label"

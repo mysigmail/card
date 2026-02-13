@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
-import type { Atom, BlockGrid, BlockItem } from '@/types/block'
+import type { Atom, CellNode, RowNode } from '@/types/block'
 import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
   blockId: string
-  grid: BlockGrid
+  row: RowNode
 }
 
 const props = defineProps<Props>()
 
-const { selectGrid, selectItem, selectAtom } = useComponentsStore()
+const { selectRow, selectCell, selectAtom } = useComponentsStore()
 
 function tupleToCss(value?: [number, number, number, number]) {
   if (!value || value.length !== 4)
@@ -63,7 +63,7 @@ function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {
 
 function imageStyle(
   atom: Extract<Atom, { type: 'image' }>,
-  horizontalAlign?: BlockItem['settings']['horizontalAlign'],
+  horizontalAlign?: CellNode['settings']['horizontalAlign'],
 ): CSSProperties {
   const align = horizontalAlign || 'left'
 
@@ -116,7 +116,7 @@ function menuImageStyle(item: Extract<Atom, { type: 'menu' }>['items'][number]):
   }
 }
 
-function menuAtomStyle(horizontalAlign?: BlockItem['settings']['horizontalAlign']): CSSProperties {
+function menuAtomStyle(horizontalAlign?: CellNode['settings']['horizontalAlign']): CSSProperties {
   return {
     textAlign: horizontalAlign || 'left',
   }
@@ -127,8 +127,8 @@ function normalizeGap(value: unknown) {
   return Number.isFinite(gap) && gap > 0 ? gap : 0
 }
 
-function gridStyle(grid: BlockGrid): CSSProperties {
-  const s = grid.settings
+function rowStyle(row: RowNode): CSSProperties {
+  const s = row.settings
   const style: CSSProperties = {
     width: '100%',
     tableLayout: 'fixed',
@@ -155,11 +155,11 @@ function gridStyle(grid: BlockGrid): CSSProperties {
   return style
 }
 
-function shouldDistributeAutoWidth(items: BlockItem[]) {
+function shouldDistributeAutoWidth(items: CellNode[]) {
   return items.every(item => item.settings.width === undefined)
 }
 
-function itemStyle(item: BlockItem, items: BlockItem[], rawGap: number): CSSProperties {
+function itemStyle(item: CellNode, items: CellNode[], rawGap: number): CSSProperties {
   const s = item.settings
   const style: CSSProperties = {}
 
@@ -222,7 +222,7 @@ function spacerStyle(rawGap: number): CSSProperties {
   }
 }
 
-function emptyLinkedItemStyle(item: BlockItem): CSSProperties {
+function emptyLinkedItemStyle(item: CellNode): CSSProperties {
   const itemHeight
     = item.settings.height && Number.isFinite(item.settings.height)
       ? Math.max(1, Number(item.settings.height))
@@ -238,52 +238,52 @@ function emptyLinkedItemStyle(item: BlockItem): CSSProperties {
   }
 }
 
-function selectGridNode(gridId: string) {
-  selectGrid(props.blockId, gridId)
+function selectRowNode(rowId: string) {
+  selectRow(props.blockId, rowId)
 }
 
-function selectItemNode(gridId: string, itemId: string) {
-  selectItem(props.blockId, gridId, itemId)
+function selectCellNode(rowId: string, cellId: string) {
+  selectCell(props.blockId, rowId, cellId)
 }
 
-function selectAtomNode(gridId: string, itemId: string, atomId: string) {
-  selectAtom(props.blockId, gridId, itemId, atomId)
+function selectAtomNode(rowId: string, cellId: string, atomId: string) {
+  selectAtom(props.blockId, rowId, cellId, atomId)
 }
 </script>
 
 <template>
   <MRow
-    :style="gridStyle(grid)"
-    :data-node-id="`grid:${grid.id}`"
-    @click.stop="selectGridNode(grid.id)"
+    :style="rowStyle(row)"
+    :data-node-id="`row:${row.id}`"
+    @click.stop="selectRowNode(row.id)"
   >
     <template
-      v-for="(item, itemIndex) in grid.items"
-      :key="item.id"
+      v-for="(cell, cellIndex) in row.cells"
+      :key="cell.id"
     >
       <MColumn
-        :style="itemStyle(item, grid.items, grid.settings.gap)"
-        :data-node-id="`item:${item.id}`"
-        @click.stop="selectItemNode(grid.id, item.id)"
+        :style="itemStyle(cell, row.cells, row.settings.gap)"
+        :data-node-id="`cell:${cell.id}`"
+        @click.stop="selectCellNode(row.id, cell.id)"
       >
         <div class="p-grid-gap">
           <MLink
-            v-if="item.settings.link && item.atoms.length === 0 && item.grids.length === 0"
-            :href="item.settings.link"
-            :style="emptyLinkedItemStyle(item)"
+            v-if="cell.settings.link && cell.atoms.length === 0 && cell.rows.length === 0"
+            :href="cell.settings.link"
+            :style="emptyLinkedItemStyle(cell)"
           >
             &nbsp;
           </MLink>
 
           <template
-            v-for="atom in item.atoms"
+            v-for="atom in cell.atoms"
             :key="atom.id"
           >
             <div
               v-if="atom.type === 'text'"
               :data-node-id="`atom:${atom.id}`"
               :style="textAtomStyle(atom)"
-              @click.stop="selectAtomNode(grid.id, item.id, atom.id)"
+              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
               v-html="atom.value || '&nbsp;'"
             />
 
@@ -291,7 +291,7 @@ function selectAtomNode(gridId: string, itemId: string, atomId: string) {
               v-else-if="atom.type === 'button'"
               :data-node-id="`atom:${atom.id}`"
               :style="atomSpacingStyle(atom, { includePadding: false })"
-              @click.stop="selectAtomNode(grid.id, item.id, atom.id)"
+              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
             >
               <MButton
                 :href="atom.link"
@@ -305,7 +305,7 @@ function selectAtomNode(gridId: string, itemId: string, atomId: string) {
               v-else-if="atom.type === 'divider'"
               :data-node-id="`atom:${atom.id}`"
               :style="atomSpacingStyle(atom)"
-              @click.stop="selectAtomNode(grid.id, item.id, atom.id)"
+              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
             >
               <MHr
                 :style="{
@@ -323,7 +323,7 @@ function selectAtomNode(gridId: string, itemId: string, atomId: string) {
               v-else-if="atom.type === 'image'"
               :data-node-id="`atom:${atom.id}`"
               :style="atomSpacingStyle(atom)"
-              @click.stop="selectAtomNode(grid.id, item.id, atom.id)"
+              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
             >
               <MLink
                 :href="atom.link"
@@ -332,7 +332,7 @@ function selectAtomNode(gridId: string, itemId: string, atomId: string) {
                 <MImg
                   :src="atom.src"
                   :alt="atom.alt"
-                  :style="imageStyle(atom, item.settings.horizontalAlign)"
+                  :style="imageStyle(atom, cell.settings.horizontalAlign)"
                 />
               </MLink>
             </div>
@@ -341,9 +341,9 @@ function selectAtomNode(gridId: string, itemId: string, atomId: string) {
               v-else-if="atom.type === 'menu'"
               :data-node-id="`atom:${atom.id}`"
               :style="atomSpacingStyle(atom)"
-              @click.stop="selectAtomNode(grid.id, item.id, atom.id)"
+              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
             >
-              <div :style="menuAtomStyle(item.settings.horizontalAlign)">
+              <div :style="menuAtomStyle(cell.settings.horizontalAlign)">
                 <MLink
                   v-for="(menuItem, menuIndex) in atom.items"
                   :key="`menu_${menuIndex}`"
@@ -369,18 +369,18 @@ function selectAtomNode(gridId: string, itemId: string, atomId: string) {
             </div>
           </template>
 
-          <BlockRendererGridNode
-            v-for="nestedGrid in item.grids"
-            :key="nestedGrid.id"
+          <BlockRendererRowNode
+            v-for="nestedRow in cell.rows"
+            :key="nestedRow.id"
             :block-id="blockId"
-            :grid="nestedGrid"
+            :row="nestedRow"
           />
         </div>
       </MColumn>
 
       <MColumn
-        v-if="shouldRenderSpacer(itemIndex, grid.items.length, grid.settings.gap)"
-        :style="spacerStyle(grid.settings.gap)"
+        v-if="shouldRenderSpacer(cellIndex, row.cells.length, row.settings.gap)"
+        :style="spacerStyle(row.settings.gap)"
         aria-hidden="true"
       >
         &nbsp;

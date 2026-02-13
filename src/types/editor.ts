@@ -1,4 +1,5 @@
-import type { Block } from '@/types/block'
+import type { BlockNode } from '@/types/block'
+import type { BackgroundImageValue, SpacingValue } from '@/types/style'
 
 export type ToolGroupRole
   = | 'layout'
@@ -7,7 +8,7 @@ export type ToolGroupRole
     | 'button'
     | 'image'
     | 'imageBlock'
-    | 'grid'
+    | 'row'
     | 'social'
     | 'divider'
     | 'custom'
@@ -23,7 +24,7 @@ export type ToolType
   = | 'align'
     | 'bgImage'
     | 'colorPicker'
-    | 'grid'
+    | 'columns'
     | 'image'
     | 'input'
     | 'select'
@@ -51,10 +52,7 @@ export interface BaseTool {
 
 export interface SpacingTool extends BaseTool {
   type: 'spacing'
-  value: {
-    margin?: [number, number, number, number]
-    padding?: [number, number, number, number]
-  }
+  value: SpacingValue
 }
 
 export interface ImageTool extends BaseTool {
@@ -75,12 +73,7 @@ export interface ColorPickerTool extends BaseTool {
 
 export interface BackgroundImageTool extends BaseTool {
   type: 'bgImage'
-  value: {
-    url: string
-    repeat: 'repeat' | 'no-repeat'
-    size: 'unset' | 'cover' | 'contain'
-    position: 'top' | 'center' | 'bottom' | 'left' | 'right'
-  }
+  value: BackgroundImageValue
 }
 
 export interface InputTool extends BaseTool {
@@ -140,12 +133,12 @@ export interface MultiTool extends BaseTool {
   value: ToolCollectionItem[]
 }
 
-export interface GridTool extends BaseTool {
-  type: 'grid'
+export interface ColumnCollectionTool extends BaseTool {
+  type: 'columns'
   value: ToolCollectionItem[]
 }
 
-export type Tool = SingleTool | MultiTool | GridTool
+export type Tool = SingleTool | MultiTool | ColumnCollectionTool
 
 export type ComponentTheme = 'light' | 'dark'
 
@@ -158,22 +151,20 @@ export type ComponentType
     | 'header'
     | 'menu'
 
-export interface BlockComponent {
+export interface CanvasBlockInstance {
   id: string
   version: 2
-  block: Block
+  block: BlockNode
 }
 
-export type CanvasItem = BlockComponent
+export type CanvasNode = CanvasBlockInstance
 
-export interface BlockCatalogComponent extends BlockComponent {
+export interface BlockPreset extends CanvasBlockInstance {
   name: string
   label: string
   type: ComponentType
   preview: string
 }
-
-export type CatalogComponent = BlockCatalogComponent
 
 export interface GeneralTool {
   padding: [number, number, number, number]

@@ -1,9 +1,8 @@
-import type { Atom, AtomType, Block, BlockGrid, BlockItem } from '@/types/block'
+import type { Atom, AtomType, BlockNode, CellNode, RowNode } from '@/types/block'
 import type {
   BackgroundImageTool,
-  BlockComponent,
-  CanvasItem,
-  CatalogComponent,
+  BlockPreset,
+  CanvasBlockInstance,
   GeneralTool,
   ImageTool,
   SpacingTool,
@@ -19,9 +18,9 @@ import { nanoid } from 'nanoid'
 import { computed, reactive, ref, shallowRef, watch } from 'vue'
 import {
   createAtom,
-  createBlock,
-  createGrid,
-  createItem,
+  createBlockNode,
+  createCellNode,
+  createRowNode,
 } from '@/components/email-components/block-factory'
 import { content } from '@/components/email-components/catalog/content'
 import { header } from '@/components/email-components/catalog/header'
@@ -45,18 +44,16 @@ const list = shallowRef<ComponentList[]>([
   { name: 'Footer', components: [] },
 ])
 
-// State
-const installed = ref<CanvasItem[]>([])
+const installed = ref<CanvasBlockInstance[]>([])
 const editableId = ref<string>()
 const isDragging = ref(false)
 const templateImportIssues = ref<TemplateValidationIssue[]>([])
 
-// Block v2 selection state
-export type BlockSelectionLevel = 'block' | 'grid' | 'item' | 'atom'
+export type BlockSelectionLevel = 'block' | 'row' | 'cell' | 'atom'
 export type SidebarTab = 'components' | 'tree'
 const selectedBlockId = ref<string>()
-const selectedGridId = ref<string>()
-const selectedItemId = ref<string>()
+const selectedRowId = ref<string>()
+const selectedCellId = ref<string>()
 const selectedAtomId = ref<string>()
 const selectionLevel = ref<BlockSelectionLevel>()
 const sidebarActiveTab = ref<SidebarTab>('components')
@@ -79,13 +76,12 @@ const general = reactive<GeneralTool>({
   previewText: '',
 })
 
-// --- V2 Type Guards ---
-
-function isBlockComponent(item: CanvasItem): item is BlockComponent {
-  return item.version === 2
+function isCanvasBlockInstance(
+  canvasBlock: CanvasBlockInstance,
+): canvasBlock is CanvasBlockInstance {
+  return canvasBlock.version === 2
 }
 
-// Computed
 const editableIndex = computed(() => {
   if (!installed.value?.length)
     return -1
@@ -100,8 +96,8 @@ function resetSelection() {
 
 function resetBlockSelection() {
   selectedBlockId.value = undefined
-  selectedGridId.value = undefined
-  selectedItemId.value = undefined
+  selectedRowId.value = undefined
+  selectedCellId.value = undefined
   selectedAtomId.value = undefined
   selectionLevel.value = undefined
 }
@@ -282,11 +278,11 @@ function initTemplatePersistence() {
 }
 
 // Methods
-function addComponent(component: CatalogComponent, index?: number) {
+function addComponent(component: BlockPreset, index?: number) {
   const clonedBlock = clone(component.block)
-  remapBlockNodeIds(clonedBlock)
+  regenerateBlockNodeIds(clonedBlock)
 
-  const cloned: BlockComponent = {
+  const cloned: CanvasBlockInstance = {
     id: nanoid(8),
     version: 2,
     block: clonedBlock,
@@ -297,37 +293,37 @@ function addComponent(component: CatalogComponent, index?: number) {
   else installed.value.push(cloned)
 }
 
-function remapItemNodeIds(item: BlockItem) {
-  item.id = nanoid(8)
-  item.atoms.forEach((atom) => {
+function regenerateCellNodeIds(cell: CellNode) {
+  cell.id = nanoid(8)
+  cell.atoms.forEach((atom) => {
     atom.id = nanoid(8)
   })
-  item.grids.forEach((grid) => {
-    remapGridNodeIds(grid)
+  cell.rows.forEach((row) => {
+    regenerateRowNodeIds(row)
   })
 }
 
-function remapGridNodeIds(grid: BlockGrid) {
-  grid.id = nanoid(8)
-  grid.items.forEach((item) => {
-    remapItemNodeIds(item)
+function regenerateRowNodeIds(row: RowNode) {
+  row.id = nanoid(8)
+  row.cells.forEach((cell) => {
+    regenerateCellNodeIds(cell)
   })
 }
 
-function remapBlockNodeIds(block: Block) {
+function regenerateBlockNodeIds(block: BlockNode) {
   block.id = nanoid(8)
-  block.grids.forEach((grid) => {
-    remapGridNodeIds(grid)
+  block.rows.forEach((row) => {
+    regenerateRowNodeIds(row)
   })
 }
 
-function findGridInGrids(grids: BlockGrid[], gridId: string): BlockGrid | undefined {
-  for (const grid of grids) {
-    if (grid.id === gridId)
-      return grid
+function findRowInRows(rows: RowNode[], rowId: string): RowNode | undefined {
+  for (const row of rows) {
+    if (row.id === rowId)
+      return row
 
-    for (const item of grid.items) {
-      const nested = findGridInGrids(item.grids, gridId)
+    for (const cell of row.cells) {
+      const nested = findRowInRows(cell.rows, rowId)
       if (nested)
         return nested
     }
@@ -336,22 +332,22 @@ function findGridInGrids(grids: BlockGrid[], gridId: string): BlockGrid | undefi
   return undefined
 }
 
-function findGridContainerInGrids(
-  grids: BlockGrid[],
-  gridId: string,
+function findRowContainerInRows(
+  rows: RowNode[],
+  rowId: string,
   isTopLevel = false,
-): { container: BlockGrid[], index: number, isTopLevel: boolean } | undefined {
-  for (const [index, grid] of grids.entries()) {
-    if (grid.id === gridId) {
+): { container: RowNode[], index: number, isTopLevel: boolean } | undefined {
+  for (const [index, row] of rows.entries()) {
+    if (row.id === rowId) {
       return {
-        container: grids,
+        container: rows,
         index,
         isTopLevel,
       }
     }
 
-    for (const item of grid.items) {
-      const nested = findGridContainerInGrids(item.grids, gridId, false)
+    for (const cell of row.cells) {
+      const nested = findRowContainerInRows(cell.rows, rowId, false)
       if (nested)
         return nested
     }
@@ -360,14 +356,14 @@ function findGridContainerInGrids(
   return undefined
 }
 
-function findItemInGrids(grids: BlockGrid[], itemId: string): BlockItem | undefined {
-  for (const grid of grids) {
-    const found = grid.items.find(i => i.id === itemId)
+function findCellInRows(rows: RowNode[], cellId: string): CellNode | undefined {
+  for (const row of rows) {
+    const found = row.cells.find(i => i.id === cellId)
     if (found)
       return found
 
-    for (const item of grid.items) {
-      const nested = findItemInGrids(item.grids, itemId)
+    for (const cell of row.cells) {
+      const nested = findCellInRows(cell.rows, cellId)
       if (nested)
         return nested
     }
@@ -376,17 +372,15 @@ function findItemInGrids(grids: BlockGrid[], itemId: string): BlockItem | undefi
   return undefined
 }
 
-// --- Block v2 CRUD ---
-
-function findBlockComponent(blockId: string): BlockComponent | undefined {
+function findCanvasBlockInstance(blockId: string): CanvasBlockInstance | undefined {
   return installed.value.find(
-    (i): i is BlockComponent => isBlockComponent(i) && i.block.id === blockId,
+    (i): i is CanvasBlockInstance => isCanvasBlockInstance(i) && i.block.id === blockId,
   )
 }
 
-function addBlockToCanvas(label?: string, index?: number) {
-  const block = createBlock(label)
-  const blockComponent: BlockComponent = {
+function insertBlockToCanvas(label?: string, index?: number) {
+  const block = createBlockNode(label)
+  const blockComponent: CanvasBlockInstance = {
     id: nanoid(8),
     version: 2,
     block,
@@ -400,7 +394,7 @@ function addBlockToCanvas(label?: string, index?: number) {
 }
 
 function renameBlock(blockId: string, label: string) {
-  const bc = findBlockComponent(blockId)
+  const bc = findCanvasBlockInstance(blockId)
   if (!bc)
     return
 
@@ -413,25 +407,25 @@ function renameBlock(blockId: string, label: string) {
   return bc.block
 }
 
-function addGridToBlock(blockId: string, insertIndex?: number) {
-  const bc = findBlockComponent(blockId)
+function insertRowToBlock(blockId: string, insertIndex?: number) {
+  const bc = findCanvasBlockInstance(blockId)
   if (!bc)
     return
 
-  const grid = createGrid()
+  const row = createRowNode()
   if (insertIndex !== undefined)
-    bc.block.grids.splice(insertIndex, 0, grid)
-  else bc.block.grids.push(grid)
+    bc.block.rows.splice(insertIndex, 0, row)
+  else bc.block.rows.push(row)
 
-  return grid
+  return row
 }
 
-function removeGridFromBlock(blockId: string, gridId: string) {
-  const bc = findBlockComponent(blockId)
+function removeRow(blockId: string, rowId: string) {
+  const bc = findCanvasBlockInstance(blockId)
   if (!bc)
     return
 
-  const target = findGridContainerInGrids(bc.block.grids, gridId, true)
+  const target = findRowContainerInRows(bc.block.rows, rowId, true)
   if (!target)
     return
 
@@ -439,147 +433,147 @@ function removeGridFromBlock(blockId: string, gridId: string) {
     return
 
   target.container.splice(target.index, 1)
-  if (selectedGridId.value === gridId)
+  if (selectedRowId.value === rowId)
     selectBlock(blockId)
 }
 
-function addGridToItem(blockId: string, gridId: string, itemId: string, insertIndex?: number) {
-  const bc = findBlockComponent(blockId)
+function insertRowToCell(blockId: string, rowId: string, cellId: string, insertIndex?: number) {
+  const bc = findCanvasBlockInstance(blockId)
   if (!bc)
     return
 
-  const parentGrid = findGridInGrids(bc.block.grids, gridId)
-  if (!parentGrid)
+  const parentRow = findRowInRows(bc.block.rows, rowId)
+  if (!parentRow)
     return
 
-  const item = parentGrid.items.find(i => i.id === itemId)
-  if (!item)
+  const cell = parentRow.cells.find(i => i.id === cellId)
+  if (!cell)
     return
 
-  const nestedGrid = createGrid()
+  const nestedRow = createRowNode()
   if (insertIndex !== undefined)
-    item.grids.splice(insertIndex, 0, nestedGrid)
-  else item.grids.push(nestedGrid)
+    cell.rows.splice(insertIndex, 0, nestedRow)
+  else cell.rows.push(nestedRow)
 
-  return nestedGrid
+  return nestedRow
 }
 
-function addItemToGrid(blockId: string, gridId: string, insertIndex?: number) {
-  const bc = findBlockComponent(blockId)
+function insertCellToRow(blockId: string, rowId: string, insertIndex?: number) {
+  const bc = findCanvasBlockInstance(blockId)
   if (!bc)
     return
 
-  const grid = findGridInGrids(bc.block.grids, gridId)
-  if (!grid)
+  const row = findRowInRows(bc.block.rows, rowId)
+  if (!row)
     return
 
-  const item = createItem()
+  const cell = createCellNode()
   if (insertIndex !== undefined)
-    grid.items.splice(insertIndex, 0, item)
-  else grid.items.push(item)
+    row.cells.splice(insertIndex, 0, cell)
+  else row.cells.push(cell)
 
-  return item
+  return cell
 }
 
-function removeItemFromGrid(blockId: string, gridId: string, itemId: string) {
-  const bc = findBlockComponent(blockId)
+function removeCell(blockId: string, rowId: string, cellId: string) {
+  const bc = findCanvasBlockInstance(blockId)
   if (!bc)
     return
 
-  const grid = findGridInGrids(bc.block.grids, gridId)
-  if (!grid || grid.items.length <= 1)
+  const row = findRowInRows(bc.block.rows, rowId)
+  if (!row || row.cells.length <= 1)
     return
 
-  const idx = grid.items.findIndex(i => i.id === itemId)
+  const idx = row.cells.findIndex(i => i.id === cellId)
   if (idx !== -1) {
-    grid.items.splice(idx, 1)
-    if (selectedItemId.value === itemId)
-      selectGrid(blockId, gridId)
+    row.cells.splice(idx, 1)
+    if (selectedCellId.value === cellId)
+      selectRow(blockId, rowId)
   }
 }
 
-function addAtomToItem(
+function insertAtomToCell(
   blockId: string,
-  gridId: string,
-  itemId: string,
+  rowId: string,
+  cellId: string,
   atomType: AtomType,
   insertIndex?: number,
 ) {
-  const bc = findBlockComponent(blockId)
+  const bc = findCanvasBlockInstance(blockId)
   if (!bc)
     return
 
-  const grid = findGridInGrids(bc.block.grids, gridId)
-  if (!grid)
+  const row = findRowInRows(bc.block.rows, rowId)
+  if (!row)
     return
 
-  const item = grid.items.find(i => i.id === itemId)
-  if (!item)
+  const cell = row.cells.find(i => i.id === cellId)
+  if (!cell)
     return
 
   const atom = createAtom(atomType)
   if (insertIndex !== undefined)
-    item.atoms.splice(insertIndex, 0, atom)
-  else item.atoms.push(atom)
+    cell.atoms.splice(insertIndex, 0, atom)
+  else cell.atoms.push(atom)
 
   return atom
 }
 
-function removeAtomFromItem(blockId: string, gridId: string, itemId: string, atomId: string) {
-  const bc = findBlockComponent(blockId)
+function removeAtom(blockId: string, rowId: string, cellId: string, atomId: string) {
+  const bc = findCanvasBlockInstance(blockId)
   if (!bc)
     return
 
-  const grid = findGridInGrids(bc.block.grids, gridId)
-  if (!grid)
+  const row = findRowInRows(bc.block.rows, rowId)
+  if (!row)
     return
 
-  const item = grid.items.find(i => i.id === itemId)
-  if (!item)
+  const cell = row.cells.find(i => i.id === cellId)
+  if (!cell)
     return
 
-  const idx = item.atoms.findIndex(a => a.id === atomId)
+  const idx = cell.atoms.findIndex(a => a.id === atomId)
   if (idx !== -1) {
-    item.atoms.splice(idx, 1)
+    cell.atoms.splice(idx, 1)
     if (selectedAtomId.value === atomId)
-      selectItem(blockId, gridId, itemId)
+      selectCell(blockId, rowId, cellId)
   }
 }
 
-function moveAtomInItem(
+function moveAtomWithinCell(
   blockId: string,
-  gridId: string,
-  itemId: string,
+  rowId: string,
+  cellId: string,
   oldIndex: number,
   newIndex: number,
 ) {
-  const bc = findBlockComponent(blockId)
+  const bc = findCanvasBlockInstance(blockId)
   if (!bc)
     return
 
-  const grid = findGridInGrids(bc.block.grids, gridId)
-  if (!grid)
+  const row = findRowInRows(bc.block.rows, rowId)
+  if (!row)
     return
 
-  const item = grid.items.find(i => i.id === itemId)
-  if (!item)
+  const cell = row.cells.find(i => i.id === cellId)
+  if (!cell)
     return
 
-  const [atom] = item.atoms.splice(oldIndex, 1)
+  const [atom] = cell.atoms.splice(oldIndex, 1)
   if (atom)
-    item.atoms.splice(newIndex, 0, atom)
+    cell.atoms.splice(newIndex, 0, atom)
 }
 
 function selectBlock(blockId: string, options?: { syncTree?: boolean }) {
-  const bc = findBlockComponent(blockId)
+  const bc = findCanvasBlockInstance(blockId)
   if (!bc)
     return
 
   editableId.value = bc.id
 
   selectedBlockId.value = blockId
-  selectedGridId.value = undefined
-  selectedItemId.value = undefined
+  selectedRowId.value = undefined
+  selectedCellId.value = undefined
   selectedAtomId.value = undefined
   selectionLevel.value = 'block'
 
@@ -587,40 +581,40 @@ function selectBlock(blockId: string, options?: { syncTree?: boolean }) {
     openTreeAndScroll(`block:${blockId}`)
 }
 
-function selectGrid(blockId: string, gridId: string, options?: { syncTree?: boolean }) {
+function selectRow(blockId: string, rowId: string, options?: { syncTree?: boolean }) {
   selectBlock(blockId, { syncTree: false })
-  selectedGridId.value = gridId
-  selectedItemId.value = undefined
+  selectedRowId.value = rowId
+  selectedCellId.value = undefined
   selectedAtomId.value = undefined
-  selectionLevel.value = 'grid'
+  selectionLevel.value = 'row'
 
   if (options?.syncTree !== false)
-    openTreeAndScroll(`grid:${gridId}`)
+    openTreeAndScroll(`row:${rowId}`)
 }
 
-function selectItem(
+function selectCell(
   blockId: string,
-  gridId: string,
-  itemId: string,
+  rowId: string,
+  cellId: string,
   options?: { syncTree?: boolean },
 ) {
-  selectGrid(blockId, gridId, { syncTree: false })
-  selectedItemId.value = itemId
+  selectRow(blockId, rowId, { syncTree: false })
+  selectedCellId.value = cellId
   selectedAtomId.value = undefined
-  selectionLevel.value = 'item'
+  selectionLevel.value = 'cell'
 
   if (options?.syncTree !== false)
-    openTreeAndScroll(`item:${itemId}`)
+    openTreeAndScroll(`cell:${cellId}`)
 }
 
 function selectAtom(
   blockId: string,
-  gridId: string,
-  itemId: string,
+  rowId: string,
+  cellId: string,
   atomId: string,
   options?: { syncTree?: boolean },
 ) {
-  selectItem(blockId, gridId, itemId, { syncTree: false })
+  selectCell(blockId, rowId, cellId, { syncTree: false })
   selectedAtomId.value = atomId
   selectionLevel.value = 'atom'
 
@@ -628,45 +622,43 @@ function selectAtom(
     openTreeAndScroll(`atom:${atomId}`)
 }
 
-// --- Block v2 computed ---
-
-const selectedBlock = computed((): Block | undefined => {
+const selectedBlock = computed((): BlockNode | undefined => {
   if (!selectedBlockId.value)
     return undefined
-  return findBlockComponent(selectedBlockId.value)?.block
+  return findCanvasBlockInstance(selectedBlockId.value)?.block
 })
 
-const selectedGrid = computed((): BlockGrid | undefined => {
-  if (!selectedBlock.value || !selectedGridId.value)
+const selectedRow = computed((): RowNode | undefined => {
+  if (!selectedBlock.value || !selectedRowId.value)
     return undefined
-  return findGridInGrids(selectedBlock.value.grids, selectedGridId.value)
+  return findRowInRows(selectedBlock.value.rows, selectedRowId.value)
 })
 
-const selectedItem = computed((): BlockItem | undefined => {
-  if (!selectedGrid.value || !selectedItemId.value)
+const selectedCell = computed((): CellNode | undefined => {
+  if (!selectedRow.value || !selectedCellId.value)
     return undefined
-  return selectedGrid.value.items.find(i => i.id === selectedItemId.value)
+  return selectedRow.value.cells.find(i => i.id === selectedCellId.value)
 })
 
 const selectedAtom = computed((): Atom | undefined => {
-  if (!selectedItem.value || !selectedAtomId.value)
+  if (!selectedCell.value || !selectedAtomId.value)
     return undefined
-  return selectedItem.value.atoms.find(a => a.id === selectedAtomId.value)
+  return selectedCell.value.atoms.find(a => a.id === selectedAtomId.value)
 })
 
 const installedBlocks = computed(() => {
-  return installed.value.filter(isBlockComponent)
+  return installed.value.filter(isCanvasBlockInstance)
 })
 
 function duplicateComponent(installedIndex: number) {
-  const item = installed.value[installedIndex]
-  if (!item || !isBlockComponent(item))
+  const canvasBlock = installed.value[installedIndex]
+  if (!canvasBlock || !isCanvasBlockInstance(canvasBlock))
     return
 
-  const clonedBlock = clone(item.block)
-  remapBlockNodeIds(clonedBlock)
+  const clonedBlock = clone(canvasBlock.block)
+  regenerateBlockNodeIds(clonedBlock)
 
-  const cloned: BlockComponent = {
+  const cloned: CanvasBlockInstance = {
     id: nanoid(8),
     version: 2,
     block: clonedBlock,
@@ -675,7 +667,7 @@ function duplicateComponent(installedIndex: number) {
 }
 
 function duplicateComponentById(componentId: string) {
-  const index = installed.value.findIndex(item => item.id === componentId)
+  const index = installed.value.findIndex(canvasBlock => canvasBlock.id === componentId)
   if (index === -1)
     return
 
@@ -705,7 +697,7 @@ function removeComponent(index: number) {
 }
 
 function removeComponentById(componentId: string) {
-  const index = installed.value.findIndex(item => item.id === componentId)
+  const index = installed.value.findIndex(canvasBlock => canvasBlock.id === componentId)
   if (index === -1)
     return
 
@@ -753,25 +745,25 @@ type MenuListItemField
     | 'height'
     | 'alt'
 
-function findGridById(gridId: string): BlockGrid | undefined {
-  for (const item of installed.value) {
-    if (!isBlockComponent(item))
+function findRowById(rowId: string): RowNode | undefined {
+  for (const canvasBlock of installed.value) {
+    if (!isCanvasBlockInstance(canvasBlock))
       continue
 
-    const grid = findGridInGrids(item.block.grids, gridId)
-    if (grid)
-      return grid
+    const row = findRowInRows(canvasBlock.block.rows, rowId)
+    if (row)
+      return row
   }
 
   return undefined
 }
 
-function findItemById(itemId: string): BlockItem | undefined {
-  for (const item of installed.value) {
-    if (!isBlockComponent(item))
+function findCellById(cellId: string): CellNode | undefined {
+  for (const canvasBlock of installed.value) {
+    if (!isCanvasBlockInstance(canvasBlock))
       continue
 
-    const found = findItemInGrids(item.block.grids, itemId)
+    const found = findCellInRows(canvasBlock.block.rows, cellId)
     if (found)
       return found
   }
@@ -891,7 +883,7 @@ function updateV2SettingsToolById(id: string, key: 'value' | 'label', value: unk
     return false
 
   if (level === 'block') {
-    const block = findBlockComponent(targetId)?.block
+    const block = findCanvasBlockInstance(targetId)?.block
     if (!block)
       return false
 
@@ -913,67 +905,67 @@ function updateV2SettingsToolById(id: string, key: 'value' | 'label', value: unk
     return false
   }
 
-  if (level === 'grid') {
-    const grid = findGridById(targetId)
-    if (!grid)
+  if (level === 'row') {
+    const row = findRowById(targetId)
+    if (!row)
       return false
 
     if (field === 'spacing') {
-      grid.settings.spacing = toSpacingValue(value)
+      row.settings.spacing = toSpacingValue(value)
       return true
     }
 
     if (field === 'backgroundColor') {
-      grid.settings.backgroundColor = String(value ?? '')
+      row.settings.backgroundColor = String(value ?? '')
       return true
     }
 
     if (field === 'backgroundImage') {
-      grid.settings.backgroundImage = toBackgroundImageValue(value)
+      row.settings.backgroundImage = toBackgroundImageValue(value)
       return true
     }
 
     if (field === 'gap') {
-      grid.settings.gap = Number(value) || 0
+      row.settings.gap = Number(value) || 0
       return true
     }
 
     if (field === 'height') {
-      grid.settings.height = toOptionalPositiveNumber(value)
+      row.settings.height = toOptionalPositiveNumber(value)
       return true
     }
 
     return false
   }
 
-  if (level === 'item') {
-    const item = findItemById(targetId)
-    if (!item)
+  if (level === 'cell') {
+    const cell = findCellById(targetId)
+    if (!cell)
       return false
 
     if (field === 'spacing') {
-      item.settings.spacing = toSpacingValue(value)
+      cell.settings.spacing = toSpacingValue(value)
       return true
     }
 
     if (field === 'backgroundColor') {
-      item.settings.backgroundColor = String(value ?? '')
+      cell.settings.backgroundColor = String(value ?? '')
       return true
     }
 
     if (field === 'backgroundImage') {
-      item.settings.backgroundImage = toBackgroundImageValue(value)
+      cell.settings.backgroundImage = toBackgroundImageValue(value)
       return true
     }
 
     if (field === 'link') {
       const nextLink = String(value ?? '').trim()
-      item.settings.link = nextLink || undefined
+      cell.settings.link = nextLink || undefined
       return true
     }
 
     if (field === 'borderRadius') {
-      item.settings.borderRadius = toNonNegativeFiniteNumber(value)
+      cell.settings.borderRadius = toNonNegativeFiniteNumber(value)
       return true
     }
 
@@ -1285,29 +1277,27 @@ export function useComponentsStore() {
     removeComponentById,
     updateToolById,
     resetSelection,
-    // v2 block methods
-    addBlockToCanvas,
+    insertBlockToCanvas,
     renameBlock,
-    addGridToBlock,
-    addGridToItem,
-    removeGridFromBlock,
-    addItemToGrid,
-    removeItemFromGrid,
-    addAtomToItem,
-    removeAtomFromItem,
-    moveAtomInItem,
-    // v2 selection
+    insertRowToBlock,
+    insertRowToCell,
+    removeRow,
+    insertCellToRow,
+    removeCell,
+    insertAtomToCell,
+    removeAtom,
+    moveAtomWithinCell,
     selectBlock,
-    selectGrid,
-    selectItem,
+    selectRow,
+    selectCell,
     selectAtom,
     selectedBlock,
-    selectedGrid,
-    selectedItem,
+    selectedRow,
+    selectedCell,
     selectedAtom,
     selectedBlockId,
-    selectedGridId,
-    selectedItemId,
+    selectedRowId,
+    selectedCellId,
     selectedAtomId,
     selectionLevel,
     sidebarActiveTab,
@@ -1315,6 +1305,6 @@ export function useComponentsStore() {
     treeScrollRequestId,
     requestTreeScroll,
     installedBlocks,
-    isBlockComponent,
+    isCanvasBlockInstance,
   }
 }

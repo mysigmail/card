@@ -1,36 +1,36 @@
-import type { Block } from '@/types/block'
-import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
+import type { BlockNode } from '@/types/block'
+import type { BlockPreset, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
-import { createBlock, createGrid } from '@/components/email-components/block-factory'
+import { createBlockNode, createRowNode } from '@/components/email-components/block-factory'
 import {
-  createButtonAtomNode,
-  createImageAtomNode,
-  createImageBlockItem,
-  createItemNode,
-  createTextAtomNode,
-  resetGrid,
+  buildButtonAtom,
+  buildImageAtom,
+  buildTextAtom,
+  createCell,
+  createImageBackgroundCell,
+  resetRow,
 } from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
 import { COLOR } from '@/components/email-components/constants'
 
-function buildHeader4ComposerBlock(label: string): Block {
+function buildHeader4Block(label: string): BlockNode {
   const imageMainHeight = 296
 
-  const block = createBlock(label)
+  const block = createBlockNode(label)
   block.settings.spacing = {
     padding: [30, 35, 30, 35],
   }
   block.settings.backgroundColor = COLOR.theme.light
   block.settings.backgroundImage = undefined
 
-  const logoGrid = block.grids[0]
-  resetGrid(logoGrid)
-  logoGrid.items = [
-    createItemNode({
+  const logoRow = block.rows[0]
+  resetRow(logoRow)
+  logoRow.cells = [
+    createCell({
       horizontalAlign: 'center',
       verticalAlign: 'top',
       atoms: [
-        createImageAtomNode({
+        buildImageAtom({
           src: images.logo.black,
           width: 110,
         }),
@@ -38,32 +38,32 @@ function buildHeader4ComposerBlock(label: string): Block {
     }),
   ]
 
-  const imageGrid = createGrid([])
-  resetGrid(imageGrid)
-  imageGrid.settings.spacing = {
+  const imageRow = createRowNode([])
+  resetRow(imageRow)
+  imageRow.settings.spacing = {
     margin: [0, 0, 0, 0],
     padding: [20, 0, 0, 0],
   }
-  imageGrid.items = [
-    createImageBlockItem('/img/johannes-andersson-v5gGwubKzEA-unsplash.jpg', {
+  imageRow.cells = [
+    createImageBackgroundCell('/img/johannes-andersson-v5gGwubKzEA-unsplash.jpg', {
       height: imageMainHeight,
       borderRadius: 5,
       link: 'https://example.com',
     }),
   ]
 
-  const textGrid = createGrid([])
-  resetGrid(textGrid)
-  textGrid.settings.spacing = {
+  const textRow = createRowNode([])
+  resetRow(textRow)
+  textRow.settings.spacing = {
     margin: [0, 0, 0, 0],
     padding: [10, 0, 0, 0],
   }
-  textGrid.items = [
-    createItemNode({
+  textRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p style="text-align: center"><span style="font-size: 18px; color: #9CA3AF">Surfing Season \'19</span></p><p style="text-align: center"><span style="font-size: 32px"><strong>There\'s Change<br/>In The Air.<br/>Can You Feel It?</strong></span></p>',
           color: COLOR.theme.dark,
@@ -72,14 +72,14 @@ function buildHeader4ComposerBlock(label: string): Block {
     }),
   ]
 
-  const buttonGrid = createGrid([])
-  resetGrid(buttonGrid)
-  buttonGrid.items = [
-    createItemNode({
+  const buttonRow = createRowNode([])
+  resetRow(buttonRow)
+  buttonRow.cells = [
+    createCell({
       horizontalAlign: 'center',
       verticalAlign: 'top',
       atoms: [
-        createButtonAtomNode({
+        buildButtonAtom({
           text: 'Take Part',
           link: 'https://example.com',
           backgroundColor: '#4A98ED',
@@ -96,19 +96,19 @@ function buildHeader4ComposerBlock(label: string): Block {
     }),
   ]
 
-  block.grids = [logoGrid, imageGrid, textGrid, buttonGrid]
+  block.rows = [logoRow, imageRow, textRow, buttonRow]
 
   return block
 }
 
-export function header4Composer(_: ComponentTheme, label: string): BlockCatalogComponent {
+export function header4Preset(_: ComponentTheme, label: string): BlockPreset {
   return {
     id: nanoid(8),
     version: 2,
-    name: 'header4-composer',
+    name: 'header4',
     label,
     type: 'header',
     preview: images.components.header4,
-    block: buildHeader4ComposerBlock(label),
+    block: buildHeader4Block(label),
   }
 }

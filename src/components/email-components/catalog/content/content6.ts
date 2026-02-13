@@ -1,21 +1,21 @@
-import type { Block } from '@/types/block'
-import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
+import type { BlockNode } from '@/types/block'
+import type { BlockPreset, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
-import { createBlock, createGrid } from '@/components/email-components/block-factory'
+import { createBlockNode, createRowNode } from '@/components/email-components/block-factory'
 import {
-  createImageAtomNode,
-  createItemNode,
-  createTextAtomNode,
-  resetGrid,
+  buildImageAtom,
+  buildTextAtom,
+  createCell,
+  resetRow,
 } from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
 
 function createLogoItem(src: string, alt: string, link: string) {
-  return createItemNode({
+  return createCell({
     horizontalAlign: 'center',
     verticalAlign: 'top',
     atoms: [
-      createImageAtomNode({
+      buildImageAtom({
         src,
         alt,
         link,
@@ -25,25 +25,25 @@ function createLogoItem(src: string, alt: string, link: string) {
   })
 }
 
-function buildContent6ComposerBlock(label: string): Block {
-  const block = createBlock(label)
+function buildContent6Block(label: string): BlockNode {
+  const block = createBlockNode(label)
   block.settings.spacing = {
     padding: [30, 35, 30, 35],
   }
   block.settings.backgroundColor = '#222222'
   block.settings.backgroundImage = undefined
 
-  const textGrid = block.grids[0]
-  resetGrid(textGrid)
-  textGrid.settings.spacing = {
+  const textRow = block.rows[0]
+  resetRow(textRow)
+  textRow.settings.spacing = {
     padding: [0, 0, 8, 0],
   }
-  textGrid.items = [
-    createItemNode({
+  textRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p style="text-align: center"><strong><span style="font-size: 32px">Our Clients</span></strong></p><p style="text-align: center"><span style="color: rgb(159, 163, 167); font-size: 16px">We&rsquo;re trusted by well-known companies,</span><br><span style="color: rgb(159, 163, 167); font-size: 14px">and here are some of them.</span></p>',
           color: '#FFFFFF',
@@ -52,42 +52,42 @@ function buildContent6ComposerBlock(label: string): Block {
     }),
   ]
 
-  const rowOneGrid = createGrid([])
-  resetGrid(rowOneGrid)
-  rowOneGrid.settings.gap = 6
-  rowOneGrid.settings.spacing = {
+  const rowOneRow = createRowNode([])
+  resetRow(rowOneRow)
+  rowOneRow.settings.gap = 6
+  rowOneRow.settings.spacing = {
     padding: [0, 0, 10, 0],
   }
-  rowOneGrid.items = [
+  rowOneRow.cells = [
     createLogoItem('/img/apple.png', 'Apple', 'https://www.apple.com'),
     createLogoItem('/img/google.png', 'Google', 'https://www.google.com'),
     createLogoItem('/img/xbox.png', 'Xbox', 'https://www.xbox.com'),
     createLogoItem('/img/spotify.png', 'Spotify', 'https://www.spotify.com'),
   ]
 
-  const rowTwoGrid = createGrid([])
-  resetGrid(rowTwoGrid)
-  rowTwoGrid.settings.gap = 6
-  rowTwoGrid.items = [
+  const rowTwoRow = createRowNode([])
+  resetRow(rowTwoRow)
+  rowTwoRow.settings.gap = 6
+  rowTwoRow.cells = [
     createLogoItem('/img/bose.png', 'Bose', 'https://www.bose.com'),
     createLogoItem('/img/microsoft.png', 'Microsoft', 'https://www.microsoft.com'),
     createLogoItem('/img/coca-cola.png', 'Coca-Cola', 'https://www.coca-cola.com'),
     createLogoItem('/img/facebook.png', 'Facebook', 'https://www.facebook.com'),
   ]
 
-  block.grids = [textGrid, rowOneGrid, rowTwoGrid]
+  block.rows = [textRow, rowOneRow, rowTwoRow]
 
   return block
 }
 
-export function content6Composer(_: ComponentTheme, label: string): BlockCatalogComponent {
+export function content6Preset(_: ComponentTheme, label: string): BlockPreset {
   return {
     id: nanoid(8),
     version: 2,
-    name: 'content6-composer',
+    name: 'content6',
     label,
     type: 'content',
     preview: images.components.content6,
-    block: buildContent6ComposerBlock(label),
+    block: buildContent6Block(label),
   }
 }

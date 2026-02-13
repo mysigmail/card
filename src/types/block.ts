@@ -1,11 +1,9 @@
-import type { BackgroundImageTool, SpacingTool } from '@/types/editor'
-
-// --- Atom Types (атомарные единицы внутри Item) ---
+import type { BackgroundImageValue, SpacingValue } from '@/types/style'
 
 export interface BaseAtom {
   id: string
   type: AtomType
-  spacing?: SpacingTool['value']
+  spacing?: SpacingValue
 }
 
 export interface TextAtom extends BaseAtom {
@@ -72,26 +70,24 @@ export type AtomType = 'text' | 'button' | 'divider' | 'image' | 'menu'
 
 export type Atom = TextAtom | ButtonAtom | DividerAtom | ImageAtom | MenuAtom
 
-// --- Settings ---
-
 export interface BlockSettings {
-  spacing: SpacingTool['value']
+  spacing: SpacingValue
   backgroundColor: string
-  backgroundImage?: BackgroundImageTool['value']
+  backgroundImage?: BackgroundImageValue
 }
 
-export interface GridSettings {
-  spacing: SpacingTool['value']
+export interface RowSettings {
+  spacing: SpacingValue
   backgroundColor: string
-  backgroundImage?: BackgroundImageTool['value']
+  backgroundImage?: BackgroundImageValue
   height?: number
   gap: number
 }
 
-export interface ItemSettings {
-  spacing: SpacingTool['value']
+export interface CellSettings {
+  spacing: SpacingValue
   backgroundColor: string
-  backgroundImage?: BackgroundImageTool['value']
+  backgroundImage?: BackgroundImageValue
   link?: string
   verticalAlign: 'top' | 'middle' | 'bottom'
   horizontalAlign?: 'left' | 'center' | 'right'
@@ -100,24 +96,22 @@ export interface ItemSettings {
   height?: number
 }
 
-// --- Structural Types ---
-
-export interface BlockItem {
+export interface RowNode {
   id: string
-  settings: ItemSettings
+  settings: RowSettings
+  cells: CellNode[]
+}
+
+export interface CellNode {
+  id: string
+  settings: CellSettings
   atoms: Atom[]
-  grids: BlockGrid[]
+  rows: RowNode[]
 }
 
-export interface BlockGrid {
-  id: string
-  settings: GridSettings
-  items: BlockItem[]
-}
-
-export interface Block {
+export interface BlockNode {
   id: string
   label: string
   settings: BlockSettings
-  grids: BlockGrid[]
+  rows: RowNode[]
 }

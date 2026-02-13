@@ -1,8 +1,8 @@
-import type { AlignTool, CatalogComponent, ImageTool } from '@/types/editor'
+import type { AlignTool, BlockPreset, ImageTool } from '@/types/editor'
 
 export interface ComponentList {
   name: string
-  components: CatalogComponent[]
+  components: BlockPreset[]
 }
 
 export interface Menu {
@@ -17,45 +17,45 @@ export interface Social {
   link: string
 }
 
-export interface GridImageContent {
+export interface CellImageContent {
   type: 'image'
   attrs: HTMLImageElement
   link?: string
 }
 
-export interface GridTextContent {
+export interface CellTextContent {
   type: 'text'
   attrs?: Record<string, unknown>
   link?: string
   value?: string
 }
 
-export interface GridButtonContent {
+export interface CellButtonContent {
   type: 'button'
   attrs: Record<string, unknown>
   text?: string
 }
 
-export interface GridMenuContent {
+export interface CellMenuContent {
   type: 'menu'
   items: Menu[]
 }
 
-export interface GridSocialContent {
+export interface CellSocialContent {
   type: 'social'
   items: Social[]
 }
 
-export type GridItemContent
-  = | GridImageContent
-    | GridTextContent
-    | GridButtonContent
-    | GridMenuContent
-    | GridSocialContent
+export type CellContent
+  = | CellImageContent
+    | CellTextContent
+    | CellButtonContent
+    | CellMenuContent
+    | CellSocialContent
 
-export interface GridItem {
+export interface RowCell {
   align?: AlignTool['value']
-  contents: GridItemContent[]
+  contents: CellContent[]
   show?: boolean
   verticalAlign?: 'top' | 'middle' | 'bottom'
 }

@@ -2,8 +2,8 @@ import type { Atom, ButtonAtom, ImageAtom, MenuAtom, MenuAtomItem, TextAtom } fr
 import type { BackgroundImageTool, SpacingTool } from '@/types/editor'
 import {
   createButtonAtom,
+  createCellNode,
   createImageAtom,
-  createItem,
   createMenuAtom,
   createTextAtom,
 } from '@/components/email-components/block-factory'
@@ -11,7 +11,7 @@ import {
 type Insets = [number, number, number, number]
 type HorizontalAlign = 'left' | 'center' | 'right'
 type VerticalAlign = 'top' | 'middle' | 'bottom'
-interface GridSettings {
+interface RowSettingsLike {
   spacing: SpacingTool['value']
   backgroundColor: string
   backgroundImage?: BackgroundImageTool['value']
@@ -19,7 +19,7 @@ interface GridSettings {
   height?: number
 }
 
-interface ItemNodeOptions {
+interface CellOptions {
   atoms?: Atom[]
   horizontalAlign?: HorizontalAlign
   verticalAlign?: VerticalAlign
@@ -32,7 +32,7 @@ interface ItemNodeOptions {
   link?: string
 }
 
-interface ImageAtomNodeOptions {
+interface ImageAtomOptions {
   src: string
   link?: string
   alt?: string
@@ -42,13 +42,13 @@ interface ImageAtomNodeOptions {
   spacing?: SpacingTool['value']
 }
 
-interface TextAtomNodeOptions {
+interface TextAtomOptions {
   value: string
   color: string
   spacing?: SpacingTool['value']
 }
 
-interface ButtonAtomNodeOptions {
+interface ButtonAtomOptions {
   text: string
   link: string
   backgroundColor: string
@@ -68,36 +68,36 @@ function zeroSpacing(): SpacingTool['value'] {
   }
 }
 
-interface GridNodeLike {
-  settings: GridSettings
+interface RowNodeLike {
+  settings: RowSettingsLike
 }
 
-export function resetGrid(grid: GridNodeLike) {
-  grid.settings.spacing = {}
-  grid.settings.backgroundColor = 'transparent'
-  grid.settings.backgroundImage = undefined
-  grid.settings.gap = 0
-  grid.settings.height = undefined
+export function resetRow(row: RowNodeLike) {
+  row.settings.spacing = {}
+  row.settings.backgroundColor = 'transparent'
+  row.settings.backgroundImage = undefined
+  row.settings.gap = 0
+  row.settings.height = undefined
 }
 
-export function createItemNode(options: ItemNodeOptions = {}) {
-  const item = createItem([])
-  item.settings.horizontalAlign = options.horizontalAlign ?? 'left'
-  item.settings.verticalAlign = options.verticalAlign ?? 'top'
-  item.settings.backgroundColor = options.backgroundColor ?? 'transparent'
-  item.settings.backgroundImage = options.backgroundImage
-  item.settings.spacing = options.spacing ?? {}
-  item.settings.width = options.width
-  item.settings.height = options.height
-  item.settings.borderRadius = options.borderRadius
-  item.settings.link = options.link
-  item.atoms = options.atoms ?? []
-  item.grids = []
+export function createCell(options: CellOptions = {}) {
+  const cell = createCellNode([])
+  cell.settings.horizontalAlign = options.horizontalAlign ?? 'left'
+  cell.settings.verticalAlign = options.verticalAlign ?? 'top'
+  cell.settings.backgroundColor = options.backgroundColor ?? 'transparent'
+  cell.settings.backgroundImage = options.backgroundImage
+  cell.settings.spacing = options.spacing ?? {}
+  cell.settings.width = options.width
+  cell.settings.height = options.height
+  cell.settings.borderRadius = options.borderRadius
+  cell.settings.link = options.link
+  cell.atoms = options.atoms ?? []
+  cell.rows = []
 
-  return item
+  return cell
 }
 
-export function createImageAtomNode(options: ImageAtomNodeOptions): ImageAtom {
+export function buildImageAtom(options: ImageAtomOptions): ImageAtom {
   const atom = createImageAtom()
   atom.src = options.src
   atom.link = options.link ?? 'https://example.com'
@@ -110,7 +110,7 @@ export function createImageAtomNode(options: ImageAtomNodeOptions): ImageAtom {
   return atom
 }
 
-export function createTextAtomNode(options: TextAtomNodeOptions): TextAtom {
+export function buildTextAtom(options: TextAtomOptions): TextAtom {
   const atom = createTextAtom(options.value)
   atom.color = options.color
   atom.spacing = options.spacing ?? zeroSpacing()
@@ -118,7 +118,7 @@ export function createTextAtomNode(options: TextAtomNodeOptions): TextAtom {
   return atom
 }
 
-export function createButtonAtomNode(options: ButtonAtomNodeOptions): ButtonAtom {
+export function buildButtonAtom(options: ButtonAtomOptions): ButtonAtom {
   const atom = createButtonAtom()
   atom.text = options.text
   atom.link = options.link
@@ -155,7 +155,7 @@ export function createMenuTextAtom(
   return atom
 }
 
-export function createImageBlockItem(
+export function createImageBackgroundCell(
   url: string,
   options: {
     height?: number
@@ -165,7 +165,7 @@ export function createImageBlockItem(
     verticalAlign?: 'top' | 'middle' | 'bottom'
   } = {},
 ) {
-  return createItemNode({
+  return createCell({
     atoms: [],
     horizontalAlign: options.horizontalAlign ?? 'left',
     verticalAlign: options.verticalAlign ?? 'top',

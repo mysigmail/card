@@ -12,11 +12,11 @@ const {
   isDragging,
   moveComponent,
   general,
-  isBlockComponent,
+  isCanvasBlockInstance,
   selectionLevel,
   selectedBlockId,
-  selectedGridId,
-  selectedItemId,
+  selectedRowId,
+  selectedCellId,
   selectedAtomId,
   selectedBlock,
   selectedAtom,
@@ -63,10 +63,10 @@ const selectedNodeId = computed(() => {
   switch (selectionLevel.value) {
     case 'block':
       return selectedBlockId.value ? `block:${selectedBlockId.value}` : undefined
-    case 'grid':
-      return selectedGridId.value ? `grid:${selectedGridId.value}` : undefined
-    case 'item':
-      return selectedItemId.value ? `item:${selectedItemId.value}` : undefined
+    case 'row':
+      return selectedRowId.value ? `row:${selectedRowId.value}` : undefined
+    case 'cell':
+      return selectedCellId.value ? `cell:${selectedCellId.value}` : undefined
     case 'atom':
       return selectedAtomId.value ? `atom:${selectedAtomId.value}` : undefined
     default:
@@ -78,10 +78,10 @@ const selectedNodeLabel = computed(() => {
   switch (selectionLevel.value) {
     case 'block':
       return selectedBlock.value?.label || 'Block'
-    case 'grid':
-      return 'Grid'
-    case 'item':
-      return 'Item'
+    case 'row':
+      return 'Row'
+    case 'cell':
+      return 'Cell'
     case 'atom':
       if (!selectedAtom.value)
         return 'Atom'
@@ -221,8 +221,8 @@ watch(
   [
     selectionLevel,
     selectedBlockId,
-    selectedGridId,
-    selectedItemId,
+    selectedRowId,
+    selectedCellId,
     selectedAtomId,
     selectedNodeLabel,
   ],
@@ -266,7 +266,7 @@ watch(
               :key="i.id"
             >
               <BlockRenderer
-                v-if="isBlockComponent(i)"
+                v-if="isCanvasBlockInstance(i)"
                 :id="i.id"
                 :data-name="i.block.label"
                 :index="index"

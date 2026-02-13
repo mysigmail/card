@@ -1,87 +1,202 @@
 # AGENTS
 
-Проект: визуальный email-конструктор на Vue 3 + TypeScript.
+Проект: визуальный email-конструктор на Vue 3 + TypeScript (block composer v2).
 
-## Цель агента
+## TL;DR для агента
 
-- Ускорять добавление email-блоков без дублирования логики.
-- Сохранять единый источник правды: `tools + schema`.
-- Поддерживать единственный путь рендера без отдельных runtime-компонентов на блок.
+- Работать только с моделью `BlockNode -> RowNode -> CellNode -> Atom`.
+- На canvas поддерживаются только блоки `version: 2` (`CanvasBlockInstance`).
+- Единый путь рендера: `BlockRenderer.vue` + `BlockRendererRowNode.vue`.
+- Единый стор/мутации дерева: `src/store/components/index.ts`.
+- Единый импорт/экспорт шаблона: `src/store/components/template-io.ts`.
+- Любые изменения структуры должны синхронно обновлять: типы, factory, renderer, tools panel, store, template-io.
 
-## Архитектурный контракт (обязательно)
+---
 
-- `Component` всегда должен иметь `schema`:
+## 1) Контекст проекта
+
+- Стек: Vue 3 + TypeScript + Vite.
+- UI: shadcn-vue компоненты из `src/components/ui/*`.
+- Email-рендер: `@mysigmail/vue-email-components`.
+- DnD/перестановка блоков: `sortablejs`.
+- Санитизация rich text при import/export: `sanitize-html`.
+
+---
+
+## 2) Доменный словарь (обязательный)
+
+- `BlockNode` — корневой узел секции письма.
+- `RowNode` — строка layout внутри `BlockNode` или `CellNode`.
+- `CellNode` — колонка внутри `RowNode`.
+- `Atom` — leaf-сущность контента (`text | button | divider | image | menu`).
+- `CanvasBlockInstance` — экземпляр блока на canvas (`id + version + block`).
+- `BlockPreset` — пресет для каталога (что можно вставить на canvas).
+
+Правило: суффикс `Node` использовать только для узлов дерева.
+
+---
+
+## 3) Архитектурный контракт
+
+### 3.1 Канвас и дерево
+
+- Канвас хранит только `CanvasBlockInstance[]`.
+- Выбор узлов и мутации структуры идут через `useComponentsStore()`.
+- Дерево и canvas должны оставаться синхронными по `data-tree-id` / `data-node-id`.
+
+### 3.2 Рендер
+
+- Рендер блоков только через:
+  - `src/components/email-components/BlockRenderer.vue`
+  - `src/components/email-components/BlockRendererRowNode.vue`
+  - `src/components/editor/EditorCanvas.vue` (host превью)
+- Не добавлять альтернативные рендер-пайплайны.
+
+### 3.3 Модель и фабрики
+
+- Источник типов:
+  - `src/types/block.ts`
   - `src/types/editor.ts`
-- Рендер блоков идет через единый рендерер:
-  - `src/components/email-components/SchemaEmailComponent.vue`
-  - `src/components/editor/EditorCanvas.vue`
-- Превью рендерится в `Shadow DOM`, чтобы изолировать стили редактора и содержимого письма:
+  - `src/types/template.ts`
+  - `src/types/style.ts`
+- Создание узлов только через factory:
+  - `src/components/email-components/block-factory.ts`
+  - `createBlockNode/createRowNode/createCellNode/create*Atom`.
+
+### 3.4 Preset-каталог
+
+- Пресеты: `src/components/email-components/catalog/<category>/*.ts`.
+- Регистрация: `src/components/email-components/catalog/<category>/index.ts`.
+- Общие helpers: `src/components/email-components/catalog/composer-helpers.ts`.
+  - Название файла историческое; использовать как слой shared helpers для preset-сборки.
+
+### 3.5 Import/Export
+
+- Только формат `TEMPLATE_EXPORT_VERSION = 2`.
+- IO/валидация/санитизация/ремап id:
+  - `src/store/components/template-io.ts`.
+
+---
+
+## 4) Карта источников правды
+
+- Типы узлов: `src/types/block.ts`
+- Типы инструментов и canvas-инстанса: `src/types/editor.ts`
+- Формат шаблона: `src/types/template.ts`
+- Стор редактора и мутации: `src/store/components/index.ts`
+- Фабрики узлов/атомов: `src/components/email-components/block-factory.ts`
+- Панель инструментов выбранного узла: `src/components/editor/components/tools/BlockSettingsPanel.vue`
+- Рендер email-превью: `src/components/editor/EditorCanvas.vue`
+- Дерево структуры: `src/components/editor/components/tree/*`
+
+---
+
+## 5) Рабочие сценарии
+
+## 5.1 Добавить/изменить preset
+
+1. Обновить preset-файл в `catalog/<category>/*.ts`.
+2. Собрать дерево только через factory/helpers.
+3. Для row сначала сбросить базу через helper (`resetRow`), потом накладывать отличия.
+4. Зарегистрировать preset в `catalog/<category>/index.ts`.
+5. Проверить вставку в canvas + рендер + редактирование в tools.
+
+## 5.2 Изменение структуры узла (row/cell/block settings)
+
+1. Обновить `src/types/block.ts`.
+2. Обновить default values в `block-factory.ts`.
+3. Обновить рендер в `BlockRenderer*.vue`.
+4. Обновить `BlockSettingsPanel.vue`.
+5. Обновить обновление значений в store (`updateV2SettingsToolById` и соседние).
+6. Обновить `template-io.ts` (валидация/санитизация/remap).
+
+## 5.3 Добавить новый atom type
+
+1. Добавить тип в `src/types/block.ts` (`AtomType`, union `Atom`).
+2. Добавить фабрику в `block-factory.ts`.
+3. Добавить рендер ветку в `BlockRendererRowNode.vue`.
+4. Добавить UI редактирования в `BlockSettingsPanel.vue`.
+5. Добавить операции в store, если нужны новые поля.
+6. Обновить `template-io.ts` (validate/sanitize/remap).
+
+## 5.4 Изменение инструментов
+
+- Инструменты описаны в `src/types/editor.ts`.
+- Для колонок использовать `type: 'columns'` и `ColumnCollectionTool`.
+- Новые tool-типы должны быть отражены в:
+  - `EditorComponentTools.vue`
+  - `template-io.ts` (`TOOL_TYPES`, validate/sanitize/remap)
+  - store update-обработчиках.
+
+---
+
+## 6) Tree-first UX (инварианты)
+
+- Структурные операции в первую очередь поддерживать через дерево (`tree/*`).
+- Клик из дерева не должен принудительно скроллить canvas.
+- Клик из canvas может активировать вкладку дерева и прокручивать к узлу.
+- Идентификаторы узлов:
+  - `block:<id>`
+  - `row:<id>`
+  - `cell:<id>`
+  - `atom:<id>`
+
+---
+
+## 7) Валидность email HTML (критично)
+
+- Не ломать email-совместимость ради web-only удобств.
+- Предпочитать табличный/layout-подход через `@mysigmail/vue-email-components`.
+- Стили должны оставаться консервативными и совместимыми с email-клиентами.
+- Rich text должен проходить санитизацию в import/export.
+
+---
+
+## 8) UI policy (shadcn-first)
+
+Порядок:
+1. Проверить готовый компонент в `src/components/ui/*`.
+2. Если нет — добавить через `shadcn-vue`.
+3. Если нет в shadcn-vue — сделать локальную обертку в стиле существующих `ui/*`.
+
+Не дублировать существующие UI-компоненты под новыми именами.
+
+Команда установки shadcn-компонента:
+- `pnpm dlx shadcn-vue@latest add <component>`
+
+---
+
+## 9) Shadow DOM и preview-стили
+
+- Preview рендерится в Shadow DOM:
   - `src/components/editor/TheEditor.vue`
   - `src/utils/index.ts` (`renderToShadowDom`)
-- Конфиги блоков хранятся в `catalog/*/index.ts` и собираются через field DSL:
-  - `src/components/email-components/fields.ts`
-- Группы инструментов описываются только через `ToolGroupRef`:
-  - `groupId`, `groupRole`, `groupLabel`
-  - `src/types/editor.ts`
-  - `src/components/email-components/schema/groups.ts`
+- Технические классы превью должны быть с префиксом `p-`.
+- Стили preview и `p-*` держать в:
+  - `src/assets/css/preview.css`
 
-## Как добавлять новый блок
+---
 
-1. Добавить/обновить декларацию в `src/components/email-components/catalog/<category>/index.ts`.
-2. Создать группы через `createSchemaGroups()` и `group(...)`.
-3. Описать `tools` через `f.*` helper-ы, передавая `ToolGroupRef`.
-4. Описать `schema` через `defineEmailBlockSchema(...)` из:
-   - `src/components/email-components/schema/types.ts`
-5. Использовать `gp(group, 'field')` для путей вместо ручной конкатенации строк.
-6. При необходимости добавить новый adapter по роли (не в renderer):
-   - `src/components/email-components/schema/adapters.ts`
+## 10) Telemetry
 
-## Typed schema paths
+- Телеметрия изолирована в `src/services/telemetry/*`.
+- Не менять telemetry-код в задачах редактора без явного запроса.
 
-- Использовать типизированные пути `groupId.property` через:
-  - `gp(...)`
-  - `defineEmailBlockSchema`
-  - `SchemaGroupFields`
+---
 
-## Tools и ключи
-
-- Использовать стабильные `key` для всех tools.
-- Новые инструменты добавлять через `toolBuilder` и/или `f.*` DSL.
-
-## Архитектурная чистота
-
-- Не добавлять альтернативные пути рендера.
-- Регистрировать adapters только по `groupRole`.
-
-## UI-компоненты (shadcn-first)
-
-- Для UI всегда использовать приоритет:
-  1. Сначала проверить, есть ли готовый компонент в `src/components/ui/*`.
-  2. Если нет, добавить компонент из `shadcn-vue`.
-  3. Если в `shadcn-vue` компонента нет, создать свой в `src/components/ui/*`, следуя паттерну shadcn.
-- Не дублировать уже существующие UI-компоненты под новыми именами.
-- Не использовать прямые `reka-ui` примитивы в фичах, если уже есть обертка в `src/components/ui/*`.
-- Для установки новых shadcn-компонентов использовать `pnpm dlx shadcn-vue@latest add <component>`.
-- Кастомные стили поверх shadcn делать минимально; приоритет — штатные `variant`/`size` и `class`-расширения в местах использования.
-- Новые кастомные компоненты в `src/components/ui/*` оформлять по паттерну:
-  - `index.ts` с экспортами, `cva`-вариантами и `VariantProps` (если есть варианты).
-  - `<Component>.vue` с типами из `index.ts`, `cn(...)`, `data-slot`, и совместимым API (`class`, `variant`, `size`, `v-model` где нужно).
-  - Именование и структура должны быть консистентны с текущими `button`, `input`, `toggle`, `select`, `color-picker`.
-
-## Shadow DOM и технические классы
-
-- Технические классы с префиксом `p-` относятся к превью письма (например, `p-html`, `p-body`, `p-ghost`, `p-is-empty`).
-- Стили для `p-*` должны жить в `src/assets/scss/preview.scss`, который инжектится в `Shadow DOM`.
-- Не опираться на стили внешнего редактора внутри email-превью; если нужен новый технический класс для превью, добавлять его в формате `p-*` и описывать в `preview.scss`.
-
-## Проверки перед завершением задачи
+## 11) Проверки перед завершением задачи
 
 - Типы:
   - `pnpm -s vue-tsc --noEmit --skipLibCheck`
 - Линт по измененным файлам:
   - `pnpm -s eslint <changed-files>`
 
-## Что НЕ трогать без причины
+Опционально (если менялись авто-импорты/глобальные компоненты):
+- `pnpm -s vite build`
+
+---
+
+## 12) Что не трогать без причины
 
 - Автогенерируемые декларации:
   - `src/types/auto-imports.d.ts`
@@ -90,7 +205,14 @@
   - `src/env.d.ts`
   - `src/types/extensions.d.ts`
 
-## Формат изменений
+Не редактировать эти файлы вручную.
 
-- Предпочитать небольшие, изолированные патчи.
-- В документации фиксировать архитектурные решения и ограничения.
+---
+
+## 13) Формат и стиль изменений
+
+- Делать небольшие изолированные патчи.
+- Избегать архитектурных отклонений без явной причины.
+- При архитектурном решении документировать ограничения и компромиссы.
+- Для рефакторинга нейминга проходить полный контур:
+  - типы -> фабрики -> рендер -> store -> template-io -> каталог -> проверки.

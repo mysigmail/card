@@ -2,8 +2,13 @@
 import { nextTick, ref, watch } from 'vue'
 import { useComponentsStore } from '@/store/components'
 
-const { installed, sidebarActiveTab, treeScrollTarget, treeScrollRequestId, isBlockComponent }
-  = useComponentsStore()
+const {
+  installed,
+  sidebarActiveTab,
+  treeScrollTarget,
+  treeScrollRequestId,
+  isCanvasBlockInstance,
+} = useComponentsStore()
 
 const rootRef = ref<HTMLElement>()
 
@@ -45,8 +50,8 @@ watch(
       v-for="(item, index) in installed"
       :key="item.id"
     >
-      <TreeBlockItem
-        v-if="isBlockComponent(item)"
+      <TreeBlockNode
+        v-if="isCanvasBlockInstance(item)"
         :id="item.id"
         :index="index"
         :block="item.block"

@@ -1,53 +1,53 @@
-import type { Block } from '@/types/block'
-import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
+import type { BlockNode } from '@/types/block'
+import type { BlockPreset, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
-import { createBlock, createGrid } from '@/components/email-components/block-factory'
+import { createBlockNode, createRowNode } from '@/components/email-components/block-factory'
 import {
-  createImageAtomNode,
-  createItemNode,
+  buildImageAtom,
+  buildTextAtom,
+  createCell,
   createMenuTextAtom,
-  createTextAtomNode,
-  resetGrid,
+  resetRow,
 } from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
 import { COLOR } from '@/components/email-components/constants'
 
-function buildHeader2ComposerBlock(label: string): Block {
-  const block = createBlock(label)
+function buildHeader2Block(label: string): BlockNode {
+  const block = createBlockNode(label)
   block.settings.spacing = {
     padding: [30, 35, 30, 35],
   }
   block.settings.backgroundColor = COLOR.theme.light
   block.settings.backgroundImage = undefined
 
-  const topGrid = block.grids[0]
-  resetGrid(topGrid)
-  topGrid.settings.spacing = {
+  const topRow = block.rows[0]
+  resetRow(topRow)
+  topRow.settings.spacing = {
     margin: [0, 0, 0, 0],
     padding: [0, 0, 20, 0],
   }
-  topGrid.items = [
-    createItemNode({
+  topRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'middle',
       atoms: [
-        createImageAtomNode({
+        buildImageAtom({
           src: images.logo.black,
           width: 110,
         }),
       ],
     }),
-    createItemNode({
+    createCell({
       horizontalAlign: 'right',
       verticalAlign: 'middle',
       atoms: [createMenuTextAtom(COLOR.theme.dark, { gap: 10 })],
     }),
   ]
 
-  const textGrid = createGrid([])
-  resetGrid(textGrid)
-  textGrid.items = [
-    createItemNode({
+  const textRow = createRowNode([])
+  resetRow(textRow)
+  textRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       borderRadius: 5,
@@ -62,7 +62,7 @@ function buildHeader2ComposerBlock(label: string): Block {
         padding: [140, 20, 20, 20],
       },
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p style="text-align: center"><span style="font-size: 18px">New Stool</span></p><p style="text-align: center"><span style="font-size: 36px"><u>Simplicity. Practicality. Naturality</u></span></p>',
           color: COLOR.theme.light,
@@ -71,19 +71,19 @@ function buildHeader2ComposerBlock(label: string): Block {
     }),
   ]
 
-  block.grids = [topGrid, textGrid]
+  block.rows = [topRow, textRow]
 
   return block
 }
 
-export function header2Composer(_: ComponentTheme, label: string): BlockCatalogComponent {
+export function header2Preset(_: ComponentTheme, label: string): BlockPreset {
   return {
     id: nanoid(8),
     version: 2,
-    name: 'header2-composer',
+    name: 'header2',
     label,
     type: 'header',
     preview: images.components.header2,
-    block: buildHeader2ComposerBlock(label),
+    block: buildHeader2Block(label),
   }
 }

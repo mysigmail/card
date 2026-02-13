@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Block } from '@/types/block'
+import type { BlockNode } from '@/types/block'
 import { ChevronDown, Copy, Pencil, Plus, Trash2 } from 'lucide-vue-next'
 import { computed, ref, watch } from 'vue'
-import TreeBlockGridNode from '@/components/editor/components/tree/TreeBlockGridNode.vue'
+import TreeBlockRowNode from '@/components/editor/components/tree/TreeBlockRowNode.vue'
 import { Button } from '@/components/ui/button'
 import { ButtonGroup } from '@/components/ui/button-group'
 import { Input } from '@/components/ui/input'
@@ -11,7 +11,7 @@ import { useComponentsStore } from '@/store/components'
 
 interface Props {
   id: string
-  block: Block
+  block: BlockNode
   index: number
 }
 
@@ -20,12 +20,12 @@ const props = defineProps<Props>()
 const {
   selectBlock,
   selectedBlockId,
-  selectedGridId,
-  selectedItemId,
+  selectedRowId,
+  selectedCellId,
   selectedAtomId,
   removeComponentById,
   duplicateComponentById,
-  addGridToBlock,
+  insertRowToBlock,
   renameBlock,
 } = useComponentsStore()
 
@@ -36,7 +36,7 @@ const shouldExpand = computed(() => {
   if (selectedBlockId.value !== props.block.id)
     return false
 
-  return Boolean(selectedGridId.value || selectedItemId.value || selectedAtomId.value)
+  return Boolean(selectedRowId.value || selectedCellId.value || selectedAtomId.value)
 })
 
 watch(
@@ -99,8 +99,8 @@ function applyRename() {
           <Button
             variant="outline"
             size="icon-xs"
-            aria-label="Add Grid"
-            @click.stop="addGridToBlock(block.id)"
+            aria-label="Add Row"
+            @click.stop="insertRowToBlock(block.id)"
           >
             <Plus class="size-3" />
           </Button>
@@ -156,17 +156,17 @@ function applyRename() {
       </div>
     </div>
 
-    <!-- Grids tree -->
+    <!-- Rows tree -->
     <div
       v-if="isOpen"
       class="pb-2"
     >
-      <TreeBlockGridNode
-        v-for="(grid, gridIndex) in block.grids"
-        :key="grid.id"
+      <TreeBlockRowNode
+        v-for="(row, rowIndex) in block.rows"
+        :key="row.id"
         :block="block"
-        :grid="grid"
-        :index="gridIndex"
+        :row="row"
+        :index="rowIndex"
         top-level
       />
     </div>

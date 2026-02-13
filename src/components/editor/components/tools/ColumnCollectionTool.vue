@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { GridTool } from '@/types/editor'
+import type { ColumnCollectionTool } from '@/types/editor'
 import { Plus } from 'lucide-vue-next'
 import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
@@ -7,7 +7,7 @@ import { useComponentsStore } from '@/store/components'
 
 interface Props {
   id: string
-  value: GridTool['value']
+  value: ColumnCollectionTool['value']
   title: string
 }
 
@@ -28,7 +28,7 @@ function onAction(action: string, index: number) {
 </script>
 
 <template>
-  <div data-slot="grid-tool">
+  <div data-slot="column-collection-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>

@@ -1,31 +1,31 @@
-import type { Block } from '@/types/block'
-import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
+import type { BlockNode } from '@/types/block'
+import type { BlockPreset, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
-import { createBlock, createGrid } from '@/components/email-components/block-factory'
+import { createBlockNode, createRowNode } from '@/components/email-components/block-factory'
 import {
-  createImageAtomNode,
-  createItemNode,
-  createTextAtomNode,
-  resetGrid,
+  buildImageAtom,
+  buildTextAtom,
+  createCell,
+  resetRow,
 } from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
 
-function buildHeader6ComposerBlock(label: string): Block {
-  const block = createBlock(label)
+function buildHeader6Block(label: string): BlockNode {
+  const block = createBlockNode(label)
   block.settings.spacing = {
     padding: [30, 35, 40, 35],
   }
   block.settings.backgroundColor = '#FFFFFF'
   block.settings.backgroundImage = undefined
 
-  const logoGrid = block.grids[0]
-  resetGrid(logoGrid)
-  logoGrid.items = [
-    createItemNode({
+  const logoRow = block.rows[0]
+  resetRow(logoRow)
+  logoRow.cells = [
+    createCell({
       horizontalAlign: 'center',
       verticalAlign: 'top',
       atoms: [
-        createImageAtomNode({
+        buildImageAtom({
           src: images.logo.black,
           alt: 'MySigMail',
           width: 128,
@@ -34,19 +34,19 @@ function buildHeader6ComposerBlock(label: string): Block {
     }),
   ]
 
-  const imageMainGrid = createGrid([])
-  resetGrid(imageMainGrid)
-  imageMainGrid.settings.spacing = {
+  const imageMainRow = createRowNode([])
+  resetRow(imageMainRow)
+  imageMainRow.settings.spacing = {
     margin: [0, 0, 0, 0],
     padding: [36, 0, 0, 0],
   }
-  imageMainGrid.items = [
-    createItemNode({
+  imageMainRow.cells = [
+    createCell({
       horizontalAlign: 'center',
       verticalAlign: 'top',
       borderRadius: 0,
       atoms: [
-        createImageAtomNode({
+        buildImageAtom({
           src: '/img/app-icon.png',
           alt: 'Image',
           width: 100,
@@ -56,14 +56,14 @@ function buildHeader6ComposerBlock(label: string): Block {
     }),
   ]
 
-  const textMainGrid = createGrid([])
-  resetGrid(textMainGrid)
-  textMainGrid.items = [
-    createItemNode({
+  const textMainRow = createRowNode([])
+  resetRow(textMainRow)
+  textMainRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p style="text-align: center"><span style="color: rgb(124, 134, 199); font-size: 16px">Brand new</span></p><p style="text-align: center"><strong><span style="font-size: 32px">The Circle.</span></strong></p>',
           color: '#000000',
@@ -72,14 +72,14 @@ function buildHeader6ComposerBlock(label: string): Block {
     }),
   ]
 
-  const imageBlockGrid = createGrid([])
-  resetGrid(imageBlockGrid)
-  imageBlockGrid.settings.spacing = {
+  const imageBlockRow = createRowNode([])
+  resetRow(imageBlockRow)
+  imageBlockRow.settings.spacing = {
     margin: [0, 0, 0, 0],
     padding: [24, 0, 0, 0],
   }
-  imageBlockGrid.items = [
-    createItemNode({
+  imageBlockRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       borderRadius: 0,
@@ -95,14 +95,14 @@ function buildHeader6ComposerBlock(label: string): Block {
     }),
   ]
 
-  const textSecondaryGrid = createGrid([])
-  resetGrid(textSecondaryGrid)
-  textSecondaryGrid.items = [
-    createItemNode({
+  const textSecondaryRow = createRowNode([])
+  resetRow(textSecondaryRow)
+  textSecondaryRow.cells = [
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       atoms: [
-        createTextAtomNode({
+        buildTextAtom({
           value:
             '<p style="text-align: center"><span style="font-size: 18px">GPS tracker for running and fitness.<br/>Unique features used by professional athletes<br/>are now also available for beginners!</span></p>',
           color: '#9FA3A7',
@@ -111,30 +111,30 @@ function buildHeader6ComposerBlock(label: string): Block {
     }),
   ]
 
-  const storesGrid = createGrid([])
-  resetGrid(storesGrid)
-  storesGrid.settings.spacing = {
+  const storesRow = createRowNode([])
+  resetRow(storesRow)
+  storesRow.settings.spacing = {
     margin: [0, 0, 0, 0],
     padding: [22, 0, 22, 0],
   }
-  storesGrid.settings.gap = 12
-  storesGrid.items = [
-    createItemNode({
+  storesRow.settings.gap = 12
+  storesRow.cells = [
+    createCell({
       horizontalAlign: 'right',
       verticalAlign: 'top',
       atoms: [
-        createImageAtomNode({
+        buildImageAtom({
           src: '/img/app-store.png',
           alt: 'Download on the App Store',
           width: 150,
         }),
       ],
     }),
-    createItemNode({
+    createCell({
       horizontalAlign: 'left',
       verticalAlign: 'top',
       atoms: [
-        createImageAtomNode({
+        buildImageAtom({
           src: '/img/google-play.png',
           alt: 'Get it on Google Play',
           width: 150,
@@ -143,26 +143,19 @@ function buildHeader6ComposerBlock(label: string): Block {
     }),
   ]
 
-  block.grids = [
-    logoGrid,
-    imageMainGrid,
-    textMainGrid,
-    imageBlockGrid,
-    textSecondaryGrid,
-    storesGrid,
-  ]
+  block.rows = [logoRow, imageMainRow, textMainRow, imageBlockRow, textSecondaryRow, storesRow]
 
   return block
 }
 
-export function header6Composer(_: ComponentTheme, label: string): BlockCatalogComponent {
+export function header6Preset(_: ComponentTheme, label: string): BlockPreset {
   return {
     id: nanoid(8),
     version: 2,
-    name: 'header6-composer',
+    name: 'header6',
     label,
     type: 'header',
     preview: images.components.header6,
-    block: buildHeader6ComposerBlock(label),
+    block: buildHeader6Block(label),
   }
 }
