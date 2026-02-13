@@ -10,8 +10,7 @@
     "preview": "vite preview",
     "lint": "vue-tsc --noEmit && eslint .",
     "lint:fix": "eslint . --fix",
-    "release": "bumpp -c 'build: release v' -t",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "release": "bumpy release",
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
@@ -44,6 +43,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.3.0",
+    "@antonreshetov/bumpy": "^0.3.0",
     "@commitlint/cli": "^18.2.0",
     "@commitlint/config-conventional": "^18.1.0",
     "@iconify-json/uil": "^1.2.3",
