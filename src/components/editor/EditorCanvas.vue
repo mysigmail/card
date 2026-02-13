@@ -2,14 +2,40 @@
 import type { CSSProperties } from 'vue'
 import { MBody, MContainer, MHtml, MPreview } from '@mysigmail/vue-email-components'
 import Sortable from 'sortablejs'
-import { computed, onMounted, ref } from 'vue'
-import SchemaEmailComponent from '@/components/email-components/SchemaEmailComponent.vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+import BlockRenderer from '@/components/email-components/BlockRenderer.vue'
 import { addGhost, removeGhost } from '@/components/email-components/utils'
 import { useComponentsStore } from '@/store/components'
 
-const { installed, isDragging, moveComponent, general } = useComponentsStore()
+const {
+  installed,
+  isDragging,
+  moveComponent,
+  general,
+  isBlockComponent,
+  selectionLevel,
+  selectedBlockId,
+  selectedGridId,
+  selectedItemId,
+  selectedAtomId,
+  selectedBlock,
+  selectedAtom,
+} = useComponentsStore()
 
 const listRef = ref<HTMLElement>()
+const surfaceRef = ref<HTMLElement>()
+const selectionOverlay = reactive({
+  visible: false,
+  top: 0,
+  left: 0,
+  width: 0,
+  height: 0,
+  label: '',
+})
+
+let overlayRafId: number | undefined
+let overlayMutationObserver: MutationObserver | undefined
+let overlayResizeObserver: ResizeObserver | undefined
 
 const EMAIL_TEMPLATE_WIDTH = 600
 
@@ -32,6 +58,98 @@ const style = computed<CSSProperties>(() => {
     padding: general.padding.map(i => `${i}px`).join(' '),
   }
 })
+
+const selectedNodeId = computed(() => {
+  switch (selectionLevel.value) {
+    case 'block':
+      return selectedBlockId.value ? `block:${selectedBlockId.value}` : undefined
+    case 'grid':
+      return selectedGridId.value ? `grid:${selectedGridId.value}` : undefined
+    case 'item':
+      return selectedItemId.value ? `item:${selectedItemId.value}` : undefined
+    case 'atom':
+      return selectedAtomId.value ? `atom:${selectedAtomId.value}` : undefined
+    default:
+      return undefined
+  }
+})
+
+const selectedNodeLabel = computed(() => {
+  switch (selectionLevel.value) {
+    case 'block':
+      return selectedBlock.value?.label || 'Block'
+    case 'grid':
+      return 'Grid'
+    case 'item':
+      return 'Item'
+    case 'atom':
+      if (!selectedAtom.value)
+        return 'Atom'
+
+      return selectedAtom.value.type.charAt(0).toUpperCase() + selectedAtom.value.type.slice(1)
+    default:
+      return ''
+  }
+})
+
+const selectionOverlayStyle = computed<CSSProperties>(() => {
+  return {
+    top: `${selectionOverlay.top}px`,
+    left: `${selectionOverlay.left}px`,
+    width: `${selectionOverlay.width}px`,
+    height: `${selectionOverlay.height}px`,
+  }
+})
+
+function resetSelectionOverlay() {
+  selectionOverlay.visible = false
+  selectionOverlay.label = ''
+}
+
+function measureSelectionOverlay() {
+  const surface = surfaceRef.value
+  const nodeId = selectedNodeId.value
+
+  if (!surface || !nodeId) {
+    resetSelectionOverlay()
+    return
+  }
+
+  const target = surface.querySelector<HTMLElement>(`[data-node-id="${nodeId}"]`)
+  if (!target) {
+    resetSelectionOverlay()
+    return
+  }
+
+  const surfaceRect = surface.getBoundingClientRect()
+  const targetRect = target.getBoundingClientRect()
+
+  if (targetRect.width <= 0 || targetRect.height <= 0) {
+    resetSelectionOverlay()
+    return
+  }
+
+  selectionOverlay.visible = true
+  selectionOverlay.top = targetRect.top - surfaceRect.top
+  selectionOverlay.left = targetRect.left - surfaceRect.left
+  selectionOverlay.width = targetRect.width
+  selectionOverlay.height = targetRect.height
+  selectionOverlay.label = selectedNodeLabel.value
+}
+
+function scheduleSelectionOverlayMeasure() {
+  if (typeof window === 'undefined' || overlayRafId !== undefined)
+    return
+
+  overlayRafId = window.requestAnimationFrame(() => {
+    overlayRafId = undefined
+    measureSelectionOverlay()
+  })
+}
+
+function onWindowResize() {
+  scheduleSelectionOverlayMeasure()
+}
 
 function initSortable() {
   Sortable.create(listRef.value!, {
@@ -60,7 +178,69 @@ function initSortable() {
 
 onMounted(() => {
   initSortable()
+
+  window.addEventListener('resize', onWindowResize)
+
+  if (surfaceRef.value) {
+    overlayMutationObserver = new MutationObserver(() => {
+      scheduleSelectionOverlayMeasure()
+    })
+
+    overlayMutationObserver.observe(surfaceRef.value, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      characterData: true,
+    })
+
+    overlayResizeObserver = new ResizeObserver(() => {
+      scheduleSelectionOverlayMeasure()
+    })
+
+    overlayResizeObserver.observe(surfaceRef.value)
+  }
+
+  scheduleSelectionOverlayMeasure()
 })
+
+onBeforeUnmount(() => {
+  overlayMutationObserver?.disconnect()
+  overlayResizeObserver?.disconnect()
+  overlayMutationObserver = undefined
+  overlayResizeObserver = undefined
+
+  if (overlayRafId !== undefined) {
+    window.cancelAnimationFrame(overlayRafId)
+    overlayRafId = undefined
+  }
+
+  window.removeEventListener('resize', onWindowResize)
+})
+
+watch(
+  [
+    selectionLevel,
+    selectedBlockId,
+    selectedGridId,
+    selectedItemId,
+    selectedAtomId,
+    selectedNodeLabel,
+  ],
+  async () => {
+    await nextTick()
+    scheduleSelectionOverlayMeasure()
+  },
+  { flush: 'post', immediate: true },
+)
+
+watch(
+  installed,
+  async () => {
+    await nextTick()
+    scheduleSelectionOverlayMeasure()
+  },
+  { deep: true, flush: 'post' },
+)
 </script>
 
 <template>
@@ -72,23 +252,41 @@ onMounted(() => {
     >
       <MContainer :style="container">
         <div
-          ref="listRef"
-          :class="{
-            'p-is-empty': installed.length === 0,
-          }"
+          ref="surfaceRef"
+          class="p-canvas-surface"
         >
-          <template
-            v-for="(i, index) in installed"
-            :key="i.id"
+          <div
+            ref="listRef"
+            :class="{
+              'p-is-empty': installed.length === 0,
+            }"
           >
-            <SchemaEmailComponent
-              :id="i.id"
-              :data-name="i.label"
-              :index="index"
-              :schema="i.schema"
-              :tools="i.tools"
-            />
-          </template>
+            <template
+              v-for="(i, index) in installed"
+              :key="i.id"
+            >
+              <BlockRenderer
+                v-if="isBlockComponent(i)"
+                :id="i.id"
+                :data-name="i.block.label"
+                :index="index"
+                :block="i.block"
+              />
+            </template>
+          </div>
+
+          <div
+            v-if="selectionOverlay.visible"
+            class="p-selection-overlay"
+            :style="selectionOverlayStyle"
+          >
+            <div
+              v-if="selectionOverlay.label"
+              class="p-selection-overlay__label"
+            >
+              {{ selectionOverlay.label }}
+            </div>
+          </div>
         </div>
       </MContainer>
     </MBody>

@@ -1,4 +1,4 @@
-import type { EmailBlockSchema } from '@/components/email-components/schema/types'
+import type { Block } from '@/types/block'
 
 export type ToolGroupRole
   = | 'layout'
@@ -158,17 +158,22 @@ export type ComponentType
     | 'header'
     | 'menu'
 
-export interface Component {
+export interface BlockComponent {
   id: string
+  version: 2
+  block: Block
+}
+
+export type CanvasItem = BlockComponent
+
+export interface BlockCatalogComponent extends BlockComponent {
   name: string
   label: string
   type: ComponentType
   preview: string
-  tools: Tool[]
-  schema: EmailBlockSchema
 }
 
-export type ComponentBuilder = (theme: ComponentTheme, label: string) => Component
+export type CatalogComponent = BlockCatalogComponent
 
 export interface GeneralTool {
   padding: [number, number, number, number]

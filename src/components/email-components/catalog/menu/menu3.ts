@@ -1,146 +1,102 @@
-import type { ComponentBuilder, ComponentTheme } from '@/types/editor'
+import type { Block, MenuAtomImageItem } from '@/types/block'
+import type { BlockCatalogComponent, ComponentTheme } from '@/types/editor'
 import { nanoid } from 'nanoid'
+import { createBlock, createMenuAtom } from '@/components/email-components/block-factory'
+import {
+  createImageAtomNode,
+  createItemNode,
+  resetGrid,
+} from '@/components/email-components/catalog/composer-helpers'
 import { images } from '@/components/email-components/catalog/images'
-import { composeEmailBlock, image, row } from '@/components/email-components/composition'
 import { COLOR } from '@/components/email-components/constants'
-import { f } from '@/components/email-components/fields'
-import { socialItems } from './shared'
 
-const menu3Composition = composeEmailBlock({
-  groups: {
-    layout: {
-      role: 'layout',
-      id: 'layout',
-      label: 'Layout',
-    },
-    logo: {
-      role: 'image',
-      id: 'logo',
-      label: 'Logo',
-    },
-    social: {
-      role: 'social',
-      id: 'social',
-      label: 'Social',
-    },
-  } as const,
-  fields: {
-    layout: ['attrs'],
-    logo: ['show', 'attrs', 'link', 'align', 'width'],
-    social: ['show', 'items', 'align', 'width'],
-  } as const,
-  schema: ({ groups, path }) => ({
-    root: {
-      attrs: path('layout', 'attrs'),
-      clickGroup: groups.layout.id,
-    },
-    nodes: [
-      row({
-        children: [
-          image({
-            group: groups.logo.id,
-            if: path('logo', 'show'),
-            attrs: path('logo', 'attrs'),
-            link: path('logo', 'link'),
-            align: path('logo', 'align'),
-            width: path('logo', 'width'),
-          }),
-          {
-            type: 'social',
-            group: groups.social.id,
-            if: path('social', 'show'),
-            items: path('social', 'items'),
-            align: path('social', 'align'),
-            width: path('social', 'width'),
-          },
-        ],
-      }),
-    ],
-  }),
-  tools: ({ groups }) => {
-    return [
-      f.spacing({
-        group: groups.layout,
-        value: {
-          padding: [30, 35, 30, 35],
-        },
-      }),
-      f.backgroundColor({
-        group: groups.layout,
-        value: COLOR.theme.light,
-      }),
-      f.align({
-        group: groups.logo,
-        value: 'left',
-      }),
-      f.columnWidth({
-        group: groups.logo,
-        value: 35,
-      }),
-      f.image({
-        group: groups.logo,
-        value: {
-          src: '',
-          link: 'https://example.com',
-          alt: 'Some alt',
-          width: 110,
-        },
-      }),
-      f.showHide({
-        group: groups.logo,
-      }),
-      f.align({
-        group: groups.social,
-        value: 'right',
-      }),
-      f.columnWidth({
-        group: groups.social,
-        value: 65,
-      }),
-      f.list({
-        group: groups.social,
-        value: socialItems('light'),
-      }),
-      f.showHide({
-        group: groups.social,
-      }),
-    ]
-  },
-})
-
-export const menu3: ComponentBuilder = (theme: ComponentTheme, label) => {
-  const preview = theme === 'dark' ? images.components.menu3.dark : images.components.menu3.light
+function buildMenu3ComposerBlock(theme: ComponentTheme, label: string): Block {
   const logo = theme === 'dark' ? images.logo.white : images.logo.black
+  const isDark = theme === 'dark'
   const backgroundColor = theme === 'dark' ? COLOR.theme.dark : COLOR.theme.light
 
-  const tools = menu3Composition.createTools()
+  const socialItems: MenuAtomImageItem[] = [
+    {
+      type: 'image',
+      name: 'Facebook',
+      link: 'https://example',
+      url: isDark ? images.socials.facebook.white : images.socials.facebook.black,
+      width: 16,
+      height: 16,
+      alt: 'Some alt',
+    },
+    {
+      type: 'image',
+      name: 'Twitter',
+      link: 'https://example',
+      url: isDark ? images.socials.twitter.white : images.socials.twitter.black,
+      width: 16,
+      height: 16,
+      alt: 'Some alt',
+    },
+    {
+      type: 'image',
+      name: 'Instagram',
+      link: 'https://example',
+      url: isDark ? images.socials.instagram.white : images.socials.instagram.black,
+      width: 16,
+      height: 16,
+      alt: 'Some alt',
+    },
+  ]
 
-  const bgTool = tools.find(
-    tool => tool.groupId === menu3Composition.groups.layout.id && tool.key === 'backgroundColor',
-  )
-  const logoTool = tools.find(
-    tool => tool.groupId === menu3Composition.groups.logo.id && tool.key === 'image',
-  )
-  const socialTool = tools.find(
-    tool => tool.groupId === menu3Composition.groups.social.id && tool.key === 'list',
-  )
+  const socialMenu = createMenuAtom()
+  socialMenu.itemType = 'image'
+  socialMenu.gap = 18
+  socialMenu.spacing = {
+    margin: [0, 0, 0, 0],
+    padding: [0, 0, 0, 0],
+  }
+  socialMenu.items = socialItems
 
-  if (bgTool)
-    bgTool.value = backgroundColor
+  const block = createBlock(label)
+  block.settings.spacing = {
+    padding: [30, 35, 30, 35],
+  }
+  block.settings.backgroundColor = backgroundColor
+  block.settings.backgroundImage = undefined
 
-  if (logoTool && logoTool.type === 'image')
-    logoTool.value.src = logo
+  const grid = block.grids[0]
+  resetGrid(grid)
 
-  if (socialTool)
-    socialTool.value = socialItems(theme)
+  const logoItem = createItemNode({
+    horizontalAlign: 'left',
+    verticalAlign: 'middle',
+    atoms: [
+      createImageAtomNode({
+        src: logo,
+        width: 110,
+      }),
+    ],
+  })
+
+  const socialItem = createItemNode({
+    horizontalAlign: 'right',
+    verticalAlign: 'middle',
+    atoms: [socialMenu],
+  })
+
+  grid.items = [logoItem, socialItem]
+  block.grids = [grid]
+
+  return block
+}
+
+export function menu3Composer(theme: ComponentTheme, label: string): BlockCatalogComponent {
+  const preview = theme === 'dark' ? images.components.menu3.dark : images.components.menu3.light
 
   return {
     id: nanoid(8),
-    name: 'Menu3',
+    version: 2,
+    name: 'menu3-composer',
     label,
-    schema: menu3Composition.schema,
     type: 'menu',
     preview,
-    tools,
+    block: buildMenu3ComposerBlock(theme, label),
   }
 }
