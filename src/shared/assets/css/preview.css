@@ -40,7 +40,7 @@ a {
   border-radius: 10px;
   border: 4px solid var(--primary);
   pointer-events: none;
-  z-index: 9;
+  z-index: 8;
 }
 
 .p-overflow {
@@ -103,7 +103,7 @@ a {
   box-sizing: border-box;
   border: 1px solid var(--primary);
   pointer-events: none;
-  z-index: 10;
+  z-index: 8;
 }
 
 .p-selection-overlay__label {
@@ -121,7 +121,7 @@ a {
   border-radius: 4px 4px 0 0;
   white-space: nowrap;
   pointer-events: none;
-  z-index: 11;
+  z-index: 9;
 }
 
 .p-edit-tool {
@@ -145,7 +145,7 @@ a {
   border-radius: 4px 4px 0 0;
   white-space: nowrap;
   pointer-events: none;
-  z-index: 9;
+  z-index: 8;
 }
 
 .p-grid-gap {
