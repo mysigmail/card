@@ -37,7 +37,7 @@ export default ({ mode }) => {
             customCollections: ['svg'],
           }),
         ],
-        dirs: ['src/layouts', 'src/components'],
+        dirs: ['src/layouts', 'src/features', 'src/shared/ui'],
       }),
       Icons({
         customCollections: {

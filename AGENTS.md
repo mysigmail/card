@@ -1,218 +1,160 @@
 # AGENTS
 
-Проект: визуальный email-конструктор на Vue 3 + TypeScript (block composer v2).
+Этот документ описывает, как агенту безопасно менять код в проекте email-конструктора на Vue 3 + TypeScript.
+Главный принцип: **JSON-структура шаблона первична**, HTML-превью вторично.
 
-## TL;DR для агента
+## 0. Приоритеты изменений
 
-- Работать только с моделью `BlockNode -> RowNode -> CellNode -> Atom`.
-- На canvas поддерживаются только блоки `version: 2` (`CanvasBlockInstance`).
-- Единый путь рендера: `BlockRenderer.vue` + `BlockRendererRowNode.vue`.
-- Единый стор/мутации дерева: `src/store/components/index.ts`.
-- Единый импорт/экспорт шаблона: `src/store/components/template-io.ts`.
-- Любые изменения структуры должны синхронно обновлять: типы, factory, renderer, tools panel, store, template-io.
+Перед любым изменением соблюдай порядок:
+1. Сохранить контракт данных шаблона (`version`, структура, лимиты, санитизация).
+2. Не ломать инварианты дерева `Block -> Row -> Cell -> Atom`.
+3. Не нарушать email-совместимость (табличная верстка, inline-стили).
+4. Не ломать UX редактора (выделение, дерево, импорт/экспорт, localStorage).
 
----
+## 1. Архитектурная карта (FSD-lite)
 
-## 1) Контекст проекта
+- `src/app` — инициализация приложения, глобальные стили.
+- `src/entities` — доменные сущности и бизнес-логика (`block`, `style`, `template`).
+- `src/features` — фичи редактора и превью (`editor`, `email-preview`).
+- `src/shared` — общие UI-компоненты, утилиты, инфраструктура.
 
-- Стек: Vue 3 + TypeScript + Vite.
-- UI: shadcn-vue компоненты из `src/components/ui/*`.
-- Email-рендер: `@mysigmail/vue-email-components`.
-- DnD/перестановка блоков: `sortablejs`.
-- Санитизация rich text при import/export: `sanitize-html`.
+## 2. Доменная модель и инварианты
 
----
+Базовая иерархия:
+`BlockNode` -> `RowNode` -> `CellNode` -> `Atom`.
 
-## 2) Доменный словарь (обязательный)
+Ключевые сущности:
+- `BlockNode` содержит `rows`.
+- `RowNode` содержит `cells`.
+- `CellNode` содержит `atoms` и `rows` (вложенность поддерживается рекурсивно).
+- `Atom` — контентный узел (`text`, `button`, `divider`, `image`, `menu`).
+- `CanvasBlockInstance` — элемент канваса с `id`, `version: 2`, `block`.
 
-- `BlockNode` — корневой узел секции письма.
-- `RowNode` — строка layout внутри `BlockNode` или `CellNode`.
-- `CellNode` — колонка внутри `RowNode`.
-- `Atom` — leaf-сущность контента (`text | button | divider | image | menu`).
-- `CanvasBlockInstance` — экземпляр блока на canvas (`id + version + block`).
-- `BlockPreset` — пресет для каталога (что можно вставить на canvas).
+ID-правила:
+- В данных узлов хранятся "сырые" id (`nanoid(8)`), без префиксов.
+- Префиксы `block:`, `row:`, `cell:`, `atom:` используются в UI (`data-node-id`, tree scroll target), а не в persisted-данных.
 
-Правило: суффикс `Node` использовать только для узлов дерева.
+## 3. Source of Truth (куда идти за изменениями)
 
----
+| Что меняем | Файл |
+| :--- | :--- |
+| Типы дерева блока | `src/entities/block/types.ts` |
+| Фабрики узлов/атомов | `src/entities/block/block-factory.ts` |
+| Типы spacing/background | `src/entities/style/types.ts` |
+| Контракт шаблона (`TemplateExportV2`, лимиты, tool types) | `src/entities/template/types.ts` |
+| Валидация/санитизация/migration/remap id шаблона | `src/entities/template/template-io.ts` |
+| Store API редактора | `src/features/editor/model/index.ts` |
+| CRUD дерева на канвасе | `src/features/editor/model/canvas.ts` |
+| Template IO интеграция со store | `src/features/editor/model/template-io.ts` |
+| Persist/Hydrate localStorage | `src/features/editor/model/persistence.ts` |
+| Главный рендер блока | `src/features/email-preview/ui/BlockRenderer.vue` |
+| Рендер row/cell/atom | `src/features/email-preview/ui/BlockRendererRowNode.vue` |
+| Панель настроек блока/атома | `src/features/editor/components/tools/BlockSettingsPanel.vue` |
+| Каталог пресетов | `src/features/email-preview/catalog/` |
 
-## 3) Архитектурный контракт
+Важно:
+- В проекте **два `template-io.ts`** с разной ответственностью:
+  - `src/entities/template/template-io.ts` — доменный парсер/валидатор/санитайзер.
+  - `src/features/editor/model/template-io.ts` — применение шаблона к store.
 
-### 3.1 Канвас и дерево
+## 4. Обязательные технические правила
 
-- Канвас хранит только `CanvasBlockInstance[]`.
-- Выбор узлов и мутации структуры идут через `useComponentsStore()`.
-- Дерево и canvas должны оставаться синхронными по `data-tree-id` / `data-node-id`.
+### 4.1 Изменение дерева только через store
 
-### 3.2 Рендер
+Использовать `useComponentsStore` и его API:
+- `insertBlockToCanvas`, `insertRowToBlock`, `insertRowToCell`
+- `insertCellToRow`, `insertAtomToCell`
+- `removeComponent`, `removeRow`, `removeCell`, `removeAtom`
+- `moveComponent`, `moveAtomWithinCell`
+- `updateToolById`, `addNewToolToMultiTool`, `deleteMultiToolItem`
+- `selectBlock/selectRow/selectCell/selectAtom`
 
-- Рендер блоков только через:
-  - `src/components/email-components/BlockRenderer.vue`
-  - `src/components/email-components/BlockRendererRowNode.vue`
-  - `src/components/editor/EditorCanvas.vue` (host превью)
-- Не добавлять альтернативные рендер-пайплайны.
+Нельзя напрямую мутировать дерево внутри UI-компонентов.
 
-### 3.3 Модель и фабрики
+### 4.2 Shadow DOM и preview-стили
 
-- Источник типов:
-  - `src/types/block.ts`
-  - `src/types/editor.ts`
-  - `src/types/template.ts`
-  - `src/types/style.ts`
-- Создание узлов только через factory:
-  - `src/components/email-components/block-factory.ts`
-  - `createBlockNode/createRowNode/createCellNode/create*Atom`.
+- Хост превью: `src/features/editor/ui/EditorCanvas.vue`.
+- Инфра Shadow DOM: `src/shared/lib/shadow-dom.ts`.
+- Технические preview-классы должны использовать префикс `p-`.
+- Проверять, что стили не протекают за пределы Shadow DOM.
 
-### 3.4 Preset-каталог
+### 4.3 Email-совместимость
 
-- Пресеты: `src/components/email-components/catalog/<category>/*.ts`.
-- Регистрация: `src/components/email-components/catalog/<category>/index.ts`.
-- Общие helpers: `src/components/email-components/catalog/composer-helpers.ts`.
-  - Название файла историческое; использовать как слой shared helpers для preset-сборки.
+- Базовая сетка только через `@mysigmail/vue-email-components` (`MRow`, `MColumn` и т.д.).
+- Не строить layout на Flexbox/Grid для email-каркаса.
+- Стили критичных элементов задавать inline.
 
-### 3.5 Import/Export
+## 5. Template contract (нельзя ломать)
 
-- Только формат `TEMPLATE_EXPORT_VERSION = 2`.
-- IO/валидация/санитизация/ремап id:
-  - `src/store/components/template-io.ts`.
+Источник: `src/entities/template/types.ts`, `src/entities/template/template-io.ts`.
 
----
+Обязательные константы/ограничения:
+- `TEMPLATE_EXPORT_VERSION = 2`
+- `TEMPLATE_LOCAL_STORAGE_KEY = "card.template.v2"`
+- `TEMPLATE_MAX_COMPONENTS = 200`
+- `TEMPLATE_MAX_JSON_BYTES = 2 * 1024 * 1024`
 
-## 4) Карта источников правды
+Поведение:
+- Импорт обязан проходить через `parseTemplateExportPayload` / `parseTemplateExportJson`.
+- HTML (text editor) должен проходить санитизацию через доменный `template-io`.
+- При runtime-импорте id блоков/узлов/атомов ремапятся в новые значения.
 
-- Типы узлов: `src/types/block.ts`
-- Типы инструментов и canvas-инстанса: `src/types/editor.ts`
-- Формат шаблона: `src/types/template.ts`
-- Стор редактора и мутации: `src/store/components/index.ts`
-- Фабрики узлов/атомов: `src/components/email-components/block-factory.ts`
-- Панель инструментов выбранного узла: `src/components/editor/components/tools/BlockSettingsPanel.vue`
-- Рендер email-превью: `src/components/editor/EditorCanvas.vue`
-- Дерево структуры: `src/components/editor/components/tree/*`
+## 6. Playbook: типовые изменения
 
----
+### 6.1 Добавить новый Atom
 
-## 5) Рабочие сценарии
+1. Добавить тип в `src/entities/block/types.ts`.
+2. Добавить фабрику в `src/entities/block/block-factory.ts`.
+3. Поддержать операции в `src/features/editor/model/canvas.ts` (если нужны спец-ветки).
+4. Добавить UI-настройки в `src/features/editor/components/tools/`.
+5. Подключить настройки в `src/features/editor/components/tools/BlockSettingsPanel.vue`.
+6. Добавить рендер в `src/features/email-preview/ui/BlockRendererRowNode.vue`.
+7. Обновить `src/entities/template/template-io.ts`:
+   - валидация структуры,
+   - санитизация,
+   - совместимость импорта/экспорта.
 
-## 5.1 Добавить/изменить preset
+### 6.2 Добавить новый тип Tool / поле настройки
 
-1. Обновить preset-файл в `catalog/<category>/*.ts`.
-2. Собрать дерево только через factory/helpers.
-3. Для row сначала сбросить базу через helper (`resetRow`), потом накладывать отличия.
-4. Зарегистрировать preset в `catalog/<category>/index.ts`.
-5. Проверить вставку в canvas + рендер + редактирование в tools.
+1. Добавить типы в `src/entities/template/types.ts`.
+2. Обновить трансформации в `src/features/editor/model/tools.ts` и `canvas.ts`.
+3. Обновить UI панели настроек (`tools/*`, `BlockSettingsPanel.vue`).
+4. Обновить доменный IO (`src/entities/template/template-io.ts`):
+   - разрешенный `TOOL_TYPES`,
+   - валидация/санитизация value.
+5. Проверить, что поле сохраняется в JSON и восстанавливается из localStorage.
 
-## 5.2 Изменение структуры узла (row/cell/block settings)
+### 6.3 Изменить контракт шаблона
 
-1. Обновить `src/types/block.ts`.
-2. Обновить default values в `block-factory.ts`.
-3. Обновить рендер в `BlockRenderer*.vue`.
-4. Обновить `BlockSettingsPanel.vue`.
-5. Обновить обновление значений в store (`updateV2SettingsToolById` и соседние).
-6. Обновить `template-io.ts` (валидация/санитизация/remap).
+1. Сначала определить обратную совместимость.
+2. Затем обновить `types.ts` и `template-io.ts` (validation + migration).
+3. После этого обновить feature-layer IO (`src/features/editor/model/template-io.ts`) при необходимости.
+4. Проверить `append` и `replace` режимы импорта.
 
-## 5.3 Добавить новый atom type
+## 7. UI policy (shadcn-vue)
 
-1. Добавить тип в `src/types/block.ts` (`AtomType`, union `Atom`).
-2. Добавить фабрику в `block-factory.ts`.
-3. Добавить рендер ветку в `BlockRendererRowNode.vue`.
-4. Добавить UI редактирования в `BlockSettingsPanel.vue`.
-5. Добавить операции в store, если нужны новые поля.
-6. Обновить `template-io.ts` (validate/sanitize/remap).
+- Базовые UI-компоненты размещаются в `src/shared/ui/`.
+- Если нужен новый компонент, использовать:
+  - `pnpm dlx shadcn-vue@latest add <component_name>`
+- Не создавать кастомные аналоги кнопок/инпутов, если есть стандартный shadcn-компонент.
 
-## 5.4 Изменение инструментов
+## 8. Проверки перед завершением
 
-- Инструменты описаны в `src/types/editor.ts`.
-- Для колонок использовать `type: 'columns'` и `ColumnCollectionTool`.
-- Новые tool-типы должны быть отражены в:
-  - `EditorComponentTools.vue`
-  - `template-io.ts` (`TOOL_TYPES`, validate/sanitize/remap)
-  - store update-обработчиках.
+Обязательный минимум:
+1. Types: `pnpm -s vue-tsc --noEmit`
+2. Lint: `pnpm -s eslint <changed_files>`
 
----
+Smoke-check вручную (критично для этого проекта):
+1. Добавление/редактирование нового поля в UI реально меняет превью.
+2. Export JSON -> Import JSON дает тот же результат (round-trip).
+3. Import в обоих режимах: `replace` и `append`.
+4. Перезагрузка страницы восстанавливает состояние из localStorage.
+5. В Shadow DOM стили элемента выглядят корректно и не текут наружу.
 
-## 6) Tree-first UX (инварианты)
+## 9. Антипаттерны (не делать)
 
-- Структурные операции в первую очередь поддерживать через дерево (`tree/*`).
-- Клик из дерева не должен принудительно скроллить canvas.
-- Клик из canvas может активировать вкладку дерева и прокручивать к узлу.
-- Идентификаторы узлов:
-  - `block:<id>`
-  - `row:<id>`
-  - `cell:<id>`
-  - `atom:<id>`
-
----
-
-## 7) Валидность email HTML (критично)
-
-- Не ломать email-совместимость ради web-only удобств.
-- Предпочитать табличный/layout-подход через `@mysigmail/vue-email-components`.
-- Стили должны оставаться консервативными и совместимыми с email-клиентами.
-- Rich text должен проходить санитизацию в import/export.
-
----
-
-## 8) UI policy (shadcn-first)
-
-Порядок:
-1. Проверить готовый компонент в `src/components/ui/*`.
-2. Если нет — добавить через `shadcn-vue`.
-3. Если нет в shadcn-vue — сделать локальную обертку в стиле существующих `ui/*`.
-
-Не дублировать существующие UI-компоненты под новыми именами.
-
-Команда установки shadcn-компонента:
-- `pnpm dlx shadcn-vue@latest add <component>`
+- Не добавлять новые точки входа для состояния мимо `useComponentsStore`.
+- Не менять JSON-контракт шаблона без обновления validation/sanitize/migration.
 
 ---
-
-## 9) Shadow DOM и preview-стили
-
-- Preview рендерится в Shadow DOM:
-  - `src/components/editor/TheEditor.vue`
-  - `src/utils/index.ts` (`renderToShadowDom`)
-- Технические классы превью должны быть с префиксом `p-`.
-- Стили preview и `p-*` держать в:
-  - `src/assets/css/preview.css`
-
----
-
-## 10) Telemetry
-
-- Телеметрия изолирована в `src/services/telemetry/*`.
-- Не менять telemetry-код в задачах редактора без явного запроса.
-
----
-
-## 11) Проверки перед завершением задачи
-
-- Типы:
-  - `pnpm -s vue-tsc --noEmit --skipLibCheck`
-- Линт по измененным файлам:
-  - `pnpm -s eslint <changed-files>`
-
-Опционально (если менялись авто-импорты/глобальные компоненты):
-- `pnpm -s vite build`
-
----
-
-## 12) Что не трогать без причины
-
-- Автогенерируемые декларации:
-  - `src/types/auto-imports.d.ts`
-  - `src/types/components.d.ts`
-- Ambient declarations:
-  - `src/env.d.ts`
-  - `src/types/extensions.d.ts`
-
-Не редактировать эти файлы вручную.
-
----
-
-## 13) Формат и стиль изменений
-
-- Делать небольшие изолированные патчи.
-- Избегать архитектурных отклонений без явной причины.
-- При архитектурном решении документировать ограничения и компромиссы.
-- Для рефакторинга нейминга проходить полный контур:
-  - типы -> фабрики -> рендер -> store -> template-io -> каталог -> проверки.
+Критерий качества для любого PR: после изменений пользователь может безопасно сохранить шаблон в JSON, импортировать его обратно и получить предсказуемый визуальный результат в email-превью без регрессий структуры.
