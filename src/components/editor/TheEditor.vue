@@ -6,8 +6,7 @@ import { renderToShadowDom } from '@/utils'
 
 const previewRef = ref()
 
-const { general, editableId, editableToolsGroupName, hydrateTemplateFromLocalStorage }
-  = useComponentsStore()
+const { general, resetSelection, hydrateTemplateFromLocalStorage } = useComponentsStore()
 
 onMounted(() => {
   hydrateTemplateFromLocalStorage()
@@ -16,8 +15,7 @@ onMounted(() => {
 
   shadow.addEventListener('click', (e) => {
     if (e.target instanceof HTMLBodyElement) {
-      editableId.value = undefined
-      editableToolsGroupName.value = undefined
+      resetSelection()
     }
   })
 })

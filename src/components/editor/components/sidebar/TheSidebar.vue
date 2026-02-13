@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import UilListUiAlt from '~icons/uil/list-ui-alt'
 import UilServer from '~icons/uil/server'
+import { useComponentsStore } from '@/store/components'
 
-const activeTab = ref<'components' | 'tree'>('components')
+const { sidebarActiveTab } = useComponentsStore()
 </script>
 
 <template>
@@ -12,28 +12,28 @@ const activeTab = ref<'components' | 'tree'>('components')
       <div class="relative z-20 mt-1 border-r border-border bg-background">
         <div
           class="cursor-pointer p-2"
-          @click="activeTab = 'components'"
+          @click="sidebarActiveTab = 'components'"
         >
           <UilServer
             class="size-6 hover:text-foreground"
-            :class="activeTab === 'components' ? 'text-foreground' : 'text-muted-foreground'"
+            :class="sidebarActiveTab === 'components' ? 'text-foreground' : 'text-muted-foreground'"
           />
         </div>
         <div
           class="cursor-pointer p-2"
-          @click="activeTab = 'tree'"
+          @click="sidebarActiveTab = 'tree'"
         >
           <UilListUiAlt
             class="size-6 hover:text-foreground"
-            :class="activeTab === 'tree' ? 'text-foreground' : 'text-muted-foreground'"
+            :class="sidebarActiveTab === 'tree' ? 'text-foreground' : 'text-muted-foreground'"
           />
         </div>
       </div>
       <div
         class="h-[calc(100vh-var(--header-height)-var(--sidebar-footer-height))] w-full overflow-y-auto bg-background"
       >
-        <ComponentList v-if="activeTab === 'components'" />
-        <TreeComponents v-if="activeTab === 'tree'" />
+        <ComponentList v-if="sidebarActiveTab === 'components'" />
+        <TreeComponents v-if="sidebarActiveTab === 'tree'" />
       </div>
     </div>
     <div class="z-10 h-[var(--sidebar-footer-height)] shrink-0 overflow-y-auto bg-background">

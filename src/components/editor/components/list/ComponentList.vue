@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { MenuAim } from '@mysigmail/menu-aim'
+import { Plus } from 'lucide-vue-next'
 import { onMounted, ref } from 'vue'
 import { useList } from '@/components/editor/components/list/composables'
 import { useComponentsStore } from '@/store/components'
 
-const { list } = useComponentsStore()
+const { list, addBlockToCanvas } = useComponentsStore()
 const { showList } = useList()
 
 const hovered = ref<number>()
@@ -51,6 +52,13 @@ function onMouseLeave() {
         >
           {{ i.name }}
         </div>
+      </div>
+      <div
+        class="cursor-pointer border-t border-border px-4 py-3 text-base hover:bg-muted flex items-center gap-2"
+        @click="addBlockToCanvas('Block')"
+      >
+        <Plus class="size-4" />
+        Empty Block
       </div>
     </div>
     <div

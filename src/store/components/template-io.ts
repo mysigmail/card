@@ -1,5 +1,6 @@
 import type { IOptions } from 'sanitize-html'
-import type { Component, GeneralTool, Tool, ToolCollectionItem } from '@/types/editor'
+import type { Atom, Block, BlockGrid, BlockItem } from '@/types/block'
+import type { CanvasItem, GeneralTool, Tool, ToolCollectionItem } from '@/types/editor'
 import type {
   TemplateExportMeta,
   TemplateExportV1,
@@ -15,7 +16,7 @@ import {
 import { clone } from '@/utils'
 
 interface CreateTemplateExportPayloadOptions {
-  installed: Component[]
+  installed: CanvasItem[]
   general: GeneralTool
   title?: string
 }
@@ -54,6 +55,7 @@ const TOOL_TYPES = new Set([
 const BACKGROUND_REPEAT_VALUES = new Set(['repeat', 'no-repeat'])
 const BACKGROUND_SIZE_VALUES = new Set(['unset', 'cover', 'contain'])
 const BACKGROUND_POSITION_VALUES = new Set(['top', 'center', 'bottom', 'left', 'right'])
+const MENU_ITEM_TYPE_VALUES = new Set(['text', 'image'])
 const EMAIL_TEXT_ALLOWED_TAGS = [
   'a',
   'b',
@@ -128,7 +130,7 @@ function isRecord(value: unknown): value is UnknownRecord {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
-function isFiniteNumber(value: unknown) {
+function isFiniteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value)
 }
 
@@ -309,7 +311,7 @@ function validateRowChild(
   }
 }
 
-function validateSchema(
+function _validateSchema(
   value: unknown,
   path: string,
   groupIds: Set<string>,
@@ -437,7 +439,432 @@ function validateGeneral(general: unknown, path: string, issues: TemplateValidat
     pushIssue(issues, `${path}.previewText`, 'general.previewText must be a string')
 }
 
-function validateTool(
+function validateSpacingTuple(
+  value: unknown,
+  path: string,
+  issues: TemplateValidationIssue[],
+  label: 'padding' | 'margin',
+) {
+  if (value === undefined)
+    return
+
+  if (
+    !Array.isArray(value)
+    || value.length !== 4
+    || value.some(entry => !isFiniteNumber(entry))
+  ) {
+    pushIssue(issues, `${path}.${label}`, `${label} must be a tuple of 4 finite numbers`)
+  }
+}
+
+function validateSpacingValue(value: unknown, path: string, issues: TemplateValidationIssue[]) {
+  if (!isRecord(value)) {
+    pushIssue(issues, path, 'spacing must be an object')
+    return
+  }
+
+  validateSpacingTuple(value.padding, path, issues, 'padding')
+  validateSpacingTuple(value.margin, path, issues, 'margin')
+}
+
+function validateBackgroundImageValue(
+  value: unknown,
+  path: string,
+  issues: TemplateValidationIssue[],
+) {
+  if (value === undefined)
+    return
+
+  if (!isRecord(value)) {
+    pushIssue(issues, path, 'backgroundImage must be an object')
+    return
+  }
+
+  if (!isString(value.url))
+    pushIssue(issues, `${path}.url`, 'backgroundImage.url must be a string')
+
+  if (!isString(value.repeat) || !BACKGROUND_REPEAT_VALUES.has(value.repeat)) {
+    pushIssue(issues, `${path}.repeat`, 'backgroundImage.repeat must be "repeat" or "no-repeat"')
+  }
+
+  if (!isString(value.size) || !BACKGROUND_SIZE_VALUES.has(value.size)) {
+    pushIssue(issues, `${path}.size`, 'backgroundImage.size must be "unset", "cover" or "contain"')
+  }
+
+  if (!isString(value.position) || !BACKGROUND_POSITION_VALUES.has(value.position)) {
+    pushIssue(
+      issues,
+      `${path}.position`,
+      'backgroundImage.position must be "top", "center", "bottom", "left" or "right"',
+    )
+  }
+}
+
+function validateAtom(value: unknown, path: string, issues: TemplateValidationIssue[]) {
+  if (!isRecord(value)) {
+    pushIssue(issues, path, 'atom must be an object')
+    return
+  }
+
+  if (!isString(value.id))
+    pushIssue(issues, `${path}.id`, 'atom.id must be a string')
+
+  if (!isString(value.type))
+    pushIssue(issues, `${path}.type`, 'atom.type must be a string')
+
+  if (value.type === 'text') {
+    if (!isString(value.value))
+      pushIssue(issues, `${path}.value`, 'text atom value must be a string')
+
+    if (value.color !== undefined && !isString(value.color)) {
+      pushIssue(issues, `${path}.color`, 'text atom color must be a string')
+    }
+
+    if (value.spacing !== undefined)
+      validateSpacingValue(value.spacing, `${path}.spacing`, issues)
+
+    return
+  }
+
+  if (value.type === 'button') {
+    if (!isString(value.text))
+      pushIssue(issues, `${path}.text`, 'button atom text must be a string')
+    if (!isString(value.link))
+      pushIssue(issues, `${path}.link`, 'button atom link must be a string')
+    if (!isString(value.backgroundColor)) {
+      pushIssue(issues, `${path}.backgroundColor`, 'button atom backgroundColor must be a string')
+    }
+    if (!isString(value.color))
+      pushIssue(issues, `${path}.color`, 'button atom color must be a string')
+    if (!isFiniteNumber(value.fontSize)) {
+      pushIssue(issues, `${path}.fontSize`, 'button atom fontSize must be a finite number')
+    }
+    if (!isFiniteNumber(value.borderRadius)) {
+      pushIssue(issues, `${path}.borderRadius`, 'button atom borderRadius must be a finite number')
+    }
+    validateSpacingTuple(value.padding, path, issues, 'padding')
+
+    if (value.spacing !== undefined)
+      validateSpacingValue(value.spacing, `${path}.spacing`, issues)
+
+    return
+  }
+
+  if (value.type === 'divider') {
+    if (!isString(value.color))
+      pushIssue(issues, `${path}.color`, 'divider atom color must be a string')
+    if (!isFiniteNumber(value.height)) {
+      pushIssue(issues, `${path}.height`, 'divider atom height must be a finite number')
+    }
+
+    if (value.spacing !== undefined)
+      validateSpacingValue(value.spacing, `${path}.spacing`, issues)
+
+    return
+  }
+
+  if (value.type === 'image') {
+    if (!isString(value.src))
+      pushIssue(issues, `${path}.src`, 'image atom src must be a string')
+
+    if (value.link !== undefined && !isString(value.link)) {
+      pushIssue(issues, `${path}.link`, 'image atom link must be a string')
+    }
+
+    if (value.alt !== undefined && !isString(value.alt)) {
+      pushIssue(issues, `${path}.alt`, 'image atom alt must be a string')
+    }
+
+    if (value.width !== undefined && !isFiniteNumber(value.width)) {
+      pushIssue(issues, `${path}.width`, 'image atom width must be a finite number')
+    }
+
+    if (value.height !== undefined && !isFiniteNumber(value.height)) {
+      pushIssue(issues, `${path}.height`, 'image atom height must be a finite number')
+    }
+
+    if (value.borderRadius !== undefined && !isFiniteNumber(value.borderRadius)) {
+      pushIssue(issues, `${path}.borderRadius`, 'image atom borderRadius must be a finite number')
+    }
+
+    if (value.spacing !== undefined)
+      validateSpacingValue(value.spacing, `${path}.spacing`, issues)
+
+    return
+  }
+
+  if (value.type === 'menu') {
+    if (
+      value.itemType !== undefined
+      && (!isString(value.itemType) || !MENU_ITEM_TYPE_VALUES.has(value.itemType))
+    ) {
+      pushIssue(issues, `${path}.itemType`, 'menu atom itemType must be "text" or "image"')
+    }
+
+    if (value.gap !== undefined && !isFiniteNumber(value.gap)) {
+      pushIssue(issues, `${path}.gap`, 'menu atom gap must be a finite number')
+    }
+
+    if (!Array.isArray(value.items)) {
+      pushIssue(issues, `${path}.items`, 'menu atom items must be an array')
+      return
+    }
+
+    value.items.forEach((item, index) => {
+      const itemPath = `${path}.items[${index}]`
+
+      if (!isRecord(item)) {
+        pushIssue(issues, itemPath, 'menu atom item must be an object')
+        return
+      }
+
+      if (
+        item.type !== undefined
+        && (!isString(item.type) || !MENU_ITEM_TYPE_VALUES.has(item.type))
+      ) {
+        pushIssue(issues, `${itemPath}.type`, 'menu atom item type must be "text" or "image"')
+        return
+      }
+
+      const normalizedType
+        = item.type === 'image'
+          ? 'image'
+          : item.type === 'text'
+            ? 'text'
+            : value.itemType === 'image'
+              ? 'image'
+              : 'text'
+
+      if (!isString(item.link)) {
+        pushIssue(issues, `${itemPath}.link`, 'menu atom item link must be a string')
+      }
+
+      if (normalizedType === 'image') {
+        if (!isString(item.name))
+          pushIssue(issues, `${itemPath}.name`, 'menu atom item name must be a string')
+        if (!isString(item.url))
+          pushIssue(issues, `${itemPath}.url`, 'menu atom item url must be a string')
+        if (!isString(item.alt))
+          pushIssue(issues, `${itemPath}.alt`, 'menu atom item alt must be a string')
+        if (item.width !== undefined && !isFiniteNumber(item.width)) {
+          pushIssue(issues, `${itemPath}.width`, 'menu atom item width must be a finite number')
+        }
+        if (item.height !== undefined && !isFiniteNumber(item.height)) {
+          pushIssue(issues, `${itemPath}.height`, 'menu atom item height must be a finite number')
+        }
+        return
+      }
+
+      if (!isString(item.text))
+        pushIssue(issues, `${itemPath}.text`, 'menu atom item text must be a string')
+      if (!isString(item.color))
+        pushIssue(issues, `${itemPath}.color`, 'menu atom item color must be a string')
+      if (!isFiniteNumber(item.fontSize)) {
+        pushIssue(issues, `${itemPath}.fontSize`, 'menu atom item fontSize must be a finite number')
+      }
+    })
+
+    if (value.spacing !== undefined)
+      validateSpacingValue(value.spacing, `${path}.spacing`, issues)
+
+    return
+  }
+
+  pushIssue(issues, `${path}.type`, 'Unsupported atom type')
+}
+
+function validateGridItem(value: unknown, path: string, issues: TemplateValidationIssue[]) {
+  if (!isRecord(value)) {
+    pushIssue(issues, path, 'item must be an object')
+    return
+  }
+
+  if (!isString(value.id))
+    pushIssue(issues, `${path}.id`, 'item.id must be a string')
+
+  if (!isRecord(value.settings)) {
+    pushIssue(issues, `${path}.settings`, 'item.settings must be an object')
+  }
+  else {
+    validateSpacingValue(value.settings.spacing, `${path}.settings.spacing`, issues)
+
+    if (!isString(value.settings.backgroundColor)) {
+      pushIssue(
+        issues,
+        `${path}.settings.backgroundColor`,
+        'item.settings.backgroundColor must be a string',
+      )
+    }
+
+    if (
+      !isString(value.settings.verticalAlign)
+      || !['top', 'middle', 'bottom'].includes(value.settings.verticalAlign)
+    ) {
+      pushIssue(
+        issues,
+        `${path}.settings.verticalAlign`,
+        'item.settings.verticalAlign must be "top", "middle" or "bottom"',
+      )
+    }
+
+    if (
+      value.settings.horizontalAlign !== undefined
+      && (!isString(value.settings.horizontalAlign)
+        || !['left', 'center', 'right'].includes(value.settings.horizontalAlign))
+    ) {
+      pushIssue(
+        issues,
+        `${path}.settings.horizontalAlign`,
+        'item.settings.horizontalAlign must be "left", "center" or "right"',
+      )
+    }
+
+    if (value.settings.link !== undefined && !isString(value.settings.link)) {
+      pushIssue(issues, `${path}.settings.link`, 'item.settings.link must be a string')
+    }
+
+    if (value.settings.width !== undefined && !isFiniteNumber(value.settings.width)) {
+      pushIssue(issues, `${path}.settings.width`, 'item.settings.width must be a number')
+    }
+
+    if (value.settings.height !== undefined && !isFiniteNumber(value.settings.height)) {
+      pushIssue(issues, `${path}.settings.height`, 'item.settings.height must be a number')
+    }
+
+    if (value.settings.borderRadius !== undefined && !isFiniteNumber(value.settings.borderRadius)) {
+      pushIssue(
+        issues,
+        `${path}.settings.borderRadius`,
+        'item.settings.borderRadius must be a number',
+      )
+    }
+
+    validateBackgroundImageValue(
+      value.settings.backgroundImage,
+      `${path}.settings.backgroundImage`,
+      issues,
+    )
+  }
+
+  if (!Array.isArray(value.atoms)) {
+    pushIssue(issues, `${path}.atoms`, 'item.atoms must be an array')
+    return
+  }
+
+  value.atoms.forEach((atom, atomIndex) => {
+    validateAtom(atom, `${path}.atoms[${atomIndex}]`, issues)
+  })
+
+  if (value.grids === undefined)
+    return
+
+  if (!Array.isArray(value.grids)) {
+    pushIssue(issues, `${path}.grids`, 'item.grids must be an array')
+    return
+  }
+
+  value.grids.forEach((grid, gridIndex) => {
+    validateGridNode(grid, `${path}.grids[${gridIndex}]`, issues)
+  })
+}
+
+function validateGridNode(value: unknown, path: string, issues: TemplateValidationIssue[]) {
+  if (!isRecord(value)) {
+    pushIssue(issues, path, 'grid must be an object')
+    return
+  }
+
+  if (!isString(value.id))
+    pushIssue(issues, `${path}.id`, 'grid.id must be a string')
+
+  if (!isRecord(value.settings)) {
+    pushIssue(issues, `${path}.settings`, 'grid.settings must be an object')
+  }
+  else {
+    validateSpacingValue(value.settings.spacing, `${path}.settings.spacing`, issues)
+
+    if (!isString(value.settings.backgroundColor)) {
+      pushIssue(
+        issues,
+        `${path}.settings.backgroundColor`,
+        'grid.settings.backgroundColor must be a string',
+      )
+    }
+
+    if (value.settings.height !== undefined && !isFiniteNumber(value.settings.height)) {
+      pushIssue(issues, `${path}.settings.height`, 'grid.settings.height must be a number')
+    }
+
+    if (!isFiniteNumber(value.settings.gap)) {
+      pushIssue(issues, `${path}.settings.gap`, 'grid.settings.gap must be a number')
+    }
+
+    validateBackgroundImageValue(
+      value.settings.backgroundImage,
+      `${path}.settings.backgroundImage`,
+      issues,
+    )
+  }
+
+  if (!Array.isArray(value.items)) {
+    pushIssue(issues, `${path}.items`, 'grid.items must be an array')
+    return
+  }
+
+  value.items.forEach((item, itemIndex) => {
+    validateGridItem(item, `${path}.items[${itemIndex}]`, issues)
+  })
+}
+
+function validateBlockComponent(
+  value: UnknownRecord,
+  path: string,
+  issues: TemplateValidationIssue[],
+) {
+  if (!isRecord(value.block)) {
+    pushIssue(issues, `${path}.block`, 'block must be an object')
+    return
+  }
+
+  const block = value.block
+
+  if (!isString(block.id))
+    pushIssue(issues, `${path}.block.id`, 'block.id must be a string')
+  if (!isString(block.label))
+    pushIssue(issues, `${path}.block.label`, 'block.label must be a string')
+
+  if (!isRecord(block.settings)) {
+    pushIssue(issues, `${path}.block.settings`, 'block.settings must be an object')
+  }
+  else {
+    validateSpacingValue(block.settings.spacing, `${path}.block.settings.spacing`, issues)
+
+    if (!isString(block.settings.backgroundColor)) {
+      pushIssue(
+        issues,
+        `${path}.block.settings.backgroundColor`,
+        'block.settings.backgroundColor must be a string',
+      )
+    }
+
+    validateBackgroundImageValue(
+      block.settings.backgroundImage,
+      `${path}.block.settings.backgroundImage`,
+      issues,
+    )
+  }
+
+  if (!Array.isArray(block.grids)) {
+    pushIssue(issues, `${path}.block.grids`, 'block.grids must be an array')
+    return
+  }
+
+  block.grids.forEach((grid, gridIndex) => {
+    validateGridNode(grid, `${path}.block.grids[${gridIndex}]`, issues)
+  })
+}
+
+function _validateTool(
   value: unknown,
   path: string,
   issues: TemplateValidationIssue[],
@@ -515,7 +942,7 @@ function validateTool(
     }
 
     item.tools.forEach((child, childIndex) => {
-      validateTool(child, `${itemPath}.tools[${childIndex}]`, issues, {
+      _validateTool(child, `${itemPath}.tools[${childIndex}]`, issues, {
         ...options,
         requireGroup: false,
       })
@@ -527,7 +954,7 @@ function sanitizeTextEditorHtml(value: string) {
   return sanitizeHtmlLib(value, EMAIL_TEXT_SANITIZE_OPTIONS)
 }
 
-function sanitizeTools(tools: Tool[]): Tool[] {
+function _sanitizeTools(tools: Tool[]): Tool[] {
   return tools.map((tool) => {
     if (tool.type === 'textEditor') {
       return {
@@ -541,7 +968,7 @@ function sanitizeTools(tools: Tool[]): Tool[] {
         ...tool,
         value: tool.value.map((item: ToolCollectionItem) => ({
           ...item,
-          tools: sanitizeTools(item.tools),
+          tools: _sanitizeTools(item.tools),
         })),
       }
     }
@@ -550,13 +977,136 @@ function sanitizeTools(tools: Tool[]): Tool[] {
   })
 }
 
+function sanitizeAtoms(atoms: Atom[]): Atom[] {
+  return atoms.map((atom) => {
+    if (atom.type === 'text') {
+      return {
+        ...atom,
+        color: atom.color || '#111827',
+        value: sanitizeTextEditorHtml(atom.value),
+      }
+    }
+
+    if (atom.type === 'image') {
+      return {
+        ...atom,
+        src: typeof atom.src === 'string' ? atom.src : '',
+        link: typeof atom.link === 'string' ? atom.link : '',
+        alt: typeof atom.alt === 'string' ? atom.alt : '',
+        width: isFiniteNumber(atom.width) && atom.width > 0 ? atom.width : undefined,
+        height: isFiniteNumber(atom.height) && atom.height > 0 ? atom.height : undefined,
+        borderRadius:
+          isFiniteNumber(atom.borderRadius) && atom.borderRadius >= 0
+            ? atom.borderRadius
+            : undefined,
+      }
+    }
+
+    if (atom.type === 'menu') {
+      const normalizedItemType
+        = atom.itemType === 'image'
+          ? 'image'
+          : atom.itemType === 'text'
+            ? 'text'
+            : atom.items[0]?.type === 'image'
+              ? 'image'
+              : 'text'
+
+      return {
+        ...atom,
+        itemType: normalizedItemType,
+        gap: isFiniteNumber(atom.gap) && atom.gap >= 0 ? atom.gap : 10,
+        items: Array.isArray(atom.items)
+          ? atom.items.map((item) => {
+              if (normalizedItemType === 'image') {
+                return {
+                  type: 'image' as const,
+                  name:
+                    item?.type === 'image'
+                      ? typeof item.name === 'string'
+                        ? item.name
+                        : ''
+                      : typeof item?.text === 'string'
+                        ? item.text
+                        : '',
+                  link: typeof item?.link === 'string' ? item.link : '',
+                  url: item?.type === 'image' ? (typeof item.url === 'string' ? item.url : '') : '',
+                  width:
+                    item?.type === 'image' && isFiniteNumber(item.width) && item.width > 0
+                      ? item.width
+                      : undefined,
+                  height:
+                    item?.type === 'image' && isFiniteNumber(item.height) && item.height > 0
+                      ? item.height
+                      : undefined,
+                  alt: item?.type === 'image' ? (typeof item.alt === 'string' ? item.alt : '') : '',
+                }
+              }
+
+              return {
+                type: 'text' as const,
+                text:
+                  item?.type === 'text'
+                    ? typeof item.text === 'string'
+                      ? item.text
+                      : ''
+                    : typeof item?.name === 'string'
+                      ? item.name
+                      : '',
+                link: typeof item?.link === 'string' ? item.link : '',
+                color:
+                  item?.type === 'text' && typeof item.color === 'string' ? item.color : '#000000',
+                fontSize:
+                  item?.type === 'text' && isFiniteNumber(item.fontSize) && item.fontSize > 0
+                    ? item.fontSize
+                    : 16,
+              }
+            })
+          : [],
+      }
+    }
+
+    return atom
+  })
+}
+
+function sanitizeGridItems(items: BlockItem[]): BlockItem[] {
+  return items.map(item => ({
+    ...item,
+    settings: {
+      ...item.settings,
+      link: typeof item.settings?.link === 'string' ? item.settings.link : undefined,
+      borderRadius:
+        isFiniteNumber(item.settings?.borderRadius) && item.settings.borderRadius >= 0
+          ? item.settings.borderRadius
+          : undefined,
+    },
+    atoms: sanitizeAtoms(item.atoms),
+    grids: sanitizeGridNodes(item.grids || []),
+  }))
+}
+
+function sanitizeGridNodes(grids: BlockGrid[]): BlockGrid[] {
+  return grids.map(grid => ({
+    ...grid,
+    items: sanitizeGridItems(grid.items),
+  }))
+}
+
+function sanitizeBlock(block: Block): Block {
+  return {
+    ...block,
+    grids: sanitizeGridNodes(block.grids),
+  }
+}
+
 function sanitizeTemplatePayload(payload: TemplateExportV1): TemplateExportV1 {
   const sanitized = clone<TemplateExportV1>(payload)
 
   sanitized.canvas.components = sanitized.canvas.components.map((component) => {
     return {
       ...component,
-      tools: sanitizeTools(component.tools),
+      block: sanitizeBlock(component.block),
     }
   })
 
@@ -626,32 +1176,17 @@ function validateTemplatePayload(
 
     if (!isString(component.id))
       pushIssue(issues, `${currentPath}.id`, 'component.id must be a string')
-    if (!isString(component.name))
-      pushIssue(issues, `${currentPath}.name`, 'component.name must be a string')
-    if (!isString(component.label))
-      pushIssue(issues, `${currentPath}.label`, 'component.label must be a string')
-    if (!isString(component.type))
-      pushIssue(issues, `${currentPath}.type`, 'component.type must be a string')
-    if (!isString(component.preview))
-      pushIssue(issues, `${currentPath}.preview`, 'component.preview must be a string')
 
-    if (!Array.isArray(component.tools)) {
-      pushIssue(issues, `${currentPath}.tools`, 'component.tools must be an array')
+    if (component.version !== 2) {
+      pushIssue(
+        issues,
+        `${currentPath}.version`,
+        'Only block-v2 components are supported (component.version must be 2)',
+      )
       return
     }
 
-    const groupIds = new Set<string>()
-    const keysByGroup = new Map<string, Set<string>>()
-
-    component.tools.forEach((tool, toolIndex) => {
-      validateTool(tool, `${currentPath}.tools[${toolIndex}]`, issues, {
-        groupIds,
-        keysByGroup,
-        requireGroup: true,
-      })
-    })
-
-    validateSchema(component.schema, `${currentPath}.schema`, groupIds, issues)
+    validateBlockComponent(component, currentPath, issues)
   })
 }
 
@@ -671,7 +1206,7 @@ function migrateTemplatePayload(value: unknown): unknown {
   return value
 }
 
-function remapToolIds(tools: Tool[]): Tool[] {
+function _remapToolIds(tools: Tool[]): Tool[] {
   return tools.map((tool) => {
     if (tool.type === 'multi' || tool.type === 'grid') {
       return {
@@ -680,7 +1215,7 @@ function remapToolIds(tools: Tool[]): Tool[] {
         value: tool.value.map((item: ToolCollectionItem) => ({
           ...item,
           id: nanoid(8),
-          tools: remapToolIds(item.tools),
+          tools: _remapToolIds(item.tools),
         })),
       }
     }
@@ -692,14 +1227,50 @@ function remapToolIds(tools: Tool[]): Tool[] {
   })
 }
 
-export function createRuntimeComponents(components: Component[]) {
-  return components.map((component) => {
-    return {
-      ...component,
-      id: nanoid(8),
-      tools: remapToolIds(component.tools),
-    } satisfies Component
-  })
+function remapAtomIds(atoms: Atom[]): Atom[] {
+  return atoms.map(atom => ({
+    ...atom,
+    id: nanoid(8),
+  }))
+}
+
+function remapGridItemIds(items: BlockItem[]): BlockItem[] {
+  return items.map(item => ({
+    ...item,
+    id: nanoid(8),
+    atoms: remapAtomIds(item.atoms),
+    grids: remapGridIds(item.grids || []),
+  }))
+}
+
+function remapGridIds(grids: BlockGrid[]): BlockGrid[] {
+  return grids.map(grid => ({
+    ...grid,
+    id: nanoid(8),
+    items: remapGridItemIds(grid.items),
+  }))
+}
+
+function remapBlockIds(block: Block): Block {
+  return {
+    ...block,
+    id: nanoid(8),
+    grids: remapGridIds(block.grids),
+  }
+}
+
+export function createRuntimeComponents(components: CanvasItem[]) {
+  return components
+    .filter(
+      (component): component is Extract<CanvasItem, { version: 2 }> => component.version === 2,
+    )
+    .map((component) => {
+      return {
+        ...component,
+        id: nanoid(8),
+        block: remapBlockIds(component.block),
+      }
+    })
 }
 
 export function createTemplateExportPayload(

@@ -1,8 +1,8 @@
-import type { AlignTool, Component, ImageTool } from '@/types/editor'
+import type { AlignTool, CatalogComponent, ImageTool } from '@/types/editor'
 
 export interface ComponentList {
   name: string
-  components: Component[]
+  components: CatalogComponent[]
 }
 
 export interface Menu {

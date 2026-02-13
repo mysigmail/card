@@ -1,19 +1,57 @@
 <script setup lang="ts">
+import { nextTick, ref, watch } from 'vue'
 import { useComponentsStore } from '@/store/components'
 
-const { installedToolsByGroup, installed } = useComponentsStore()
+const { installed, sidebarActiveTab, treeScrollTarget, treeScrollRequestId, isBlockComponent }
+  = useComponentsStore()
+
+const rootRef = ref<HTMLElement>()
+
+function scrollToSelectedNode() {
+  if (!rootRef.value || !treeScrollTarget.value)
+    return
+
+  const target = rootRef.value.querySelector<HTMLElement>(
+    `[data-tree-id="${treeScrollTarget.value}"]`,
+  )
+
+  if (!target)
+    return
+
+  target.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center',
+    inline: 'nearest',
+  })
+}
+
+watch(
+  [treeScrollRequestId, () => sidebarActiveTab.value],
+  async () => {
+    if (sidebarActiveTab.value !== 'tree')
+      return
+
+    await nextTick()
+    await nextTick()
+    scrollToSelectedNode()
+  },
+  { flush: 'post', immediate: true },
+)
 </script>
 
 <template>
-  <div>
-    <TreeComponentsItem
-      v-for="(i, index) in installedToolsByGroup"
-      :id="i.id"
-      :key="i.id"
-      :index="index"
-      :name="i.name"
-      :groups="i.groups"
-    />
+  <div ref="rootRef">
+    <template
+      v-for="(item, index) in installed"
+      :key="item.id"
+    >
+      <TreeBlockItem
+        v-if="isBlockComponent(item)"
+        :id="item.id"
+        :index="index"
+        :block="item.block"
+      />
+    </template>
     <div
       v-if="!installed.length"
       class="p-4 text-muted-foreground"

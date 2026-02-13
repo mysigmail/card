@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Component } from '@/types/editor'
+import type { CatalogComponent } from '@/types/editor'
 import Sortable from 'sortablejs'
 import { onMounted, ref } from 'vue'
 import { useList } from '@/components/editor/components/list/composables'
@@ -7,7 +7,7 @@ import { addGhost, removeGhost } from '@/components/email-components/utils'
 import { useComponentsStore } from '@/store/components'
 
 interface Props {
-  components: Component[]
+  components: CatalogComponent[]
 }
 
 const props = defineProps<Props>()
