@@ -1,3 +1,20 @@
+## 0.11.0 (2026-02-14)
+
+### Features
+
+- add interactive insertion line for creating tree nodes (#38) ([9192390](https://github.com/mysigmail/card/commit/919239036ffa3fee67f6f670f9fcbb493aa870cb))
+- relocate "Empty Block" button from component list to component tree ([6cfe37e](https://github.com/mysigmail/card/commit/6cfe37e2e8dc4c821fe001a8fdc6a715392588f0))
+- migrate email preview catalog blocks to JSON format, add save block functionality in dev mode (#37) ([463fa87](https://github.com/mysigmail/card/commit/463fa8731955618bc237c4f367eb2b198a6674e7))
+
+### Other
+
+- reorganize panel tools, remove actions (#39) ([d5075fc](https://github.com/mysigmail/card/commit/d5075fc42bc93a8bfc48cff2f264e730cc231046))
+- update AGENTS ([ee75a03](https://github.com/mysigmail/card/commit/ee75a03bb211f88543d49a70431752ad47f4c40d))
+- useX concept (#36) ([9a5b721](https://github.com/mysigmail/card/commit/9a5b7212933e4e889628da5aaad047bcab6a10f4))
+- decrease z-index values for preview overlay and label elements to adjust layering ([2ec30bf](https://github.com/mysigmail/card/commit/2ec30bf62e1a85dfa62e2b2eaf95b2619922b778))
+- remove GitHub Release Tag workflow ([3ea4ccf](https://github.com/mysigmail/card/commit/3ea4ccf4b5cd168cc05a39b61c3bee944a2b9dd9))
+- use bumpy for versioning ([5f1602d](https://github.com/mysigmail/card/commit/5f1602d40aadd8477c2bf862293be757c52ed7e7))
+
 ## 0.10.0 (2026-02-13)
 
 ### Features
