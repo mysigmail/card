@@ -8,7 +8,6 @@ import {
   List,
   Minus,
   MousePointerClick,
-  Plus,
   Text,
   Trash2,
 } from 'lucide-vue-next'
@@ -16,21 +15,23 @@ import { computed, ref, watch } from 'vue'
 import { useCanvas, useSelection } from '@/features/editor/model'
 import { Button } from '@/shared/ui/button'
 import { ButtonGroup } from '@/shared/ui/button-group'
-import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
 
 interface Props {
   block: BlockNode
   row: RowNode
   index: number
   topLevel?: boolean
+  cellId?: string
+  parentRowId?: string
+  indentPx?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
   topLevel: false,
+  indentPx: 0,
 })
 
-const { insertCellToRow, removeRow, removeCell, insertAtomToCell, insertRowToCell, removeAtom }
-  = useCanvas()
+const { removeRow, removeCell, removeAtom } = useCanvas()
 
 const {
   selectRow,
@@ -43,8 +44,17 @@ const {
 } = useSelection()
 
 const isOpen = ref(true)
-const itemPopoverId = ref<string | null>(null)
+const TOP_LEVEL_INDENT_PX = 4
+const NESTED_ROW_INDENT_PX = 8
+const CELL_INDENT_PX = 24
+const ATOM_INDENT_PX = 8
 
+const rowIndentPx = computed(() => {
+  const ownIndent = props.topLevel ? TOP_LEVEL_INDENT_PX : NESTED_ROW_INDENT_PX
+  return props.indentPx + ownIndent
+})
+const cellIndentPx = computed(() => rowIndentPx.value + CELL_INDENT_PX)
+const atomIndentPx = computed(() => cellIndentPx.value + ATOM_INDENT_PX)
 const canRemoveRow = computed(() => {
   if (!props.topLevel)
     return true
@@ -117,27 +127,38 @@ function atomLabel(type: AtomType) {
   }
 }
 
-function setItemPopover(itemId: string, open: boolean) {
-  itemPopoverId.value = open ? itemId : null
+function isRowActive(rowId: string) {
+  return selectedRowId.value === rowId && !selectedCellId.value && !selectedAtomId.value
 }
 
-function addFromCellPopover(rowId: string, cellId: string, type: AtomType | 'row') {
-  if (type === 'row')
-    insertRowToCell(props.block.id, rowId, cellId)
-  else insertAtomToCell(props.block.id, rowId, cellId, type)
+function isCellActive(cellId: string) {
+  return selectedCellId.value === cellId && !selectedAtomId.value
+}
 
-  itemPopoverId.value = null
+function isAtomActive(atomId: string) {
+  return selectedAtomId.value === atomId
 }
 </script>
 
 <template>
-  <div :class="topLevel ? 'pl-1' : 'pl-2'">
+  <div
+    :data-row-scope-id="`row-scope:${row.id}`"
+    :data-row-scope-block-id="block.id"
+    :data-row-scope-row-id="parentRowId || row.id"
+    :data-row-scope-cell-id="cellId"
+    :data-row-scope-index="index"
+    :class="topLevel ? 'pl-1' : 'pl-2'"
+  >
     <div
       :data-tree-id="`row:${row.id}`"
-      class="flex items-center justify-between gap-2 px-2 py-1 text-xs text-muted-foreground"
-      :class="{
-        'text-foreground!': selectedRowId === row.id && selectedBlockId === block.id,
-      }"
+      :data-block-id="block.id"
+      :data-row-id="parentRowId || row.id"
+      :data-cell-id="cellId"
+      :data-index="index"
+      data-type="row"
+      class="relative z-0 flex h-8 cursor-pointer items-center justify-between gap-2 rounded-sm px-2 text-xs text-muted-foreground before:absolute before:inset-y-0 before:right-0 before:left-[calc(var(--tree-node-left-offset)*-1)] before:-z-10 before:rounded-sm before:transition-colors hover:before:bg-muted/60"
+      :class="{ 'before:bg-muted/70 text-foreground!': isRowActive(row.id) }"
+      :style="{ '--tree-node-left-offset': `${rowIndentPx}px` }"
       @click="selectRow(block.id, row.id, { syncTree: false })"
     >
       <div class="flex min-w-0 flex-1 items-center gap-1">
@@ -147,18 +168,10 @@ function addFromCellPopover(rowId: string, cellId: string, type: AtomType | 'row
           @click.stop="isOpen = !isOpen"
         />
         <Grid2x2 class="size-3.5 shrink-0" />
-        <span class="truncate cursor-pointer hover:text-foreground">Row {{ index + 1 }}</span>
+        <span class="truncate">Row {{ index + 1 }}</span>
       </div>
 
       <ButtonGroup>
-        <Button
-          variant="outline"
-          size="icon-xs"
-          aria-label="Add Cell"
-          @click.stop="insertCellToRow(block.id, row.id)"
-        >
-          <Plus class="size-3" />
-        </Button>
         <Button
           v-if="canRemoveRow"
           variant="outline"
@@ -179,88 +192,25 @@ function addFromCellPopover(rowId: string, cellId: string, type: AtomType | 'row
       >
         <div
           :data-tree-id="`cell:${cell.id}`"
-          class="flex items-center justify-between gap-2 px-2 py-1 text-xs text-muted-foreground"
+          :data-block-id="block.id"
+          :data-row-id="row.id"
+          :data-cell-id="cell.id"
+          :data-atom-count="cell.atoms.length"
+          :data-index="cellIndex"
+          data-type="cell"
+          class="relative z-0 flex h-8 cursor-pointer items-center justify-between gap-2 rounded-sm px-2 text-xs text-muted-foreground before:absolute before:inset-y-0 before:right-0 before:left-[calc(var(--tree-node-left-offset)*-1)] before:-z-10 before:rounded-sm before:transition-colors hover:before:bg-muted/60"
           :class="{
-            'text-foreground!': selectedCellId === cell.id && selectedRowId === row.id,
+            'before:bg-muted/70 text-foreground!': isCellActive(cell.id),
           }"
+          :style="{ '--tree-node-left-offset': `${cellIndentPx}px` }"
           @click="selectCell(block.id, row.id, cell.id, { syncTree: false })"
         >
           <div class="flex min-w-0 flex-1 items-center gap-1.5">
             <LayoutGrid class="size-3.5 shrink-0" />
-            <span class="truncate cursor-pointer hover:text-foreground">Cell {{ cellIndex + 1 }}</span>
+            <span class="truncate">Cell {{ cellIndex + 1 }}</span>
           </div>
 
           <ButtonGroup>
-            <Popover
-              :open="itemPopoverId === cell.id"
-              @update:open="(open: boolean) => setItemPopover(cell.id, open)"
-            >
-              <PopoverTrigger as-child>
-                <Button
-                  variant="outline"
-                  size="icon-xs"
-                  aria-label="Add"
-                  @click.stop
-                >
-                  <Plus class="size-3" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent
-                align="end"
-                class="w-40 p-1"
-              >
-                <div class="flex flex-col gap-1">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    class="justify-start"
-                    @click="addFromCellPopover(row.id, cell.id, 'text')"
-                  >
-                    Text
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    class="justify-start"
-                    @click="addFromCellPopover(row.id, cell.id, 'button')"
-                  >
-                    Button
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    class="justify-start"
-                    @click="addFromCellPopover(row.id, cell.id, 'divider')"
-                  >
-                    Divider
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    class="justify-start"
-                    @click="addFromCellPopover(row.id, cell.id, 'image')"
-                  >
-                    Image
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    class="justify-start"
-                    @click="addFromCellPopover(row.id, cell.id, 'menu')"
-                  >
-                    Menu
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    class="justify-start"
-                    @click="addFromCellPopover(row.id, cell.id, 'row')"
-                  >
-                    Row
-                  </Button>
-                </div>
-              </PopoverContent>
-            </Popover>
             <Button
               v-if="row.cells.length > 1"
               variant="outline"
@@ -274,14 +224,22 @@ function addFromCellPopover(rowId: string, cellId: string, type: AtomType | 'row
         </div>
 
         <div
-          v-for="atom in cell.atoms"
+          v-for="(atom, atomIndex) in cell.atoms"
           :key="atom.id"
           class="pl-2"
         >
           <div
             :data-tree-id="`atom:${atom.id}`"
-            class="flex items-center justify-between gap-2 px-2 py-1 text-xs text-muted-foreground"
-            :class="{ 'text-foreground!': selectedAtomId === atom.id }"
+            :data-block-id="block.id"
+            :data-row-id="row.id"
+            :data-cell-id="cell.id"
+            :data-atom-id="atom.id"
+            :data-parent-cell-index="cellIndex"
+            :data-index="atomIndex"
+            data-type="atom"
+            class="relative z-0 flex h-8 cursor-pointer items-center justify-between gap-2 rounded-sm px-2 text-xs text-muted-foreground before:absolute before:inset-y-0 before:right-0 before:left-[calc(var(--tree-node-left-offset)*-1)] before:-z-10 before:rounded-sm before:transition-colors hover:before:bg-muted/60"
+            :class="{ 'before:bg-muted/70 text-foreground!': isAtomActive(atom.id) }"
+            :style="{ '--tree-node-left-offset': `${atomIndentPx}px` }"
             @click="selectAtom(block.id, row.id, cell.id, atom.id, { syncTree: false })"
           >
             <div class="flex min-w-0 flex-1 items-center gap-1.5">
@@ -305,9 +263,7 @@ function addFromCellPopover(rowId: string, cellId: string, type: AtomType | 'row
                 v-else
                 class="size-3.5 shrink-0"
               />
-              <span class="truncate cursor-pointer hover:text-foreground">{{
-                atomLabel(atom.type)
-              }}</span>
+              <span class="truncate">{{ atomLabel(atom.type) }}</span>
             </div>
             <Button
               variant="outline"
@@ -325,7 +281,10 @@ function addFromCellPopover(rowId: string, cellId: string, type: AtomType | 'row
           :key="nestedRow.id"
           :block="block"
           :row="nestedRow"
+          :cell-id="cell.id"
+          :parent-row-id="row.id"
           :index="nestedRowIndex"
+          :indent-px="cellIndentPx"
         />
       </div>
     </div>

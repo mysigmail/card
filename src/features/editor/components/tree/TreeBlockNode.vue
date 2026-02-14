@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { BlockNode } from '@/entities/block'
 import type { ComponentType } from '@/entities/template'
-import { ChevronDown, Copy, HardDriveDownload, Pencil, Plus, Trash2 } from 'lucide-vue-next'
+import { ChevronDown, Copy, HardDriveDownload, Pencil, Trash2 } from 'lucide-vue-next'
 import { computed, ref, watch } from 'vue'
 import TreeBlockRowNode from '@/features/editor/components/tree/TreeBlockRowNode.vue'
 import { useCanvas, useSelection } from '@/features/editor/model'
@@ -21,7 +21,7 @@ const props = defineProps<Props>()
 
 const isDev = import.meta.env.DEV
 
-const { removeComponentById, duplicateComponentById, insertRowToBlock, renameBlock } = useCanvas()
+const { removeComponentById, duplicateComponentById, renameBlock } = useCanvas()
 
 const { selectBlock, selectedBlockId, selectedRowId, selectedCellId, selectedAtomId }
   = useSelection()
@@ -46,6 +46,14 @@ const shouldExpand = computed(() => {
     return false
 
   return Boolean(selectedRowId.value || selectedCellId.value || selectedAtomId.value)
+})
+const isBlockActive = computed(() => {
+  return (
+    selectedBlockId.value === props.block.id
+    && !selectedRowId.value
+    && !selectedCellId.value
+    && !selectedAtomId.value
+  )
 })
 
 watch(
@@ -90,14 +98,20 @@ function handleSaveBlock(type: ComponentType) {
     class="relative select-none"
     :class="
       selectedBlockId === block.id
-        ? `before:absolute before:inset-y-0 before:left-0 before:w-0.5 before:bg-primary before:content-['']`
+        ? `before:absolute before:inset-y-0 before:left-0 before:z-20 before:w-0.5 before:bg-primary before:content-['']`
         : ''
     "
   >
     <!-- Block header -->
     <div
-      class="flex cursor-pointer items-center justify-between px-2 py-2.5"
+      class="flex h-8 cursor-pointer items-center justify-between rounded-sm px-2 transition-colors hover:bg-muted/60"
       :data-tree-id="`block:${block.id}`"
+      :data-block-id="block.id"
+      :data-index="index"
+      data-type="block"
+      :class="{
+        'bg-muted/70 text-foreground': isBlockActive,
+      }"
       @click="onHeaderClick"
     >
       <div class="flex min-w-0 flex-1 items-center gap-1.5">
@@ -110,14 +124,6 @@ function handleSaveBlock(type: ComponentType) {
       </div>
       <div class="flex">
         <ButtonGroup>
-          <Button
-            variant="outline"
-            size="icon-xs"
-            aria-label="Add Row"
-            @click.stop="insertRowToBlock(block.id)"
-          >
-            <Plus class="size-3" />
-          </Button>
           <Popover v-model:open="renamePopoverOpen">
             <PopoverTrigger as-child>
               <Button
