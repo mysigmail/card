@@ -2,7 +2,7 @@
 import type { AlignTool } from '@/features/editor/model'
 import { AlignCenter, AlignLeft, AlignRight } from 'lucide-vue-next'
 import { ref, watch } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas } from '@/features/editor/model'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 
 interface Props {
@@ -15,7 +15,7 @@ const props = defineProps<Props>()
 
 const localValue = ref(props.value)
 
-const { updateToolById } = useComponentsStore()
+const { updateToolById } = useCanvas()
 
 watch(
   () => props.value,

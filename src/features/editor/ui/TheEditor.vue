@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas, usePersistence, useSelection } from '@/features/editor/model'
 import Editor from '@/features/editor/ui/EditorCanvas.vue'
 import { renderToShadowDom } from '@/shared/lib/shadow-dom'
 
 const previewRef = ref()
 
-const { general, resetSelection, hydrateTemplateFromLocalStorage } = useComponentsStore()
+const { general } = useCanvas()
+const { resetSelection } = useSelection()
+const { hydrateTemplateFromLocalStorage } = usePersistence()
 
 onMounted(() => {
   hydrateTemplateFromLocalStorage()

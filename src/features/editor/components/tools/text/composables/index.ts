@@ -13,12 +13,12 @@ import { Editor } from '@tiptap/vue-3'
 import { computed, inject, onBeforeUnmount, onMounted, provide, ref } from 'vue'
 import { FontSize } from '@/features/editor/components/tools/text/extensions/font-size'
 import { Strike } from '@/features/editor/components/tools/text/extensions/strike'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas } from '@/features/editor/model'
 
 const editorContextKey = Symbol('text-editor-context')
 
 function createEditorContext() {
-  const { updateToolById } = useComponentsStore()
+  const { updateToolById } = useCanvas()
   const editor = ref<Editor>()
 
   const link = computed({

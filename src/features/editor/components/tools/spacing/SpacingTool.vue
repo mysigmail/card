@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SpacingTool } from '@/features/editor/model'
 import { ref, watch } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas } from '@/features/editor/model'
 
 interface Props {
   id: string
@@ -11,7 +11,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { updateToolById } = useComponentsStore()
+const { updateToolById } = useCanvas()
 
 const localMarginTop = ref(props.value.margin?.[0] || 0)
 const localMarginRight = ref(props.value.margin?.[1] || 0)

@@ -1,12 +1,7 @@
-import type { Ref } from 'vue'
 import type { BlockSelectionLevel, CanvasBlockInstance, SidebarTab } from './types'
 import type { Atom, BlockNode, CellNode, RowNode } from '@/entities/block'
 import { computed, ref } from 'vue'
-
-interface CreateSelectionModuleOptions {
-  editableId: Ref<string | undefined>
-  installed: Ref<CanvasBlockInstance[]>
-}
+import { editableId, installed } from './state'
 
 function findRowInRows(rows: RowNode[], rowId: string): RowNode | undefined {
   for (const row of rows) {
@@ -24,13 +19,15 @@ function findRowInRows(rows: RowNode[], rowId: string): RowNode | undefined {
 }
 
 function findCanvasBlockInstance(
-  installed: CanvasBlockInstance[],
+  items: CanvasBlockInstance[],
   blockId: string,
 ): CanvasBlockInstance | undefined {
-  return installed.find(i => i.version === 2 && i.block.id === blockId)
+  return items.find(i => i.version === 2 && i.block.id === blockId)
 }
 
-export function createSelectionModule(options: CreateSelectionModuleOptions) {
+let _instance: ReturnType<typeof _createSelection> | null = null
+
+function _createSelection() {
   const selectedBlockId = ref<string>()
   const selectedRowId = ref<string>()
   const selectedCellId = ref<string>()
@@ -49,7 +46,7 @@ export function createSelectionModule(options: CreateSelectionModuleOptions) {
   }
 
   function resetSelection() {
-    options.editableId.value = undefined
+    editableId.value = undefined
     resetBlockSelection()
   }
 
@@ -64,11 +61,11 @@ export function createSelectionModule(options: CreateSelectionModuleOptions) {
   }
 
   function selectBlock(blockId: string, selectOptions?: { syncTree?: boolean }) {
-    const block = findCanvasBlockInstance(options.installed.value, blockId)
+    const block = findCanvasBlockInstance(installed.value, blockId)
     if (!block)
       return
 
-    options.editableId.value = block.id
+    editableId.value = block.id
 
     selectedBlockId.value = blockId
     selectedRowId.value = undefined
@@ -125,7 +122,7 @@ export function createSelectionModule(options: CreateSelectionModuleOptions) {
     if (!selectedBlockId.value)
       return undefined
 
-    return findCanvasBlockInstance(options.installed.value, selectedBlockId.value)?.block
+    return findCanvasBlockInstance(installed.value, selectedBlockId.value)?.block
   })
 
   const selectedRow = computed((): RowNode | undefined => {
@@ -169,4 +166,11 @@ export function createSelectionModule(options: CreateSelectionModuleOptions) {
     selectedCell,
     selectedAtom,
   }
+}
+
+export function useSelection() {
+  if (!_instance)
+    _instance = _createSelection()
+
+  return _instance
 }

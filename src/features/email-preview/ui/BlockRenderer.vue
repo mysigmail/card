@@ -3,7 +3,7 @@ import type { CSSProperties } from 'vue'
 import type { BlockNode } from '@/entities/block'
 import { MContainer } from '@mysigmail/vue-email-components'
 import { computed } from 'vue'
-import { useComponentsStore } from '@/features/editor'
+import { useCanvas, useSelection } from '@/features/editor'
 import BlockRendererRowNode from '@/features/email-preview/ui/BlockRendererRowNode.vue'
 
 interface Props {
@@ -14,7 +14,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { editableIndex, selectBlock } = useComponentsStore()
+const { editableIndex } = useCanvas()
+const { selectBlock } = useSelection()
 
 const blockStyle = computed<CSSProperties>(() => {
   const s = props.block.settings

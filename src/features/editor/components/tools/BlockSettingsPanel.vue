@@ -16,11 +16,13 @@ import {
   AlignVerticalJustifyStart,
 } from 'lucide-vue-next'
 import { computed } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas, useSelection } from '@/features/editor/model'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
+
+const { insertRowToBlock, insertCellToRow, removeRow, removeAtom } = useCanvas()
 
 const {
   selectionLevel,
@@ -28,14 +30,10 @@ const {
   selectedRow,
   selectedCell,
   selectedAtom,
-  insertRowToBlock,
-  removeRow,
-  insertCellToRow,
-  removeAtom,
   selectedBlockId,
   selectedRowId,
   selectedCellId,
-} = useComponentsStore()
+} = useSelection()
 
 const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   url: '',

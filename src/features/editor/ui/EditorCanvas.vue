@@ -3,15 +3,12 @@ import type { CSSProperties } from 'vue'
 import { MBody, MContainer, MHtml, MPreview } from '@mysigmail/vue-email-components'
 import Sortable from 'sortablejs'
 import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas, useSelection } from '@/features/editor/model'
 import { addGhost, BlockRenderer, removeGhost } from '@/features/email-preview'
 
+const { installed, isDragging, moveComponent, general, isCanvasBlockInstance } = useCanvas()
+
 const {
-  installed,
-  isDragging,
-  moveComponent,
-  general,
-  isCanvasBlockInstance,
   selectionLevel,
   selectedBlockId,
   selectedRowId,
@@ -19,7 +16,7 @@ const {
   selectedAtomId,
   selectedBlock,
   selectedAtom,
-} = useComponentsStore()
+} = useSelection()
 
 const listRef = ref<HTMLElement>()
 const surfaceRef = ref<HTMLElement>()

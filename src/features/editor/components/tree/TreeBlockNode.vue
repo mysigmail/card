@@ -3,7 +3,7 @@ import type { BlockNode } from '@/entities/block'
 import { ChevronDown, Copy, Pencil, Plus, Trash2 } from 'lucide-vue-next'
 import { computed, ref, watch } from 'vue'
 import TreeBlockRowNode from '@/features/editor/components/tree/TreeBlockRowNode.vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas, useSelection } from '@/features/editor/model'
 import { Button } from '@/shared/ui/button'
 import { ButtonGroup } from '@/shared/ui/button-group'
 import { Input } from '@/shared/ui/input'
@@ -17,17 +17,10 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const {
-  selectBlock,
-  selectedBlockId,
-  selectedRowId,
-  selectedCellId,
-  selectedAtomId,
-  removeComponentById,
-  duplicateComponentById,
-  insertRowToBlock,
-  renameBlock,
-} = useComponentsStore()
+const { removeComponentById, duplicateComponentById, insertRowToBlock, renameBlock } = useCanvas()
+
+const { selectBlock, selectedBlockId, selectedRowId, selectedCellId, selectedAtomId }
+  = useSelection()
 
 const isOpen = ref(true)
 const renamePopoverOpen = ref(false)

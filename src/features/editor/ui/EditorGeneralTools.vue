@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas } from '@/features/editor/model'
 import { Input } from '@/shared/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
 import { Textarea } from '@/shared/ui/textarea'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 
-const { general } = useComponentsStore()
+const { general } = useCanvas()
 
 const fontOptions = [
   { label: 'Arial', value: 'Arial, Helvetica, sans-serif' },

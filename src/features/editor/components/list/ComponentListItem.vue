@@ -3,7 +3,7 @@ import type { BlockPreset } from '@/features/editor/model'
 import Sortable from 'sortablejs'
 import { onMounted, ref } from 'vue'
 import { useList } from '@/features/editor/components/list/composables'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas } from '@/features/editor/model'
 import { addGhost, removeGhost } from '@/features/email-preview'
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { addComponent } = useComponentsStore()
+const { addComponent } = useCanvas()
 
 const { showList } = useList()
 

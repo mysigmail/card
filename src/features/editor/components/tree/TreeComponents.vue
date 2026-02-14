@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import { nextTick, ref, watch } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas, useSelection } from '@/features/editor/model'
 
-const {
-  installed,
-  sidebarActiveTab,
-  treeScrollTarget,
-  treeScrollRequestId,
-  isCanvasBlockInstance,
-} = useComponentsStore()
+const { installed, isCanvasBlockInstance } = useCanvas()
+
+const { sidebarActiveTab, treeScrollTarget, treeScrollRequestId } = useSelection()
 
 const rootRef = ref<HTMLElement>()
 

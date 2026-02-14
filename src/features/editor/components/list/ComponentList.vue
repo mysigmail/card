@@ -3,9 +3,9 @@ import { MenuAim } from '@mysigmail/menu-aim'
 import { Plus } from 'lucide-vue-next'
 import { onMounted, ref } from 'vue'
 import { useList } from '@/features/editor/components/list/composables'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas } from '@/features/editor/model'
 
-const { list, insertBlockToCanvas } = useComponentsStore()
+const { list, insertBlockToCanvas } = useCanvas()
 const { showList } = useList()
 
 const hovered = ref<number>()

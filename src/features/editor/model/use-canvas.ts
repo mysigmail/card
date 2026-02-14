@@ -1,12 +1,10 @@
-import type { ComputedRef, Ref } from 'vue'
-import type { BlockPreset, CanvasBlockInstance, ComponentList, GeneralTool, Tool } from './types'
-import type { Atom, AtomType, BlockNode, CellNode, RowNode } from '@/entities/block'
-import type { TemplateValidationIssue } from '@/entities/template'
+import type { BlockPreset, CanvasBlockInstance, GeneralTool, Tool } from './types'
+import type { AtomType, BlockNode, CellNode, RowNode } from '@/entities/block'
 import { nanoid } from 'nanoid'
-import { computed, reactive, ref, shallowRef } from 'vue'
+import { computed } from 'vue'
 import { createAtom, createBlockNode, createCellNode, createRowNode } from '@/entities/block'
-import { content, header, menu } from '@/features/email-preview'
 import { clone } from '@/shared/lib/clone'
+import { editableId, general, installed, isDragging, list, templateImportIssues } from './state'
 import {
   DEFAULT_MENU_ATOM_GAP,
   DEFAULT_MENU_IMAGE_ITEM,
@@ -22,71 +20,7 @@ import {
   toSpacingValue,
 } from './tools'
 
-export interface CanvasState {
-  list: Ref<ComponentList[]>
-  installed: Ref<CanvasBlockInstance[]>
-  editableId: Ref<string | undefined>
-  isDragging: Ref<boolean>
-  general: GeneralTool
-}
-
-interface SelectionBindings {
-  selectedRowId: Ref<string | undefined>
-  selectedCellId: Ref<string | undefined>
-  selectedAtomId: Ref<string | undefined>
-  selectedAtom: ComputedRef<Atom | undefined>
-  resetSelection: () => void
-  selectBlock: (blockId: string, options?: { syncTree?: boolean }) => void
-  selectRow: (blockId: string, rowId: string, options?: { syncTree?: boolean }) => void
-  selectCell: (
-    blockId: string,
-    rowId: string,
-    cellId: string,
-    options?: { syncTree?: boolean },
-  ) => void
-}
-
-interface CreateCanvasModuleOptions {
-  state: CanvasState
-  selection: SelectionBindings
-  templateImportIssues: Ref<TemplateValidationIssue[]>
-}
-
-export function createCanvasState(): CanvasState {
-  const list = shallowRef<ComponentList[]>([
-    { name: 'Menu', components: menu },
-    { name: 'Header', components: header },
-    { name: 'Content', components: content },
-    { name: 'Feature', components: [] },
-    { name: 'Call to Action', components: [] },
-    { name: 'E-Commerce', components: [] },
-    { name: 'Footer', components: [] },
-  ])
-
-  const installed = ref<CanvasBlockInstance[]>([])
-  const editableId = ref<string>()
-  const isDragging = ref(false)
-  const general = reactive<GeneralTool>({
-    padding: [24, 0, 24, 0],
-    background: {
-      color: '#F5F5F5',
-      image: '',
-      repeat: 'no-repeat',
-      size: 'cover',
-      position: 'center',
-    },
-    font: 'Arial',
-    previewText: '',
-  })
-
-  return {
-    list,
-    installed,
-    editableId,
-    isDragging,
-    general,
-  }
-}
+import { useSelection } from './use-selection'
 
 export function isCanvasBlockInstance(
   canvasBlock: CanvasBlockInstance,
@@ -173,29 +107,27 @@ function regenerateBlockNodeIds(block: BlockNode) {
   })
 }
 
-export function createCanvasModule(options: CreateCanvasModuleOptions) {
-  const { state, selection, templateImportIssues } = options
+let _instance: ReturnType<typeof _createCanvas> | null = null
+
+function _createCanvas() {
+  const selection = useSelection()
 
   const editableIndex = computed(() => {
-    if (!state.installed.value.length)
+    if (!installed.value.length)
       return -1
 
-    return state.installed.value.findIndex(i => i.id === state.editableId.value)
-  })
-
-  const installedBlocks = computed(() => {
-    return state.installed.value.filter(isCanvasBlockInstance)
+    return installed.value.findIndex(i => i.id === editableId.value)
   })
 
   function findCanvasBlockInstance(blockId: string): CanvasBlockInstance | undefined {
-    return state.installed.value.find(
+    return installed.value.find(
       (item): item is CanvasBlockInstance =>
         isCanvasBlockInstance(item) && item.block.id === blockId,
     )
   }
 
   function findRowById(rowId: string): RowNode | undefined {
-    for (const canvasBlock of state.installed.value) {
+    for (const canvasBlock of installed.value) {
       if (!isCanvasBlockInstance(canvasBlock))
         continue
 
@@ -208,7 +140,7 @@ export function createCanvasModule(options: CreateCanvasModuleOptions) {
   }
 
   function findCellById(cellId: string): CellNode | undefined {
-    for (const canvasBlock of state.installed.value) {
+    for (const canvasBlock of installed.value) {
       if (!isCanvasBlockInstance(canvasBlock))
         continue
 
@@ -231,8 +163,8 @@ export function createCanvasModule(options: CreateCanvasModuleOptions) {
     }
 
     if (index !== undefined)
-      state.installed.value.splice(index, 0, cloned)
-    else state.installed.value.push(cloned)
+      installed.value.splice(index, 0, cloned)
+    else installed.value.push(cloned)
   }
 
   function insertBlockToCanvas(label?: string, index?: number) {
@@ -244,8 +176,8 @@ export function createCanvasModule(options: CreateCanvasModuleOptions) {
     }
 
     if (index !== undefined)
-      state.installed.value.splice(index, 0, blockComponent)
-    else state.installed.value.push(blockComponent)
+      installed.value.splice(index, 0, blockComponent)
+    else installed.value.push(blockComponent)
 
     return blockComponent
   }
@@ -397,32 +329,8 @@ export function createCanvasModule(options: CreateCanvasModuleOptions) {
     }
   }
 
-  function moveAtomWithinCell(
-    blockId: string,
-    rowId: string,
-    cellId: string,
-    oldIndex: number,
-    newIndex: number,
-  ) {
-    const blockComponent = findCanvasBlockInstance(blockId)
-    if (!blockComponent)
-      return
-
-    const row = findRowInRows(blockComponent.block.rows, rowId)
-    if (!row)
-      return
-
-    const cell = row.cells.find(i => i.id === cellId)
-    if (!cell)
-      return
-
-    const [atom] = cell.atoms.splice(oldIndex, 1)
-    if (atom)
-      cell.atoms.splice(newIndex, 0, atom)
-  }
-
   function duplicateComponent(installedIndex: number) {
-    const canvasBlock = state.installed.value[installedIndex]
+    const canvasBlock = installed.value[installedIndex]
     if (!canvasBlock || !isCanvasBlockInstance(canvasBlock))
       return
 
@@ -435,11 +343,11 @@ export function createCanvasModule(options: CreateCanvasModuleOptions) {
       block: clonedBlock,
     }
 
-    state.installed.value.splice(installedIndex + 1, 0, cloned)
+    installed.value.splice(installedIndex + 1, 0, cloned)
   }
 
   function duplicateComponentById(componentId: string) {
-    const index = state.installed.value.findIndex(canvasBlock => canvasBlock.id === componentId)
+    const index = installed.value.findIndex(canvasBlock => canvasBlock.id === componentId)
     if (index === -1)
       return
 
@@ -447,29 +355,29 @@ export function createCanvasModule(options: CreateCanvasModuleOptions) {
   }
 
   function moveComponent(oldIndex: number, newIndex: number) {
-    const component = state.installed.value[oldIndex]
+    const component = installed.value[oldIndex]
 
     if (!component)
       return
 
-    state.installed.value.splice(oldIndex, 1)
-    state.installed.value.splice(newIndex, 0, component)
+    installed.value.splice(oldIndex, 1)
+    installed.value.splice(newIndex, 0, component)
   }
 
   function removeComponent(index: number) {
-    const removed = state.installed.value[index]
+    const removed = installed.value[index]
 
     if (!removed)
       return
 
-    state.installed.value.splice(index, 1)
+    installed.value.splice(index, 1)
 
-    if (state.editableId.value === removed.id)
+    if (editableId.value === removed.id)
       selection.resetSelection()
   }
 
   function removeComponentById(componentId: string) {
-    const index = state.installed.value.findIndex(canvasBlock => canvasBlock.id === componentId)
+    const index = installed.value.findIndex(canvasBlock => canvasBlock.id === componentId)
     if (index === -1)
       return
 
@@ -477,7 +385,7 @@ export function createCanvasModule(options: CreateCanvasModuleOptions) {
   }
 
   function clearCanvas() {
-    state.installed.value = []
+    installed.value = []
     templateImportIssues.value = []
     selection.resetSelection()
   }
@@ -816,7 +724,7 @@ export function createCanvasModule(options: CreateCanvasModuleOptions) {
 
   function updateToolById<T extends Tool>(id: string, key: 'value' | 'label', value: T['value']) {
     if (id === 'layoutPadding' && key === 'value') {
-      state.general.padding = (value as { padding: GeneralTool['padding'] }).padding
+      general.padding = (value as { padding: GeneralTool['padding'] }).padding
       return
     }
 
@@ -859,12 +767,18 @@ export function createCanvasModule(options: CreateCanvasModuleOptions) {
   }
 
   return {
+    list,
+    installed,
+    editableId,
+    isDragging,
+    general,
+    templateImportIssues,
+    editableIndex,
+    isCanvasBlockInstance,
     addComponent,
     addNewToolToMultiTool,
     deleteMultiToolItem,
-    duplicateComponent,
     duplicateComponentById,
-    editableIndex,
     insertBlockToCanvas,
     renameBlock,
     insertRowToBlock,
@@ -874,13 +788,16 @@ export function createCanvasModule(options: CreateCanvasModuleOptions) {
     removeCell,
     insertAtomToCell,
     removeAtom,
-    moveAtomWithinCell,
     moveComponent,
     clearCanvas,
-    removeComponent,
     removeComponentById,
     updateToolById,
-    installedBlocks,
-    isCanvasBlockInstance,
   }
+}
+
+export function useCanvas() {
+  if (!_instance)
+    _instance = _createCanvas()
+
+  return _instance
 }
