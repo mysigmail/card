@@ -1,0 +1,218 @@
+{
+  "version": 2,
+  "name": "header4",
+  "label": "Header 4",
+  "type": "header",
+  "preview": "img/components/header-4.png",
+  "block": {
+    "id": "seGFZ6_t",
+    "label": "Header 4",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "zyCfGxRB",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "wnDpSVGS",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "IDYXbflg",
+                "type": "image",
+                "src": "img/logo-black.png",
+                "link": "https://example.com",
+                "alt": "Some alt",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "_UhhkuIn",
+        "settings": {
+          "spacing": {
+            "margin": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "padding": [
+              20,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "aVTlKflM",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "link": "https://example.com",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 5,
+              "backgroundImage": {
+                "url": "img/johannes-andersson-v5gGwubKzEA-unsplash.jpg",
+                "position": "center",
+                "repeat": "no-repeat",
+                "size": "cover"
+              },
+              "height": 296
+            },
+            "atoms": [],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "h9ScPS5t",
+        "settings": {
+          "spacing": {
+            "margin": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "padding": [
+              10,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "gmjRlHwU",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "P0Zoiz9o",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"font-size: 18px; color: #9CA3AF\">Surfing Season '19</span></p><p style=\"text-align: center\"><span style=\"font-size: 32px\"><strong>There's Change<br/>In The Air.<br/>Can You Feel It?</strong></span></p>",
+                "color": "#222222",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "0gJc4pGE",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "rTklwPB5",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "UeIbZ12e",
+                "type": "button",
+                "text": "Take Part",
+                "link": "https://example.com",
+                "backgroundColor": "#4A98ED",
+                "color": "#FFFFFF",
+                "fontSize": 14,
+                "borderRadius": 5,
+                "padding": [
+                  12,
+                  24,
+                  12,
+                  24
+                ],
+                "spacing": {
+                  "margin": [
+                    20,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    12,
+                    24,
+                    12,
+                    24
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

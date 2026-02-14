@@ -1,0 +1,155 @@
+{
+  "version": 2,
+  "name": "content2",
+  "label": "Content 2",
+  "type": "content",
+  "preview": "img/components/content-2.png",
+  "block": {
+    "id": "rP1cX6zx",
+    "label": "Content 2",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "T8NnLCgM",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              12,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 20
+        },
+        "cells": [
+          {
+            "id": "KmZA3_cP",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "lZ1M_Ufc",
+                "type": "text",
+                "value": "<p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: left\"><strong><span style=\"font-size: 24px\">How Music Affects</span></strong><br><strong><span style=\"font-size: 24px\">Your Productivity</span></strong></p>",
+                "color": "#111111",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "76v_0S_Q",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "U9OIgtDW",
+                "type": "text",
+                "value": "<p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: left\"><strong><span style=\"font-size: 24px\">Background Music for</span></strong><br><strong><span style=\"font-size: 24px\">Coding</span></strong></p>",
+                "color": "#111111",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "ax_w6WxT",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 20
+        },
+        "cells": [
+          {
+            "id": "D0oyoFGe",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "link": "https://example.com",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 5,
+              "backgroundImage": {
+                "url": "img/juja-han-HU-uL54pfQI-unsplash.jpg",
+                "position": "center",
+                "repeat": "no-repeat",
+                "size": "cover"
+              },
+              "height": 200
+            },
+            "atoms": [],
+            "rows": []
+          },
+          {
+            "id": "D9YxBJm0",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "link": "https://example.com",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 5,
+              "backgroundImage": {
+                "url": "img/jefferson-santos-9SoCnyQmkzI-unsplash.jpg",
+                "position": "center",
+                "repeat": "no-repeat",
+                "size": "cover"
+              },
+              "height": 200
+            },
+            "atoms": [],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

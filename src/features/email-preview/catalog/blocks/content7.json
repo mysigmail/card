@@ -1,0 +1,155 @@
+{
+  "version": 2,
+  "name": "content7",
+  "label": "Content 7",
+  "type": "content",
+  "preview": "img/components/content-7.png",
+  "block": {
+    "id": "fsFNaNTV",
+    "label": "Content 7",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "HzD-rrsU",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              20,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 20
+        },
+        "cells": [
+          {
+            "id": "pk0AmWCO",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "_4YhF2Jn",
+                "type": "text",
+                "value": "<p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: left\"><strong><span style=\"font-size: 24px\">How Music Affects</span></strong><br><strong><span style=\"font-size: 24px\">Your Productivity</span></strong></p><p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Music is regarded as one of the triumphs of human creativity.</span></p>",
+                "color": "#111111",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "73wUlmJu",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "link": "https://example.com",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 5,
+              "backgroundImage": {
+                "url": "img/juja-han-HU-uL54pfQI-unsplash.jpg",
+                "position": "center",
+                "repeat": "no-repeat",
+                "size": "cover"
+              },
+              "height": 200
+            },
+            "atoms": [],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "mY7szVgg",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 20
+        },
+        "cells": [
+          {
+            "id": "v9MMIqVk",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "yrxGoyZX",
+                "type": "text",
+                "value": "<p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: left\"><strong><span style=\"font-size: 24px\">Background Music for</span></strong><br><strong><span style=\"font-size: 24px\">Coding</span></strong></p><p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Do you guys use background music while coding?</span></p>",
+                "color": "#111111",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "8VfCXwmo",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "link": "https://example.com",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 5,
+              "backgroundImage": {
+                "url": "img/jefferson-santos-9SoCnyQmkzI-unsplash.jpg",
+                "position": "center",
+                "repeat": "no-repeat",
+                "size": "cover"
+              },
+              "height": 200
+            },
+            "atoms": [],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

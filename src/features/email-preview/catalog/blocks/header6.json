@@ -1,0 +1,345 @@
+{
+  "version": 2,
+  "name": "header6",
+  "label": "Header 6",
+  "type": "header",
+  "preview": "img/components/header-6.png",
+  "block": {
+    "id": "6unI9hVd",
+    "label": "Header 6",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          40,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "-MtdTXoZ",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "81r5PHTp",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "Jw0ckwPT",
+                "type": "image",
+                "src": "img/logo-black.png",
+                "link": "https://example.com",
+                "alt": "MySigMail",
+                "width": 128,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "ePYBmZDG",
+        "settings": {
+          "spacing": {
+            "margin": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "padding": [
+              36,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "cIMJWUjn",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 0
+            },
+            "atoms": [
+              {
+                "id": "GfRd4BmC",
+                "type": "image",
+                "src": "img/app-icon.png",
+                "link": "https://example.com",
+                "alt": "Image",
+                "width": 100,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "height": 100
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "vvZmSpC0",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "hHAIHouO",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "-vpAJ0nR",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(124, 134, 199); font-size: 16px\">Brand new</span></p><p style=\"text-align: center\"><strong><span style=\"font-size: 32px\">The Circle.</span></strong></p>",
+                "color": "#000000",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "b-kxUHul",
+        "settings": {
+          "spacing": {
+            "margin": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "padding": [
+              24,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "qyec1Df_",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "link": "https://example.com",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 0,
+              "backgroundImage": {
+                "url": "img/iphone-angle.jpg",
+                "position": "center",
+                "repeat": "no-repeat",
+                "size": "contain"
+              },
+              "height": 185
+            },
+            "atoms": [],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "S8nNzZA7",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "e-fBbBkS",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "GxTuyh58",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"font-size: 18px\">GPS tracker for running and fitness.<br/>Unique features used by professional athletes<br/>are now also available for beginners!</span></p>",
+                "color": "#9FA3A7",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "yCwFG4cw",
+        "settings": {
+          "spacing": {
+            "margin": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "padding": [
+              22,
+              0,
+              22,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 12
+        },
+        "cells": [
+          {
+            "id": "FpGl-_pu",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "right"
+            },
+            "atoms": [
+              {
+                "id": "iQZvYueN",
+                "type": "image",
+                "src": "img/app-store.png",
+                "link": "https://example.com",
+                "alt": "Download on the App Store",
+                "width": 150,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "E0XTdmZa",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "rez-j_UV",
+                "type": "image",
+                "src": "img/google-play.png",
+                "link": "https://example.com",
+                "alt": "Get it on Google Play",
+                "width": 150,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

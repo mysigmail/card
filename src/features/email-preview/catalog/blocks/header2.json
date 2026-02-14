@@ -1,0 +1,198 @@
+{
+  "version": 2,
+  "name": "header2",
+  "label": "Header 2",
+  "type": "header",
+  "preview": "img/components/header-2.png",
+  "block": {
+    "id": "i7EZWaz_",
+    "label": "Header 2",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "zwKU4xXR",
+        "settings": {
+          "spacing": {
+            "margin": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "padding": [
+              0,
+              0,
+              20,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "9TZJB3I4",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "K93zo_lL",
+                "type": "image",
+                "src": "img/logo-black.png",
+                "link": "https://example.com",
+                "alt": "Some alt",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "ZM9AnqHF",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right"
+            },
+            "atoms": [
+              {
+                "id": "rXgLiCox",
+                "type": "menu",
+                "itemType": "text",
+                "gap": 10,
+                "items": [
+                  {
+                    "type": "text",
+                    "text": "Specs",
+                    "link": "https://example",
+                    "color": "#222222",
+                    "fontSize": 16
+                  },
+                  {
+                    "type": "text",
+                    "text": "Feature",
+                    "link": "https://example",
+                    "color": "#222222",
+                    "fontSize": 16
+                  },
+                  {
+                    "type": "text",
+                    "text": "Price",
+                    "link": "https://example",
+                    "color": "#222222",
+                    "fontSize": 16
+                  }
+                ],
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "qDMeZHpB",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "OnhbA2Qc",
+            "settings": {
+              "spacing": {
+                "margin": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "padding": [
+                  140,
+                  20,
+                  20,
+                  20
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 5,
+              "backgroundImage": {
+                "url": "img/ruslan-bardash-4kTbAMRAHtQ-unsplash.png",
+                "position": "top",
+                "repeat": "no-repeat",
+                "size": "cover"
+              }
+            },
+            "atoms": [
+              {
+                "id": "J0q5U-8L",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"font-size: 18px\">New Stool</span></p><p style=\"text-align: center\"><span style=\"font-size: 36px\"><u>Simplicity. Practicality. Naturality</u></span></p>",
+                "color": "#FFFFFF",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

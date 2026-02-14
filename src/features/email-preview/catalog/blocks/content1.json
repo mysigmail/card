@@ -1,0 +1,96 @@
+{
+  "version": 2,
+  "name": "content1",
+  "label": "Content 1",
+  "type": "content",
+  "preview": "img/components/content-1.png",
+  "block": {
+    "id": "G86LJihh",
+    "label": "Content 1",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "ZF7fxSqh",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "Z69ew8wD",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "8Br6p3rY",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: center\"><strong><span style=\"font-size: 24px\">Is There a Perfect Time of</span></strong><br><strong><span style=\"font-size: 24px\">Day to Meditate?</span></strong></p>",
+                "color": "#111111",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "8pyLw4IG",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "WrsH1hiL",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "link": "https://example.com",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 5,
+              "backgroundImage": {
+                "url": "img/simon-migaj-Yui5vfKHuzs-unsplash.jpg",
+                "position": "center",
+                "repeat": "no-repeat",
+                "size": "cover"
+              },
+              "height": 200
+            },
+            "atoms": [],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

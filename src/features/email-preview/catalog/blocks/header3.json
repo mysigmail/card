@@ -1,0 +1,173 @@
+{
+  "version": 2,
+  "name": "header3",
+  "label": "Header 3",
+  "type": "header",
+  "preview": "img/components/header-3.png",
+  "block": {
+    "id": "V6kmYqpc",
+    "label": "Header 3",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "3rjKzpvh",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "PoxORDe5",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "VVNACvL4",
+                "type": "image",
+                "src": "img/logo-black.png",
+                "link": "https://example.com",
+                "alt": "Some alt",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "drhDfOKc",
+        "settings": {
+          "spacing": {
+            "margin": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "padding": [
+              30,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "Z01Ha05A",
+            "settings": {
+              "spacing": {
+                "margin": [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "padding": [
+                  45,
+                  20,
+                  16,
+                  20
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 5,
+              "backgroundImage": {
+                "url": "img/bosco-shots-ZoEdO0G0xmI-unsplash.png",
+                "position": "top",
+                "repeat": "no-repeat",
+                "size": "cover"
+              }
+            },
+            "atoms": [
+              {
+                "id": "b5mEhn7E",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"font-size: 36px\"><strong>Don't Lose<br/>Yourself.</strong></span></p><p style=\"text-align: center\"><span style=\"font-size: 18px\">New album</span></p>",
+                "color": "#FFFFFF",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "lzGKovcX",
+                "type": "button",
+                "text": "Download",
+                "link": "https://example.com",
+                "backgroundColor": "#3494FB",
+                "color": "#FFFFFF",
+                "fontSize": 14,
+                "borderRadius": 5,
+                "padding": [
+                  12,
+                  24,
+                  12,
+                  24
+                ],
+                "spacing": {
+                  "margin": [
+                    40,
+                    0,
+                    40,
+                    0
+                  ],
+                  "padding": [
+                    12,
+                    24,
+                    12,
+                    24
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}
