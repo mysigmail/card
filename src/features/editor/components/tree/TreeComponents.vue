@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { Plus } from 'lucide-vue-next'
 import { nextTick, ref, watch } from 'vue'
 import { useCanvas, useSelection } from '@/features/editor/model'
 
-const { installed, isCanvasBlockInstance } = useCanvas()
+const { installed, isCanvasBlockInstance, insertBlockToCanvas } = useCanvas()
 
 const { sidebarActiveTab, treeScrollTarget, treeScrollRequestId } = useSelection()
 
@@ -42,6 +43,13 @@ watch(
 
 <template>
   <div ref="rootRef">
+    <div
+      class="flex cursor-pointer items-center gap-2 border-b border-border px-4 py-3 text-base hover:bg-muted"
+      @click="insertBlockToCanvas('Block')"
+    >
+      <Plus class="size-4" />
+      Empty Block
+    </div>
     <template
       v-for="(item, index) in installed"
       :key="item.id"
@@ -55,9 +63,11 @@ watch(
     </template>
     <div
       v-if="!installed.length"
-      class="p-4 text-muted-foreground"
+      class="p-6 text-center text-muted-foreground"
     >
-      The component tree is empty
+      <p class="mt-1 text-xs">
+        Add a new empty block or drag & drop from the catalog.
+      </p>
     </div>
   </div>
 </template>
