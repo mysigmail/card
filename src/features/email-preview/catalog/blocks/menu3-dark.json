@@ -1,0 +1,129 @@
+{
+  "version": 2,
+  "name": "menu3-dark",
+  "label": "Menu 3",
+  "type": "menu",
+  "preview": "img/components/menu-3-dark.png",
+  "block": {
+    "id": "uS-x-uma",
+    "label": "Menu 3",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#222222"
+    },
+    "rows": [
+      {
+        "id": "vFVgtBCG",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "kqFcZBZ-",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "idSRsagR",
+                "type": "image",
+                "src": "img/logo-white.png",
+                "link": "https://example.com",
+                "alt": "Some alt",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "x4iTZ7EA",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right"
+            },
+            "atoms": [
+              {
+                "id": "nt1ZUZrI",
+                "type": "menu",
+                "itemType": "image",
+                "gap": 18,
+                "items": [
+                  {
+                    "type": "image",
+                    "name": "Facebook",
+                    "link": "https://example",
+                    "url": "img/facebook-white.png",
+                    "width": 16,
+                    "height": 16,
+                    "alt": "Some alt"
+                  },
+                  {
+                    "type": "image",
+                    "name": "Twitter",
+                    "link": "https://example",
+                    "url": "img/twitter-x-white.png",
+                    "width": 16,
+                    "height": 16,
+                    "alt": "Some alt"
+                  },
+                  {
+                    "type": "image",
+                    "name": "Instagram",
+                    "link": "https://example",
+                    "url": "img/instagram-white.png",
+                    "width": 16,
+                    "height": 16,
+                    "alt": "Some alt"
+                  }
+                ],
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

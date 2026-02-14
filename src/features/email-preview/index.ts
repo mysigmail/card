@@ -1,6 +1,5 @@
-export * from './catalog/content'
-export * from './catalog/header'
-export * from './catalog/menu'
+export * from './catalog/load-blocks'
+export { saveBlockAsJson } from './catalog/save-block'
 export * from './lib/utils'
 export { default as BlockRenderer } from './ui/BlockRenderer.vue'
 export { default as BlockRendererRowNode } from './ui/BlockRendererRowNode.vue'

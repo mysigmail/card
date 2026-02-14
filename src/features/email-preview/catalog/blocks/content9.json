@@ -1,0 +1,268 @@
+{
+  "version": 2,
+  "name": "content9",
+  "label": "Content 9",
+  "type": "content",
+  "preview": "img/components/content-9.png",
+  "block": {
+    "id": "byw0gxx5",
+    "label": "Content 9",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "o9Bxcepy",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              8,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 20
+        },
+        "cells": [
+          {
+            "id": "wMzQc_Yg",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "I_p8z3pD",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Staying in shape is mostly about program compliance: it&rsquo;s not about having the best fitness program, but about having one that&rsquo;s good enough, and making sure you actually stick to it.</span></p>",
+                "color": "#111111",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "HgMwKzqC",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "Kph63160",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">There&rsquo;s a common saying that willpower is like a muscle: it gets stronger when you use it. The truth is more complex. There&rsquo;s mixed evidence for how much people can really improve their self-control.</span></p>",
+                "color": "#111111",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "BSIKtOha",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              8,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 20
+        },
+        "cells": [
+          {
+            "id": "BdLQk58x",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "HUml9vPF",
+                "type": "image",
+                "src": "img/jack-finnigan-rriAI0nhcbc-unsplash.jpg",
+                "link": "https://example.com",
+                "alt": "Mike Brown",
+                "width": 80,
+                "borderRadius": 60,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "height": 80
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "rM9nzREo",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "XOx4MGbD",
+                "type": "image",
+                "src": "img/tamara-bellis-Mn1Uopx7if8-unsplash.jpg",
+                "link": "https://example.com",
+                "alt": "Lina Muller",
+                "width": 80,
+                "borderRadius": 60,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "height": 80
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "FM8vTM7T",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 20
+        },
+        "cells": [
+          {
+            "id": "6RlaH1aK",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "E40VmNJF",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><strong><span style=\"font-size: 18px\">Mike Brown</span></strong><br><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Fitness Trainer</span></p>",
+                "color": "#111111",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "onDISXbL",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "EOF-u46_",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><strong><span style=\"font-size: 18px\">Lina Muller</span></strong><br><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Bloger</span></p>",
+                "color": "#111111",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

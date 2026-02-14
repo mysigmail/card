@@ -1,0 +1,253 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Catalog Block",
+  "description": "JSON-декларация блока email-каталога",
+  "type": "object",
+  "required": ["version", "name", "label", "type", "preview", "block"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": 2
+    },
+    "name": {
+      "type": "string",
+      "description": "Уникальное имя блока (например content1, menu1-dark)"
+    },
+    "label": {
+      "type": "string",
+      "description": "Отображаемое название блока в каталоге"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["content", "cta", "ecommerce", "feature", "footer", "header", "menu"],
+      "description": "Категория блока"
+    },
+    "preview": {
+      "type": "string",
+      "description": "Относительный путь к превью-картинке (без VITE_APP_BASE_PATH)"
+    },
+    "block": {
+      "$ref": "#/$defs/BlockNode"
+    }
+  },
+  "$defs": {
+    "Insets": {
+      "type": "array",
+      "items": { "type": "number" },
+      "minItems": 4,
+      "maxItems": 4,
+      "description": "[top, right, bottom, left]"
+    },
+    "SpacingValue": {
+      "type": "object",
+      "properties": {
+        "margin": { "$ref": "#/$defs/Insets" },
+        "padding": { "$ref": "#/$defs/Insets" }
+      },
+      "additionalProperties": false
+    },
+    "BackgroundImageValue": {
+      "type": "object",
+      "required": ["url", "repeat", "size", "position"],
+      "additionalProperties": false,
+      "properties": {
+        "url": { "type": "string" },
+        "repeat": { "type": "string", "enum": ["repeat", "no-repeat"] },
+        "size": { "type": "string", "enum": ["unset", "cover", "contain"] },
+        "position": { "type": "string", "enum": ["top", "center", "bottom", "left", "right"] }
+      }
+    },
+    "TextAtom": {
+      "type": "object",
+      "required": ["id", "type", "value", "color"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "const": "text" },
+        "value": { "type": "string", "description": "HTML-контент текстового атома" },
+        "color": { "type": "string" },
+        "spacing": { "$ref": "#/$defs/SpacingValue" }
+      }
+    },
+    "ButtonAtom": {
+      "type": "object",
+      "required": ["id", "type", "text", "link", "backgroundColor", "color", "fontSize", "borderRadius", "padding"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "const": "button" },
+        "text": { "type": "string" },
+        "link": { "type": "string" },
+        "backgroundColor": { "type": "string" },
+        "color": { "type": "string" },
+        "fontSize": { "type": "number" },
+        "borderRadius": { "type": "number" },
+        "padding": { "$ref": "#/$defs/Insets" },
+        "spacing": { "$ref": "#/$defs/SpacingValue" }
+      }
+    },
+    "DividerAtom": {
+      "type": "object",
+      "required": ["id", "type", "color", "height"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "const": "divider" },
+        "color": { "type": "string" },
+        "height": { "type": "number" },
+        "spacing": { "$ref": "#/$defs/SpacingValue" }
+      }
+    },
+    "ImageAtom": {
+      "type": "object",
+      "required": ["id", "type", "src", "link", "alt"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "const": "image" },
+        "src": { "type": "string" },
+        "link": { "type": "string" },
+        "alt": { "type": "string" },
+        "width": { "type": "number" },
+        "height": { "type": "number" },
+        "borderRadius": { "type": "number" },
+        "spacing": { "$ref": "#/$defs/SpacingValue" }
+      }
+    },
+    "MenuAtomTextItem": {
+      "type": "object",
+      "required": ["type", "text", "link", "color", "fontSize"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "text" },
+        "text": { "type": "string" },
+        "link": { "type": "string" },
+        "color": { "type": "string" },
+        "fontSize": { "type": "number" }
+      }
+    },
+    "MenuAtomImageItem": {
+      "type": "object",
+      "required": ["type", "name", "link", "url", "alt"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "image" },
+        "name": { "type": "string" },
+        "link": { "type": "string" },
+        "url": { "type": "string" },
+        "width": { "type": "number" },
+        "height": { "type": "number" },
+        "alt": { "type": "string" }
+      }
+    },
+    "MenuAtom": {
+      "type": "object",
+      "required": ["id", "type", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "const": "menu" },
+        "itemType": { "type": "string", "enum": ["text", "image"] },
+        "gap": { "type": "number" },
+        "items": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "$ref": "#/$defs/MenuAtomTextItem" },
+              { "$ref": "#/$defs/MenuAtomImageItem" }
+            ]
+          }
+        },
+        "spacing": { "$ref": "#/$defs/SpacingValue" }
+      }
+    },
+    "Atom": {
+      "oneOf": [
+        { "$ref": "#/$defs/TextAtom" },
+        { "$ref": "#/$defs/ButtonAtom" },
+        { "$ref": "#/$defs/DividerAtom" },
+        { "$ref": "#/$defs/ImageAtom" },
+        { "$ref": "#/$defs/MenuAtom" }
+      ]
+    },
+    "CellSettings": {
+      "type": "object",
+      "properties": {
+        "spacing": { "$ref": "#/$defs/SpacingValue" },
+        "backgroundColor": { "type": "string" },
+        "backgroundImage": { "$ref": "#/$defs/BackgroundImageValue" },
+        "link": { "type": "string" },
+        "verticalAlign": { "type": "string", "enum": ["top", "middle", "bottom"] },
+        "horizontalAlign": { "type": "string", "enum": ["left", "center", "right"] },
+        "borderRadius": { "type": "number" },
+        "width": { "type": "number", "description": "Ширина в процентах (0-100)" },
+        "height": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "RowSettings": {
+      "type": "object",
+      "properties": {
+        "spacing": { "$ref": "#/$defs/SpacingValue" },
+        "backgroundColor": { "type": "string" },
+        "backgroundImage": { "$ref": "#/$defs/BackgroundImageValue" },
+        "height": { "type": "number" },
+        "gap": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "BlockSettings": {
+      "type": "object",
+      "properties": {
+        "spacing": { "$ref": "#/$defs/SpacingValue" },
+        "backgroundColor": { "type": "string" },
+        "backgroundImage": { "$ref": "#/$defs/BackgroundImageValue" }
+      },
+      "additionalProperties": false
+    },
+    "CellNode": {
+      "type": "object",
+      "required": ["id", "settings", "atoms", "rows"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "settings": { "$ref": "#/$defs/CellSettings" },
+        "atoms": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/Atom" }
+        },
+        "rows": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/RowNode" }
+        }
+      }
+    },
+    "RowNode": {
+      "type": "object",
+      "required": ["id", "settings", "cells"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "settings": { "$ref": "#/$defs/RowSettings" },
+        "cells": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/CellNode" }
+        }
+      }
+    },
+    "BlockNode": {
+      "type": "object",
+      "required": ["id", "label", "settings", "rows"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string", "description": "Название блока" },
+        "settings": { "$ref": "#/$defs/BlockSettings" },
+        "rows": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/RowNode" }
+        }
+      }
+    }
+  }
+}

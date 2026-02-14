@@ -1,0 +1,289 @@
+{
+  "version": 2,
+  "name": "header5",
+  "label": "Header 5",
+  "type": "header",
+  "preview": "img/components/header-5.png",
+  "block": {
+    "id": "T5Ql3ahD",
+    "label": "Header 5",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "irs6yIz2",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "YirUX4he",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "tQqy-gXB",
+                "type": "image",
+                "src": "img/logo-black.png",
+                "link": "https://example.com",
+                "alt": "Some alt",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "QkzRyi9-",
+        "settings": {
+          "spacing": {
+            "margin": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "padding": [
+              30,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "sJmhsqgg",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "EfzE8mkW",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(124, 134, 199); font-size: 18px\">New series</span></p><p style=\"text-align: center\"><strong><span style=\"font-size: 32px\">The loop by loop.</span></strong></p>",
+                "color": "#000000",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "jvHj4RVL",
+        "settings": {
+          "spacing": {
+            "margin": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "padding": [
+              20,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "iVO9qCtj",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 0
+            },
+            "atoms": [
+              {
+                "id": "4GLDF3rG",
+                "type": "image",
+                "src": "img/apple-watch-2.png",
+                "link": "https://example.com",
+                "alt": "Some alt",
+                "width": 450,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "height": 300
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "Z8_HVWFC",
+        "settings": {
+          "spacing": {
+            "margin": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "padding": [
+              20,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "a27jNZU9",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "X_MPrbKC",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"font-size: 18px\">With our latest model of watch,<br>you'll get the most amazing features<br>for your everyday workout.</span></p>",
+                "color": "#A9ADB3",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "htmAmBD-",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "9cnka4Ns",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "6_5udpLz",
+                "type": "button",
+                "text": "Take Yours",
+                "link": "https://example.com",
+                "backgroundColor": "#4A98ED",
+                "color": "#FFFFFF",
+                "fontSize": 14,
+                "borderRadius": 5,
+                "padding": [
+                  12,
+                  24,
+                  12,
+                  24
+                ],
+                "spacing": {
+                  "margin": [
+                    20,
+                    0,
+                    20,
+                    0
+                  ],
+                  "padding": [
+                    12,
+                    24,
+                    12,
+                    24
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 import type { CanvasBlockInstance, ComponentList, GeneralTool } from './types'
 import type { TemplateValidationIssue } from '@/entities/template'
 import { reactive, ref, shallowRef } from 'vue'
-import { content, header, menu } from '@/features/email-preview'
+import { content, header, menu } from '@/features/email-preview/catalog/load-blocks'
 
 export const list = shallowRef<ComponentList[]>([
   { name: 'Menu', components: menu },

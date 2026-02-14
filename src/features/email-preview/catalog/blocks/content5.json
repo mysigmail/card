@@ -1,0 +1,154 @@
+{
+  "version": 2,
+  "name": "content5",
+  "label": "Content 5",
+  "type": "content",
+  "preview": "img/components/content-5.png",
+  "block": {
+    "id": "eW5rLGt-",
+    "label": "Content 5",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "RjPPeG_t",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "lZmFT7WY",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "zZV9jI9D",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"font-size: 14px\">Staying in shape is mostly about program compliance: it&rsquo;s not about having</span><br><span style=\"font-size: 14px\">the best fitness program, but about having one that&rsquo;s good enough, and</span><br><span style=\"font-size: 14px\">making sure you actually stick to it.</span></p>",
+                "color": "#9FA3A7",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "HmdD1jRU",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "-V7CbHS2",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "j1Vs_B1g",
+                "type": "image",
+                "src": "img/jack-finnigan-rriAI0nhcbc-unsplash.jpg",
+                "link": "https://example.com",
+                "alt": "Mike Brown",
+                "width": 80,
+                "borderRadius": 60,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "height": 80
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "XRce3YDh",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "5NCa7527",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "8yRMYgmg",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><strong><span style=\"font-size: 18px\">Mike Brown</span></strong><br><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Fitness Trainer</span></p>",
+                "color": "#111111",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,372 @@
+{
+  "version": 2,
+  "name": "content6",
+  "label": "Content 6",
+  "type": "content",
+  "preview": "img/components/content-6.png",
+  "block": {
+    "id": "_VuBU5Ok",
+    "label": "Content 6",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#222222"
+    },
+    "rows": [
+      {
+        "id": "91Xhe9XI",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              8,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "l4vNf_3m",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "dxqR7xeW",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><strong><span style=\"font-size: 32px\">Our Clients</span></strong></p><p style=\"text-align: center\"><span style=\"color: rgb(159, 163, 167); font-size: 16px\">We&rsquo;re trusted by well-known companies,</span><br><span style=\"color: rgb(159, 163, 167); font-size: 14px\">and here are some of them.</span></p>",
+                "color": "#FFFFFF",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "dUwYZLMR",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              10,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 6
+        },
+        "cells": [
+          {
+            "id": "0R_k7rTS",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "ERNK-MLw",
+                "type": "image",
+                "src": "img/apple.png",
+                "link": "https://www.apple.com",
+                "alt": "Apple",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "Oz7MTJ9c",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "Y4NL5ugO",
+                "type": "image",
+                "src": "img/google.png",
+                "link": "https://www.google.com",
+                "alt": "Google",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "sg5QKSMC",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "k9cXV_X3",
+                "type": "image",
+                "src": "img/xbox.png",
+                "link": "https://www.xbox.com",
+                "alt": "Xbox",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "BBMgAv9o",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "0khoCDWy",
+                "type": "image",
+                "src": "img/spotify.png",
+                "link": "https://www.spotify.com",
+                "alt": "Spotify",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "ph0hpxR2",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 6
+        },
+        "cells": [
+          {
+            "id": "56oDVp2W",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "3qEJZobA",
+                "type": "image",
+                "src": "img/bose.png",
+                "link": "https://www.bose.com",
+                "alt": "Bose",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "kqwGqJxt",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "Xc9LeU91",
+                "type": "image",
+                "src": "img/microsoft.png",
+                "link": "https://www.microsoft.com",
+                "alt": "Microsoft",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "QHM_DT9V",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "usPiXU6a",
+                "type": "image",
+                "src": "img/coca-cola.png",
+                "link": "https://www.coca-cola.com",
+                "alt": "Coca-Cola",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "h95NNJSV",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "Rco-8VLA",
+                "type": "image",
+                "src": "img/facebook.png",
+                "link": "https://www.facebook.com",
+                "alt": "Facebook",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

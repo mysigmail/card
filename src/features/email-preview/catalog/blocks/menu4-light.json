@@ -1,0 +1,111 @@
+{
+  "version": 2,
+  "name": "menu4-light",
+  "label": "Menu 8",
+  "type": "menu",
+  "preview": "img/components/menu-4-light.png",
+  "block": {
+    "id": "85xz-f1J",
+    "label": "Menu 8",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "r8big_yN",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "RPOaGNh-",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "z3fG6yQX",
+                "type": "image",
+                "src": "img/logo-black.png",
+                "link": "https://example.com",
+                "alt": "Some alt",
+                "width": 110,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "qCOf__8h",
+                "type": "menu",
+                "itemType": "text",
+                "gap": 10,
+                "items": [
+                  {
+                    "type": "text",
+                    "text": "Specs",
+                    "link": "https://example",
+                    "color": "#222222",
+                    "fontSize": 16
+                  },
+                  {
+                    "type": "text",
+                    "text": "Feature",
+                    "link": "https://example",
+                    "color": "#222222",
+                    "fontSize": 16
+                  },
+                  {
+                    "type": "text",
+                    "text": "Price",
+                    "link": "https://example",
+                    "color": "#222222",
+                    "fontSize": 16
+                  }
+                ],
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    20,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

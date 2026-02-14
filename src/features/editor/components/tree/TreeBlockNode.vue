@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { BlockNode } from '@/entities/block'
-import { ChevronDown, Copy, Pencil, Plus, Trash2 } from 'lucide-vue-next'
+import type { ComponentType } from '@/entities/template'
+import { ChevronDown, Copy, HardDriveDownload, Pencil, Plus, Trash2 } from 'lucide-vue-next'
 import { computed, ref, watch } from 'vue'
 import TreeBlockRowNode from '@/features/editor/components/tree/TreeBlockRowNode.vue'
 import { useCanvas, useSelection } from '@/features/editor/model'
+import { saveBlockAsJson } from '@/features/email-preview/catalog/save-block'
 import { Button } from '@/shared/ui/button'
 import { ButtonGroup } from '@/shared/ui/button-group'
 import { Input } from '@/shared/ui/input'
@@ -17,6 +19,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const isDev = import.meta.env.DEV
+
 const { removeComponentById, duplicateComponentById, insertRowToBlock, renameBlock } = useCanvas()
 
 const { selectBlock, selectedBlockId, selectedRowId, selectedCellId, selectedAtomId }
@@ -25,6 +29,18 @@ const { selectBlock, selectedBlockId, selectedRowId, selectedCellId, selectedAto
 const isOpen = ref(true)
 const renamePopoverOpen = ref(false)
 const renameValue = ref(props.block.label)
+
+const saveBlockPopoverOpen = ref(false)
+const blockTypes: Array<{ label: string, value: ComponentType }> = [
+  { label: 'Menu', value: 'menu' },
+  { label: 'Header', value: 'header' },
+  { label: 'Content', value: 'content' },
+  { label: 'Feature', value: 'feature' },
+  { label: 'Call to Action', value: 'cta' },
+  { label: 'E-Commerce', value: 'ecommerce' },
+  { label: 'Footer', value: 'footer' },
+]
+
 const shouldExpand = computed(() => {
   if (selectedBlockId.value !== props.block.id)
     return false
@@ -61,6 +77,11 @@ function onClick(type: 'copy' | 'remove') {
 function applyRename() {
   if (renameBlock(props.block.id, renameValue.value))
     renamePopoverOpen.value = false
+}
+
+function handleSaveBlock(type: ComponentType) {
+  saveBlockAsJson(props.block, { type })
+  saveBlockPopoverOpen.value = false
 }
 </script>
 
@@ -137,6 +158,38 @@ function applyRename() {
           >
             <Copy class="size-3" />
           </Button>
+          <Popover
+            v-if="isDev"
+            v-model:open="saveBlockPopoverOpen"
+          >
+            <PopoverTrigger as-child>
+              <Button
+                variant="outline"
+                size="icon-xs"
+                aria-label="Save as Block"
+                @click.stop
+              >
+                <HardDriveDownload class="size-3" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent
+              align="end"
+              class="w-48 p-1"
+            >
+              <div class="flex flex-col">
+                <Button
+                  v-for="t in blockTypes"
+                  :key="t.value"
+                  variant="ghost"
+                  size="sm"
+                  class="justify-start px-2 font-normal"
+                  @click="handleSaveBlock(t.value)"
+                >
+                  Save to {{ t.label }}
+                </Button>
+              </div>
+            </PopoverContent>
+          </Popover>
           <Button
             variant="outline"
             size="icon-xs"

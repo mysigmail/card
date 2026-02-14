@@ -1,0 +1,66 @@
+{
+  "version": 2,
+  "name": "content4",
+  "label": "Content 4",
+  "type": "content",
+  "preview": "img/components/content-4.png",
+  "block": {
+    "id": "jN5SB2zN",
+    "label": "Content 4",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "5BP440-0",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "nLkabrop",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "LPIY0s03",
+                "type": "text",
+                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: center\"><strong><span style=\"font-size: 24px\">How to Stick to Your Fitness Habits the Easy</span></strong><br><strong><span style=\"font-size: 24px\">Way, According to Science</span></strong></p><p style=\"text-align: center\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Staying in shape is mostly about program compliance: it&rsquo;s not about having</span><br><span style=\"color: rgb(159, 163, 167); font-size: 14px\">the best fitness program, but about having one that&rsquo;s good enough, and</span><br><span style=\"color: rgb(159, 163, 167); font-size: 14px\">making sure you actually stick to it.</span></p>",
+                "color": "#111111",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}
