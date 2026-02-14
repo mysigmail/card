@@ -43,31 +43,35 @@ ID-правила:
 | Типы spacing/background | `src/entities/style/types.ts` |
 | Контракт шаблона (`TemplateExportV2`, лимиты, tool types) | `src/entities/template/types.ts` |
 | Валидация/санитизация/migration/remap id шаблона | `src/entities/template/template-io.ts` |
-| Store API редактора | `src/features/editor/model/index.ts` |
-| CRUD дерева на канвасе | `src/features/editor/model/canvas.ts` |
-| Template IO интеграция со store | `src/features/editor/model/template-io.ts` |
-| Persist/Hydrate localStorage | `src/features/editor/model/persistence.ts` |
+| Barrel-export модели редактора | `src/features/editor/model/index.ts` |
+| Shared reactive state | `src/features/editor/model/state.ts` |
+| CRUD дерева на канвасе | `src/features/editor/model/use-canvas.ts` (`useCanvas`) |
+| Выделение block/row/cell/atom | `src/features/editor/model/use-selection.ts` (`useSelection`) |
+| Template IO интеграция со store | `src/features/editor/model/use-template-io.ts` (`useTemplateIO`) |
+| Persist/Hydrate localStorage | `src/features/editor/model/use-persistence.ts` (`usePersistence`) |
+| Tool-утилиты (трансформации) | `src/features/editor/model/tools.ts` |
 | Главный рендер блока | `src/features/email-preview/ui/BlockRenderer.vue` |
 | Рендер row/cell/atom | `src/features/email-preview/ui/BlockRendererRowNode.vue` |
 | Панель настроек блока/атома | `src/features/editor/components/tools/BlockSettingsPanel.vue` |
 | Каталог пресетов | `src/features/email-preview/catalog/` |
 
 Важно:
-- В проекте **два `template-io.ts`** с разной ответственностью:
+- В проекте **два `template-io`** с разной ответственностью:
   - `src/entities/template/template-io.ts` — доменный парсер/валидатор/санитайзер.
-  - `src/features/editor/model/template-io.ts` — применение шаблона к store.
+  - `src/features/editor/model/use-template-io.ts` — применение шаблона к store.
 
 ## 4. Обязательные технические правила
 
-### 4.1 Изменение дерева только через store
+### 4.1 Изменение дерева только через composables
 
-Использовать `useComponentsStore` и его API:
-- `insertBlockToCanvas`, `insertRowToBlock`, `insertRowToCell`
-- `insertCellToRow`, `insertAtomToCell`
-- `removeComponent`, `removeRow`, `removeCell`, `removeAtom`
-- `moveComponent`, `moveAtomWithinCell`
-- `updateToolById`, `addNewToolToMultiTool`, `deleteMultiToolItem`
-- `selectBlock/selectRow/selectCell/selectAtom`
+Модель редактора разделена на 4 самостоятельных singleton-composable. Каждый создаётся при первом вызове и переиспользует один экземпляр:
+
+- **`useCanvas()`** — CRUD канваса: `insertBlockToCanvas`, `insertRowToBlock`, `insertRowToCell`, `insertCellToRow`, `insertAtomToCell`, `removeComponentById`, `removeRow`, `removeCell`, `removeAtom`, `moveComponent`, `updateToolById`, `addNewToolToMultiTool`, `deleteMultiToolItem`, `clearCanvas`.
+- **`useSelection()`** — выделение: `selectBlock`, `selectRow`, `selectCell`, `selectAtom`, `resetSelection`. Computed: `selectedBlock`, `selectedRow`, `selectedCell`, `selectedAtom`.
+- **`useTemplateIO()`** — импорт/экспорт: `importTemplate`, `importTemplateFromJson`, `exportTemplate`, `exportTemplateJson`.
+- **`usePersistence()`** — localStorage: `persistTemplateToLocalStorage`, `hydrateFromLocalStorage`.
+
+Общее реактивное состояние (`installed`, `editableId`, `isDragging`, `general`, `list`, `templateImportIssues`) вынесено в `state.ts` и импортируется composables напрямую.
 
 Нельзя напрямую мутировать дерево внутри UI-компонентов.
 
@@ -105,7 +109,7 @@ ID-правила:
 
 1. Добавить тип в `src/entities/block/types.ts`.
 2. Добавить фабрику в `src/entities/block/block-factory.ts`.
-3. Поддержать операции в `src/features/editor/model/canvas.ts` (если нужны спец-ветки).
+3. Поддержать операции в `src/features/editor/model/use-canvas.ts` (если нужны спец-ветки).
 4. Добавить UI-настройки в `src/features/editor/components/tools/`.
 5. Подключить настройки в `src/features/editor/components/tools/BlockSettingsPanel.vue`.
 6. Добавить рендер в `src/features/email-preview/ui/BlockRendererRowNode.vue`.
@@ -117,7 +121,7 @@ ID-правила:
 ### 6.2 Добавить новый тип Tool / поле настройки
 
 1. Добавить типы в `src/entities/template/types.ts`.
-2. Обновить трансформации в `src/features/editor/model/tools.ts` и `canvas.ts`.
+2. Обновить трансформации в `src/features/editor/model/tools.ts` и `use-canvas.ts`.
 3. Обновить UI панели настроек (`tools/*`, `BlockSettingsPanel.vue`).
 4. Обновить доменный IO (`src/entities/template/template-io.ts`):
    - разрешенный `TOOL_TYPES`,
@@ -128,7 +132,7 @@ ID-правила:
 
 1. Сначала определить обратную совместимость.
 2. Затем обновить `types.ts` и `template-io.ts` (validation + migration).
-3. После этого обновить feature-layer IO (`src/features/editor/model/template-io.ts`) при необходимости.
+3. После этого обновить feature-layer IO (`src/features/editor/model/use-template-io.ts`) при необходимости.
 4. Проверить `append` и `replace` режимы импорта.
 
 ## 7. UI policy (shadcn-vue)
@@ -153,8 +157,9 @@ Smoke-check вручную (критично для этого проекта):
 
 ## 9. Антипаттерны (не делать)
 
-- Не добавлять новые точки входа для состояния мимо `useComponentsStore`.
+- Не создавать новые хранилища состояния мимо `state.ts` и существующих composables.
 - Не менять JSON-контракт шаблона без обновления validation/sanitize/migration.
+- Не импортировать composables циклически на уровне модуля (использовать call-time вызовы внутри функций).
 
 ---
 Критерий качества для любого PR: после изменений пользователь может безопасно сохранить шаблон в JSON, импортировать его обратно и получить предсказуемый визуальный результат в email-превью без регрессий структуры.
