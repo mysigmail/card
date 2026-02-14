@@ -1,5 +1,3 @@
-import type { Ref } from 'vue'
-import type { CanvasBlockInstance, GeneralTool } from './types'
 import type {
   TemplateExportV2,
   TemplateImportMode,
@@ -12,16 +10,13 @@ import {
   parseTemplateExportPayload,
 } from '@/entities/template'
 import { clone } from '@/shared/lib/clone'
+import { general, installed, templateImportIssues } from './state'
+import { usePersistence } from './use-persistence'
+import { useSelection } from './use-selection'
 
-interface CreateTemplateIOModuleOptions {
-  installed: Ref<CanvasBlockInstance[]>
-  general: GeneralTool
-  templateImportIssues: Ref<TemplateValidationIssue[]>
-  resetSelection: () => void
-  persistTemplateToLocalStorage: () => void
-}
+let _instance: ReturnType<typeof _createTemplateIO> | null = null
 
-export function createTemplateIOModule(options: CreateTemplateIOModuleOptions) {
+function _createTemplateIO() {
   let ignoreTemplatePersist = false
 
   function withPersistLock<T>(task: () => T): T {
@@ -44,29 +39,33 @@ export function createTemplateIOModule(options: CreateTemplateIOModuleOptions) {
     const components = createRuntimeComponents(payload.canvas.components)
 
     if (mode === 'replace') {
-      options.installed.value = components
+      installed.value = components
     }
     else {
-      options.installed.value.push(...components)
+      installed.value.push(...components)
     }
 
     if (mode === 'replace' || applyOptions?.applyGeneralInAppend) {
-      Object.assign(options.general, clone(payload.editor.general))
+      Object.assign(general, clone(payload.editor.general))
     }
 
-    options.resetSelection()
+    useSelection().resetSelection()
   }
 
   function exportTemplate(title?: string) {
     return createTemplateExportPayload({
-      general: options.general,
-      installed: options.installed.value,
+      general,
+      installed: installed.value,
       title,
     })
   }
 
   function exportTemplateJson(title?: string) {
     return JSON.stringify(exportTemplate(title), null, 2)
+  }
+
+  function triggerPersist() {
+    usePersistence().persistTemplateToLocalStorage()
   }
 
   function importTemplate(
@@ -77,7 +76,7 @@ export function createTemplateIOModule(options: CreateTemplateIOModuleOptions) {
     },
   ) {
     const result = parseTemplateExportPayload(rawPayload)
-    options.templateImportIssues.value = result.issues
+    templateImportIssues.value = result.issues
 
     if (!result.payload) {
       return {
@@ -91,7 +90,7 @@ export function createTemplateIOModule(options: CreateTemplateIOModuleOptions) {
       applyImportedTemplate(parsedPayload, mode, applyOptions)
     })
 
-    options.persistTemplateToLocalStorage()
+    triggerPersist()
 
     return {
       ok: true as const,
@@ -107,7 +106,7 @@ export function createTemplateIOModule(options: CreateTemplateIOModuleOptions) {
     },
   ) {
     const result = parseTemplateExportJson(raw)
-    options.templateImportIssues.value = result.issues
+    templateImportIssues.value = result.issues
 
     if (!result.payload) {
       return {
@@ -121,7 +120,7 @@ export function createTemplateIOModule(options: CreateTemplateIOModuleOptions) {
       applyImportedTemplate(parsedPayload, mode, applyOptions)
     })
 
-    options.persistTemplateToLocalStorage()
+    triggerPersist()
 
     return {
       ok: true as const,
@@ -138,4 +137,11 @@ export function createTemplateIOModule(options: CreateTemplateIOModuleOptions) {
     withPersistLock,
     isPersistIgnored: () => ignoreTemplatePersist,
   }
+}
+
+export function useTemplateIO() {
+  if (!_instance)
+    _instance = _createTemplateIO()
+
+  return _instance
 }

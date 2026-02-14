@@ -2,7 +2,7 @@
 import type { CSSProperties } from 'vue'
 import type { Atom, CellNode, RowNode } from '@/entities/block'
 import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
-import { useComponentsStore } from '@/features/editor'
+import { useSelection } from '@/features/editor'
 
 interface Props {
   blockId: string
@@ -11,7 +11,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { selectRow, selectCell, selectAtom } = useComponentsStore()
+const { selectRow, selectCell, selectAtom } = useSelection()
 
 function tupleToCss(value?: [number, number, number, number]) {
   if (!value || value.length !== 4)

@@ -2,7 +2,7 @@
 import type { MultiTool } from '@/features/editor/model'
 import { Plus } from 'lucide-vue-next'
 import { ref } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas } from '@/features/editor/model'
 import { Button } from '@/shared/ui/button'
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { addNewToolToMultiTool, deleteMultiToolItem } = useComponentsStore()
+const { addNewToolToMultiTool, deleteMultiToolItem } = useCanvas()
 
 const localValue = ref(props.value)
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { BackgroundImageTool, ImageTool } from '@/features/editor/model'
 import { computed, reactive, watch } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas } from '@/features/editor/model'
 import { Input } from '@/shared/ui/input'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 
@@ -16,7 +16,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { updateToolById } = useComponentsStore()
+const { updateToolById } = useCanvas()
 
 const localValue = reactive<UnifiedImageValue>(props.value)
 const isBackground = computed(() => props.type === 'bgImage')

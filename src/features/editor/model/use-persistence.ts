@@ -1,36 +1,22 @@
-import type { Ref } from 'vue'
-import type { CanvasBlockInstance, GeneralTool } from './types'
-import type {
-  TemplateExportV2,
-  TemplateImportMode,
-  TemplateValidationIssue,
-} from '@/entities/template'
+import type { TemplateValidationIssue } from '@/entities/template'
 import { watch } from 'vue'
 import { parseTemplateExportJson, TEMPLATE_LOCAL_STORAGE_KEY } from '@/entities/template'
+import { general, installed, templateImportIssues } from './state'
+import { useTemplateIO } from './use-template-io'
 
-interface CreatePersistenceModuleOptions {
-  installed: Ref<CanvasBlockInstance[]>
-  general: GeneralTool
-  templateImportIssues: Ref<TemplateValidationIssue[]>
-  exportTemplateJson: (title?: string) => string
-  applyImportedTemplate: (
-    payload: TemplateExportV2,
-    mode: TemplateImportMode,
-    options?: { applyGeneralInAppend?: boolean },
-  ) => void
-  withPersistLock: <T>(task: () => T) => T
-  isPersistIgnored: () => boolean
-}
+let _instance: ReturnType<typeof _createPersistence> | null = null
 
-export function createPersistenceModule(options: CreatePersistenceModuleOptions) {
+function _createPersistence() {
   let templatePersistenceInitialized = false
 
   function persistTemplateToLocalStorage() {
-    if (typeof window === 'undefined' || options.isPersistIgnored())
+    const templateIO = useTemplateIO()
+
+    if (typeof window === 'undefined' || templateIO.isPersistIgnored())
       return
 
     try {
-      window.localStorage.setItem(TEMPLATE_LOCAL_STORAGE_KEY, options.exportTemplateJson())
+      window.localStorage.setItem(TEMPLATE_LOCAL_STORAGE_KEY, templateIO.exportTemplateJson())
     }
     catch {
       // Ignore storage write errors (private mode / quota exceeded)
@@ -38,6 +24,8 @@ export function createPersistenceModule(options: CreatePersistenceModuleOptions)
   }
 
   function hydrateTemplateFromLocalStorage() {
+    const templateIO = useTemplateIO()
+
     if (typeof window === 'undefined') {
       return {
         ok: false as const,
@@ -55,7 +43,7 @@ export function createPersistenceModule(options: CreatePersistenceModuleOptions)
     }
 
     const result = parseTemplateExportJson(raw)
-    options.templateImportIssues.value = result.issues
+    templateImportIssues.value = result.issues
 
     if (!result.payload) {
       return {
@@ -65,8 +53,8 @@ export function createPersistenceModule(options: CreatePersistenceModuleOptions)
     }
     const payload = result.payload
 
-    options.withPersistLock(() => {
-      options.applyImportedTemplate(payload, 'replace')
+    templateIO.withPersistLock(() => {
+      templateIO.applyImportedTemplate(payload, 'replace')
     })
 
     return {
@@ -82,7 +70,7 @@ export function createPersistenceModule(options: CreatePersistenceModuleOptions)
     templatePersistenceInitialized = true
 
     watch(
-      options.installed,
+      installed,
       () => {
         persistTemplateToLocalStorage()
       },
@@ -90,7 +78,7 @@ export function createPersistenceModule(options: CreatePersistenceModuleOptions)
     )
 
     watch(
-      options.general,
+      general,
       () => {
         persistTemplateToLocalStorage()
       },
@@ -98,9 +86,19 @@ export function createPersistenceModule(options: CreatePersistenceModuleOptions)
     )
   }
 
+  // Auto-init persistence on singleton creation
+  initTemplatePersistence()
+
   return {
     persistTemplateToLocalStorage,
     hydrateTemplateFromLocalStorage,
     initTemplatePersistence,
   }
+}
+
+export function usePersistence() {
+  if (!_instance)
+    _instance = _createPersistence()
+
+  return _instance
 }

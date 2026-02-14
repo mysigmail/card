@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas, useSelection } from '@/features/editor/model'
 
-const { editableId, selectionLevel } = useComponentsStore()
+const { editableId } = useCanvas()
+const { selectionLevel } = useSelection()
 </script>
 
 <template>

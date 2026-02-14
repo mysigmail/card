@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import UilListUiAlt from '~icons/uil/list-ui-alt'
 import UilServer from '~icons/uil/server'
-import { useComponentsStore } from '@/features/editor/model'
+import { useSelection } from '@/features/editor/model'
 
-const { sidebarActiveTab } = useComponentsStore()
+const { sidebarActiveTab } = useSelection()
 </script>
 
 <template>

@@ -2,7 +2,7 @@
 import type { TemplateImportMode } from '@/entities/template'
 import { MoreHorizontal as MoreHorizontalIcon } from 'lucide-vue-next'
 import { computed, ref, watch } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas, useTemplateIO } from '@/features/editor/model'
 import { Button } from '@/shared/ui/button'
 import { ButtonGroup } from '@/shared/ui/button-group'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/shared/ui/dialog'
@@ -25,8 +25,8 @@ const pendingImportRaw = ref('')
 const pendingImportFileName = ref('')
 const fileInputRef = ref<HTMLInputElement>()
 
-const { exportTemplateJson, importTemplateFromJson, templateImportIssues, clearCanvas }
-  = useComponentsStore()
+const { exportTemplateJson, importTemplateFromJson } = useTemplateIO()
+const { templateImportIssues, clearCanvas } = useCanvas()
 
 const importModeValue = computed<string>({
   get: () => importMode.value,

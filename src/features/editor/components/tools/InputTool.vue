@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { InputNumberTool, InputTool } from '@/features/editor/model'
 import { ref, watch } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas } from '@/features/editor/model'
 import { Input } from '@/shared/ui/input'
 
 interface Props {
@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'string',
 })
 
-const { updateToolById } = useComponentsStore()
+const { updateToolById } = useCanvas()
 
 const localValue = ref(props.value)
 

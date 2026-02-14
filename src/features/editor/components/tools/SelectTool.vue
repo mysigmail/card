@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SelectTool } from '@/features/editor/model'
 import { ref, watch } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas } from '@/features/editor/model'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { updateToolById } = useComponentsStore()
+const { updateToolById } = useCanvas()
 const localValue = ref(props.value)
 
 watch(

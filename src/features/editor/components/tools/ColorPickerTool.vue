@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ColorPickerTool } from '@/features/editor/model'
 import { ref, watch } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas } from '@/features/editor/model'
 import { ColorPicker } from '@/shared/ui/color-picker'
 
 interface Props {
@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<Emits>()
 
-const { updateToolById } = useComponentsStore()
+const { updateToolById } = useCanvas()
 
 const localValue = ref(props.value)
 

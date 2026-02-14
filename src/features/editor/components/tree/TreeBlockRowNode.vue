@@ -13,7 +13,7 @@ import {
   Trash2,
 } from 'lucide-vue-next'
 import { computed, ref, watch } from 'vue'
-import { useComponentsStore } from '@/features/editor/model'
+import { useCanvas, useSelection } from '@/features/editor/model'
 import { Button } from '@/shared/ui/button'
 import { ButtonGroup } from '@/shared/ui/button-group'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
@@ -29,6 +29,9 @@ const props = withDefaults(defineProps<Props>(), {
   topLevel: false,
 })
 
+const { insertCellToRow, removeRow, removeCell, insertAtomToCell, insertRowToCell, removeAtom }
+  = useCanvas()
+
 const {
   selectRow,
   selectCell,
@@ -37,13 +40,7 @@ const {
   selectedRowId,
   selectedCellId,
   selectedAtomId,
-  insertCellToRow,
-  removeRow,
-  removeCell,
-  insertAtomToCell,
-  insertRowToCell,
-  removeAtom,
-} = useComponentsStore()
+} = useSelection()
 
 const isOpen = ref(true)
 const itemPopoverId = ref<string | null>(null)
