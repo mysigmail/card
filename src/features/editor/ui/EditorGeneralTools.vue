@@ -41,7 +41,7 @@ const positionOptions = [
 <template>
   <EditorPanel>
     <EditorPanelItem
-      title="Layout"
+      title="Spacing"
       type="opened"
     >
       <SpacingTool

@@ -16,24 +16,12 @@ import {
   AlignVerticalJustifyStart,
 } from 'lucide-vue-next'
 import { computed } from 'vue'
-import { useCanvas, useSelection } from '@/features/editor/model'
-import { Button } from '@/shared/ui/button'
+import { useSelection } from '@/features/editor/model'
 import { Input } from '@/shared/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 
-const { insertRowToBlock, insertCellToRow, removeRow, removeAtom } = useCanvas()
-
-const {
-  selectionLevel,
-  selectedBlock,
-  selectedRow,
-  selectedCell,
-  selectedAtom,
-  selectedBlockId,
-  selectedRowId,
-  selectedCellId,
-} = useSelection()
+const { selectionLevel, selectedBlock, selectedRow, selectedCell, selectedAtom } = useSelection()
 
 const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   url: '',
@@ -210,7 +198,7 @@ const blockAppearanceTools = computed<Tool[]>(() => {
     {
       id: settingToolId('block', selectedBlock.value.id, 'spacing'),
       key: 'padding',
-      label: 'Spacings',
+      label: 'Spacing',
       type: 'spacing',
       value: normalizeSpacingValue(selectedBlock.value.settings.spacing),
     },
@@ -239,23 +227,9 @@ const rowAppearanceTools = computed<Tool[]>(() => {
     {
       id: settingToolId('row', selectedRow.value.id, 'spacing'),
       key: 'padding',
-      label: 'Spacings',
+      label: 'Spacing',
       type: 'spacing',
       value: normalizeSpacingValue(selectedRow.value.settings.spacing),
-    },
-    {
-      id: settingToolId('row', selectedRow.value.id, 'backgroundColor'),
-      key: 'backgroundColor',
-      label: 'Background Color',
-      type: 'colorPicker',
-      value: selectedRow.value.settings.backgroundColor,
-    },
-    {
-      id: settingToolId('row', selectedRow.value.id, 'backgroundImage'),
-      key: 'backgroundImage',
-      label: 'Background Image',
-      type: 'bgImage',
-      value: normalizeBackgroundImage(selectedRow.value.settings.backgroundImage),
     },
     {
       id: settingToolId('row', selectedRow.value.id, 'gap'),
@@ -271,6 +245,35 @@ const rowAppearanceTools = computed<Tool[]>(() => {
       type: 'inputNumber',
       value: selectedRow.value.settings.height ?? 0,
     },
+    {
+      id: settingToolId('row', selectedRow.value.id, 'backgroundColor'),
+      key: 'backgroundColor',
+      label: 'Background Color',
+      type: 'colorPicker',
+      value: selectedRow.value.settings.backgroundColor,
+    },
+    {
+      id: settingToolId('row', selectedRow.value.id, 'backgroundImage'),
+      key: 'backgroundImage',
+      label: 'Background Image',
+      type: 'bgImage',
+      value: normalizeBackgroundImage(selectedRow.value.settings.backgroundImage),
+    },
+  ]
+})
+
+const cellSpacingTools = computed<Tool[]>(() => {
+  if (!selectedCell.value)
+    return []
+
+  return [
+    {
+      id: settingToolId('cell', selectedCell.value.id, 'spacing'),
+      key: 'padding',
+      label: 'Spacing',
+      type: 'spacing',
+      value: normalizeSpacingValue(selectedCell.value.settings.spacing),
+    },
   ]
 })
 
@@ -280,11 +283,11 @@ const cellAppearanceTools = computed<Tool[]>(() => {
 
   return [
     {
-      id: settingToolId('cell', selectedCell.value.id, 'spacing'),
-      key: 'padding',
-      label: 'Spacings',
-      type: 'spacing',
-      value: normalizeSpacingValue(selectedCell.value.settings.spacing),
+      id: settingToolId('cell', selectedCell.value.id, 'borderRadius'),
+      key: 'borderRadius',
+      label: 'Border Radius',
+      type: 'inputNumber',
+      value: selectedCell.value.settings.borderRadius ?? 0,
     },
     {
       id: settingToolId('cell', selectedCell.value.id, 'backgroundColor'),
@@ -307,27 +310,7 @@ const cellAppearanceTools = computed<Tool[]>(() => {
       type: 'input',
       value: selectedCell.value.settings.link || '',
     },
-    {
-      id: settingToolId('cell', selectedCell.value.id, 'borderRadius'),
-      key: 'borderRadius',
-      label: 'Border Radius',
-      type: 'inputNumber',
-      value: selectedCell.value.settings.borderRadius ?? 0,
-    },
   ]
-})
-
-const canRemoveSelectedRow = computed(() => {
-  if (!selectedBlock.value || !selectedRow.value)
-    return false
-
-  const currentRowId = selectedRow.value.id
-  const isTopLevelRow = selectedBlock.value.rows.some(row => row.id === currentRowId)
-
-  if (!isTopLevelRow)
-    return true
-
-  return selectedBlock.value.rows.length > 1
 })
 
 function getItemWidthMode() {
@@ -402,6 +385,13 @@ const atomTools = computed<Tool[]>(() => {
   if (selectedAtom.value.type === 'text') {
     return [
       {
+        id: atomToolId('spacing'),
+        key: 'spacing',
+        label: 'Spacing',
+        type: 'spacing',
+        value: normalizeSpacingValue(selectedAtom.value.spacing),
+      },
+      {
         id: atomToolId('color'),
         key: 'mainColor',
         label: 'Main Color',
@@ -415,31 +405,24 @@ const atomTools = computed<Tool[]>(() => {
         type: 'textEditor',
         value: selectedAtom.value.value,
       },
-      {
-        id: atomToolId('spacing'),
-        key: 'spacing',
-        label: 'Spacings',
-        type: 'spacing',
-        value: normalizeSpacingValue(selectedAtom.value.spacing),
-      },
     ]
   }
 
   if (selectedAtom.value.type === 'button') {
     return [
       {
-        id: atomToolId('text'),
-        key: 'text',
-        label: 'Text',
-        type: 'input',
-        value: selectedAtom.value.text,
+        id: atomToolId('spacing'),
+        key: 'spacing',
+        label: 'Spacing',
+        type: 'spacing',
+        value: normalizeSpacingValue(selectedAtom.value.spacing, selectedAtom.value.padding),
       },
       {
-        id: atomToolId('link'),
-        key: 'link',
-        label: 'Link',
-        type: 'input',
-        value: selectedAtom.value.link,
+        id: atomToolId('borderRadius'),
+        key: 'borderRadius',
+        label: 'Border Radius',
+        type: 'inputNumber',
+        value: selectedAtom.value.borderRadius,
       },
       {
         id: atomToolId('backgroundColor'),
@@ -463,24 +446,38 @@ const atomTools = computed<Tool[]>(() => {
         value: selectedAtom.value.fontSize,
       },
       {
-        id: atomToolId('borderRadius'),
-        key: 'borderRadius',
-        label: 'Border Radius',
-        type: 'inputNumber',
-        value: selectedAtom.value.borderRadius,
+        id: atomToolId('text'),
+        key: 'text',
+        label: 'Text',
+        type: 'input',
+        value: selectedAtom.value.text,
       },
       {
-        id: atomToolId('spacing'),
-        key: 'spacing',
-        label: 'Spacings',
-        type: 'spacing',
-        value: normalizeSpacingValue(selectedAtom.value.spacing, selectedAtom.value.padding),
+        id: atomToolId('link'),
+        key: 'link',
+        label: 'Link',
+        type: 'input',
+        value: selectedAtom.value.link,
       },
     ]
   }
 
   if (selectedAtom.value.type === 'image') {
     return [
+      {
+        id: atomToolId('spacing'),
+        key: 'spacing',
+        label: 'Spacing',
+        type: 'spacing',
+        value: normalizeSpacingValue(selectedAtom.value.spacing),
+      },
+      {
+        id: atomToolId('borderRadius'),
+        key: 'borderRadius',
+        label: 'Border Radius',
+        type: 'inputNumber',
+        value: selectedAtom.value.borderRadius ?? 0,
+      },
       {
         id: atomToolId('image'),
         key: 'image',
@@ -494,25 +491,25 @@ const atomTools = computed<Tool[]>(() => {
           height: selectedAtom.value.height,
         }),
       },
-      {
-        id: atomToolId('borderRadius'),
-        key: 'borderRadius',
-        label: 'Border Radius',
-        type: 'inputNumber',
-        value: selectedAtom.value.borderRadius ?? 0,
-      },
-      {
-        id: atomToolId('spacing'),
-        key: 'spacing',
-        label: 'Spacings',
-        type: 'spacing',
-        value: normalizeSpacingValue(selectedAtom.value.spacing),
-      },
     ]
   }
 
   if (selectedAtom.value.type === 'menu') {
     return [
+      {
+        id: atomToolId('spacing'),
+        key: 'spacing',
+        label: 'Spacing',
+        type: 'spacing',
+        value: normalizeSpacingValue(selectedAtom.value.spacing),
+      },
+      {
+        id: atomToolId('gap'),
+        key: 'gap',
+        label: 'Gap',
+        type: 'inputNumber',
+        value: selectedAtom.value.gap ?? 10,
+      },
       {
         id: atomToolId('menuItemType'),
         key: 'menuItemType',
@@ -531,36 +528,22 @@ const atomTools = computed<Tool[]>(() => {
         ],
       },
       {
-        id: atomToolId('gap'),
-        key: 'gap',
-        label: 'Gap',
-        type: 'inputNumber',
-        value: selectedAtom.value.gap ?? 10,
-      },
-      {
         id: atomToolId('menuList'),
         key: 'list',
         label: 'List',
         type: 'multi',
         value: toMenuListToolValue(selectedAtom.value),
       },
-      {
-        id: atomToolId('spacing'),
-        key: 'spacing',
-        label: 'Spacings',
-        type: 'spacing',
-        value: normalizeSpacingValue(selectedAtom.value.spacing),
-      },
     ]
   }
 
   return [
     {
-      id: atomToolId('color'),
-      key: 'color',
-      label: 'Color',
-      type: 'colorPicker',
-      value: selectedAtom.value.color,
+      id: atomToolId('spacing'),
+      key: 'spacing',
+      label: 'Spacing',
+      type: 'spacing',
+      value: normalizeSpacingValue(selectedAtom.value.spacing),
     },
     {
       id: atomToolId('height'),
@@ -570,11 +553,11 @@ const atomTools = computed<Tool[]>(() => {
       value: selectedAtom.value.height,
     },
     {
-      id: atomToolId('spacing'),
-      key: 'spacing',
-      label: 'Spacings',
-      type: 'spacing',
-      value: normalizeSpacingValue(selectedAtom.value.spacing),
+      id: atomToolId('color'),
+      key: 'color',
+      label: 'Color',
+      type: 'colorPicker',
+      value: selectedAtom.value.color,
     },
   ]
 })
@@ -582,7 +565,6 @@ const atomTools = computed<Tool[]>(() => {
 
 <template>
   <div class="block-settings-panel">
-    <!-- ================= BLOCK LEVEL ================= -->
     <EditorPanel v-if="selectionLevel === 'block' && selectedBlock">
       <EditorPanelItem
         type="opened"
@@ -590,18 +572,6 @@ const atomTools = computed<Tool[]>(() => {
       >
         <div class="space-y-3 pb-2">
           <EditorComponentTools :tools="blockAppearanceTools" />
-
-          <!-- Actions -->
-          <div class="flex gap-2 pt-2 border-t border-border">
-            <Button
-              variant="outline"
-              size="sm"
-              class="flex-1"
-              @click="insertRowToBlock(selectedBlockId!)"
-            >
-              + Grid
-            </Button>
-          </div>
         </div>
       </EditorPanelItem>
     </EditorPanel>
@@ -613,26 +583,6 @@ const atomTools = computed<Tool[]>(() => {
       >
         <div class="space-y-3 pb-2">
           <EditorComponentTools :tools="rowAppearanceTools" />
-
-          <!-- Actions -->
-          <div class="flex gap-2 pt-2 border-t border-border">
-            <Button
-              variant="outline"
-              size="sm"
-              class="flex-1"
-              @click="insertCellToRow(selectedBlockId!, selectedRowId!)"
-            >
-              + Cell
-            </Button>
-            <Button
-              v-if="canRemoveSelectedRow"
-              variant="destructive"
-              size="sm"
-              @click="removeRow(selectedBlockId!, selectedRowId!)"
-            >
-              Remove
-            </Button>
-          </div>
         </div>
       </EditorPanelItem>
     </EditorPanel>
@@ -643,142 +593,142 @@ const atomTools = computed<Tool[]>(() => {
         title="Cell"
       >
         <div class="space-y-3 pb-2">
+          <EditorComponentTools :tools="cellSpacingTools" />
+
+          <div class="grid grid-cols-[minmax(0,120px)_minmax(0,1fr)] gap-4">
+            <div>
+              <EditorToolLabel>Width</EditorToolLabel>
+              <Select
+                :model-value="getItemWidthMode()"
+                @update:model-value="(v) => onItemWidthModeChange(String(v))"
+              >
+                <SelectTrigger class="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="auto">
+                    Auto
+                  </SelectItem>
+                  <SelectItem value="manual">
+                    Manual
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <EditorToolLabel>Width (%)</EditorToolLabel>
+              <Input
+                type="number"
+                :disabled="getItemWidthMode() !== 'manual'"
+                :placeholder="getItemWidthMode() === 'manual' ? '50' : 'Auto'"
+                :model-value="selectedCell.settings.width ?? ''"
+                @update:model-value="(v: string | number) => onItemWidthChange(v)"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-[minmax(0,120px)_minmax(0,1fr)] gap-4">
+            <div>
+              <EditorToolLabel>Height</EditorToolLabel>
+              <Select
+                :model-value="getItemHeightMode()"
+                @update:model-value="(v) => onItemHeightModeChange(String(v))"
+              >
+                <SelectTrigger class="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="auto">
+                    Auto
+                  </SelectItem>
+                  <SelectItem value="manual">
+                    Manual
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <EditorToolLabel>Height (px)</EditorToolLabel>
+              <Input
+                type="number"
+                :disabled="getItemHeightMode() !== 'manual'"
+                :placeholder="getItemHeightMode() === 'manual' ? '120' : 'Auto'"
+                :model-value="selectedCell.settings.height ?? ''"
+                @update:model-value="(v: string | number) => onItemHeightChange(v)"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <EditorToolLabel>Vertical Align</EditorToolLabel>
+              <ToggleGroup
+                :model-value="selectedCell.settings.verticalAlign"
+                type="single"
+                size="sm"
+                variant="outline"
+                :spacing="0"
+                class="w-full"
+                @update:model-value="(v) => onItemVerticalAlignChange(String(v))"
+              >
+                <ToggleGroupItem
+                  value="top"
+                  class="flex-1"
+                >
+                  <AlignVerticalJustifyStart class="size-4" />
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  value="middle"
+                  class="flex-1"
+                >
+                  <AlignVerticalJustifyCenter class="size-4" />
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  value="bottom"
+                  class="flex-1"
+                >
+                  <AlignVerticalJustifyEnd class="size-4" />
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </div>
+            <div>
+              <EditorToolLabel>Horizontal Align</EditorToolLabel>
+              <ToggleGroup
+                :model-value="getItemHorizontalAlign()"
+                type="single"
+                size="sm"
+                variant="outline"
+                :spacing="0"
+                class="w-full"
+                @update:model-value="(v) => onItemHorizontalAlignChange(String(v))"
+              >
+                <ToggleGroupItem
+                  value="left"
+                  class="flex-1"
+                >
+                  <AlignLeft class="size-4" />
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  value="center"
+                  class="flex-1"
+                >
+                  <AlignCenter class="size-4" />
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  value="right"
+                  class="flex-1"
+                >
+                  <AlignRight class="size-4" />
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </div>
+          </div>
+
           <EditorComponentTools :tools="cellAppearanceTools" />
-
-          <!-- Vertical Align -->
-          <div>
-            <EditorToolLabel>Vertical Align</EditorToolLabel>
-            <ToggleGroup
-              :model-value="selectedCell.settings.verticalAlign"
-              type="single"
-              size="sm"
-              variant="outline"
-              :spacing="0"
-              _class="w-full"
-              @update:model-value="(v) => onItemVerticalAlignChange(String(v))"
-            >
-              <ToggleGroupItem
-                value="top"
-                class="flex-1"
-              >
-                <AlignVerticalJustifyStart class="size-4" />
-              </ToggleGroupItem>
-              <ToggleGroupItem
-                value="middle"
-                class="flex-1"
-              >
-                <AlignVerticalJustifyCenter class="size-4" />
-              </ToggleGroupItem>
-              <ToggleGroupItem
-                value="bottom"
-                class="flex-1"
-              >
-                <AlignVerticalJustifyEnd class="size-4" />
-              </ToggleGroupItem>
-            </ToggleGroup>
-          </div>
-
-          <!-- Horizontal Align -->
-          <div>
-            <EditorToolLabel>Horizontal Align</EditorToolLabel>
-            <ToggleGroup
-              :model-value="getItemHorizontalAlign()"
-              type="single"
-              size="sm"
-              variant="outline"
-              :spacing="0"
-              _class="w-full"
-              @update:model-value="(v) => onItemHorizontalAlignChange(String(v))"
-            >
-              <ToggleGroupItem
-                value="left"
-                class="flex-1"
-              >
-                <AlignLeft class="size-4" />
-              </ToggleGroupItem>
-              <ToggleGroupItem
-                value="center"
-                class="flex-1"
-              >
-                <AlignCenter class="size-4" />
-              </ToggleGroupItem>
-              <ToggleGroupItem
-                value="right"
-                class="flex-1"
-              >
-                <AlignRight class="size-4" />
-              </ToggleGroupItem>
-            </ToggleGroup>
-          </div>
-
-          <!-- Width -->
-          <div>
-            <EditorToolLabel>Width</EditorToolLabel>
-            <Select
-              :model-value="getItemWidthMode()"
-              @update:model-value="(v) => onItemWidthModeChange(String(v))"
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="auto">
-                  Auto
-                </SelectItem>
-                <SelectItem value="manual">
-                  Manual
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div v-if="getItemWidthMode() === 'manual'">
-            <EditorToolLabel>Width (%)</EditorToolLabel>
-            <Input
-              type="number"
-              size="sm"
-              placeholder="50"
-              :model-value="selectedCell.settings.width ?? ''"
-              @update:model-value="(v: string | number) => onItemWidthChange(v)"
-            />
-          </div>
-
-          <!-- Height -->
-          <div>
-            <EditorToolLabel>Height</EditorToolLabel>
-            <Select
-              :model-value="getItemHeightMode()"
-              @update:model-value="(v) => onItemHeightModeChange(String(v))"
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="auto">
-                  Auto
-                </SelectItem>
-                <SelectItem value="manual">
-                  Manual
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div v-if="getItemHeightMode() === 'manual'">
-            <EditorToolLabel>Height (px)</EditorToolLabel>
-            <Input
-              type="number"
-              size="sm"
-              placeholder="120"
-              :model-value="selectedCell.settings.height ?? ''"
-              @update:model-value="(v: string | number) => onItemHeightChange(v)"
-            />
-          </div>
         </div>
       </EditorPanelItem>
     </EditorPanel>
 
-    <!-- ================= ATOM LEVEL ================= -->
     <EditorPanel v-if="selectionLevel === 'atom' && selectedAtom">
       <EditorPanelItem
         type="opened"
@@ -789,20 +739,6 @@ const atomTools = computed<Tool[]>(() => {
             v-if="atomTools.length"
             :tools="atomTools"
           />
-
-          <!-- Remove -->
-          <div class="pt-2 border-t border-border">
-            <Button
-              variant="destructive"
-              size="sm"
-              class="w-full"
-              @click="
-                removeAtom(selectedBlockId!, selectedRowId!, selectedCellId!, selectedAtom!.id)
-              "
-            >
-              Remove Atom
-            </Button>
-          </div>
         </div>
       </EditorPanelItem>
     </EditorPanel>
