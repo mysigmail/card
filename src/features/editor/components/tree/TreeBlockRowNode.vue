@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import type { ComponentPublicInstance } from 'vue'
 import type { AtomType, BlockNode, RowNode } from '@/entities/block'
 import {
   ChevronDown,
   Grid2x2,
+  GripVertical,
   Image as ImageIcon,
   LayoutGrid,
   List,
@@ -11,8 +13,10 @@ import {
   Text,
   Trash2,
 } from 'lucide-vue-next'
-import { computed, ref, watch } from 'vue'
+import Sortable from 'sortablejs'
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useCanvas, useSelection } from '@/features/editor/model'
+import { addGhost, removeGhost } from '@/features/email-preview'
 import { Button } from '@/shared/ui/button'
 import { ButtonGroup } from '@/shared/ui/button-group'
 
@@ -31,7 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
   indentPx: 0,
 })
 
-const { removeRow, removeCell, removeAtom } = useCanvas()
+const { removeRow, removeCell, removeAtom, moveCell, moveAtom, isDragging } = useCanvas()
 
 const {
   selectRow,
@@ -44,6 +48,7 @@ const {
 } = useSelection()
 
 const isOpen = ref(true)
+const cellsRef = ref<HTMLElement>()
 const TOP_LEVEL_INDENT_PX = 4
 const NESTED_ROW_INDENT_PX = 8
 const CELL_INDENT_PX = 24
@@ -55,12 +60,106 @@ const rowIndentPx = computed(() => {
 })
 const cellIndentPx = computed(() => rowIndentPx.value + CELL_INDENT_PX)
 const atomIndentPx = computed(() => cellIndentPx.value + ATOM_INDENT_PX)
+const cellSortableItemId = computed(() => `row:${props.row.id}`)
 const canRemoveRow = computed(() => {
   if (!props.topLevel)
     return true
 
   return props.block.rows.length > 1
 })
+const cellSortKey = computed(() => props.row.cells.map(cell => cell.id).join('|'))
+const atomSortKey = computed(() =>
+  props.row.cells.map(cell => `${cell.id}:${cell.atoms.length}`).join('|'),
+)
+
+let cellSortable: Sortable | undefined
+const atomListRefMap = new Map<string, HTMLElement>()
+const atomSortables = new Map<string, Sortable>()
+
+function destroyCellsSortable() {
+  cellSortable?.destroy()
+  cellSortable = undefined
+}
+
+function destroyAtomSortables() {
+  atomSortables.forEach(sortable => sortable.destroy())
+  atomSortables.clear()
+}
+
+function initCellsSortable() {
+  if (!cellsRef.value || cellSortable)
+    return
+
+  cellSortable = Sortable.create(cellsRef.value, {
+    animation: 150,
+    draggable: `[data-cell-sortable-item="${cellSortableItemId.value}"]`,
+    handle: '[data-cell-drag-handle]',
+    ghostClass: 'tree-cell-ghost',
+    swapThreshold: 0.5,
+    onStart() {
+      isDragging.value = true
+    },
+    onEnd(e) {
+      removeGhost()
+      isDragging.value = false
+
+      if (e.oldIndex === undefined || e.newIndex === undefined)
+        return
+
+      moveCell(props.block.id, props.row.id, e.oldIndex, e.newIndex)
+    },
+    setData(dataTransfer, dragEl) {
+      const name = dragEl.getAttribute('data-name') || 'Cell'
+      addGhost(dataTransfer, name, 'sm')
+    },
+  })
+}
+
+function setAtomListRef(cellId: string, el: Element | ComponentPublicInstance | null) {
+  if (el instanceof HTMLElement) {
+    atomListRefMap.set(cellId, el)
+    return
+  }
+
+  atomListRefMap.delete(cellId)
+}
+
+function initAtomSortables() {
+  if (atomSortables.size > 0)
+    return
+
+  props.row.cells.forEach((cell) => {
+    const atomListEl = atomListRefMap.get(cell.id)
+    if (!atomListEl)
+      return
+
+    const sortable = Sortable.create(atomListEl, {
+      animation: 150,
+      draggable: '[data-atom-sortable-item="true"]',
+      handle: '[data-atom-drag-handle]',
+      ghostClass: 'tree-atom-ghost',
+      swapThreshold: 0.5,
+      onStart() {
+        isDragging.value = true
+      },
+      onEnd(e) {
+        removeGhost()
+        isDragging.value = false
+
+        if (e.oldIndex === undefined || e.newIndex === undefined)
+          return
+
+        moveAtom(props.block.id, props.row.id, cell.id, e.oldIndex, e.newIndex)
+      },
+      setData(dataTransfer, dragEl) {
+        const name = dragEl.getAttribute('data-name') || 'Atom'
+        addGhost(dataTransfer, name, 'sm')
+      },
+    })
+
+    atomSortables.set(cell.id, sortable)
+  })
+}
 
 function hasRowInTree(row: RowNode, rowId: string): boolean {
   if (row.id === rowId)
@@ -112,6 +211,29 @@ watch(
   { immediate: true },
 )
 
+watch(
+  [isOpen, cellSortKey, atomSortKey],
+  async ([open]) => {
+    if (!open) {
+      destroyCellsSortable()
+      destroyAtomSortables()
+      return
+    }
+
+    await nextTick()
+    destroyCellsSortable()
+    destroyAtomSortables()
+    initCellsSortable()
+    initAtomSortables()
+  },
+  { immediate: true },
+)
+
+onBeforeUnmount(() => {
+  destroyCellsSortable()
+  destroyAtomSortables()
+})
+
 function atomLabel(type: AtomType) {
   switch (type) {
     case 'text':
@@ -143,6 +265,8 @@ function isAtomActive(atomId: string) {
 <template>
   <div
     :data-row-scope-id="`row-scope:${row.id}`"
+    :data-row-sortable-item="topLevel ? 'true' : undefined"
+    :data-name="topLevel ? `Row ${index + 1}` : undefined"
     :data-row-scope-block-id="block.id"
     :data-row-scope-row-id="parentRowId || row.id"
     :data-row-scope-cell-id="cellId"
@@ -162,6 +286,11 @@ function isAtomActive(atomId: string) {
       @click="selectRow(block.id, row.id, { syncTree: false })"
     >
       <div class="flex min-w-0 flex-1 items-center gap-1">
+        <GripVertical
+          v-if="topLevel && block.rows.length > 1"
+          data-row-drag-handle
+          class="size-3.5 shrink-0 cursor-grab text-muted-foreground/80"
+        />
         <ChevronDown
           class="size-3.5 transition-transform"
           :class="{ '-rotate-90': !isOpen }"
@@ -184,10 +313,15 @@ function isAtomActive(atomId: string) {
       </ButtonGroup>
     </div>
 
-    <div v-if="isOpen">
+    <div
+      v-if="isOpen"
+      ref="cellsRef"
+    >
       <div
         v-for="(cell, cellIndex) in row.cells"
         :key="cell.id"
+        :data-cell-sortable-item="cellSortableItemId"
+        :data-name="`Cell ${cellIndex + 1}`"
         class="pl-6"
       >
         <div
@@ -206,6 +340,11 @@ function isAtomActive(atomId: string) {
           @click="selectCell(block.id, row.id, cell.id, { syncTree: false })"
         >
           <div class="flex min-w-0 flex-1 items-center gap-1.5">
+            <GripVertical
+              v-if="row.cells.length > 1"
+              data-cell-drag-handle
+              class="size-3.5 shrink-0 cursor-grab text-muted-foreground/80"
+            />
             <LayoutGrid class="size-3.5 shrink-0" />
             <span class="truncate">Cell {{ cellIndex + 1 }}</span>
           </div>
@@ -223,56 +362,65 @@ function isAtomActive(atomId: string) {
           </ButtonGroup>
         </div>
 
-        <div
-          v-for="(atom, atomIndex) in cell.atoms"
-          :key="atom.id"
-          class="pl-2"
-        >
+        <div :ref="(el) => setAtomListRef(cell.id, el)">
           <div
-            :data-tree-id="`atom:${atom.id}`"
-            :data-block-id="block.id"
-            :data-row-id="row.id"
-            :data-cell-id="cell.id"
-            :data-atom-id="atom.id"
-            :data-parent-cell-index="cellIndex"
-            :data-index="atomIndex"
-            data-type="atom"
-            class="relative z-0 flex h-8 cursor-pointer items-center justify-between gap-2 rounded-sm px-2 text-xs text-muted-foreground before:absolute before:inset-y-0 before:right-0 before:left-[calc(var(--tree-node-left-offset)*-1)] before:-z-10 before:rounded-sm before:transition-colors hover:before:bg-muted/60"
-            :class="{ 'before:bg-muted/70 text-foreground!': isAtomActive(atom.id) }"
-            :style="{ '--tree-node-left-offset': `${atomIndentPx}px` }"
-            @click="selectAtom(block.id, row.id, cell.id, atom.id, { syncTree: false })"
+            v-for="(atom, atomIndex) in cell.atoms"
+            :key="atom.id"
+            data-atom-sortable-item="true"
+            :data-name="atomLabel(atom.type)"
+            class="pl-2"
           >
-            <div class="flex min-w-0 flex-1 items-center gap-1.5">
-              <Text
-                v-if="atom.type === 'text'"
-                class="size-3.5 shrink-0"
-              />
-              <MousePointerClick
-                v-else-if="atom.type === 'button'"
-                class="size-3.5 shrink-0"
-              />
-              <ImageIcon
-                v-else-if="atom.type === 'image'"
-                class="size-3.5 shrink-0"
-              />
-              <List
-                v-else-if="atom.type === 'menu'"
-                class="size-3.5 shrink-0"
-              />
-              <Minus
-                v-else
-                class="size-3.5 shrink-0"
-              />
-              <span class="truncate">{{ atomLabel(atom.type) }}</span>
-            </div>
-            <Button
-              variant="outline"
-              size="icon-xs"
-              aria-label="Remove Atom"
-              @click.stop="removeAtom(block.id, row.id, cell.id, atom.id)"
+            <div
+              :data-tree-id="`atom:${atom.id}`"
+              :data-block-id="block.id"
+              :data-row-id="row.id"
+              :data-cell-id="cell.id"
+              :data-atom-id="atom.id"
+              :data-parent-cell-index="cellIndex"
+              :data-index="atomIndex"
+              data-type="atom"
+              class="relative z-0 flex h-8 cursor-pointer items-center justify-between gap-2 rounded-sm px-2 text-xs text-muted-foreground before:absolute before:inset-y-0 before:right-0 before:left-[calc(var(--tree-node-left-offset)*-1)] before:-z-10 before:rounded-sm before:transition-colors hover:before:bg-muted/60"
+              :class="{ 'before:bg-muted/70 text-foreground!': isAtomActive(atom.id) }"
+              :style="{ '--tree-node-left-offset': `${atomIndentPx}px` }"
+              @click="selectAtom(block.id, row.id, cell.id, atom.id, { syncTree: false })"
             >
-              <Trash2 class="size-3 text-destructive" />
-            </Button>
+              <div class="flex min-w-0 flex-1 items-center gap-1.5">
+                <GripVertical
+                  v-if="cell.atoms.length > 1"
+                  data-atom-drag-handle
+                  class="size-3.5 shrink-0 cursor-grab text-muted-foreground/80"
+                />
+                <Text
+                  v-if="atom.type === 'text'"
+                  class="size-3.5 shrink-0"
+                />
+                <MousePointerClick
+                  v-else-if="atom.type === 'button'"
+                  class="size-3.5 shrink-0"
+                />
+                <ImageIcon
+                  v-else-if="atom.type === 'image'"
+                  class="size-3.5 shrink-0"
+                />
+                <List
+                  v-else-if="atom.type === 'menu'"
+                  class="size-3.5 shrink-0"
+                />
+                <Minus
+                  v-else
+                  class="size-3.5 shrink-0"
+                />
+                <span class="truncate">{{ atomLabel(atom.type) }}</span>
+              </div>
+              <Button
+                variant="outline"
+                size="icon-xs"
+                aria-label="Remove Atom"
+                @click.stop="removeAtom(block.id, row.id, cell.id, atom.id)"
+              >
+                <Trash2 class="size-3 text-destructive" />
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -290,3 +438,35 @@ function isAtomActive(atomId: string) {
     </div>
   </div>
 </template>
+
+<style scoped>
+.tree-cell-ghost,
+.tree-atom-ghost {
+  background-color: color-mix(in oklch, var(--primary), transparent 90%) !important;
+  border: 2px dashed var(--primary) !important;
+  border-radius: var(--radius-sm) !important;
+  height: 28px !important;
+  width: 90% !important;
+  margin: 4px auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 1 !important;
+}
+
+.tree-cell-ghost > *,
+.tree-atom-ghost > * {
+  display: none !important;
+}
+
+.tree-cell-ghost::after,
+.tree-atom-ghost::after {
+  content: 'Drop Here';
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--primary) !important;
+  display: block !important;
+}
+</style>

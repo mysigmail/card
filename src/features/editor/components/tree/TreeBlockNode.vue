@@ -2,9 +2,11 @@
 import type { BlockNode } from '@/entities/block'
 import type { ComponentType } from '@/entities/template'
 import { ChevronDown, Copy, HardDriveDownload, Pencil, Trash2 } from 'lucide-vue-next'
-import { computed, ref, watch } from 'vue'
+import Sortable from 'sortablejs'
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import TreeBlockRowNode from '@/features/editor/components/tree/TreeBlockRowNode.vue'
 import { useCanvas, useSelection } from '@/features/editor/model'
+import { addGhost, removeGhost } from '@/features/email-preview'
 import { saveBlockAsJson } from '@/features/email-preview/catalog/save-block'
 import { Button } from '@/shared/ui/button'
 import { ButtonGroup } from '@/shared/ui/button-group'
@@ -21,7 +23,8 @@ const props = defineProps<Props>()
 
 const isDev = import.meta.env.DEV
 
-const { removeComponentById, duplicateComponentById, renameBlock } = useCanvas()
+const { removeComponentById, duplicateComponentById, renameBlock, moveRow, isDragging }
+  = useCanvas()
 
 const { selectBlock, selectedBlockId, selectedRowId, selectedCellId, selectedAtomId }
   = useSelection()
@@ -29,6 +32,7 @@ const { selectBlock, selectedBlockId, selectedRowId, selectedCellId, selectedAto
 const isOpen = ref(true)
 const renamePopoverOpen = ref(false)
 const renameValue = ref(props.block.label)
+const rowsRef = ref<HTMLElement>()
 
 const saveBlockPopoverOpen = ref(false)
 const blockTypes: Array<{ label: string, value: ComponentType }> = [
@@ -56,6 +60,42 @@ const isBlockActive = computed(() => {
   )
 })
 
+let rowSortable: Sortable | undefined
+
+function destroyRowsSortable() {
+  rowSortable?.destroy()
+  rowSortable = undefined
+}
+
+function initRowsSortable() {
+  if (!rowsRef.value || rowSortable)
+    return
+
+  rowSortable = Sortable.create(rowsRef.value, {
+    animation: 150,
+    draggable: '[data-row-sortable-item="true"]',
+    handle: '[data-row-drag-handle]',
+    ghostClass: 'tree-ghost',
+    swapThreshold: 0.5,
+    onStart() {
+      isDragging.value = true
+    },
+    onEnd(e) {
+      removeGhost()
+      isDragging.value = false
+
+      if (e.oldIndex === undefined || e.newIndex === undefined)
+        return
+
+      moveRow(props.block.id, e.oldIndex, e.newIndex)
+    },
+    setData(dataTransfer, dragEl) {
+      const name = dragEl.getAttribute('data-name') || 'Row'
+      addGhost(dataTransfer, name, 'sm')
+    },
+  })
+}
+
 watch(
   shouldExpand,
   (value) => {
@@ -68,6 +108,25 @@ watch(
 watch(renamePopoverOpen, (open) => {
   if (open)
     renameValue.value = props.block.label
+})
+
+watch(
+  isOpen,
+  async (open) => {
+    if (!open) {
+      destroyRowsSortable()
+      return
+    }
+
+    await nextTick()
+    initRowsSortable()
+  },
+  { immediate: true },
+)
+
+onBeforeUnmount(() => {
+  destroyRowsSortable()
+  isDragging.value = false
 })
 
 function onHeaderClick() {
@@ -211,6 +270,7 @@ function handleSaveBlock(type: ComponentType) {
     <!-- Rows tree -->
     <div
       v-if="isOpen"
+      ref="rowsRef"
       class="pb-2"
     >
       <TreeBlockRowNode
@@ -224,3 +284,32 @@ function handleSaveBlock(type: ComponentType) {
     </div>
   </div>
 </template>
+
+<style scoped>
+.tree-ghost {
+  background-color: color-mix(in oklch, var(--primary), transparent 90%) !important;
+  border: 2px dashed var(--primary) !important;
+  border-radius: var(--radius-sm) !important;
+  height: 28px !important;
+  width: 90% !important;
+  margin: 4px auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 1 !important;
+}
+
+.tree-ghost > * {
+  display: none !important;
+}
+
+.tree-ghost::after {
+  content: 'Drop Here';
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--primary) !important;
+  display: block !important;
+}
+</style>
