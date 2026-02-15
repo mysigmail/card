@@ -337,6 +337,93 @@ function _createCanvas() {
     }
   }
 
+  function moveCell(blockId: string, rowId: string, oldIndex: number, newIndex: number) {
+    const blockComponent = findCanvasBlockInstance(blockId)
+    if (!blockComponent)
+      return
+
+    const row = findRowInRows(blockComponent.block.rows, rowId)
+    if (!row)
+      return
+
+    const { cells } = row
+    if (
+      oldIndex === newIndex
+      || oldIndex < 0
+      || newIndex < 0
+      || oldIndex >= cells.length
+      || newIndex >= cells.length
+    ) {
+      return
+    }
+
+    const [cell] = cells.splice(oldIndex, 1)
+    if (!cell)
+      return
+
+    cells.splice(newIndex, 0, cell)
+  }
+
+  function moveAtom(
+    blockId: string,
+    rowId: string,
+    cellId: string,
+    oldIndex: number,
+    newIndex: number,
+  ) {
+    const blockComponent = findCanvasBlockInstance(blockId)
+    if (!blockComponent)
+      return
+
+    const row = findRowInRows(blockComponent.block.rows, rowId)
+    if (!row)
+      return
+
+    const cell = row.cells.find(i => i.id === cellId)
+    if (!cell)
+      return
+
+    const { atoms } = cell
+    if (
+      oldIndex === newIndex
+      || oldIndex < 0
+      || newIndex < 0
+      || oldIndex >= atoms.length
+      || newIndex >= atoms.length
+    ) {
+      return
+    }
+
+    const [atom] = atoms.splice(oldIndex, 1)
+    if (!atom)
+      return
+
+    atoms.splice(newIndex, 0, atom)
+  }
+
+  function moveRow(blockId: string, oldIndex: number, newIndex: number) {
+    const blockComponent = findCanvasBlockInstance(blockId)
+    if (!blockComponent)
+      return
+
+    const { rows } = blockComponent.block
+    if (
+      oldIndex === newIndex
+      || oldIndex < 0
+      || newIndex < 0
+      || oldIndex >= rows.length
+      || newIndex >= rows.length
+    ) {
+      return
+    }
+
+    const [row] = rows.splice(oldIndex, 1)
+    if (!row)
+      return
+
+    rows.splice(newIndex, 0, row)
+  }
+
   function duplicateComponent(installedIndex: number) {
     const canvasBlock = installed.value[installedIndex]
     if (!canvasBlock || !isCanvasBlockInstance(canvasBlock))
@@ -817,6 +904,9 @@ function _createCanvas() {
     removeCell,
     insertAtomToCell,
     removeAtom,
+    moveCell,
+    moveAtom,
+    moveRow,
     moveComponent,
     clearCanvas,
     removeComponentById,
