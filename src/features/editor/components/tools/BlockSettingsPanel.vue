@@ -15,7 +15,7 @@ import {
   AlignVerticalJustifyEnd,
   AlignVerticalJustifyStart,
 } from 'lucide-vue-next'
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useSelection } from '@/features/editor/model'
 import { Input } from '@/shared/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
@@ -23,6 +23,11 @@ import { Switch } from '@/shared/ui/switch'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 
 const { selectionLevel, selectedBlock, selectedRow, selectedCell, selectedAtom } = useSelection()
+
+type DimensionMode = 'auto' | 'manual'
+
+const cellWidthMode = ref<DimensionMode>('auto')
+const cellHeightMode = ref<DimensionMode>('auto')
 
 const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   url: '',
@@ -170,6 +175,19 @@ function toOptionalNumber(value: string | number) {
   const parsed = Number(value)
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined
 }
+
+function toDimensionMode(value?: number): DimensionMode {
+  return value === undefined ? 'auto' : 'manual'
+}
+
+watch(
+  () => selectedCell.value?.id,
+  () => {
+    cellWidthMode.value = toDimensionMode(selectedCell.value?.settings.width)
+    cellHeightMode.value = toDimensionMode(selectedCell.value?.settings.height)
+  },
+  { immediate: true },
+)
 
 function normalizeSpacingValue(
   value?: SpacingTool['value'],
@@ -369,15 +387,17 @@ const cellAppearanceTools = computed<Tool[]>(() => {
 })
 
 function getItemWidthMode() {
-  return selectedCell.value?.settings.width === undefined ? 'auto' : 'manual'
+  return cellWidthMode.value
 }
 
 function onItemWidthModeChange(mode: string) {
   if (!selectedCell.value)
     return
 
+  const nextMode: DimensionMode = mode === 'manual' ? 'manual' : 'auto'
+  cellWidthMode.value = nextMode
   selectedCell.value.settings.width
-    = mode === 'manual' ? (selectedCell.value.settings.width ?? 50) : undefined
+    = nextMode === 'manual' ? (selectedCell.value.settings.width ?? 50) : undefined
 }
 
 function onItemWidthChange(value: string | number) {
@@ -388,15 +408,17 @@ function onItemWidthChange(value: string | number) {
 }
 
 function getItemHeightMode() {
-  return selectedCell.value?.settings.height === undefined ? 'auto' : 'manual'
+  return cellHeightMode.value
 }
 
 function onItemHeightModeChange(mode: string) {
   if (!selectedCell.value)
     return
 
+  const nextMode: DimensionMode = mode === 'manual' ? 'manual' : 'auto'
+  cellHeightMode.value = nextMode
   selectedCell.value.settings.height
-    = mode === 'manual' ? (selectedCell.value.settings.height ?? 120) : undefined
+    = nextMode === 'manual' ? (selectedCell.value.settings.height ?? 120) : undefined
 }
 
 function onItemHeightChange(value: string | number) {
