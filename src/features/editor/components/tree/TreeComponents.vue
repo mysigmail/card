@@ -48,7 +48,7 @@ interface InsertionPoint {
 const activeInsertionPoint = ref<InsertionPoint | null>(null)
 const isMenuOpen = ref(false)
 const insertionPointPriority = { atom: 4, cell: 3, row: 2, block: 1 } as const
-const insertionPointRadius = 10
+const insertionPointRadius = 6
 const yDistanceTieThreshold = 2
 const emptyCellAtomXOffset = 16
 const atomSiblingCellXOffset = 12
