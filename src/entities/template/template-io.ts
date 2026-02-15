@@ -137,6 +137,10 @@ function isString(value: unknown): value is string {
   return typeof value === 'string'
 }
 
+function toOptionalBoolean(value: unknown): boolean | undefined {
+  return typeof value === 'boolean' ? value : undefined
+}
+
 function pushIssue(issues: TemplateValidationIssue[], path: string, message: string) {
   issues.push({ path, message })
 }
@@ -511,6 +515,10 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
   if (!isString(value.type))
     pushIssue(issues, `${path}.type`, 'atom.type must be a string')
 
+  if (value.hiddenOnMobile !== undefined && typeof value.hiddenOnMobile !== 'boolean') {
+    pushIssue(issues, `${path}.hiddenOnMobile`, 'atom.hiddenOnMobile must be a boolean')
+  }
+
   if (value.type === 'text') {
     if (!isString(value.value))
       pushIssue(issues, `${path}.value`, 'text atom value must be a string')
@@ -722,6 +730,25 @@ function validateCellNode(value: unknown, path: string, issues: TemplateValidati
       pushIssue(issues, `${path}.settings.link`, 'cell.settings.link must be a string')
     }
 
+    if (
+      value.settings.hiddenOnMobile !== undefined
+      && typeof value.settings.hiddenOnMobile !== 'boolean'
+    ) {
+      pushIssue(
+        issues,
+        `${path}.settings.hiddenOnMobile`,
+        'cell.settings.hiddenOnMobile must be a boolean',
+      )
+    }
+
+    if (value.settings.collapseOnMobile !== undefined) {
+      pushIssue(
+        issues,
+        `${path}.settings.collapseOnMobile`,
+        'cell.settings.collapseOnMobile is no longer supported. Use row.settings.collapseOnMobile',
+      )
+    }
+
     if (value.settings.width !== undefined && !isFiniteNumber(value.settings.width)) {
       pushIssue(issues, `${path}.settings.width`, 'cell.settings.width must be a number')
     }
@@ -796,6 +823,28 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
 
     if (!isFiniteNumber(value.settings.gap)) {
       pushIssue(issues, `${path}.settings.gap`, 'row.settings.gap must be a number')
+    }
+
+    if (
+      value.settings.hiddenOnMobile !== undefined
+      && typeof value.settings.hiddenOnMobile !== 'boolean'
+    ) {
+      pushIssue(
+        issues,
+        `${path}.settings.hiddenOnMobile`,
+        'row.settings.hiddenOnMobile must be a boolean',
+      )
+    }
+
+    if (
+      value.settings.collapseOnMobile !== undefined
+      && typeof value.settings.collapseOnMobile !== 'boolean'
+    ) {
+      pushIssue(
+        issues,
+        `${path}.settings.collapseOnMobile`,
+        'row.settings.collapseOnMobile must be a boolean',
+      )
     }
 
     validateBackgroundImageValue(
@@ -981,6 +1030,7 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
     if (atom.type === 'text') {
       return {
         ...atom,
+        hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
         color: atom.color || '#111827',
         value: sanitizeTextEditorHtml(atom.value),
       }
@@ -989,6 +1039,7 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
     if (atom.type === 'image') {
       return {
         ...atom,
+        hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
         src: typeof atom.src === 'string' ? atom.src : '',
         link: typeof atom.link === 'string' ? atom.link : '',
         alt: typeof atom.alt === 'string' ? atom.alt : '',
@@ -1013,6 +1064,7 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
 
       return {
         ...atom,
+        hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
         itemType: normalizedItemType,
         gap: isFiniteNumber(atom.gap) && atom.gap >= 0 ? atom.gap : 10,
         items: Array.isArray(atom.items)
@@ -1065,29 +1117,46 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
       }
     }
 
-    return atom
+    return {
+      ...atom,
+      hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+    }
   })
 }
 
 function sanitizeCellNodes(cells: CellNode[]): CellNode[] {
-  return cells.map(cell => ({
-    ...cell,
-    settings: {
+  return cells.map((cell) => {
+    const settings = {
       ...cell.settings,
       link: typeof cell.settings?.link === 'string' ? cell.settings.link : undefined,
+      hiddenOnMobile: toOptionalBoolean(cell.settings?.hiddenOnMobile),
       borderRadius:
         isFiniteNumber(cell.settings?.borderRadius) && cell.settings.borderRadius >= 0
           ? cell.settings.borderRadius
           : undefined,
-    },
-    atoms: sanitizeAtoms(cell.atoms),
-    rows: sanitizeRowNodes(cell.rows || []),
-  }))
+    }
+
+    // Hard-drop legacy per-cell collapse to keep exported schema clean.
+    delete (settings as Record<string, unknown>).collapseOnMobile
+
+    return {
+      ...cell,
+      settings,
+      atoms: sanitizeAtoms(cell.atoms),
+      rows: sanitizeRowNodes(cell.rows || []),
+    }
+  })
 }
 
 function sanitizeRowNodes(rows: RowNode[]): RowNode[] {
   return rows.map(row => ({
     ...row,
+    settings: {
+      ...row.settings,
+      hiddenOnMobile: toOptionalBoolean(row.settings?.hiddenOnMobile),
+      collapseOnMobile:
+        typeof row.settings?.collapseOnMobile === 'boolean' ? row.settings.collapseOnMobile : true,
+    },
     cells: sanitizeCellNodes(row.cells),
   }))
 }

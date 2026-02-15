@@ -30,3 +30,4 @@ export type {
 
 export type BlockSelectionLevel = 'block' | 'row' | 'cell' | 'atom'
 export type SidebarTab = 'components' | 'tree'
+export type PreviewMode = 'desktop' | 'mobile'

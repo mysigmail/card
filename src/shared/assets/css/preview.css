@@ -227,3 +227,25 @@ a {
   font-size: 16px;
   content: 'Drop Here';
 }
+
+.p-preview-mobile td.e-col-mobile-collapse {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.p-preview-mobile td.e-col-gap-mobile-collapse {
+  display: block !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+  height: var(--e-row-gap, 0px) !important;
+  min-height: var(--e-row-gap, 0px) !important;
+  line-height: 0 !important;
+}
+
+.p-preview-mobile .e-mobile-hidden {
+  display: none !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+}

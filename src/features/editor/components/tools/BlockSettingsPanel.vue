@@ -19,6 +19,7 @@ import { computed } from 'vue'
 import { useSelection } from '@/features/editor/model'
 import { Input } from '@/shared/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
+import { Switch } from '@/shared/ui/switch'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 
 const { selectionLevel, selectedBlock, selectedRow, selectedCell, selectedAtom } = useSelection()
@@ -173,21 +174,31 @@ function toOptionalNumber(value: string | number) {
 function normalizeSpacingValue(
   value?: SpacingTool['value'],
   fallbackPadding: [number, number, number, number] = [0, 0, 0, 0],
+  options: {
+    includeMargin?: boolean
+    includePadding?: boolean
+  } = {},
 ): SpacingTool['value'] {
-  const margin
-    = Array.isArray(value?.margin) && value.margin.length === 4
-      ? (value.margin.map(i => Number(i) || 0) as [number, number, number, number])
-      : ([0, 0, 0, 0] as [number, number, number, number])
+  const includeMargin = options.includeMargin !== false
+  const includePadding = options.includePadding !== false
 
-  const padding
-    = Array.isArray(value?.padding) && value.padding.length === 4
-      ? (value.padding.map(i => Number(i) || 0) as [number, number, number, number])
-      : ([...fallbackPadding] as [number, number, number, number])
+  const normalized: SpacingTool['value'] = {}
 
-  return {
-    margin,
-    padding,
+  if (includeMargin) {
+    normalized.margin
+      = Array.isArray(value?.margin) && value.margin.length === 4
+        ? (value.margin.map(i => Number(i) || 0) as [number, number, number, number])
+        : ([0, 0, 0, 0] as [number, number, number, number])
   }
+
+  if (includePadding) {
+    normalized.padding
+      = Array.isArray(value?.padding) && value.padding.length === 4
+        ? (value.padding.map(i => Number(i) || 0) as [number, number, number, number])
+        : ([...fallbackPadding] as [number, number, number, number])
+  }
+
+  return normalized
 }
 
 const blockAppearanceTools = computed<Tool[]>(() => {
@@ -200,7 +211,9 @@ const blockAppearanceTools = computed<Tool[]>(() => {
       key: 'padding',
       label: 'Spacing',
       type: 'spacing',
-      value: normalizeSpacingValue(selectedBlock.value.settings.spacing),
+      value: normalizeSpacingValue(selectedBlock.value.settings.spacing, [0, 0, 0, 0], {
+        includeMargin: false,
+      }),
     },
     {
       id: settingToolId('block', selectedBlock.value.id, 'backgroundColor'),
@@ -219,7 +232,7 @@ const blockAppearanceTools = computed<Tool[]>(() => {
   ]
 })
 
-const rowAppearanceTools = computed<Tool[]>(() => {
+const rowSpacingTools = computed<Tool[]>(() => {
   if (!selectedRow.value)
     return []
 
@@ -229,8 +242,28 @@ const rowAppearanceTools = computed<Tool[]>(() => {
       key: 'padding',
       label: 'Spacing',
       type: 'spacing',
-      value: normalizeSpacingValue(selectedRow.value.settings.spacing),
+      value: normalizeSpacingValue(selectedRow.value.settings.spacing, [0, 0, 0, 0], {
+        includeMargin: false,
+      }),
     },
+  ]
+})
+
+const rowHiddenOnMobile = computed<boolean>({
+  get: () => selectedRow.value?.settings.hiddenOnMobile ?? false,
+  set: (next) => {
+    if (!selectedRow.value)
+      return
+
+    selectedRow.value.settings.hiddenOnMobile = Boolean(next)
+  },
+})
+
+const rowAppearanceTools = computed<Tool[]>(() => {
+  if (!selectedRow.value)
+    return []
+
+  return [
     {
       id: settingToolId('row', selectedRow.value.id, 'gap'),
       key: 'gap',
@@ -262,6 +295,16 @@ const rowAppearanceTools = computed<Tool[]>(() => {
   ]
 })
 
+const rowCollapseOnMobile = computed<boolean>({
+  get: () => selectedRow.value?.settings.collapseOnMobile !== false,
+  set: (next) => {
+    if (!selectedRow.value)
+      return
+
+    selectedRow.value.settings.collapseOnMobile = Boolean(next)
+  },
+})
+
 const cellSpacingTools = computed<Tool[]>(() => {
   if (!selectedCell.value)
     return []
@@ -272,9 +315,21 @@ const cellSpacingTools = computed<Tool[]>(() => {
       key: 'padding',
       label: 'Spacing',
       type: 'spacing',
-      value: normalizeSpacingValue(selectedCell.value.settings.spacing),
+      value: normalizeSpacingValue(selectedCell.value.settings.spacing, [0, 0, 0, 0], {
+        includeMargin: false,
+      }),
     },
   ]
+})
+
+const cellHiddenOnMobile = computed<boolean>({
+  get: () => selectedCell.value?.settings.hiddenOnMobile ?? false,
+  set: (next) => {
+    if (!selectedCell.value)
+      return
+
+    selectedCell.value.settings.hiddenOnMobile = Boolean(next)
+  },
 })
 
 const cellAppearanceTools = computed<Tool[]>(() => {
@@ -378,19 +433,51 @@ function atomToolId(field: string) {
   return `v2-atom::${selectedAtom.value.id}::${field}`
 }
 
+const atomHiddenOnMobile = computed<boolean>({
+  get: () => selectedAtom.value?.hiddenOnMobile ?? false,
+  set: (next) => {
+    if (!selectedAtom.value)
+      return
+
+    selectedAtom.value.hiddenOnMobile = Boolean(next)
+  },
+})
+
+function atomSpacingTool(): Tool | undefined {
+  if (!selectedAtom.value)
+    return undefined
+
+  if (selectedAtom.value.type === 'button') {
+    return {
+      id: atomToolId('spacing'),
+      key: 'spacing',
+      label: 'Spacing',
+      type: 'spacing',
+      value: normalizeSpacingValue(selectedAtom.value.spacing, selectedAtom.value.padding),
+    }
+  }
+
+  return {
+    id: atomToolId('spacing'),
+    key: 'spacing',
+    label: 'Spacing',
+    type: 'spacing',
+    value: normalizeSpacingValue(selectedAtom.value.spacing),
+  }
+}
+
+const atomSpacingTools = computed<Tool[]>(() => {
+  const spacingTool = atomSpacingTool()
+
+  return spacingTool ? [spacingTool] : []
+})
+
 const atomTools = computed<Tool[]>(() => {
   if (!selectedAtom.value)
     return []
 
   if (selectedAtom.value.type === 'text') {
     return [
-      {
-        id: atomToolId('spacing'),
-        key: 'spacing',
-        label: 'Spacing',
-        type: 'spacing',
-        value: normalizeSpacingValue(selectedAtom.value.spacing),
-      },
       {
         id: atomToolId('color'),
         key: 'mainColor',
@@ -410,13 +497,6 @@ const atomTools = computed<Tool[]>(() => {
 
   if (selectedAtom.value.type === 'button') {
     return [
-      {
-        id: atomToolId('spacing'),
-        key: 'spacing',
-        label: 'Spacing',
-        type: 'spacing',
-        value: normalizeSpacingValue(selectedAtom.value.spacing, selectedAtom.value.padding),
-      },
       {
         id: atomToolId('borderRadius'),
         key: 'borderRadius',
@@ -465,13 +545,6 @@ const atomTools = computed<Tool[]>(() => {
   if (selectedAtom.value.type === 'image') {
     return [
       {
-        id: atomToolId('spacing'),
-        key: 'spacing',
-        label: 'Spacing',
-        type: 'spacing',
-        value: normalizeSpacingValue(selectedAtom.value.spacing),
-      },
-      {
         id: atomToolId('borderRadius'),
         key: 'borderRadius',
         label: 'Border Radius',
@@ -496,13 +569,6 @@ const atomTools = computed<Tool[]>(() => {
 
   if (selectedAtom.value.type === 'menu') {
     return [
-      {
-        id: atomToolId('spacing'),
-        key: 'spacing',
-        label: 'Spacing',
-        type: 'spacing',
-        value: normalizeSpacingValue(selectedAtom.value.spacing),
-      },
       {
         id: atomToolId('gap'),
         key: 'gap',
@@ -538,13 +604,6 @@ const atomTools = computed<Tool[]>(() => {
   }
 
   return [
-    {
-      id: atomToolId('spacing'),
-      key: 'spacing',
-      label: 'Spacing',
-      type: 'spacing',
-      value: normalizeSpacingValue(selectedAtom.value.spacing),
-    },
     {
       id: atomToolId('height'),
       key: 'height',
@@ -582,6 +641,26 @@ const atomTools = computed<Tool[]>(() => {
         title="Row"
       >
         <div class="space-y-3 pb-2">
+          <EditorComponentTools :tools="rowSpacingTools" />
+
+          <div class="space-y-3">
+            <EditorToolLabel>View</EditorToolLabel>
+            <div class="flex gap-6 -mt-2">
+              <div>
+                <EditorToolLabel type="secondary">
+                  Hide on Mobile
+                </EditorToolLabel>
+                <Switch v-model="rowHiddenOnMobile" />
+              </div>
+              <div>
+                <EditorToolLabel type="secondary">
+                  Collapse on Mobile
+                </EditorToolLabel>
+                <Switch v-model="rowCollapseOnMobile" />
+              </div>
+            </div>
+          </div>
+
           <EditorComponentTools :tools="rowAppearanceTools" />
         </div>
       </EditorPanelItem>
@@ -594,6 +673,15 @@ const atomTools = computed<Tool[]>(() => {
       >
         <div class="space-y-3 pb-2">
           <EditorComponentTools :tools="cellSpacingTools" />
+          <div class="space-y-3">
+            <EditorToolLabel>View</EditorToolLabel>
+            <div>
+              <EditorToolLabel type="secondary">
+                Hide on Mobile
+              </EditorToolLabel>
+              <Switch v-model="cellHiddenOnMobile" />
+            </div>
+          </div>
 
           <div class="grid grid-cols-[minmax(0,120px)_minmax(0,1fr)] gap-4">
             <div>
@@ -735,6 +823,21 @@ const atomTools = computed<Tool[]>(() => {
         :title="selectedAtom.type.charAt(0).toUpperCase() + selectedAtom.type.slice(1)"
       >
         <div class="space-y-3 pb-2">
+          <EditorComponentTools
+            v-if="atomSpacingTools.length"
+            :tools="atomSpacingTools"
+          />
+
+          <div class="space-y-3">
+            <EditorToolLabel>View</EditorToolLabel>
+            <div>
+              <EditorToolLabel type="secondary">
+                Hide on Mobile
+              </EditorToolLabel>
+              <Switch v-model="atomHiddenOnMobile" />
+            </div>
+          </div>
+
           <EditorComponentTools
             v-if="atomTools.length"
             :tools="atomTools"

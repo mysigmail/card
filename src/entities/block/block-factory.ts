@@ -26,6 +26,8 @@ export function createDefaultRowSettings(): RowSettings {
   return {
     spacing: {},
     backgroundColor: 'transparent',
+    hiddenOnMobile: false,
+    collapseOnMobile: true,
     gap: 0,
   }
 }
@@ -35,6 +37,7 @@ export function createDefaultCellSettings(): CellSettings {
     spacing: {},
     backgroundColor: 'transparent',
     link: undefined,
+    hiddenOnMobile: false,
     verticalAlign: 'top',
     horizontalAlign: 'left',
     borderRadius: undefined,

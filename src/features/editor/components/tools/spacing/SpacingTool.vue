@@ -55,6 +55,8 @@ watch(
     localMarginLeft.value,
   ],
   (v) => {
+    const margin = props.value.margin ? (v as SpacingTool['value']['margin']) : props.value.margin
+
     const padding = props.value.padding
       ? ([
           localPaddingTop.value,
@@ -66,7 +68,7 @@ watch(
 
     updateToolById<SpacingTool>(props.id, 'value', {
       padding,
-      margin: v as SpacingTool['value']['margin'],
+      margin,
     })
   },
 )

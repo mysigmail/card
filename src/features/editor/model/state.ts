@@ -1,4 +1,4 @@
-import type { CanvasBlockInstance, ComponentList, GeneralTool } from './types'
+import type { CanvasBlockInstance, ComponentList, GeneralTool, PreviewMode } from './types'
 import type { TemplateValidationIssue } from '@/entities/template'
 import { reactive, ref, shallowRef } from 'vue'
 import { content, header, menu } from '@/features/email-preview/catalog/load-blocks'
@@ -16,6 +16,7 @@ export const list = shallowRef<ComponentList[]>([
 export const installed = ref<CanvasBlockInstance[]>([])
 export const editableId = ref<string>()
 export const isDragging = ref(false)
+export const previewMode = ref<PreviewMode>('desktop')
 export const templateImportIssues = ref<TemplateValidationIssue[]>([])
 
 export const general = reactive<GeneralTool>({

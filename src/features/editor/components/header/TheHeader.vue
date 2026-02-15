@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TemplateImportMode } from '@/entities/template'
-import { MoreHorizontal as MoreHorizontalIcon } from 'lucide-vue-next'
+import { Monitor, MoreHorizontal, Smartphone } from 'lucide-vue-next'
 import { computed, ref, watch } from 'vue'
 import { useCanvas, useTemplateIO } from '@/features/editor/model'
 import { Button } from '@/shared/ui/button'
@@ -10,6 +10,8 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
 import { Switch } from '@/shared/ui/switch'
@@ -25,14 +27,22 @@ const pendingImportRaw = ref('')
 const pendingImportFileName = ref('')
 const fileInputRef = ref<HTMLInputElement>()
 
-const { exportTemplateJson, importTemplateFromJson } = useTemplateIO()
-const { templateImportIssues, clearCanvas } = useCanvas()
+const { exportTemplateHtml, exportTemplateJson, importTemplateFromJson } = useTemplateIO()
+const { templateImportIssues, clearCanvas, previewMode } = useCanvas()
 
 const importModeValue = computed<string>({
   get: () => importMode.value,
   set: (next) => {
     if (next === 'replace' || next === 'append')
       importMode.value = next
+  },
+})
+
+const previewModeValue = computed<string>({
+  get: () => previewMode.value,
+  set: (next) => {
+    if (next === 'desktop' || next === 'mobile')
+      previewMode.value = next
   },
 })
 
@@ -54,6 +64,24 @@ function exportTemplateToFile() {
   const link = document.createElement('a')
   link.href = url
   link.download = `email-template-${now}.json`
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+  URL.revokeObjectURL(url)
+
+  importStatus.value = 'idle'
+  importMessage.value = ''
+}
+
+function exportTemplateHtmlToFile() {
+  const now = new Date().toISOString().replace(/[:.]/g, '-')
+  const payload = exportTemplateHtml()
+  const file = new Blob([payload], { type: 'text/html;charset=utf-8' })
+  const url = URL.createObjectURL(file)
+
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `email-template-${now}.html`
   document.body.appendChild(link)
   link.click()
   link.remove()
@@ -140,8 +168,20 @@ watch(importDialogVisible, (open) => {
     <div class="flex items-center">
       <SvgLogoWhite width="100" />
     </div>
-    <div class="tools">
-      tools
+    <div class="tools flex items-center justify-center">
+      <ToggleGroup
+        v-model="previewModeValue"
+        type="single"
+        variant="outline"
+        size="xs"
+      >
+        <ToggleGroupItem value="desktop">
+          <Monitor class="size-4" />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="mobile">
+          <Smartphone class="size-4" />
+        </ToggleGroupItem>
+      </ToggleGroup>
     </div>
     <div class="actions flex items-center">
       <ButtonGroup>
@@ -159,15 +199,23 @@ watch(importDialogVisible, (open) => {
               size="icon-sm"
               aria-label="More Options"
             >
-              <MoreHorizontalIcon />
+              <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem @select="exportTemplateToFile">
-              Export JSON
+            <DropdownMenuLabel>Export</DropdownMenuLabel>
+            <DropdownMenuItem @select="exportTemplateHtmlToFile">
+              HTML
             </DropdownMenuItem>
+            <DropdownMenuItem @select="exportTemplateToFile">
+              Template JSON
+            </DropdownMenuItem>
+
+            <DropdownMenuSeparator />
+
+            <DropdownMenuLabel>Import</DropdownMenuLabel>
             <DropdownMenuItem @select="openImportDialog">
-              Import JSON
+              Template JSON
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

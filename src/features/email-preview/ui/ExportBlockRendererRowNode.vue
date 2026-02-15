@@ -2,16 +2,12 @@
 import type { CSSProperties } from 'vue'
 import type { Atom, CellNode, RowNode } from '@/entities/block'
 import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
-import { useSelection } from '@/features/editor'
 
 interface Props {
-  blockId: string
   row: RowNode
 }
 
-const props = defineProps<Props>()
-
-const { selectRow, selectCell, selectAtom } = useSelection()
+defineProps<Props>()
 
 function tupleToCss(value?: [number, number, number, number]) {
   if (!value || value.length !== 4)
@@ -307,21 +303,8 @@ function emptyLinkedItemStyle(item: CellNode): CSSProperties {
 
 function atomWrapperClass(atom: Atom) {
   return {
-    'e-atom': true,
     'e-mobile-hidden': Boolean(atom.hiddenOnMobile),
   }
-}
-
-function selectRowNode(rowId: string) {
-  selectRow(props.blockId, rowId)
-}
-
-function selectCellNode(rowId: string, cellId: string) {
-  selectCell(props.blockId, rowId, cellId)
-}
-
-function selectAtomNode(rowId: string, cellId: string, atomId: string) {
-  selectAtom(props.blockId, rowId, cellId, atomId)
 }
 </script>
 
@@ -329,8 +312,6 @@ function selectAtomNode(rowId: string, cellId: string, atomId: string) {
   <MRow
     :class="rowClass(row)"
     :style="rowStyle(row)"
-    :data-node-id="`row:${row.id}`"
-    @click.stop="selectRowNode(row.id)"
   >
     <template
       v-for="(cell, cellIndex) in row.cells"
@@ -339,124 +320,107 @@ function selectAtomNode(rowId: string, cellId: string, atomId: string) {
       <MColumn
         :class="cellClass(cell, row)"
         :style="itemStyle(cell, row.cells, row.settings.gap)"
-        :data-node-id="`cell:${cell.id}`"
-        @click.stop="selectCellNode(row.id, cell.id)"
       >
-        <div class="p-grid-gap">
-          <MLink
-            v-if="cell.settings.link && cell.atoms.length === 0 && cell.rows.length === 0"
-            :href="cell.settings.link"
-            :style="emptyLinkedItemStyle(cell)"
-          >
-            &nbsp;
-          </MLink>
+        <MLink
+          v-if="cell.settings.link && cell.atoms.length === 0 && cell.rows.length === 0"
+          :href="cell.settings.link"
+          :style="emptyLinkedItemStyle(cell)"
+        >
+          &nbsp;
+        </MLink>
 
-          <template
-            v-for="atom in cell.atoms"
-            :key="atom.id"
+        <template
+          v-for="atom in cell.atoms"
+          :key="atom.id"
+        >
+          <div
+            v-if="atom.type === 'text'"
+            :class="atomWrapperClass(atom)"
+            :style="textAtomStyle(atom)"
+            v-html="atom.value || '&nbsp;'"
+          />
+
+          <div
+            v-else-if="atom.type === 'button'"
+            :class="atomWrapperClass(atom)"
+            :style="atomSpacingStyle(atom, { includePadding: false })"
           >
-            <div
-              v-if="atom.type === 'text'"
-              :class="atomWrapperClass(atom)"
-              :data-node-id="`atom:${atom.id}`"
-              :style="textAtomStyle(atom)"
-              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
-              v-html="atom.value || '&nbsp;'"
+            <MButton
+              :href="atom.link"
+              :style="buttonStyle(atom)"
+            >
+              {{ atom.text }}
+            </MButton>
+          </div>
+
+          <div
+            v-else-if="atom.type === 'divider'"
+            :class="atomWrapperClass(atom)"
+            :style="atomSpacingStyle(atom)"
+          >
+            <MHr
+              :style="{
+                borderColor: atom.color,
+                borderWidth: `${atom.height}px`,
+                borderStyle: 'solid',
+                borderTop: 'none',
+                borderLeft: 'none',
+                borderRight: 'none',
+              }"
             />
+          </div>
 
-            <div
-              v-else-if="atom.type === 'button'"
-              :class="atomWrapperClass(atom)"
-              :data-node-id="`atom:${atom.id}`"
-              :style="atomSpacingStyle(atom, { includePadding: false })"
-              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
+          <div
+            v-else-if="atom.type === 'image'"
+            :class="atomWrapperClass(atom)"
+            :style="atomSpacingStyle(atom)"
+          >
+            <MLink
+              :href="atom.link"
+              :style="imageLinkStyle()"
             >
-              <MButton
-                :href="atom.link"
-                :style="buttonStyle(atom)"
-              >
-                {{ atom.text }}
-              </MButton>
-            </div>
-
-            <div
-              v-else-if="atom.type === 'divider'"
-              :class="atomWrapperClass(atom)"
-              :data-node-id="`atom:${atom.id}`"
-              :style="atomSpacingStyle(atom)"
-              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
-            >
-              <MHr
-                :style="{
-                  borderColor: atom.color,
-                  borderWidth: `${atom.height}px`,
-                  borderStyle: 'solid',
-                  borderTop: 'none',
-                  borderLeft: 'none',
-                  borderRight: 'none',
-                }"
+              <MImg
+                :src="atom.src"
+                :alt="atom.alt"
+                :style="imageStyle(atom, cell.settings.horizontalAlign)"
               />
-            </div>
+            </MLink>
+          </div>
 
-            <div
-              v-else-if="atom.type === 'image'"
-              :class="atomWrapperClass(atom)"
-              :data-node-id="`atom:${atom.id}`"
-              :style="atomSpacingStyle(atom)"
-              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
-            >
+          <div
+            v-else-if="atom.type === 'menu'"
+            :class="atomWrapperClass(atom)"
+            :style="atomSpacingStyle(atom)"
+          >
+            <div :style="menuAtomStyle(cell.settings.horizontalAlign)">
               <MLink
-                :href="atom.link"
-                :style="imageLinkStyle()"
+                v-for="(menuItem, menuIndex) in atom.items"
+                :key="`menu_${menuIndex}`"
+                :href="menuItem.link"
+                :style="menuItemLinkBaseStyle(atom.gap ?? 10, atom.items.length === menuIndex + 1)"
               >
-                <MImg
-                  :src="atom.src"
-                  :alt="atom.alt"
-                  :style="imageStyle(atom, cell.settings.horizontalAlign)"
-                />
+                <template v-if="menuItem.type === 'image'">
+                  <MImg
+                    :src="menuItem.url"
+                    :alt="menuItem.alt"
+                    :style="menuImageStyle(menuItem)"
+                  />
+                </template>
+                <template v-else>
+                  <span :style="menuTextLinkStyle(menuItem.color, menuItem.fontSize)">
+                    {{ menuItem.text }}
+                  </span>
+                </template>
               </MLink>
             </div>
+          </div>
+        </template>
 
-            <div
-              v-else-if="atom.type === 'menu'"
-              :class="atomWrapperClass(atom)"
-              :data-node-id="`atom:${atom.id}`"
-              :style="atomSpacingStyle(atom)"
-              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
-            >
-              <div :style="menuAtomStyle(cell.settings.horizontalAlign)">
-                <MLink
-                  v-for="(menuItem, menuIndex) in atom.items"
-                  :key="`menu_${menuIndex}`"
-                  :href="menuItem.link"
-                  :style="
-                    menuItemLinkBaseStyle(atom.gap ?? 10, atom.items.length === menuIndex + 1)
-                  "
-                >
-                  <template v-if="menuItem.type === 'image'">
-                    <MImg
-                      :src="menuItem.url"
-                      :alt="menuItem.alt"
-                      :style="menuImageStyle(menuItem)"
-                    />
-                  </template>
-                  <template v-else>
-                    <span :style="menuTextLinkStyle(menuItem.color, menuItem.fontSize)">
-                      {{ menuItem.text }}
-                    </span>
-                  </template>
-                </MLink>
-              </div>
-            </div>
-          </template>
-
-          <BlockRendererRowNode
-            v-for="nestedRow in cell.rows"
-            :key="nestedRow.id"
-            :block-id="blockId"
-            :row="nestedRow"
-          />
-        </div>
+        <ExportBlockRendererRowNode
+          v-for="nestedRow in cell.rows"
+          :key="nestedRow.id"
+          :row="nestedRow"
+        />
       </MColumn>
 
       <MColumn
