@@ -4,6 +4,7 @@ export interface BaseAtom {
   id: string
   type: AtomType
   spacing?: SpacingValue
+  hiddenOnMobile?: boolean
 }
 
 export interface TextAtom extends BaseAtom {
@@ -80,6 +81,8 @@ export interface RowSettings {
   spacing: SpacingValue
   backgroundColor: string
   backgroundImage?: BackgroundImageValue
+  hiddenOnMobile?: boolean
+  collapseOnMobile?: boolean
   height?: number
   gap: number
 }
@@ -89,6 +92,7 @@ export interface CellSettings {
   backgroundColor: string
   backgroundImage?: BackgroundImageValue
   link?: string
+  hiddenOnMobile?: boolean
   verticalAlign: 'top' | 'middle' | 'bottom'
   horizontalAlign?: 'left' | 'center' | 'right'
   borderRadius?: number

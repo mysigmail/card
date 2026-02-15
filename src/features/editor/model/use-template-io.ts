@@ -3,12 +3,15 @@ import type {
   TemplateImportMode,
   TemplateValidationIssue,
 } from '@/entities/template'
+import { render as renderEmailHtml } from '@mysigmail/vue-email-components'
+import { defineComponent, h } from 'vue'
 import {
   createRuntimeComponents,
   createTemplateExportPayload,
   parseTemplateExportJson,
   parseTemplateExportPayload,
 } from '@/entities/template'
+import EmailExportDocument from '@/features/email-preview/ui/EmailExportDocument.vue'
 import { clone } from '@/shared/lib/clone'
 import { general, installed, templateImportIssues } from './state'
 import { usePersistence } from './use-persistence'
@@ -18,6 +21,28 @@ let _instance: ReturnType<typeof _createTemplateIO> | null = null
 
 function _createTemplateIO() {
   let ignoreTemplatePersist = false
+
+  function isConditionalEmailComment(content: string) {
+    const normalized = content.trim().toLowerCase()
+    return (
+      normalized.startsWith('[if')
+      || normalized.startsWith('[endif]')
+      || normalized.startsWith('<![endif]')
+    )
+  }
+
+  function sanitizeExportedHtml(html: string) {
+    const withoutTechnicalAttrs = html
+      .replace(/\sdata-node-id="[^"]*"/g, '')
+      .replace(/\sdata-v-[\w-]+="[^"]*"/g, '')
+
+    const withoutTechnicalComments = withoutTechnicalAttrs.replace(
+      /<!--([\s\S]*?)-->/g,
+      (full, content: string) => (isConditionalEmailComment(content) ? full : ''),
+    )
+
+    return withoutTechnicalComments.replace(/\n{3,}/g, '\n\n').trim()
+  }
 
   function withPersistLock<T>(task: () => T): T {
     ignoreTemplatePersist = true
@@ -62,6 +87,25 @@ function _createTemplateIO() {
 
   function exportTemplateJson(title?: string) {
     return JSON.stringify(exportTemplate(title), null, 2)
+  }
+
+  function exportTemplateHtml() {
+    const componentsSnapshot = clone(installed.value)
+    const generalSnapshot = clone(general)
+
+    const ExportRoot = defineComponent({
+      name: 'TemplateExportRoot',
+      setup() {
+        return () =>
+          h(EmailExportDocument, {
+            components: componentsSnapshot,
+            general: generalSnapshot,
+          })
+      },
+    })
+
+    const html = renderEmailHtml(ExportRoot)
+    return sanitizeExportedHtml(html)
   }
 
   function triggerPersist() {
@@ -131,6 +175,7 @@ function _createTemplateIO() {
   return {
     applyImportedTemplate,
     exportTemplate,
+    exportTemplateHtml,
     exportTemplateJson,
     importTemplate,
     importTemplateFromJson,

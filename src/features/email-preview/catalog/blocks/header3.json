@@ -11,9 +11,9 @@
       "spacing": {
         "padding": [
           30,
-          35,
+          24,
           30,
-          35
+          24
         ]
       },
       "backgroundColor": "#FFFFFF"
@@ -96,9 +96,9 @@
                 ],
                 "padding": [
                   45,
-                  20,
+                  0,
                   16,
-                  20
+                  0
                 ]
               },
               "backgroundColor": "transparent",
@@ -127,9 +127,9 @@
                   ],
                   "padding": [
                     0,
+                    20,
                     0,
-                    0,
-                    0
+                    20
                   ]
                 }
               },

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useCanvas, usePersistence, useSelection } from '@/features/editor/model'
 import Editor from '@/features/editor/ui/EditorCanvas.vue'
 import { renderToShadowDom } from '@/shared/lib/shadow-dom'
@@ -9,6 +9,15 @@ const previewRef = ref()
 const { general } = useCanvas()
 const { resetSelection } = useSelection()
 const { hydrateTemplateFromLocalStorage } = usePersistence()
+
+const previewHostStyle = computed(() => {
+  return {
+    backgroundColor: general.background.color,
+    width: '100%',
+    maxWidth: '100%',
+    justifySelf: 'stretch',
+  }
+})
 
 onMounted(() => {
   hydrateTemplateFromLocalStorage()
@@ -30,9 +39,7 @@ onMounted(() => {
     <TheSidebar />
     <div
       ref="previewRef"
-      :style="{
-        backgroundColor: general.background.color,
-      }"
+      :style="previewHostStyle"
     />
     <EditorTools />
   </div>

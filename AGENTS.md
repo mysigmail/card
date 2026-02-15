@@ -29,9 +29,9 @@
 
 Ключевые сущности:
 - `BlockNode` содержит `rows`, `settings` (`BlockSettings`) и `label`.
-- `RowNode` содержит `cells` и `settings` (`RowSettings` с `gap`, optional `height`).
-- `CellNode` содержит `atoms`, `rows` (вложенность поддерживается рекурсивно) и `settings` (`CellSettings` с `verticalAlign`, `horizontalAlign`, `borderRadius`, `width`, `height`, `link`).
-- `Atom` — контентный узел (`text`, `button`, `divider`, `image`, `menu`). Базовый `BaseAtom` имеет `id`, `type`, optional `spacing`.
+- `RowNode` содержит `cells` и `settings` (`RowSettings` с `gap`, optional `height`, optional `hiddenOnMobile`, optional `collapseOnMobile`).
+- `CellNode` содержит `atoms`, `rows` (вложенность поддерживается рекурсивно) и `settings` (`CellSettings` с `verticalAlign`, `horizontalAlign`, `borderRadius`, `width`, `height`, `link`, optional `hiddenOnMobile`).
+- `Atom` — контентный узел (`text`, `button`, `divider`, `image`, `menu`). Базовый `BaseAtom` имеет `id`, `type`, optional `spacing`, optional `hiddenOnMobile`.
 - `CanvasBlockInstance` — элемент канваса с `id`, `version: 2`, `block`.
 - `BlockPreset` — расширяет `CanvasBlockInstance`, добавляет `name`, `label`, `type` (`ComponentType`), `preview`.
 
@@ -57,14 +57,17 @@ ID-правила:
 | Валидация/санитизация/migration/remap id шаблона | `src/entities/template/template-io.ts` |
 | Barrel-export модели редактора | `src/features/editor/model/index.ts` |
 | Типы модели редактора (`BlockSelectionLevel`, `SidebarTab`, re-export entities) | `src/features/editor/model/types.ts` |
-| Shared reactive state (`installed`, `editableId`, `isDragging`, `general`, `list`, `templateImportIssues`) | `src/features/editor/model/state.ts` |
+| Shared reactive state (`installed`, `editableId`, `isDragging`, `previewMode`, `general`, `list`, `templateImportIssues`) | `src/features/editor/model/state.ts` |
 | CRUD дерева на канвасе | `src/features/editor/model/use-canvas.ts` (`useCanvas`) |
 | Выделение block/row/cell/atom, sidebar tab, tree scroll | `src/features/editor/model/use-selection.ts` (`useSelection`) |
 | Template IO интеграция со store | `src/features/editor/model/use-template-io.ts` (`useTemplateIO`) |
 | Persist/Hydrate localStorage | `src/features/editor/model/use-persistence.ts` (`usePersistence`) |
 | Tool-утилиты (трансформации, defaults) | `src/features/editor/model/tools.ts` |
-| Главный рендер блока | `src/features/email-preview/ui/BlockRenderer.vue` |
-| Рендер row/cell/atom | `src/features/email-preview/ui/BlockRendererRowNode.vue` |
+| Главный рендер блока (preview) | `src/features/email-preview/ui/BlockRenderer.vue` |
+| Рендер row/cell/atom (preview) | `src/features/email-preview/ui/BlockRendererRowNode.vue` |
+| Главный рендер блока (export) | `src/features/email-preview/ui/ExportBlockRenderer.vue` |
+| Рендер row/cell/atom (export) | `src/features/email-preview/ui/ExportBlockRendererRowNode.vue` |
+| HTML-документ экспорта | `src/features/email-preview/ui/EmailExportDocument.vue` |
 | Панель настроек блока/атома | `src/features/editor/components/tools/BlockSettingsPanel.vue` |
 | Каталог пресетов (JSON-файлы, загрузчик, хелперы) | `src/features/email-preview/catalog/` |
 | JSON-схема пресетов | `src/features/email-preview/catalog/block.schema.json` |
@@ -88,7 +91,7 @@ ID-правила:
 
 - **`useSelection()`** — выделение: `selectBlock`, `selectRow`, `selectCell`, `selectAtom`, `resetSelection`. Computed: `selectedBlock`, `selectedRow`, `selectedCell`, `selectedAtom`. Управление UI: `sidebarActiveTab`, `treeScrollTarget`, `treeScrollRequestId`, `requestTreeScroll`, `openTreeAndScroll`, `selectionLevel`.
 
-- **`useTemplateIO()`** — импорт/экспорт: `importTemplate`, `importTemplateFromJson`, `exportTemplate`, `exportTemplateJson`, `applyImportedTemplate`, `withPersistLock`, `isPersistIgnored`, `triggerPersist`.
+- **`useTemplateIO()`** — импорт/экспорт: `importTemplate`, `importTemplateFromJson`, `exportTemplate`, `exportTemplateJson`, `exportTemplateHtml`, `applyImportedTemplate`, `withPersistLock`, `isPersistIgnored`, `triggerPersist`.
 
 - **`usePersistence()`** — localStorage: `persistTemplateToLocalStorage`, `hydrateTemplateFromLocalStorage`, `initTemplatePersistence` (auto-init при создании singleton).
 
@@ -96,6 +99,7 @@ ID-правила:
 - `installed` — `ref<CanvasBlockInstance[]>` — установленные блоки на канвасе.
 - `editableId` — `ref<string>` — ID выбранного блока.
 - `isDragging` — `ref<boolean>` — состояние перетаскивания.
+- `previewMode` — `ref<'desktop' | 'mobile'>` — режим предпросмотра.
 - `general` — `reactive<GeneralTool>` — глобальные настройки (padding, background, font, previewText).
 - `list` — `shallowRef<ComponentList[]>` — категории пресетов с блоками (Menu, Header, Content, Feature, Call to Action, E-Commerce, Footer).
 - `templateImportIssues` — `ref<TemplateValidationIssue[]>` — проблемы импорта.
@@ -216,6 +220,7 @@ Smoke-check вручную (критично для этого проекта):
 3. Import в обоих режимах: `replace` и `append`.
 4. Перезагрузка страницы восстанавливает состояние из localStorage.
 5. В Shadow DOM стили элемента выглядят корректно и не текут наружу.
+6. Export HTML повторяет ключевое поведение preview (mobile hide/collapse).
 
 ## 9. Антипаттерны (не делать)
 

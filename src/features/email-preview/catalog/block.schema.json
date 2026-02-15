@@ -66,6 +66,7 @@
         "type": { "const": "text" },
         "value": { "type": "string", "description": "HTML-контент текстового атома" },
         "color": { "type": "string" },
+        "hiddenOnMobile": { "type": "boolean" },
         "spacing": { "$ref": "#/$defs/SpacingValue" }
       }
     },
@@ -83,6 +84,7 @@
         "fontSize": { "type": "number" },
         "borderRadius": { "type": "number" },
         "padding": { "$ref": "#/$defs/Insets" },
+        "hiddenOnMobile": { "type": "boolean" },
         "spacing": { "$ref": "#/$defs/SpacingValue" }
       }
     },
@@ -95,6 +97,7 @@
         "type": { "const": "divider" },
         "color": { "type": "string" },
         "height": { "type": "number" },
+        "hiddenOnMobile": { "type": "boolean" },
         "spacing": { "$ref": "#/$defs/SpacingValue" }
       }
     },
@@ -111,6 +114,7 @@
         "width": { "type": "number" },
         "height": { "type": "number" },
         "borderRadius": { "type": "number" },
+        "hiddenOnMobile": { "type": "boolean" },
         "spacing": { "$ref": "#/$defs/SpacingValue" }
       }
     },
@@ -149,6 +153,7 @@
         "type": { "const": "menu" },
         "itemType": { "type": "string", "enum": ["text", "image"] },
         "gap": { "type": "number" },
+        "hiddenOnMobile": { "type": "boolean" },
         "items": {
           "type": "array",
           "items": {
@@ -177,6 +182,7 @@
         "backgroundColor": { "type": "string" },
         "backgroundImage": { "$ref": "#/$defs/BackgroundImageValue" },
         "link": { "type": "string" },
+        "hiddenOnMobile": { "type": "boolean" },
         "verticalAlign": { "type": "string", "enum": ["top", "middle", "bottom"] },
         "horizontalAlign": { "type": "string", "enum": ["left", "center", "right"] },
         "borderRadius": { "type": "number" },
@@ -191,6 +197,8 @@
         "spacing": { "$ref": "#/$defs/SpacingValue" },
         "backgroundColor": { "type": "string" },
         "backgroundImage": { "$ref": "#/$defs/BackgroundImageValue" },
+        "hiddenOnMobile": { "type": "boolean" },
+        "collapseOnMobile": { "type": "boolean" },
         "height": { "type": "number" },
         "gap": { "type": "number" }
       },

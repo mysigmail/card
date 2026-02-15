@@ -11,9 +11,9 @@
       "spacing": {
         "padding": [
           30,
-          35,
+          24,
           30,
-          35
+          24
         ]
       },
       "backgroundColor": "#FFFFFF"
@@ -169,8 +169,7 @@
                     0,
                     0
                   ]
-                },
-                "height": 300
+                }
               }
             ],
             "rows": []

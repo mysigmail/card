@@ -11,9 +11,9 @@
       "spacing": {
         "padding": [
           30,
-          35,
+          24,
           40,
-          35
+          24
         ]
       },
       "backgroundColor": "#FFFFFF"
@@ -267,7 +267,8 @@
             ]
           },
           "backgroundColor": "transparent",
-          "gap": 12
+          "gap": 12,
+          "collapseOnMobile": false
         },
         "cells": [
           {

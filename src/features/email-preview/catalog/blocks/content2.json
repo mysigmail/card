@@ -5,22 +5,22 @@
   "type": "content",
   "preview": "img/components/content-2.png",
   "block": {
-    "id": "rP1cX6zx",
+    "id": "hsA4vpdM",
     "label": "Content 2",
     "settings": {
       "spacing": {
         "padding": [
           30,
-          35,
+          24,
           30,
-          35
+          24
         ]
       },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "T8NnLCgM",
+        "id": "s-xJMRet",
         "settings": {
           "spacing": {
             "padding": [
@@ -35,7 +35,7 @@
         },
         "cells": [
           {
-            "id": "KmZA3_cP",
+            "id": "wUhoZZ7R",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -44,7 +44,7 @@
             },
             "atoms": [
               {
-                "id": "lZ1M_Ufc",
+                "id": "i6ZZ65s-",
                 "type": "text",
                 "value": "<p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: left\"><strong><span style=\"font-size: 24px\">How Music Affects</span></strong><br><strong><span style=\"font-size: 24px\">Your Productivity</span></strong></p>",
                 "color": "#111111",
@@ -64,10 +64,43 @@
                 }
               }
             ],
-            "rows": []
+            "rows": [
+              {
+                "id": "7ZHGpCa-",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "04wBdNwk",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left",
+                      "borderRadius": 5,
+                      "backgroundImage": {
+                        "url": "img/juja-han-HU-uL54pfQI-unsplash.jpg",
+                        "repeat": "no-repeat",
+                        "size": "cover",
+                        "position": "center"
+                      },
+                      "height": 200
+                    },
+                    "atoms": [],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
           },
           {
-            "id": "76v_0S_Q",
+            "id": "yPslkSrr",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -76,7 +109,7 @@
             },
             "atoms": [
               {
-                "id": "U9OIgtDW",
+                "id": "A0X_Pkap",
                 "type": "text",
                 "value": "<p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: left\"><strong><span style=\"font-size: 24px\">Background Music for</span></strong><br><strong><span style=\"font-size: 24px\">Coding</span></strong></p>",
                 "color": "#111111",
@@ -96,57 +129,40 @@
                 }
               }
             ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "ax_w6WxT",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "gap": 20
-        },
-        "cells": [
-          {
-            "id": "D0oyoFGe",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "link": "https://example.com",
-              "verticalAlign": "top",
-              "horizontalAlign": "left",
-              "borderRadius": 5,
-              "backgroundImage": {
-                "url": "img/juja-han-HU-uL54pfQI-unsplash.jpg",
-                "position": "center",
-                "repeat": "no-repeat",
-                "size": "cover"
-              },
-              "height": 200
-            },
-            "atoms": [],
-            "rows": []
-          },
-          {
-            "id": "D9YxBJm0",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "link": "https://example.com",
-              "verticalAlign": "top",
-              "horizontalAlign": "left",
-              "borderRadius": 5,
-              "backgroundImage": {
-                "url": "img/jefferson-santos-9SoCnyQmkzI-unsplash.jpg",
-                "position": "center",
-                "repeat": "no-repeat",
-                "size": "cover"
-              },
-              "height": 200
-            },
-            "atoms": [],
-            "rows": []
+            "rows": [
+              {
+                "id": "0xol4F9Y",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "dGlGDtYb",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left",
+                      "borderRadius": 5,
+                      "backgroundImage": {
+                        "url": "img/jefferson-santos-9SoCnyQmkzI-unsplash.jpg",
+                        "repeat": "no-repeat",
+                        "size": "cover",
+                        "position": "center"
+                      },
+                      "height": 200
+                    },
+                    "atoms": [],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       }

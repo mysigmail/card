@@ -4,7 +4,15 @@ import { nanoid } from 'nanoid'
 import { computed } from 'vue'
 import { createAtom, createBlockNode, createCellNode, createRowNode } from '@/entities/block'
 import { clone } from '@/shared/lib/clone'
-import { editableId, general, installed, isDragging, list, templateImportIssues } from './state'
+import {
+  editableId,
+  general,
+  installed,
+  isDragging,
+  list,
+  previewMode,
+  templateImportIssues,
+} from './state'
 import {
   DEFAULT_MENU_ATOM_GAP,
   DEFAULT_MENU_IMAGE_ITEM,
@@ -446,6 +454,16 @@ function _createCanvas() {
         return true
       }
 
+      if (field === 'hiddenOnMobile') {
+        row.settings.hiddenOnMobile = Boolean(value)
+        return true
+      }
+
+      if (field === 'collapseOnMobile') {
+        row.settings.collapseOnMobile = Boolean(value)
+        return true
+      }
+
       if (field === 'height') {
         row.settings.height = toOptionalPositiveNumber(value)
         return true
@@ -480,6 +498,11 @@ function _createCanvas() {
         return true
       }
 
+      if (field === 'hiddenOnMobile') {
+        cell.settings.hiddenOnMobile = Boolean(value)
+        return true
+      }
+
       if (field === 'borderRadius') {
         cell.settings.borderRadius = toNonNegativeFiniteNumber(value)
         return true
@@ -504,6 +527,11 @@ function _createCanvas() {
 
     if (scope !== 'v2-atom' || atomId !== atom.id || !field)
       return false
+
+    if (field === 'hiddenOnMobile') {
+      atom.hiddenOnMobile = Boolean(value)
+      return true
+    }
 
     if (atom.type === 'text') {
       if (field === 'content') {
@@ -771,6 +799,7 @@ function _createCanvas() {
     installed,
     editableId,
     isDragging,
+    previewMode,
     general,
     templateImportIssues,
     editableIndex,

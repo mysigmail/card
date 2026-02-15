@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
-import { MBody, MContainer, MHtml, MPreview } from '@mysigmail/vue-email-components'
+import { MBody, MContainer, MHead, MHtml, MPreview } from '@mysigmail/vue-email-components'
 import Sortable from 'sortablejs'
 import { computed, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import { useCanvas, useSelection } from '@/features/editor/model'
 import { addGhost, BlockRenderer, removeGhost } from '@/features/email-preview'
+import { EMAIL_RESPONSIVE_CSS } from '@/features/email-preview/constants'
 
-const { installed, isDragging, moveComponent, general, isCanvasBlockInstance } = useCanvas()
+const { installed, isDragging, moveComponent, general, previewMode, isCanvasBlockInstance }
+  = useCanvas()
 
 const {
   selectionLevel,
@@ -33,15 +35,19 @@ let overlayRafId: number | undefined
 let overlayMutationObserver: MutationObserver | undefined
 let overlayResizeObserver: ResizeObserver | undefined
 
-const EMAIL_TEMPLATE_WIDTH = 600
+const DESKTOP_TEMPLATE_WIDTH = 600
+const MOBILE_TEMPLATE_WIDTH = 375
+const HEAD_STYLE_TAG = 'style'
 
-const container: CSSProperties = {
-  position: 'relative',
-  width: `${EMAIL_TEMPLATE_WIDTH}px`,
-  maxWidth: '100%',
-  margin: '0 auto',
-  tableLayout: 'fixed',
-}
+const containerStyle = computed<CSSProperties>(() => {
+  return {
+    position: 'relative',
+    width: `${previewMode.value === 'mobile' ? MOBILE_TEMPLATE_WIDTH : DESKTOP_TEMPLATE_WIDTH}px`,
+    maxWidth: '100%',
+    margin: '0 auto',
+    tableLayout: 'fixed',
+  }
+})
 
 const style = computed<CSSProperties>(() => {
   return {
@@ -52,6 +58,13 @@ const style = computed<CSSProperties>(() => {
     backgroundPosition: general.background.position,
     fontFamily: general.font,
     padding: general.padding.map(i => `${i}px`).join(' '),
+  }
+})
+
+const bodyClass = computed(() => {
+  return {
+    'p-body': true,
+    'p-preview-mobile': previewMode.value === 'mobile',
   }
 })
 
@@ -241,12 +254,17 @@ watch(
 
 <template>
   <MHtml class="p-html">
+    <MHead>
+      <component :is="HEAD_STYLE_TAG">
+        {{ EMAIL_RESPONSIVE_CSS }}
+      </component>
+    </MHead>
     <MPreview :text="general.previewText" />
     <MBody
       :style="style"
-      class="p-body"
+      :class="bodyClass"
     >
-      <MContainer :style="container">
+      <MContainer :style="containerStyle">
         <div
           ref="surfaceRef"
           class="p-canvas-surface"
