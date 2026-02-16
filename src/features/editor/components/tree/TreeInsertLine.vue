@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { AtomType } from '@/entities/block'
+import type { TreeInsertType } from '@/features/editor/components/tree/use-tree-helpers'
 import { computed } from 'vue'
 import TreeInsertMenu from '@/features/editor/components/tree/TreeInsertMenu.vue'
 
 interface Props {
   visible?: boolean
-  allowedTypes: Array<AtomType | 'row' | 'cell' | 'block'>
+  allowedTypes: TreeInsertType[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -13,21 +13,25 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{
-  (e: 'select', type: AtomType | 'row' | 'cell' | 'block'): void
+  (e: 'select', type: TreeInsertType): void
   (e: 'openChange', open: boolean): void
 }>()
 
 const defaultInsertType = computed(() => props.allowedTypes[0])
+
 const buttonLabel = computed(() => {
   if (props.allowedTypes.includes('block'))
     return 'Add Block'
+
   if (props.allowedTypes.includes('cell'))
     return 'Add Cell'
-  if (props.allowedTypes.includes('row')) {
+
+  if (props.allowedTypes.includes('row'))
     return props.allowedTypes.length === 1 ? 'Add Row' : 'Add Item'
-  }
+
   return 'Add Item'
 })
+
 const shouldOpenMenu = computed(
   () => buttonLabel.value === 'Add Item' && props.allowedTypes.length > 1,
 )

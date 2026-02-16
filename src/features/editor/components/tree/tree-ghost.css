@@ -1,0 +1,32 @@
+.tree-ghost,
+.tree-cell-ghost,
+.tree-atom-ghost {
+  background-color: color-mix(in oklch, var(--primary), transparent 90%) !important;
+  border: 2px dashed var(--primary) !important;
+  border-radius: var(--radius-sm) !important;
+  height: 28px !important;
+  width: 90% !important;
+  margin: 4px auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 1 !important;
+}
+
+.tree-ghost > *,
+.tree-cell-ghost > *,
+.tree-atom-ghost > * {
+  display: none !important;
+}
+
+.tree-ghost::after,
+.tree-cell-ghost::after,
+.tree-atom-ghost::after {
+  content: 'Drop Here';
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--primary) !important;
+  display: block !important;
+}

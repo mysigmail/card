@@ -33,7 +33,7 @@ const { sidebarActiveTab } = useSelection()
         class="h-[calc(100vh-var(--header-height)-var(--sidebar-footer-height))] w-full overflow-y-auto bg-background"
       >
         <ComponentList v-if="sidebarActiveTab === 'components'" />
-        <TreeComponents v-if="sidebarActiveTab === 'tree'" />
+        <Tree v-if="sidebarActiveTab === 'tree'" />
       </div>
     </div>
     <div class="z-10 h-[var(--sidebar-footer-height)] shrink-0 overflow-y-auto bg-background">
