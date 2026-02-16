@@ -3,12 +3,8 @@ export type {
   AlignTool,
   BackgroundImageTool,
   BaseTool,
+  BlockLibraryCategory,
   BlockPreset,
-  CanvasBlockInstance,
-  CanvasNode,
-  ColorPickerTool,
-  ColumnCollectionTool,
-  ComponentList,
   ComponentTheme,
   ComponentType,
   GeneralTool,
@@ -29,5 +25,5 @@ export type {
 } from '@/entities/template'
 
 export type BlockSelectionLevel = 'block' | 'row' | 'cell' | 'atom'
-export type SidebarTab = 'components' | 'tree'
+export type SidebarTab = 'library' | 'tree'
 export type PreviewMode = 'desktop' | 'mobile'

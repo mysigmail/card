@@ -30,9 +30,7 @@ watch(localValue, () => {
 
 <template>
   <div data-slot="toggle-tool">
-    <EditorToolLabel>
-      {{ title }}
-    </EditorToolLabel>
+    <EditorToolLabel>{{ title }}</EditorToolLabel>
     <Switch v-model="localValue" />
   </div>
 </template>

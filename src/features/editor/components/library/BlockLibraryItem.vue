@@ -2,9 +2,9 @@
 import type { BlockPreset } from '@/features/editor/model'
 import Sortable from 'sortablejs'
 import { onMounted, ref } from 'vue'
-import { useList } from '@/features/editor/components/list/composables'
 import { useCanvas } from '@/features/editor/model'
 import { addGhost, removeGhost } from '@/features/email-preview'
+import { useBlockLibrary } from './use-block-library'
 
 interface Props {
   components: BlockPreset[]
@@ -13,8 +13,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { addComponent } = useCanvas()
-
-const { showList } = useList()
+const { showLibrary } = useBlockLibrary()
 
 const listRef = ref<HTMLElement>()
 
@@ -27,7 +26,7 @@ function initSortable() {
     },
     sort: false,
     onStart: () => {
-      showList.value = false
+      showLibrary.value = false
     },
     onEnd: (e) => {
       const componentIndex = Number(e.oldIndex)
@@ -53,7 +52,7 @@ onMounted(() => {
 <template>
   <div
     ref="listRef"
-    class="component-list-items"
+    data-slot="block-library-item"
   >
     <div
       v-for="i in components"

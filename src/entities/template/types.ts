@@ -165,7 +165,7 @@ export interface BlockPreset extends CanvasBlockInstance {
   preview: string
 }
 
-export interface ComponentList {
+export interface BlockLibraryCategory {
   name: string
   components: BlockPreset[]
 }

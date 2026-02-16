@@ -29,7 +29,7 @@ watch(localValue, () => {
 </script>
 
 <template>
-  <div data-slot="input-tool">
+  <div data-slot="select-tool">
     <EditorToolLabel>
       {{ title }}
     </EditorToolLabel>

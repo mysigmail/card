@@ -2,21 +2,26 @@
 import UilListUiAlt from '~icons/uil/list-ui-alt'
 import UilServer from '~icons/uil/server'
 import { useSelection } from '@/features/editor/model'
+import BlockLibrary from '../library/BlockLibrary.vue'
+import Tree from '../tree/Tree.vue'
 
 const { sidebarActiveTab } = useSelection()
 </script>
 
 <template>
-  <div class="flex flex-col border-r border-border">
+  <div
+    data-slot="editor-sidebar"
+    class="flex flex-col border-r border-border"
+  >
     <div class="flex grow">
       <div class="relative z-20 mt-1 border-r border-border bg-background">
         <div
           class="cursor-pointer p-2"
-          @click="sidebarActiveTab = 'components'"
+          @click="sidebarActiveTab = 'library'"
         >
           <UilServer
             class="size-6 hover:text-foreground"
-            :class="sidebarActiveTab === 'components' ? 'text-foreground' : 'text-muted-foreground'"
+            :class="sidebarActiveTab === 'library' ? 'text-foreground' : 'text-muted-foreground'"
           />
         </div>
         <div
@@ -32,7 +37,7 @@ const { sidebarActiveTab } = useSelection()
       <div
         class="h-[calc(100vh-var(--header-height)-var(--sidebar-footer-height))] w-full overflow-y-auto bg-background"
       >
-        <ComponentList v-if="sidebarActiveTab === 'components'" />
+        <BlockLibrary v-if="sidebarActiveTab === 'library'" />
         <Tree v-if="sidebarActiveTab === 'tree'" />
       </div>
     </div>
