@@ -3,6 +3,7 @@ import type { ComponentPublicInstance } from 'vue'
 import type { AtomType, BlockNode, RowNode } from '@/entities/block'
 import {
   ChevronDown,
+  Copy,
   Grid2x2,
   GripVertical,
   Image as ImageIcon,
@@ -35,7 +36,17 @@ const props = withDefaults(defineProps<Props>(), {
   indentPx: 0,
 })
 
-const { removeRow, removeCell, removeAtom, moveCell, moveAtom, isDragging } = useCanvas()
+const {
+  removeRow,
+  duplicateRow,
+  removeCell,
+  duplicateCell,
+  removeAtom,
+  duplicateAtom,
+  moveCell,
+  moveAtom,
+  isDragging,
+} = useCanvas()
 
 const {
   selectRow,
@@ -302,6 +313,14 @@ function isAtomActive(atomId: string) {
 
       <ButtonGroup>
         <Button
+          variant="outline"
+          size="icon-xs"
+          aria-label="Copy Row"
+          @click.stop="duplicateRow(block.id, row.id)"
+        >
+          <Copy class="size-3" />
+        </Button>
+        <Button
           v-if="canRemoveRow"
           variant="outline"
           size="icon-xs"
@@ -350,6 +369,14 @@ function isAtomActive(atomId: string) {
           </div>
 
           <ButtonGroup>
+            <Button
+              variant="outline"
+              size="icon-xs"
+              aria-label="Copy Cell"
+              @click.stop="duplicateCell(block.id, row.id, cell.id)"
+            >
+              <Copy class="size-3" />
+            </Button>
             <Button
               v-if="row.cells.length > 1"
               variant="outline"
@@ -412,14 +439,24 @@ function isAtomActive(atomId: string) {
                 />
                 <span class="truncate">{{ atomLabel(atom.type) }}</span>
               </div>
-              <Button
-                variant="outline"
-                size="icon-xs"
-                aria-label="Remove Atom"
-                @click.stop="removeAtom(block.id, row.id, cell.id, atom.id)"
-              >
-                <Trash2 class="size-3 text-destructive" />
-              </Button>
+              <ButtonGroup>
+                <Button
+                  variant="outline"
+                  size="icon-xs"
+                  aria-label="Copy Atom"
+                  @click.stop="duplicateAtom(block.id, row.id, cell.id, atom.id)"
+                >
+                  <Copy class="size-3" />
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon-xs"
+                  aria-label="Remove Atom"
+                  @click.stop="removeAtom(block.id, row.id, cell.id, atom.id)"
+                >
+                  <Trash2 class="size-3 text-destructive" />
+                </Button>
+              </ButtonGroup>
             </div>
           </div>
         </div>
