@@ -1,5 +1,5 @@
 import type { BlockPreset, CanvasBlockInstance, GeneralTool, Tool } from './types'
-import type { AtomType, BlockNode, CellNode, RowNode } from '@/entities/block'
+import type { Atom, AtomType, BlockNode, CellNode, RowNode } from '@/entities/block'
 import { nanoid } from 'nanoid'
 import { computed } from 'vue'
 import { createAtom, createBlockNode, createCellNode, createRowNode } from '@/entities/block'
@@ -94,11 +94,15 @@ function findCellInRows(rows: RowNode[], cellId: string): CellNode | undefined {
 function regenerateCellNodeIds(cell: CellNode) {
   cell.id = nanoid(8)
   cell.atoms.forEach((atom) => {
-    atom.id = nanoid(8)
+    regenerateAtomId(atom)
   })
   cell.rows.forEach((row) => {
     regenerateRowNodeIds(row)
   })
+}
+
+function regenerateAtomId(atom: Atom) {
+  atom.id = nanoid(8)
 }
 
 function regenerateRowNodeIds(row: RowNode) {
@@ -234,6 +238,26 @@ function _createCanvas() {
       selection.selectBlock(blockId)
   }
 
+  function duplicateRow(blockId: string, rowId: string) {
+    const blockComponent = findCanvasBlockInstance(blockId)
+    if (!blockComponent)
+      return
+
+    const target = findRowContainerInRows(blockComponent.block.rows, rowId, true)
+    if (!target)
+      return
+
+    const sourceRow = target.container[target.index]
+    if (!sourceRow)
+      return
+
+    const clonedRow = clone<RowNode>(sourceRow)
+    regenerateRowNodeIds(clonedRow)
+    target.container.splice(target.index + 1, 0, clonedRow)
+
+    return clonedRow
+  }
+
   function insertRowToCell(blockId: string, rowId: string, cellId: string, insertIndex?: number) {
     const blockComponent = findCanvasBlockInstance(blockId)
     if (!blockComponent)
@@ -289,6 +313,30 @@ function _createCanvas() {
     }
   }
 
+  function duplicateCell(blockId: string, rowId: string, cellId: string) {
+    const blockComponent = findCanvasBlockInstance(blockId)
+    if (!blockComponent)
+      return
+
+    const row = findRowInRows(blockComponent.block.rows, rowId)
+    if (!row)
+      return
+
+    const cellIndex = row.cells.findIndex(i => i.id === cellId)
+    if (cellIndex === -1)
+      return
+
+    const sourceCell = row.cells[cellIndex]
+    if (!sourceCell)
+      return
+
+    const clonedCell = clone<CellNode>(sourceCell)
+    regenerateCellNodeIds(clonedCell)
+    row.cells.splice(cellIndex + 1, 0, clonedCell)
+
+    return clonedCell
+  }
+
   function insertAtomToCell(
     blockId: string,
     rowId: string,
@@ -335,6 +383,34 @@ function _createCanvas() {
       if (selection.selectedAtomId.value === atomId)
         selection.selectCell(blockId, rowId, cellId)
     }
+  }
+
+  function duplicateAtom(blockId: string, rowId: string, cellId: string, atomId: string) {
+    const blockComponent = findCanvasBlockInstance(blockId)
+    if (!blockComponent)
+      return
+
+    const row = findRowInRows(blockComponent.block.rows, rowId)
+    if (!row)
+      return
+
+    const cell = row.cells.find(i => i.id === cellId)
+    if (!cell)
+      return
+
+    const atomIndex = cell.atoms.findIndex(atom => atom.id === atomId)
+    if (atomIndex === -1)
+      return
+
+    const sourceAtom = cell.atoms[atomIndex]
+    if (!sourceAtom)
+      return
+
+    const clonedAtom = clone<Atom>(sourceAtom)
+    regenerateAtomId(clonedAtom)
+    cell.atoms.splice(atomIndex + 1, 0, clonedAtom)
+
+    return clonedAtom
   }
 
   function moveCell(blockId: string, rowId: string, oldIndex: number, newIndex: number) {
@@ -900,10 +976,13 @@ function _createCanvas() {
     insertRowToBlock,
     insertRowToCell,
     removeRow,
+    duplicateRow,
     insertCellToRow,
     removeCell,
+    duplicateCell,
     insertAtomToCell,
     removeAtom,
+    duplicateAtom,
     moveCell,
     moveAtom,
     moveRow,
