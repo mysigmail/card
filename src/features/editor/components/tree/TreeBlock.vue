@@ -2,16 +2,16 @@
 import type { BlockNode } from '@/entities/block'
 import type { ComponentType } from '@/entities/template'
 import { ChevronDown, Copy, HardDriveDownload, Pencil, Trash2 } from 'lucide-vue-next'
-import Sortable from 'sortablejs'
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
-import TreeBlockRowNode from '@/features/editor/components/tree/TreeBlockRowNode.vue'
+import TreeRow from '@/features/editor/components/tree/TreeRow.vue'
 import { useCanvas, useSelection } from '@/features/editor/model'
-import { addGhost, removeGhost } from '@/features/email-preview'
 import { saveBlockAsJson } from '@/features/email-preview/catalog/save-block'
 import { Button } from '@/shared/ui/button'
 import { ButtonGroup } from '@/shared/ui/button-group'
 import { Input } from '@/shared/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
+import { TREE_BLOCK_TYPES } from './use-tree-helpers'
+import { createTreeSortable } from './use-tree-sortable'
 
 interface Props {
   id: string
@@ -35,15 +35,6 @@ const renameValue = ref(props.block.label)
 const rowsRef = ref<HTMLElement>()
 
 const saveBlockPopoverOpen = ref(false)
-const blockTypes: Array<{ label: string, value: ComponentType }> = [
-  { label: 'Menu', value: 'menu' },
-  { label: 'Header', value: 'header' },
-  { label: 'Content', value: 'content' },
-  { label: 'Feature', value: 'feature' },
-  { label: 'Call to Action', value: 'cta' },
-  { label: 'E-Commerce', value: 'ecommerce' },
-  { label: 'Footer', value: 'footer' },
-]
 
 const shouldExpand = computed(() => {
   if (selectedBlockId.value !== props.block.id)
@@ -51,6 +42,7 @@ const shouldExpand = computed(() => {
 
   return Boolean(selectedRowId.value || selectedCellId.value || selectedAtomId.value)
 })
+
 const isBlockActive = computed(() => {
   return (
     selectedBlockId.value === props.block.id
@@ -60,7 +52,7 @@ const isBlockActive = computed(() => {
   )
 })
 
-let rowSortable: Sortable | undefined
+let rowSortable: ReturnType<typeof createTreeSortable> | undefined
 
 function destroyRowsSortable() {
   rowSortable?.destroy()
@@ -71,27 +63,17 @@ function initRowsSortable() {
   if (!rowsRef.value || rowSortable)
     return
 
-  rowSortable = Sortable.create(rowsRef.value, {
-    animation: 150,
+  rowSortable = createTreeSortable({
+    el: rowsRef.value,
     draggable: '[data-row-sortable-item="true"]',
     handle: '[data-row-drag-handle]',
     ghostClass: 'tree-ghost',
-    swapThreshold: 0.5,
-    onStart() {
-      isDragging.value = true
+    isDragging,
+    onMove(oldIndex, newIndex) {
+      moveRow(props.block.id, oldIndex, newIndex)
     },
-    onEnd(e) {
-      removeGhost()
-      isDragging.value = false
-
-      if (e.oldIndex === undefined || e.newIndex === undefined)
-        return
-
-      moveRow(props.block.id, e.oldIndex, e.newIndex)
-    },
-    setData(dataTransfer, dragEl) {
-      const name = dragEl.getAttribute('data-name') || 'Row'
-      addGhost(dataTransfer, name, 'sm')
+    getDragName(dragEl) {
+      return dragEl.getAttribute('data-name') || 'Row'
     },
   })
 }
@@ -161,7 +143,6 @@ function handleSaveBlock(type: ComponentType) {
         : ''
     "
   >
-    <!-- Block header -->
     <div
       class="flex h-8 cursor-pointer items-center justify-between rounded-sm px-2 transition-colors hover:bg-muted/60"
       :data-tree-id="`block:${block.id}`"
@@ -243,7 +224,7 @@ function handleSaveBlock(type: ComponentType) {
             >
               <div class="flex flex-col">
                 <Button
-                  v-for="t in blockTypes"
+                  v-for="t in TREE_BLOCK_TYPES"
                   :key="t.value"
                   variant="ghost"
                   size="sm"
@@ -267,13 +248,12 @@ function handleSaveBlock(type: ComponentType) {
       </div>
     </div>
 
-    <!-- Rows tree -->
     <div
       v-if="isOpen"
       ref="rowsRef"
       class="pb-2"
     >
-      <TreeBlockRowNode
+      <TreeRow
         v-for="(row, rowIndex) in block.rows"
         :key="row.id"
         :block="block"
@@ -284,32 +264,3 @@ function handleSaveBlock(type: ComponentType) {
     </div>
   </div>
 </template>
-
-<style scoped>
-.tree-ghost {
-  background-color: color-mix(in oklch, var(--primary), transparent 90%) !important;
-  border: 2px dashed var(--primary) !important;
-  border-radius: var(--radius-sm) !important;
-  height: 28px !important;
-  width: 90% !important;
-  margin: 4px auto !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  opacity: 1 !important;
-}
-
-.tree-ghost > * {
-  display: none !important;
-}
-
-.tree-ghost::after {
-  content: 'Drop Here';
-  font-size: 10px !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  color: var(--primary) !important;
-  display: block !important;
-}
-</style>
