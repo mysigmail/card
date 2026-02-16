@@ -1,0 +1,194 @@
+{
+  "version": 2,
+  "name": "cta-1",
+  "label": "CTA 1",
+  "type": "cta",
+  "preview": "img/components/cta-1.png",
+  "block": {
+    "id": "PC8OjbZy",
+    "label": "CTA 1",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          24,
+          0,
+          24
+        ]
+      },
+      "backgroundColor": "#222"
+    },
+    "rows": [
+      {
+        "id": "Jei3t7RM",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
+        "cells": [
+          {
+            "id": "c30bKTgY",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "VMFQ_DW0",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><span style=\"font-size:18px\">New series</span></p><p style=\"text-align:center\"><span style=\"font-size:32px\"><strong>Unheard of Power.</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(159, 163, 167)\">With our latest model of laptop,<br />you'll get the most amazing features <br />in your professional work.</span></p>",
+                "color": "#ffffff",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "UON3FLuL",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "aLdfxtXA",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "backgroundColor": "transparent",
+              "hiddenOnMobile": false,
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "uSpg_gKB",
+                "type": "button",
+                "text": "By Now",
+                "link": "https://example.com",
+                "backgroundColor": "#4F46E5",
+                "color": "#FFFFFF",
+                "fontSize": 16,
+                "borderRadius": 4,
+                "padding": [
+                  12,
+                  24,
+                  12,
+                  24
+                ],
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    12,
+                    24,
+                    12,
+                    24
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "vBcPLw-h",
+        "settings": {
+          "spacing": {
+            "margin": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "padding": [
+              20,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
+        "cells": [
+          {
+            "id": "IV4vFfkq",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 0
+            },
+            "atoms": [
+              {
+                "id": "Vc_jNqy8",
+                "type": "image",
+                "src": "img/mbp-13-space.png",
+                "link": "https://example.com",
+                "alt": "Some alt",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    -3,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

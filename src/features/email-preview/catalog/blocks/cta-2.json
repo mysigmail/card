@@ -1,0 +1,215 @@
+{
+  "version": 2,
+  "name": "cta-2",
+  "label": "CTA 2",
+  "type": "cta",
+  "preview": "img/components/cta-2.png",
+  "block": {
+    "id": "cajcM2yk",
+    "label": "CTA 2",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          24,
+          0,
+          24
+        ]
+      },
+      "backgroundColor": "#ffffff"
+    },
+    "rows": [
+      {
+        "id": "p13qp213",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
+        "cells": [
+          {
+            "id": "UkZ4bt2N",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "LXZu7iaI",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><span style=\"color: rgb(131, 163, 237); font-size: 18px;\">New series</span></p><p style=\"text-align: center;\"><span style=\"font-size: 32px;\"><strong>Ultra Black Edition</strong></span></p>",
+                "color": "#000000",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "D5IbZb2l",
+        "settings": {
+          "spacing": {
+            "padding": [
+              20,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
+        "cells": [
+          {
+            "id": "3AexSn18",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 0
+            },
+            "atoms": [
+              {
+                "id": "vB-Rwrql",
+                "type": "image",
+                "src": "img/diesel-watch-1x1.jpg",
+                "link": "https://example.com",
+                "alt": "Some alt",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "tL7pyU1u",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "UKaAReLP",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  0,
+                  0,
+                  30,
+                  0
+                ]
+              },
+              "backgroundColor": "transparent",
+              "hiddenOnMobile": false,
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "tVnwrrkE",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><span style=\"color: rgb(159, 163, 167);\">With our latest model of watch,</span><br><span style=\"color: rgb(159, 163, 167);\">you'll get the most amazing features</span><br><span style=\"color: rgb(159, 163, 167);\">for your everyday workout.</span></p>",
+                "color": "#111827",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "g1BUUYbe",
+                "type": "button",
+                "text": "By Now",
+                "link": "https://example.com",
+                "backgroundColor": "#4F46E5",
+                "color": "#FFFFFF",
+                "fontSize": 16,
+                "borderRadius": 4,
+                "padding": [
+                  12,
+                  24,
+                  12,
+                  24
+                ],
+                "spacing": {
+                  "padding": [
+                    12,
+                    24,
+                    12,
+                    24
+                  ],
+                  "margin": [
+                    30,
+                    0,
+                    30,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

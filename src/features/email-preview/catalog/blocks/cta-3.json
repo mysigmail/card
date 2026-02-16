@@ -1,0 +1,165 @@
+{
+  "version": 2,
+  "name": "cta-3",
+  "label": "CTA 3",
+  "type": "cta",
+  "preview": "img/components/cta-3.png",
+  "block": {
+    "id": "reAedTLK",
+    "label": "CTA 3",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          24,
+          0,
+          24
+        ]
+      },
+      "backgroundColor": "#ffffff"
+    },
+    "rows": [
+      {
+        "id": "ZT-tsz1E",
+        "settings": {
+          "spacing": {
+            "padding": [
+              20,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
+        "cells": [
+          {
+            "id": "nrhxQPd7",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 0
+            },
+            "atoms": [
+              {
+                "id": "nYVGGNr5",
+                "type": "image",
+                "src": "img/adidas-real-deal-damien-lillard-hirere-black1-blapur.png",
+                "link": "https://example.com",
+                "alt": "Some alt",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "nXujubXY",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "kbYmXTrr",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  0,
+                  0,
+                  30,
+                  0
+                ]
+              },
+              "backgroundColor": "transparent",
+              "hiddenOnMobile": false,
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "A8JWkFOh",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><span style=\"font-size: 32px;\"><strong>Impossible is Nothing</strong></span></p><p style=\"text-align: center;\"><span style=\"color: rgb(159, 163, 167);\">Changing the game isn't easy and before long,<br>haters came out of the woodwork.</span></p>",
+                "color": "#111827",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "0jAA0rod",
+                "type": "button",
+                "text": "By Now",
+                "link": "https://example.com",
+                "backgroundColor": "#4F46E5",
+                "color": "#FFFFFF",
+                "fontSize": 16,
+                "borderRadius": 4,
+                "padding": [
+                  12,
+                  24,
+                  12,
+                  24
+                ],
+                "spacing": {
+                  "padding": [
+                    12,
+                    24,
+                    12,
+                    24
+                  ],
+                  "margin": [
+                    30,
+                    0,
+                    20,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

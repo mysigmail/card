@@ -1,0 +1,194 @@
+{
+  "version": 2,
+  "name": "cta-5",
+  "label": "CTA 5",
+  "type": "cta",
+  "preview": "img/components/cta-6.png",
+  "block": {
+    "id": "CfqOE--_",
+    "label": "CTA 5",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
+      "backgroundColor": "#FFFFFF",
+      "backgroundImage": {
+        "url": "public/img/toa-heftiba-O3ymvT7Wf9U-unsplash.jpg",
+        "repeat": "no-repeat",
+        "size": "cover",
+        "position": "center"
+      }
+    },
+    "rows": [
+      {
+        "id": "moJYR8se",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0,
+          "backgroundImage": {
+            "url": "",
+            "repeat": "no-repeat",
+            "size": "cover",
+            "position": "center"
+          }
+        },
+        "cells": [
+          {
+            "id": "yy7-eOFT",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "hiddenOnMobile": false,
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "QOLbPV9p",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\">New series</p><p style=\"text-align: center;\"><span style=\"font-size: 32px;\"><strong>Overtaking the Down</strong></span></p>",
+                "color": "#ffffff",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "ur9Hw5vX",
+        "settings": {
+          "spacing": {
+            "padding": [
+              110,
+              0,
+              110,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "4ndRSSHg",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "backgroundColor": "transparent",
+              "hiddenOnMobile": false,
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "JK1375MM",
+                "type": "image",
+                "src": "img/play-button-white.png",
+                "link": "https://example.com",
+                "alt": "Image",
+                "width": 56,
+                "borderRadius": 0,
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "OetbOi9C",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0,
+          "backgroundImage": {
+            "url": "",
+            "repeat": "no-repeat",
+            "size": "cover",
+            "position": "center"
+          }
+        },
+        "cells": [
+          {
+            "id": "iIRmA5-6",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "hiddenOnMobile": false,
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "-10jd10k",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\">Single available on all platforms.<br>Creative Label © 2019</p>",
+                "color": "#ffffff",
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

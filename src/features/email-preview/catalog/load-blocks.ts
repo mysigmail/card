@@ -72,3 +72,7 @@ function loadBlocksByType(type: ComponentType): CatalogBlock[] {
 export const content = loadBlocksByType('content')
 export const header = loadBlocksByType('header')
 export const menu = loadBlocksByType('menu')
+export const feature = loadBlocksByType('feature')
+export const cta = loadBlocksByType('cta')
+export const ecommerce = loadBlocksByType('ecommerce')
+export const footer = loadBlocksByType('footer')
