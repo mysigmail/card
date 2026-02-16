@@ -1,3 +1,20 @@
+## 0.12.0 (2026-02-16)
+
+### Features
+
+- add duplicate for row/cell/atom (#42) ([8bed16a](https://github.com/mysigmail/card/commit/8bed16acf041fea462685986b3d7b0707298e142))
+- add drag & drop for rows/cell/atom in tree (#41) ([24fac22](https://github.com/mysigmail/card/commit/24fac22cc0ec613a6e1c39651d9f889eb379902a))
+- add html export & mobile preview (#40) ([73850ed](https://github.com/mysigmail/card/commit/73850ed74a4a53047521bdd89a6b621939c68ec1))
+
+### Bug Fixes
+
+- preserve manual Width/Height mode when input is cleared ([9a2cb5b](https://github.com/mysigmail/card/commit/9a2cb5b15e7c786c1498aa5ec263f0eab5580ab3))
+- adjust insertion point radius for better alignment ([cba3af5](https://github.com/mysigmail/card/commit/cba3af58bc1bbff5ad8abfb5b3009f7ce49a7b75))
+
+### Other
+
+- update README ([3c04ddd](https://github.com/mysigmail/card/commit/3c04ddd46153c27f00931ffe547c62c4203f91a9))
+
 ## 0.11.0 (2026-02-14)
 
 ### Features
