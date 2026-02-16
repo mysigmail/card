@@ -106,7 +106,7 @@ ID-правила:
 - `isDragging` — `ref<boolean>` — состояние перетаскивания.
 - `previewMode` — `ref<'desktop' | 'mobile'>` — режим предпросмотра.
 - `general` — `reactive<GeneralTool>` — глобальные настройки (padding, background, font, previewText).
-- `list` — `shallowRef<ComponentList[]>` — категории пресетов с блоками (Menu, Header, Content, Feature, Call to Action, E-Commerce, Footer).
+- `library` — `shallowRef<BlockLibraryCategory[]>` — категории пресетов с блоками (Menu, Header, Content, Feature, Call to Action, E-Commerce, Footer).
 - `templateImportIssues` — `ref<TemplateValidationIssue[]>` — проблемы импорта.
 
 Нельзя напрямую мутировать дерево внутри UI-компонентов.

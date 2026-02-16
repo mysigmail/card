@@ -1,5 +1,6 @@
 export * from './types'
 export { useCanvas } from './use-canvas'
+export { useCanvasTools } from './use-canvas-tools'
 export { usePersistence } from './use-persistence'
 export { useSelection } from './use-selection'
 export { useTemplateIO } from './use-template-io'

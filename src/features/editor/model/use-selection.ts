@@ -33,7 +33,7 @@ function _createSelection() {
   const selectedCellId = ref<string>()
   const selectedAtomId = ref<string>()
   const selectionLevel = ref<BlockSelectionLevel>()
-  const sidebarActiveTab = ref<SidebarTab>('components')
+  const sidebarActiveTab = ref<SidebarTab>('library')
   const treeScrollTarget = ref<string>()
   const treeScrollRequestId = ref(0)
 
