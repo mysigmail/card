@@ -1,3 +1,17 @@
+## 0.13.0 (2026-02-17)
+
+### Features
+
+- add undo/redo functionality (#45) ([b39d8de](https://github.com/mysigmail/card/commit/b39d8de46d9c84fa493db28f892ba4cd1c9b2f2f))
+- add call to actions presets ([927d168](https://github.com/mysigmail/card/commit/927d168d175ac2d92cf40b1996780c41e0a79567))
+
+### Other
+
+- fix types re export ([4c1b197](https://github.com/mysigmail/card/commit/4c1b197988c07f254a78f8cade7cc1f209d70a5d))
+- decompose editor feature (#44) ([ed11323](https://github.com/mysigmail/card/commit/ed113238e23f5901b0c37821dd75b953385a4fcb))
+- add architecture standards skill ([a481e66](https://github.com/mysigmail/card/commit/a481e665fd87a249c2e4ebb48aeebee7bc0d3b05))
+- decompose tree components and simplify naming (#43) ([be66145](https://github.com/mysigmail/card/commit/be66145c4734431558cf54d2d569894d519c5c57))
+
 ## 0.12.0 (2026-02-16)
 
 ### Features
