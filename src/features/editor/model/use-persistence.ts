@@ -2,6 +2,7 @@ import type { TemplateValidationIssue } from '@/entities/template'
 import { watch } from 'vue'
 import { parseTemplateExportJson, TEMPLATE_LOCAL_STORAGE_KEY } from '@/entities/template'
 import { general, installed, templateImportIssues } from './state'
+import { useHistory } from './use-history'
 import { useTemplateIO } from './use-template-io'
 
 let _instance: ReturnType<typeof _createPersistence> | null = null
@@ -25,6 +26,7 @@ function _createPersistence() {
 
   function hydrateTemplateFromLocalStorage() {
     const templateIO = useTemplateIO()
+    const history = useHistory()
 
     if (typeof window === 'undefined') {
       return {
@@ -36,6 +38,7 @@ function _createPersistence() {
     const raw = window.localStorage.getItem(TEMPLATE_LOCAL_STORAGE_KEY)
 
     if (!raw) {
+      history.resetHistory()
       return {
         ok: true as const,
         issues: [] as TemplateValidationIssue[],
@@ -46,6 +49,7 @@ function _createPersistence() {
     templateImportIssues.value = result.issues
 
     if (!result.payload) {
+      history.resetHistory()
       return {
         ok: false as const,
         issues: result.issues,
@@ -56,6 +60,7 @@ function _createPersistence() {
     templateIO.withPersistLock(() => {
       templateIO.applyImportedTemplate(payload, 'replace')
     })
+    history.resetHistory()
 
     return {
       ok: true as const,
