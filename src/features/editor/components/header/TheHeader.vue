@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Monitor, MoreHorizontal, Smartphone } from 'lucide-vue-next'
+import { Monitor, MoreHorizontal, Redo2, Smartphone, Undo2 } from 'lucide-vue-next'
 import { Button } from '@/shared/ui/button'
 import { ButtonGroup } from '@/shared/ui/button-group'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/shared/ui/dialog'
@@ -11,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu'
+import { Separator } from '@/shared/ui/separator'
 import { Switch } from '@/shared/ui/switch'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 import { useHeaderActions } from './use-header-actions'
@@ -28,12 +29,16 @@ const {
   previewModeValue,
   visibleImportIssues,
   canImport,
+  canUndo,
+  canRedo,
   exportTemplateToFile,
   exportTemplateHtmlToFile,
   openImportDialog,
   closeImportDialog,
   clearCanvasWithConfirm,
   onConfirmClearCanvas,
+  onUndo,
+  onRedo,
   onImportFileChange,
   confirmImport,
 } = useHeaderActions()
@@ -42,17 +47,40 @@ const {
 <template>
   <div
     data-slot="editor-header"
-    class="flex items-center justify-between bg-foreground px-4 text-secondary"
+    class="flex items-center justify-between bg-sidebar-accent-foreground px-4 text-secondary"
   >
     <div class="flex items-center">
       <SvgLogoWhite width="100" />
     </div>
-    <div class="tools flex items-center justify-center">
+    <!-- <div class="flex items-center justify-center gap-4 dark">
+      <ButtonGroup>
+        <Button
+          variant="outline"
+          size="icon-sm"
+          aria-label="Undo (Cmd+Z)"
+          title="Undo (Cmd+Z)"
+          :disabled="!canUndo"
+          @click="onUndo"
+        >
+          <Undo2 class="size-4" />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon-sm"
+          aria-label="Redo (Cmd+Shift+Z)"
+          title="Redo (Cmd+Shift+Z)"
+          :disabled="!canRedo"
+          @click="onRedo"
+        >
+          <Redo2 class="size-4" />
+        </Button>
+      </ButtonGroup>
+
       <ToggleGroup
         v-model="previewModeValue"
         type="single"
         variant="outline"
-        size="xs"
+        size="sm"
       >
         <ToggleGroupItem value="desktop">
           <Monitor class="size-4" />
@@ -61,15 +89,52 @@ const {
           <Smartphone class="size-4" />
         </ToggleGroupItem>
       </ToggleGroup>
-    </div>
-    <div class="actions flex items-center">
+    </div> -->
+    <div class="actions flex items-center dark gap-5 h-5">
+      <ButtonGroup>
+        <Button
+          variant="outline"
+          size="icon-sm"
+          aria-label="Undo (Cmd+Z)"
+          title="Undo (Cmd+Z)"
+          :disabled="!canUndo"
+          @click="onUndo"
+        >
+          <Undo2 class="size-4" />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon-sm"
+          aria-label="Redo (Cmd+Shift+Z)"
+          title="Redo (Cmd+Shift+Z)"
+          :disabled="!canRedo"
+          @click="onRedo"
+        >
+          <Redo2 class="size-4" />
+        </Button>
+      </ButtonGroup>
+
+      <ToggleGroup
+        v-model="previewModeValue"
+        type="single"
+        variant="outline"
+        size="sm"
+      >
+        <ToggleGroupItem value="desktop">
+          <Monitor class="size-4" />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="mobile">
+          <Smartphone class="size-4" />
+        </ToggleGroupItem>
+      </ToggleGroup>
+      <Separator orientation="vertical" />
       <ButtonGroup>
         <Button
           size="sm"
           variant="outline"
           @click="clearCanvasWithConfirm"
         >
-          New
+          New Template
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger as-child>
@@ -208,7 +273,7 @@ const {
           variant="destructive"
           @click="onConfirmClearCanvas()"
         >
-          Yes
+          Confirm
         </Button>
       </DialogFooter>
     </DialogContent>

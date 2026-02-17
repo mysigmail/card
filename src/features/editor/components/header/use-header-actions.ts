@@ -1,10 +1,22 @@
 import type { TemplateImportMode } from '@/entities/template'
+import { useEventListener } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
-import { useCanvas, useTemplateIO } from '@/features/editor/model'
+import { useCanvas, useHistory, useTemplateIO } from '@/features/editor/model'
+
+function isTextInputElement(target: EventTarget | null) {
+  if (!(target instanceof HTMLElement))
+    return false
+
+  if (target.isContentEditable)
+    return true
+
+  return ['input', 'textarea', 'select'].includes(target.tagName.toLowerCase())
+}
 
 export function useHeaderActions() {
   const { exportTemplateHtml, exportTemplateJson, importTemplateFromJson } = useTemplateIO()
   const { templateImportIssues, clearCanvas, previewMode } = useCanvas()
+  const { canUndo, canRedo, undo, redo, resetHistory } = useHistory()
 
   const importDialogVisible = ref(false)
   const clearDialogVisible = ref(false)
@@ -104,6 +116,7 @@ export function useHeaderActions() {
 
   function onConfirmClearCanvas() {
     clearCanvas()
+    resetHistory()
     clearDialogVisible.value = false
   }
 
@@ -143,6 +156,42 @@ export function useHeaderActions() {
     importMessage.value = 'Import failed. Check validation errors below.'
   }
 
+  function onUndo() {
+    undo()
+  }
+
+  function onRedo() {
+    redo()
+  }
+
+  function onKeyDown(event: KeyboardEvent) {
+    if (!(event.metaKey || event.ctrlKey) || event.altKey)
+      return
+
+    if (isTextInputElement(event.target))
+      return
+
+    if (event.key.toLowerCase() !== 'z')
+      return
+
+    if (event.shiftKey) {
+      if (!canRedo.value)
+        return
+
+      event.preventDefault()
+      redo()
+      return
+    }
+
+    if (!canUndo.value)
+      return
+
+    event.preventDefault()
+    undo()
+  }
+
+  useEventListener('keydown', onKeyDown, { passive: false })
+
   watch(importDialogVisible, (open) => {
     if (!open)
       resetImportDialog()
@@ -162,12 +211,16 @@ export function useHeaderActions() {
     previewModeValue,
     visibleImportIssues,
     canImport,
+    canUndo,
+    canRedo,
     exportTemplateToFile,
     exportTemplateHtmlToFile,
     openImportDialog,
     closeImportDialog,
     clearCanvasWithConfirm,
     onConfirmClearCanvas,
+    onUndo,
+    onRedo,
     onImportFileChange,
     confirmImport,
   }

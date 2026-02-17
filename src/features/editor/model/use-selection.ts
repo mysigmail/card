@@ -1,4 +1,9 @@
-import type { BlockSelectionLevel, CanvasBlockInstance, SidebarTab } from './types'
+import type {
+  BlockSelectionLevel,
+  CanvasBlockInstance,
+  EditorSelectionSnapshot,
+  SidebarTab,
+} from './types'
 import type { Atom, BlockNode, CellNode, RowNode } from '@/entities/block'
 import { computed, ref } from 'vue'
 import { editableId, installed } from './state'
@@ -23,6 +28,10 @@ function findCanvasBlockInstance(
   blockId: string,
 ): CanvasBlockInstance | undefined {
   return items.find(i => i.version === 2 && i.block.id === blockId)
+}
+
+function hasCanvasInstanceById(items: CanvasBlockInstance[], id: string) {
+  return items.some(item => item.id === id)
 }
 
 let _instance: ReturnType<typeof _createSelection> | null = null
@@ -118,6 +127,99 @@ function _createSelection() {
       openTreeAndScroll(`atom:${atomId}`)
   }
 
+  function captureSelectionSnapshot(): EditorSelectionSnapshot {
+    return {
+      editableId: editableId.value,
+      selectedBlockId: selectedBlockId.value,
+      selectedRowId: selectedRowId.value,
+      selectedCellId: selectedCellId.value,
+      selectedAtomId: selectedAtomId.value,
+      selectionLevel: selectionLevel.value,
+      sidebarActiveTab: sidebarActiveTab.value,
+    }
+  }
+
+  function applySelectionSnapshot(
+    snapshot?: EditorSelectionSnapshot,
+    applyOptions?: { restoreSidebarTab?: boolean, openTreeWhenSelection?: boolean },
+  ) {
+    if (
+      applyOptions?.restoreSidebarTab !== false
+      && (snapshot?.sidebarActiveTab === 'library' || snapshot?.sidebarActiveTab === 'tree')
+    ) {
+      sidebarActiveTab.value = snapshot.sidebarActiveTab
+    }
+
+    const blockId = snapshot?.selectedBlockId
+    if (!blockId) {
+      resetSelection()
+      return
+    }
+
+    const block = findCanvasBlockInstance(installed.value, blockId)
+    if (!block) {
+      resetSelection()
+      return
+    }
+
+    editableId.value
+      = snapshot?.editableId && hasCanvasInstanceById(installed.value, snapshot.editableId)
+        ? snapshot.editableId
+        : block.id
+    selectedBlockId.value = blockId
+    selectedRowId.value = undefined
+    selectedCellId.value = undefined
+    selectedAtomId.value = undefined
+    selectionLevel.value = 'block'
+
+    if (
+      (snapshot?.selectionLevel === 'row'
+        || snapshot?.selectionLevel === 'cell'
+        || snapshot?.selectionLevel === 'atom')
+      && snapshot.selectedRowId
+    ) {
+      const row = findRowInRows(block.block.rows, snapshot.selectedRowId)
+      if (!row)
+        return
+
+      selectedRowId.value = row.id
+      selectionLevel.value = 'row'
+    }
+
+    if (
+      (snapshot?.selectionLevel === 'cell' || snapshot?.selectionLevel === 'atom')
+      && selectedRowId.value
+      && snapshot.selectedCellId
+    ) {
+      const row = findRowInRows(block.block.rows, selectedRowId.value)
+      const cell = row?.cells.find(i => i.id === snapshot.selectedCellId)
+      if (!cell)
+        return
+
+      selectedCellId.value = cell.id
+      selectionLevel.value = 'cell'
+    }
+
+    if (
+      snapshot?.selectionLevel === 'atom'
+      && selectedRowId.value
+      && selectedCellId.value
+      && snapshot.selectedAtomId
+    ) {
+      const row = findRowInRows(block.block.rows, selectedRowId.value)
+      const cell = row?.cells.find(i => i.id === selectedCellId.value)
+      const atom = cell?.atoms.find(item => item.id === snapshot.selectedAtomId)
+      if (!atom)
+        return
+
+      selectedAtomId.value = atom.id
+      selectionLevel.value = 'atom'
+    }
+
+    if (applyOptions?.openTreeWhenSelection && selectedBlockId.value)
+      sidebarActiveTab.value = 'tree'
+  }
+
   const selectedBlock = computed((): BlockNode | undefined => {
     if (!selectedBlockId.value)
       return undefined
@@ -161,6 +263,8 @@ function _createSelection() {
     selectRow,
     selectCell,
     selectAtom,
+    captureSelectionSnapshot,
+    applySelectionSnapshot,
     selectedBlock,
     selectedRow,
     selectedCell,
