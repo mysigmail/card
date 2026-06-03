@@ -21,6 +21,11 @@ jobs:
         run: |
           set -o pipefail
 
+          if [ "$(gh api "repos/$REPO" --jq '.has_issues')" != "true" ]; then
+            echo "Issues are disabled for $REPO; skipping."
+            exit 0
+          fi
+
           cutoff="$(date -u -d "$INACTIVE_DAYS days ago" +%s)"
 
           gh issue list \
