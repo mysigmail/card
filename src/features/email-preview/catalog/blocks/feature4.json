@@ -1,0 +1,305 @@
+{
+  "version": 2,
+  "name": "feature4",
+  "label": "Feature 4",
+  "type": "feature",
+  "preview": "img/components/feature-4.png",
+  "block": {
+    "id": "F4BlockA",
+    "label": "Feature 4",
+    "settings": {
+      "spacing": { "padding": [28, 34, 34, 34] },
+      "backgroundColor": "#222222"
+    },
+    "rows": [
+      {
+        "id": "F4IntroA",
+        "settings": {
+          "spacing": { "padding": [0, 0, 30, 0] },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "F4IntroC",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
+            "atoms": [
+              {
+                "id": "F4IntroT",
+                "type": "text",
+                "value": "<p><strong><span style=\"color: #FFFFFF; font-size: 32px;\">Features</span></strong></p><p><span style=\"color: #D1D5DB; font-size: 16px;\">Our app was made for creators like you. We build our APIs to be simple to use, powerful in production, and endlessly scalable.</span></p>",
+                "color": "#FFFFFF",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "F4Grid1A",
+        "settings": { "spacing": { "padding": [0, 0, 26, 0] }, "backgroundColor": "transparent", "collapseOnMobile": true, "gap": 28 },
+        "cells": [
+          {
+            "id": "F4ItemAA",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "F4HeadAA",
+                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
+                "cells": [
+                  {
+                    "id": "F4IconAA",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
+                    "atoms": [
+                      {
+                        "id": "F4ImageA",
+                        "type": "image",
+                        "src": "img/browser-white.png",
+                        "link": "https://example.com",
+                        "alt": "Components",
+                        "height": 36,
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "F4NameAA",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
+                    "atoms": [
+                      {
+                        "id": "F4TitleA",
+                        "type": "text",
+                        "value": "<p><strong><span style=\"color: #FFFFFF; font-size: 18px;\">Components</span></strong></p>",
+                        "color": "#FFFFFF",
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "F4DescAA",
+                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
+                "cells": [
+                  {
+                    "id": "F4DescAC",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
+                    "atoms": [
+                      {
+                        "id": "F4CopyAA",
+                        "type": "text",
+                        "value": "<p><span style=\"color: #D1D5DB; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
+                        "color": "#D1D5DB",
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "F4ItemBB",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "F4HeadBB",
+                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
+                "cells": [
+                  {
+                    "id": "F4IconBB",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
+                    "atoms": [
+                      {
+                        "id": "F4ImageB",
+                        "type": "image",
+                        "src": "img/development-white.png",
+                        "link": "https://example.com",
+                        "alt": "ESP Ready",
+                        "height": 36,
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "F4NameBB",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
+                    "atoms": [
+                      {
+                        "id": "F4TitleB",
+                        "type": "text",
+                        "value": "<p><strong><span style=\"color: #FFFFFF; font-size: 18px;\">ESP Ready</span></strong></p>",
+                        "color": "#FFFFFF",
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "F4DescBB",
+                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
+                "cells": [
+                  {
+                    "id": "F4DescBC",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
+                    "atoms": [
+                      {
+                        "id": "F4CopyBB",
+                        "type": "text",
+                        "value": "<p><span style=\"color: #D1D5DB; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
+                        "color": "#D1D5DB",
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "F4Grid2A",
+        "settings": { "spacing": {}, "backgroundColor": "transparent", "collapseOnMobile": true, "gap": 28 },
+        "cells": [
+          {
+            "id": "F4ItemCC",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "F4HeadCC",
+                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
+                "cells": [
+                  {
+                    "id": "F4IconCC",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
+                    "atoms": [
+                      {
+                        "id": "F4ImageC",
+                        "type": "image",
+                        "src": "img/test-white.png",
+                        "link": "https://example.com",
+                        "alt": "Performance",
+                        "height": 36,
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "F4NameCC",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
+                    "atoms": [
+                      {
+                        "id": "F4TitleC",
+                        "type": "text",
+                        "value": "<p><strong><span style=\"color: #FFFFFF; font-size: 18px;\">Performance</span></strong></p>",
+                        "color": "#FFFFFF",
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "F4DescCC",
+                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
+                "cells": [
+                  {
+                    "id": "F4DescCD",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
+                    "atoms": [
+                      {
+                        "id": "F4CopyCC",
+                        "type": "text",
+                        "value": "<p><span style=\"color: #D1D5DB; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
+                        "color": "#D1D5DB",
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "F4ItemDD",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "F4HeadDD",
+                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
+                "cells": [
+                  {
+                    "id": "F4IconDD",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
+                    "atoms": [
+                      {
+                        "id": "F4ImageD",
+                        "type": "image",
+                        "src": "img/service-white.png",
+                        "link": "https://example.com",
+                        "alt": "Service",
+                        "height": 36,
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "F4NameDD",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
+                    "atoms": [
+                      {
+                        "id": "F4TitleD",
+                        "type": "text",
+                        "value": "<p><strong><span style=\"color: #FFFFFF; font-size: 18px;\">Service</span></strong></p>",
+                        "color": "#FFFFFF",
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "F4DescDD",
+                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
+                "cells": [
+                  {
+                    "id": "F4DescDC",
+                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
+                    "atoms": [
+                      {
+                        "id": "F4CopyDD",
+                        "type": "text",
+                        "value": "<p><span style=\"color: #D1D5DB; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
+                        "color": "#D1D5DB",
+                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

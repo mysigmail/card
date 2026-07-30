@@ -1,0 +1,125 @@
+{
+  "version": 2,
+  "name": "feature3",
+  "label": "Feature 3",
+  "type": "feature",
+  "preview": "img/components/feature-3.png",
+  "block": {
+    "id": "F3BlockA",
+    "label": "Feature 3",
+    "settings": {
+      "spacing": { "padding": [28, 36, 44, 36] },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "F3TitleA",
+        "settings": {
+          "spacing": { "padding": [0, 0, 32, 0] },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "F3HeadAA",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F3TextAA",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 32px;\">Our Plan &amp; Pricing</span></strong></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "F3PlansA",
+        "settings": { "spacing": {}, "backgroundColor": "transparent", "collapseOnMobile": true, "gap": 34 },
+        "cells": [
+          {
+            "id": "F3CellAA",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F3CopyAA",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 24px;\">Shared<br>Hosting</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Starts at</span></p><p style=\"text-align: center;\"><strong><span style=\"color: #54C746; font-size: 32px;\">$0.99</span></strong><span style=\"color: #9FA3A7; font-size: 14px;\"> / mo</span></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 20, 0] }
+              },
+              {
+                "id": "F3BtnA01",
+                "type": "button",
+                "text": "View Plans",
+                "link": "https://example.com",
+                "backgroundColor": "#409EFF",
+                "color": "#FFFFFF",
+                "fontSize": 14,
+                "borderRadius": 3,
+                "padding": [12, 20, 12, 20],
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "F3CellBB",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F3CopyBB",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 24px;\">VPS<br>Hosting</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Starts at</span></p><p style=\"text-align: center;\"><strong><span style=\"color: #54C746; font-size: 32px;\">$1.99</span></strong><span style=\"color: #9FA3A7; font-size: 14px;\"> / mo</span></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 20, 0] }
+              },
+              {
+                "id": "F3BtnB01",
+                "type": "button",
+                "text": "View Plans",
+                "link": "https://example.com",
+                "backgroundColor": "#409EFF",
+                "color": "#FFFFFF",
+                "fontSize": 14,
+                "borderRadius": 3,
+                "padding": [12, 20, 12, 20],
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "F3CellCC",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F3CopyCC",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 24px;\">Dedicated<br>Hosting</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Starts at</span></p><p style=\"text-align: center;\"><strong><span style=\"color: #54C746; font-size: 32px;\">$2.99</span></strong><span style=\"color: #9FA3A7; font-size: 14px;\"> / mo</span></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 20, 0] }
+              },
+              {
+                "id": "F3BtnC01",
+                "type": "button",
+                "text": "View Plans",
+                "link": "https://example.com",
+                "backgroundColor": "#409EFF",
+                "color": "#FFFFFF",
+                "fontSize": 14,
+                "borderRadius": 3,
+                "padding": [12, 20, 12, 20],
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

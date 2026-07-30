@@ -1,0 +1,141 @@
+{
+  "version": 2,
+  "name": "feature1",
+  "label": "Feature 1",
+  "type": "feature",
+  "preview": "img/components/feature-1.png",
+  "block": {
+    "id": "F1BlockA",
+    "label": "Feature 1",
+    "settings": {
+      "spacing": { "padding": [28, 34, 32, 34] },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "F1TitleA",
+        "settings": {
+          "spacing": { "padding": [0, 0, 24, 0] },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "F1HeadAA",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "F1TextAA",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 32px;\">Features</span></strong></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "F1ItemsA",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "collapseOnMobile": true,
+          "gap": 22
+        },
+        "cells": [
+          {
+            "id": "F1CellAA",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "F1ImageA",
+                "type": "image",
+                "src": "img/browser.png",
+                "link": "https://example.com",
+                "alt": "Components",
+                "height": 70,
+                "spacing": { "margin": [0, 0, 8, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F1CopyAA",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 22px;\">Components</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "F1CellBB",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "F1ImageB",
+                "type": "image",
+                "src": "img/development.png",
+                "link": "https://example.com",
+                "alt": "ESP Ready",
+                "height": 70,
+                "spacing": { "margin": [0, 0, 8, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F1CopyBB",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 22px;\">ESP Ready</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "F1CellCC",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "F1ImageC",
+                "type": "image",
+                "src": "img/test.png",
+                "link": "https://example.com",
+                "alt": "Performance",
+                "height": 70,
+                "spacing": { "margin": [0, 0, 8, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F1CopyCC",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 22px;\">Performance</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}
