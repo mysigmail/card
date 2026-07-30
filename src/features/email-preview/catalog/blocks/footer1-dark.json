@@ -1,0 +1,80 @@
+{
+  "version": 2,
+  "name": "footer1-dark",
+  "label": "Footer 1",
+  "type": "footer",
+  "preview": "img/components/footer-1-dark.png",
+  "block": {
+    "id": "F1DBlock",
+    "label": "Footer 1",
+    "settings": {
+      "spacing": { "padding": [30, 35, 30, 35] },
+      "backgroundColor": "#222222"
+    },
+    "rows": [
+      {
+        "id": "F1DAddrR",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "F1DAddrC",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "F1DAddrA",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><span style=\"font-size: 14px; color: rgb(170, 170, 170);\">500 Howard Street<br>San Francisco, CA 94105</span></p>",
+                "color": "#AAAAAA",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "F1DMenuR",
+        "settings": {
+          "spacing": { "padding": [2, 0, 0, 0] },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "F1DMenuC",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "F1DMenuA",
+                "type": "menu",
+                "itemType": "text",
+                "gap": 20,
+                "items": [
+                  { "type": "text", "text": "Update preferences", "link": "https://example.com", "color": "#FFFFFF", "fontSize": 14 },
+                  { "type": "text", "text": "Unsubscribe", "link": "https://example.com", "color": "#FFFFFF", "fontSize": 14 },
+                  { "type": "text", "text": "Policies", "link": "https://example.com", "color": "#FFFFFF", "fontSize": 14 }
+                ],
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}
