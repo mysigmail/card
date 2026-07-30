@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "name": "footer1-light",
+  "label": "Footer 5",
+  "type": "footer",
+  "preview": "img/components/footer-1-light.png",
+  "block": {
+    "id": "F1LBlock",
+    "label": "Footer 5",
+    "settings": {
+      "spacing": { "padding": [30, 35, 30, 35] },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "F1LAddrR",
+        "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
+        "cells": [
+          {
+            "id": "F1LAddrC",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F1LAddrA",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><span style=\"font-size: 14px; color: rgb(170, 170, 170);\">500 Howard Street<br>San Francisco, CA 94105</span></p>",
+                "color": "#AAAAAA",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "F1LMenuR",
+        "settings": { "spacing": { "padding": [2, 0, 0, 0] }, "backgroundColor": "transparent", "gap": 0 },
+        "cells": [
+          {
+            "id": "F1LMenuC",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F1LMenuA",
+                "type": "menu",
+                "itemType": "text",
+                "gap": 20,
+                "items": [
+                  { "type": "text", "text": "Update preferences", "link": "https://example.com", "color": "#222222", "fontSize": 14 },
+                  { "type": "text", "text": "Unsubscribe", "link": "https://example.com", "color": "#222222", "fontSize": 14 },
+                  { "type": "text", "text": "Policies", "link": "https://example.com", "color": "#222222", "fontSize": 14 }
+                ],
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

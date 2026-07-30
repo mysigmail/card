@@ -26,7 +26,16 @@ const BLOCK_ORDER: Record<ComponentType, string[]> = {
   feature: [],
   cta: [],
   ecommerce: [],
-  footer: [],
+  footer: [
+    'footer1-dark',
+    'footer2-dark',
+    'footer3-dark',
+    'footer4-dark',
+    'footer1-light',
+    'footer2-light',
+    'footer3-light',
+    'footer4-light',
+  ],
 }
 
 const basePath = import.meta.env.VITE_APP_BASE_PATH || '/'

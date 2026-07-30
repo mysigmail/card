@@ -1,0 +1,90 @@
+{
+  "version": 2,
+  "name": "footer2-light",
+  "label": "Footer 6",
+  "type": "footer",
+  "preview": "img/components/footer-2-light.png",
+  "block": {
+    "id": "F2LBlock",
+    "label": "Footer 6",
+    "settings": {
+      "spacing": { "padding": [30, 35, 30, 35] },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "F2LSocRw",
+        "settings": { "spacing": { "padding": [0, 0, 25, 0] }, "backgroundColor": "transparent", "gap": 0 },
+        "cells": [
+          {
+            "id": "F2LSocCl",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F2LSocAt",
+                "type": "menu",
+                "itemType": "image",
+                "gap": 20,
+                "items": [
+                  { "type": "image", "name": "Facebook", "link": "https://example.com", "url": "img/footer-facebook-black.png", "width": 16, "alt": "Facebook" },
+                  { "type": "image", "name": "Twitter", "link": "https://example.com", "url": "img/footer-twitter-black.png", "width": 16, "alt": "Twitter" },
+                  { "type": "image", "name": "Instagram", "link": "https://example.com", "url": "img/footer-instagram-black.png", "width": 16, "alt": "Instagram" }
+                ],
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "F2LMainR",
+        "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0, "collapseOnMobile": true },
+        "cells": [
+          {
+            "id": "F2LLogoC",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left", "width": 21 },
+            "atoms": [
+              {
+                "id": "F2LLogoA",
+                "type": "image",
+                "src": "img/logo-black.png",
+                "link": "https://example.com",
+                "alt": "MySigMail",
+                "width": 110,
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "F2LInfoC",
+            "settings": { "spacing": { "padding": [0, 0, 0, 30] }, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left", "width": 79 },
+            "atoms": [
+              {
+                "id": "F2LInfoA",
+                "type": "text",
+                "value": "<p><span style=\"font-size: 14px; color: rgb(170, 170, 170);\">500 Howard Street San Francisco, CA 94105<br><u><a href=\"https://example.com\" style=\"color: rgb(170, 170, 170);\">hello@example.com</a></u></span></p>",
+                "color": "#AAAAAA",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F2LMenuA",
+                "type": "menu",
+                "itemType": "text",
+                "gap": 20,
+                "items": [
+                  { "type": "text", "text": "Update preferences", "link": "https://example.com", "color": "#222222", "fontSize": 14 },
+                  { "type": "text", "text": "Unsubscribe", "link": "https://example.com", "color": "#222222", "fontSize": 14 },
+                  { "type": "text", "text": "Policies", "link": "https://example.com", "color": "#222222", "fontSize": 14 }
+                ],
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [2, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}
