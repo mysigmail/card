@@ -1,0 +1,146 @@
+{
+  "version": 2,
+  "name": "ecommerce2",
+  "label": "E-Commerce 2",
+  "type": "ecommerce",
+  "preview": "img/components/ecommerce-2.png",
+  "block": {
+    "id": "E2BlockA",
+    "label": "E-Commerce 2",
+    "settings": {
+      "spacing": { "padding": [30, 35, 40, 35] },
+      "backgroundColor": "#FFFFFF",
+      "backgroundImage": {
+        "url": "img/photo-1482424917728-d82d29662023.jpeg",
+        "repeat": "no-repeat",
+        "size": "cover",
+        "position": "center"
+      }
+    },
+    "rows": [
+      {
+        "id": "E2TopRow",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "E2TopCel",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "right"
+            },
+            "atoms": [
+              {
+                "id": "E2TopTxt",
+                "type": "text",
+                "value": "<p style=\"text-align: right;\"><span style=\"font-size: 14px; color: rgb(170, 170, 170);\"><a href=\"https://example.com\">See all ➝</a></span></p>",
+                "color": "#FFFFFF",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "E2ImgRow",
+        "settings": {
+          "spacing": { "padding": [0, 0, 20, 0] },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "E2ImgCel",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "E2ImgAtm",
+                "type": "image",
+                "src": "img/t-shirt-4.png",
+                "link": "https://example.com",
+                "alt": "Smoke Edition",
+                "width": 530,
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "E2TxtRow",
+        "settings": {
+          "spacing": { "padding": [0, 0, 20, 0] },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "E2TxtCel",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "E2CopyAA",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><span style=\"color: rgb(170, 170, 170);\">New series</span></p><p style=\"text-align: center;\"><strong><span style=\"font-size: 32px; color: rgb(200, 200, 200);\">Smoke Edition</span></strong></p><p style=\"text-align: center;\"><span style=\"color: rgb(170, 170, 170);\">Hip Hop Basic Longline T-Shirt.</span></p><p style=\"text-align: center;\"><strong><span style=\"color: rgb(200, 200, 200); font-size: 24px;\">$34.99</span></strong></p>",
+                "color": "#FFFFFF",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "E2CtaRow",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "E2CtaCel",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "E2Button",
+                "type": "button",
+                "text": "Buy Now",
+                "link": "https://example.com",
+                "backgroundColor": "#FFFFFF",
+                "color": "#000000",
+                "fontSize": 16,
+                "borderRadius": 3,
+                "padding": [12, 20, 12, 20],
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

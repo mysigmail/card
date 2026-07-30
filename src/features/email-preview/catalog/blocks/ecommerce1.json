@@ -1,0 +1,140 @@
+{
+  "version": 2,
+  "name": "ecommerce1",
+  "label": "E-Commerce 1",
+  "type": "ecommerce",
+  "preview": "img/components/ecommerce-1.png",
+  "block": {
+    "id": "E1BlockA",
+    "label": "E-Commerce 1",
+    "settings": {
+      "spacing": { "padding": [30, 35, 30, 35] },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "E1TopRow",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "E1TopCel",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "right"
+            },
+            "atoms": [
+              {
+                "id": "E1TopTxt",
+                "type": "text",
+                "value": "<p style=\"text-align: right;\"><span style=\"font-size: 14px; color: rgb(59, 175, 252);\"><a href=\"https://example.com\">See all ➝</a></span></p>",
+                "color": "#000000",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "E1ImgRow",
+        "settings": {
+          "spacing": { "padding": [0, 0, 20, 0] },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "E1ImgCel",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "E1ImgAtm",
+                "type": "image",
+                "src": "img/t-shirt-1.png",
+                "link": "https://example.com",
+                "alt": "Extended Shirt",
+                "width": 530,
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "E1TxtRow",
+        "settings": {
+          "spacing": { "padding": [0, 0, 20, 0] },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "E1TxtCel",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "E1CopyAA",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><span style=\"color: rgb(132, 137, 196);\">New series</span></p><p style=\"text-align: center;\"><strong><span style=\"font-size: 32px;\">Extended Shirt</span></strong></p><p style=\"text-align: center;\"><span style=\"color: rgb(170, 170, 170);\">Hip Hop Basic Longline T-Shirt.</span></p><p style=\"text-align: center;\"><strong><span style=\"color: rgb(105, 193, 66); font-size: 24px;\">$24.99</span></strong></p>",
+                "color": "#000000",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "E1CtaRow",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "E1CtaCel",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "E1Button",
+                "type": "button",
+                "text": "Buy Now",
+                "link": "https://example.com",
+                "backgroundColor": "#409EFF",
+                "color": "#FFFFFF",
+                "fontSize": 16,
+                "borderRadius": 3,
+                "padding": [12, 20, 12, 20],
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}
