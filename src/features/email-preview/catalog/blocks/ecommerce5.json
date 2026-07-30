@@ -1,0 +1,82 @@
+{
+  "version": 2,
+  "name": "ecommerce5",
+  "label": "E-Commerce 5",
+  "type": "ecommerce",
+  "preview": "img/components/ecommerce-5.png",
+  "block": {
+    "id": "E5BlockA",
+    "label": "E-Commerce 5",
+    "settings": {
+      "spacing": { "padding": [30, 35, 10, 35] },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "E5ProdRw",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "E5TxtCel",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 52
+            },
+            "atoms": [
+              {
+                "id": "E5CopyA1",
+                "type": "text",
+                "value": "<p><span style=\"color: rgb(132, 137, 196);\">New series</span></p><p><strong><span style=\"font-size: 24px;\">Basketball Shoes</span></strong></p><p><span style=\"color: rgb(170, 170, 170);\">Men's High-Top Basketball Shoes.</span></p><p><strong><span style=\"color: rgb(105, 193, 66); font-size: 24px;\">$749.99</span></strong></p>",
+                "color": "#000000",
+                "spacing": { "margin": [0, 0, 20, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "E5Button",
+                "type": "button",
+                "text": "Buy Now",
+                "link": "https://example.com",
+                "backgroundColor": "#409EFF",
+                "color": "#FFFFFF",
+                "fontSize": 16,
+                "borderRadius": 3,
+                "padding": [12, 20, 12, 20],
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "E5ImgCel",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 48
+            },
+            "atoms": [
+              {
+                "id": "E5Image1",
+                "type": "image",
+                "src": "img/adidas-real-deal-damien-lillard-hirere-black1-blapur-1x1.jpg",
+                "link": "https://example.com",
+                "alt": "Basketball Shoes",
+                "height": 244,
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}
