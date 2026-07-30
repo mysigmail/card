@@ -1,0 +1,169 @@
+{
+  "version": 2,
+  "name": "feature6",
+  "label": "Feature 6",
+  "type": "feature",
+  "preview": "img/components/feature-6.png",
+  "block": {
+    "id": "F6BlockA",
+    "label": "Feature 6",
+    "settings": {
+      "spacing": { "padding": [28, 42, 30, 42] },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "F6TitleA",
+        "settings": {
+          "spacing": { "padding": [0, 0, 28, 0] },
+          "backgroundColor": "transparent",
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "F6HeadAA",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F6TextAA",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 32px;\">Features</span></strong></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "F6ItemsA",
+        "settings": {
+          "spacing": { "padding": [0, 0, 28, 0] },
+          "backgroundColor": "transparent",
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "F6CellAA",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F6ImageA",
+                "type": "image",
+                "src": "img/coffee.png",
+                "link": "https://example.com",
+                "alt": "Coffee",
+                "height": 50,
+                "spacing": { "margin": [0, 0, 10, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F6CopyAA",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 48px;\">78</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Cups of Coffee</span></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "F6CellBB",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F6ImageB",
+                "type": "image",
+                "src": "img/ipod.png",
+                "link": "https://example.com",
+                "alt": "Music",
+                "height": 50,
+                "spacing": { "margin": [0, 0, 10, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F6CopyBB",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 48px;\">459</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Songs Listened</span></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "F6CellCC",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F6ImageC",
+                "type": "image",
+                "src": "img/apple-icon.png",
+                "link": "https://example.com",
+                "alt": "Skipped meals",
+                "height": 50,
+                "spacing": { "margin": [0, 0, 10, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F6CopyCC",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 48px;\">05</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Skipped Meals</span></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "F6CellDD",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F6ImageD",
+                "type": "image",
+                "src": "img/game-controller.png",
+                "link": "https://example.com",
+                "alt": "Gaming",
+                "height": 50,
+                "spacing": { "margin": [0, 0, 10, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F6CopyDD",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 48px;\">10</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Hours Gaming</span></p>",
+                "color": "#111111",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "F6Action",
+        "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
+        "cells": [
+          {
+            "id": "F6Button",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F6BtnAtm",
+                "type": "button",
+                "text": "Download",
+                "link": "https://example.com",
+                "backgroundColor": "#409EFF",
+                "color": "#FFFFFF",
+                "fontSize": 14,
+                "borderRadius": 3,
+                "padding": [12, 20, 12, 20],
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

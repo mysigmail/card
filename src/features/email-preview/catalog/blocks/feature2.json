@@ -1,0 +1,120 @@
+{
+  "version": 2,
+  "name": "feature2",
+  "label": "Feature 2",
+  "type": "feature",
+  "preview": "img/components/feature-2.png",
+  "block": {
+    "id": "F2BlockA",
+    "label": "Feature 2",
+    "settings": {
+      "spacing": { "padding": [34, 42, 34, 42] },
+      "backgroundColor": "#222222"
+    },
+    "rows": [
+      {
+        "id": "F2ItemsA",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "F2CellAA",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F2ImageA",
+                "type": "image",
+                "src": "img/coffee-white.png",
+                "link": "https://example.com",
+                "alt": "Coffee",
+                "height": 50,
+                "spacing": { "margin": [0, 0, 12, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F2CopyAA",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"color: #FFFFFF; font-size: 48px;\">78</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #D1D5DB; font-size: 14px;\">Cups of Coffee</span></p>",
+                "color": "#FFFFFF",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "F2CellBB",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F2ImageB",
+                "type": "image",
+                "src": "img/ipod-white.png",
+                "link": "https://example.com",
+                "alt": "Music",
+                "height": 50,
+                "spacing": { "margin": [0, 0, 12, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F2CopyBB",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"color: #FFFFFF; font-size: 48px;\">459</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #D1D5DB; font-size: 14px;\">Songs Listened</span></p>",
+                "color": "#FFFFFF",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "F2CellCC",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F2ImageC",
+                "type": "image",
+                "src": "img/apple-icon-white.png",
+                "link": "https://example.com",
+                "alt": "Skipped meals",
+                "height": 50,
+                "spacing": { "margin": [0, 0, 12, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F2CopyCC",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"color: #FFFFFF; font-size: 48px;\">05</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #D1D5DB; font-size: 14px;\">Skipped Meals</span></p>",
+                "color": "#FFFFFF",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "F2CellDD",
+            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "atoms": [
+              {
+                "id": "F2ImageD",
+                "type": "image",
+                "src": "img/game-controller-white.png",
+                "link": "https://example.com",
+                "alt": "Gaming",
+                "height": 50,
+                "spacing": { "margin": [0, 0, 12, 0], "padding": [0, 0, 0, 0] }
+              },
+              {
+                "id": "F2CopyDD",
+                "type": "text",
+                "value": "<p style=\"text-align: center;\"><strong><span style=\"color: #FFFFFF; font-size: 48px;\">10</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #D1D5DB; font-size: 14px;\">Hours Gaming</span></p>",
+                "color": "#FFFFFF",
+                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}
