@@ -1,0 +1,84 @@
+name: Deploy
+
+on:
+  push:
+    tags: ['@mysigmail/card@*']
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  APP_DIR: /var/www/card.mysigmail.com/public/app
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+        env:
+          VITE_APP_BASE_PATH: /app/
+
+      - name: Настроить SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+
+      - name: Загрузить приложение
+        run: |
+          rsync -az --delete-after --delay-updates dist/ \
+            "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:$APP_DIR/"
+
+      - name: Проверить деплой
+        run: |
+          for attempt in $(seq 1 5); do
+            if curl --fail --silent --show-error --location \
+              --connect-timeout 5 --max-time 20 \
+              --header 'Cache-Control: no-cache' \
+              "https://card.mysigmail.com/app/?deploy=$GITHUB_SHA" \
+              --output /dev/null; then
+              assets_ok=true
+
+              while IFS= read -r asset; do
+                if ! curl --fail --silent --show-error --location \
+                  --connect-timeout 5 --max-time 20 \
+                  --header 'Cache-Control: no-cache' \
+                  "https://card.mysigmail.com${asset}?deploy=$GITHUB_SHA" \
+                  --output /dev/null; then
+                  assets_ok=false
+                  break
+                fi
+              done < <(grep -oE '(src|href)="[^"]+"' dist/index.html \
+                | cut -d '"' -f 2)
+
+              if [ "$assets_ok" = true ]; then
+                echo "Приложение и его ресурсы доступны"
+                exit 0
+              fi
+            fi
+
+            echo "Попытка $attempt завершилась ошибкой"
+            sleep 2
+          done
+
+          echo "Приложение или его ресурсы недоступны после деплоя"
+          exit 1
