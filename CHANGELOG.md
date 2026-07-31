@@ -1,3 +1,16 @@
+## 0.14.0 (2026-07-31)
+
+### Features
+
+- add footer presets (#49) ([cae3f53](https://github.com/mysigmail/card/commit/cae3f533a2dac4fc6756de224ad8c208a0ed88df))
+- add e-commerce presets (#48) ([a5ed552](https://github.com/mysigmail/card/commit/a5ed552e89684a77d65271c161cafe776b2516fc))
+- add feature presets (#47) ([b6c5059](https://github.com/mysigmail/card/commit/b6c505941cbf1ac2df523c54060e9c39394d93ff))
+
+### Other
+
+- handle disabled issues in stale workflow ([89934cc](https://github.com/mysigmail/card/commit/89934ccb5d3a93695e453bede472e9702f097e44))
+- replace blocked issues-helper action ([eb0eb9d](https://github.com/mysigmail/card/commit/eb0eb9d6a9ac4124dc0eda0759400d0028269140))
+
 ## 0.13.0 (2026-02-17)
 
 ### Features
