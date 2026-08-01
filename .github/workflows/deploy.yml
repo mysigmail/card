@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 env:
-  APP_DIR: /var/www/card.mysigmail.com/public/app
+  APP_DIR: /var/www/card.mysigmail.com/app
 
 jobs:
   deploy:
