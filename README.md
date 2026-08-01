@@ -75,6 +75,6 @@ If you want to use this editor in a proprietary application without open-sourcin
 
 ## License
 
-[AGPL-3.0](https://github.com/mysigmail/card/blob/master/LICENSE)
+[AGPL-3.0](LICENSE)
 
 Copyright (c) 2022-present, Anton Reshetov.
