@@ -74,8 +74,7 @@ ID-правила:
 | Рендер row/cell/atom (export) | `src/features/email-preview/ui/ExportBlockRendererRowNode.vue` |
 | HTML-документ экспорта | `src/features/email-preview/ui/EmailExportDocument.vue` |
 | Панель настроек блока/атома | `src/features/editor/components/tools/BlockSettingsPanel.vue` |
-| Каталог пресетов (JSON-файлы, загрузчик, хелперы) | `src/features/email-preview/catalog/` |
-| JSON-схема пресетов | `src/features/email-preview/catalog/block.schema.json` |
+| Runtime-каталог пресетов (готовые JSON-файлы и загрузчик) | `src/features/email-preview/catalog/` |
 | Tree-компоненты (навигация по структуре) | `src/features/editor/components/tree/` |
 | Компоненты инструментов (AlignTool, ColorPickerTool, ImageTool, etc.) | `src/features/editor/components/tools/` |
 | Shadow DOM хост превью | `src/features/editor/ui/EditorCanvas.vue` |
@@ -126,11 +125,9 @@ ID-правила:
 
 ### 4.4 Каталог пресетов
 
-- Блоки-пресеты хранятся как JSON-файлы в `src/features/email-preview/catalog/blocks/`.
-- Схема валидации: `src/features/email-preview/catalog/block.schema.json`.
-- Загрузка: `load-blocks.ts`, хелперы создания: `composer-helpers.ts`.
-- Изображения для пресетов: `images.ts`.
-- Сохранение блоков: `save-block.ts`.
+- В runtime-репозитории хранятся только готовые JSON-пресеты в `src/features/email-preview/catalog/blocks/`, их загрузчик `load-blocks.ts` и готовые изображения в `public/img/components/`.
+- Не добавлять в runtime-код UI, API, CLI, схемы или helpers для создания и перегенерации каталога.
+- `BLOCK_ORDER` в `load-blocks.ts` определяет стабильный порядок отображения готовых артефактов.
 
 ### 4.5 Rich Text Editor
 
@@ -198,10 +195,10 @@ TemplateExportV2 {
 
 ### 6.4 Добавить JSON-пресет блока
 
-1. Создать JSON-файл в `src/features/email-preview/catalog/blocks/`.
-2. Следовать схеме `block.schema.json`.
-3. Зарегистрировать в `load-blocks.ts` в соответствующей категории.
-4. Добавить изображение превью в `images.ts`.
+1. Добавить проверенный сгенерированный JSON-файл в `src/features/email-preview/catalog/blocks/`.
+2. Добавить соответствующее готовое изображение превью в `public/img/components/`.
+3. При необходимости зарегистрировать имя в `BLOCK_ORDER` файла `load-blocks.ts`.
+4. Проверить загрузку готового пресета и визуальный результат в runtime-каталоге.
 
 ## 7. UI policy (shadcn-vue)
 

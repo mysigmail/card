@@ -1,5 +1,6 @@
 /* eslint-disable node/prefer-global/process */
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -9,11 +10,11 @@ import Icons from 'unplugin-icons/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig, loadEnv } from 'vite'
 
-const pathSrc = path.resolve(__dirname, './src')
-const pathRoot = path.resolve(__dirname, './')
+const pathRoot = path.dirname(fileURLToPath(import.meta.url))
+const pathSrc = path.resolve(pathRoot, 'src')
 
 export default ({ mode }) => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+  process.env = { ...process.env, ...loadEnv(mode, pathRoot) }
 
   return defineConfig({
     base: process.env.VITE_APP_BASE_PATH || '/',
@@ -37,11 +38,15 @@ export default ({ mode }) => {
             customCollections: ['svg'],
           }),
         ],
-        dirs: ['src/layouts', 'src/features', 'src/shared/ui'],
+        dirs: [
+          path.resolve(pathSrc, 'layouts'),
+          path.resolve(pathSrc, 'features'),
+          path.resolve(pathSrc, 'shared/ui'),
+        ],
       }),
       Icons({
         customCollections: {
-          svg: FileSystemIconLoader('./src/assets/svg'),
+          svg: FileSystemIconLoader(path.resolve(pathSrc, 'assets/svg')),
         },
       }),
     ],

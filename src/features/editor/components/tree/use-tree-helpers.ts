@@ -1,6 +1,5 @@
 import type { Component, Ref } from 'vue'
 import type { AtomType, RowNode } from '@/entities/block'
-import type { ComponentType } from '@/entities/template'
 import type { SidebarTab } from '@/features/editor/model'
 import {
   Grid2x2,
@@ -53,16 +52,6 @@ export const TREE_NODE_INDENT_PX = {
   cell: 24,
   atom: 8,
 } as const
-
-export const TREE_BLOCK_TYPES: Array<{ label: string, value: ComponentType }> = [
-  { label: 'Menu', value: 'menu' },
-  { label: 'Header', value: 'header' },
-  { label: 'Content', value: 'content' },
-  { label: 'Feature', value: 'feature' },
-  { label: 'Call to Action', value: 'cta' },
-  { label: 'E-Commerce', value: 'ecommerce' },
-  { label: 'Footer', value: 'footer' },
-]
 
 interface TreeInsertTypeMeta {
   label: string
