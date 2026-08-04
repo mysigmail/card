@@ -5,7 +5,7 @@
   "type": "content",
   "preview": "img/components/content-9.png",
   "block": {
-    "id": "Dltb7127",
+    "id": "IhfajeWJ",
     "label": "Content 9",
     "settings": {
       "spacing": {
@@ -20,7 +20,7 @@
     },
     "rows": [
       {
-        "id": "Rgj0_Jy_",
+        "id": "nOPor4b2",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
@@ -30,7 +30,7 @@
         },
         "cells": [
           {
-            "id": "JIEEC69c",
+            "id": "2wt_qp9C",
             "settings": {
               "spacing": {
                 "padding": [
@@ -48,7 +48,7 @@
             },
             "atoms": [
               {
-                "id": "tbnZmSzF",
+                "id": "K28m_4W8",
                 "type": "image",
                 "src": "img/catalog/presenters/skincare-presenter.png",
                 "link": "https://card.email/read",
@@ -64,7 +64,7 @@
                   "margin": [
                     0,
                     0,
-                    0,
+                    -4,
                     0
                   ]
                 }
@@ -73,7 +73,7 @@
             "rows": []
           },
           {
-            "id": "OjkRPmAQ",
+            "id": "bOeDwo-M",
             "settings": {
               "spacing": {
                 "padding": [
@@ -90,7 +90,7 @@
             },
             "atoms": [
               {
-                "id": "KP_-c7tS",
+                "id": "hahnW7Uy",
                 "type": "text",
                 "value": "<p><strong><span style=\"color:#FF6B00;font-size:38px\">“</span></strong></p><p><strong><span style=\"font-size:27px\">The message finally sounds like the people who made it.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">A single testimonial with enough space for a real point of view.</span></p><p><strong>Amelia Reed</strong><br /><span style=\"color:#7A6558;font-size:13px\">Brand director, North Studio</span></p>",
                 "color": "#1F1712",
