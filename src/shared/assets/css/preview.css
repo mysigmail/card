@@ -245,7 +245,8 @@ a {
   line-height: 0 !important;
 }
 
-.p-preview-mobile .e-mobile-hidden {
+.p-preview-mobile .e-mobile-hidden,
+.p-preview-mobile td.e-mobile-hidden {
   display: none !important;
   max-height: 0 !important;
   overflow: hidden !important;
