@@ -1,3 +1,17 @@
+## 0.15.0 (2026-08-04)
+
+### Features
+
+- **catalog:** refresh visual block library (#54) ([2b1719c](https://github.com/mysigmail/card/commit/2b1719c7d895540e169f6a16c9d6a739a85136fa))
+
+### Other
+
+- **catalog:** remove authoring tooling from OSS ([c9b21d3](https://github.com/mysigmail/card/commit/c9b21d345e1ffc33084006b747eb02b4cff1200e))
+- **readme:** use relative license link (#53) ([dec78a4](https://github.com/mysigmail/card/commit/dec78a473961b983054e39f3437f0ee30fc743c9))
+- deploy app to separate server root (#52) ([9a23a23](https://github.com/mysigmail/card/commit/9a23a23a042487f1d8505d91cf3996d0e41d304b))
+- create draft GitHub releases for tag deployments (#51) ([d6c5130](https://github.com/mysigmail/card/commit/d6c51303c025b3444dc5d454fc30aac6764ae1c0))
+- add manual and tag-triggered production deploy (#50) ([a7e2363](https://github.com/mysigmail/card/commit/a7e2363e4742c54236b49d58e2923eb606e0f910))
+
 ## 0.14.0 (2026-07-31)
 
 ### Features
