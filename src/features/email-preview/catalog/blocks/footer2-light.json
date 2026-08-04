@@ -5,7 +5,7 @@
   "type": "footer",
   "preview": "img/components/footer-2-light.png",
   "block": {
-    "id": "F2LBlock",
+    "id": "qv65MHbb",
     "label": "Footer 6",
     "settings": {
       "spacing": {
@@ -20,7 +20,7 @@
     },
     "rows": [
       {
-        "id": "F2LSocRw",
+        "id": "KkATgT7H",
         "settings": {
           "spacing": {
             "padding": [
@@ -36,7 +36,7 @@
         },
         "cells": [
           {
-            "id": "F2LSocCl",
+            "id": "LTFVhWFh",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -45,7 +45,7 @@
             },
             "atoms": [
               {
-                "id": "F2LSocAt",
+                "id": "GMFX2xT6",
                 "type": "menu",
                 "itemType": "image",
                 "gap": 20,
@@ -62,7 +62,7 @@
                     "type": "image",
                     "name": "Twitter",
                     "link": "https://example.com",
-                    "url": "img/system/social/footer/footer-twitter-black.png",
+                    "url": "img/system/social/menu/twitter-x-black.png",
                     "width": 16,
                     "alt": "Twitter"
                   },
@@ -96,7 +96,7 @@
         ]
       },
       {
-        "id": "F2LMainR",
+        "id": "LHZzRzMq",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
@@ -105,7 +105,7 @@
         },
         "cells": [
           {
-            "id": "F2LLogoC",
+            "id": "ntTDWFeo",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -115,7 +115,7 @@
             },
             "atoms": [
               {
-                "id": "F2LLogoA",
+                "id": "ZTs4GyI_",
                 "type": "image",
                 "src": "img/system/logos/logo-black.png",
                 "link": "https://example.com",
@@ -140,7 +140,7 @@
             "rows": []
           },
           {
-            "id": "F2LInfoC",
+            "id": "yt5IBZqh",
             "settings": {
               "spacing": {
                 "padding": [
@@ -157,7 +157,7 @@
             },
             "atoms": [
               {
-                "id": "F2LInfoA",
+                "id": "fhipuLNA",
                 "type": "text",
                 "value": "<p><span style=\"font-size:14px;color:rgb(170, 170, 170)\">500 Howard Street San Francisco, CA 94105<br /><u><a href=\"https://example.com\" style=\"color:rgb(170, 170, 170)\">hello@example.com</a></u></span></p>",
                 "color": "#AAAAAA",
@@ -177,7 +177,7 @@
                 }
               },
               {
-                "id": "F2LMenuA",
+                "id": "4VJ56yUA",
                 "type": "menu",
                 "itemType": "text",
                 "gap": 20,

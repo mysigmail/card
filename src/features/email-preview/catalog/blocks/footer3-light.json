@@ -5,7 +5,7 @@
   "type": "footer",
   "preview": "img/components/footer-3-light.png",
   "block": {
-    "id": "F3LBlock",
+    "id": "aWD21pnj",
     "label": "Footer 7",
     "settings": {
       "spacing": {
@@ -20,7 +20,7 @@
     },
     "rows": [
       {
-        "id": "F3LSocRw",
+        "id": "1SDO-JGZ",
         "settings": {
           "spacing": {
             "padding": [
@@ -36,7 +36,7 @@
         },
         "cells": [
           {
-            "id": "F3LSocCl",
+            "id": "3w26r5Ff",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -45,7 +45,7 @@
             },
             "atoms": [
               {
-                "id": "F3LSocAt",
+                "id": "zRvGhTSW",
                 "type": "menu",
                 "itemType": "image",
                 "gap": 20,
@@ -62,7 +62,7 @@
                     "type": "image",
                     "name": "Twitter",
                     "link": "https://example.com",
-                    "url": "img/system/social/footer/footer-twitter-black.png",
+                    "url": "img/system/social/menu/twitter-x-black.png",
                     "width": 16,
                     "alt": "Twitter"
                   },
@@ -96,7 +96,7 @@
         ]
       },
       {
-        "id": "F3LLogoR",
+        "id": "9g4pOGxK",
         "settings": {
           "spacing": {
             "padding": [
@@ -112,7 +112,7 @@
         },
         "cells": [
           {
-            "id": "F3LLogoC",
+            "id": "3UEzpWF0",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -121,7 +121,7 @@
             },
             "atoms": [
               {
-                "id": "F3LLogoA",
+                "id": "BNPRcoLx",
                 "type": "image",
                 "src": "img/system/logos/logo-black.png",
                 "link": "https://example.com",
@@ -148,7 +148,7 @@
         ]
       },
       {
-        "id": "F3LInfoR",
+        "id": "17FXKogV",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
@@ -157,7 +157,7 @@
         },
         "cells": [
           {
-            "id": "F3LInfoC",
+            "id": "e87oEFit",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -166,7 +166,7 @@
             },
             "atoms": [
               {
-                "id": "F3LInfoA",
+                "id": "ZYePtmR0",
                 "type": "text",
                 "value": "<p style=\"text-align:center\"><span style=\"font-size:14px;color:rgb(170, 170, 170)\">500 Howard Street San Francisco, CA 94105<br /><u><a href=\"https://example.com\" style=\"color:rgb(170, 170, 170)\">hello@example.com</a></u></span></p>",
                 "color": "#AAAAAA",
@@ -191,7 +191,7 @@
         ]
       },
       {
-        "id": "F3LMenuR",
+        "id": "-mfdF_lV",
         "settings": {
           "spacing": {
             "padding": [
@@ -207,7 +207,7 @@
         },
         "cells": [
           {
-            "id": "F3LMenuC",
+            "id": "9u6-zCy6",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -216,7 +216,7 @@
             },
             "atoms": [
               {
-                "id": "F3LMenuA",
+                "id": "cxkPLV04",
                 "type": "menu",
                 "itemType": "text",
                 "gap": 20,
