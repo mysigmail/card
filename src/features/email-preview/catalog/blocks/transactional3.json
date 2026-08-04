@@ -1,0 +1,318 @@
+{
+  "version": 2,
+  "name": "transactional3",
+  "label": "Transactional 3",
+  "type": "transactional",
+  "preview": "img/components/transactional-3.png",
+  "block": {
+    "id": "MHiaUJi4",
+    "label": "Transactional 3",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#ffffff"
+    },
+    "rows": [
+      {
+        "id": "LY_6kB2S",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "5A343CoG",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 68
+            },
+            "atoms": [
+              {
+                "id": "68pFlYxU",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">TRACKING #OR-592-184</span></strong></p><p><strong><span style=\"font-size:31px\">Your package is on the move.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Estimated delivery: Thursday, 6 August</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "EiOcOWBy",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  14,
+                  8,
+                  14,
+                  8
+                ]
+              },
+              "backgroundColor": "#ffffff",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 32
+            },
+            "atoms": [
+              {
+                "id": "GZrVRcqa",
+                "type": "image",
+                "src": "img/catalog/fashion-travel/carry-on-suitcase.png",
+                "link": "https://card.email/features",
+                "alt": "Orange carry-on suitcase",
+                "width": 120,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "diEGcZRp",
+        "settings": {
+          "spacing": {
+            "padding": [
+              20,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": false,
+          "gap": 12
+        },
+        "cells": [
+          {
+            "id": "HoIz8FFe",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  14,
+                  10,
+                  14,
+                  10
+                ]
+              },
+              "backgroundColor": "#ffffff",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 33,
+              "height": 112
+            },
+            "atoms": [
+              {
+                "id": "U4PSDoft",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:14px\">01</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#1F1712;font-size:15px\">Confirmed</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:11px\">4 Aug · 09:12</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "VI1yP628",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  14,
+                  10,
+                  14,
+                  10
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 33,
+              "height": 112
+            },
+            "atoms": [
+              {
+                "id": "-KhaQaFA",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><span style=\"color:rgb(255, 107, 0);font-size:14px\"><strong>02</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(31, 23, 18);font-size:15px\"><strong>In transit</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:11px\">5 Aug · 14:40</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "DXV9gGmp",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  14,
+                  10,
+                  14,
+                  10
+                ]
+              },
+              "backgroundColor": "#ffffff",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 33,
+              "height": 112
+            },
+            "atoms": [
+              {
+                "id": "knn3c3UQ",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:14px\">03</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#1F1712;font-size:15px\">Delivered</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:11px\">Expected 6 Aug</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "4-KXzCpS",
+        "settings": {
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "cw51Gnr9",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "bQJVMfco",
+                "type": "button",
+                "text": "Track package",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -5,190 +5,177 @@
   "type": "cta",
   "preview": "img/components/cta-4.png",
   "block": {
-    "id": "ClmBKojY",
+    "id": "zajaCYcH",
     "label": "CTA 4",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          40,
-          24
+          18,
+          20,
+          18,
+          20
         ]
       },
-      "backgroundColor": "#FFFFFF"
+      "backgroundColor": "#1F1712"
     },
     "rows": [
       {
-        "id": "zxNj8oXT",
-        "settings": {
-          "spacing": {
-            "padding": [
-              0,
-              0,
-              0,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "ZlwrhDY4",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center",
-              "borderRadius": 0
-            },
-            "atoms": [
-              {
-                "id": "NJyiCnVv",
-                "type": "image",
-                "src": "img/app-icon.png",
-                "link": "https://example.com",
-                "alt": "Image",
-                "width": 100,
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                },
-                "height": 100
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "VqoC5LzN",
+        "id": "z791n21w",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 12
         },
         "cells": [
           {
-            "id": "dnPChd18",
+            "id": "3brKq_6K",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
+              "spacing": {
+                "padding": [
+                  12,
+                  8,
+                  12,
+                  8
+                ]
+              },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 20
             },
             "atoms": [
               {
-                "id": "DDHGlbdz",
+                "id": "jcr7-5Vv",
+                "type": "image",
+                "src": "img/catalog/products/headphones.png",
+                "link": "https://card.email/catalog",
+                "alt": "Orange over-ear headphones",
+                "width": 105,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "r-trAGvU",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  12,
+                  8,
+                  12,
+                  8
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 20
+            },
+            "atoms": [
+              {
+                "id": "FD66wBZG",
+                "type": "image",
+                "src": "img/catalog/fashion-travel/tote-bag.png",
+                "link": "https://card.email/catalog",
+                "alt": "Orange tote bag",
+                "width": 105,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "1QvMEXrN",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  10,
+                  4,
+                  10,
+                  10
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 60
+            },
+            "atoms": [
+              {
+                "id": "eh-2vEfK",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><span style=\"font-size: 32px;\"><strong>The Circle</strong></span></p><p style=\"text-align: center;\"><span style=\"color: rgb(159, 163, 167);\">GPS tracker for running and fitness.<br>Unique features used by professional athletes<br>are now also available for beginners!</span></p>",
-                "color": "#000000",
+                "value": "<p><strong><span style=\"color:#FFB16F;font-size:12px\">THE EDIT</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">Two useful things. One short list.</span></strong></p>",
+                "color": "#FFFFFF",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
                     0,
                     0,
                     0
                   ]
                 }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "U6Xz1BQb",
-        "settings": {
-          "spacing": {
-            "padding": [
-              22,
-              0,
-              0,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 12,
-          "collapseOnMobile": false
-        },
-        "cells": [
-          {
-            "id": "Re3-2NB4",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "right"
-            },
-            "atoms": [
+              },
               {
-                "id": "pIgqlo4I",
-                "type": "image",
-                "src": "img/app-store.png",
-                "link": "https://example.com",
-                "alt": "Download on the App Store",
-                "width": 150,
+                "id": "IdFctHx3",
+                "type": "button",
+                "text": "Browse the edit",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FFFFFF",
+                "color": "#1F1712",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
                 "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
                   "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          },
-          {
-            "id": "sgNuIkmG",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
-            },
-            "atoms": [
-              {
-                "id": "jWQPxf_r",
-                "type": "image",
-                "src": "img/google-play.png",
-                "link": "https://example.com",
-                "alt": "Get it on Google Play",
-                "width": 150,
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
+                    13,
+                    20,
+                    13,
+                    20
                   ],
-                  "padding": [
-                    0,
+                  "margin": [
+                    10,
                     0,
                     0,
                     0

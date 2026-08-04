@@ -1,0 +1,152 @@
+{
+  "version": 2,
+  "name": "header8",
+  "label": "Header 8",
+  "type": "header",
+  "preview": "img/components/header-8.png",
+  "block": {
+    "id": "YLF_2Jtg",
+    "label": "Header 8",
+    "settings": {
+      "spacing": {
+        "padding": [
+          32,
+          30,
+          32,
+          30
+        ]
+      },
+      "backgroundColor": "#FF6B00",
+      "backgroundImage": {
+        "url": "img/catalog/backgrounds/gradient-waves.png",
+        "repeat": "no-repeat",
+        "size": "cover",
+        "position": "center"
+      }
+    },
+    "rows": [
+      {
+        "id": "6V328O37",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
+        "cells": [
+          {
+            "id": "PG-_tCx7",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "width": 24
+            },
+            "atoms": [
+              {
+                "id": "5o7auu5x",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:42px\">24</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#5A2B0A;font-size:13px\">SEPTEMBER</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    18,
+                    10,
+                    18,
+                    10
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "qPdmksuh",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 52
+            },
+            "atoms": [
+              {
+                "id": "DLK75x6A",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:13px\">ONLINE WORKSHOP · 10:00</span></strong></p><p><strong><span style=\"font-size:33px\">Design the first screen together.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:14px\">Date, topic and registration action stay visible at a glance.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "nhSeUSgm",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right",
+              "width": 24
+            },
+            "atoms": [
+              {
+                "id": "Um9lTZi3",
+                "type": "button",
+                "text": "Register",
+                "link": "https://card.email/start",
+                "backgroundColor": "#1F1712",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

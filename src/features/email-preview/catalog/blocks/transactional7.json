@@ -1,0 +1,348 @@
+{
+  "version": 2,
+  "name": "transactional7",
+  "label": "Transactional 7",
+  "type": "transactional",
+  "preview": "img/components/transactional-7.png",
+  "block": {
+    "id": "EcYj_EM1",
+    "label": "Transactional 7",
+    "settings": {
+      "spacing": {
+        "padding": [
+          40,
+          44,
+          36,
+          44
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "LOx9Otg8",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "t6KUHSzA",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "fr1cojSg",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">VERIFY YOUR EMAIL</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Enter this one-time code.</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:14px\">Use it to finish signing in. The code expires in 10 minutes.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "dvWa0ylT",
+        "settings": {
+          "spacing": {
+            "padding": [
+              22,
+              30,
+              0,
+              30
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": false,
+          "gap": 10
+        },
+        "cells": [
+          {
+            "id": "tsmCUQG9",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 12,
+              "width": 16,
+              "height": 62
+            },
+            "atoms": [
+              {
+                "id": "3UEPYWWR",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">4</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "cCYKJIUX",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 12,
+              "width": 16,
+              "height": 62
+            },
+            "atoms": [
+              {
+                "id": "DpZ143Qw",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">8</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "XdU9Brs0",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 12,
+              "width": 16,
+              "height": 62
+            },
+            "atoms": [
+              {
+                "id": "pLbZnrRT",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">2</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "nFXIZ_v_",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 12,
+              "width": 16,
+              "height": 62
+            },
+            "atoms": [
+              {
+                "id": "YuTvJ15W",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">9</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "eRzgeBDk",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 12,
+              "width": 16,
+              "height": 62
+            },
+            "atoms": [
+              {
+                "id": "ovhagGe9",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">1</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "w-8M5bvU",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 12,
+              "width": 16,
+              "height": 62
+            },
+            "atoms": [
+              {
+                "id": "BSUJjwmI",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">6</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "v3P4xbl4",
+        "settings": {
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "wYm0reU3",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "VAH7jbNz",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:12px\">Never share this code with anyone, including support.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

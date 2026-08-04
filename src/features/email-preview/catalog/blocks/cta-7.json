@@ -1,0 +1,171 @@
+{
+  "version": 2,
+  "name": "cta-7",
+  "label": "CTA 7",
+  "type": "cta",
+  "preview": "img/components/cta-7.png",
+  "block": {
+    "id": "5YjBBPVU",
+    "label": "CTA 7",
+    "settings": {
+      "spacing": {
+        "padding": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "backgroundColor": "#1F1712"
+    },
+    "rows": [
+      {
+        "id": "HkeIh_cb",
+        "settings": {
+          "spacing": {
+            "padding": [
+              32,
+              0,
+              32,
+              21
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 22
+        },
+        "cells": [
+          {
+            "id": "oxzLWVog",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "backgroundImage": {
+                "url": "img/catalog/backgrounds/gradient-ribbons.png",
+                "repeat": "no-repeat",
+                "size": "cover",
+                "position": "center"
+              },
+              "width": 46,
+              "height": 250
+            },
+            "atoms": [
+              {
+                "id": "pKAr_VcY",
+                "type": "button",
+                "text": "▶  Play 2:14",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FFFFFF",
+                "color": "#1F1712",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "6ctLZdmI",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  24,
+                  18,
+                  24,
+                  18
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 54
+            },
+            "atoms": [
+              {
+                "id": "KmDA4bNP",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FFB16F;font-size:13px\">2 MINUTE STORY</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:31px\">See how the pieces come together.</span></strong></p><p><span style=\"color:#FFD9B8;font-size:15px\">A media-led CTA for demos and customer stories.</span></p>",
+                "color": "#FFFFFF",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "yIfrAXSr",
+                "type": "button",
+                "text": "Watch the film",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

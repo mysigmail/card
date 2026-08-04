@@ -5,72 +5,263 @@
   "type": "ecommerce",
   "preview": "img/components/ecommerce-5.png",
   "block": {
-    "id": "E5BlockA",
+    "id": "F4hgBdSH",
     "label": "E-Commerce 5",
     "settings": {
-      "spacing": { "padding": [30, 35, 10, 35] },
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "E5ProdRw",
+        "id": "5Iuml7WX",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 18
+          "gap": 0
         },
         "cells": [
           {
-            "id": "E5TxtCel",
+            "id": "7FY7vzBU",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
-              "verticalAlign": "middle",
-              "horizontalAlign": "left",
-              "width": 52
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
             },
             "atoms": [
               {
-                "id": "E5CopyA1",
+                "id": "DzK_Pze9",
                 "type": "text",
-                "value": "<p><span style=\"color: rgb(132, 137, 196);\">New series</span></p><p><strong><span style=\"font-size: 24px;\">Basketball Shoes</span></strong></p><p><span style=\"color: rgb(170, 170, 170);\">Men's High-Top Basketball Shoes.</span></p><p><strong><span style=\"color: rgb(105, 193, 66); font-size: 24px;\">$749.99</span></strong></p>",
-                "color": "#000000",
-                "spacing": { "margin": [0, 0, 20, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">SIDE BY SIDE</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Choose the sound that fits the room.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "_nnsBU-6",
+        "settings": {
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
+        "cells": [
+          {
+            "id": "866ZNxhA",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  24,
+                  18,
+                  24,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "width": 50
+            },
+            "atoms": [
+              {
+                "id": "ZBtYrfDy",
+                "type": "image",
+                "src": "img/catalog/products/headphones.png",
+                "link": "https://card.email/features",
+                "alt": "Orange over-ear headphones",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "height": 150
               },
               {
-                "id": "E5Button",
+                "id": "RQDhG_ub",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:22px\">Focus Headphones</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Private listening<br />32-hour battery<br />Fold-flat design</span></p><p style=\"text-align:center\"><strong><span style=\"font-size:24px\">$159</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    12,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "0CwAnutE",
                 "type": "button",
-                "text": "Buy Now",
-                "link": "https://example.com",
-                "backgroundColor": "#409EFF",
+                "text": "Choose headphones",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
                 "color": "#FFFFFF",
-                "fontSize": 16,
-                "borderRadius": 3,
-                "padding": [12, 20, 12, 20],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
           },
           {
-            "id": "E5ImgCel",
+            "id": "osIcxXhD",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "middle",
+              "spacing": {
+                "padding": [
+                  24,
+                  18,
+                  24,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "top",
               "horizontalAlign": "center",
-              "width": 48
+              "borderRadius": 18,
+              "width": 50
             },
             "atoms": [
               {
-                "id": "E5Image1",
+                "id": "KECX4VY-",
                 "type": "image",
-                "src": "img/adidas-real-deal-damien-lillard-hirere-black1-blapur-1x1.jpg",
-                "link": "https://example.com",
-                "alt": "Basketball Shoes",
-                "height": 244,
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "src": "img/catalog/products/wireless-speaker.png",
+                "link": "https://card.email/features",
+                "alt": "Orange wireless speaker",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                "height": 150
+              },
+              {
+                "id": "DqeHT-Wb",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:22px\">Room Speaker</span></strong></p><p style=\"text-align:center\"><span style=\"color:#5A2B0A;font-size:13px\">Shared listening<br />18-hour battery<br />Room-filling sound</span></p><p style=\"text-align:center\"><strong><span style=\"font-size:24px\">$119</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    12,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "dm0Aa1hU",
+                "type": "button",
+                "text": "Choose speaker",
+                "link": "https://card.email/start",
+                "backgroundColor": "#1F1712",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []

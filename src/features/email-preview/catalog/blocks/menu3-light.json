@@ -40,7 +40,7 @@
               {
                 "id": "eisxsScc",
                 "type": "image",
-                "src": "img/logo-black.png",
+                "src": "img/system/logos/logo-black.png",
                 "link": "https://example.com",
                 "alt": "Some alt",
                 "width": 110,
@@ -81,7 +81,7 @@
                     "type": "image",
                     "name": "Facebook",
                     "link": "https://example",
-                    "url": "img/facebook-black.png",
+                    "url": "img/system/social/menu/facebook-black.png",
                     "width": 16,
                     "height": 16,
                     "alt": "Some alt"
@@ -90,7 +90,7 @@
                     "type": "image",
                     "name": "Twitter",
                     "link": "https://example",
-                    "url": "img/twitter-x-black.png",
+                    "url": "img/system/social/menu/twitter-x-black.png",
                     "width": 16,
                     "height": 16,
                     "alt": "Some alt"
@@ -99,7 +99,7 @@
                     "type": "image",
                     "name": "Instagram",
                     "link": "https://example",
-                    "url": "img/instagram-black.png",
+                    "url": "img/system/social/menu/instagram-black.png",
                     "width": 16,
                     "height": 16,
                     "alt": "Some alt"

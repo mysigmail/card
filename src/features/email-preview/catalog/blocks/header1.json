@@ -5,60 +5,117 @@
   "type": "header",
   "preview": "img/components/header-1.png",
   "block": {
-    "id": "6DN_P3qn",
+    "id": "2jcVlRIf",
     "label": "Header 1",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          30,
-          24
+          38,
+          38,
+          40,
+          38
         ]
       },
-      "backgroundColor": "#222222",
-      "backgroundImage": {
-        "url": "img/josh-nuttall-pIwu5XNvXpk-unsplash.png",
-        "position": "center",
-        "repeat": "no-repeat",
-        "size": "cover"
-      }
+      "backgroundColor": "#FF6B00"
     },
     "rows": [
       {
-        "id": "4Z0_blTK",
+        "id": "qdxscp9v",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0,
-          "collapseOnMobile": false
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
         },
         "cells": [
           {
-            "id": "vH6ZPCfA",
+            "id": "cm4dmB7O",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
               "verticalAlign": "top",
-              "horizontalAlign": "left",
-              "width": 35
+              "horizontalAlign": "left"
             },
             "atoms": [
               {
-                "id": "1IZTwp4U",
-                "type": "image",
-                "src": "img/logo-white.png",
-                "link": "https://example.com",
-                "alt": "Some alt",
-                "width": 110,
+                "id": "ddaBopcy",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:13px\">INDEPENDENT NOTES ON USEFUL THINGS</span></strong></p><p><strong><span style=\"font-size:56px\">FIELD / NOTES</span></strong></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "3hcmSkIL",
+                "type": "divider",
+                "color": "#5A2B0A",
+                "height": 1,
+                "spacing": {
                   "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    14,
+                    0,
+                    14,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "M4zhuhfA",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 28
+        },
+        "cells": [
+          {
+            "id": "DgAZnEcT",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 28
+            },
+            "atoms": [
+              {
+                "id": "qJfNrUJ3",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:22px\">Issue 08</span></strong><br /><span style=\"color:#5A2B0A;font-size:13px\">SEPTEMBER · 6 MIN READ</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
                     0,
                     0,
                     0,
@@ -70,93 +127,28 @@
             "rows": []
           },
           {
-            "id": "PZ4Vy4nP",
+            "id": "PABMo7UZ",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
               "verticalAlign": "top",
-              "horizontalAlign": "right",
-              "width": 65
+              "horizontalAlign": "left",
+              "width": 72
             },
             "atoms": [
               {
-                "id": "Z8hmmq35",
-                "type": "menu",
-                "itemType": "text",
-                "gap": 10,
-                "items": [
-                  {
-                    "type": "text",
-                    "text": "Specs",
-                    "link": "https://example",
-                    "color": "#FFFFFF",
-                    "fontSize": 16
-                  },
-                  {
-                    "type": "text",
-                    "text": "Feature",
-                    "link": "https://example",
-                    "color": "#FFFFFF",
-                    "fontSize": 16
-                  },
-                  {
-                    "type": "text",
-                    "text": "Price",
-                    "link": "https://example",
-                    "color": "#FFFFFF",
-                    "fontSize": 16
-                  }
-                ],
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "TpH2kxgf",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "0j9-jlqg",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
-            },
-            "atoms": [
-              {
-                "id": "Opsftvnv",
+                "id": "Dr82ex7P",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size: 18px\">Unleash Freedom</span></strong></p><p><span style=\"color: rgb(159, 249, 141); font-size: 48px\">Discover</span><span style=\"font-size: 48px\"> the Unmatched Thrill with Our </span><span style=\"color: #9FF98D; font-size: 48px\">New Bicycle</span></p>",
-                "color": "#FFFFFF",
+                "value": "<p><strong><span style=\"font-size:28px\">A clearer way to choose what stays.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:15px\">Stories about products, habits and the small decisions that shape everyday work.</span></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
-                    50,
+                  "padding": [
+                    0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
                     0,
                     0,

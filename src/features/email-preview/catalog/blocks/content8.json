@@ -5,119 +5,93 @@
   "type": "content",
   "preview": "img/components/content-8.png",
   "block": {
-    "id": "pZTbKD3n",
+    "id": "IuR5_OHg",
     "label": "Content 8",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          30,
-          24
+          34,
+          32,
+          34,
+          32
         ]
       },
-      "backgroundColor": "#FFFFFF"
+      "backgroundColor": "#FFF3E6"
     },
     "rows": [
       {
-        "id": "bqAiH89k",
-        "settings": {
-          "spacing": {
-            "padding": [
-              0,
-              0,
-              20,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 20
-        },
-        "cells": [
-          {
-            "id": "8GBmD2St",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "link": "https://example.com",
-              "verticalAlign": "top",
-              "horizontalAlign": "left",
-              "borderRadius": 5,
-              "backgroundImage": {
-                "url": "img/juja-han-HU-uL54pfQI-unsplash.jpg",
-                "position": "center",
-                "repeat": "no-repeat",
-                "size": "cover"
-              },
-              "height": 200
-            },
-            "atoms": [],
-            "rows": []
-          },
-          {
-            "id": "A_Y0OUdR",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
-            },
-            "atoms": [
-              {
-                "id": "OD3QnWtJ",
-                "type": "text",
-                "value": "<p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: left\"><strong><span style=\"font-size: 24px\">How Music Affects</span></strong><br><strong><span style=\"font-size: 24px\">Your Productivity</span></strong></p><p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Music is regarded as one of the triumphs of human creativity.</span></p>",
-                "color": "#111111",
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "-gwgrLyo",
+        "id": "qVA-FWAj",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 20
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 24
         },
         "cells": [
           {
-            "id": "RluJbUw3",
+            "id": "w0AT4TBC",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 60
             },
             "atoms": [
               {
-                "id": "rcVVzeQc",
+                "id": "7v_ir1ty",
                 "type": "text",
-                "value": "<p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: left\"><strong><span style=\"font-size: 24px\">Background Music for</span></strong><br><strong><span style=\"font-size: 24px\">Coding</span></strong></p><p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Do you guys use background music while coding?</span></p>",
-                "color": "#111111",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">PACKING CHECKLIST</span></strong></p><p><strong><span style=\"font-size:31px\">Five decisions before the door closes.</span></strong></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "0hzFeZWU",
+                "type": "divider",
+                "color": "#FFD9B8",
+                "height": 1,
+                "spacing": {
                   "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    18,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "E-_oBgGj",
+                "type": "text",
+                "value": "<p><strong>✓ Keep one layer within reach</strong></p><p><strong>✓ Separate work from charging</strong></p><p><strong>✓ Leave room for the return trip</strong></p><p><strong>✓ Put the fragile piece in the center</strong></p><p><strong>✓ Photograph the final arrangement</strong></p>",
+                "color": "#5A2B0A",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
                     0,
                     0,
                     0,
@@ -129,23 +103,46 @@
             "rows": []
           },
           {
-            "id": "8sGBp2tE",
+            "id": "Nywddyq7",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "link": "https://example.com",
-              "verticalAlign": "top",
-              "horizontalAlign": "left",
-              "borderRadius": 5,
-              "backgroundImage": {
-                "url": "img/jefferson-santos-9SoCnyQmkzI-unsplash.jpg",
-                "position": "center",
-                "repeat": "no-repeat",
-                "size": "cover"
+              "spacing": {
+                "padding": [
+                  20,
+                  12,
+                  0,
+                  12
+                ]
               },
-              "height": 200
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "bottom",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "width": 40
             },
-            "atoms": [],
+            "atoms": [
+              {
+                "id": "DSjLoABi",
+                "type": "image",
+                "src": "img/catalog/fashion-travel/carry-on-suitcase.png",
+                "link": "https://card.email/read",
+                "alt": "Orange carry-on suitcase",
+                "width": 210,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
             "rows": []
           }
         ]

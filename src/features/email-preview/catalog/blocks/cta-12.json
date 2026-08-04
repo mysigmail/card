@@ -1,0 +1,133 @@
+{
+  "version": 2,
+  "name": "cta-12",
+  "label": "CTA 12",
+  "type": "cta",
+  "preview": "img/components/cta-12.png",
+  "block": {
+    "id": "pG8jYpIG",
+    "label": "CTA 12",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#1F1712"
+    },
+    "rows": [
+      {
+        "id": "fNd2e9HK",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 22
+        },
+        "cells": [
+          {
+            "id": "HojzZ1Fr",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 68
+            },
+            "atoms": [
+              {
+                "id": "XVSupRAC",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FFB16F;font-size:13px\">FREE FIELD GUIDE / PDF</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:31px\">A practical checklist for the next campaign.</span></strong></p><p><span style=\"color:#FFD9B8;font-size:15px\">A resource-first block that works without decorative imagery.</span></p>",
+                "color": "#FFFFFF",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "C7oDDCnS",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "#FFFFFF",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 32
+            },
+            "atoms": [
+              {
+                "id": "L1-mShjH",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:30px\">18</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:12px\">ACTIONABLE PAGES</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    18,
+                    12,
+                    0,
+                    12
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "VGUC756S",
+                "type": "button",
+                "text": "Download guide",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    12,
+                    12,
+                    18,
+                    12
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

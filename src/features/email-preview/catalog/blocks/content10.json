@@ -1,0 +1,169 @@
+{
+  "version": 2,
+  "name": "content10",
+  "label": "Content 10",
+  "type": "content",
+  "preview": "img/components/content-10.png",
+  "block": {
+    "id": "fe-VHQ4t",
+    "label": "Content 10",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "d4bGOO3V",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "f_Ia-58K",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "QRJHnOME",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">TWO PERSPECTIVES</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:30px\">What changed after the first week.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "cPW19YcT",
+        "settings": {
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
+        "cells": [
+          {
+            "id": "kAZN277F",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  22,
+                  20,
+                  22,
+                  20
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 50
+            },
+            "atoms": [
+              {
+                "id": "TMYC-8cT",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:30px\">“</span></strong></p><p><strong><span style=\"font-size:19px\">We stopped explaining the interface and started discussing the work.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Maya Chen · Product lead</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "P-EpauiY",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  22,
+                  20,
+                  22,
+                  20
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 50
+            },
+            "atoms": [
+              {
+                "id": "5I6UAJuf",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:30px\">“</span></strong></p><p><strong><span style=\"font-size:19px\">The handoff became shorter because the structure already carried intent.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Noah Ellis · Design director</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

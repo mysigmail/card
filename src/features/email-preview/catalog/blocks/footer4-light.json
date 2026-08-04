@@ -8,17 +8,41 @@
     "id": "F4LBlock",
     "label": "Footer 8",
     "settings": {
-      "spacing": { "padding": [30, 35, 30, 35] },
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
         "id": "F4LSocRw",
-        "settings": { "spacing": { "padding": [0, 0, 25, 0] }, "backgroundColor": "transparent", "gap": 0 },
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              25,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
             "id": "F4LSocCl",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
                 "id": "F4LSocAt",
@@ -26,11 +50,45 @@
                 "itemType": "image",
                 "gap": 20,
                 "items": [
-                  { "type": "image", "name": "Facebook", "link": "https://example.com", "url": "img/footer-facebook-black.png", "width": 16, "alt": "Facebook" },
-                  { "type": "image", "name": "Twitter", "link": "https://example.com", "url": "img/footer-twitter-black.png", "width": 16, "alt": "Twitter" },
-                  { "type": "image", "name": "Instagram", "link": "https://example.com", "url": "img/footer-instagram-black.png", "width": 16, "alt": "Instagram" }
+                  {
+                    "type": "image",
+                    "name": "Facebook",
+                    "link": "https://example.com",
+                    "url": "img/system/social/footer/footer-facebook-black.png",
+                    "width": 16,
+                    "alt": "Facebook"
+                  },
+                  {
+                    "type": "image",
+                    "name": "Twitter",
+                    "link": "https://example.com",
+                    "url": "img/system/social/footer/footer-twitter-black.png",
+                    "width": 16,
+                    "alt": "Twitter"
+                  },
+                  {
+                    "type": "image",
+                    "name": "Instagram",
+                    "link": "https://example.com",
+                    "url": "img/system/social/footer/footer-instagram-black.png",
+                    "width": 16,
+                    "alt": "Instagram"
+                  }
                 ],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -39,18 +97,41 @@
       },
       {
         "id": "F4LInfoR",
-        "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
             "id": "F4LInfoC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
                 "id": "F4LInfoA",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><span style=\"font-size: 14px; color: rgb(170, 170, 170);\">500 Howard Street San Francisco, CA 94105<br><u><a href=\"https://example.com\" style=\"color: rgb(170, 170, 170);\">hello@example.com</a></u></span></p>",
+                "value": "<p style=\"text-align:center\"><span style=\"font-size:14px;color:rgb(170, 170, 170)\">500 Howard Street San Francisco, CA 94105<br /><u><a href=\"https://example.com\" style=\"color:rgb(170, 170, 170)\">hello@example.com</a></u></span></p>",
                 "color": "#AAAAAA",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -59,11 +140,28 @@
       },
       {
         "id": "F4LAppsR",
-        "settings": { "spacing": { "padding": [0, 0, 20, 0] }, "backgroundColor": "transparent", "gap": 0 },
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              20,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
             "id": "F4LAppsC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
                 "id": "F4LAppsA",
@@ -71,10 +169,37 @@
                 "itemType": "image",
                 "gap": 12,
                 "items": [
-                  { "type": "image", "name": "App Store", "link": "https://example.com", "url": "img/app-store.png", "width": 150, "alt": "Download on the App Store" },
-                  { "type": "image", "name": "Google Play", "link": "https://example.com", "url": "img/google-play.png", "width": 150, "alt": "Get it on Google Play" }
+                  {
+                    "type": "image",
+                    "name": "App Store",
+                    "link": "https://example.com",
+                    "url": "img/system/stores/app-store.png",
+                    "width": 150,
+                    "alt": "Download on the App Store"
+                  },
+                  {
+                    "type": "image",
+                    "name": "Google Play",
+                    "link": "https://example.com",
+                    "url": "img/system/stores/google-play.png",
+                    "width": 150,
+                    "alt": "Get it on Google Play"
+                  }
                 ],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -83,11 +208,28 @@
       },
       {
         "id": "F4LMenuR",
-        "settings": { "spacing": { "padding": [2, 0, 0, 0] }, "backgroundColor": "transparent", "gap": 0 },
+        "settings": {
+          "spacing": {
+            "padding": [
+              2,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
             "id": "F4LMenuC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
                 "id": "F4LMenuA",
@@ -95,11 +237,42 @@
                 "itemType": "text",
                 "gap": 20,
                 "items": [
-                  { "type": "text", "text": "Update preferences", "link": "https://example.com", "color": "#222222", "fontSize": 14 },
-                  { "type": "text", "text": "Unsubscribe", "link": "https://example.com", "color": "#222222", "fontSize": 14 },
-                  { "type": "text", "text": "Policies", "link": "https://example.com", "color": "#222222", "fontSize": 14 }
+                  {
+                    "type": "text",
+                    "text": "Update preferences",
+                    "link": "https://example.com",
+                    "color": "#222222",
+                    "fontSize": 14
+                  },
+                  {
+                    "type": "text",
+                    "text": "Unsubscribe",
+                    "link": "https://example.com",
+                    "color": "#222222",
+                    "fontSize": 14
+                  },
+                  {
+                    "type": "text",
+                    "text": "Policies",
+                    "link": "https://example.com",
+                    "color": "#222222",
+                    "fontSize": 14
+                  }
                 ],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []

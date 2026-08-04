@@ -5,23 +5,32 @@
   "type": "feature",
   "preview": "img/components/feature-1.png",
   "block": {
-    "id": "F1BlockA",
+    "id": "HLhHOciq",
     "label": "Feature 1",
     "settings": {
-      "spacing": { "padding": [28, 34, 32, 34] },
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "F1TitleA",
+        "id": "fo93eHkQ",
         "settings": {
-          "spacing": { "padding": [0, 0, 24, 0] },
+          "spacing": {},
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
           "gap": 0
         },
         "cells": [
           {
-            "id": "F1HeadAA",
+            "id": "7iIWkqzG",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -30,11 +39,24 @@
             },
             "atoms": [
               {
-                "id": "F1TextAA",
+                "id": "fVWhVxNR",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 32px;\">Features</span></strong></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">THREE USEFUL OUTCOMES</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">A system that earns its place.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -42,94 +64,141 @@
         ]
       },
       {
-        "id": "F1ItemsA",
+        "id": "VSkVlALD",
         "settings": {
-          "spacing": {},
+          "spacing": {
+            "padding": [
+              20,
+              0,
+              0,
+              0
+            ]
+          },
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 22
+          "gap": 14
         },
         "cells": [
           {
-            "id": "F1CellAA",
+            "id": "-Shr1JdF",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
+              "spacing": {
+                "padding": [
+                  22,
+                  18,
+                  22,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
               "verticalAlign": "top",
-              "horizontalAlign": "center"
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 33
             },
             "atoms": [
               {
-                "id": "F1ImageA",
-                "type": "image",
-                "src": "img/browser.png",
-                "link": "https://example.com",
-                "alt": "Components",
-                "height": 70,
-                "spacing": { "margin": [0, 0, 8, 0], "padding": [0, 0, 0, 0] }
-              },
-              {
-                "id": "F1CopyAA",
+                "id": "trwygxB6",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 22px;\">Components</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">FAST</span></strong></p><p><strong><span style=\"font-size:23px\">Start with structure.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Move from blank page to a useful first draft without rebuilding the basics.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
           },
           {
-            "id": "F1CellBB",
+            "id": "aEax8H6H",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
+              "spacing": {
+                "padding": [
+                  22,
+                  18,
+                  22,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
               "verticalAlign": "top",
-              "horizontalAlign": "center"
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 33
             },
             "atoms": [
               {
-                "id": "F1ImageB",
-                "type": "image",
-                "src": "img/development.png",
-                "link": "https://example.com",
-                "alt": "ESP Ready",
-                "height": 70,
-                "spacing": { "margin": [0, 0, 8, 0], "padding": [0, 0, 0, 0] }
-              },
-              {
-                "id": "F1CopyBB",
+                "id": "3u9tdgZQ",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 22px;\">ESP Ready</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:13px\">CLEAR</span></strong></p><p><strong><span style=\"font-size:23px\">Edit with intent.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:14px\">Keep hierarchy visible while content, media and actions continue to change.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
           },
           {
-            "id": "F1CellCC",
+            "id": "kheJU0Zf",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
+              "spacing": {
+                "padding": [
+                  22,
+                  18,
+                  22,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
               "verticalAlign": "top",
-              "horizontalAlign": "center"
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 33
             },
             "atoms": [
               {
-                "id": "F1ImageC",
-                "type": "image",
-                "src": "img/test.png",
-                "link": "https://example.com",
-                "alt": "Performance",
-                "height": 70,
-                "spacing": { "margin": [0, 0, 8, 0], "padding": [0, 0, 0, 0] }
-              },
-              {
-                "id": "F1CopyCC",
+                "id": "wNEQeATe",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 22px;\">Performance</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">SAFE</span></strong></p><p><strong><span style=\"font-size:23px\">Send predictably.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Reuse email-safe patterns instead of discovering layout limits at export time.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []

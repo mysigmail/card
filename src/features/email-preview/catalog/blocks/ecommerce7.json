@@ -1,0 +1,478 @@
+{
+  "version": 2,
+  "name": "ecommerce7",
+  "label": "E-Commerce 7",
+  "type": "ecommerce",
+  "preview": "img/components/ecommerce-7.png",
+  "block": {
+    "id": "nsh72tBb",
+    "label": "E-Commerce 7",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "EFACfcdd",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "V9IdjzRE",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "bQp82CHO",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">SHOP BY USE</span></strong></p><p><strong><span style=\"font-size:31px\">Start with the part of the day.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "13ooRlZO",
+        "settings": {
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              14,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 14
+        },
+        "cells": [
+          {
+            "id": "PmHOM7v1",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  14,
+                  10,
+                  14,
+                  10
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 24,
+              "height": 108
+            },
+            "atoms": [
+              {
+                "id": "zTkbBE0o",
+                "type": "image",
+                "src": "img/catalog/devices/mechanical-keyboard.png",
+                "link": "https://card.email/features",
+                "alt": "Orange mechanical keyboard",
+                "width": 120,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "2MjuR9VU",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 56
+            },
+            "atoms": [
+              {
+                "id": "HPDhBJ4B",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:22px\">Desk</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">Keyboards, cameras and focus tools · 12 items</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "9ctBL8TD",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right",
+              "width": 20
+            },
+            "atoms": [
+              {
+                "id": "0To58vcZ",
+                "type": "button",
+                "text": "Browse desk",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "QKUcFH5S",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              14,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 14
+        },
+        "cells": [
+          {
+            "id": "uJPtDgRv",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  14,
+                  10,
+                  14,
+                  10
+                ]
+              },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 24,
+              "height": 108
+            },
+            "atoms": [
+              {
+                "id": "s51Gqc5a",
+                "type": "image",
+                "src": "img/catalog/fashion-travel/trench-coat.png",
+                "link": "https://card.email/features",
+                "alt": "Orange trench coat",
+                "width": 72,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "RxqQRhyc",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 56
+            },
+            "atoms": [
+              {
+                "id": "dL7dKIhG",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:22px\">Between plans</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">Layers, bags and travel pieces · 18 items</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "ixgONRIC",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right",
+              "width": 20
+            },
+            "atoms": [
+              {
+                "id": "A4v7gjYo",
+                "type": "button",
+                "text": "Browse travel",
+                "link": "https://card.email/start",
+                "backgroundColor": "#1F1712",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "WGT7Zbtx",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 14
+        },
+        "cells": [
+          {
+            "id": "PoyY-QjG",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  14,
+                  10,
+                  14,
+                  10
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 24,
+              "height": 108
+            },
+            "atoms": [
+              {
+                "id": "pS6b5QWm",
+                "type": "image",
+                "src": "img/catalog/fashion-travel/puffer-jacket.png",
+                "link": "https://card.email/features",
+                "alt": "Orange puffer jacket",
+                "width": 120,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "rpv29C9o",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 56
+            },
+            "atoms": [
+              {
+                "id": "w8CwvCPk",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:22px\">Everyday</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">Simple upgrades for repeat use · 9 items</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "Ao-7RsWk",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right",
+              "width": 20
+            },
+            "atoms": [
+              {
+                "id": "NLDn7SPK",
+                "type": "button",
+                "text": "Browse daily",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

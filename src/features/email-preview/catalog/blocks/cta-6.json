@@ -1,0 +1,198 @@
+{
+  "version": 2,
+  "name": "cta-6",
+  "label": "CTA 6",
+  "type": "cta",
+  "preview": "img/components/cta-6.png",
+  "block": {
+    "id": "ZrdI44Vu",
+    "label": "CTA 6",
+    "settings": {
+      "spacing": {
+        "padding": [
+          18,
+          20,
+          18,
+          20
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "jWS0YPSq",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 10
+        },
+        "cells": [
+          {
+            "id": "VUzPYp9g",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  10,
+                  8,
+                  10,
+                  8
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 18
+            },
+            "atoms": [
+              {
+                "id": "dNk-hbxo",
+                "type": "image",
+                "src": "img/catalog/devices/mini-pc.png",
+                "link": "https://card.email/catalog",
+                "alt": "Compact orange desktop computer",
+                "width": 78,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "086eJrTW",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 46
+            },
+            "atoms": [
+              {
+                "id": "IZlpqRps",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:12px\">DESKTOP APP · 4.2</span></strong></p><p><strong><span style=\"font-size:23px\">Keep the workspace one click away.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "meiD4u4I",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 18
+            },
+            "atoms": [
+              {
+                "id": "S3hXsFlB",
+                "type": "button",
+                "text": "macOS",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "nVMVYKT3",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 18
+            },
+            "atoms": [
+              {
+                "id": "tORguqoq",
+                "type": "button",
+                "text": "Windows",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FFD9B8",
+                "color": "#1F1712",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

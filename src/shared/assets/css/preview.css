@@ -194,7 +194,7 @@ a {
   align-items: center;
   justify-content: center;
   content: '';
-  background-image: url('/img/dnd-icon.svg');
+  background-image: url('/img/system/editor/dnd-icon.svg');
   background-position: center center;
   background-repeat: no-repeat;
 }

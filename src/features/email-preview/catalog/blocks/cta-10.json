@@ -1,0 +1,145 @@
+{
+  "version": 2,
+  "name": "cta-10",
+  "label": "CTA 10",
+  "type": "cta",
+  "preview": "img/components/cta-10.png",
+  "block": {
+    "id": "NZX9QvXr",
+    "label": "CTA 10",
+    "settings": {
+      "spacing": {
+        "padding": [
+          18,
+          22,
+          18,
+          22
+        ]
+      },
+      "backgroundColor": "#1F1712"
+    },
+    "rows": [
+      {
+        "id": "Fq-nMg0C",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 12
+        },
+        "cells": [
+          {
+            "id": "bOBsX08W",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 14
+            },
+            "atoms": [
+              {
+                "id": "7jMLgLOa",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFB16F;font-size:12px\">SEP</span></strong><br /><strong><span style=\"color:#FFFFFF;font-size:26px\">24</span></strong></p>",
+                "color": "#FFFFFF",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "k_2Q9JK6",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 61
+            },
+            "atoms": [
+              {
+                "id": "mjGqHLSN",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FFFFFF;font-size:22px\">Workshop starts at 10:00.</span></strong><br /><span style=\"color:#FFD9B8;font-size:13px\">12 seats remain · calendar invite included</span></p>",
+                "color": "#FFFFFF",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "Ct8umbxS",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right",
+              "width": 25
+            },
+            "atoms": [
+              {
+                "id": "3tJayKJE",
+                "type": "button",
+                "text": "Register",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

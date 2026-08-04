@@ -1,0 +1,118 @@
+{
+  "version": 2,
+  "name": "cta-11",
+  "label": "CTA 11",
+  "type": "cta",
+  "preview": "img/components/cta-11.png",
+  "block": {
+    "id": "wKuMaCvH",
+    "label": "CTA 11",
+    "settings": {
+      "spacing": {
+        "padding": [
+          38,
+          54,
+          38,
+          54
+        ]
+      },
+      "backgroundColor": "#FFF3E6"
+    },
+    "rows": [
+      {
+        "id": "fDORtH0K",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "868pWqUt",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "6HbFijHe",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">THE WEEKLY CIRCLE</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Good ideas get better in company.</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:15px\">Join makers sharing useful work, honest notes and fresh references.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "nwGZlm0N",
+                "type": "divider",
+                "color": "#FFD9B8",
+                "height": 1,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    18,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "YA2fm2ye",
+                "type": "button",
+                "text": "Join the community",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

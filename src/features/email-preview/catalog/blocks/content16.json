@@ -1,0 +1,606 @@
+{
+  "version": 2,
+  "name": "content16",
+  "label": "Content 16",
+  "type": "content",
+  "preview": "img/components/content-16.png",
+  "block": {
+    "id": "IfWQl45_",
+    "label": "Content 16",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "CzyZfPKb",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "T0AUOc55",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "q1xBYVqH",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">THREE NOTES FROM THE FIELD</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:30px\">Different teams. One clear shift.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "ijPQn1tV",
+        "settings": {
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 14
+        },
+        "cells": [
+          {
+            "id": "KUdgrglf",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  22,
+                  14,
+                  22,
+                  14
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 33
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "pQF53yZv",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "pmRud9SM",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "height": 82
+                    },
+                    "atoms": [
+                      {
+                        "id": "h7-tyyeL",
+                        "type": "image",
+                        "src": "img/catalog/avatars/travel-mug-presenter-avatar.png",
+                        "link": "https://card.email/authors",
+                        "alt": "Portrait of customer Maya Chen",
+                        "width": 82,
+                        "borderRadius": 999,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "Ez31EPEW",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      14,
+                      4,
+                      0,
+                      4
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "k36KSHkq",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "center",
+                      "height": 120
+                    },
+                    "atoms": [
+                      {
+                        "id": "XjqKLJpg",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:17px\">“We found the right starting point in minutes.”</span></strong></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "Fjl8-AAI",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      10,
+                      4,
+                      0,
+                      4
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "7HXiRLma",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "center",
+                      "height": 44
+                    },
+                    "atoms": [
+                      {
+                        "id": "epajs8JX",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Maya Chen<br />Product lead</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "4THYRoOv",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  22,
+                  14,
+                  22,
+                  14
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 33
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "45urrIm4",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "JwBcZWvx",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "height": 82
+                    },
+                    "atoms": [
+                      {
+                        "id": "Tdi45gT5",
+                        "type": "image",
+                        "src": "img/catalog/avatars/skincare-presenter-avatar.png",
+                        "link": "https://card.email/authors",
+                        "alt": "Portrait of customer Sofia Reed",
+                        "width": 82,
+                        "borderRadius": 999,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "Aqcfk_hH",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      14,
+                      4,
+                      0,
+                      4
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "DwUDF68C",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "center",
+                      "height": 120
+                    },
+                    "atoms": [
+                      {
+                        "id": "4fvjDeNC",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:17px\">“The structure made the feedback much sharper.”</span></strong></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "bTsy5EF3",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      10,
+                      4,
+                      0,
+                      4
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "U6hFvksR",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "center",
+                      "height": 44
+                    },
+                    "atoms": [
+                      {
+                        "id": "umOzAdWE",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Sofia Reed<br />Brand director</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "86oOfOe1",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  22,
+                  14,
+                  22,
+                  14
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 33
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "h4CfywXN",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "lE9bJw-5",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "height": 82
+                    },
+                    "atoms": [
+                      {
+                        "id": "MFjuGIuT",
+                        "type": "image",
+                        "src": "img/catalog/avatars/speaker-presenter-avatar.png",
+                        "link": "https://card.email/authors",
+                        "alt": "Portrait of customer Daniel Brooks",
+                        "width": 82,
+                        "borderRadius": 999,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "Vj8LYWIp",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      14,
+                      4,
+                      0,
+                      4
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "PsnVj-8s",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "center",
+                      "height": 120
+                    },
+                    "atoms": [
+                      {
+                        "id": "5p0td6Xn",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:17px\">“Our first review finally stayed on the message.”</span></strong></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "6Nq97y2F",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      10,
+                      4,
+                      0,
+                      4
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "NAydTdMp",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "center",
+                      "height": 44
+                    },
+                    "atoms": [
+                      {
+                        "id": "Q3o6n-Xa",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Daniel Brooks<br />Creative lead</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

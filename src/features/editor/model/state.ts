@@ -9,6 +9,7 @@ import {
   footer,
   header,
   menu,
+  transactional,
 } from '@/features/email-preview/catalog/load-blocks'
 
 export const library = shallowRef<BlockLibraryCategory[]>([
@@ -18,6 +19,7 @@ export const library = shallowRef<BlockLibraryCategory[]>([
   { name: 'Feature', components: feature },
   { name: 'Call to Action', components: cta },
   { name: 'E-Commerce', components: ecommerce },
+  { name: 'Transactional', components: transactional },
   { name: 'Footer', components: footer },
 ])
 

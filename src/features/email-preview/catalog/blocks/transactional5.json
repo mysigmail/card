@@ -1,0 +1,175 @@
+{
+  "version": 2,
+  "name": "transactional5",
+  "label": "Transactional 5",
+  "type": "transactional",
+  "preview": "img/components/transactional-5.png",
+  "block": {
+    "id": "H9nf7gSp",
+    "label": "Transactional 5",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
+    },
+    "rows": [
+      {
+        "id": "Vd3ib6J2",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
+        "cells": [
+          {
+            "id": "geLXjHJ_",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "width": 25,
+              "height": 138
+            },
+            "atoms": [
+              {
+                "id": "iAIbf0lw",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:42px\">24</span></strong><br><span style=\"color:#5A2B0A;font-size:13px\">SEPTEMBER</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "Q6zG6fM5",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 51
+            },
+            "atoms": [
+              {
+                "id": "wrXDHKIF",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">BOOKING CONFIRMED</span></strong></p><p><strong><span style=\"font-size:29px\">Product systems workshop</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Thursday · 10:00–11:30 AM<br>Online · Room opens 15 minutes early</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "-upL7OLY",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  16,
+                  12,
+                  16,
+                  12
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 24
+            },
+            "atoms": [
+              {
+                "id": "U6_VGmuF",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:11px\">BOOKING ID</span><br><strong><span style=\"font-size:18px\">WS-4821</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "l5MqKRKI",
+                "type": "button",
+                "text": "Add to calendar",
+                "link": "https://card.email/start",
+                "backgroundColor": "#1F1712",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    12,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

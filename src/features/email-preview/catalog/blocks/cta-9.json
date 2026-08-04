@@ -1,0 +1,145 @@
+{
+  "version": 2,
+  "name": "cta-9",
+  "label": "CTA 9",
+  "type": "cta",
+  "preview": "img/components/cta-9.png",
+  "block": {
+    "id": "DdflOtXy",
+    "label": "CTA 9",
+    "settings": {
+      "spacing": {
+        "padding": [
+          24,
+          26,
+          0,
+          26
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "GxT6wjo4",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "ZA7skW0o",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "backgroundImage": {
+                "url": "",
+                "repeat": "no-repeat",
+                "size": "unset",
+                "position": "center"
+              }
+            },
+            "atoms": [
+              {
+                "id": "RT1qrGOJ",
+                "type": "image",
+                "src": "img/catalog/fashion-travel/puffer-jacket.png",
+                "link": "https://card.email/catalog",
+                "alt": "Orange puffer jacket",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "-7--loFQ",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  16,
+                  18,
+                  32,
+                  18
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 50
+            },
+            "atoms": [
+              {
+                "id": "tBb48pb4",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:13px\">48 HOURS ONLY</span></strong></p><p><strong><span style=\"font-size:30px\">Take 20% off the layer everyone wants.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:14px\">Use code</span> <strong><span style=\"font-size:18px\">WARM20</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "BKOyvtyT",
+                "type": "button",
+                "text": "Apply the offer",
+                "link": "https://card.email/start",
+                "backgroundColor": "#1F1712",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,561 @@
+{
+  "version": 2,
+  "name": "transactional2",
+  "label": "Transactional 2",
+  "type": "transactional",
+  "preview": "img/components/transactional-2.png",
+  "block": {
+    "id": "UQs6XGi0",
+    "label": "Transactional 2",
+    "settings": {
+      "spacing": {
+        "padding": [
+          36,
+          36,
+          36,
+          36
+        ]
+      },
+      "backgroundColor": "#ffffff"
+    },
+    "rows": [
+      {
+        "id": "_vD8CrBd",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "fsDivMDb",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 58
+            },
+            "atoms": [
+              {
+                "id": "Cs9YGMsV",
+                "type": "text",
+                "value": "<p><span style=\"font-size:13px\"><strong>RECEIPT / 04 AUG 2026</strong></span></p><p><span style=\"font-size:31px\"><strong>Payment received.</strong></span></p><p><span style=\"font-size:14px\">Receipt #RC-7391 · Visa ending in 2048</span></p>",
+                "color": "#000000",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "LsdqSTjf",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right",
+              "width": 42
+            },
+            "atoms": [
+              {
+                "id": "T5e456GX",
+                "type": "text",
+                "value": "<p style=\"text-align:right\"><span style=\"font-size:12px\">TOTAL PAID</span><span><br /></span><span style=\"font-size:31px\"><strong>$248.00</strong></span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "BXflTfyM",
+        "settings": {
+          "spacing": {
+            "padding": [
+              22,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 20
+        },
+        "cells": [
+          {
+            "id": "MWsEpTYV",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 66
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "1J0Ycj0v",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": false,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "ulwrNbiq",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left",
+                      "width": 48
+                    },
+                    "atoms": [
+                      {
+                        "id": "wOHYaMMb",
+                        "type": "text",
+                        "value": "<p><span style=\"font-size:13px\">Weekend kit</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "lzipYUIN",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "right",
+                      "width": 52
+                    },
+                    "atoms": [
+                      {
+                        "id": "Jucyvz7J",
+                        "type": "text",
+                        "value": "<p style=\"text-align:right\"><span style=\"font-size:13px\">$228.00</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "-I6KAQD-",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": false,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "sLHbxCjg",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left",
+                      "width": 48
+                    },
+                    "atoms": [
+                      {
+                        "id": "9O8uFIJk",
+                        "type": "text",
+                        "value": "<p><span style=\"font-size:13px\">Shipping</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "iZ0indnG",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "right",
+                      "width": 52
+                    },
+                    "atoms": [
+                      {
+                        "id": "hHHcv-iZ",
+                        "type": "text",
+                        "value": "<p style=\"text-align:right\"><span style=\"font-size:13px\">$12.00</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "XnO4A6Ir",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": false,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "uZ0GUzGY",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left",
+                      "width": 48
+                    },
+                    "atoms": [
+                      {
+                        "id": "0FrdbBqH",
+                        "type": "text",
+                        "value": "<p><span style=\"font-size:13px\">Tax</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "eZx4fGSY",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "right",
+                      "width": 52
+                    },
+                    "atoms": [
+                      {
+                        "id": "tPdHw2ow",
+                        "type": "text",
+                        "value": "<p style=\"text-align:right\"><span style=\"font-size:13px\">$8.00</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "qGdMxx_L",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "9caBef2A",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "atoms": [
+                      {
+                        "id": "ksNY5FHr",
+                        "type": "divider",
+                        "color": "#d6d6d6",
+                        "height": 1,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            6,
+                            0,
+                            6,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "kIymtvh0",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": false,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "Ze0g4NGI",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left",
+                      "width": 48
+                    },
+                    "atoms": [
+                      {
+                        "id": "dLc-148S",
+                        "type": "text",
+                        "value": "<p><span style=\"font-size:13px\">Total</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "4olHNMlU",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "right",
+                      "width": 52
+                    },
+                    "atoms": [
+                      {
+                        "id": "WiJOCsLz",
+                        "type": "text",
+                        "value": "<p style=\"text-align:right\"><span style=\"font-size:13px\"><strong>$248.00</strong></span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "8Gjh80VV",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "bottom",
+              "horizontalAlign": "right",
+              "width": 34
+            },
+            "atoms": [
+              {
+                "id": "Rw8PR51E",
+                "type": "button",
+                "text": "Download receipt",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

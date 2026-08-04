@@ -5,297 +5,97 @@
   "type": "header",
   "preview": "img/components/header-6.png",
   "block": {
-    "id": "6unI9hVd",
+    "id": "KKLvibKq",
     "label": "Header 6",
     "settings": {
       "spacing": {
         "padding": [
+          28,
           30,
-          24,
-          40,
-          24
+          0,
+          30
         ]
       },
-      "backgroundColor": "#FFFFFF"
+      "backgroundColor": "#FF6B00",
+      "backgroundImage": {
+        "url": "img/catalog/backgrounds/gradient-orbs.png",
+        "repeat": "no-repeat",
+        "size": "cover",
+        "position": "center"
+      }
     },
     "rows": [
       {
-        "id": "-MtdTXoZ",
+        "id": "V3Kd7JOn",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
         },
         "cells": [
           {
-            "id": "81r5PHTp",
+            "id": "lgxHTO3G",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
-            },
-            "atoms": [
-              {
-                "id": "Jw0ckwPT",
-                "type": "image",
-                "src": "img/logo-black.png",
-                "link": "https://example.com",
-                "alt": "MySigMail",
-                "width": 128,
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "ePYBmZDG",
-        "settings": {
-          "spacing": {
-            "margin": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "padding": [
-              36,
-              0,
-              0,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "cIMJWUjn",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center",
-              "borderRadius": 0
-            },
-            "atoms": [
-              {
-                "id": "GfRd4BmC",
-                "type": "image",
-                "src": "img/app-icon.png",
-                "link": "https://example.com",
-                "alt": "Image",
-                "width": 100,
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                },
-                "height": 100
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "vvZmSpC0",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "hHAIHouO",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
-            },
-            "atoms": [
-              {
-                "id": "-vpAJ0nR",
-                "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(124, 134, 199); font-size: 16px\">Brand new</span></p><p style=\"text-align: center\"><strong><span style=\"font-size: 32px\">The Circle.</span></strong></p>",
-                "color": "#000000",
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "b-kxUHul",
-        "settings": {
-          "spacing": {
-            "margin": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "padding": [
-              24,
-              0,
-              0,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "qyec1Df_",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "link": "https://example.com",
-              "verticalAlign": "top",
-              "horizontalAlign": "left",
-              "borderRadius": 0,
-              "backgroundImage": {
-                "url": "img/iphone-angle.jpg",
-                "position": "center",
-                "repeat": "no-repeat",
-                "size": "contain"
+              "spacing": {
+                "padding": [
+                  26,
+                  8,
+                  26,
+                  0
+                ]
               },
-              "height": 185
-            },
-            "atoms": [],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "S8nNzZA7",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "e-fBbBkS",
-            "settings": {
-              "spacing": {},
               "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 58
             },
             "atoms": [
               {
-                "id": "GxTuyh58",
+                "id": "W6taQ8Bw",
                 "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"font-size: 18px\">GPS tracker for running and fitness.<br/>Unique features used by professional athletes<br/>are now also available for beginners!</span></p>",
-                "color": "#9FA3A7",
+                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:13px\">LIVE DEMO / THURSDAY</span></strong></p><p><strong><span style=\"font-size:36px\">Hear the difference before we name it.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:15px\">The presenter demonstrates the product and points attention toward the launch message.</span></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
                     0,
                     0,
                     0
                   ]
                 }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "yCwFG4cw",
-        "settings": {
-          "spacing": {
-            "margin": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "padding": [
-              22,
-              0,
-              22,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 12,
-          "collapseOnMobile": false
-        },
-        "cells": [
-          {
-            "id": "FpGl-_pu",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "right"
-            },
-            "atoms": [
+              },
               {
-                "id": "iQZvYueN",
-                "type": "image",
-                "src": "img/app-store.png",
-                "link": "https://example.com",
-                "alt": "Download on the App Store",
-                "width": 150,
+                "id": "S9sl5uyr",
+                "type": "button",
+                "text": "Reserve a place",
+                "link": "https://card.email/start",
+                "backgroundColor": "#1F1712",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
                 "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
                   "padding": [
-                    0,
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
                     0,
                     0,
                     0
@@ -306,29 +106,30 @@
             "rows": []
           },
           {
-            "id": "E0XTdmZa",
+            "id": "fEC0U8LF",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
+              "verticalAlign": "bottom",
+              "horizontalAlign": "center",
+              "width": 42
             },
             "atoms": [
               {
-                "id": "rez-j_UV",
+                "id": "7iv1V3za",
                 "type": "image",
-                "src": "img/google-play.png",
-                "link": "https://example.com",
-                "alt": "Get it on Google Play",
-                "width": 150,
+                "src": "img/catalog/presenters/speaker-presenter.png",
+                "link": "https://card.email/start",
+                "alt": "Presenter demonstrating an orange wireless speaker",
+                "width": 255,
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
                     0,
                     0,

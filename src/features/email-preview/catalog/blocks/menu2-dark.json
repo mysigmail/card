@@ -3,7 +3,7 @@
   "name": "menu2-dark",
   "label": "Menu 2",
   "type": "menu",
-  "preview": "img/components/menu-2-dark.jpg",
+  "preview": "img/components/menu-2-dark.png",
   "block": {
     "id": "SDoNSytC",
     "label": "Menu 2",
@@ -40,7 +40,7 @@
               {
                 "id": "_PjP-5Dz",
                 "type": "image",
-                "src": "img/logo-white.png",
+                "src": "img/system/logos/logo-white.png",
                 "link": "https://example.com",
                 "alt": "Some alt",
                 "width": 110,

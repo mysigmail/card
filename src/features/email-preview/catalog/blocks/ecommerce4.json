@@ -5,72 +5,340 @@
   "type": "ecommerce",
   "preview": "img/components/ecommerce-4.png",
   "block": {
-    "id": "E4BlockA",
+    "id": "XCNgGRyu",
     "label": "E-Commerce 4",
     "settings": {
-      "spacing": { "padding": [30, 35, 25, 35] },
-      "backgroundColor": "#FFFFFF"
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
     },
     "rows": [
       {
-        "id": "E4ProdRw",
+        "id": "FKWX3mCK",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 18
+          "gap": 16
         },
         "cells": [
           {
-            "id": "E4ImgCel",
+            "id": "FSjWzVY0",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
               "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "width": 48
+              "width": 18
             },
             "atoms": [
               {
-                "id": "E4Image1",
+                "id": "01wa3S7E",
                 "type": "image",
-                "src": "img/diesel-watch-1x1.jpg",
-                "link": "https://example.com",
-                "alt": "Diesel DZ4507",
-                "width": 247,
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "src": "img/catalog/avatars/sneaker-presenter-avatar.png",
+                "link": "https://card.email/features",
+                "alt": "Portrait of collection curator Lena Park",
+                "width": 94,
+                "borderRadius": 999,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
           },
           {
-            "id": "E4TxtCel",
+            "id": "crNJJIbn",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
               "verticalAlign": "middle",
               "horizontalAlign": "left",
-              "width": 52
+              "width": 82
             },
             "atoms": [
               {
-                "id": "E4CopyA1",
+                "id": "ULzXEh65",
                 "type": "text",
-                "value": "<p><span style=\"color: rgb(132, 137, 196);\">New series</span></p><p><strong><span style=\"font-size: 24px;\">Diesel DZ4507</span></strong></p><p><span style=\"color: rgb(170, 170, 170);\">Diesel Men's DZ4507 Chrono.</span></p><p><strong><span style=\"color: rgb(105, 193, 66); font-size: 24px;\">$137.99</span></strong></p>",
-                "color": "#000000",
-                "spacing": { "margin": [0, 0, 20, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">LENA’S WEEKEND PICKS</span></strong></p><p><strong><span style=\"font-size:29px\">Two small upgrades I keep recommending.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Curated by Lena Park · product editor</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "aXY6SoIl",
+        "settings": {
+          "spacing": {
+            "padding": [
+              20,
+              0,
+              14,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "sa1UDqk_",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  18,
+                  12,
+                  18,
+                  12
+                ]
+              },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 34,
+              "height": 150
+            },
+            "atoms": [
+              {
+                "id": "KZN4JpOJ",
+                "type": "image",
+                "src": "img/catalog/products/sneaker.png",
+                "link": "https://card.email/features",
+                "alt": "Orange and cream lifestyle sneaker",
+                "width": 180,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "LgHsKh1T",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 66
+            },
+            "atoms": [
+              {
+                "id": "aRGaoXZO",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:22px\">Weekend Pair</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Soft landing · everyday sole</span></p><p><strong><span style=\"font-size:22px\">$89</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               },
               {
-                "id": "E4Button",
+                "id": "wFHjLpL6",
                 "type": "button",
-                "text": "Buy Now",
-                "link": "https://example.com",
-                "backgroundColor": "#409EFF",
+                "text": "Shop the pair",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
                 "color": "#FFFFFF",
-                "fontSize": 16,
-                "borderRadius": 3,
-                "padding": [12, 20, 12, 20],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "wXieO2an",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "tJBsUpUW",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  18,
+                  12,
+                  18,
+                  12
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 34,
+              "height": 150
+            },
+            "atoms": [
+              {
+                "id": "Qp4ljJeV",
+                "type": "image",
+                "src": "img/catalog/products/beverage-can.png",
+                "link": "https://card.email/features",
+                "alt": "Orange sparkling beverage can",
+                "width": 96,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "11YNQlrS",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 66
+            },
+            "atoms": [
+              {
+                "id": "y57T2Wkb",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:22px\">Citrus Six-Pack</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Dry finish · low sugar</span></p><p><strong><span style=\"font-size:22px\">$18</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "9RC_0NgS",
+                "type": "button",
+                "text": "Add the pack",
+                "link": "https://card.email/start",
+                "backgroundColor": "#1F1712",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []

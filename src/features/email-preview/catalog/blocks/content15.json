@@ -1,0 +1,169 @@
+{
+  "version": 2,
+  "name": "content15",
+  "label": "Content 15",
+  "type": "content",
+  "preview": "img/components/content-15.png",
+  "block": {
+    "id": "eatvXX3r",
+    "label": "Content 15",
+    "settings": {
+      "spacing": {
+        "padding": [
+          38,
+          40,
+          38,
+          40
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
+    },
+    "rows": [
+      {
+        "id": "o2iPxn99",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "3THdWSGL",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "WdjplyFy",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">FROM THE EDITOR</span></strong></p><p><strong><span style=\"font-size:32px\">The detail worth carrying into the next draft.</span></strong></p><p><span style=\"color:#7A6558;font-size:15px\">An editorial opening with a visible author, useful for columns, newsletters and expert commentary.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "uHqgNoF1",
+                "type": "divider",
+                "color": "#FFD9B8",
+                "height": 1,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    18,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "spzJpGdt",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "jqY1XPLE",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 22
+            },
+            "atoms": [
+              {
+                "id": "qvjTzrBM",
+                "type": "image",
+                "src": "img/catalog/avatars/headphones-presenter-avatar.png",
+                "link": "https://card.email/authors",
+                "alt": "Portrait of editorial author Amir Cole",
+                "width": 96,
+                "borderRadius": 999,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "CQL0cXka",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 78
+            },
+            "atoms": [
+              {
+                "id": "AsVEse-7",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:18px\">Amir Cole</span></strong><br /><span style=\"color:#FF6B00;font-size:13px\">EDITOR · PRODUCT &amp; CULTURE</span></p><p><span style=\"color:#7A6558;font-size:14px\">Writes about the small choices that make products easier to understand and remember.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

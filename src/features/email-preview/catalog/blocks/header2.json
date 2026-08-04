@@ -5,187 +5,130 @@
   "type": "header",
   "preview": "img/components/header-2.png",
   "block": {
-    "id": "i7EZWaz_",
+    "id": "uUuCemff",
     "label": "Header 2",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          30,
-          24
+          38,
+          34,
+          38,
+          34
         ]
       },
-      "backgroundColor": "#FFFFFF"
+      "backgroundColor": "#FFF9F3"
     },
     "rows": [
       {
-        "id": "zwKU4xXR",
-        "settings": {
-          "spacing": {
-            "margin": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "padding": [
-              0,
-              0,
-              20,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 0,
-          "collapseOnMobile": false
-        },
-        "cells": [
-          {
-            "id": "9TZJB3I4",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "middle",
-              "horizontalAlign": "left"
-            },
-            "atoms": [
-              {
-                "id": "K93zo_lL",
-                "type": "image",
-                "src": "img/logo-black.png",
-                "link": "https://example.com",
-                "alt": "Some alt",
-                "width": 110,
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          },
-          {
-            "id": "ZM9AnqHF",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "middle",
-              "horizontalAlign": "right"
-            },
-            "atoms": [
-              {
-                "id": "rXgLiCox",
-                "type": "menu",
-                "itemType": "text",
-                "gap": 10,
-                "items": [
-                  {
-                    "type": "text",
-                    "text": "Specs",
-                    "link": "https://example",
-                    "color": "#222222",
-                    "fontSize": 16
-                  },
-                  {
-                    "type": "text",
-                    "text": "Feature",
-                    "link": "https://example",
-                    "color": "#222222",
-                    "fontSize": 16
-                  },
-                  {
-                    "type": "text",
-                    "text": "Price",
-                    "link": "https://example",
-                    "color": "#222222",
-                    "fontSize": 16
-                  }
-                ],
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "qDMeZHpB",
+        "id": "6EaleFeR",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 24
         },
         "cells": [
           {
-            "id": "OnhbA2Qc",
+            "id": "xhMJGIrB",
             "settings": {
-              "spacing": {
-                "margin": [
-                  0,
-                  0,
-                  0,
-                  0
-                ],
-                "padding": [
-                  140,
-                  0,
-                  20,
-                  0
-                ]
-              },
+              "spacing": {},
               "backgroundColor": "transparent",
-              "verticalAlign": "top",
+              "verticalAlign": "middle",
               "horizontalAlign": "left",
-              "borderRadius": 5,
-              "backgroundImage": {
-                "url": "img/ruslan-bardash-4kTbAMRAHtQ-unsplash.png",
-                "position": "top",
-                "repeat": "no-repeat",
-                "size": "cover"
-              }
+              "width": 56
             },
             "atoms": [
               {
-                "id": "J0q5U-8L",
+                "id": "3Hij89zy",
                 "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"font-size: 18px\">New Stool</span></p><p style=\"text-align: center\"><span style=\"font-size: 36px\"><u>Simplicity. Practicality. Naturality</u></span></p>",
-                "color": "#FFFFFF",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">ROOM-FILLING SOUND</span></strong></p><p><strong><span style=\"font-size:37px\">Small speaker. Serious presence.</span></strong></p><p><span style=\"color:#7A6558;font-size:15px\">A classic media-right hero for a focused product launch.</span></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "en1yAtxk",
+                "type": "button",
+                "text": "Meet the speaker",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "LvQoP4jg",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  24,
+                  16,
+                  24,
+                  16
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 20,
+              "width": 44
+            },
+            "atoms": [
+              {
+                "id": "E1acDCTp",
+                "type": "image",
+                "src": "img/catalog/products/wireless-speaker.png",
+                "link": "https://card.email/start",
+                "alt": "Orange wireless speaker",
+                "width": 240,
+                "spacing": {
                   "padding": [
                     0,
-                    20,
                     0,
-                    20
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
                   ]
                 }
               }

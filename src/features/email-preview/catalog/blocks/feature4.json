@@ -5,298 +5,232 @@
   "type": "feature",
   "preview": "img/components/feature-4.png",
   "block": {
-    "id": "F4BlockA",
+    "id": "WZEhqA9T",
     "label": "Feature 4",
     "settings": {
-      "spacing": { "padding": [28, 34, 34, 34] },
-      "backgroundColor": "#222222"
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
     },
     "rows": [
       {
-        "id": "F4IntroA",
+        "id": "2-pNbsM8",
         "settings": {
-          "spacing": { "padding": [0, 0, 30, 0] },
+          "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 20
         },
         "cells": [
           {
-            "id": "F4IntroC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
+            "id": "mApIYfyD",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  10,
+                  12,
+                  10,
+                  0
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 62
+            },
             "atoms": [
               {
-                "id": "F4IntroT",
+                "id": "af-jXkbc",
                 "type": "text",
-                "value": "<p><strong><span style=\"color: #FFFFFF; font-size: 32px;\">Features</span></strong></p><p><span style=\"color: #D1D5DB; font-size: 16px;\">Our app was made for creators like you. We build our APIs to be simple to use, powerful in production, and endlessly scalable.</span></p>",
-                "color": "#FFFFFF",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">GUIDED BY THE MESSAGE</span></strong></p><p><strong><span style=\"font-size:31px\">Three rules the editor keeps visible.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "zNC1Guet",
+                "type": "divider",
+                "color": "#FFD9B8",
+                "height": 1,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    16,
+                    0,
+                    16,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "upvtlwC-",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:19px\">Hierarchy stays explicit</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">The selected block, row, cell and atom remain understandable.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "kAEgnww6",
+                "type": "divider",
+                "color": "#FFD9B8",
+                "height": 1,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    16,
+                    0,
+                    16,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "GjvwIYa6",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:19px\">Changes stay local</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">Edit the useful layer without rebuilding the surrounding email.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "42L7UyhD",
+                "type": "divider",
+                "color": "#FFD9B8",
+                "height": 1,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    16,
+                    0,
+                    16,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "O0qkaElV",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:19px\">Output stays predictable</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">The reviewed structure is the structure that gets exported.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
-          }
-        ]
-      },
-      {
-        "id": "F4Grid1A",
-        "settings": { "spacing": { "padding": [0, 0, 26, 0] }, "backgroundColor": "transparent", "collapseOnMobile": true, "gap": 28 },
-        "cells": [
-          {
-            "id": "F4ItemAA",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-            "atoms": [],
-            "rows": [
-              {
-                "id": "F4HeadAA",
-                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
-                "cells": [
-                  {
-                    "id": "F4IconAA",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
-                    "atoms": [
-                      {
-                        "id": "F4ImageA",
-                        "type": "image",
-                        "src": "img/browser-white.png",
-                        "link": "https://example.com",
-                        "alt": "Components",
-                        "height": 36,
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  },
-                  {
-                    "id": "F4NameAA",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
-                    "atoms": [
-                      {
-                        "id": "F4TitleA",
-                        "type": "text",
-                        "value": "<p><strong><span style=\"color: #FFFFFF; font-size: 18px;\">Components</span></strong></p>",
-                        "color": "#FFFFFF",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
-              },
-              {
-                "id": "F4DescAA",
-                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
-                "cells": [
-                  {
-                    "id": "F4DescAC",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-                    "atoms": [
-                      {
-                        "id": "F4CopyAA",
-                        "type": "text",
-                        "value": "<p><span style=\"color: #D1D5DB; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
-                        "color": "#D1D5DB",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
-              }
-            ]
           },
           {
-            "id": "F4ItemBB",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-            "atoms": [],
-            "rows": [
-              {
-                "id": "F4HeadBB",
-                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
-                "cells": [
-                  {
-                    "id": "F4IconBB",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
-                    "atoms": [
-                      {
-                        "id": "F4ImageB",
-                        "type": "image",
-                        "src": "img/development-white.png",
-                        "link": "https://example.com",
-                        "alt": "ESP Ready",
-                        "height": 36,
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  },
-                  {
-                    "id": "F4NameBB",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
-                    "atoms": [
-                      {
-                        "id": "F4TitleB",
-                        "type": "text",
-                        "value": "<p><strong><span style=\"color: #FFFFFF; font-size: 18px;\">ESP Ready</span></strong></p>",
-                        "color": "#FFFFFF",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
+            "id": "pdW0aJQi",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  8,
+                  0,
+                  8
                 ]
               },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "bottom",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "width": 38
+            },
+            "atoms": [
               {
-                "id": "F4DescBB",
-                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
-                "cells": [
-                  {
-                    "id": "F4DescBC",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-                    "atoms": [
-                      {
-                        "id": "F4CopyBB",
-                        "type": "text",
-                        "value": "<p><span style=\"color: #D1D5DB; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
-                        "color": "#D1D5DB",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
+                "id": "JXfTAJYI",
+                "type": "image",
+                "src": "img/catalog/presenters/skincare-presenter.png",
+                "link": "https://card.email/features",
+                "alt": "Presenter indicating a set of product capabilities",
+                "width": 245,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "F4Grid2A",
-        "settings": { "spacing": {}, "backgroundColor": "transparent", "collapseOnMobile": true, "gap": 28 },
-        "cells": [
-          {
-            "id": "F4ItemCC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-            "atoms": [],
-            "rows": [
-              {
-                "id": "F4HeadCC",
-                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
-                "cells": [
-                  {
-                    "id": "F4IconCC",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
-                    "atoms": [
-                      {
-                        "id": "F4ImageC",
-                        "type": "image",
-                        "src": "img/test-white.png",
-                        "link": "https://example.com",
-                        "alt": "Performance",
-                        "height": 36,
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  },
-                  {
-                    "id": "F4NameCC",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
-                    "atoms": [
-                      {
-                        "id": "F4TitleC",
-                        "type": "text",
-                        "value": "<p><strong><span style=\"color: #FFFFFF; font-size: 18px;\">Performance</span></strong></p>",
-                        "color": "#FFFFFF",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
-              },
-              {
-                "id": "F4DescCC",
-                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
-                "cells": [
-                  {
-                    "id": "F4DescCD",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-                    "atoms": [
-                      {
-                        "id": "F4CopyCC",
-                        "type": "text",
-                        "value": "<p><span style=\"color: #D1D5DB; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
-                        "color": "#D1D5DB",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "id": "F4ItemDD",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-            "atoms": [],
-            "rows": [
-              {
-                "id": "F4HeadDD",
-                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
-                "cells": [
-                  {
-                    "id": "F4IconDD",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
-                    "atoms": [
-                      {
-                        "id": "F4ImageD",
-                        "type": "image",
-                        "src": "img/service-white.png",
-                        "link": "https://example.com",
-                        "alt": "Service",
-                        "height": 36,
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  },
-                  {
-                    "id": "F4NameDD",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
-                    "atoms": [
-                      {
-                        "id": "F4TitleD",
-                        "type": "text",
-                        "value": "<p><strong><span style=\"color: #FFFFFF; font-size: 18px;\">Service</span></strong></p>",
-                        "color": "#FFFFFF",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
-              },
-              {
-                "id": "F4DescDD",
-                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
-                "cells": [
-                  {
-                    "id": "F4DescDC",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-                    "atoms": [
-                      {
-                        "id": "F4CopyDD",
-                        "type": "text",
-                        "value": "<p><span style=\"color: #D1D5DB; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
-                        "color": "#D1D5DB",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
-              }
-            ]
+            ],
+            "rows": []
           }
         ]
       }

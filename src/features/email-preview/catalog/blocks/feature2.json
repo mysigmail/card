@@ -5,110 +5,330 @@
   "type": "feature",
   "preview": "img/components/feature-2.png",
   "block": {
-    "id": "F2BlockA",
+    "id": "gowX8n3c",
     "label": "Feature 2",
     "settings": {
-      "spacing": { "padding": [34, 42, 34, 42] },
-      "backgroundColor": "#222222"
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
     },
     "rows": [
       {
-        "id": "F2ItemsA",
+        "id": "Y4Z_dApv",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 18
+          "gap": 0
         },
         "cells": [
           {
-            "id": "F2CellAA",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "-nMIN6CS",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
             "atoms": [
               {
-                "id": "F2ImageA",
-                "type": "image",
-                "src": "img/coffee-white.png",
-                "link": "https://example.com",
-                "alt": "Coffee",
-                "height": 50,
-                "spacing": { "margin": [0, 0, 12, 0], "padding": [0, 0, 0, 0] }
-              },
-              {
-                "id": "F2CopyAA",
+                "id": "PinD_6Z_",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"color: #FFFFFF; font-size: 48px;\">78</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #D1D5DB; font-size: 14px;\">Cups of Coffee</span></p>",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">BUILT INTO THE WORKFLOW</span></strong></p><p><strong><span style=\"font-size:31px\">Follow the work, not the chrome.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "oI_vsY1d",
+        "settings": {
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              16,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
+        "cells": [
+          {
+            "id": "9AePWZLn",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  16,
+                  8,
+                  16,
+                  8
+                ]
+              },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 14
+            },
+            "atoms": [
+              {
+                "id": "6amALi6n",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:24px\">01</span></strong></p>",
                 "color": "#FFFFFF",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
           },
           {
-            "id": "F2CellBB",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "lgxumroX",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 86
+            },
             "atoms": [
               {
-                "id": "F2ImageB",
-                "type": "image",
-                "src": "img/ipod-white.png",
-                "link": "https://example.com",
-                "alt": "Music",
-                "height": 50,
-                "spacing": { "margin": [0, 0, 12, 0], "padding": [0, 0, 0, 0] }
-              },
-              {
-                "id": "F2CopyBB",
+                "id": "uFmY7N8b",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"color: #FFFFFF; font-size: 48px;\">459</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #D1D5DB; font-size: 14px;\">Songs Listened</span></p>",
-                "color": "#FFFFFF",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"font-size:21px\">Choose a proven starting point.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Begin from a reusable block instead of a finished campaign theme.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "wmKMO1Xd",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              16,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
+        "cells": [
+          {
+            "id": "TBbbwZq9",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  16,
+                  8,
+                  16,
+                  8
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 14
+            },
+            "atoms": [
+              {
+                "id": "nNgd2jrB",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#5A2B0A;font-size:24px\">02</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
           },
           {
-            "id": "F2CellCC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "gtfxESOy",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 86
+            },
             "atoms": [
               {
-                "id": "F2ImageC",
-                "type": "image",
-                "src": "img/apple-icon-white.png",
-                "link": "https://example.com",
-                "alt": "Skipped meals",
-                "height": 50,
-                "spacing": { "margin": [0, 0, 12, 0], "padding": [0, 0, 0, 0] }
-              },
-              {
-                "id": "F2CopyCC",
+                "id": "rBYNjlS4",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"color: #FFFFFF; font-size: 48px;\">05</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #D1D5DB; font-size: 14px;\">Skipped Meals</span></p>",
+                "value": "<p><strong><span style=\"font-size:21px\">Refine the useful layer.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Change copy, media and hierarchy while the email-safe structure stays visible.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "s-L-DQZE",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
+        "cells": [
+          {
+            "id": "cUXFBYwJ",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  16,
+                  8,
+                  16,
+                  8
+                ]
+              },
+              "backgroundColor": "#1F1712",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 14
+            },
+            "atoms": [
+              {
+                "id": "rz99e6-n",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:24px\">03</span></strong></p>",
                 "color": "#FFFFFF",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
           },
           {
-            "id": "F2CellDD",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "Q8Ffox-C",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 86
+            },
             "atoms": [
               {
-                "id": "F2ImageD",
-                "type": "image",
-                "src": "img/game-controller-white.png",
-                "link": "https://example.com",
-                "alt": "Gaming",
-                "height": 50,
-                "spacing": { "margin": [0, 0, 12, 0], "padding": [0, 0, 0, 0] }
-              },
-              {
-                "id": "F2CopyDD",
+                "id": "0Xb5Uo9r",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"color: #FFFFFF; font-size: 48px;\">10</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #D1D5DB; font-size: 14px;\">Hours Gaming</span></p>",
-                "color": "#FFFFFF",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"font-size:21px\">Export what you reviewed.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Carry the same structure from editor preview into JSON and final HTML.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []

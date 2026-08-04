@@ -8,17 +8,41 @@
     "id": "F3DBlock",
     "label": "Footer 3",
     "settings": {
-      "spacing": { "padding": [30, 35, 30, 35] },
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
       "backgroundColor": "#222222"
     },
     "rows": [
       {
         "id": "F3DSocRw",
-        "settings": { "spacing": { "padding": [0, 0, 25, 0] }, "backgroundColor": "transparent", "gap": 0 },
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              25,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
             "id": "F3DSocCl",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
                 "id": "F3DSocAt",
@@ -26,11 +50,45 @@
                 "itemType": "image",
                 "gap": 20,
                 "items": [
-                  { "type": "image", "name": "Facebook", "link": "https://example.com", "url": "img/footer-facebook-white.png", "width": 16, "alt": "Facebook" },
-                  { "type": "image", "name": "Twitter", "link": "https://example.com", "url": "img/footer-twitter-white.png", "width": 16, "alt": "Twitter" },
-                  { "type": "image", "name": "Instagram", "link": "https://example.com", "url": "img/footer-instagram-white.png", "width": 16, "alt": "Instagram" }
+                  {
+                    "type": "image",
+                    "name": "Facebook",
+                    "link": "https://example.com",
+                    "url": "img/system/social/footer/footer-facebook-white.png",
+                    "width": 16,
+                    "alt": "Facebook"
+                  },
+                  {
+                    "type": "image",
+                    "name": "Twitter",
+                    "link": "https://example.com",
+                    "url": "img/system/social/footer/footer-twitter-white.png",
+                    "width": 16,
+                    "alt": "Twitter"
+                  },
+                  {
+                    "type": "image",
+                    "name": "Instagram",
+                    "link": "https://example.com",
+                    "url": "img/system/social/footer/footer-instagram-white.png",
+                    "width": 16,
+                    "alt": "Instagram"
+                  }
                 ],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -39,20 +97,50 @@
       },
       {
         "id": "F3DLogoR",
-        "settings": { "spacing": { "padding": [0, 0, 20, 0] }, "backgroundColor": "transparent", "gap": 0 },
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              20,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
             "id": "F3DLogoC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
                 "id": "F3DLogoA",
                 "type": "image",
-                "src": "img/logo-white.png",
+                "src": "img/system/logos/logo-white.png",
                 "link": "https://example.com",
                 "alt": "MySigMail",
                 "width": 110,
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -61,18 +149,41 @@
       },
       {
         "id": "F3DInfoR",
-        "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
             "id": "F3DInfoC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
                 "id": "F3DInfoA",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><span style=\"font-size: 14px; color: rgb(170, 170, 170);\">500 Howard Street San Francisco, CA 94105<br><u><a href=\"https://example.com\" style=\"color: rgb(170, 170, 170);\">hello@example.com</a></u></span></p>",
+                "value": "<p style=\"text-align:center\"><span style=\"font-size:14px;color:rgb(170, 170, 170)\">500 Howard Street San Francisco, CA 94105<br /><u><a href=\"https://example.com\" style=\"color:rgb(170, 170, 170)\">hello@example.com</a></u></span></p>",
                 "color": "#AAAAAA",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -81,11 +192,28 @@
       },
       {
         "id": "F3DMenuR",
-        "settings": { "spacing": { "padding": [2, 0, 0, 0] }, "backgroundColor": "transparent", "gap": 0 },
+        "settings": {
+          "spacing": {
+            "padding": [
+              2,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
             "id": "F3DMenuC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
                 "id": "F3DMenuA",
@@ -93,11 +221,42 @@
                 "itemType": "text",
                 "gap": 20,
                 "items": [
-                  { "type": "text", "text": "Update preferences", "link": "https://example.com", "color": "#FFFFFF", "fontSize": 14 },
-                  { "type": "text", "text": "Unsubscribe", "link": "https://example.com", "color": "#FFFFFF", "fontSize": 14 },
-                  { "type": "text", "text": "Policies", "link": "https://example.com", "color": "#FFFFFF", "fontSize": 14 }
+                  {
+                    "type": "text",
+                    "text": "Update preferences",
+                    "link": "https://example.com",
+                    "color": "#FFFFFF",
+                    "fontSize": 14
+                  },
+                  {
+                    "type": "text",
+                    "text": "Unsubscribe",
+                    "link": "https://example.com",
+                    "color": "#FFFFFF",
+                    "fontSize": 14
+                  },
+                  {
+                    "type": "text",
+                    "text": "Policies",
+                    "link": "https://example.com",
+                    "color": "#FFFFFF",
+                    "fontSize": 14
+                  }
                 ],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []

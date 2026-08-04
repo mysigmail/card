@@ -3,7 +3,7 @@
   "name": "menu1-light",
   "label": "Menu 5",
   "type": "menu",
-  "preview": "img/components/menu-1-light.jpg",
+  "preview": "img/components/menu-1-light.png",
   "block": {
     "id": "AfZMqZ1Q",
     "label": "Menu 5",
@@ -40,7 +40,7 @@
               {
                 "id": "lpea8BRF",
                 "type": "image",
-                "src": "img/logo-black.png",
+                "src": "img/system/logos/logo-black.png",
                 "link": "https://example.com",
                 "alt": "Some alt",
                 "width": 110,

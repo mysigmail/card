@@ -5,31 +5,58 @@
   "type": "feature",
   "preview": "img/components/feature-5.png",
   "block": {
-    "id": "F5BlockA",
+    "id": "haM7x2Z5",
     "label": "Feature 5",
     "settings": {
-      "spacing": { "padding": [28, 34, 34, 34] },
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "F5IntroA",
+        "id": "2fDoFgGi",
         "settings": {
-          "spacing": { "padding": [0, 0, 30, 0] },
+          "spacing": {},
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
           "gap": 0
         },
         "cells": [
           {
-            "id": "F5IntroC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "rf0UFQ-I",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
-                "id": "F5IntroT",
+                "id": "zm56tK7v",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 32px;\">Features</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 16px;\">Our app was made for creators like you. We build our APIs to be simple to use, powerful in production, and endlessly scalable.</span></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">BEFORE / AFTER</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Replace guesswork with visible structure.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -37,266 +64,103 @@
         ]
       },
       {
-        "id": "F5Grid1A",
-        "settings": { "spacing": { "padding": [0, 0, 26, 0] }, "backgroundColor": "transparent", "collapseOnMobile": true, "gap": 28 },
-        "cells": [
-          {
-            "id": "F5ItemAA",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-            "atoms": [],
-            "rows": [
-              {
-                "id": "F5HeadAA",
-                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
-                "cells": [
-                  {
-                    "id": "F5IconAA",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
-                    "atoms": [
-                      {
-                        "id": "F5ImageA",
-                        "type": "image",
-                        "src": "img/browser.png",
-                        "link": "https://example.com",
-                        "alt": "Components",
-                        "height": 36,
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  },
-                  {
-                    "id": "F5NameAA",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
-                    "atoms": [
-                      {
-                        "id": "F5TitleA",
-                        "type": "text",
-                        "value": "<p><strong><span style=\"font-size: 18px;\">Components</span></strong></p>",
-                        "color": "#111111",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
-              },
-              {
-                "id": "F5DescAA",
-                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
-                "cells": [
-                  {
-                    "id": "F5DescAC",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-                    "atoms": [
-                      {
-                        "id": "F5CopyAA",
-                        "type": "text",
-                        "value": "<p><span style=\"color: #9FA3A7; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
-                        "color": "#9FA3A7",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
-              }
+        "id": "v06AvquA",
+        "settings": {
+          "spacing": {
+            "padding": [
+              20,
+              0,
+              0,
+              0
             ]
           },
-          {
-            "id": "F5ItemBB",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-            "atoms": [],
-            "rows": [
-              {
-                "id": "F5HeadBB",
-                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
-                "cells": [
-                  {
-                    "id": "F5IconBB",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
-                    "atoms": [
-                      {
-                        "id": "F5ImageB",
-                        "type": "image",
-                        "src": "img/development.png",
-                        "link": "https://example.com",
-                        "alt": "ESP Ready",
-                        "height": 36,
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  },
-                  {
-                    "id": "F5NameBB",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
-                    "atoms": [
-                      {
-                        "id": "F5TitleB",
-                        "type": "text",
-                        "value": "<p><strong><span style=\"font-size: 18px;\">ESP Ready</span></strong></p>",
-                        "color": "#111111",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
-              },
-              {
-                "id": "F5DescBB",
-                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
-                "cells": [
-                  {
-                    "id": "F5DescBC",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-                    "atoms": [
-                      {
-                        "id": "F5CopyBB",
-                        "type": "text",
-                        "value": "<p><span style=\"color: #9FA3A7; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
-                        "color": "#9FA3A7",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "F5Grid2A",
-        "settings": { "spacing": {}, "backgroundColor": "transparent", "collapseOnMobile": true, "gap": 28 },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
         "cells": [
           {
-            "id": "F5ItemCC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-            "atoms": [],
-            "rows": [
-              {
-                "id": "F5HeadCC",
-                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
-                "cells": [
-                  {
-                    "id": "F5IconCC",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
-                    "atoms": [
-                      {
-                        "id": "F5ImageC",
-                        "type": "image",
-                        "src": "img/test.png",
-                        "link": "https://example.com",
-                        "alt": "Performance",
-                        "height": 36,
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  },
-                  {
-                    "id": "F5NameCC",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
-                    "atoms": [
-                      {
-                        "id": "F5TitleC",
-                        "type": "text",
-                        "value": "<p><strong><span style=\"font-size: 18px;\">Performance</span></strong></p>",
-                        "color": "#111111",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
+            "id": "uSS2rHI7",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  26,
+                  22,
+                  26,
+                  22
                 ]
               },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 18,
+              "width": 50
+            },
+            "atoms": [
               {
-                "id": "F5DescCC",
-                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
-                "cells": [
-                  {
-                    "id": "F5DescCD",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-                    "atoms": [
-                      {
-                        "id": "F5CopyCC",
-                        "type": "text",
-                        "value": "<p><span style=\"color: #9FA3A7; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
-                        "color": "#9FA3A7",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
+                "id": "6OB5WFT7",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#7A6558;font-size:13px\">WITHOUT A SYSTEM</span></strong></p><p><strong><span style=\"font-size:24px\">Every send starts over.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">× Rebuild common sections<br />× Find hierarchy by trial<br />× Discover limits at export</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
-            ]
+            ],
+            "rows": []
           },
           {
-            "id": "F5ItemDD",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-            "atoms": [],
-            "rows": [
-              {
-                "id": "F5HeadDD",
-                "settings": { "spacing": { "padding": [0, 0, 14, 0] }, "backgroundColor": "transparent", "collapseOnMobile": false, "gap": 10 },
-                "cells": [
-                  {
-                    "id": "F5IconDD",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 16 },
-                    "atoms": [
-                      {
-                        "id": "F5ImageD",
-                        "type": "image",
-                        "src": "img/service.png",
-                        "link": "https://example.com",
-                        "alt": "Service",
-                        "height": 36,
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  },
-                  {
-                    "id": "F5NameDD",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "middle", "horizontalAlign": "left", "width": 84 },
-                    "atoms": [
-                      {
-                        "id": "F5TitleD",
-                        "type": "text",
-                        "value": "<p><strong><span style=\"font-size: 18px;\">Service</span></strong></p>",
-                        "color": "#111111",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
+            "id": "JRpvoDe7",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  26,
+                  22,
+                  26,
+                  22
                 ]
               },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 18,
+              "width": 50
+            },
+            "atoms": [
               {
-                "id": "F5DescDD",
-                "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
-                "cells": [
-                  {
-                    "id": "F5DescDC",
-                    "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "left" },
-                    "atoms": [
-                      {
-                        "id": "F5CopyDD",
-                        "type": "text",
-                        "value": "<p><span style=\"color: #9FA3A7; font-size: 14px;\">Pre-designed components from which you can quickly create beautiful email templates.</span></p>",
-                        "color": "#9FA3A7",
-                        "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-                      }
-                    ],
-                    "rows": []
-                  }
-                ]
+                "id": "3msE1Ei7",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:13px\">WITH A SYSTEM</span></strong></p><p><strong><span style=\"font-size:24px\">Each send starts ahead.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:14px\">✓ Reuse proven sections<br />✓ Edit a visible hierarchy<br />✓ Export the reviewed structure</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
-            ]
+            ],
+            "rows": []
           }
         ]
       }

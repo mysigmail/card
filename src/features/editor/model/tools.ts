@@ -20,7 +20,7 @@ export const DEFAULT_MENU_IMAGE_ITEM = {
   type: 'image' as const,
   name: 'Icon',
   link: 'https://example',
-  url: '/img/facebook-black.png',
+  url: '/img/system/social/menu/facebook-black.png',
   width: 16,
   height: 16,
   alt: 'Icon',

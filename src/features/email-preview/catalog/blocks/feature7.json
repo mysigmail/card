@@ -1,0 +1,274 @@
+{
+  "version": 2,
+  "name": "feature7",
+  "label": "Feature 7",
+  "type": "feature",
+  "preview": "img/components/feature-7.png",
+  "block": {
+    "id": "PHoY25_5",
+    "label": "Feature 7",
+    "settings": {
+      "spacing": {
+        "padding": [
+          0,
+          0,
+          28,
+          0
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "0Ch5rSYK",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "#1F1712",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
+        "cells": [
+          {
+            "id": "2OC2gduz",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  28,
+                  26,
+                  28,
+                  26
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 62
+            },
+            "atoms": [
+              {
+                "id": "hayujSUz",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FFB16F;font-size:13px\">FEATURE SPOTLIGHT</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:34px\">The tree stays visible while the message changes.</span></strong></p><p><span style=\"color:#FFD9B8;font-size:14px\">A focused capability with enough context to explain why it matters.</span></p>",
+                "color": "#FFFFFF",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "ulfGDlCr",
+                "type": "button",
+                "text": "See the editor",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FFFFFF",
+                "color": "#1F1712",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "e3HgaMMN",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  30,
+                  14,
+                  30,
+                  14
+                ]
+              },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "width": 38
+            },
+            "atoms": [
+              {
+                "id": "Ell_NaVM",
+                "type": "image",
+                "src": "img/catalog/devices/mechanical-keyboard.png",
+                "link": "https://card.email/features",
+                "alt": "Orange mechanical keyboard",
+                "width": 230,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "AhCpPUap",
+        "settings": {
+          "spacing": {
+            "padding": [
+              22,
+              6,
+              0,
+              6
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "1FCCQahl",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 33
+            },
+            "atoms": [
+              {
+                "id": "lEEhje9r",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:18px\">Select precisely</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">Block, row, cell or atom.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "iAXnahd9",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 33
+            },
+            "atoms": [
+              {
+                "id": "ZcaGYfwD",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:18px\">Edit locally</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">Change only the intended layer.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "HN-wcILt",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 33
+            },
+            "atoms": [
+              {
+                "id": "Vtj-AQMD",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:18px\">Review clearly</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">Keep the whole email in context.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}
