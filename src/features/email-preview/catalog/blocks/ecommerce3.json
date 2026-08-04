@@ -178,7 +178,7 @@
                         "padding": [
                           14,
                           10,
-                          0,
+                          14,
                           10
                         ]
                       },
@@ -186,13 +186,13 @@
                       "verticalAlign": "middle",
                       "horizontalAlign": "center",
                       "borderRadius": 14,
-                      "height": 140
+                      "height": 160
                     },
                     "atoms": [
                       {
                         "id": "VxBLBM01",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Transit Bomber</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">Lightweight shell</span></p><p style=\"text-align:center\"><span style=\"font-size:36px\"><strong>$128</strong></span></p>",
+                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Transit Bomber</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">Lightweight shell</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$128</strong></span></p>",
                         "color": "#1F1712",
                         "spacing": {
                           "padding": [
@@ -384,7 +384,7 @@
                         "padding": [
                           14,
                           10,
-                          0,
+                          14,
                           10
                         ]
                       },
@@ -392,13 +392,13 @@
                       "verticalAlign": "middle",
                       "horizontalAlign": "center",
                       "borderRadius": 14,
-                      "height": 140
+                      "height": 160
                     },
                     "atoms": [
                       {
                         "id": "BQj8ihmS",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Pocket Console</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">256 GB · OLED</span></p><p style=\"text-align:center\"><span style=\"font-size:36px\"><strong>$249</strong></span></p>",
+                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Pocket Console</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">256 GB · OLED</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$249</strong></span></p>",
                         "color": "#1F1712",
                         "spacing": {
                           "padding": [
@@ -590,7 +590,7 @@
                         "padding": [
                           14,
                           10,
-                          0,
+                          14,
                           10
                         ]
                       },
@@ -598,13 +598,13 @@
                       "verticalAlign": "middle",
                       "horizontalAlign": "center",
                       "borderRadius": 14,
-                      "height": 140
+                      "height": 160
                     },
                     "atoms": [
                       {
                         "id": "ildOMnJC",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Daily<br />Serum</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">50 ml · fragrance free</span></p><p style=\"text-align:center\"><span style=\"font-size:36px\"><strong>$42</strong></span></p>",
+                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Daily Skincare</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">50 ml · fragrance free</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$42</strong></span></p>",
                         "color": "#1F1712",
                         "spacing": {
                           "padding": [
