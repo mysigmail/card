@@ -5,7 +5,7 @@
   "type": "header",
   "preview": "img/components/header-6.png",
   "block": {
-    "id": "KKLvibKq",
+    "id": "-M_20RSW",
     "label": "Header 6",
     "settings": {
       "spacing": {
@@ -20,13 +20,13 @@
       "backgroundImage": {
         "url": "img/catalog/backgrounds/gradient-orbs.png",
         "repeat": "no-repeat",
-        "size": "cover",
-        "position": "center"
+        "size": "unset",
+        "position": "bottom"
       }
     },
     "rows": [
       {
-        "id": "V3Kd7JOn",
+        "id": "PolQCZef",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
@@ -36,11 +36,11 @@
         },
         "cells": [
           {
-            "id": "lgxHTO3G",
+            "id": "pRxJ4Few",
             "settings": {
               "spacing": {
                 "padding": [
-                  26,
+                  0,
                   8,
                   26,
                   0
@@ -53,7 +53,7 @@
             },
             "atoms": [
               {
-                "id": "W6taQ8Bw",
+                "id": "CzYxqrlH",
                 "type": "text",
                 "value": "<p><strong><span style=\"color:#5A2B0A;font-size:13px\">LIVE DEMO / THURSDAY</span></strong></p><p><strong><span style=\"font-size:36px\">Hear the difference before we name it.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:15px\">The presenter demonstrates the product and points attention toward the launch message.</span></p>",
                 "color": "#1F1712",
@@ -73,7 +73,7 @@
                 }
               },
               {
-                "id": "S9sl5uyr",
+                "id": "FuuSpqrJ",
                 "type": "button",
                 "text": "Reserve a place",
                 "link": "https://card.email/start",
@@ -106,7 +106,7 @@
             "rows": []
           },
           {
-            "id": "fEC0U8LF",
+            "id": "d5mk868D",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -116,12 +116,11 @@
             },
             "atoms": [
               {
-                "id": "7iv1V3za",
+                "id": "LA_0qSkx",
                 "type": "image",
                 "src": "img/catalog/presenters/speaker-presenter.png",
                 "link": "https://card.email/start",
                 "alt": "Presenter demonstrating an orange wireless speaker",
-                "width": 255,
                 "spacing": {
                   "padding": [
                     0,
@@ -132,7 +131,7 @@
                   "margin": [
                     0,
                     0,
-                    0,
+                    -3,
                     0
                   ]
                 }
