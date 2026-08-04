@@ -194,7 +194,7 @@ a {
   align-items: center;
   justify-content: center;
   content: '';
-  background-image: url('/img/dnd-icon.svg');
+  background-image: url('/img/system/editor/dnd-icon.svg');
   background-position: center center;
   background-repeat: no-repeat;
 }
@@ -232,6 +232,7 @@ a {
   display: block !important;
   width: 100% !important;
   max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .p-preview-mobile td.e-col-gap-mobile-collapse {
@@ -244,7 +245,8 @@ a {
   line-height: 0 !important;
 }
 
-.p-preview-mobile .e-mobile-hidden {
+.p-preview-mobile .e-mobile-hidden,
+.p-preview-mobile td.e-mobile-hidden {
   display: none !important;
   max-height: 0 !important;
   overflow: hidden !important;

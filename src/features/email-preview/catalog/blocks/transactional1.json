@@ -1,0 +1,249 @@
+{
+  "version": 2,
+  "name": "transactional1",
+  "label": "Transactional 1",
+  "type": "transactional",
+  "preview": "img/components/transactional-1.png",
+  "block": {
+    "id": "mQbitGSG",
+    "label": "Transactional 1",
+    "settings": {
+      "spacing": {
+        "padding": [
+          36,
+          34,
+          36,
+          34
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "JeShgrpN",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "IEhVTLWc",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 64
+            },
+            "atoms": [
+              {
+                "id": "LvYO-BY-",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">ORDER #CARD-2048</span></strong></p><p><strong><span style=\"font-size:32px\">Thanks, Maya. Your order is confirmed.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">We’ve received your payment and will send tracking as soon as the package leaves our studio.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "YKqVypMC",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  14,
+                  20,
+                  14
+                ]
+              },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 36
+            },
+            "atoms": [
+              {
+                "id": "lhq1W0Ia",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:13px\">CONFIRMED</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:26px\">$159.00</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "471A10R1",
+        "settings": {
+          "spacing": {
+            "padding": [
+              22,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
+        "cells": [
+          {
+            "id": "IVDkvMGq",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  14,
+                  10,
+                  14,
+                  10
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 30,
+              "height": 128
+            },
+            "atoms": [
+              {
+                "id": "BuygKcLR",
+                "type": "image",
+                "src": "img/catalog/products/headphones.png",
+                "link": "https://card.email/features",
+                "alt": "Orange over-ear headphones",
+                "width": 130,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "gow4Noxy",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 42
+            },
+            "atoms": [
+              {
+                "id": "IP8FFa3_",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:19px\">Focus Headphones</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Sand / Orange · Qty 1</span></p><p><strong><span style=\"font-size:18px\">$159.00</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "lV-Uc3Zv",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right",
+              "width": 28
+            },
+            "atoms": [
+              {
+                "id": "aYQ3lRrc",
+                "type": "button",
+                "text": "View order",
+                "link": "https://card.email/start",
+                "backgroundColor": "#1F1712",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

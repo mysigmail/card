@@ -1,0 +1,286 @@
+{
+  "version": 2,
+  "name": "ecommerce6",
+  "label": "E-Commerce 6",
+  "type": "ecommerce",
+  "preview": "img/components/ecommerce-6.png",
+  "block": {
+    "id": "0WZ0IJgP",
+    "label": "E-Commerce 6",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
+    },
+    "rows": [
+      {
+        "id": "tGn8hMTN",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "D2VVxHSD",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "m7EZZkv6",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">THE WEEKEND KIT</span></strong></p><p><strong><span style=\"font-size:31px\">Three pieces. One lighter departure.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "5DWJ3UZj",
+        "settings": {
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 12
+        },
+        "cells": [
+          {
+            "id": "_XpNrqOZ",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  18,
+                  8,
+                  18,
+                  8
+                ]
+              },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 20
+            },
+            "atoms": [
+              {
+                "id": "dltZDY0n",
+                "type": "image",
+                "src": "img/catalog/fashion-travel/carry-on-suitcase.png",
+                "link": "https://card.email/features",
+                "alt": "Orange carry-on suitcase",
+                "width": 145,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "hqPaykYb",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  18,
+                  8,
+                  18,
+                  8
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 20
+            },
+            "atoms": [
+              {
+                "id": "ZgTnP1TC",
+                "type": "image",
+                "src": "img/catalog/fashion-travel/weekend-duffel.png",
+                "link": "https://card.email/features",
+                "alt": "Orange weekend duffel bag",
+                "width": 145,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "mEZXcBnD",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  18,
+                  8,
+                  18,
+                  8
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 20
+            },
+            "atoms": [
+              {
+                "id": "ZPM7q_9F",
+                "type": "image",
+                "src": "img/catalog/fashion-travel/tote-bag.png",
+                "link": "https://card.email/features",
+                "alt": "Orange tote bag",
+                "width": 145,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "6DCXe4ky",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  10,
+                  0,
+                  10,
+                  10
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 40
+            },
+            "atoms": [
+              {
+                "id": "KTq5wxOY",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:12px\">SAVE $42 AS A SET</span></strong></p><p><strong><span style=\"font-size:25px\">Carry-on + duffel + tote</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Sand / Orange · ships together</span></p><p><strong><span style=\"font-size:27px\">$248</span></strong> <span style=\"color:#7A6558;text-decoration:line-through\">$290</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "amQc5NUe",
+                "type": "button",
+                "text": "Add the kit",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

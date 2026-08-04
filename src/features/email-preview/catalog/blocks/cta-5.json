@@ -3,129 +3,58 @@
   "name": "cta-5",
   "label": "CTA 5",
   "type": "cta",
-  "preview": "img/components/cta-6.png",
+  "preview": "img/components/cta-5.png",
   "block": {
-    "id": "CfqOE--_",
+    "id": "kuCQ4FSZ",
     "label": "CTA 5",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          35,
-          30,
-          35
+          20,
+          22,
+          20,
+          22
         ]
       },
-      "backgroundColor": "#FFFFFF",
-      "backgroundImage": {
-        "url": "public/img/toa-heftiba-O3ymvT7Wf9U-unsplash.jpg",
-        "repeat": "no-repeat",
-        "size": "cover",
-        "position": "center"
-      }
+      "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "moJYR8se",
+        "id": "KOQrfTEs",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0,
-          "backgroundImage": {
-            "url": "",
-            "repeat": "no-repeat",
-            "size": "cover",
-            "position": "center"
-          }
+          "gap": 14
         },
         "cells": [
           {
-            "id": "yy7-eOFT",
+            "id": "rVXN7OJK",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
-              "hiddenOnMobile": false,
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 18
             },
             "atoms": [
               {
-                "id": "QOLbPV9p",
-                "type": "text",
-                "value": "<p style=\"text-align: center;\">New series</p><p style=\"text-align: center;\"><span style=\"font-size: 32px;\"><strong>Overtaking the Down</strong></span></p>",
-                "color": "#ffffff",
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "ur9Hw5vX",
-        "settings": {
-          "spacing": {
-            "padding": [
-              110,
-              0,
-              110,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "hiddenOnMobile": false,
-          "collapseOnMobile": true,
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "4ndRSSHg",
-            "settings": {
-              "spacing": {
-                "padding": [
-                  0,
-                  0,
-                  0,
-                  0
-                ]
-              },
-              "backgroundColor": "transparent",
-              "hiddenOnMobile": false,
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
-            },
-            "atoms": [
-              {
-                "id": "JK1375MM",
+                "id": "5xqvujCw",
                 "type": "image",
-                "src": "img/play-button-white.png",
-                "link": "https://example.com",
-                "alt": "Image",
-                "width": 56,
-                "borderRadius": 0,
+                "src": "img/catalog/avatars/speaker-presenter-avatar.png",
+                "link": "https://card.email/catalog",
+                "alt": "Portrait of live session host Maya Chen",
+                "width": 78,
+                "borderRadius": 999,
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
                     0,
                     0,
@@ -135,48 +64,73 @@
               }
             ],
             "rows": []
-          }
-        ]
-      },
-      {
-        "id": "OetbOi9C",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "hiddenOnMobile": false,
-          "collapseOnMobile": true,
-          "gap": 0,
-          "backgroundImage": {
-            "url": "",
-            "repeat": "no-repeat",
-            "size": "cover",
-            "position": "center"
-          }
-        },
-        "cells": [
+          },
           {
-            "id": "iIRmA5-6",
+            "id": "-EamFrRq",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
-              "hiddenOnMobile": false,
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 57
             },
             "atoms": [
               {
-                "id": "-10jd10k",
+                "id": "BNwrrlq7",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\">Single available on all platforms.<br>Creative Label © 2019</p>",
-                "color": "#ffffff",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:12px\">OFFICE HOURS · 20 MIN</span></strong></p><p><strong><span style=\"font-size:23px\">Bring one question. Leave with a next step.</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">Hosted by Maya Chen · Thursday at 14:00</span></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "vckkjYo4",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right",
+              "width": 25
+            },
+            "atoms": [
+              {
+                "id": "rDbZF-WK",
+                "type": "button",
+                "text": "Save a seat",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
                   "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
                     0,
                     0,
                     0,

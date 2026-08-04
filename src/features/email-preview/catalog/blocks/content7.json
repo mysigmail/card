@@ -5,37 +5,32 @@
   "type": "content",
   "preview": "img/components/content-7.png",
   "block": {
-    "id": "fsFNaNTV",
+    "id": "4eyZc_uR",
     "label": "Content 7",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          30,
-          24
+          34,
+          32,
+          34,
+          32
         ]
       },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "HzD-rrsU",
+        "id": "GA9wLfH_",
         "settings": {
-          "spacing": {
-            "padding": [
-              0,
-              0,
-              20,
-              0
-            ]
-          },
+          "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 20
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
         },
         "cells": [
           {
-            "id": "pk0AmWCO",
+            "id": "f0lEZ8uM",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -44,18 +39,18 @@
             },
             "atoms": [
               {
-                "id": "_4YhF2Jn",
+                "id": "BiP9yJb7",
                 "type": "text",
-                "value": "<p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: left\"><strong><span style=\"font-size: 24px\">How Music Affects</span></strong><br><strong><span style=\"font-size: 24px\">Your Productivity</span></strong></p><p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Music is regarded as one of the triumphs of human creativity.</span></p>",
-                "color": "#111111",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">A SIMPLE PROCESS</span></strong></p><p><strong><span style=\"font-size:31px\">From rough thought to useful draft.</span></strong></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
                     0,
                     0,
@@ -64,60 +59,58 @@
                 }
               }
             ],
-            "rows": []
-          },
-          {
-            "id": "73wUlmJu",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "link": "https://example.com",
-              "verticalAlign": "top",
-              "horizontalAlign": "left",
-              "borderRadius": 5,
-              "backgroundImage": {
-                "url": "img/juja-han-HU-uL54pfQI-unsplash.jpg",
-                "position": "center",
-                "repeat": "no-repeat",
-                "size": "cover"
-              },
-              "height": 200
-            },
-            "atoms": [],
             "rows": []
           }
         ]
       },
       {
-        "id": "mY7szVgg",
+        "id": "1_W5gh_S",
         "settings": {
-          "spacing": {},
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              0,
+              0
+            ]
+          },
           "backgroundColor": "transparent",
-          "gap": 20
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 14
         },
         "cells": [
           {
-            "id": "v9MMIqVk",
+            "id": "HzAuxeeN",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
+              "spacing": {
+                "padding": [
+                  22,
+                  18,
+                  22,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
               "verticalAlign": "top",
-              "horizontalAlign": "left"
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 33
             },
             "atoms": [
               {
-                "id": "yrxGoyZX",
+                "id": "trfDWQ5D",
                 "type": "text",
-                "value": "<p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: left\"><strong><span style=\"font-size: 24px\">Background Music for</span></strong><br><strong><span style=\"font-size: 24px\">Coding</span></strong></p><p style=\"text-align: left\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Do you guys use background music while coding?</span></p>",
-                "color": "#111111",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:30px\">01</span></strong></p><p><strong><span style=\"font-size:18px\">Frame it</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Write the real question before searching for the answer.</span></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
                     0,
                     0,
@@ -129,23 +122,85 @@
             "rows": []
           },
           {
-            "id": "8VfCXwmo",
+            "id": "4piDPUUK",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "link": "https://example.com",
+              "spacing": {
+                "padding": [
+                  22,
+                  18,
+                  22,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
               "verticalAlign": "top",
               "horizontalAlign": "left",
-              "borderRadius": 5,
-              "backgroundImage": {
-                "url": "img/jefferson-santos-9SoCnyQmkzI-unsplash.jpg",
-                "position": "center",
-                "repeat": "no-repeat",
-                "size": "cover"
-              },
-              "height": 200
+              "borderRadius": 16,
+              "width": 33
             },
-            "atoms": [],
+            "atoms": [
+              {
+                "id": "-WC2btDJ",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:30px\">02</span></strong></p><p><strong><span style=\"font-size:18px\">Shape it</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Choose a clear order and remove the duplicate moves.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "CafRzuBt",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  22,
+                  18,
+                  22,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 33
+            },
+            "atoms": [
+              {
+                "id": "bRmm9rD8",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:30px\">03</span></strong></p><p><strong><span style=\"font-size:18px\">Share it</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">End with a next step the reader can actually take.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
             "rows": []
           }
         ]

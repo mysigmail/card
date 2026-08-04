@@ -5,206 +5,108 @@
   "type": "header",
   "preview": "img/components/header-4.png",
   "block": {
-    "id": "seGFZ6_t",
+    "id": "LK8mHtBy",
     "label": "Header 4",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          30,
-          24
+          38,
+          38,
+          40,
+          38
         ]
       },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "zyCfGxRB",
+        "id": "oyEZdYns",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
           "gap": 0
         },
         "cells": [
           {
-            "id": "wnDpSVGS",
+            "id": "q-Q9qTJb",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
-              "verticalAlign": "top",
+              "verticalAlign": "middle",
               "horizontalAlign": "center"
             },
             "atoms": [
               {
-                "id": "IDYXbflg",
-                "type": "image",
-                "src": "img/logo-black.png",
-                "link": "https://example.com",
-                "alt": "Some alt",
-                "width": 110,
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "_UhhkuIn",
-        "settings": {
-          "spacing": {
-            "margin": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "padding": [
-              20,
-              0,
-              0,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "aVTlKflM",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "link": "https://example.com",
-              "verticalAlign": "top",
-              "horizontalAlign": "left",
-              "borderRadius": 5,
-              "backgroundImage": {
-                "url": "img/johannes-andersson-v5gGwubKzEA-unsplash.jpg",
-                "position": "center",
-                "repeat": "no-repeat",
-                "size": "cover"
-              },
-              "height": 296
-            },
-            "atoms": [],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "h9ScPS5t",
-        "settings": {
-          "spacing": {
-            "margin": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "padding": [
-              10,
-              0,
-              0,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "gmjRlHwU",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
-            },
-            "atoms": [
-              {
-                "id": "P0Zoiz9o",
+                "id": "3KBRQAq_",
                 "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"font-size: 18px; color: #9CA3AF\">Surfing Season '19</span></p><p style=\"text-align: center\"><span style=\"font-size: 32px\"><strong>There's Change<br/>In The Air.<br/>Can You Feel It?</strong></span></p>",
-                "color": "#222222",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">THE WEEKEND PAIR</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:40px\">Move light. Land softly.</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:15px\">A centered product-first hero with one clear destination.</span></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
                     0,
                     0,
                     0
                   ]
                 }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "0gJc4pGE",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "rTklwPB5",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
-            },
-            "atoms": [
+              },
               {
-                "id": "UeIbZ12e",
+                "id": "s47El-fP",
+                "type": "image",
+                "src": "img/catalog/products/sneaker.png",
+                "link": "https://card.email/start",
+                "alt": "Orange and cream lifestyle sneaker",
+                "width": 310,
+                "spacing": {
+                  "padding": [
+                    16,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "tq4kP3MU",
                 "type": "button",
-                "text": "Take Part",
-                "link": "https://example.com",
-                "backgroundColor": "#4A98ED",
+                "text": "Shop the pair",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
                 "color": "#FFFFFF",
-                "fontSize": 14,
-                "borderRadius": 5,
+                "fontSize": 15,
+                "borderRadius": 10,
                 "padding": [
-                  12,
-                  24,
-                  12,
-                  24
+                  13,
+                  20,
+                  13,
+                  20
                 ],
                 "spacing": {
-                  "margin": [
+                  "padding": [
+                    13,
                     20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
                     0,
                     0,
                     0
-                  ],
-                  "padding": [
-                    12,
-                    24,
-                    12,
-                    24
                   ]
                 }
               }

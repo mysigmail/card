@@ -5,32 +5,90 @@
   "type": "footer",
   "preview": "img/components/footer-4-dark.png",
   "block": {
-    "id": "F4DBlock",
+    "id": "moO4o1IA",
     "label": "Footer 4",
     "settings": {
-      "spacing": { "padding": [30, 35, 30, 35] },
+      "spacing": {
+        "padding": [
+          30,
+          35,
+          30,
+          35
+        ]
+      },
       "backgroundColor": "#222222"
     },
     "rows": [
       {
-        "id": "F4DSocRw",
-        "settings": { "spacing": { "padding": [0, 0, 25, 0] }, "backgroundColor": "transparent", "gap": 0 },
+        "id": "Q93k4Md9",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              25,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
-            "id": "F4DSocCl",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "mjykxDYu",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
-                "id": "F4DSocAt",
+                "id": "dz4wsK0H",
                 "type": "menu",
                 "itemType": "image",
                 "gap": 20,
                 "items": [
-                  { "type": "image", "name": "Facebook", "link": "https://example.com", "url": "img/footer-facebook-white.png", "width": 16, "alt": "Facebook" },
-                  { "type": "image", "name": "Twitter", "link": "https://example.com", "url": "img/footer-twitter-white.png", "width": 16, "alt": "Twitter" },
-                  { "type": "image", "name": "Instagram", "link": "https://example.com", "url": "img/footer-instagram-white.png", "width": 16, "alt": "Instagram" }
+                  {
+                    "type": "image",
+                    "name": "Facebook",
+                    "link": "https://example.com",
+                    "url": "img/system/social/footer/footer-facebook-white.png",
+                    "width": 16,
+                    "alt": "Facebook"
+                  },
+                  {
+                    "type": "image",
+                    "name": "Twitter",
+                    "link": "https://example.com",
+                    "url": "img/system/social/menu/twitter-x-white.png",
+                    "width": 16,
+                    "alt": "Twitter"
+                  },
+                  {
+                    "type": "image",
+                    "name": "Instagram",
+                    "link": "https://example.com",
+                    "url": "img/system/social/footer/footer-instagram-white.png",
+                    "width": 16,
+                    "alt": "Instagram"
+                  }
                 ],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -38,19 +96,42 @@
         ]
       },
       {
-        "id": "F4DInfoR",
-        "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
+        "id": "g1IqSDkX",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
-            "id": "F4DInfoC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "7TuhGpEB",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
-                "id": "F4DInfoA",
+                "id": "OmC7c7EO",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><span style=\"font-size: 14px; color: rgb(170, 170, 170);\">500 Howard Street San Francisco, CA 94105<br><u><a href=\"https://example.com\" style=\"color: rgb(170, 170, 170);\">hello@example.com</a></u></span></p>",
+                "value": "<p style=\"text-align:center\"><span style=\"font-size:14px;color:rgb(170, 170, 170)\">500 Howard Street San Francisco, CA 94105<br /><u><a href=\"https://example.com\" style=\"color:rgb(170, 170, 170)\">hello@example.com</a></u></span></p>",
                 "color": "#AAAAAA",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -58,23 +139,67 @@
         ]
       },
       {
-        "id": "F4DAppsR",
-        "settings": { "spacing": { "padding": [0, 0, 20, 0] }, "backgroundColor": "transparent", "gap": 0 },
+        "id": "EChGDNL7",
+        "settings": {
+          "spacing": {
+            "padding": [
+              0,
+              0,
+              20,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
-            "id": "F4DAppsC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "Ft6EtJk5",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
-                "id": "F4DAppsA",
+                "id": "vNCmTGfR",
                 "type": "menu",
                 "itemType": "image",
                 "gap": 12,
                 "items": [
-                  { "type": "image", "name": "App Store", "link": "https://example.com", "url": "img/app-store.png", "width": 150, "alt": "Download on the App Store" },
-                  { "type": "image", "name": "Google Play", "link": "https://example.com", "url": "img/google-play.png", "width": 150, "alt": "Get it on Google Play" }
+                  {
+                    "type": "image",
+                    "name": "App Store",
+                    "link": "https://example.com",
+                    "url": "img/system/stores/app-store.png",
+                    "width": 150,
+                    "alt": "Download on the App Store"
+                  },
+                  {
+                    "type": "image",
+                    "name": "Google Play",
+                    "link": "https://example.com",
+                    "url": "img/system/stores/google-play.png",
+                    "width": 150,
+                    "alt": "Get it on Google Play"
+                  }
                 ],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -82,24 +207,72 @@
         ]
       },
       {
-        "id": "F4DMenuR",
-        "settings": { "spacing": { "padding": [2, 0, 0, 0] }, "backgroundColor": "transparent", "gap": 0 },
+        "id": "vjPpHzLT",
+        "settings": {
+          "spacing": {
+            "padding": [
+              2,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "gap": 0,
+          "collapseOnMobile": true
+        },
         "cells": [
           {
-            "id": "F4DMenuC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "FX3Kgmrq",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
             "atoms": [
               {
-                "id": "F4DMenuA",
+                "id": "h0m8688w",
                 "type": "menu",
                 "itemType": "text",
                 "gap": 20,
                 "items": [
-                  { "type": "text", "text": "Update preferences", "link": "https://example.com", "color": "#FFFFFF", "fontSize": 14 },
-                  { "type": "text", "text": "Unsubscribe", "link": "https://example.com", "color": "#FFFFFF", "fontSize": 14 },
-                  { "type": "text", "text": "Policies", "link": "https://example.com", "color": "#FFFFFF", "fontSize": 14 }
+                  {
+                    "type": "text",
+                    "text": "Update preferences",
+                    "link": "https://example.com",
+                    "color": "#FFFFFF",
+                    "fontSize": 14
+                  },
+                  {
+                    "type": "text",
+                    "text": "Unsubscribe",
+                    "link": "https://example.com",
+                    "color": "#FFFFFF",
+                    "fontSize": 14
+                  },
+                  {
+                    "type": "text",
+                    "text": "Policies",
+                    "link": "https://example.com",
+                    "color": "#FFFFFF",
+                    "fontSize": 14
+                  }
                 ],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "spacing": {
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []

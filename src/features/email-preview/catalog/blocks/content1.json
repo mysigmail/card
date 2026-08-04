@@ -5,30 +5,32 @@
   "type": "content",
   "preview": "img/components/content-1.png",
   "block": {
-    "id": "G86LJihh",
+    "id": "lIQcolOZ",
     "label": "Content 1",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          30,
-          24
+          44,
+          44,
+          40,
+          44
         ]
       },
-      "backgroundColor": "#FFFFFF"
+      "backgroundColor": "#FFF9F3"
     },
     "rows": [
       {
-        "id": "ZF7fxSqh",
+        "id": "ZpCshJt0",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
           "gap": 0
         },
         "cells": [
           {
-            "id": "Z69ew8wD",
+            "id": "h6CJDQ5x",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
@@ -37,21 +39,41 @@
             },
             "atoms": [
               {
-                "id": "8Br6p3rY",
+                "id": "h7acjiWh",
                 "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: center\"><strong><span style=\"font-size: 24px\">Is There a Perfect Time of</span></strong><br><strong><span style=\"font-size: 24px\">Day to Meditate?</span></strong></p>",
-                "color": "#111111",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">EDITOR'S NOTE / 01</span></strong></p><p><strong><span style=\"font-size:38px\">The useful part starts before the big idea.</span></strong></p><p><span style=\"color:#7A6558;font-size:17px\">A text-first opening for a point of view, announcement or thoughtful introduction.</span></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "SXzqGnaq",
+                "type": "divider",
+                "color": "#FFD9B8",
+                "height": 1,
+                "spacing": {
                   "padding": [
                     0,
                     0,
                     0,
+                    0
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    18,
                     0
                   ]
                 }
@@ -62,31 +84,79 @@
         ]
       },
       {
-        "id": "8pyLw4IG",
+        "id": "GPNQ8JtY",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 28
         },
         "cells": [
           {
-            "id": "WrsH1hiL",
+            "id": "h37960CJ",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
-              "link": "https://example.com",
               "verticalAlign": "top",
               "horizontalAlign": "left",
-              "borderRadius": 5,
-              "backgroundImage": {
-                "url": "img/simon-migaj-Yui5vfKHuzs-unsplash.jpg",
-                "position": "center",
-                "repeat": "no-repeat",
-                "size": "cover"
-              },
-              "height": 200
+              "width": 50
             },
-            "atoms": [],
+            "atoms": [
+              {
+                "id": "F__w2E_S",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:16px\">Start with context</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Explain what changed and why the reader should care now.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "-T6-tRyr",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 50
+            },
+            "atoms": [
+              {
+                "id": "9QyWJNb_",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:16px\">End with direction</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Give the next section a clear promise instead of another headline.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
             "rows": []
           }
         ]

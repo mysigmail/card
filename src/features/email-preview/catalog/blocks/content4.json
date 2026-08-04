@@ -5,50 +5,133 @@
   "type": "content",
   "preview": "img/components/content-4.png",
   "block": {
-    "id": "jN5SB2zN",
+    "id": "2cB1gEQ2",
     "label": "Content 4",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          30,
-          24
+          34,
+          32,
+          34,
+          32
         ]
       },
-      "backgroundColor": "#FFFFFF"
+      "backgroundColor": "#FFF3E6"
     },
     "rows": [
       {
-        "id": "5BP440-0",
+        "id": "lxTeHiV-",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 24
         },
         "cells": [
           {
-            "id": "nLkabrop",
+            "id": "b31ru39m",
             "settings": {
-              "spacing": {},
+              "spacing": {
+                "padding": [
+                  14,
+                  6,
+                  14,
+                  0
+                ]
+              },
               "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 58
             },
             "atoms": [
               {
-                "id": "LPIY0s03",
+                "id": "RHZkxc3v",
                 "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">12 July '19</span></p><p style=\"text-align: center\"><strong><span style=\"font-size: 24px\">How to Stick to Your Fitness Habits the Easy</span></strong><br><strong><span style=\"font-size: 24px\">Way, According to Science</span></strong></p><p style=\"text-align: center\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Staying in shape is mostly about program compliance: it&rsquo;s not about having</span><br><span style=\"color: rgb(159, 163, 167); font-size: 14px\">the best fitness program, but about having one that&rsquo;s good enough, and</span><br><span style=\"color: rgb(159, 163, 167); font-size: 14px\">making sure you actually stick to it.</span></p>",
-                "color": "#111111",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">BEHIND THE SETUP</span></strong></p><p><strong><span style=\"font-size:30px\">Small tools can change the rhythm of a room.</span></strong></p><p><span style=\"color:#7A6558;font-size:15px\">A mirrored article start for reviews, interviews and product-led editorial.</span></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "_kO98m3H",
+                "type": "button",
+                "text": "See the setup",
+                "link": "https://card.email/read",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 14,
+                "borderRadius": 10,
+                "padding": [
+                  12,
+                  18,
+                  12,
+                  18
+                ],
+                "spacing": {
                   "padding": [
+                    12,
+                    18,
+                    12,
+                    18
+                  ],
+                  "margin": [
+                    16,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "ERpnkH7d",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  24,
+                  18,
+                  24,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFFFFF",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "width": 42
+            },
+            "atoms": [
+              {
+                "id": "mO-3-790",
+                "type": "image",
+                "src": "img/catalog/devices/webcam.png",
+                "link": "https://card.email/read",
+                "alt": "Compact orange webcam",
+                "width": 220,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
                     0,
                     0,
                     0,

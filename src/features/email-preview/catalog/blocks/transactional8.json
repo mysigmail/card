@@ -1,0 +1,441 @@
+{
+  "version": 2,
+  "name": "transactional8",
+  "label": "Transactional 8",
+  "type": "transactional",
+  "preview": "img/components/transactional-8.png",
+  "block": {
+    "id": "H92wG6Jl",
+    "label": "Transactional 8",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
+    },
+    "rows": [
+      {
+        "id": "i2fnY2UC",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "kXBedgEX",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 0,
+              "width": 7,
+              "height": 72
+            },
+            "atoms": [
+              {
+                "id": "pSqq6Gis",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><span style=\"color:rgb(255, 255, 255);font-size:56px\"><strong>!</strong></span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "Eplgh30e",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "F1qoqtVq",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">PAYMENT NEEDS ATTENTION</span></strong></p><p><strong><span style=\"font-size:30px\">We couldn’t renew your plan.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Your workspace remains active until 12 August.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "7DXcEC7_",
+        "settings": {
+          "spacing": {
+            "padding": [
+              20,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "QIuz6w2q",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  14,
+                  16,
+                  14,
+                  16
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 14,
+              "width": 62
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "f66Jj0w5",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      5,
+                      0,
+                      5,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": false,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "BlMW5TyL",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left",
+                      "width": 48
+                    },
+                    "atoms": [
+                      {
+                        "id": "a5p6Dedq",
+                        "type": "text",
+                        "value": "<p><span style=\"color:#7A6558;font-size:13px\">Card</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "WNEOyk5X",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "right",
+                      "width": 52
+                    },
+                    "atoms": [
+                      {
+                        "id": "uryO6D3K",
+                        "type": "text",
+                        "value": "<p style=\"text-align:right\"><span><span style=\"color:#1F1712;font-size:13px\">Visa ···· 2048</span></span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "PSmCG4W9",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      5,
+                      0,
+                      5,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": false,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "W9ZCCci9",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left",
+                      "width": 48
+                    },
+                    "atoms": [
+                      {
+                        "id": "WfjwF-UR",
+                        "type": "text",
+                        "value": "<p><span style=\"color:#7A6558;font-size:13px\">Amount due</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "2G0gaulH",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "right",
+                      "width": 52
+                    },
+                    "atoms": [
+                      {
+                        "id": "_KcdbAHM",
+                        "type": "text",
+                        "value": "<p style=\"text-align:right\"><strong><span style=\"color:#1F1712;font-size:13px\">$24.00</span></strong></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "2olcZGxG",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      5,
+                      0,
+                      5,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": false,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "hUJJ2pKd",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left",
+                      "width": 48
+                    },
+                    "atoms": [
+                      {
+                        "id": "4Br8l3Dn",
+                        "type": "text",
+                        "value": "<p><span style=\"color:#7A6558;font-size:13px\">Next attempt</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "CWwLB1qe",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "right",
+                      "width": 52
+                    },
+                    "atoms": [
+                      {
+                        "id": "HebCqYZb",
+                        "type": "text",
+                        "value": "<p style=\"text-align:right\"><span><span style=\"color:#1F1712;font-size:13px\">8 August</span></span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "TokMXe7H",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right",
+              "width": 38
+            },
+            "atoms": [
+              {
+                "id": "iUzNL0qf",
+                "type": "button",
+                "text": "Update payment",
+                "link": "https://card.email/start",
+                "backgroundColor": "#1F1712",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

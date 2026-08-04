@@ -5,276 +5,116 @@
   "type": "header",
   "preview": "img/components/header-5.png",
   "block": {
-    "id": "T5Ql3ahD",
+    "id": "BVRu8cGf",
     "label": "Header 5",
     "settings": {
       "spacing": {
         "padding": [
           30,
-          24,
           30,
-          24
+          30,
+          30
         ]
       },
-      "backgroundColor": "#FFFFFF"
+      "backgroundColor": "#C94F00",
+      "backgroundImage": {
+        "url": "img/catalog/backgrounds/gradient-ribbons.png",
+        "repeat": "no-repeat",
+        "size": "cover",
+        "position": "center"
+      }
     },
     "rows": [
       {
-        "id": "irs6yIz2",
+        "id": "mEaZHGrn",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0,
+          "height": 360
         },
         "cells": [
           {
-            "id": "YirUX4he",
+            "id": "_sgwdxe_",
             "settings": {
               "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
+              "backgroundColor": "#1F1712",
+              "hiddenOnMobile": false,
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "borderRadius": 20,
+              "width": 100
             },
             "atoms": [
               {
-                "id": "tQqy-gXB",
-                "type": "image",
-                "src": "img/logo-black.png",
-                "link": "https://example.com",
-                "alt": "Some alt",
-                "width": 110,
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "QkzRyi9-",
-        "settings": {
-          "spacing": {
-            "margin": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "padding": [
-              30,
-              0,
-              0,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "sJmhsqgg",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
-            },
-            "atoms": [
-              {
-                "id": "EfzE8mkW",
+                "id": "BbeNVD6u",
                 "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(124, 134, 199); font-size: 18px\">New series</span></p><p style=\"text-align: center\"><strong><span style=\"font-size: 32px\">The loop by loop.</span></strong></p>",
-                "color": "#000000",
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "jvHj4RVL",
-        "settings": {
-          "spacing": {
-            "margin": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "padding": [
-              20,
-              0,
-              0,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "iVO9qCtj",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center",
-              "borderRadius": 0
-            },
-            "atoms": [
-              {
-                "id": "4GLDF3rG",
-                "type": "image",
-                "src": "img/apple-watch-2.png",
-                "link": "https://example.com",
-                "alt": "Some alt",
-                "width": 450,
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "Z8_HVWFC",
-        "settings": {
-          "spacing": {
-            "margin": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "padding": [
-              20,
-              0,
-              0,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "a27jNZU9",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
-            },
-            "atoms": [
-              {
-                "id": "X_MPrbKC",
-                "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"font-size: 18px\">With our latest model of watch,<br>you'll get the most amazing features<br>for your everyday workout.</span></p>",
-                "color": "#A9ADB3",
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "htmAmBD-",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "9cnka4Ns",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
-            },
-            "atoms": [
-              {
-                "id": "6_5udpLz",
-                "type": "button",
-                "text": "Take Yours",
-                "link": "https://example.com",
-                "backgroundColor": "#4A98ED",
+                "value": "<p style=\"text-align:right\"><strong><span style=\"color:#FFB16F;font-size:12px\">01 / OPENING FRAME</span></strong></p><p><strong><span style=\"color:#FFB16F;font-size:13px\">A NEW WAY THROUGH</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:40px\">Make the first impression feel inevitable.</span></strong></p><p><span style=\"color:#FFD9B8;font-size:15px\">A focused opening with one clear promise and a direct next step.</span></p>",
                 "color": "#FFFFFF",
-                "fontSize": 14,
-                "borderRadius": 5,
+                "spacing": {
+                  "padding": [
+                    30,
+                    34,
+                    0,
+                    34
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "L5n0teA1",
+                "type": "divider",
+                "color": "#FF6B00",
+                "height": 2,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    20,
+                    34,
+                    0,
+                    34
+                  ]
+                }
+              },
+              {
+                "id": "Vwg9ETr9",
+                "type": "button",
+                "text": "Enter the story",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FFFFFF",
+                "color": "#1F1712",
+                "fontSize": 15,
+                "borderRadius": 10,
                 "padding": [
-                  12,
-                  24,
-                  12,
-                  24
+                  13,
+                  20,
+                  13,
+                  20
                 ],
                 "spacing": {
-                  "margin": [
-                    20,
-                    0,
-                    20,
-                    0
-                  ],
                   "padding": [
-                    12,
-                    24,
-                    12,
-                    24
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    22,
+                    34,
+                    30,
+                    34
                   ]
                 }
               }

@@ -1,0 +1,260 @@
+{
+  "version": 2,
+  "name": "content12",
+  "label": "Content 12",
+  "type": "content",
+  "preview": "img/components/content-12.png",
+  "block": {
+    "id": "SJ7vI9VZ",
+    "label": "Content 12",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          34,
+          34,
+          34
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
+    },
+    "rows": [
+      {
+        "id": "pfie8xfS",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "7aWW5g1g",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "bjUKZoxb",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">FIELD INTERVIEW / 04</span></strong></p><p><strong><span style=\"font-size:32px\">The demonstration that changed the conversation.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "802cbyGw",
+                "type": "divider",
+                "color": "#FFD9B8",
+                "height": 1,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    18,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "MOX6lrX3",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
+        "cells": [
+          {
+            "id": "eBuYkccN",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  16,
+                  10,
+                  0,
+                  10
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "bottom",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "width": 28,
+              "backgroundImage": {
+                "url": "img/catalog/backgrounds/gradient-ribbons.png",
+                "repeat": "no-repeat",
+                "size": "cover",
+                "position": "right"
+              }
+            },
+            "atoms": [
+              {
+                "id": "9hbB8hrl",
+                "type": "image",
+                "src": "img/catalog/presenters/beverage-can-presenter.png",
+                "link": "https://card.email/read",
+                "alt": "Presenter demonstrating an orange beverage can",
+                "width": 165,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    -3,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "TlK1hEhK",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  8,
+                  8,
+                  8,
+                  8
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 48
+            },
+            "atoms": [
+              {
+                "id": "sLzuaCZI",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:19px\">Start with the object, then explain the choice.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Maya placed the can in view before describing the redesign. That small sequence gave the audience something concrete to inspect while the reasoning unfolded.</span></p><p><span style=\"color:#7A6558;font-size:14px\">The result felt less like a pitch and more like a useful working note.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "LvDfmDtF",
+                "type": "button",
+                "text": "Read the interview",
+                "link": "https://card.email/read",
+                "backgroundColor": "#1F1712",
+                "color": "#FFFFFF",
+                "fontSize": 14,
+                "borderRadius": 10,
+                "padding": [
+                  12,
+                  18,
+                  12,
+                  18
+                ],
+                "spacing": {
+                  "padding": [
+                    12,
+                    18,
+                    12,
+                    18
+                  ],
+                  "margin": [
+                    16,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "UYVMAKH-",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  16,
+                  20,
+                  16
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 24
+            },
+            "atoms": [
+              {
+                "id": "e6MnQrQX",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:12px\">KEY DETAIL</span></strong></p><p><strong><span style=\"font-size:21px\">Show first.<br />Explain second.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:13px\">A compact takeaway separated from the main narrative.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

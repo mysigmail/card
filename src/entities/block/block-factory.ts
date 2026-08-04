@@ -92,7 +92,7 @@ export function createImageAtom(): ImageAtom {
   return {
     id: nanoid(8),
     type: 'image',
-    src: '/img/logo-black.png',
+    src: '/img/system/logos/logo-black.png',
     link: 'https://example.com',
     alt: 'Image',
     width: 120,

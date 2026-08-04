@@ -15,6 +15,7 @@ export const EMAIL_RESPONSIVE_CSS = `
     display: block !important;
     width: 100% !important;
     max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   td.e-col-gap-mobile-collapse {
@@ -27,7 +28,8 @@ export const EMAIL_RESPONSIVE_CSS = `
     line-height: 0 !important;
   }
 
-  .e-mobile-hidden {
+  .e-mobile-hidden,
+  td.e-mobile-hidden {
     display: none !important;
     max-height: 0 !important;
     overflow: hidden !important;

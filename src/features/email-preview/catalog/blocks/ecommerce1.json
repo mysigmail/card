@@ -5,36 +5,58 @@
   "type": "ecommerce",
   "preview": "img/components/ecommerce-1.png",
   "block": {
-    "id": "E1BlockA",
+    "id": "BWpy2clH",
     "label": "E-Commerce 1",
     "settings": {
-      "spacing": { "padding": [30, 35, 30, 35] },
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "E1TopRow",
+        "id": "m-6kUTXR",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
           "gap": 0
         },
         "cells": [
           {
-            "id": "E1TopCel",
+            "id": "99ud85lR",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
               "verticalAlign": "top",
-              "horizontalAlign": "right"
+              "horizontalAlign": "left"
             },
             "atoms": [
               {
-                "id": "E1TopTxt",
+                "id": "QPcoKmxv",
                 "type": "text",
-                "value": "<p style=\"text-align: right;\"><span style=\"font-size: 14px; color: rgb(59, 175, 252);\"><a href=\"https://example.com\">See all ➝</a></span></p>",
-                "color": "#000000",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">THE DESK EDIT</span></strong></p><p><strong><span style=\"font-size:31px\">One featured upgrade, three useful additions.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -42,96 +64,363 @@
         ]
       },
       {
-        "id": "E1ImgRow",
+        "id": "FEdUsrgi",
         "settings": {
-          "spacing": { "padding": [0, 0, 20, 0] },
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              0,
+              0
+            ]
+          },
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 14
         },
         "cells": [
           {
-            "id": "E1ImgCel",
+            "id": "5OI-y1pr",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
+              "spacing": {
+                "padding": [
+                  22,
+                  18,
+                  22,
+                  18
+                ]
+              },
+              "backgroundColor": "#1F1712",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "width": 50
             },
             "atoms": [
               {
-                "id": "E1ImgAtm",
+                "id": "c-uVbdO2",
                 "type": "image",
-                "src": "img/t-shirt-1.png",
-                "link": "https://example.com",
-                "alt": "Extended Shirt",
-                "width": 530,
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "E1TxtRow",
-        "settings": {
-          "spacing": { "padding": [0, 0, 20, 0] },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "E1TxtCel",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
-            },
-            "atoms": [
+                "src": "img/catalog/products/headphones.png",
+                "link": "https://card.email/features",
+                "alt": "Orange over-ear headphones",
+                "width": 210,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
               {
-                "id": "E1CopyAA",
+                "id": "dh9WWP4B",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><span style=\"color: rgb(132, 137, 196);\">New series</span></p><p style=\"text-align: center;\"><strong><span style=\"font-size: 32px;\">Extended Shirt</span></strong></p><p style=\"text-align: center;\"><span style=\"color: rgb(170, 170, 170);\">Hip Hop Basic Longline T-Shirt.</span></p><p style=\"text-align: center;\"><strong><span style=\"color: rgb(105, 193, 66); font-size: 24px;\">$24.99</span></strong></p>",
-                "color": "#000000",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "E1CtaRow",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "E1CtaCel",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
-            },
-            "atoms": [
-              {
-                "id": "E1Button",
-                "type": "button",
-                "text": "Buy Now",
-                "link": "https://example.com",
-                "backgroundColor": "#409EFF",
+                "value": "<p><strong><span style=\"color:#FFB16F;font-size:12px\">FEATURED</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">Focus Headphones</span></strong></p><p><span style=\"color:#FFD9B8;font-size:13px\">Soft ear cups · wireless · 32h battery</span></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">$159</span></strong></p>",
                 "color": "#FFFFFF",
-                "fontSize": 16,
-                "borderRadius": 3,
-                "padding": [12, 20, 12, 20],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+                "spacing": {
+                  "padding": [
+                    14,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "ZqTK_oUx",
+                "type": "button",
+                "text": "Add to setup",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
+          },
+          {
+            "id": "esKeNXHH",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  10,
+                  10,
+                  10,
+                  10
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 18,
+              "width": 50
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "M0_KQaN7",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 10
+                },
+                "cells": [
+                  {
+                    "id": "U3f8jDAv",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          16,
+                          10,
+                          16,
+                          10
+                        ]
+                      },
+                      "backgroundColor": "#FFF9F3",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "center",
+                      "borderRadius": 14,
+                      "width": 50
+                    },
+                    "atoms": [
+                      {
+                        "id": "huamfjRJ",
+                        "type": "image",
+                        "src": "img/catalog/devices/webcam.png",
+                        "link": "https://card.email/features",
+                        "alt": "Compact orange webcam",
+                        "width": 112,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      {
+                        "id": "y8cp7u3B",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:17px\">Desk Camera</span></strong><br /><span style=\"color:#7A6558;font-size:12px\">4K · auto framing</span><br /><strong><span style=\"font-size:19px\">$89</span></strong></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            10,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "aED7QA_-",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          16,
+                          10,
+                          16,
+                          10
+                        ]
+                      },
+                      "backgroundColor": "#FFD9B8",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "center",
+                      "borderRadius": 14,
+                      "width": 50
+                    },
+                    "atoms": [
+                      {
+                        "id": "5ZsCucmZ",
+                        "type": "image",
+                        "src": "img/catalog/fashion-travel/city-backpack.png",
+                        "link": "https://card.email/features",
+                        "alt": "Orange city backpack",
+                        "width": 112,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      {
+                        "id": "04Wq2EwR",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><span style=\"font-size:17px\"><strong>City</strong></span><br /><span style=\"font-size:17px\"><strong>Pack</strong></span><br /><span style=\"color:rgb(90, 43, 10);font-size:12px\">16 L · laptop sleeve</span><br /><span style=\"font-size:19px\"><strong>$74</strong></span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            10,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "uJ2vQF4g",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      10,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 10
+                },
+                "cells": [
+                  {
+                    "id": "l15gcHmN",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          16,
+                          12,
+                          16,
+                          12
+                        ]
+                      },
+                      "backgroundColor": "#FFFFFF",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "left",
+                      "borderRadius": 14,
+                      "width": 60
+                    },
+                    "atoms": [
+                      {
+                        "id": "FrdZJNZt",
+                        "type": "text",
+                        "value": "<p><strong><span style=\"color:#FF6B00;font-size:12px\">COMPLETE THE DESK</span></strong></p><p><strong><span style=\"font-size:20px\">Studio Microphone</span></strong></p><p><span style=\"color:#7A6558;font-size:12px\">USB-C · cardioid · desk stand</span></p><p><strong><span style=\"font-size:21px\">$109</span></strong></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      },
+                      {
+                        "id": "-hi6cpng",
+                        "type": "button",
+                        "text": "Add microphone",
+                        "link": "https://card.email/start",
+                        "backgroundColor": "#1F1712",
+                        "color": "#FFFFFF",
+                        "fontSize": 15,
+                        "borderRadius": 10,
+                        "padding": [
+                          13,
+                          20,
+                          13,
+                          20
+                        ],
+                        "spacing": {
+                          "padding": [
+                            13,
+                            20,
+                            13,
+                            20
+                          ],
+                          "margin": [
+                            10,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       }

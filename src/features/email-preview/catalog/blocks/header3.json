@@ -5,52 +5,63 @@
   "type": "header",
   "preview": "img/components/header-3.png",
   "block": {
-    "id": "V6kmYqpc",
+    "id": "6Fm_DfDc",
     "label": "Header 3",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          30,
-          24
+          34,
+          32,
+          34,
+          32
         ]
       },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "3rjKzpvh",
+        "id": "5GdT_0hx",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 24
         },
         "cells": [
           {
-            "id": "PoxORDe5",
+            "id": "j2LEl9U9",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
+              "spacing": {
+                "padding": [
+                  24,
+                  14,
+                  0,
+                  14
+                ]
+              },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "bottom",
+              "horizontalAlign": "center",
+              "borderRadius": 20,
+              "width": 42
             },
             "atoms": [
               {
-                "id": "VVNACvL4",
+                "id": "f7G-pNNq",
                 "type": "image",
-                "src": "img/logo-black.png",
-                "link": "https://example.com",
-                "alt": "Some alt",
-                "width": 110,
+                "src": "img/catalog/fashion-travel/trench-coat.png",
+                "link": "https://card.email/start",
+                "alt": "Orange trench coat",
+                "width": 235,
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
                     0,
                     0,
@@ -60,106 +71,71 @@
               }
             ],
             "rows": []
-          }
-        ]
-      },
-      {
-        "id": "drhDfOKc",
-        "settings": {
-          "spacing": {
-            "margin": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "padding": [
-              30,
-              0,
-              0,
-              0
-            ]
           },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
           {
-            "id": "Z01Ha05A",
+            "id": "i-RCdLNg",
             "settings": {
               "spacing": {
-                "margin": [
-                  0,
-                  0,
-                  0,
-                  0
-                ],
                 "padding": [
-                  45,
-                  0,
-                  16,
-                  0
+                  18,
+                  4,
+                  18,
+                  8
                 ]
               },
               "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center",
-              "borderRadius": 5,
-              "backgroundImage": {
-                "url": "img/bosco-shots-ZoEdO0G0xmI-unsplash.png",
-                "position": "top",
-                "repeat": "no-repeat",
-                "size": "cover"
-              }
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 58
             },
             "atoms": [
               {
-                "id": "b5mEhn7E",
+                "id": "GcUqSejt",
                 "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"font-size: 36px\"><strong>Don't Lose<br/>Yourself.</strong></span></p><p style=\"text-align: center\"><span style=\"font-size: 18px\">New album</span></p>",
-                "color": "#FFFFFF",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">THE LIGHT LAYER</span></strong></p><p><strong><span style=\"font-size:36px\">Built for the weather between plans.</span></strong></p><p><span style=\"color:#7A6558;font-size:15px\">A media-left opening with room for a concise product promise.</span></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
-                    20,
                     0,
-                    20
+                    0,
+                    0
                   ]
                 }
               },
               {
-                "id": "lzGKovcX",
+                "id": "NYZi5Zhe",
                 "type": "button",
-                "text": "Download",
-                "link": "https://example.com",
-                "backgroundColor": "#3494FB",
+                "text": "Explore the layer",
+                "link": "https://card.email/start",
+                "backgroundColor": "#1F1712",
                 "color": "#FFFFFF",
-                "fontSize": 14,
-                "borderRadius": 5,
+                "fontSize": 15,
+                "borderRadius": 10,
                 "padding": [
-                  12,
-                  24,
-                  12,
-                  24
+                  13,
+                  20,
+                  13,
+                  20
                 ],
                 "spacing": {
-                  "margin": [
-                    40,
-                    0,
-                    40,
-                    0
-                  ],
                   "padding": [
-                    12,
-                    24,
-                    12,
-                    24
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
                   ]
                 }
               }

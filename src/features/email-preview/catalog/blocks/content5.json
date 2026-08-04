@@ -5,147 +5,389 @@
   "type": "content",
   "preview": "img/components/content-5.png",
   "block": {
-    "id": "eW5rLGt-",
+    "id": "4XWNAyXA",
     "label": "Content 5",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          30,
-          24
+          34,
+          32,
+          34,
+          32
         ]
       },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "RjPPeG_t",
+        "id": "Nvq44R5M",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 14
         },
         "cells": [
           {
-            "id": "lZmFT7WY",
+            "id": "usMv9SyO",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
+              "spacing": {
+                "padding": [
+                  20,
+                  12,
+                  20,
+                  12
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
               "verticalAlign": "top",
-              "horizontalAlign": "left"
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 33
             },
-            "atoms": [
+            "atoms": [],
+            "rows": [
               {
-                "id": "zZV9jI9D",
-                "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"font-size: 14px\">Staying in shape is mostly about program compliance: it&rsquo;s not about having</span><br><span style=\"font-size: 14px\">the best fitness program, but about having one that&rsquo;s good enough, and</span><br><span style=\"font-size: 14px\">making sure you actually stick to it.</span></p>",
-                "color": "#9FA3A7",
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "HmdD1jRU",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "-V7CbHS2",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
-            },
-            "atoms": [
-              {
-                "id": "j1Vs_B1g",
-                "type": "image",
-                "src": "img/jack-finnigan-rriAI0nhcbc-unsplash.jpg",
-                "link": "https://example.com",
-                "alt": "Mike Brown",
-                "width": 80,
-                "borderRadius": 60,
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
+                "id": "36AF1xyD",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
                 },
-                "height": 80
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "XRce3YDh",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "5NCa7527",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
-            },
-            "atoms": [
+                "cells": [
+                  {
+                    "id": "Xt7EMhma",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "height": 135
+                    },
+                    "atoms": [
+                      {
+                        "id": "oXjspwGA",
+                        "type": "image",
+                        "src": "img/catalog/products/travel-mug.png",
+                        "link": "https://card.email/read",
+                        "alt": "Orange travel mug",
+                        "width": 110,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
               {
-                "id": "8yRMYgmg",
-                "type": "text",
-                "value": "<p style=\"text-align: center\"><strong><span style=\"font-size: 18px\">Mike Brown</span></strong><br><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Fitness Trainer</span></p>",
-                "color": "#111111",
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
+                "id": "GLTIWDbp",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      14,
+                      4,
+                      0,
+                      4
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "Gz5c1LsM",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "center",
+                      "height": 118
+                    },
+                    "atoms": [
+                      {
+                        "id": "CDVXqxUj",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:18px\">A better daily<br />ritual</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Three minutes on the object that quietly improved the morning.</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
               }
-            ],
-            "rows": []
+            ]
+          },
+          {
+            "id": "8YWo9p7i",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  12,
+                  20,
+                  12
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 33
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "JSCRQp2h",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "Zt0_lTkx",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "height": 135
+                    },
+                    "atoms": [
+                      {
+                        "id": "x4t9OjZa",
+                        "type": "image",
+                        "src": "img/catalog/devices/gamepad.png",
+                        "link": "https://card.email/read",
+                        "alt": "Orange game controller",
+                        "width": 150,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "vIf5SPH_",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      14,
+                      4,
+                      0,
+                      4
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "v9d-Rtof",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "center",
+                      "height": 118
+                    },
+                    "atoms": [
+                      {
+                        "id": "4RoalX-C",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:18px\">Play without<br />friction</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">What good controls teach us about clear interaction.</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "PRW2TeY5",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  12,
+                  20,
+                  12
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "center",
+              "borderRadius": 16,
+              "width": 33
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "gkp3G06v",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "Gn4Ac8ac",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "height": 135
+                    },
+                    "atoms": [
+                      {
+                        "id": "WTACQUmp",
+                        "type": "image",
+                        "src": "img/catalog/fashion-travel/tote-bag.png",
+                        "link": "https://card.email/read",
+                        "alt": "Orange tote bag",
+                        "width": 130,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "hsp4ZrxP",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      14,
+                      4,
+                      0,
+                      4
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "65ULv0th",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "center",
+                      "height": 118
+                    },
+                    "atoms": [
+                      {
+                        "id": "-GOgtYo1",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:18px\">Carry only the<br />useful</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">A short guide to editing the everyday kit.</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       }

@@ -1,0 +1,180 @@
+{
+  "version": 2,
+  "name": "transactional6",
+  "label": "Transactional 6",
+  "type": "transactional",
+  "preview": "img/components/transactional-6.png",
+  "block": {
+    "id": "UGvna04-",
+    "label": "Transactional 6",
+    "settings": {
+      "spacing": {
+        "padding": [
+          42,
+          58,
+          38,
+          58
+        ]
+      },
+      "backgroundColor": "#1F1712"
+    },
+    "rows": [
+      {
+        "id": "x_iwuted",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "NmDaSbkh",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "FaXd6YW5",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFB16F;font-size:13px\">SECURITY REQUEST</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:32px\">Reset your password.</span></strong></p><p style=\"text-align:center\"><span style=\"color:#FFD9B8;font-size:14px\">We received a request to update the password for maya@example.com. This link expires in 30 minutes.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "sZGafOyv",
+        "settings": {
+          "spacing": {
+            "padding": [
+              22,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "sTnCQkDs",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "jen7UgoI",
+                "type": "button",
+                "text": "Choose a new password",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "JihRDryg",
+        "settings": {
+          "spacing": {
+            "padding": [
+              18,
+              26,
+              0,
+              26
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "HzYVj7D0",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "g7sUPOE8",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><span style=\"color:#A88976;font-size:12px\">If you didn’t request this, you can safely ignore this message. Your password will stay unchanged.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

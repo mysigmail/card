@@ -1,0 +1,111 @@
+{
+  "version": 2,
+  "name": "content14",
+  "label": "Content 14",
+  "type": "content",
+  "preview": "img/components/content-14.png",
+  "block": {
+    "id": "O1f3kmxF",
+    "label": "Content 14",
+    "settings": {
+      "spacing": {
+        "padding": [
+          44,
+          58,
+          42,
+          58
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
+    },
+    "rows": [
+      {
+        "id": "feCk_nWV",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "SXGk1c77",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "bbg6_Yki",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:34px\">“</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:21px\">The strongest improvement was not a new feature. It was finally having a starting point the whole team understood.</span></p>",
+                "color": "#7A6558",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "l-vQiJ27",
+                "type": "image",
+                "src": "img/catalog/avatars/beverage-can-presenter-avatar.png",
+                "link": "https://card.email/authors",
+                "alt": "Portrait of customer Alex Morgan",
+                "width": 104,
+                "borderRadius": 999,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "kRYtW9Ix",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:23px\">Alex Morgan</span></strong><br /><span style=\"color:#FF6B00;font-size:15px\">Customer experience lead</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

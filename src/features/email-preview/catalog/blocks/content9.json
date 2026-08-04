@@ -5,223 +5,66 @@
   "type": "content",
   "preview": "img/components/content-9.png",
   "block": {
-    "id": "byw0gxx5",
+    "id": "IhfajeWJ",
     "label": "Content 9",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          30,
-          24
+          34,
+          32,
+          34,
+          32
         ]
       },
-      "backgroundColor": "#FFFFFF"
+      "backgroundColor": "#FFF9F3"
     },
     "rows": [
       {
-        "id": "o9Bxcepy",
-        "settings": {
-          "spacing": {
-            "padding": [
-              0,
-              0,
-              8,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 20
-        },
-        "cells": [
-          {
-            "id": "wMzQc_Yg",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
-            },
-            "atoms": [
-              {
-                "id": "I_p8z3pD",
-                "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Staying in shape is mostly about program compliance: it&rsquo;s not about having the best fitness program, but about having one that&rsquo;s good enough, and making sure you actually stick to it.</span></p>",
-                "color": "#111111",
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          },
-          {
-            "id": "HgMwKzqC",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
-            },
-            "atoms": [
-              {
-                "id": "Kph63160",
-                "type": "text",
-                "value": "<p style=\"text-align: center\"><span style=\"color: rgb(159, 163, 167); font-size: 14px\">There&rsquo;s a common saying that willpower is like a muscle: it gets stronger when you use it. The truth is more complex. There&rsquo;s mixed evidence for how much people can really improve their self-control.</span></p>",
-                "color": "#111111",
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "BSIKtOha",
-        "settings": {
-          "spacing": {
-            "padding": [
-              0,
-              0,
-              8,
-              0
-            ]
-          },
-          "backgroundColor": "transparent",
-          "gap": 20
-        },
-        "cells": [
-          {
-            "id": "BdLQk58x",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
-            },
-            "atoms": [
-              {
-                "id": "HUml9vPF",
-                "type": "image",
-                "src": "img/jack-finnigan-rriAI0nhcbc-unsplash.jpg",
-                "link": "https://example.com",
-                "alt": "Mike Brown",
-                "width": 80,
-                "borderRadius": 60,
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                },
-                "height": 80
-              }
-            ],
-            "rows": []
-          },
-          {
-            "id": "rM9nzREo",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
-            },
-            "atoms": [
-              {
-                "id": "XOx4MGbD",
-                "type": "image",
-                "src": "img/tamara-bellis-Mn1Uopx7if8-unsplash.jpg",
-                "link": "https://example.com",
-                "alt": "Lina Muller",
-                "width": 80,
-                "borderRadius": 60,
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                },
-                "height": 80
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "FM8vTM7T",
+        "id": "nOPor4b2",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
           "gap": 20
         },
         "cells": [
           {
-            "id": "6RlaH1aK",
+            "id": "2wt_qp9C",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
+              "spacing": {
+                "padding": [
+                  16,
+                  8,
+                  0,
+                  8
+                ]
+              },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "bottom",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "width": 38
             },
             "atoms": [
               {
-                "id": "E40VmNJF",
-                "type": "text",
-                "value": "<p style=\"text-align: center\"><strong><span style=\"font-size: 18px\">Mike Brown</span></strong><br><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Fitness Trainer</span></p>",
-                "color": "#111111",
+                "id": "K28m_4W8",
+                "type": "image",
+                "src": "img/catalog/presenters/skincare-presenter.png",
+                "link": "https://card.email/read",
+                "alt": "Presenter holding an orange skincare bottle",
+                "width": 205,
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
                     0,
-                    0,
+                    -4,
                     0
                   ]
                 }
@@ -230,27 +73,35 @@
             "rows": []
           },
           {
-            "id": "onDISXbL",
+            "id": "bOeDwo-M",
             "settings": {
-              "spacing": {},
+              "spacing": {
+                "padding": [
+                  18,
+                  4,
+                  18,
+                  8
+                ]
+              },
               "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "left"
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 62
             },
             "atoms": [
               {
-                "id": "EOF-u46_",
+                "id": "hahnW7Uy",
                 "type": "text",
-                "value": "<p style=\"text-align: center\"><strong><span style=\"font-size: 18px\">Lina Muller</span></strong><br><span style=\"color: rgb(159, 163, 167); font-size: 14px\">Bloger</span></p>",
-                "color": "#111111",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:38px\">“</span></strong></p><p><strong><span style=\"font-size:27px\">The message finally sounds like the people who made it.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">A single testimonial with enough space for a real point of view.</span></p><p><strong>Amelia Reed</strong><br /><span style=\"color:#7A6558;font-size:13px\">Brand director, North Studio</span></p>",
+                "color": "#1F1712",
                 "spacing": {
-                  "margin": [
+                  "padding": [
                     0,
                     0,
                     0,
                     0
                   ],
-                  "padding": [
+                  "margin": [
                     0,
                     0,
                     0,

@@ -1,0 +1,210 @@
+{
+  "version": 2,
+  "name": "header7",
+  "label": "Header 7",
+  "type": "header",
+  "preview": "img/components/header-7.png",
+  "block": {
+    "id": "FiXHQBpf",
+    "label": "Header 7",
+    "settings": {
+      "spacing": {
+        "padding": [
+          38,
+          38,
+          34,
+          38
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
+    },
+    "rows": [
+      {
+        "id": "UAiYnURD",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "t3I8aEVE",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "yjTzXq8X",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">FIELD NOTES / ISSUE 08</span></strong></p><p><strong><span style=\"font-size:37px\">What we choose to carry.</span></strong></p><p><span style=\"color:#7A6558;font-size:15px\">An editorial issue header with a visible author and a wide visual chapter marker.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "knh5Q25U",
+        "settings": {
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              18,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "DhXGtuPT",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  20,
+                  20,
+                  20
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 20
+            },
+            "atoms": [
+              {
+                "id": "S3OiIN42",
+                "type": "image",
+                "src": "img/catalog/fashion-travel/weekend-duffel.png",
+                "link": "https://card.email/start",
+                "alt": "Orange weekend duffel bag",
+                "width": 260,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "Mzhhut9d",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 12
+        },
+        "cells": [
+          {
+            "id": "qvJnpVs6",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 18
+            },
+            "atoms": [
+              {
+                "id": "Gh7Ggzky",
+                "type": "image",
+                "src": "img/catalog/avatars/travel-mug-presenter-avatar.png",
+                "link": "https://card.email/authors",
+                "alt": "Portrait of issue editor Maya Chen",
+                "width": 66,
+                "borderRadius": 999,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "hvLtvww0",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 82
+            },
+            "atoms": [
+              {
+                "id": "x5D2zIH7",
+                "type": "text",
+                "value": "<p><strong>Maya Chen</strong><br /><span style=\"color:#7A6558;font-size:13px\">Editor · objects, travel and everyday systems</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

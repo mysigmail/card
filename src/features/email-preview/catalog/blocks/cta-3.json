@@ -5,59 +5,79 @@
   "type": "cta",
   "preview": "img/components/cta-3.png",
   "block": {
-    "id": "reAedTLK",
+    "id": "YQxg4bES",
     "label": "CTA 3",
     "settings": {
       "spacing": {
         "padding": [
-          30,
-          24,
-          0,
-          24
+          20,
+          22,
+          20,
+          22
         ]
       },
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FFD9B8"
     },
     "rows": [
       {
-        "id": "ZT-tsz1E",
+        "id": "L92K6o4e",
         "settings": {
-          "spacing": {
-            "padding": [
-              20,
-              0,
-              0,
-              0
-            ]
-          },
+          "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0,
-          "collapseOnMobile": true
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
         },
         "cells": [
           {
-            "id": "nrhxQPd7",
+            "id": "kb9uH45T",
             "settings": {
-              "spacing": {
-                "padding": [
-                  0,
-                  0,
-                  0,
-                  0
-                ]
-              },
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
+              "spacing": {},
+              "backgroundColor": "#1F1712",
+              "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "borderRadius": 0
+              "borderRadius": 14,
+              "width": 18
             },
             "atoms": [
               {
-                "id": "nYVGGNr5",
-                "type": "image",
-                "src": "img/adidas-real-deal-damien-lillard-hirere-black1-blapur.png",
-                "link": "https://example.com",
-                "alt": "Some alt",
+                "id": "IYjxIqzS",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:12px\">07</span></strong><br /><span style=\"color:#FFD9B8;font-size:11px\">LEFT TODAY</span></p>",
+                "color": "#FFFFFF",
+                "spacing": {
+                  "padding": [
+                    14,
+                    8,
+                    14,
+                    8
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "kts3l7e_",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 57
+            },
+            "atoms": [
+              {
+                "id": "YC4Yo_-d",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:23px\">Almost gone, not forgotten.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:13px\">Get one short availability reminder before the batch closes.</span></p>",
+                "color": "#1F1712",
                 "spacing": {
                   "padding": [
                     0,
@@ -75,82 +95,43 @@
               }
             ],
             "rows": []
-          }
-        ]
-      },
-      {
-        "id": "nXujubXY",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "hiddenOnMobile": false,
-          "collapseOnMobile": true,
-          "gap": 0
-        },
-        "cells": [
+          },
           {
-            "id": "kbYmXTrr",
+            "id": "rPCP6PRG",
             "settings": {
-              "spacing": {
-                "padding": [
-                  0,
-                  0,
-                  30,
-                  0
-                ]
-              },
+              "spacing": {},
               "backgroundColor": "transparent",
-              "hiddenOnMobile": false,
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
+              "verticalAlign": "middle",
+              "horizontalAlign": "right",
+              "width": 25
             },
             "atoms": [
               {
-                "id": "A8JWkFOh",
-                "type": "text",
-                "value": "<p style=\"text-align: center;\"><span style=\"font-size: 32px;\"><strong>Impossible is Nothing</strong></span></p><p style=\"text-align: center;\"><span style=\"color: rgb(159, 163, 167);\">Changing the game isn't easy and before long,<br>haters came out of the woodwork.</span></p>",
-                "color": "#111827",
-                "spacing": {
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
-              },
-              {
-                "id": "0jAA0rod",
+                "id": "ZgRYVo3F",
                 "type": "button",
-                "text": "By Now",
-                "link": "https://example.com",
-                "backgroundColor": "#4F46E5",
+                "text": "Remind me",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
                 "color": "#FFFFFF",
-                "fontSize": 16,
-                "borderRadius": 4,
+                "fontSize": 15,
+                "borderRadius": 10,
                 "padding": [
-                  12,
-                  24,
-                  12,
-                  24
+                  13,
+                  20,
+                  13,
+                  20
                 ],
                 "spacing": {
                   "padding": [
-                    12,
-                    24,
-                    12,
-                    24
+                    13,
+                    20,
+                    13,
+                    20
                   ],
                   "margin": [
-                    30,
                     0,
-                    20,
+                    0,
+                    0,
                     0
                   ]
                 }

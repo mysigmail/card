@@ -5,31 +5,109 @@
   "type": "feature",
   "preview": "img/components/feature-3.png",
   "block": {
-    "id": "F3BlockA",
+    "id": "t38K19L9",
     "label": "Feature 3",
     "settings": {
-      "spacing": { "padding": [28, 36, 44, 36] },
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "F3TitleA",
+        "id": "iicPedu4",
         "settings": {
-          "spacing": { "padding": [0, 0, 32, 0] },
+          "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
         },
         "cells": [
           {
-            "id": "F3HeadAA",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "85K6LHxB",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  28,
+                  16,
+                  28,
+                  16
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "backgroundImage": {
+                "url": "img/catalog/backgrounds/gradient-ribbons.png",
+                "repeat": "no-repeat",
+                "size": "cover",
+                "position": "center"
+              },
+              "width": 48
+            },
             "atoms": [
               {
-                "id": "F3TextAA",
+                "id": "zuB8-I3P",
+                "type": "image",
+                "src": "img/catalog/devices/vr-headset-kit.png",
+                "link": "https://card.email/features",
+                "alt": "Orange virtual reality headset kit",
+                "width": 245,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "xlF46-Jv",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "#1F1712",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 52
+            },
+            "atoms": [
+              {
+                "id": "NlZ9_EtI",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 32px;\">Our Plan &amp; Pricing</span></strong></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"color:#FFB16F;font-size:12px\">01 / SYSTEM</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">Structure before styling.</span></strong></p><p><span style=\"color:#FFD9B8;font-size:13px\">Rows, cells and atoms stay explicit while the visual layer changes.</span></p>",
+                "color": "#FFFFFF",
+                "spacing": {
+                  "padding": [
+                    20,
+                    18,
+                    20,
+                    18
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -37,83 +115,100 @@
         ]
       },
       {
-        "id": "F3PlansA",
-        "settings": { "spacing": {}, "backgroundColor": "transparent", "collapseOnMobile": true, "gap": 34 },
+        "id": "0R9kX9Qn",
+        "settings": {
+          "spacing": {
+            "padding": [
+              16,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
         "cells": [
           {
-            "id": "F3CellAA",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "BYuRWVKV",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  18,
+                  20,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 50
+            },
             "atoms": [
               {
-                "id": "F3CopyAA",
+                "id": "zgfcMbAG",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 24px;\">Shared<br>Hosting</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Starts at</span></p><p style=\"text-align: center;\"><strong><span style=\"color: #54C746; font-size: 32px;\">$0.99</span></strong><span style=\"color: #9FA3A7; font-size: 14px;\"> / mo</span></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 20, 0] }
-              },
-              {
-                "id": "F3BtnA01",
-                "type": "button",
-                "text": "View Plans",
-                "link": "https://example.com",
-                "backgroundColor": "#409EFF",
-                "color": "#FFFFFF",
-                "fontSize": 14,
-                "borderRadius": 3,
-                "padding": [12, 20, 12, 20],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:12px\">02 / CONTROL</span></strong></p><p><strong><span style=\"font-size:21px\">Tune the hierarchy.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:13px\">Adjust spacing, alignment and emphasis without hiding the underlying tree.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
           },
           {
-            "id": "F3CellBB",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "WfRdlUPM",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  18,
+                  20,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 50
+            },
             "atoms": [
               {
-                "id": "F3CopyBB",
+                "id": "N15GSkl_",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 24px;\">VPS<br>Hosting</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Starts at</span></p><p style=\"text-align: center;\"><strong><span style=\"color: #54C746; font-size: 32px;\">$1.99</span></strong><span style=\"color: #9FA3A7; font-size: 14px;\"> / mo</span></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 20, 0] }
-              },
-              {
-                "id": "F3BtnB01",
-                "type": "button",
-                "text": "View Plans",
-                "link": "https://example.com",
-                "backgroundColor": "#409EFF",
-                "color": "#FFFFFF",
-                "fontSize": 14,
-                "borderRadius": 3,
-                "padding": [12, 20, 12, 20],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
-              }
-            ],
-            "rows": []
-          },
-          {
-            "id": "F3CellCC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
-            "atoms": [
-              {
-                "id": "F3CopyCC",
-                "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 24px;\">Dedicated<br>Hosting</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Starts at</span></p><p style=\"text-align: center;\"><strong><span style=\"color: #54C746; font-size: 32px;\">$2.99</span></strong><span style=\"color: #9FA3A7; font-size: 14px;\"> / mo</span></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 20, 0] }
-              },
-              {
-                "id": "F3BtnC01",
-                "type": "button",
-                "text": "View Plans",
-                "link": "https://example.com",
-                "backgroundColor": "#409EFF",
-                "color": "#FFFFFF",
-                "fontSize": 14,
-                "borderRadius": 3,
-                "padding": [12, 20, 12, 20],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:12px\">03 / OUTPUT</span></strong></p><p><strong><span style=\"font-size:21px\">Keep the contract.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Preview, persistence and export work from the same versioned structure.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []

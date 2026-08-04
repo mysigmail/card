@@ -5,31 +5,58 @@
   "type": "feature",
   "preview": "img/components/feature-6.png",
   "block": {
-    "id": "F6BlockA",
+    "id": "b79UkJ0X",
     "label": "Feature 6",
     "settings": {
-      "spacing": { "padding": [28, 42, 30, 42] },
-      "backgroundColor": "#FFFFFF"
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
     },
     "rows": [
       {
-        "id": "F6TitleA",
+        "id": "U-hxCv-t",
         "settings": {
-          "spacing": { "padding": [0, 0, 28, 0] },
+          "spacing": {},
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
           "gap": 0
         },
         "cells": [
           {
-            "id": "F6HeadAA",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "2FOCjGBm",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
             "atoms": [
               {
-                "id": "F6TextAA",
+                "id": "XtwCHrMd",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 32px;\">Features</span></strong></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">CAPABILITY MAP</span></strong></p><p><strong><span style=\"font-size:31px\">Four parts, one editing model.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -37,102 +64,100 @@
         ]
       },
       {
-        "id": "F6ItemsA",
+        "id": "82zg_6Lo",
         "settings": {
-          "spacing": { "padding": [0, 0, 28, 0] },
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              0,
+              0
+            ]
+          },
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 18
+          "gap": 16
         },
         "cells": [
           {
-            "id": "F6CellAA",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "RHGII4l6",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  18,
+                  20,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 50
+            },
             "atoms": [
               {
-                "id": "F6ImageA",
-                "type": "image",
-                "src": "img/coffee.png",
-                "link": "https://example.com",
-                "alt": "Coffee",
-                "height": 50,
-                "spacing": { "margin": [0, 0, 10, 0], "padding": [0, 0, 0, 0] }
-              },
-              {
-                "id": "F6CopyAA",
+                "id": "MWIwIzdG",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 48px;\">78</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Cups of Coffee</span></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:12px\">COMPOSE</span></strong></p><p><strong><span style=\"font-size:21px\">Reusable block library</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Start from a useful position rather than a completed campaign.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
           },
           {
-            "id": "F6CellBB",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "uVIj88Mv",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  18,
+                  20,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 50
+            },
             "atoms": [
               {
-                "id": "F6ImageB",
-                "type": "image",
-                "src": "img/ipod.png",
-                "link": "https://example.com",
-                "alt": "Music",
-                "height": 50,
-                "spacing": { "margin": [0, 0, 10, 0], "padding": [0, 0, 0, 0] }
-              },
-              {
-                "id": "F6CopyBB",
+                "id": "HpBN9vJV",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 48px;\">459</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Songs Listened</span></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-              }
-            ],
-            "rows": []
-          },
-          {
-            "id": "F6CellCC",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
-            "atoms": [
-              {
-                "id": "F6ImageC",
-                "type": "image",
-                "src": "img/apple-icon.png",
-                "link": "https://example.com",
-                "alt": "Skipped meals",
-                "height": 50,
-                "spacing": { "margin": [0, 0, 10, 0], "padding": [0, 0, 0, 0] }
-              },
-              {
-                "id": "F6CopyCC",
-                "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 48px;\">05</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Skipped Meals</span></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-              }
-            ],
-            "rows": []
-          },
-          {
-            "id": "F6CellDD",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
-            "atoms": [
-              {
-                "id": "F6ImageD",
-                "type": "image",
-                "src": "img/game-controller.png",
-                "link": "https://example.com",
-                "alt": "Gaming",
-                "height": 50,
-                "spacing": { "margin": [0, 0, 10, 0], "padding": [0, 0, 0, 0] }
-              },
-              {
-                "id": "F6CopyDD",
-                "type": "text",
-                "value": "<p style=\"text-align: center;\"><strong><span style=\"font-size: 48px;\">10</span></strong></p><p style=\"text-align: center;\"><span style=\"color: #9FA3A7; font-size: 14px;\">Hours Gaming</span></p>",
-                "color": "#111111",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:12px\">REFINE</span></strong></p><p><strong><span style=\"font-size:21px\">Explicit content tree</span></strong></p><p><span style=\"color:#5A2B0A;font-size:13px\">Move from block to atom without losing the surrounding structure.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -140,24 +165,100 @@
         ]
       },
       {
-        "id": "F6Action",
-        "settings": { "spacing": {}, "backgroundColor": "transparent", "gap": 0 },
+        "id": "ynlsycj1",
+        "settings": {
+          "spacing": {
+            "padding": [
+              16,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
         "cells": [
           {
-            "id": "F6Button",
-            "settings": { "spacing": {}, "backgroundColor": "transparent", "verticalAlign": "top", "horizontalAlign": "center" },
+            "id": "k92EnpCz",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  18,
+                  20,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 50
+            },
             "atoms": [
               {
-                "id": "F6BtnAtm",
-                "type": "button",
-                "text": "Download",
-                "link": "https://example.com",
-                "backgroundColor": "#409EFF",
-                "color": "#FFFFFF",
-                "fontSize": 14,
-                "borderRadius": 3,
-                "padding": [12, 20, 12, 20],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+                "id": "AGjqRs6M",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:12px\">REVIEW</span></strong></p><p><strong><span style=\"font-size:21px\">Desktop and mobile preview</span></strong></p><p><span style=\"color:#5A2B0A;font-size:13px\">Check hierarchy and stacking before the message leaves the editor.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "a9XFijt6",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  20,
+                  18,
+                  20,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 50
+            },
+            "atoms": [
+              {
+                "id": "AThJ6Cr_",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:12px\">DELIVER</span></strong></p><p><strong><span style=\"font-size:21px\">JSON and HTML output</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Keep the versioned source and the email-ready result connected.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []

@@ -1,0 +1,168 @@
+{
+  "version": 2,
+  "name": "feature8",
+  "label": "Feature 8",
+  "type": "feature",
+  "preview": "img/components/feature-8.png",
+  "block": {
+    "id": "n4yYZlWY",
+    "label": "Feature 8",
+    "settings": {
+      "spacing": {
+        "padding": [
+          28,
+          24,
+          28,
+          24
+        ]
+      },
+      "backgroundColor": "#FFF3E6"
+    },
+    "rows": [
+      {
+        "id": "OOm3r2OA",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 14
+        },
+        "cells": [
+          {
+            "id": "iqKOKPun",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 25
+            },
+            "atoms": [
+              {
+                "id": "-B9mThms",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:27px\">BL</span></strong></p><p style=\"text-align:center\"><strong>Block library</strong><br /><span style=\"color:#7A6558;font-size:12px\">Useful starts</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "udRweIKD",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 25
+            },
+            "atoms": [
+              {
+                "id": "4ZA182Yo",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:27px\">TR</span></strong></p><p style=\"text-align:center\"><strong>Visible tree</strong><br /><span style=\"color:#7A6558;font-size:12px\">Explicit layers</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "9uzt7kGO",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 25
+            },
+            "atoms": [
+              {
+                "id": "DHl9GyMB",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:27px\">PV</span></strong></p><p style=\"text-align:center\"><strong>Live preview</strong><br /><span style=\"color:#7A6558;font-size:12px\">Desktop + mobile</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "gz4N5MUQ",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 25
+            },
+            "atoms": [
+              {
+                "id": "gQY-3ufY",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:27px\">EX</span></strong></p><p style=\"text-align:center\"><strong>Safe export</strong><br /><span style=\"color:#7A6558;font-size:12px\">JSON + HTML</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

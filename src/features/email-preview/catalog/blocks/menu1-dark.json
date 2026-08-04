@@ -3,7 +3,7 @@
   "name": "menu1-dark",
   "label": "Menu 1",
   "type": "menu",
-  "preview": "img/components/menu-1-dark.jpg",
+  "preview": "img/components/menu-1-dark.png",
   "block": {
     "id": "rt373vVg",
     "label": "Menu 1",
@@ -40,7 +40,7 @@
               {
                 "id": "y-04l5NF",
                 "type": "image",
-                "src": "img/logo-white.png",
+                "src": "img/system/logos/logo-white.png",
                 "link": "https://example.com",
                 "alt": "Some alt",
                 "width": 110,

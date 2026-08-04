@@ -1,0 +1,263 @@
+{
+  "version": 2,
+  "name": "transactional4",
+  "label": "Transactional 4",
+  "type": "transactional",
+  "preview": "img/components/transactional-4.png",
+  "block": {
+    "id": "GGZq21Hb",
+    "label": "Transactional 4",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "Wg8aLf-t",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 18
+        },
+        "cells": [
+          {
+            "id": "Z0WscH6i",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  22,
+                  14,
+                  22,
+                  14
+                ]
+              },
+              "backgroundColor": "#FF6B00",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 18,
+              "width": 42
+            },
+            "atoms": [
+              {
+                "id": "A3SBy0xb",
+                "type": "image",
+                "src": "img/catalog/products/travel-mug.png",
+                "link": "https://card.email/features",
+                "alt": "Orange travel mug",
+                "width": 190,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "hzK2IAIb",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  8,
+                  0,
+                  8,
+                  18
+                ]
+              },
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 58
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "05f3GlT0",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "TgvUrHzc",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "atoms": [
+                      {
+                        "id": "XioyX_R-",
+                        "type": "text",
+                        "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">DELIVERED TODAY</span></strong></p><p><strong><span style=\"font-size:32px\">Your order has arrived.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Left at the front desk at 14:32.</span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "HYbFFEdM",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      16,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "547iV5cN",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          16,
+                          16,
+                          16,
+                          16
+                        ]
+                      },
+                      "backgroundColor": "#FFF3E6",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left",
+                      "borderRadius": 14
+                    },
+                    "atoms": [
+                      {
+                        "id": "wbX8l5Dv",
+                        "type": "text",
+                        "value": "<p><span style=\"color:#7A6558;font-size:12px\">DELIVERY ADDRESS</span><br><strong>18 Market Street<br>Brooklyn, NY 11201</strong></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "e0L1S_Yf",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      16,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "bB5u0eqW",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "atoms": [
+                      {
+                        "id": "t7IgiGn4",
+                        "type": "button",
+                        "text": "Report an issue",
+                        "link": "https://card.email/start",
+                        "backgroundColor": "#1F1712",
+                        "color": "#FFFFFF",
+                        "fontSize": 15,
+                        "borderRadius": 10,
+                        "padding": [
+                          13,
+                          20,
+                          13,
+                          20
+                        ],
+                        "spacing": {
+                          "padding": [
+                            13,
+                            20,
+                            13,
+                            20
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

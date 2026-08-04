@@ -1,0 +1,339 @@
+{
+  "version": 2,
+  "name": "transactional9",
+  "label": "Transactional 9",
+  "type": "transactional",
+  "preview": "img/components/transactional-9.png",
+  "block": {
+    "id": "KCKU0N2m",
+    "label": "Transactional 9",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "UEZhowDz",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "efg8-N75",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "bJvyc6F-",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">REFUND ISSUED</span></strong></p><p><strong><span style=\"font-size:31px\">$89.00 is on its way back.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Most banks post refunds within 3–5 business days.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "zE3vkL4g",
+        "settings": {
+          "spacing": {
+            "padding": [
+              20,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 16
+        },
+        "cells": [
+          {
+            "id": "BG3EaUIo",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  14,
+                  10,
+                  14,
+                  10
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 14,
+              "width": 27,
+              "height": 118
+            },
+            "atoms": [
+              {
+                "id": "thvvagrp",
+                "type": "image",
+                "src": "img/catalog/products/sneaker.png",
+                "link": "https://card.email/features",
+                "alt": "Orange and cream lifestyle sneaker",
+                "width": 125,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "z3qj6OpI",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 43
+            },
+            "atoms": [
+              {
+                "id": "oTXgwVfG",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:18px\">Weekend Pair</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Return #RT-1184<br>Refund to Visa ···· 2048</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "IwPRXNyu",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "right",
+              "width": 30
+            },
+            "atoms": [
+              {
+                "id": "pT0gK2A_",
+                "type": "text",
+                "value": "<p style=\"text-align:right\"><span style=\"color:#7A6558;font-size:12px\">REFUND TOTAL</span><br><strong><span style=\"font-size:23px\">$89.00</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "98cMi9Nr",
+        "settings": {
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": false,
+          "gap": 10
+        },
+        "cells": [
+          {
+            "id": "obm00nWV",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  12,
+                  8,
+                  12,
+                  8
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 12,
+              "width": 33
+            },
+            "atoms": [
+              {
+                "id": "3wiPltcU",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">01 · APPROVED</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "jMMZB5qg",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  12,
+                  8,
+                  12,
+                  8
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 12,
+              "width": 33
+            },
+            "atoms": [
+              {
+                "id": "KJ0xkUbH",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">02 · SENT</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "hC05sTBk",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  12,
+                  8,
+                  12,
+                  8
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 12,
+              "width": 33
+            },
+            "atoms": [
+              {
+                "id": "3SWicpYf",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">03 · BANK POSTING</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

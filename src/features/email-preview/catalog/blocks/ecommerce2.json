@@ -5,136 +5,179 @@
   "type": "ecommerce",
   "preview": "img/components/ecommerce-2.png",
   "block": {
-    "id": "E2BlockA",
+    "id": "pijeOrf4",
     "label": "E-Commerce 2",
     "settings": {
-      "spacing": { "padding": [30, 35, 40, 35] },
-      "backgroundColor": "#FFFFFF",
-      "backgroundImage": {
-        "url": "img/photo-1482424917728-d82d29662023.jpeg",
-        "repeat": "no-repeat",
-        "size": "cover",
-        "position": "center"
-      }
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFF9F3"
     },
     "rows": [
       {
-        "id": "E2TopRow",
+        "id": "P7NXssCz",
         "settings": {
           "spacing": {},
           "backgroundColor": "transparent",
-          "gap": 0
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 22
         },
         "cells": [
           {
-            "id": "E2TopCel",
+            "id": "vlC2iMnx",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "right"
+              "spacing": {
+                "padding": [
+                  28,
+                  18,
+                  28,
+                  18
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 20,
+              "width": 48
             },
             "atoms": [
               {
-                "id": "E2TopTxt",
-                "type": "text",
-                "value": "<p style=\"text-align: right;\"><span style=\"font-size: 14px; color: rgb(170, 170, 170);\"><a href=\"https://example.com\">See all ➝</a></span></p>",
-                "color": "#FFFFFF",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "E2ImgRow",
-        "settings": {
-          "spacing": { "padding": [0, 0, 20, 0] },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "E2ImgCel",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
-            },
-            "atoms": [
-              {
-                "id": "E2ImgAtm",
+                "id": "w1pLk6HC",
                 "type": "image",
-                "src": "img/t-shirt-4.png",
-                "link": "https://example.com",
-                "alt": "Smoke Edition",
-                "width": 530,
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "src": "img/catalog/fashion-travel/check-in-suitcase.png",
+                "link": "https://card.email/features",
+                "alt": "Orange hard-shell check-in suitcase",
+                "width": 280,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
-          }
-        ]
-      },
-      {
-        "id": "E2TxtRow",
-        "settings": {
-          "spacing": { "padding": [0, 0, 20, 0] },
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
+          },
           {
-            "id": "E2TxtCel",
+            "id": "Ar7hMoi7",
             "settings": {
-              "spacing": {},
+              "spacing": {
+                "padding": [
+                  18,
+                  8,
+                  18,
+                  18
+                ]
+              },
               "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 52
             },
             "atoms": [
               {
-                "id": "E2CopyAA",
+                "id": "AdUv8E3G",
                 "type": "text",
-                "value": "<p style=\"text-align: center;\"><span style=\"color: rgb(170, 170, 170);\">New series</span></p><p style=\"text-align: center;\"><strong><span style=\"font-size: 32px; color: rgb(200, 200, 200);\">Smoke Edition</span></strong></p><p style=\"text-align: center;\"><span style=\"color: rgb(170, 170, 170);\">Hip Hop Basic Longline T-Shirt.</span></p><p style=\"text-align: center;\"><strong><span style=\"color: rgb(200, 200, 200); font-size: 24px;\">$34.99</span></strong></p>",
-                "color": "#FFFFFF",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
-              }
-            ],
-            "rows": []
-          }
-        ]
-      },
-      {
-        "id": "E2CtaRow",
-        "settings": {
-          "spacing": {},
-          "backgroundColor": "transparent",
-          "gap": 0
-        },
-        "cells": [
-          {
-            "id": "E2CtaCel",
-            "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
-              "verticalAlign": "top",
-              "horizontalAlign": "center"
-            },
-            "atoms": [
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">CHECK-IN / 72 L</span></strong></p><p><strong><span style=\"font-size:34px\">The long-week suitcase.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Hard shell · quiet wheels · compression divider</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
               {
-                "id": "E2Button",
+                "id": "8HChozU3",
+                "type": "divider",
+                "color": "#FFD9B8",
+                "height": 1,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    16,
+                    0,
+                    16,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "NsQhjZxf",
+                "type": "text",
+                "value": "<p><span style=\"color:#7A6558;font-size:13px\">Sand / Orange</span><br /><strong><span style=\"font-size:29px\">$189</span></strong> <span style=\"color:#FF6B00;font-size:13px\">FREE SHIPPING</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "LNx_EYfF",
                 "type": "button",
-                "text": "Buy Now",
-                "link": "https://example.com",
-                "backgroundColor": "#FFFFFF",
-                "color": "#000000",
-                "fontSize": 16,
-                "borderRadius": 3,
-                "padding": [12, 20, 12, 20],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+                "text": "Choose this case",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []

@@ -149,6 +149,7 @@ export type ComponentType
     | 'footer'
     | 'header'
     | 'menu'
+    | 'transactional'
 
 export interface CanvasBlockInstance {
   id: string

@@ -1,0 +1,172 @@
+{
+  "version": 2,
+  "name": "header9",
+  "label": "Header 9",
+  "type": "header",
+  "preview": "img/components/header-9.png",
+  "block": {
+    "id": "jeN-RW3c",
+    "label": "Header 9",
+    "settings": {
+      "spacing": {
+        "padding": [
+          38,
+          34,
+          38,
+          34
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "jyz0sG5d",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 24
+        },
+        "cells": [
+          {
+            "id": "4226IQZK",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 58
+            },
+            "atoms": [
+              {
+                "id": "k131YWQ-",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">PLAY ANYWHERE</span></strong></p><p><strong><span style=\"font-size:37px\">A whole library in both hands.</span></strong></p><p><span style=\"color:#7A6558;font-size:15px\">A device introduction with direct platform actions and no decorative app chrome.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "-kG4axiQ",
+                "type": "button",
+                "text": "Download for macOS",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              },
+              {
+                "id": "ox-hI32C",
+                "type": "button",
+                "text": "Get it for Windows",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FFD9B8",
+                "color": "#1F1712",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    10,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "Crwaih_5",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  24,
+                  14,
+                  24,
+                  14
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "borderRadius": 20,
+              "width": 42
+            },
+            "atoms": [
+              {
+                "id": "qX3wGNkN",
+                "type": "image",
+                "src": "img/catalog/devices/handheld-console.png",
+                "link": "https://card.email/start",
+                "alt": "Orange handheld gaming console",
+                "width": 245,
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

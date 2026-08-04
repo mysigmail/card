@@ -1,0 +1,558 @@
+{
+  "version": 2,
+  "name": "content11",
+  "label": "Content 11",
+  "type": "content",
+  "preview": "img/components/content-11.png",
+  "block": {
+    "id": "xavgXl5T",
+    "label": "Content 11",
+    "settings": {
+      "spacing": {
+        "padding": [
+          38,
+          34,
+          34,
+          34
+        ]
+      },
+      "backgroundColor": "#1F1712"
+    },
+    "rows": [
+      {
+        "id": "2NtI3tYh",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "hMMvYCls",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "center"
+            },
+            "atoms": [
+              {
+                "id": "ETpBmbTv",
+                "type": "text",
+                "value": "<p style=\"text-align:center\"><span style=\"color:rgb(255, 107, 0);font-size:31px\"><strong>Our Clients</strong></span></p><p style=\"text-align:center\"><span style=\"font-size:16px\">We’re trusted by well-known companies,<br />and here are some of them.</span></p>",
+                "color": "#ffffff",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "bPwHSCJ7",
+        "settings": {
+          "spacing": {
+            "padding": [
+              26,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 12
+        },
+        "cells": [
+          {
+            "id": "zPiOnflC",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 50
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "RpriisxG",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": false,
+                  "gap": 12
+                },
+                "cells": [
+                  {
+                    "id": "ufEei7uR",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          10,
+                          8,
+                          10,
+                          8
+                        ]
+                      },
+                      "backgroundColor": "#302E2C",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 16,
+                      "width": 50,
+                      "height": 78
+                    },
+                    "atoms": [
+                      {
+                        "id": "r02J_c1b",
+                        "type": "image",
+                        "src": "img/catalog/brands/apple.png",
+                        "link": "https://card.email/read",
+                        "alt": "Apple",
+                        "width": 102,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "WkcXz0eO",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          10,
+                          8,
+                          10,
+                          8
+                        ]
+                      },
+                      "backgroundColor": "#302E2C",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 16,
+                      "width": 50,
+                      "height": 78
+                    },
+                    "atoms": [
+                      {
+                        "id": "FyjwVw8A",
+                        "type": "image",
+                        "src": "img/catalog/brands/google.png",
+                        "link": "https://card.email/read",
+                        "alt": "Google",
+                        "width": 102,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "W4sin8TS",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 50
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "gO4ByaD3",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": false,
+                  "gap": 12
+                },
+                "cells": [
+                  {
+                    "id": "fBztCwqY",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          10,
+                          8,
+                          10,
+                          8
+                        ]
+                      },
+                      "backgroundColor": "#302E2C",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 16,
+                      "width": 50,
+                      "height": 78
+                    },
+                    "atoms": [
+                      {
+                        "id": "Jn3X2XmW",
+                        "type": "image",
+                        "src": "img/catalog/brands/xbox.png",
+                        "link": "https://card.email/read",
+                        "alt": "Xbox",
+                        "width": 102,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "WZewx3dU",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          10,
+                          8,
+                          10,
+                          8
+                        ]
+                      },
+                      "backgroundColor": "#302E2C",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 16,
+                      "width": 50,
+                      "height": 78
+                    },
+                    "atoms": [
+                      {
+                        "id": "2EVvGFPu",
+                        "type": "image",
+                        "src": "img/catalog/brands/spotify.png",
+                        "link": "https://card.email/read",
+                        "alt": "Spotify",
+                        "width": 102,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "9Fp7Ok19",
+        "settings": {
+          "spacing": {
+            "padding": [
+              10,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 12
+        },
+        "cells": [
+          {
+            "id": "IDWb7s8Y",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 50
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "lj4_w8JL",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": false,
+                  "gap": 12
+                },
+                "cells": [
+                  {
+                    "id": "3TeXSTo7",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          10,
+                          8,
+                          10,
+                          8
+                        ]
+                      },
+                      "backgroundColor": "#302E2C",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 16,
+                      "width": 50,
+                      "height": 78
+                    },
+                    "atoms": [
+                      {
+                        "id": "2lVgUszr",
+                        "type": "image",
+                        "src": "img/catalog/brands/bose.png",
+                        "link": "https://card.email/read",
+                        "alt": "Bose",
+                        "width": 102,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "MWIWxAGH",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          10,
+                          8,
+                          10,
+                          8
+                        ]
+                      },
+                      "backgroundColor": "#302E2C",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 16,
+                      "width": 50,
+                      "height": 78
+                    },
+                    "atoms": [
+                      {
+                        "id": "gFwYZHnT",
+                        "type": "image",
+                        "src": "img/catalog/brands/microsoft.png",
+                        "link": "https://card.email/read",
+                        "alt": "Microsoft",
+                        "width": 102,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "icCzwyR_",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 50
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "vrxmRFnO",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": false,
+                  "gap": 12
+                },
+                "cells": [
+                  {
+                    "id": "I2IefO8t",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          10,
+                          8,
+                          10,
+                          8
+                        ]
+                      },
+                      "backgroundColor": "#302E2C",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 16,
+                      "width": 50,
+                      "height": 78
+                    },
+                    "atoms": [
+                      {
+                        "id": "UyEfWapf",
+                        "type": "image",
+                        "src": "img/catalog/brands/coca-cola.png",
+                        "link": "https://card.email/read",
+                        "alt": "Coca-Cola",
+                        "width": 102,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  },
+                  {
+                    "id": "j_oHWCyQ",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          10,
+                          8,
+                          10,
+                          8
+                        ]
+                      },
+                      "backgroundColor": "#302E2C",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 16,
+                      "width": 50,
+                      "height": 78
+                    },
+                    "atoms": [
+                      {
+                        "id": "CzIPwC1c",
+                        "type": "image",
+                        "src": "img/catalog/brands/facebook.png",
+                        "link": "https://card.email/read",
+                        "alt": "Facebook",
+                        "width": 102,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

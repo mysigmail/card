@@ -5,36 +5,58 @@
   "type": "ecommerce",
   "preview": "img/components/ecommerce-3.png",
   "block": {
-    "id": "E3BlockA",
+    "id": "IO7uy1Gl",
     "label": "E-Commerce 3",
     "settings": {
-      "spacing": { "padding": [30, 35, 40, 35] },
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
       "backgroundColor": "#FFFFFF"
     },
     "rows": [
       {
-        "id": "E3TopRow",
+        "id": "WmrsjL-C",
         "settings": {
-          "spacing": { "padding": [0, 0, 20, 0] },
+          "spacing": {},
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
           "gap": 0
         },
         "cells": [
           {
-            "id": "E3TopCel",
+            "id": "RCaKklkI",
             "settings": {
               "spacing": {},
               "backgroundColor": "transparent",
               "verticalAlign": "top",
-              "horizontalAlign": "right"
+              "horizontalAlign": "center"
             },
             "atoms": [
               {
-                "id": "E3TopTxt",
+                "id": "iIdp_GCJ",
                 "type": "text",
-                "value": "<p style=\"text-align: right;\"><span style=\"font-size: 14px; color: rgb(59, 175, 252);\"><a href=\"https://example.com\">See all ➝</a></span></p>",
-                "color": "#000000",
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [0, 0, 0, 0] }
+                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">NEW THIS WEEK</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Three arrivals, three different jobs.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
               }
             ],
             "rows": []
@@ -42,93 +64,639 @@
         ]
       },
       {
-        "id": "E3ProdRw",
+        "id": "o9pf4CDG",
         "settings": {
-          "spacing": {},
+          "spacing": {
+            "padding": [
+              18,
+              0,
+              0,
+              0
+            ]
+          },
           "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 40
+          "gap": 14
         },
         "cells": [
           {
-            "id": "E3ProdA1",
+            "id": "wCKOv4_w",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
+              "spacing": {
+                "padding": [
+                  10,
+                  10,
+                  10,
+                  10
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
               "verticalAlign": "top",
-              "horizontalAlign": "center"
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 33
             },
-            "atoms": [
+            "atoms": [],
+            "rows": [
               {
-                "id": "E3Image1",
-                "type": "image",
-                "src": "img/t-shirt-1.png",
-                "link": "https://example.com",
-                "alt": "Extended Shirt",
-                "width": 245,
-                "spacing": { "margin": [0, 0, 20, 0], "padding": [0, 0, 0, 0] }
+                "id": "LmYC92pC",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "7R7G2U6G",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          16,
+                          10,
+                          16,
+                          10
+                        ]
+                      },
+                      "backgroundColor": "#FFFFFF",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 14,
+                      "height": 190
+                    },
+                    "atoms": [
+                      {
+                        "id": "oyMqgRM_",
+                        "type": "image",
+                        "src": "img/catalog/fashion-travel/bomber-jacket.png",
+                        "link": "https://card.email/features",
+                        "alt": "Orange bomber jacket",
+                        "width": 165,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
               },
               {
-                "id": "E3CopyA1",
-                "type": "text",
-                "value": "<p style=\"text-align: center;\"><span style=\"color: rgb(132, 137, 196);\">New series</span></p><p style=\"text-align: center;\"><strong><span style=\"font-size: 24px;\">Extended Shirt</span></strong></p><p style=\"text-align: center;\"><span style=\"color: rgb(170, 170, 170);\">Hip Hop Basic Longline T-Shirt.</span></p><p style=\"text-align: center;\"><strong><span style=\"color: rgb(105, 193, 66); font-size: 24px;\">$24.99</span></strong></p>",
-                "color": "#000000",
-                "spacing": { "margin": [0, 0, 20, 0], "padding": [0, 0, 0, 0] }
+                "id": "HC0wEqpU",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      10,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "BsKklpz3",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          14,
+                          10,
+                          14,
+                          10
+                        ]
+                      },
+                      "backgroundColor": "#FFF3E6",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 14,
+                      "height": 160
+                    },
+                    "atoms": [
+                      {
+                        "id": "VxBLBM01",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Transit Bomber</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">Lightweight shell</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$128</strong></span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
               },
               {
-                "id": "E3BtnA01",
-                "type": "button",
-                "text": "Buy Now",
-                "link": "https://example.com",
-                "backgroundColor": "#409EFF",
-                "color": "#FFFFFF",
-                "fontSize": 16,
-                "borderRadius": 3,
-                "padding": [12, 20, 12, 20],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+                "id": "0FUYtIzf",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      10,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "EnRmVHpQ",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          10,
+                          8,
+                          10,
+                          8
+                        ]
+                      },
+                      "backgroundColor": "#FFF3E6",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 14,
+                      "height": 68
+                    },
+                    "atoms": [
+                      {
+                        "id": "lWm1fpIg",
+                        "type": "button",
+                        "text": "View jacket",
+                        "link": "https://card.email/start",
+                        "backgroundColor": "#FF6B00",
+                        "color": "#FFFFFF",
+                        "fontSize": 15,
+                        "borderRadius": 10,
+                        "padding": [
+                          13,
+                          20,
+                          13,
+                          20
+                        ],
+                        "spacing": {
+                          "padding": [
+                            13,
+                            20,
+                            13,
+                            20
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
               }
-            ],
-            "rows": []
+            ]
           },
           {
-            "id": "E3ProdB2",
+            "id": "98IkYbJY",
             "settings": {
-              "spacing": {},
-              "backgroundColor": "transparent",
+              "spacing": {
+                "padding": [
+                  10,
+                  10,
+                  10,
+                  10
+                ]
+              },
+              "backgroundColor": "#FFD9B8",
               "verticalAlign": "top",
-              "horizontalAlign": "center"
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 33
             },
-            "atoms": [
+            "atoms": [],
+            "rows": [
               {
-                "id": "E3Image2",
-                "type": "image",
-                "src": "img/t-shirt-2.png",
-                "link": "https://example.com",
-                "alt": "Extended Shirt",
-                "width": 245,
-                "spacing": { "margin": [0, 0, 20, 0], "padding": [0, 0, 0, 0] }
+                "id": "1k4ANX-g",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "j2zXA3bq",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          16,
+                          10,
+                          16,
+                          10
+                        ]
+                      },
+                      "backgroundColor": "#FFFFFF",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 14,
+                      "height": 190
+                    },
+                    "atoms": [
+                      {
+                        "id": "qcwDuT7B",
+                        "type": "image",
+                        "src": "img/catalog/devices/handheld-console.png",
+                        "link": "https://card.email/features",
+                        "alt": "Orange handheld game console",
+                        "width": 165,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
               },
               {
-                "id": "E3CopyB2",
-                "type": "text",
-                "value": "<p style=\"text-align: center;\"><span style=\"color: rgb(132, 137, 196);\">New series</span></p><p style=\"text-align: center;\"><strong><span style=\"font-size: 24px;\">Extended Shirt</span></strong></p><p style=\"text-align: center;\"><span style=\"color: rgb(170, 170, 170);\">Hip Hop Basic Longline T-Shirt.</span></p><p style=\"text-align: center;\"><strong><span style=\"color: rgb(105, 193, 66); font-size: 24px;\">$24.99</span></strong></p>",
-                "color": "#000000",
-                "spacing": { "margin": [0, 0, 20, 0], "padding": [0, 0, 0, 0] }
+                "id": "yY4PlNH8",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      10,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "Y13qOLWT",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          14,
+                          10,
+                          14,
+                          10
+                        ]
+                      },
+                      "backgroundColor": "#FFD9B8",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 14,
+                      "height": 160
+                    },
+                    "atoms": [
+                      {
+                        "id": "BQj8ihmS",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Pocket Console</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">256 GB · OLED</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$249</strong></span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
               },
               {
-                "id": "E3BtnB02",
-                "type": "button",
-                "text": "Buy Now",
-                "link": "https://example.com",
-                "backgroundColor": "#409EFF",
-                "color": "#FFFFFF",
-                "fontSize": 16,
-                "borderRadius": 3,
-                "padding": [12, 20, 12, 20],
-                "spacing": { "margin": [0, 0, 0, 0], "padding": [12, 20, 12, 20] }
+                "id": "5Ny0GoaN",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      10,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "ctVPURHm",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          10,
+                          8,
+                          10,
+                          8
+                        ]
+                      },
+                      "backgroundColor": "#FFD9B8",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 14,
+                      "height": 68
+                    },
+                    "atoms": [
+                      {
+                        "id": "MvSx77Ej",
+                        "type": "button",
+                        "text": "View console",
+                        "link": "https://card.email/start",
+                        "backgroundColor": "#FF6B00",
+                        "color": "#FFFFFF",
+                        "fontSize": 15,
+                        "borderRadius": 10,
+                        "padding": [
+                          13,
+                          20,
+                          13,
+                          20
+                        ],
+                        "spacing": {
+                          "padding": [
+                            13,
+                            20,
+                            13,
+                            20
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
               }
-            ],
-            "rows": []
+            ]
+          },
+          {
+            "id": "-P4ERd_x",
+            "settings": {
+              "spacing": {
+                "padding": [
+                  10,
+                  10,
+                  10,
+                  10
+                ]
+              },
+              "backgroundColor": "#FFF3E6",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "borderRadius": 16,
+              "width": 33
+            },
+            "atoms": [],
+            "rows": [
+              {
+                "id": "3hFw24hn",
+                "settings": {
+                  "spacing": {},
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "G8dR4GOV",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          16,
+                          10,
+                          16,
+                          10
+                        ]
+                      },
+                      "backgroundColor": "#FFFFFF",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 14,
+                      "height": 190
+                    },
+                    "atoms": [
+                      {
+                        "id": "vwefrL4K",
+                        "type": "image",
+                        "src": "img/catalog/products/skincare-bottle.png",
+                        "link": "https://card.email/features",
+                        "alt": "Orange skincare pump bottle",
+                        "width": 135,
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "v1ymOP1A",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      10,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "wlGGkwTB",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          14,
+                          10,
+                          14,
+                          10
+                        ]
+                      },
+                      "backgroundColor": "#FFF3E6",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 14,
+                      "height": 160
+                    },
+                    "atoms": [
+                      {
+                        "id": "ildOMnJC",
+                        "type": "text",
+                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Daily Skincare</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">50 ml · fragrance free</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$42</strong></span></p>",
+                        "color": "#1F1712",
+                        "spacing": {
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              },
+              {
+                "id": "58V4glS3",
+                "settings": {
+                  "spacing": {
+                    "padding": [
+                      10,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "hiddenOnMobile": false,
+                  "collapseOnMobile": true,
+                  "gap": 0
+                },
+                "cells": [
+                  {
+                    "id": "EcGNuiWu",
+                    "settings": {
+                      "spacing": {
+                        "padding": [
+                          10,
+                          8,
+                          10,
+                          8
+                        ]
+                      },
+                      "backgroundColor": "#FFF3E6",
+                      "verticalAlign": "middle",
+                      "horizontalAlign": "center",
+                      "borderRadius": 14,
+                      "height": 68
+                    },
+                    "atoms": [
+                      {
+                        "id": "a8Payt2f",
+                        "type": "button",
+                        "text": "View serum",
+                        "link": "https://card.email/start",
+                        "backgroundColor": "#FF6B00",
+                        "color": "#FFFFFF",
+                        "fontSize": 15,
+                        "borderRadius": 10,
+                        "padding": [
+                          13,
+                          20,
+                          13,
+                          20
+                        ],
+                        "spacing": {
+                          "padding": [
+                            13,
+                            20,
+                            13,
+                            20
+                          ],
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ],
+                    "rows": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       }

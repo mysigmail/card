@@ -1,0 +1,155 @@
+{
+  "version": 2,
+  "name": "cta-8",
+  "label": "CTA 8",
+  "type": "cta",
+  "preview": "img/components/cta-8.png",
+  "block": {
+    "id": "dcPg6jDA",
+    "label": "CTA 8",
+    "settings": {
+      "spacing": {
+        "padding": [
+          30,
+          30,
+          30,
+          30
+        ]
+      },
+      "backgroundColor": "#FFFFFF"
+    },
+    "rows": [
+      {
+        "id": "sybHZlCz",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 12
+        },
+        "cells": [
+          {
+            "id": "cyVwmngw",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "left",
+              "width": 52
+            },
+            "atoms": [
+              {
+                "id": "jwa-b8We",
+                "type": "text",
+                "value": "<p><strong><span style=\"font-size:29px\">Choose how you want to begin.</span></strong></p><p><span style=\"color:#7A6558;font-size:15px\">Two clear paths without turning the block into a full landing page.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "IKeDNocG",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 19
+            },
+            "atoms": [
+              {
+                "id": "dpM9KlW0",
+                "type": "button",
+                "text": "Start free",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FF6B00",
+                "color": "#FFFFFF",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "dfcZt74p",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "middle",
+              "horizontalAlign": "center",
+              "width": 25
+            },
+            "atoms": [
+              {
+                "id": "GglarEDw",
+                "type": "button",
+                "text": "Book a demo",
+                "link": "https://card.email/start",
+                "backgroundColor": "#FFF3E6",
+                "color": "#1F1712",
+                "fontSize": 15,
+                "borderRadius": 10,
+                "padding": [
+                  13,
+                  20,
+                  13,
+                  20
+                ],
+                "spacing": {
+                  "padding": [
+                    13,
+                    20,
+                    13,
+                    20
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "version": 2,
+  "name": "content13",
+  "label": "Content 13",
+  "type": "content",
+  "preview": "img/components/content-13.png",
+  "block": {
+    "id": "yDCSCRee",
+    "label": "Content 13",
+    "settings": {
+      "spacing": {
+        "padding": [
+          34,
+          32,
+          34,
+          32
+        ]
+      },
+      "backgroundColor": "#FFF3E6"
+    },
+    "rows": [
+      {
+        "id": "W4lRcvf1",
+        "settings": {
+          "spacing": {},
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 0
+        },
+        "cells": [
+          {
+            "id": "lzH9WY1c",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left"
+            },
+            "atoms": [
+              {
+                "id": "OM92n8zu",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">THE QUARTER IN THREE NUMBERS</span></strong></p><p><strong><span style=\"font-size:30px\">A compact data story, not a dashboard.</span></strong></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      },
+      {
+        "id": "usMIhi5p",
+        "settings": {
+          "spacing": {
+            "padding": [
+              20,
+              0,
+              0,
+              0
+            ]
+          },
+          "backgroundColor": "transparent",
+          "hiddenOnMobile": false,
+          "collapseOnMobile": true,
+          "gap": 20
+        },
+        "cells": [
+          {
+            "id": "n2VP5WNC",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 33
+            },
+            "atoms": [
+              {
+                "id": "XzLaYl1L",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:36px\">42%</span></strong></p><p><strong>Faster first draft</strong></p><p><span style=\"color:#7A6558;font-size:13px\">Measured from brief to review-ready structure.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "ElCBbTUt",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 33
+            },
+            "atoms": [
+              {
+                "id": "xZVvqweg",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:36px\">3.1×</span></strong></p><p><strong>More reuse</strong></p><p><span style=\"color:#7A6558;font-size:13px\">Teams started from proven patterns instead of blank pages.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          },
+          {
+            "id": "IftQ944L",
+            "settings": {
+              "spacing": {},
+              "backgroundColor": "transparent",
+              "verticalAlign": "top",
+              "horizontalAlign": "left",
+              "width": 33
+            },
+            "atoms": [
+              {
+                "id": "Ko73sYfm",
+                "type": "text",
+                "value": "<p><strong><span style=\"color:#FF6B00;font-size:36px\">18h</span></strong></p><p><strong>Saved weekly</strong></p><p><span style=\"color:#7A6558;font-size:13px\">A clear number with one sentence of useful context.</span></p>",
+                "color": "#1F1712",
+                "spacing": {
+                  "padding": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "margin": [
+                    0,
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              }
+            ],
+            "rows": []
+          }
+        ]
+      }
+    ]
+  }
+}
