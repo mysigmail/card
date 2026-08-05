@@ -10,13 +10,17 @@ import {
   Link,
   List,
   ListOrdered,
+  MoveHorizontal,
+  MoveVertical,
   RemoveFormatting,
   Strikethrough,
   Subscript,
   Superscript,
+  Type,
   Underline,
 } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
+import { useCanvas } from '@/features/editor/model'
 import { Button } from '@/shared/ui/button'
 import { ColorPicker } from '@/shared/ui/color-picker'
 import { Input } from '@/shared/ui/input'
@@ -38,20 +42,117 @@ defineOptions({ inheritAttrs: false })
 const props = defineProps<Props>()
 const toolbar = ref<HTMLElement>()
 const { toolbarPosition } = useInlineToolbarPosition(props.editor, toolbar)
+const { general } = useCanvas()
 
 const DEFAULT_STYLE_VALUE = '__default__'
+const MIXED_STYLE_VALUE = '__mixed__'
 const FONT_WEIGHTS = ['400', '500', '600', '700', '800', '900']
 const LINE_HEIGHTS = ['1', '1.2', '1.4', '1.5', '1.6', '2']
 const LETTER_SPACINGS = ['-1px', '0px', '0.5px', '1px', '2px', '4px']
 const COLOR_PRESETS = ['#F56C6C', '#E6A23C', '#67C23A', '#396BDD', '#000000', '#FFFFFF']
+const SELECT_STYLE_CONTROLS = [
+  {
+    label: 'Font weight',
+    name: 'fontWeight',
+    icon: Bold,
+    width: 'w-[76px]',
+    values: FONT_WEIGHTS,
+  },
+  {
+    label: 'Line height',
+    name: 'lineHeight',
+    icon: MoveVertical,
+    width: 'w-[90px]',
+    values: LINE_HEIGHTS,
+  },
+  {
+    label: 'Letter spacing',
+    name: 'letterSpacing',
+    icon: MoveHorizontal,
+    width: 'min-w-[92px] flex-1',
+    values: LETTER_SPACINGS,
+  },
+] as const
 
 function textStyleValue(name: string) {
   void props.revision
   return props.editor.getAttributes('textStyle')[name] ?? ''
 }
 
-function selectStyleValue(name: string) {
-  return textStyleValue(name) || DEFAULT_STYLE_VALUE
+type SelectTextStyleName = 'fontFamily' | 'fontWeight' | 'lineHeight' | 'letterSpacing'
+
+function selectedTextStyleValue(name: SelectTextStyleName) {
+  void props.revision
+  const { from, to, empty } = props.editor.state.selection
+
+  if (empty) {
+    const value = textStyleValue(name)
+    if (!value && name === 'fontWeight' && props.editor.isActive('bold'))
+      return '700'
+    return String(value)
+  }
+
+  const values = new Set<string>()
+  props.editor.state.doc.nodesBetween(from, to, (node) => {
+    if (!node.isText)
+      return
+
+    const textStyle = node.marks.find(mark => mark.type.name === 'textStyle')
+    const value = textStyle?.attrs[name]
+    if (value) {
+      values.add(String(value))
+      return
+    }
+
+    const isBold = name === 'fontWeight' && node.marks.some(mark => mark.type.name === 'bold')
+    values.add(isBold ? '700' : '')
+  })
+
+  if (values.size > 1)
+    return MIXED_STYLE_VALUE
+
+  return values.values().next().value ?? ''
+}
+
+function selectStyleValue(name: SelectTextStyleName) {
+  return selectedTextStyleValue(name) || DEFAULT_STYLE_VALUE
+}
+
+function defaultStyleValue(name: SelectTextStyleName) {
+  if (name === 'fontFamily')
+    return general.font || 'Arial'
+  if (name === 'fontWeight')
+    return '400'
+  if (name === 'lineHeight')
+    return 'normal'
+  return '0px'
+}
+
+function formatStyleValue(name: SelectTextStyleName, value: string) {
+  if (value === MIXED_STYLE_VALUE)
+    return 'Mixed'
+
+  const effectiveValue = value || defaultStyleValue(name)
+  if (name === 'fontFamily') {
+    return (
+      INLINE_TEXT_FONT_FAMILIES.find(
+        font => font.value === effectiveValue || font.label === effectiveValue,
+      )?.label ?? effectiveValue
+    )
+  }
+
+  if (name === 'letterSpacing')
+    return effectiveValue.replace(/^(-?[\d.]+)(px|em|rem)$/, '$1 $2')
+
+  return effectiveValue
+}
+
+function displayedStyleValue(name: SelectTextStyleName) {
+  return formatStyleValue(name, selectedTextStyleValue(name))
+}
+
+function defaultStyleLabel(name: SelectTextStyleName) {
+  return formatStyleValue(name, defaultStyleValue(name))
 }
 
 function markState(
@@ -338,21 +439,31 @@ function stringValue(value: unknown) {
     >
       <SelectTrigger
         size="sm"
-        class="w-[118px] px-2 text-xs"
+        class="w-[120px] gap-1.5 px-2 text-xs"
         aria-label="Font family"
       >
-        <SelectValue placeholder="Default" />
+        <Type class="size-3.5 text-muted-foreground" />
+        <SelectValue>
+          {{ displayedStyleValue('fontFamily') }}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent
         :body-lock="false"
         :disable-outside-pointer-events="false"
       >
         <SelectItem
+          v-if="selectStyleValue('fontFamily') === MIXED_STYLE_VALUE"
+          :value="MIXED_STYLE_VALUE"
+          disabled
+        >
+          Mixed
+        </SelectItem>
+        <SelectItem
           v-for="font in INLINE_TEXT_FONT_FAMILIES"
           :key="font.label"
           :value="font.value || DEFAULT_STYLE_VALUE"
         >
-          {{ font.label }}
+          {{ font.value ? font.label : `${defaultStyleLabel('fontFamily')} · Template` }}
         </SelectItem>
       </SelectContent>
     </Select>
@@ -369,47 +480,38 @@ function stringValue(value: unknown) {
     />
 
     <Select
-      v-for="control in [
-        {
-          label: 'Font weight',
-          name: 'fontWeight',
-          placeholder: 'Weight',
-          width: 'w-[78px]',
-          values: FONT_WEIGHTS,
-        },
-        {
-          label: 'Line height',
-          name: 'lineHeight',
-          placeholder: 'Line',
-          width: 'w-[68px]',
-          values: LINE_HEIGHTS,
-        },
-        {
-          label: 'Letter spacing',
-          name: 'letterSpacing',
-          placeholder: 'Spacing',
-          width: 'min-w-[82px] flex-1',
-          values: LETTER_SPACINGS,
-        },
-      ]"
+      v-for="control in SELECT_STYLE_CONTROLS"
       :key="control.name"
       :model-value="selectStyleValue(control.name)"
       @update:model-value="setTextStyle(control.name, stringValue($event))"
     >
       <SelectTrigger
         size="sm"
-        class="px-2 text-xs"
+        class="gap-1.5 px-2 text-xs"
         :class="control.width"
         :aria-label="control.label"
       >
-        <SelectValue :placeholder="control.placeholder" />
+        <component
+          :is="control.icon"
+          class="size-3.5 text-muted-foreground"
+        />
+        <SelectValue>
+          {{ displayedStyleValue(control.name) }}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent
         :body-lock="false"
         :disable-outside-pointer-events="false"
       >
+        <SelectItem
+          v-if="selectStyleValue(control.name) === MIXED_STYLE_VALUE"
+          :value="MIXED_STYLE_VALUE"
+          disabled
+        >
+          Mixed
+        </SelectItem>
         <SelectItem :value="DEFAULT_STYLE_VALUE">
-          {{ control.placeholder }}
+          {{ defaultStyleLabel(control.name) }}
         </SelectItem>
         <SelectItem
           v-for="value in control.values"
