@@ -10,16 +10,17 @@ import {
   Link,
   List,
   ListOrdered,
-  MoveHorizontal,
-  MoveVertical,
   RemoveFormatting,
   Strikethrough,
   Subscript,
   Superscript,
-  Type,
   Underline,
 } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
+import UilArrowsHAlt from '~icons/uil/arrows-h-alt'
+import UilArrowsVAlt from '~icons/uil/arrows-v-alt'
+import UilText from '~icons/uil/text'
+import UilTextFields from '~icons/uil/text-fields'
 import { useCanvas } from '@/features/editor/model'
 import { Button } from '@/shared/ui/button'
 import { ColorPicker } from '@/shared/ui/color-picker'
@@ -29,6 +30,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Separator } from '@/shared/ui/separator'
 import { Toggle } from '@/shared/ui/toggle'
 import { useInlineToolbarPosition } from './composables/use-inline-toolbar-position'
+import ScrubbableNumberField from './ScrubbableNumberField.vue'
 import { INLINE_TEXT_FONT_FAMILIES } from './text-editor-core'
 
 interface Props {
@@ -47,41 +49,18 @@ const { general } = useCanvas()
 const DEFAULT_STYLE_VALUE = '__default__'
 const MIXED_STYLE_VALUE = '__mixed__'
 const FONT_WEIGHTS = ['400', '500', '600', '700', '800', '900']
-const LINE_HEIGHTS = ['1', '1.2', '1.4', '1.5', '1.6', '2']
-const LETTER_SPACINGS = ['-1px', '0px', '0.5px', '1px', '2px', '4px']
 const COLOR_PRESETS = ['#F56C6C', '#E6A23C', '#67C23A', '#396BDD', '#000000', '#FFFFFF']
-const SELECT_STYLE_CONTROLS = [
-  {
-    label: 'Font weight',
-    name: 'fontWeight',
-    icon: Bold,
-    width: 'w-[76px]',
-    values: FONT_WEIGHTS,
-  },
-  {
-    label: 'Line height',
-    name: 'lineHeight',
-    icon: MoveVertical,
-    width: 'w-[90px]',
-    values: LINE_HEIGHTS,
-  },
-  {
-    label: 'Letter spacing',
-    name: 'letterSpacing',
-    icon: MoveHorizontal,
-    width: 'min-w-[92px] flex-1',
-    values: LETTER_SPACINGS,
-  },
-] as const
 
 function textStyleValue(name: string) {
   void props.revision
   return props.editor.getAttributes('textStyle')[name] ?? ''
 }
 
-type SelectTextStyleName = 'fontFamily' | 'fontWeight' | 'lineHeight' | 'letterSpacing'
+type TextStyleName = 'fontFamily' | 'fontSize' | 'fontWeight' | 'lineHeight' | 'letterSpacing'
+type SelectTextStyleName = Extract<TextStyleName, 'fontFamily' | 'fontWeight'>
+type NumericTextStyleName = Extract<TextStyleName, 'fontSize' | 'lineHeight' | 'letterSpacing'>
 
-function selectedTextStyleValue(name: SelectTextStyleName) {
+function selectedTextStyleValue(name: TextStyleName) {
   void props.revision
   const { from, to, empty } = props.editor.state.selection
 
@@ -121,11 +100,7 @@ function selectStyleValue(name: SelectTextStyleName) {
 function defaultStyleValue(name: SelectTextStyleName) {
   if (name === 'fontFamily')
     return general.font || 'Arial'
-  if (name === 'fontWeight')
-    return '400'
-  if (name === 'lineHeight')
-    return 'normal'
-  return '0px'
+  return '400'
 }
 
 function formatStyleValue(name: SelectTextStyleName, value: string) {
@@ -141,9 +116,6 @@ function formatStyleValue(name: SelectTextStyleName, value: string) {
     )
   }
 
-  if (name === 'letterSpacing')
-    return effectiveValue.replace(/^(-?[\d.]+)(px|em|rem)$/, '$1 $2')
-
   return effectiveValue
 }
 
@@ -153,6 +125,33 @@ function displayedStyleValue(name: SelectTextStyleName) {
 
 function defaultStyleLabel(name: SelectTextStyleName) {
   return formatStyleValue(name, defaultStyleValue(name))
+}
+
+const fontFamilyOptions = computed(() => {
+  const inheritedFont = defaultStyleLabel('fontFamily')
+  return INLINE_TEXT_FONT_FAMILIES.filter((font) => {
+    return Boolean(font.value) && font.label !== inheritedFont && font.value !== general.font
+  })
+})
+
+function numericStyleValue(name: NumericTextStyleName, fallback?: number) {
+  const value = selectedTextStyleValue(name)
+  if (value === MIXED_STYLE_VALUE)
+    return 'mixed' as const
+  if (!value)
+    return fallback
+
+  const number = Number.parseFloat(value)
+  return Number.isFinite(number) ? number : fallback
+}
+
+function setNumericStyle(name: NumericTextStyleName, value: number | undefined) {
+  if (value === undefined) {
+    setTextStyle(name, DEFAULT_STYLE_VALUE)
+    return
+  }
+
+  setTextStyle(name, name === 'lineHeight' ? String(value) : `${value}px`)
 }
 
 function markState(
@@ -208,17 +207,6 @@ function clearFormatting() {
 function setTextColor(color: string) {
   props.editor.chain().setColor(color).run()
 }
-
-const fontSize = computed({
-  get() {
-    return String(textStyleValue('fontSize')).replace('px', '') || '16'
-  },
-  set(value: string | number) {
-    const nextValue = Number(value)
-    if (Number.isFinite(nextValue))
-      setTextStyle('fontSize', `${nextValue}px`)
-  },
-})
 
 function eventInputValue(event: Event) {
   return (event.target as HTMLInputElement).value
@@ -442,7 +430,7 @@ function stringValue(value: unknown) {
         class="w-[120px] gap-1.5 px-2 text-xs"
         aria-label="Font family"
       >
-        <Type class="size-3.5 text-muted-foreground" />
+        <UilText class="size-4 text-muted-foreground" />
         <SelectValue>
           {{ displayedStyleValue('fontFamily') }}
         </SelectValue>
@@ -458,45 +446,48 @@ function stringValue(value: unknown) {
         >
           Mixed
         </SelectItem>
+        <SelectItem :value="DEFAULT_STYLE_VALUE">
+          {{ defaultStyleLabel('fontFamily') }}
+        </SelectItem>
         <SelectItem
-          v-for="font in INLINE_TEXT_FONT_FAMILIES"
+          v-for="font in fontFamilyOptions"
           :key="font.label"
-          :value="font.value || DEFAULT_STYLE_VALUE"
+          :value="font.value"
         >
-          {{ font.value ? font.label : `${defaultStyleLabel('fontFamily')} · Template` }}
+          {{ font.label }}
         </SelectItem>
       </SelectContent>
     </Select>
 
-    <Input
-      v-model="fontSize"
-      class="w-14 px-2 text-xs"
-      size="sm"
-      aria-label="Font size"
-      title="Font size"
-      type="number"
-      min="1"
-      max="250"
-    />
+    <ScrubbableNumberField
+      class="w-[76px]"
+      label="Font size"
+      :model-value="numericStyleValue('fontSize', 16)"
+      :default-value="16"
+      :min="1"
+      :max="250"
+      :step="1"
+      :precision="0"
+      :pixels-per-step="2"
+      @update:model-value="setNumericStyle('fontSize', $event)"
+    >
+      <template #prefix>
+        <UilTextFields />
+      </template>
+    </ScrubbableNumberField>
 
     <Select
-      v-for="control in SELECT_STYLE_CONTROLS"
-      :key="control.name"
-      :model-value="selectStyleValue(control.name)"
-      @update:model-value="setTextStyle(control.name, stringValue($event))"
+      :model-value="selectStyleValue('fontWeight')"
+      @update:model-value="setTextStyle('fontWeight', stringValue($event))"
     >
       <SelectTrigger
         size="sm"
-        class="gap-1.5 px-2 text-xs"
-        :class="control.width"
-        :aria-label="control.label"
+        class="w-[92px] gap-1.5 px-2 text-xs"
+        aria-label="Font weight"
       >
-        <component
-          :is="control.icon"
-          class="size-3.5 text-muted-foreground"
-        />
+        <Bold class="size-4 text-muted-foreground" />
         <SelectValue>
-          {{ displayedStyleValue(control.name) }}
+          {{ displayedStyleValue('fontWeight') }}
         </SelectValue>
       </SelectTrigger>
       <SelectContent
@@ -504,17 +495,17 @@ function stringValue(value: unknown) {
         :disable-outside-pointer-events="false"
       >
         <SelectItem
-          v-if="selectStyleValue(control.name) === MIXED_STYLE_VALUE"
+          v-if="selectStyleValue('fontWeight') === MIXED_STYLE_VALUE"
           :value="MIXED_STYLE_VALUE"
           disabled
         >
           Mixed
         </SelectItem>
         <SelectItem :value="DEFAULT_STYLE_VALUE">
-          {{ defaultStyleLabel(control.name) }}
+          {{ defaultStyleLabel('fontWeight') }}
         </SelectItem>
         <SelectItem
-          v-for="value in control.values"
+          v-for="value in FONT_WEIGHTS.filter((value) => value !== defaultStyleValue('fontWeight'))"
           :key="value"
           :value="value"
         >
@@ -522,6 +513,40 @@ function stringValue(value: unknown) {
         </SelectItem>
       </SelectContent>
     </Select>
+
+    <ScrubbableNumberField
+      class="w-[82px]"
+      label="Line height"
+      :model-value="numericStyleValue('lineHeight')"
+      :default-value="1.2"
+      :min="0.5"
+      :max="10"
+      :step="0.1"
+      :precision="2"
+      :pixels-per-step="4"
+      @update:model-value="setNumericStyle('lineHeight', $event)"
+    >
+      <template #prefix>
+        <UilArrowsVAlt />
+      </template>
+    </ScrubbableNumberField>
+
+    <ScrubbableNumberField
+      class="w-[82px]"
+      label="Letter spacing"
+      :model-value="numericStyleValue('letterSpacing')"
+      :default-value="0"
+      :min="-50"
+      :max="100"
+      :step="0.1"
+      :precision="2"
+      :pixels-per-step="4"
+      @update:model-value="setNumericStyle('letterSpacing', $event)"
+    >
+      <template #prefix>
+        <UilArrowsHAlt />
+      </template>
+    </ScrubbableNumberField>
 
     <ColorPicker
       :model-value="textStyleValue('color') || '#000000'"
