@@ -124,6 +124,30 @@ a {
   z-index: 9;
 }
 
+.p-inline-text-editor {
+  display: contents;
+}
+
+.p-inline-text-editor__host {
+  display: contents;
+}
+
+.p-inline-text-editor__content {
+  position: relative;
+  cursor: text;
+  outline: 1px solid var(--primary);
+  outline-offset: 2px;
+  z-index: 10;
+}
+
+.p-inline-text-editor__content ul,
+.p-inline-text-editor__content ol,
+.p-text-atom-content ul,
+.p-text-atom-content ol {
+  margin: 0;
+  padding-left: 1.5em;
+}
+
 .p-edit-tool {
   position: relative;
   box-shadow: inset 0 0 0 1px var(--primary);

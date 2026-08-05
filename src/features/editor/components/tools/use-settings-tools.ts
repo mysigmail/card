@@ -393,13 +393,6 @@ export function useSettingsTools() {
           type: 'colorPicker',
           value: selectedAtom.value.color || DEFAULT_TEXT_MAIN_COLOR,
         },
-        {
-          id: atomToolId(atomId, 'content'),
-          key: 'content',
-          label: 'Content',
-          type: 'textEditor',
-          value: selectedAtom.value.value,
-        },
       ]
     }
 

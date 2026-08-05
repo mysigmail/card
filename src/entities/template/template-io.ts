@@ -76,6 +76,8 @@ const EMAIL_TEXT_ALLOWED_TAGS = [
   'p',
   'span',
   'strong',
+  'sub',
+  'sup',
   'u',
   'ul',
 ]
@@ -92,13 +94,17 @@ const EMAIL_TEXT_ALLOWED_STYLES: NonNullable<IOptions['allowedStyles']> = {
     'border-radius': [/^[\d\s.%]+$/],
     'color': [/^#[0-9a-f]{3,8}$/i, /^rgb(a?)\([^)]*\)$/i],
     'display': [/^[a-z-]+$/i],
-    'font-family': [/^[\w\s"',-]+$/],
-    'font-size': [/^\d+(px|em|rem|%)$/],
+    'font-family': [/^[\w\s"',-]{1,200}$/],
+    'font-size': [
+      /^(?:(?:[1-9]\d?|1\d\d|2[0-4]\d|250)px|(?:0|[1-9]\d?)(?:\.\d+)?(?:em|rem)|[1-9]\d{0,2}(?:\.\d+)?%)$/,
+    ],
     'font-style': [/^(normal|italic|oblique)$/],
     'font-weight': [/^(normal|bold|[1-9]00)$/],
     'height': [/^\d+(px|%)$/],
-    'letter-spacing': [/^-?\d+(px|em|rem)?$/],
-    'line-height': [/^\d+(\.\d+)?(px|em|rem|%)?$/],
+    'letter-spacing': [/^-?(?:0|[1-9]\d?)(?:\.\d+)?(?:px|em|rem)?$/],
+    'line-height': [
+      /^(?:(?:0|[1-9]\d?|1\d\d|2[0-4]\d|250)px|\d(?:\.\d+)?(?:em|rem)?|[1-9]\d{0,2}(?:\.\d+)?%)$/,
+    ],
     'margin': [/^[\d\s.%-]+$/],
     'margin-bottom': [/^-?\d+(px|em|rem|%)$/],
     'margin-left': [/^-?\d+(px|em|rem|%)$/],
@@ -998,7 +1004,7 @@ function _validateTool(
   })
 }
 
-function sanitizeTextEditorHtml(value: string) {
+export function sanitizeTextEditorHtml(value: string) {
   return sanitizeHtmlLib(value, EMAIL_TEXT_SANITIZE_OPTIONS)
 }
 

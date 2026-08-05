@@ -3,6 +3,7 @@ import type { CSSProperties } from 'vue'
 import { MBody, MContainer, MHead, MHtml, MPreview } from '@mysigmail/vue-email-components'
 import Sortable from 'sortablejs'
 import { computed, onMounted, ref } from 'vue'
+import { useInlineTextEditing } from '@/features/editor/components/tools/text/composables/use-inline-text-editing'
 import { useCanvas } from '@/features/editor/model'
 import { addGhost, BlockRenderer, removeGhost } from '@/features/email-preview'
 import { EMAIL_RESPONSIVE_CSS } from '@/features/email-preview/constants'
@@ -15,6 +16,7 @@ const listRef = ref<HTMLElement>()
 const surfaceRef = ref<HTMLElement>()
 
 const { selectionOverlay, selectionOverlayStyle } = useSelectionOverlay(surfaceRef)
+const { editingAtomId } = useInlineTextEditing()
 
 const DESKTOP_TEMPLATE_WIDTH = 600
 const MOBILE_TEMPLATE_WIDTH = 375
@@ -55,6 +57,8 @@ function initSortable() {
     animation: 150,
     ghostClass: 'p-ghost',
     swapThreshold: 0.5,
+    filter: '.p-inline-text-editor',
+    preventOnFilter: false,
     onStart() {
       isDragging.value = true
     },
@@ -120,7 +124,7 @@ onMounted(() => {
           </div>
 
           <div
-            v-if="selectionOverlay.visible"
+            v-if="selectionOverlay.visible && !editingAtomId"
             class="p-selection-overlay"
             :style="selectionOverlayStyle"
           >
