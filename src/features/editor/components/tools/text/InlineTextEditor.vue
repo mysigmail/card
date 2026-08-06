@@ -17,10 +17,16 @@ const editor = shallowRef<Editor>()
 const root = ref<HTMLElement>()
 const { getTextAtomValue, updateTextAtomValue } = useCanvas()
 const { flushPendingSnapshot } = useHistory()
-const { registerEditor, requestToolbarUpdate, stopEditing, unregisterEditor }
-  = useInlineTextEditing()
+const {
+  consumeEditingPointerPosition,
+  registerEditor,
+  requestToolbarUpdate,
+  stopEditing,
+  unregisterEditor,
+} = useInlineTextEditing()
 let finished = false
 let lastModelValue = sanitizeTextEditorHtml(props.value)
+let initialFocusRafId: number | undefined
 
 function persistEditorValue() {
   if (!editor.value)
@@ -49,11 +55,32 @@ function onRootKeydown(event: KeyboardEvent) {
   finishEditing()
 }
 
+function focusInitialSelection() {
+  const currentEditor = editor.value
+  if (!currentEditor)
+    return
+
+  const pointerPosition = consumeEditingPointerPosition(props.atomId)
+  initialFocusRafId = window.requestAnimationFrame(() => {
+    initialFocusRafId = undefined
+    if (editor.value !== currentEditor)
+      return
+
+    const position = pointerPosition ? currentEditor.view.posAtCoords(pointerPosition) : null
+
+    if (position) {
+      currentEditor.chain().setTextSelection(position.pos).focus().run()
+      return
+    }
+
+    currentEditor.commands.focus('end')
+  })
+}
+
 onMounted(() => {
   editor.value = new Editor({
     content: normalizeInlineEditorHtml(sanitizeTextEditorHtml(props.value)),
     extensions: createInlineTextExtensions(),
-    autofocus: 'end',
     editorProps: {
       attributes: {
         'class': 'p-inline-text-editor__content',
@@ -79,7 +106,7 @@ onMounted(() => {
 
   registerEditor(props.atomId, editor.value)
 
-  nextTick(() => editor.value?.commands.focus('end'))
+  nextTick(focusInitialSelection)
 })
 
 watch(
@@ -95,6 +122,11 @@ watch(
 )
 
 onBeforeUnmount(() => {
+  if (initialFocusRafId !== undefined) {
+    window.cancelAnimationFrame(initialFocusRafId)
+    initialFocusRafId = undefined
+  }
+
   if (
     canPersistInlineTextOnUnmount({
       currentModelValue: getTextAtomValue(props.atomId),

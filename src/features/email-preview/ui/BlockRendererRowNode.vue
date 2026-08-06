@@ -330,9 +330,9 @@ function selectAtomNode(rowId: string, cellId: string, atomId: string, event?: M
     event.currentTarget.focus()
 }
 
-function startTextEditing(rowId: string, cellId: string, atomId: string) {
+function startTextEditing(rowId: string, cellId: string, atomId: string, event?: MouseEvent) {
   selectAtom(props.blockId, rowId, cellId, atomId)
-  startEditing(atomId)
+  startEditing(atomId, event ? { left: event.clientX, top: event.clientY } : undefined)
 }
 
 function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
@@ -381,7 +381,7 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
               :style="textAtomStyle(atom)"
               :tabindex="editingAtomId === atom.id ? -1 : 0"
               @click.stop="selectAtomNode(row.id, cell.id, atom.id, $event)"
-              @dblclick.stop="startTextEditing(row.id, cell.id, atom.id)"
+              @dblclick.stop="startTextEditing(row.id, cell.id, atom.id, $event)"
               @keydown="onTextAtomKeydown($event, atom.id)"
             >
               <InlineTextEditor
