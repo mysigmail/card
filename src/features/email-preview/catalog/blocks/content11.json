@@ -41,8 +41,7 @@
               {
                 "id": "ETpBmbTv",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><span style=\"color:rgb(255, 107, 0);font-size:31px\"><strong>Our Clients</strong></span></p><p style=\"text-align:center\"><span style=\"font-size:16px\">We’re trusted by well-known companies,<br />and here are some of them.</span></p>",
-                "color": "#ffffff",
+                "value": "<div style=\"color:#ffffff\"><p style=\"text-align:center\"><span style=\"color:rgb(255, 107, 0);font-size:31px\"><strong>Our Clients</strong></span></p><p style=\"text-align:center\"><span style=\"font-size:16px\">We’re trusted by well-known companies,<br />and here are some of them.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

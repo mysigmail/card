@@ -41,8 +41,7 @@
               {
                 "id": "QRJHnOME",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">TWO PERSPECTIVES</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:30px\">What changed after the first week.</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">TWO PERSPECTIVES</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:30px\">What changed after the first week.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -101,8 +100,7 @@
               {
                 "id": "TMYC-8cT",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:30px\">“</span></strong></p><p><strong><span style=\"font-size:19px\">We stopped explaining the interface and started discussing the work.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Maya Chen · Product lead</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:30px\">“</span></strong></p><p><strong><span style=\"font-size:19px\">We stopped explaining the interface and started discussing the work.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Maya Chen · Product lead</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -142,8 +140,7 @@
               {
                 "id": "5I6UAJuf",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:30px\">“</span></strong></p><p><strong><span style=\"font-size:19px\">The handoff became shorter because the structure already carried intent.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Noah Ellis · Design director</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:30px\">“</span></strong></p><p><strong><span style=\"font-size:19px\">The handoff became shorter because the structure already carried intent.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Noah Ellis · Design director</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

@@ -41,8 +41,7 @@
               {
                 "id": "QPcoKmxv",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">THE DESK EDIT</span></strong></p><p><strong><span style=\"font-size:31px\">One featured upgrade, three useful additions.</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">THE DESK EDIT</span></strong></p><p><strong><span style=\"font-size:31px\">One featured upgrade, three useful additions.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -123,8 +122,7 @@
               {
                 "id": "dh9WWP4B",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FFB16F;font-size:12px\">FEATURED</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">Focus Headphones</span></strong></p><p><span style=\"color:#FFD9B8;font-size:13px\">Soft ear cups · wireless · 32h battery</span></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">$159</span></strong></p>",
-                "color": "#FFFFFF",
+                "value": "<div style=\"color:#FFFFFF\"><p><strong><span style=\"color:#FFB16F;font-size:12px\">FEATURED</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">Focus Headphones</span></strong></p><p><span style=\"color:#FFD9B8;font-size:13px\">Soft ear cups · wireless · 32h battery</span></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">$159</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     14,
@@ -245,8 +243,7 @@
                       {
                         "id": "y8cp7u3B",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:17px\">Desk Camera</span></strong><br /><span style=\"color:#7A6558;font-size:12px\">4K · auto framing</span><br /><strong><span style=\"font-size:19px\">$89</span></strong></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:17px\">Desk Camera</span></strong><br /><span style=\"color:#7A6558;font-size:12px\">4K · auto framing</span><br /><strong><span style=\"font-size:19px\">$89</span></strong></p></div>",
                         "spacing": {
                           "padding": [
                             10,
@@ -308,8 +305,7 @@
                       {
                         "id": "04Wq2EwR",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><span style=\"font-size:17px\"><strong>City</strong></span><br /><span style=\"font-size:17px\"><strong>Pack</strong></span><br /><span style=\"color:rgb(90, 43, 10);font-size:12px\">16 L · laptop sleeve</span><br /><span style=\"font-size:19px\"><strong>$74</strong></span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><span style=\"font-size:17px\"><strong>City</strong></span><br /><span style=\"font-size:17px\"><strong>Pack</strong></span><br /><span style=\"color:rgb(90, 43, 10);font-size:12px\">16 L · laptop sleeve</span><br /><span style=\"font-size:19px\"><strong>$74</strong></span></p></div>",
                         "spacing": {
                           "padding": [
                             10,
@@ -368,8 +364,7 @@
                       {
                         "id": "FrdZJNZt",
                         "type": "text",
-                        "value": "<p><strong><span style=\"color:#FF6B00;font-size:12px\">COMPLETE THE DESK</span></strong></p><p><strong><span style=\"font-size:20px\">Studio Microphone</span></strong></p><p><span style=\"color:#7A6558;font-size:12px\">USB-C · cardioid · desk stand</span></p><p><strong><span style=\"font-size:21px\">$109</span></strong></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:12px\">COMPLETE THE DESK</span></strong></p><p><strong><span style=\"font-size:20px\">Studio Microphone</span></strong></p><p><span style=\"color:#7A6558;font-size:12px\">USB-C · cardioid · desk stand</span></p><p><strong><span style=\"font-size:21px\">$109</span></strong></p></div>",
                         "spacing": {
                           "padding": [
                             0,

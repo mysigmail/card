@@ -114,8 +114,7 @@
               {
                 "id": "KmDA4bNP",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FFB16F;font-size:13px\">2 MINUTE STORY</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:31px\">See how the pieces come together.</span></strong></p><p><span style=\"color:#FFD9B8;font-size:15px\">A media-led CTA for demos and customer stories.</span></p>",
-                "color": "#FFFFFF",
+                "value": "<div style=\"color:#FFFFFF\"><p><strong><span style=\"color:#FFB16F;font-size:13px\">2 MINUTE STORY</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:31px\">See how the pieces come together.</span></strong></p><p><span style=\"color:#FFD9B8;font-size:15px\">A media-led CTA for demos and customer stories.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

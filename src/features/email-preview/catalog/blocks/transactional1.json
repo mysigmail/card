@@ -42,8 +42,7 @@
               {
                 "id": "LvYO-BY-",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">ORDER #CARD-2048</span></strong></p><p><strong><span style=\"font-size:32px\">Thanks, Maya. Your order is confirmed.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">We’ve received your payment and will send tracking as soon as the package leaves our studio.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">ORDER #CARD-2048</span></strong></p><p><strong><span style=\"font-size:32px\">Thanks, Maya. Your order is confirmed.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">We’ve received your payment and will send tracking as soon as the package leaves our studio.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -83,8 +82,7 @@
               {
                 "id": "lhq1W0Ia",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:13px\">CONFIRMED</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:26px\">$159.00</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:13px\">CONFIRMED</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:26px\">$159.00</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -179,8 +177,7 @@
               {
                 "id": "IP8FFa3_",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:19px\">Focus Headphones</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Sand / Orange · Qty 1</span></p><p><strong><span style=\"font-size:18px\">$159.00</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:19px\">Focus Headphones</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Sand / Orange · Qty 1</span></p><p><strong><span style=\"font-size:18px\">$159.00</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,

@@ -40,8 +40,7 @@
               {
                 "id": "F1LAddrA",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><span style=\"font-size:14px;color:rgb(170, 170, 170)\">500 Howard Street<br />San Francisco, CA 94105</span></p>",
-                "color": "#AAAAAA",
+                "value": "<div style=\"color:#AAAAAA\"><p style=\"text-align:center\"><span style=\"font-size:14px;color:rgb(170, 170, 170)\">500 Howard Street<br />San Francisco, CA 94105</span></p></div>",
                 "spacing": {
                   "margin": [
                     0,

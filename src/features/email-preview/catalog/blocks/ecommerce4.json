@@ -78,8 +78,7 @@
               {
                 "id": "ULzXEh65",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">LENA’S WEEKEND PICKS</span></strong></p><p><strong><span style=\"font-size:29px\">Two small upgrades I keep recommending.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Curated by Lena Park · product editor</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">LENA’S WEEKEND PICKS</span></strong></p><p><strong><span style=\"font-size:29px\">Two small upgrades I keep recommending.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Curated by Lena Park · product editor</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -174,8 +173,7 @@
               {
                 "id": "aRGaoXZO",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:22px\">Weekend Pair</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Soft landing · everyday sole</span></p><p><strong><span style=\"font-size:22px\">$89</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:22px\">Weekend Pair</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Soft landing · everyday sole</span></p><p><strong><span style=\"font-size:22px\">$89</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -293,8 +291,7 @@
               {
                 "id": "y57T2Wkb",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:22px\">Citrus Six-Pack</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Dry finish · low sugar</span></p><p><strong><span style=\"font-size:22px\">$18</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:22px\">Citrus Six-Pack</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Dry finish · low sugar</span></p><p><strong><span style=\"font-size:22px\">$18</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,

@@ -42,8 +42,7 @@
               {
                 "id": "Cs9YGMsV",
                 "type": "text",
-                "value": "<p><span style=\"font-size:13px\"><strong>RECEIPT / 04 AUG 2026</strong></span></p><p><span style=\"font-size:31px\"><strong>Payment received.</strong></span></p><p><span style=\"font-size:14px\">Receipt #RC-7391 · Visa ending in 2048</span></p>",
-                "color": "#000000",
+                "value": "<div style=\"color:#000000\"><p><span style=\"font-size:13px\"><strong>RECEIPT / 04 AUG 2026</strong></span></p><p><span style=\"font-size:31px\"><strong>Payment received.</strong></span></p><p><span style=\"font-size:14px\">Receipt #RC-7391 · Visa ending in 2048</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -75,8 +74,7 @@
               {
                 "id": "T5e456GX",
                 "type": "text",
-                "value": "<p style=\"text-align:right\"><span style=\"font-size:12px\">TOTAL PAID</span><span><br /></span><span style=\"font-size:31px\"><strong>$248.00</strong></span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:right\"><span style=\"font-size:12px\">TOTAL PAID</span><span><br /></span><span style=\"font-size:31px\"><strong>$248.00</strong></span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -155,8 +153,7 @@
                       {
                         "id": "wOHYaMMb",
                         "type": "text",
-                        "value": "<p><span style=\"font-size:13px\">Weekend kit</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p><span style=\"font-size:13px\">Weekend kit</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -188,8 +185,7 @@
                       {
                         "id": "Jucyvz7J",
                         "type": "text",
-                        "value": "<p style=\"text-align:right\"><span style=\"font-size:13px\">$228.00</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:right\"><span style=\"font-size:13px\">$228.00</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -240,8 +236,7 @@
                       {
                         "id": "9O8uFIJk",
                         "type": "text",
-                        "value": "<p><span style=\"font-size:13px\">Shipping</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p><span style=\"font-size:13px\">Shipping</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -273,8 +268,7 @@
                       {
                         "id": "hHHcv-iZ",
                         "type": "text",
-                        "value": "<p style=\"text-align:right\"><span style=\"font-size:13px\">$12.00</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:right\"><span style=\"font-size:13px\">$12.00</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -325,8 +319,7 @@
                       {
                         "id": "0FrdbBqH",
                         "type": "text",
-                        "value": "<p><span style=\"font-size:13px\">Tax</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p><span style=\"font-size:13px\">Tax</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -358,8 +351,7 @@
                       {
                         "id": "tPdHw2ow",
                         "type": "text",
-                        "value": "<p style=\"text-align:right\"><span style=\"font-size:13px\">$8.00</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:right\"><span style=\"font-size:13px\">$8.00</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -454,8 +446,7 @@
                       {
                         "id": "dLc-148S",
                         "type": "text",
-                        "value": "<p><span style=\"font-size:13px\">Total</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p><span style=\"font-size:13px\">Total</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -487,8 +478,7 @@
                       {
                         "id": "WiJOCsLz",
                         "type": "text",
-                        "value": "<p style=\"text-align:right\"><span style=\"font-size:13px\"><strong>$248.00</strong></span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:right\"><span style=\"font-size:13px\"><strong>$248.00</strong></span></p></div>",
                         "spacing": {
                           "padding": [
                             0,

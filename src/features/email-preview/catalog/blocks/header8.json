@@ -49,8 +49,7 @@
               {
                 "id": "5o7auu5x",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:42px\">24</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#5A2B0A;font-size:13px\">SEPTEMBER</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:42px\">24</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#5A2B0A;font-size:13px\">SEPTEMBER</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     18,
@@ -82,8 +81,7 @@
               {
                 "id": "DLK75x6A",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:13px\">ONLINE WORKSHOP · 10:00</span></strong></p><p><strong><span style=\"font-size:33px\">Design the first screen together.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:14px\">Date, topic and registration action stay visible at a glance.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#5A2B0A;font-size:13px\">ONLINE WORKSHOP · 10:00</span></strong></p><p><strong><span style=\"font-size:33px\">Design the first screen together.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:14px\">Date, topic and registration action stay visible at a glance.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

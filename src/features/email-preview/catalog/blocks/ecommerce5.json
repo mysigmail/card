@@ -41,8 +41,7 @@
               {
                 "id": "DzK_Pze9",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">SIDE BY SIDE</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Choose the sound that fits the room.</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">SIDE BY SIDE</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Choose the sound that fits the room.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -123,8 +122,7 @@
               {
                 "id": "RQDhG_ub",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:22px\">Focus Headphones</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Private listening<br />32-hour battery<br />Fold-flat design</span></p><p style=\"text-align:center\"><strong><span style=\"font-size:24px\">$159</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:22px\">Focus Headphones</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Private listening<br />32-hour battery<br />Fold-flat design</span></p><p style=\"text-align:center\"><strong><span style=\"font-size:24px\">$159</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     12,
@@ -216,8 +214,7 @@
               {
                 "id": "DqeHT-Wb",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:22px\">Room Speaker</span></strong></p><p style=\"text-align:center\"><span style=\"color:#5A2B0A;font-size:13px\">Shared listening<br />18-hour battery<br />Room-filling sound</span></p><p style=\"text-align:center\"><strong><span style=\"font-size:24px\">$119</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:22px\">Room Speaker</span></strong></p><p style=\"text-align:center\"><span style=\"color:#5A2B0A;font-size:13px\">Shared listening<br />18-hour battery<br />Room-filling sound</span></p><p style=\"text-align:center\"><strong><span style=\"font-size:24px\">$119</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     12,

@@ -41,8 +41,7 @@
               {
                 "id": "bjUKZoxb",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">FIELD INTERVIEW / 04</span></strong></p><p><strong><span style=\"font-size:32px\">The demonstration that changed the conversation.</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">FIELD INTERVIEW / 04</span></strong></p><p><strong><span style=\"font-size:32px\">The demonstration that changed the conversation.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -162,8 +161,7 @@
               {
                 "id": "sLzuaCZI",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:19px\">Start with the object, then explain the choice.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Maya placed the can in view before describing the redesign. That small sequence gave the audience something concrete to inspect while the reasoning unfolded.</span></p><p><span style=\"color:#7A6558;font-size:14px\">The result felt less like a pitch and more like a useful working note.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:19px\">Start with the object, then explain the choice.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Maya placed the can in view before describing the redesign. That small sequence gave the audience something concrete to inspect while the reasoning unfolded.</span></p><p><span style=\"color:#7A6558;font-size:14px\">The result felt less like a pitch and more like a useful working note.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -233,8 +231,7 @@
               {
                 "id": "e6MnQrQX",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:12px\">KEY DETAIL</span></strong></p><p><strong><span style=\"font-size:21px\">Show first.<br />Explain second.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:13px\">A compact takeaway separated from the main narrative.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#5A2B0A;font-size:12px\">KEY DETAIL</span></strong></p><p><strong><span style=\"font-size:21px\">Show first.<br />Explain second.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:13px\">A compact takeaway separated from the main narrative.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

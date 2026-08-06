@@ -41,8 +41,7 @@
               {
                 "id": "iIdp_GCJ",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">NEW THIS WEEK</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Three arrivals, three different jobs.</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">NEW THIS WEEK</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Three arrivals, three different jobs.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -192,8 +191,7 @@
                       {
                         "id": "VxBLBM01",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Transit Bomber</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">Lightweight shell</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$128</strong></span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Transit Bomber</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">Lightweight shell</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$128</strong></span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -398,8 +396,7 @@
                       {
                         "id": "BQj8ihmS",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Pocket Console</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">256 GB · OLED</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$249</strong></span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Pocket Console</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">256 GB · OLED</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$249</strong></span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -604,8 +601,7 @@
                       {
                         "id": "ildOMnJC",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Daily Skincare</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">50 ml · fragrance free</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$42</strong></span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><span style=\"font-size:20px\"><strong>Daily Skincare</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:12px\">50 ml · fragrance free</span></p><p style=\"text-align:center\"><span style=\"font-size:21px\"><strong>$42</strong></span></p></div>",
                         "spacing": {
                           "padding": [
                             0,

@@ -41,8 +41,7 @@
               {
                 "id": "OM92n8zu",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">THE QUARTER IN THREE NUMBERS</span></strong></p><p><strong><span style=\"font-size:30px\">A compact data story, not a dashboard.</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">THE QUARTER IN THREE NUMBERS</span></strong></p><p><strong><span style=\"font-size:30px\">A compact data story, not a dashboard.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -93,8 +92,7 @@
               {
                 "id": "XzLaYl1L",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:36px\">42%</span></strong></p><p><strong>Faster first draft</strong></p><p><span style=\"color:#7A6558;font-size:13px\">Measured from brief to review-ready structure.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:36px\">42%</span></strong></p><p><strong>Faster first draft</strong></p><p><span style=\"color:#7A6558;font-size:13px\">Measured from brief to review-ready structure.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -126,8 +124,7 @@
               {
                 "id": "xZVvqweg",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:36px\">3.1×</span></strong></p><p><strong>More reuse</strong></p><p><span style=\"color:#7A6558;font-size:13px\">Teams started from proven patterns instead of blank pages.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:36px\">3.1×</span></strong></p><p><strong>More reuse</strong></p><p><span style=\"color:#7A6558;font-size:13px\">Teams started from proven patterns instead of blank pages.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -159,8 +156,7 @@
               {
                 "id": "Ko73sYfm",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:36px\">18h</span></strong></p><p><strong>Saved weekly</strong></p><p><span style=\"color:#7A6558;font-size:13px\">A clear number with one sentence of useful context.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:36px\">18h</span></strong></p><p><strong>Saved weekly</strong></p><p><span style=\"color:#7A6558;font-size:13px\">A clear number with one sentence of useful context.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

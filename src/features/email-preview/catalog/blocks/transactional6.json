@@ -41,8 +41,7 @@
               {
                 "id": "FaXd6YW5",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFB16F;font-size:13px\">SECURITY REQUEST</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:32px\">Reset your password.</span></strong></p><p style=\"text-align:center\"><span style=\"color:#FFD9B8;font-size:14px\">We received a request to update the password for maya@example.com. This link expires in 30 minutes.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#FFB16F;font-size:13px\">SECURITY REQUEST</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:32px\">Reset your password.</span></strong></p><p style=\"text-align:center\"><span style=\"color:#FFD9B8;font-size:14px\">We received a request to update the password for maya@example.com. This link expires in 30 minutes.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -153,8 +152,7 @@
               {
                 "id": "g7sUPOE8",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><span style=\"color:#A88976;font-size:12px\">If you didn’t request this, you can safely ignore this message. Your password will stay unchanged.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><span style=\"color:#A88976;font-size:12px\">If you didn’t request this, you can safely ignore this message. Your password will stay unchanged.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

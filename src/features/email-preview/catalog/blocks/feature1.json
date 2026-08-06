@@ -41,8 +41,7 @@
               {
                 "id": "fVWhVxNR",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">THREE USEFUL OUTCOMES</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">A system that earns its place.</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">THREE USEFUL OUTCOMES</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">A system that earns its place.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -101,8 +100,7 @@
               {
                 "id": "trwygxB6",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">FAST</span></strong></p><p><strong><span style=\"font-size:23px\">Start with structure.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Move from blank page to a useful first draft without rebuilding the basics.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">FAST</span></strong></p><p><strong><span style=\"font-size:23px\">Start with structure.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Move from blank page to a useful first draft without rebuilding the basics.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -142,8 +140,7 @@
               {
                 "id": "3u9tdgZQ",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:13px\">CLEAR</span></strong></p><p><strong><span style=\"font-size:23px\">Edit with intent.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:14px\">Keep hierarchy visible while content, media and actions continue to change.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#5A2B0A;font-size:13px\">CLEAR</span></strong></p><p><strong><span style=\"font-size:23px\">Edit with intent.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:14px\">Keep hierarchy visible while content, media and actions continue to change.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -183,8 +180,7 @@
               {
                 "id": "wNEQeATe",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">SAFE</span></strong></p><p><strong><span style=\"font-size:23px\">Send predictably.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Reuse email-safe patterns instead of discovering layout limits at export time.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">SAFE</span></strong></p><p><strong><span style=\"font-size:23px\">Send predictably.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Reuse email-safe patterns instead of discovering layout limits at export time.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

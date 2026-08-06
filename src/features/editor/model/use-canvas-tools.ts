@@ -192,11 +192,6 @@ function _createCanvasTools() {
       if (field === 'content')
         return updateTextAtomValue(atom.id, String(value ?? ''))
 
-      if (field === 'color') {
-        atom.color = String(value ?? '')
-        return true
-      }
-
       if (field === 'spacing') {
         atom.spacing = toSpacingValue(value)
         return true

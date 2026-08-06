@@ -41,8 +41,7 @@
               {
                 "id": "q1xBYVqH",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">THREE NOTES FROM THE FIELD</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:30px\">Different teams. One clear shift.</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">THREE NOTES FROM THE FIELD</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:30px\">Different teams. One clear shift.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -177,8 +176,7 @@
                       {
                         "id": "XjqKLJpg",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:17px\">“We found the right starting point in minutes.”</span></strong></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:17px\">“We found the right starting point in minutes.”</span></strong></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -229,8 +227,7 @@
                       {
                         "id": "epajs8JX",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Maya Chen<br />Product lead</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Maya Chen<br />Product lead</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -350,8 +347,7 @@
                       {
                         "id": "4fvjDeNC",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:17px\">“The structure made the feedback much sharper.”</span></strong></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:17px\">“The structure made the feedback much sharper.”</span></strong></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -402,8 +398,7 @@
                       {
                         "id": "umOzAdWE",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Sofia Reed<br />Brand director</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Sofia Reed<br />Brand director</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -523,8 +518,7 @@
                       {
                         "id": "5p0td6Xn",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:17px\">“Our first review finally stayed on the message.”</span></strong></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:17px\">“Our first review finally stayed on the message.”</span></strong></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -575,8 +569,7 @@
                       {
                         "id": "Q3o6n-Xa",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Daniel Brooks<br />Creative lead</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Daniel Brooks<br />Creative lead</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
