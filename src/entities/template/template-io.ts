@@ -529,10 +529,6 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
     if (!isString(value.value))
       pushIssue(issues, `${path}.value`, 'text atom value must be a string')
 
-    if (value.color !== undefined && !isString(value.color)) {
-      pushIssue(issues, `${path}.color`, 'text atom color must be a string')
-    }
-
     if (value.spacing !== undefined)
       validateSpacingValue(value.spacing, `${path}.spacing`, issues)
 
@@ -1035,10 +1031,11 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
   return atoms.map((atom) => {
     if (atom.type === 'text') {
       return {
-        ...atom,
-        hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
-        color: atom.color || '#111827',
+        id: atom.id,
+        type: atom.type,
         value: sanitizeTextEditorHtml(atom.value),
+        spacing: atom.spacing,
+        hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
       }
     }
 

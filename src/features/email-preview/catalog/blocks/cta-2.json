@@ -42,8 +42,7 @@
               {
                 "id": "sMKaQTzi",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:23px\">Ready to make the next send count?</span></strong></p><p><span style=\"color:#5A2B0A;font-size:14px\">A compact prompt for one high-priority action.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:23px\">Ready to make the next send count?</span></strong></p><p><span style=\"color:#5A2B0A;font-size:14px\">A compact prompt for one high-priority action.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

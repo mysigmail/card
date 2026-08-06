@@ -159,8 +159,7 @@
               {
                 "id": "fhipuLNA",
                 "type": "text",
-                "value": "<p><span style=\"font-size:14px;color:rgb(170, 170, 170)\">500 Howard Street San Francisco, CA 94105<br /><u><a href=\"https://example.com\" style=\"color:rgb(170, 170, 170)\">hello@example.com</a></u></span></p>",
-                "color": "#AAAAAA",
+                "value": "<div style=\"color:#AAAAAA\"><p><span style=\"font-size:14px;color:rgb(170, 170, 170)\">500 Howard Street San Francisco, CA 94105<br /><u><a href=\"https://example.com\" style=\"color:rgb(170, 170, 170)\">hello@example.com</a></u></span></p></div>",
                 "spacing": {
                   "margin": [
                     0,

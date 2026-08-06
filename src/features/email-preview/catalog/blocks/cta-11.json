@@ -41,8 +41,7 @@
               {
                 "id": "6HbFijHe",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">THE WEEKLY CIRCLE</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Good ideas get better in company.</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:15px\">Join makers sharing useful work, honest notes and fresh references.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">THE WEEKLY CIRCLE</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Good ideas get better in company.</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:15px\">Join makers sharing useful work, honest notes and fresh references.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

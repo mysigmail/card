@@ -49,8 +49,7 @@
               {
                 "id": "af-jXkbc",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">GUIDED BY THE MESSAGE</span></strong></p><p><strong><span style=\"font-size:31px\">Three rules the editor keeps visible.</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">GUIDED BY THE MESSAGE</span></strong></p><p><strong><span style=\"font-size:31px\">Three rules the editor keeps visible.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -89,8 +88,7 @@
               {
                 "id": "upvtlwC-",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:19px\">Hierarchy stays explicit</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">The selected block, row, cell and atom remain understandable.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:19px\">Hierarchy stays explicit</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">The selected block, row, cell and atom remain understandable.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -129,8 +127,7 @@
               {
                 "id": "GjvwIYa6",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:19px\">Changes stay local</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">Edit the useful layer without rebuilding the surrounding email.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:19px\">Changes stay local</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">Edit the useful layer without rebuilding the surrounding email.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -169,8 +166,7 @@
               {
                 "id": "O0qkaElV",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:19px\">Output stays predictable</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">The reviewed structure is the structure that gets exported.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:19px\">Output stays predictable</span></strong><br /><span style=\"color:#7A6558;font-size:13px\">The reviewed structure is the structure that gets exported.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

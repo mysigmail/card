@@ -92,8 +92,7 @@
               {
                 "id": "NlZ9_EtI",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FFB16F;font-size:12px\">01 / SYSTEM</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">Structure before styling.</span></strong></p><p><span style=\"color:#FFD9B8;font-size:13px\">Rows, cells and atoms stay explicit while the visual layer changes.</span></p>",
-                "color": "#FFFFFF",
+                "value": "<div style=\"color:#FFFFFF\"><p><strong><span style=\"color:#FFB16F;font-size:12px\">01 / SYSTEM</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">Structure before styling.</span></strong></p><p><span style=\"color:#FFD9B8;font-size:13px\">Rows, cells and atoms stay explicit while the visual layer changes.</span></p></div>",
                 "spacing": {
                   "padding": [
                     20,
@@ -152,8 +151,7 @@
               {
                 "id": "zgfcMbAG",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:12px\">02 / CONTROL</span></strong></p><p><strong><span style=\"font-size:21px\">Tune the hierarchy.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:13px\">Adjust spacing, alignment and emphasis without hiding the underlying tree.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#5A2B0A;font-size:12px\">02 / CONTROL</span></strong></p><p><strong><span style=\"font-size:21px\">Tune the hierarchy.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:13px\">Adjust spacing, alignment and emphasis without hiding the underlying tree.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -193,8 +191,7 @@
               {
                 "id": "N15GSkl_",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:12px\">03 / OUTPUT</span></strong></p><p><strong><span style=\"font-size:21px\">Keep the contract.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Preview, persistence and export work from the same versioned structure.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:12px\">03 / OUTPUT</span></strong></p><p><strong><span style=\"font-size:21px\">Keep the contract.</span></strong></p><p><span style=\"color:#7A6558;font-size:13px\">Preview, persistence and export work from the same versioned structure.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

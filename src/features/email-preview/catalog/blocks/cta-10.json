@@ -42,8 +42,7 @@
               {
                 "id": "7jMLgLOa",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFB16F;font-size:12px\">SEP</span></strong><br /><strong><span style=\"color:#FFFFFF;font-size:26px\">24</span></strong></p>",
-                "color": "#FFFFFF",
+                "value": "<div style=\"color:#FFFFFF\"><p style=\"text-align:center\"><strong><span style=\"color:#FFB16F;font-size:12px\">SEP</span></strong><br /><strong><span style=\"color:#FFFFFF;font-size:26px\">24</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -75,8 +74,7 @@
               {
                 "id": "mjGqHLSN",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FFFFFF;font-size:22px\">Workshop starts at 10:00.</span></strong><br /><span style=\"color:#FFD9B8;font-size:13px\">12 seats remain · calendar invite included</span></p>",
-                "color": "#FFFFFF",
+                "value": "<div style=\"color:#FFFFFF\"><p><strong><span style=\"color:#FFFFFF;font-size:22px\">Workshop starts at 10:00.</span></strong><br /><span style=\"color:#FFD9B8;font-size:13px\">12 seats remain · calendar invite included</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

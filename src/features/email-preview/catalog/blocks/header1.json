@@ -41,8 +41,7 @@
               {
                 "id": "ddaBopcy",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#5A2B0A;font-size:13px\">INDEPENDENT NOTES ON USEFUL THINGS</span></strong></p><p><strong><span style=\"font-size:56px\">FIELD / NOTES</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#5A2B0A;font-size:13px\">INDEPENDENT NOTES ON USEFUL THINGS</span></strong></p><p><strong><span style=\"font-size:56px\">FIELD / NOTES</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -106,8 +105,7 @@
               {
                 "id": "qJfNrUJ3",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:22px\">Issue 08</span></strong><br /><span style=\"color:#5A2B0A;font-size:13px\">SEPTEMBER · 6 MIN READ</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:22px\">Issue 08</span></strong><br /><span style=\"color:#5A2B0A;font-size:13px\">SEPTEMBER · 6 MIN READ</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -139,8 +137,7 @@
               {
                 "id": "Dr82ex7P",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:28px\">A clearer way to choose what stays.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:15px\">Stories about products, habits and the small decisions that shape everyday work.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:28px\">A clearer way to choose what stays.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:15px\">Stories about products, habits and the small decisions that shape everyday work.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

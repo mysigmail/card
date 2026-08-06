@@ -135,8 +135,7 @@
               {
                 "id": "eh-2vEfK",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FFB16F;font-size:12px\">THE EDIT</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">Two useful things. One short list.</span></strong></p>",
-                "color": "#FFFFFF",
+                "value": "<div style=\"color:#FFFFFF\"><p><strong><span style=\"color:#FFB16F;font-size:12px\">THE EDIT</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:24px\">Two useful things. One short list.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,

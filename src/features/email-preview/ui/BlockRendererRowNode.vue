@@ -43,10 +43,7 @@ function atomSpacingStyle(atom: Atom, options: { includePadding?: boolean } = {}
 }
 
 function textAtomStyle(atom: Extract<Atom, { type: 'text' }>): CSSProperties {
-  return {
-    ...atomSpacingStyle(atom),
-    ...(atom.color ? { color: atom.color } : {}),
-  }
+  return atomSpacingStyle(atom)
 }
 
 function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {

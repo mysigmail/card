@@ -41,8 +41,7 @@
               {
                 "id": "PinD_6Z_",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">BUILT INTO THE WORKFLOW</span></strong></p><p><strong><span style=\"font-size:31px\">Follow the work, not the chrome.</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">BUILT INTO THE WORKFLOW</span></strong></p><p><strong><span style=\"font-size:31px\">Follow the work, not the chrome.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -101,8 +100,7 @@
               {
                 "id": "6amALi6n",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:24px\">01</span></strong></p>",
-                "color": "#FFFFFF",
+                "value": "<div style=\"color:#FFFFFF\"><p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:24px\">01</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -134,8 +132,7 @@
               {
                 "id": "uFmY7N8b",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:21px\">Choose a proven starting point.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Begin from a reusable block instead of a finished campaign theme.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:21px\">Choose a proven starting point.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Begin from a reusable block instead of a finished campaign theme.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -194,8 +191,7 @@
               {
                 "id": "nNgd2jrB",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#5A2B0A;font-size:24px\">02</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#5A2B0A;font-size:24px\">02</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -227,8 +223,7 @@
               {
                 "id": "rBYNjlS4",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:21px\">Refine the useful layer.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Change copy, media and hierarchy while the email-safe structure stays visible.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:21px\">Refine the useful layer.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Change copy, media and hierarchy while the email-safe structure stays visible.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -280,8 +275,7 @@
               {
                 "id": "rz99e6-n",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:24px\">03</span></strong></p>",
-                "color": "#FFFFFF",
+                "value": "<div style=\"color:#FFFFFF\"><p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:24px\">03</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -313,8 +307,7 @@
               {
                 "id": "0Xb5Uo9r",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:21px\">Export what you reviewed.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Carry the same structure from editor preview into JSON and final HTML.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:21px\">Export what you reviewed.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Carry the same structure from editor preview into JSON and final HTML.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

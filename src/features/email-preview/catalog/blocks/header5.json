@@ -51,8 +51,7 @@
               {
                 "id": "BbeNVD6u",
                 "type": "text",
-                "value": "<p style=\"text-align:right\"><strong><span style=\"color:#FFB16F;font-size:12px\">01 / OPENING FRAME</span></strong></p><p><strong><span style=\"color:#FFB16F;font-size:13px\">A NEW WAY THROUGH</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:40px\">Make the first impression feel inevitable.</span></strong></p><p><span style=\"color:#FFD9B8;font-size:15px\">A focused opening with one clear promise and a direct next step.</span></p>",
-                "color": "#FFFFFF",
+                "value": "<div style=\"color:#FFFFFF\"><p style=\"text-align:right\"><strong><span style=\"color:#FFB16F;font-size:12px\">01 / OPENING FRAME</span></strong></p><p><strong><span style=\"color:#FFB16F;font-size:13px\">A NEW WAY THROUGH</span></strong></p><p><strong><span style=\"color:#FFFFFF;font-size:40px\">Make the first impression feel inevitable.</span></strong></p><p><span style=\"color:#FFD9B8;font-size:15px\">A focused opening with one clear promise and a direct next step.</span></p></div>",
                 "spacing": {
                   "padding": [
                     30,

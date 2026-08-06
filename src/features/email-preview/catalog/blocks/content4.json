@@ -49,8 +49,7 @@
               {
                 "id": "RHZkxc3v",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">BEHIND THE SETUP</span></strong></p><p><strong><span style=\"font-size:30px\">Small tools can change the rhythm of a room.</span></strong></p><p><span style=\"color:#7A6558;font-size:15px\">A mirrored article start for reviews, interviews and product-led editorial.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">BEHIND THE SETUP</span></strong></p><p><strong><span style=\"font-size:30px\">Small tools can change the rhythm of a room.</span></strong></p><p><span style=\"color:#7A6558;font-size:15px\">A mirrored article start for reviews, interviews and product-led editorial.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

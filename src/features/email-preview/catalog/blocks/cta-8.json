@@ -42,8 +42,7 @@
               {
                 "id": "jwa-b8We",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:29px\">Choose how you want to begin.</span></strong></p><p><span style=\"color:#7A6558;font-size:15px\">Two clear paths without turning the block into a full landing page.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:29px\">Choose how you want to begin.</span></strong></p><p><span style=\"color:#7A6558;font-size:15px\">Two clear paths without turning the block into a full landing page.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

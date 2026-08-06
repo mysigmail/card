@@ -42,8 +42,7 @@
               {
                 "id": "68pFlYxU",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">TRACKING #OR-592-184</span></strong></p><p><strong><span style=\"font-size:31px\">Your package is on the move.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Estimated delivery: Thursday, 6 August</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">TRACKING #OR-592-184</span></strong></p><p><strong><span style=\"font-size:31px\">Your package is on the move.</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Estimated delivery: Thursday, 6 August</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -146,8 +145,7 @@
               {
                 "id": "U4PSDoft",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:14px\">01</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#1F1712;font-size:15px\">Confirmed</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:11px\">4 Aug · 09:12</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:14px\">01</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#1F1712;font-size:15px\">Confirmed</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:11px\">4 Aug · 09:12</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -188,8 +186,7 @@
               {
                 "id": "-KhaQaFA",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><span style=\"color:rgb(255, 107, 0);font-size:14px\"><strong>02</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(31, 23, 18);font-size:15px\"><strong>In transit</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:11px\">5 Aug · 14:40</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><span style=\"color:rgb(255, 107, 0);font-size:14px\"><strong>02</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(31, 23, 18);font-size:15px\"><strong>In transit</strong></span></p><p style=\"text-align:center\"><span style=\"color:rgb(122, 101, 88);font-size:11px\">5 Aug · 14:40</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -230,8 +227,7 @@
               {
                 "id": "knn3c3UQ",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:14px\">03</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#1F1712;font-size:15px\">Delivered</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:11px\">Expected 6 Aug</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:14px\">03</span></strong></p><p style=\"text-align:center\"><strong><span style=\"color:#1F1712;font-size:15px\">Delivered</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:11px\">Expected 6 Aug</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

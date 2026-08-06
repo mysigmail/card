@@ -42,8 +42,7 @@
               {
                 "id": "7v_ir1ty",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">PACKING CHECKLIST</span></strong></p><p><strong><span style=\"font-size:31px\">Five decisions before the door closes.</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">PACKING CHECKLIST</span></strong></p><p><strong><span style=\"font-size:31px\">Five decisions before the door closes.</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -82,8 +81,7 @@
               {
                 "id": "E-_oBgGj",
                 "type": "text",
-                "value": "<p><strong>✓ Keep one layer within reach</strong></p><p><strong>✓ Separate work from charging</strong></p><p><strong>✓ Leave room for the return trip</strong></p><p><strong>✓ Put the fragile piece in the center</strong></p><p><strong>✓ Photograph the final arrangement</strong></p>",
-                "color": "#5A2B0A",
+                "value": "<div style=\"color:#5A2B0A\"><p><strong>✓ Keep one layer within reach</strong></p><p><strong>✓ Separate work from charging</strong></p><p><strong>✓ Leave room for the return trip</strong></p><p><strong>✓ Put the fragile piece in the center</strong></p><p><strong>✓ Photograph the final arrangement</strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,

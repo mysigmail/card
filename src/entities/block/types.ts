@@ -10,7 +10,6 @@ export interface BaseAtom {
 export interface TextAtom extends BaseAtom {
   type: 'text'
   value: string
-  color: string
 }
 
 export interface ButtonAtom extends BaseAtom {

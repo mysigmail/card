@@ -125,8 +125,7 @@
                       {
                         "id": "CDVXqxUj",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:18px\">A better daily<br />ritual</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Three minutes on the object that quietly improved the morning.</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:18px\">A better daily<br />ritual</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">Three minutes on the object that quietly improved the morning.</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -245,8 +244,7 @@
                       {
                         "id": "4RoalX-C",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:18px\">Play without<br />friction</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">What good controls teach us about clear interaction.</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:18px\">Play without<br />friction</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">What good controls teach us about clear interaction.</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,
@@ -365,8 +363,7 @@
                       {
                         "id": "-GOgtYo1",
                         "type": "text",
-                        "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:18px\">Carry only the<br />useful</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">A short guide to editing the everyday kit.</span></p>",
-                        "color": "#1F1712",
+                        "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:18px\">Carry only the<br />useful</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:13px\">A short guide to editing the everyday kit.</span></p></div>",
                         "spacing": {
                           "padding": [
                             0,

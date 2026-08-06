@@ -43,8 +43,7 @@
               {
                 "id": "IYjxIqzS",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:12px\">07</span></strong><br /><span style=\"color:#FFD9B8;font-size:11px\">LEFT TODAY</span></p>",
-                "color": "#FFFFFF",
+                "value": "<div style=\"color:#FFFFFF\"><p style=\"text-align:center\"><strong><span style=\"color:#FFFFFF;font-size:12px\">07</span></strong><br /><span style=\"color:#FFD9B8;font-size:11px\">LEFT TODAY</span></p></div>",
                 "spacing": {
                   "padding": [
                     14,
@@ -76,8 +75,7 @@
               {
                 "id": "YC4Yo_-d",
                 "type": "text",
-                "value": "<p><strong><span style=\"font-size:23px\">Almost gone, not forgotten.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:13px\">Get one short availability reminder before the batch closes.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"font-size:23px\">Almost gone, not forgotten.</span></strong></p><p><span style=\"color:#5A2B0A;font-size:13px\">Get one short availability reminder before the batch closes.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

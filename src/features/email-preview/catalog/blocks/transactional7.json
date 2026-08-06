@@ -41,8 +41,7 @@
               {
                 "id": "fr1cojSg",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">VERIFY YOUR EMAIL</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Enter this one-time code.</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:14px\">Use it to finish signing in. The code expires in 10 minutes.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"color:#FF6B00;font-size:13px\">VERIFY YOUR EMAIL</span></strong></p><p style=\"text-align:center\"><strong><span style=\"font-size:31px\">Enter this one-time code.</span></strong></p><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:14px\">Use it to finish signing in. The code expires in 10 minutes.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -95,8 +94,7 @@
               {
                 "id": "3UEPYWWR",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">4</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:25px\">4</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -130,8 +128,7 @@
               {
                 "id": "DpZ143Qw",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">8</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:25px\">8</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -165,8 +162,7 @@
               {
                 "id": "pLbZnrRT",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">2</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:25px\">2</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -200,8 +196,7 @@
               {
                 "id": "YuTvJ15W",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">9</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:25px\">9</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -235,8 +230,7 @@
               {
                 "id": "ovhagGe9",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">1</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:25px\">1</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -270,8 +264,7 @@
               {
                 "id": "BSUJjwmI",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:25px\">6</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:25px\">6</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -321,8 +314,7 @@
               {
                 "id": "VAH7jbNz",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:12px\">Never share this code with anyone, including support.</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:12px\">Never share this code with anyone, including support.</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,

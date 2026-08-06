@@ -44,8 +44,7 @@
               {
                 "id": "iAIbf0lw",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><strong><span style=\"font-size:42px\">24</span></strong><br><span style=\"color:#5A2B0A;font-size:13px\">SEPTEMBER</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><strong><span style=\"font-size:42px\">24</span></strong><br><span style=\"color:#5A2B0A;font-size:13px\">SEPTEMBER</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -77,8 +76,7 @@
               {
                 "id": "wrXDHKIF",
                 "type": "text",
-                "value": "<p><strong><span style=\"color:#FF6B00;font-size:13px\">BOOKING CONFIRMED</span></strong></p><p><strong><span style=\"font-size:29px\">Product systems workshop</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Thursday · 10:00–11:30 AM<br>Online · Room opens 15 minutes early</span></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p><strong><span style=\"color:#FF6B00;font-size:13px\">BOOKING CONFIRMED</span></strong></p><p><strong><span style=\"font-size:29px\">Product systems workshop</span></strong></p><p><span style=\"color:#7A6558;font-size:14px\">Thursday · 10:00–11:30 AM<br>Online · Room opens 15 minutes early</span></p></div>",
                 "spacing": {
                   "padding": [
                     0,
@@ -118,8 +116,7 @@
               {
                 "id": "U6_VGmuF",
                 "type": "text",
-                "value": "<p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:11px\">BOOKING ID</span><br><strong><span style=\"font-size:18px\">WS-4821</span></strong></p>",
-                "color": "#1F1712",
+                "value": "<div style=\"color:#1F1712\"><p style=\"text-align:center\"><span style=\"color:#7A6558;font-size:11px\">BOOKING ID</span><br><strong><span style=\"font-size:18px\">WS-4821</span></strong></p></div>",
                 "spacing": {
                   "padding": [
                     0,

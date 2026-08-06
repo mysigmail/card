@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { createBlockNode } from '@/entities/block'
 import {
   createRuntimeComponents,
+  parseTemplateExportPayload,
   sanitizeTextEditorHtml,
   TEMPLATE_EXPORT_VERSION,
 } from '@/entities/template'
@@ -18,6 +19,67 @@ import {
 import { useCanvas, useHistory, useTemplateIO } from '@/features/editor/model'
 
 describe('inline text typography contract', () => {
+  it('keeps inherited and nested colors across sanitizer and Tiptap round-trips', () => {
+    const input = sanitizeTextEditorHtml(
+      '<div style="color:#1F1712"><p>Base <span style="color:#FF6B00">accent</span></p><ul><li>List item</li></ul><p>Second root</p></div>',
+    )
+    const editor = new Editor({ content: input, extensions: createInlineTextExtensions() })
+
+    const output = sanitizeTextEditorHtml(editor.getHTML())
+    editor.destroy()
+
+    expect(output).toContain('<div style="color:rgb(31, 23, 18)">')
+    expect(output).toContain('<span style="color:rgb(255, 107, 0)">accent</span>')
+    expect(output).toContain('<ul><li><p>List item</p></li></ul>')
+
+    const secondEditor = new Editor({ content: output, extensions: createInlineTextExtensions() })
+    expect(sanitizeTextEditorHtml(secondEditor.getHTML())).toBe(output)
+    secondEditor.destroy()
+  })
+
+  it('drops legacy top-level text color from the canonical payload', () => {
+    const component = {
+      id: 'component',
+      version: 2 as const,
+      block: createBlockNode('Text'),
+    }
+    const atom = component.block.rows[0].cells[0].atoms[0]
+    Object.assign(atom, { color: '#1F1712', unknown: 'drop-me' })
+
+    const result = parseTemplateExportPayload({
+      version: TEMPLATE_EXPORT_VERSION,
+      meta: {
+        id: 'template',
+        title: 'Text',
+        createdAt: '1970-01-01T00:00:00.000Z',
+        updatedAt: '1970-01-01T00:00:00.000Z',
+      },
+      editor: {
+        general: {
+          padding: [0, 0, 0, 0],
+          background: {
+            color: '#ffffff',
+            image: '',
+            repeat: 'no-repeat',
+            size: 'cover',
+            position: 'center',
+          },
+          font: 'Arial',
+          previewText: '',
+        },
+      },
+      canvas: { components: [component] },
+    })
+
+    expect(result.issues).toEqual([])
+    expect(result.payload?.canvas.components[0].block.rows[0].cells[0].atoms[0]).not.toHaveProperty(
+      'color',
+    )
+    expect(result.payload?.canvas.components[0].block.rows[0].cells[0].atoms[0]).not.toHaveProperty(
+      'unknown',
+    )
+  })
+
   it('keeps legacy HTML and accepted typography while removing unsafe content', () => {
     const input = [
       '<p onclick="alert(1)" style="text-align: center">Legacy <strong>bold</strong></p>',
