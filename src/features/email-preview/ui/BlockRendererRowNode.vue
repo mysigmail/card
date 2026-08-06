@@ -2,7 +2,10 @@
 import type { CSSProperties } from 'vue'
 import type { Atom, CellNode, RowNode } from '@/entities/block'
 import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
+import { sanitizeTextEditorHtml } from '@/entities/template'
 import { useSelection } from '@/features/editor'
+import { useInlineTextEditing } from '@/features/editor/components/tools/text/composables/use-inline-text-editing'
+import InlineTextEditor from '@/features/editor/components/tools/text/InlineTextEditor.vue'
 
 interface Props {
   blockId: string
@@ -12,6 +15,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { selectRow, selectCell, selectAtom } = useSelection()
+const { editingAtomId, startEditing } = useInlineTextEditing()
 
 function tupleToCss(value?: [number, number, number, number]) {
   if (!value || value.length !== 4)
@@ -320,8 +324,23 @@ function selectCellNode(rowId: string, cellId: string) {
   selectCell(props.blockId, rowId, cellId)
 }
 
-function selectAtomNode(rowId: string, cellId: string, atomId: string) {
+function selectAtomNode(rowId: string, cellId: string, atomId: string, event?: MouseEvent) {
   selectAtom(props.blockId, rowId, cellId, atomId)
+  if (event?.currentTarget instanceof HTMLElement)
+    event.currentTarget.focus()
+}
+
+function startTextEditing(rowId: string, cellId: string, atomId: string, event?: MouseEvent) {
+  selectAtom(props.blockId, rowId, cellId, atomId)
+  startEditing(atomId, event ? { left: event.clientX, top: event.clientY } : undefined)
+}
+
+function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
+  if (event.key !== 'Enter' || editingAtomId.value === atomId)
+    return
+
+  event.preventDefault()
+  startEditing(atomId)
 }
 </script>
 
@@ -360,9 +379,22 @@ function selectAtomNode(rowId: string, cellId: string, atomId: string) {
               :class="atomWrapperClass(atom)"
               :data-node-id="`atom:${atom.id}`"
               :style="textAtomStyle(atom)"
-              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
-              v-html="atom.value || '&nbsp;'"
-            />
+              :tabindex="editingAtomId === atom.id ? -1 : 0"
+              @click.stop="selectAtomNode(row.id, cell.id, atom.id, $event)"
+              @dblclick.stop="startTextEditing(row.id, cell.id, atom.id, $event)"
+              @keydown="onTextAtomKeydown($event, atom.id)"
+            >
+              <InlineTextEditor
+                v-if="editingAtomId === atom.id"
+                :atom-id="atom.id"
+                :value="atom.value"
+              />
+              <div
+                v-else
+                class="p-text-atom-content"
+                v-html="sanitizeTextEditorHtml(atom.value) || '&nbsp;'"
+              />
+            </div>
 
             <div
               v-else-if="atom.type === 'button'"

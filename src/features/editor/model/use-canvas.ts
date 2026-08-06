@@ -470,6 +470,8 @@ function _createCanvas() {
     clearCanvas,
     removeComponentById,
     updateToolById: canvasTools.updateToolById,
+    updateTextAtomValue: canvasTools.updateTextAtomValue,
+    getTextAtomValue: canvasTools.getTextAtomValue,
   }
 }
 

@@ -12,7 +12,7 @@
       "#/*": ["./*"]
     },
     "resolveJsonModule": true,
-    "types": ["unplugin-icons/types/vue"],
+    "types": ["unplugin-icons/types/vue", "@types/web-bluetooth"],
     "strict": true,
     "sourceMap": true,
     "esModuleInterop": true

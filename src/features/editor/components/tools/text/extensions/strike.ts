@@ -25,7 +25,8 @@ export const Strike = Extension.create({
         attributes: {
           textDecoration: {
             default: null,
-            parseHTML: element => element.style.textDecoration.includes('line-through'),
+            parseHTML: element =>
+              element.style.textDecoration.includes('line-through') ? 'line-through' : null,
             renderHTML: (attributes) => {
               if (!attributes.textDecoration)
                 return {}

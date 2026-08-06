@@ -106,11 +106,23 @@ a {
   z-index: 8;
 }
 
-.p-selection-overlay__label {
+.p-selection-overlay__labels {
   position: absolute;
   left: -1px;
-  top: -1px;
+  top: 1px;
   transform: translateY(calc(-100% - 2px));
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 9;
+}
+
+.p-selection-overlay__label,
+.p-selection-overlay__hint {
+  display: flex;
+  align-items: center;
   background-color: var(--primary);
   color: #fff;
   font-family: 'Fira Sans', sans-serif;
@@ -119,9 +131,35 @@ a {
   line-height: 1;
   padding: 4px 6px;
   border-radius: 4px 4px 0 0;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 9;
+}
+
+.p-selection-overlay__hint {
+  background-color: color-mix(in srgb, var(--primary) 72%, white);
+  border-radius: 4px 4px 0 0;
+}
+
+.p-inline-text-editor {
+  display: contents;
+}
+
+.p-inline-text-editor__host {
+  display: contents;
+}
+
+.p-inline-text-editor__content {
+  position: relative;
+  cursor: text;
+  outline: 1px solid var(--primary);
+  outline-offset: 2px;
+  z-index: 10;
+}
+
+.p-inline-text-editor__content ul,
+.p-inline-text-editor__content ol,
+.p-text-atom-content ul,
+.p-text-atom-content ol {
+  margin: 0;
+  padding-left: 1.5em;
 }
 
 .p-edit-tool {

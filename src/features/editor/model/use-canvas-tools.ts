@@ -1,6 +1,8 @@
 import type { GeneralTool, Tool } from './types'
+import type { RowNode, TextAtom } from '@/entities/block'
+import { sanitizeTextEditorHtml } from '@/entities/template'
 import { findCanvasBlockInstance, findCellById, findRowById } from './lib/canvas-state-utils'
-import { general } from './state'
+import { general, installed } from './state'
 import {
   DEFAULT_MENU_ATOM_GAP,
   DEFAULT_MENU_IMAGE_ITEM,
@@ -21,6 +23,35 @@ let _instance: ReturnType<typeof _createCanvasTools> | null = null
 
 function _createCanvasTools() {
   const selection = useSelection()
+
+  function findTextAtomById(atomId: string) {
+    let target: TextAtom | undefined
+
+    function visitRows(rows: RowNode[]): TextAtom | undefined {
+      for (const row of rows) {
+        for (const cell of row.cells) {
+          const atom = cell.atoms.find(
+            (candidate): candidate is TextAtom =>
+              candidate.id === atomId && candidate.type === 'text',
+          )
+          if (atom)
+            return atom
+
+          const nested = visitRows(cell.rows)
+          if (nested)
+            return nested
+        }
+      }
+    }
+
+    for (const component of installed.value) {
+      if (component.version !== 2)
+        continue
+      target = visitRows(component.block.rows)
+      if (target)
+        return target
+    }
+  }
 
   function updateV2SettingsToolById(id: string, key: 'value' | 'label', value: unknown) {
     if (key !== 'value')
@@ -158,10 +189,8 @@ function _createCanvasTools() {
     }
 
     if (atom.type === 'text') {
-      if (field === 'content') {
-        atom.value = String(value ?? '')
-        return true
-      }
+      if (field === 'content')
+        return updateTextAtomValue(atom.id, String(value ?? ''))
 
       if (field === 'color') {
         atom.color = String(value ?? '')
@@ -418,12 +447,27 @@ function _createCanvasTools() {
     }
   }
 
+  function updateTextAtomValue(atomId: string, html: string) {
+    const target = findTextAtomById(atomId)
+
+    if (!target)
+      return false
+
+    const value = sanitizeTextEditorHtml(html)
+    if (target.value !== value)
+      target.value = value
+
+    return true
+  }
+
   return {
     updateToolById,
     addNewToolToMultiTool,
     deleteMultiToolItem,
     updateV2SettingsToolById,
     updateV2AtomToolById,
+    updateTextAtomValue,
+    getTextAtomValue: (atomId: string) => findTextAtomById(atomId)?.value,
   }
 }
 

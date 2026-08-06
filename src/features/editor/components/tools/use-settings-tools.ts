@@ -18,8 +18,6 @@ export const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   position: 'center',
 }
 
-export const DEFAULT_TEXT_MAIN_COLOR = '#111827'
-
 export const DEFAULT_IMAGE_VALUE: ImageTool['value'] = {
   src: '',
   alt: '',
@@ -384,24 +382,8 @@ export function useSettingsTools() {
 
     const atomId = selectedAtom.value.id
 
-    if (selectedAtom.value.type === 'text') {
-      return [
-        {
-          id: atomToolId(atomId, 'color'),
-          key: 'mainColor',
-          label: 'Main Color',
-          type: 'colorPicker',
-          value: selectedAtom.value.color || DEFAULT_TEXT_MAIN_COLOR,
-        },
-        {
-          id: atomToolId(atomId, 'content'),
-          key: 'content',
-          label: 'Content',
-          type: 'textEditor',
-          value: selectedAtom.value.value,
-        },
-      ]
-    }
+    if (selectedAtom.value.type === 'text')
+      return []
 
     if (selectedAtom.value.type === 'button') {
       return [
