@@ -15,7 +15,8 @@ const { installed, isDragging, moveComponent, general, previewMode, isCanvasBloc
 const listRef = ref<HTMLElement>()
 const surfaceRef = ref<HTMLElement>()
 
-const { selectionOverlay, selectionOverlayStyle } = useSelectionOverlay(surfaceRef)
+const { selectionOverlay, selectionOverlayStyle, showInlineEditHint }
+  = useSelectionOverlay(surfaceRef)
 const { editingAtomId } = useInlineTextEditing()
 
 const DESKTOP_TEMPLATE_WIDTH = 600
@@ -130,9 +131,17 @@ onMounted(() => {
           >
             <div
               v-if="selectionOverlay.label"
-              class="p-selection-overlay__label"
+              class="p-selection-overlay__labels"
             >
-              {{ selectionOverlay.label }}
+              <div class="p-selection-overlay__label">
+                {{ selectionOverlay.label }}
+              </div>
+              <div
+                v-if="showInlineEditHint"
+                class="p-selection-overlay__hint"
+              >
+                Double-click to edit
+              </div>
             </div>
           </div>
         </div>
