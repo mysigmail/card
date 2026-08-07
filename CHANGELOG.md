@@ -1,3 +1,14 @@
+## 0.16.0 (2026-08-07)
+
+### Features
+
+- **editor:** add inline text typography editing (#55) ([11c5780](https://github.com/mysigmail/card/commit/11c5780f796793f9670cd1f392fb927019276c1d))
+
+### Other
+
+- **text:** remove legacy atom color (#56) ([4b60222](https://github.com/mysigmail/card/commit/4b60222ea336268869201376119e212ec1c1e10d))
+- update favicon ([e306b95](https://github.com/mysigmail/card/commit/e306b95044f2cece1cd4030b840bcd12765ce95c))
+
 ## 0.15.0 (2026-08-04)
 
 ### Features
