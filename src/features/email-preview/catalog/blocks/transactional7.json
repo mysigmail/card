@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "transactional7",
   "label": "Transactional 7",
   "type": "transactional",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "fr1cojSg",
                 "type": "text",
@@ -57,10 +58,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "dvWa0ylT",
@@ -76,7 +77,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": false,
-          "gap": 10
+          "gap": 10,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -90,7 +92,7 @@
               "width": 16,
               "height": 62
             },
-            "atoms": [
+            "children": [
               {
                 "id": "3UEPYWWR",
                 "type": "text",
@@ -110,8 +112,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "cCYKJIUX",
@@ -124,7 +125,7 @@
               "width": 16,
               "height": 62
             },
-            "atoms": [
+            "children": [
               {
                 "id": "DpZ143Qw",
                 "type": "text",
@@ -144,8 +145,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "XdU9Brs0",
@@ -158,7 +158,7 @@
               "width": 16,
               "height": 62
             },
-            "atoms": [
+            "children": [
               {
                 "id": "pLbZnrRT",
                 "type": "text",
@@ -178,8 +178,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "nFXIZ_v_",
@@ -192,7 +191,7 @@
               "width": 16,
               "height": 62
             },
-            "atoms": [
+            "children": [
               {
                 "id": "YuTvJ15W",
                 "type": "text",
@@ -212,8 +211,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "eRzgeBDk",
@@ -226,7 +224,7 @@
               "width": 16,
               "height": 62
             },
-            "atoms": [
+            "children": [
               {
                 "id": "ovhagGe9",
                 "type": "text",
@@ -246,8 +244,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "w-8M5bvU",
@@ -260,7 +257,7 @@
               "width": 16,
               "height": 62
             },
-            "atoms": [
+            "children": [
               {
                 "id": "BSUJjwmI",
                 "type": "text",
@@ -280,10 +277,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "v3P4xbl4",
@@ -299,7 +296,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -310,7 +308,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "VAH7jbNz",
                 "type": "text",
@@ -330,10 +328,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

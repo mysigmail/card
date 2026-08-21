@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "cta-11",
   "label": "CTA 11",
   "type": "cta",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "middle",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "6HbFijHe",
                 "type": "text",
@@ -107,10 +108,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

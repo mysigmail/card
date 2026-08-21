@@ -18,14 +18,16 @@ interface Props {
   cellId?: string
   parentRowId?: string
   indentPx?: number
+  siblingsCount?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
   topLevel: false,
   indentPx: 0,
+  siblingsCount: 1,
 })
 
-const { removeRow, duplicateRow, moveCell, moveAtom, isDragging } = useCanvas()
+const { removeRow, duplicateRow, moveCell, moveCellChild, isDragging } = useCanvas()
 
 const { selectRow, selectedBlockId, selectedRowId, selectedCellId, selectedAtomId } = useSelection()
 
@@ -33,13 +35,17 @@ const isOpen = ref(true)
 const cellsRef = ref<HTMLElement>()
 
 const rowIndentPx = computed(() => {
-  const ownIndent = props.topLevel ? TREE_NODE_INDENT_PX.topLevelRow : TREE_NODE_INDENT_PX.nestedRow
+  const ownIndent = props.topLevel ? TREE_NODE_INDENT_PX.root : TREE_NODE_INDENT_PX.level
 
   return props.indentPx + ownIndent
 })
-const cellIndentPx = computed(() => rowIndentPx.value + TREE_NODE_INDENT_PX.cell)
-const atomIndentPx = computed(() => cellIndentPx.value + TREE_NODE_INDENT_PX.atom)
+const cellIndentPx = computed(() => rowIndentPx.value + TREE_NODE_INDENT_PX.level)
+const atomIndentPx = computed(() => cellIndentPx.value + TREE_NODE_INDENT_PX.level)
 const cellSortableItemId = computed(() => `row:${props.row.id}`)
+const canDragRow = computed(
+  () =>
+    (props.topLevel && props.block.rows.length > 1) || (!props.topLevel && props.siblingsCount > 1),
+)
 
 const canRemoveRow = computed(() => {
   if (!props.topLevel)
@@ -50,7 +56,7 @@ const canRemoveRow = computed(() => {
 
 const cellSortKey = computed(() => props.row.cells.map(cell => cell.id).join('|'))
 const atomSortKey = computed(() =>
-  props.row.cells.map(cell => `${cell.id}:${cell.atoms.length}`).join('|'),
+  props.row.cells.map(cell => `${cell.id}:${cell.children.length}`).join('|'),
 )
 
 let cellSortable: ReturnType<typeof createTreeSortable> | undefined
@@ -106,12 +112,12 @@ function initAtomSortables() {
 
     const sortable = createTreeSortable({
       el: atomListEl,
-      draggable: '[data-atom-sortable-item="true"]',
-      handle: '[data-atom-drag-handle]',
+      draggable: '[data-cell-child-sortable-item="true"]',
+      handle: '[data-cell-child-drag-handle]',
       ghostClass: 'tree-atom-ghost',
       isDragging,
       onMove(oldIndex, newIndex) {
-        moveAtom(props.block.id, props.row.id, cell.id, oldIndex, newIndex)
+        moveCellChild(props.block.id, props.row.id, cell.id, oldIndex, newIndex)
       },
       getDragName(dragEl) {
         return dragEl.getAttribute('data-name') || 'Atom'
@@ -177,6 +183,7 @@ function isRowActive(rowId: string) {
 
 <template>
   <div
+    :data-cell-child-sortable-item="topLevel ? undefined : 'true'"
     :data-row-scope-id="`row-scope:${row.id}`"
     :data-row-sortable-item="topLevel ? 'true' : undefined"
     :data-name="topLevel ? `Row ${index + 1}` : undefined"
@@ -184,7 +191,7 @@ function isRowActive(rowId: string) {
     :data-row-scope-row-id="parentRowId || row.id"
     :data-row-scope-cell-id="cellId"
     :data-row-scope-index="index"
-    :class="topLevel ? 'pl-1' : 'pl-2'"
+    :class="topLevel ? 'pl-1' : 'pl-3'"
   >
     <div
       :data-tree-id="`row:${row.id}`"
@@ -198,40 +205,51 @@ function isRowActive(rowId: string) {
       :style="{ '--tree-node-left-offset': `${rowIndentPx}px` }"
       @click="selectRow(block.id, row.id, { syncTree: false })"
     >
-      <div class="flex min-w-0 flex-1 items-center gap-1">
-        <GripVertical
-          v-if="topLevel && block.rows.length > 1"
-          data-row-drag-handle
-          class="size-3.5 shrink-0 cursor-grab text-muted-foreground/80"
-        />
+      <div
+        class="grid min-w-0 flex-1 grid-cols-[0.75rem_0.75rem_minmax(0,1fr)] items-center gap-0.5"
+      >
         <ChevronDown
-          class="size-3.5 transition-transform"
+          class="size-3 transition-transform"
           :class="{ '-rotate-90': !isOpen }"
           @click.stop="isOpen = !isOpen"
         />
-        <Grid2x2 class="size-3.5 shrink-0" />
-        <span class="truncate">Row {{ index + 1 }}</span>
+        <div
+          class="col-span-2 grid min-w-0 grid-cols-[0.75rem_minmax(0,1fr)] items-center gap-0.5"
+          :data-row-drag-handle="canDragRow && topLevel ? '' : undefined"
+          :data-cell-child-drag-handle="canDragRow && !topLevel ? '' : undefined"
+        >
+          <Grid2x2 class="size-3 shrink-0" />
+          <span class="truncate">Row {{ index + 1 }}</span>
+        </div>
       </div>
 
-      <ButtonGroup>
-        <Button
-          variant="outline"
-          size="icon-xs"
-          aria-label="Copy Row"
-          @click.stop="duplicateRow(block.id, row.id)"
-        >
-          <Copy class="size-3" />
-        </Button>
-        <Button
-          v-if="canRemoveRow"
-          variant="outline"
-          size="icon-xs"
-          aria-label="Remove Row"
-          @click.stop="removeRow(block.id, row.id)"
-        >
-          <Trash2 class="size-3 text-destructive" />
-        </Button>
-      </ButtonGroup>
+      <div class="flex shrink-0 items-center gap-0.5">
+        <GripVertical
+          v-if="canDragRow"
+          :data-row-drag-handle="topLevel ? '' : undefined"
+          :data-cell-child-drag-handle="topLevel ? undefined : ''"
+          class="size-3 shrink-0 cursor-grab text-muted-foreground/80"
+        />
+        <ButtonGroup>
+          <Button
+            variant="outline"
+            size="icon-xs"
+            aria-label="Copy Row"
+            @click.stop="duplicateRow(block.id, row.id)"
+          >
+            <Copy class="size-3" />
+          </Button>
+          <Button
+            v-if="canRemoveRow"
+            variant="outline"
+            size="icon-xs"
+            aria-label="Remove Row"
+            @click.stop="removeRow(block.id, row.id)"
+          >
+            <Trash2 class="size-3 text-destructive" />
+          </Button>
+        </ButtonGroup>
+      </div>
     </div>
 
     <div
@@ -243,6 +261,7 @@ function isRowActive(rowId: string) {
         :key="cell.id"
       >
         <TreeCell
+          :block="block"
           :block-id="block.id"
           :row-id="row.id"
           :cell="cell"
@@ -252,17 +271,6 @@ function isRowActive(rowId: string) {
           :cell-indent-px="cellIndentPx"
           :atom-indent-px="atomIndentPx"
           :set-atom-list-ref="setAtomListRef"
-        />
-
-        <TreeRow
-          v-for="(nestedRow, nestedRowIndex) in cell.rows"
-          :key="nestedRow.id"
-          :block="block"
-          :row="nestedRow"
-          :cell-id="cell.id"
-          :parent-row-id="row.id"
-          :index="nestedRowIndex"
-          :indent-px="cellIndentPx"
         />
       </template>
     </div>

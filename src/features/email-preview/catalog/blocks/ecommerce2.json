@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "ecommerce2",
   "label": "E-Commerce 2",
   "type": "ecommerce",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 22
+          "gap": 22,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -46,7 +47,7 @@
               "borderRadius": 20,
               "width": 48
             },
-            "atoms": [
+            "children": [
               {
                 "id": "w1pLk6HC",
                 "type": "image",
@@ -69,8 +70,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "Ar7hMoi7",
@@ -88,7 +88,7 @@
               "horizontalAlign": "left",
               "width": 52
             },
-            "atoms": [
+            "children": [
               {
                 "id": "AdUv8E3G",
                 "type": "text",
@@ -177,10 +177,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "cta-12",
   "label": "CTA 12",
   "type": "cta",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 22
+          "gap": 22,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -38,7 +39,7 @@
               "horizontalAlign": "left",
               "width": 68
             },
-            "atoms": [
+            "children": [
               {
                 "id": "XVSupRAC",
                 "type": "text",
@@ -58,8 +59,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "C7oDDCnS",
@@ -71,7 +71,7 @@
               "borderRadius": 16,
               "width": 32
             },
-            "atoms": [
+            "children": [
               {
                 "id": "L1-mShjH",
                 "type": "text",
@@ -121,10 +121,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

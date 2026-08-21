@@ -1,6 +1,10 @@
 import type { TemplateValidationIssue } from '@/entities/template'
 import { watch } from 'vue'
-import { parseTemplateExportJson, TEMPLATE_LOCAL_STORAGE_KEY } from '@/entities/template'
+import {
+  parseTemplateExportJson,
+  TEMPLATE_LEGACY_LOCAL_STORAGE_KEY,
+  TEMPLATE_LOCAL_STORAGE_KEY,
+} from '@/entities/template'
 import { general, installed, templateImportIssues } from './state'
 import { useHistory } from './use-history'
 import { useTemplateIO } from './use-template-io'
@@ -35,7 +39,9 @@ function _createPersistence() {
       }
     }
 
-    const raw = window.localStorage.getItem(TEMPLATE_LOCAL_STORAGE_KEY)
+    const raw
+      = window.localStorage.getItem(TEMPLATE_LOCAL_STORAGE_KEY)
+        ?? window.localStorage.getItem(TEMPLATE_LEGACY_LOCAL_STORAGE_KEY)
 
     if (!raw) {
       history.resetHistory()

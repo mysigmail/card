@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "cta-6",
   "label": "CTA 6",
   "type": "cta",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 10
+          "gap": 10,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -46,7 +47,7 @@
               "borderRadius": 14,
               "width": 18
             },
-            "atoms": [
+            "children": [
               {
                 "id": "dNk-hbxo",
                 "type": "image",
@@ -69,8 +70,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "086eJrTW",
@@ -81,7 +81,7 @@
               "horizontalAlign": "left",
               "width": 46
             },
-            "atoms": [
+            "children": [
               {
                 "id": "IZlpqRps",
                 "type": "text",
@@ -101,8 +101,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "meiD4u4I",
@@ -113,7 +112,7 @@
               "horizontalAlign": "center",
               "width": 18
             },
-            "atoms": [
+            "children": [
               {
                 "id": "S3hXsFlB",
                 "type": "button",
@@ -144,8 +143,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "nVMVYKT3",
@@ -156,7 +154,7 @@
               "horizontalAlign": "center",
               "width": 18
             },
-            "atoms": [
+            "children": [
               {
                 "id": "tORguqoq",
                 "type": "button",
@@ -187,10 +185,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "transactional4",
   "label": "Transactional 4",
   "type": "transactional",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 18
+          "gap": 18,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -46,7 +47,7 @@
               "borderRadius": 18,
               "width": 42
             },
-            "atoms": [
+            "children": [
               {
                 "id": "A3SBy0xb",
                 "type": "image",
@@ -69,8 +70,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "hzK2IAIb",
@@ -88,8 +88,7 @@
               "horizontalAlign": "left",
               "width": 58
             },
-            "atoms": [],
-            "rows": [
+            "children": [
               {
                 "id": "05f3GlT0",
                 "settings": {
@@ -97,7 +96,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": true,
-                  "gap": 0
+                  "gap": 0,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -108,7 +108,7 @@
                       "verticalAlign": "top",
                       "horizontalAlign": "left"
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "XioyX_R-",
                         "type": "text",
@@ -128,10 +128,10 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               },
               {
                 "id": "HYbFFEdM",
@@ -147,7 +147,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": true,
-                  "gap": 0
+                  "gap": 0,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -166,7 +167,7 @@
                       "horizontalAlign": "left",
                       "borderRadius": 14
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "wbX8l5Dv",
                         "type": "text",
@@ -186,10 +187,10 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               },
               {
                 "id": "e0L1S_Yf",
@@ -205,7 +206,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": true,
-                  "gap": 0
+                  "gap": 0,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -216,7 +218,7 @@
                       "verticalAlign": "top",
                       "horizontalAlign": "left"
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "t7IgiGn4",
                         "type": "button",
@@ -247,14 +249,15 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               }
             ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

@@ -1,5 +1,4 @@
 import type { BackgroundImageTool, ImageTool, SpacingTool } from './types'
-import type { Atom } from '@/entities/block'
 
 export const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   url: '',
@@ -7,37 +6,6 @@ export const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   size: 'cover',
   position: 'center',
 }
-
-export const DEFAULT_MENU_TEXT_ITEM = {
-  type: 'text' as const,
-  text: 'Item',
-  link: 'https://example',
-  color: '#000000',
-  fontSize: 16,
-} as const
-
-export const DEFAULT_MENU_IMAGE_ITEM = {
-  type: 'image' as const,
-  name: 'Icon',
-  link: 'https://example',
-  url: '/img/system/social/menu/facebook-black.png',
-  width: 16,
-  height: 16,
-  alt: 'Icon',
-} as const
-
-export const DEFAULT_MENU_ATOM_GAP = 10
-
-export type MenuListItemField
-  = | 'text'
-    | 'link'
-    | 'color'
-    | 'fontSize'
-    | 'name'
-    | 'url'
-    | 'width'
-    | 'height'
-    | 'alt'
 
 export function toSpacingValue(value: unknown): SpacingTool['value'] {
   const raw = (value || {}) as SpacingTool['value']
@@ -83,63 +51,4 @@ export function toImageValue(value: unknown): ImageTool['value'] {
 export function toNonNegativeFiniteNumber(value: unknown): number | undefined {
   const parsed = Number(value)
   return Number.isFinite(parsed) && parsed >= 0 ? parsed : undefined
-}
-
-export function getMenuAtomItemType(atom: Extract<Atom, { type: 'menu' }>): 'text' | 'image' {
-  if (atom.itemType === 'image')
-    return 'image'
-
-  if (atom.itemType === 'text')
-    return 'text'
-
-  const first = atom.items[0]
-  return first?.type === 'image' ? 'image' : 'text'
-}
-
-export function toMenuTextItem(item: Extract<Atom, { type: 'menu' }>['items'][number] | undefined) {
-  if (item?.type === 'text')
-    return { ...item }
-
-  return {
-    ...DEFAULT_MENU_TEXT_ITEM,
-    text: item?.type === 'image' ? item.name : DEFAULT_MENU_TEXT_ITEM.text,
-    link: item?.link || DEFAULT_MENU_TEXT_ITEM.link,
-  }
-}
-
-export function toMenuImageItem(
-  item: Extract<Atom, { type: 'menu' }>['items'][number] | undefined,
-) {
-  if (item?.type === 'image')
-    return { ...item }
-
-  return {
-    ...DEFAULT_MENU_IMAGE_ITEM,
-    name: item?.type === 'text' ? item.text : DEFAULT_MENU_IMAGE_ITEM.name,
-    link: item?.link || DEFAULT_MENU_IMAGE_ITEM.link,
-  }
-}
-
-export function parseMenuListField(field: string) {
-  const [key, indexRaw, itemField] = field.split('::')
-
-  if (key !== 'menuList' || !indexRaw || !itemField)
-    return undefined
-
-  const index = Number(indexRaw)
-  if (!Number.isInteger(index) || index < 0)
-    return undefined
-
-  if (
-    !['text', 'link', 'color', 'fontSize', 'name', 'url', 'width', 'height', 'alt'].includes(
-      itemField,
-    )
-  ) {
-    return undefined
-  }
-
-  return {
-    index,
-    itemField: itemField as MenuListItemField,
-  }
 }

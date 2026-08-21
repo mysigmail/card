@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "content9",
   "label": "Content 9",
   "type": "content",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 20
+          "gap": 20,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -46,7 +47,7 @@
               "borderRadius": 18,
               "width": 38
             },
-            "atoms": [
+            "children": [
               {
                 "id": "K28m_4W8",
                 "type": "image",
@@ -69,8 +70,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "bOeDwo-M",
@@ -88,7 +88,7 @@
               "horizontalAlign": "left",
               "width": 62
             },
-            "atoms": [
+            "children": [
               {
                 "id": "hahnW7Uy",
                 "type": "text",
@@ -108,10 +108,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

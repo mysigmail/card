@@ -1,11 +1,4 @@
-import type { MenuAtom } from '@/entities/block'
-import type {
-  BackgroundImageTool,
-  ImageTool,
-  MultiTool,
-  SpacingTool,
-  Tool,
-} from '@/features/editor/model'
+import type { BackgroundImageTool, ImageTool, SpacingTool, Tool } from '@/features/editor/model'
 import { computed, ref, watch } from 'vue'
 import { useSelection } from '@/features/editor/model'
 
@@ -73,109 +66,6 @@ export function normalizeSpacingValue(
   }
 
   return normalized
-}
-
-export function menuItemFieldToolId(atomId: string, index: number, field: string) {
-  return `v2-atom::${atomId}::menuList::${index}::${field}`
-}
-
-export function menuItemGroupId(atomId: string, index: number) {
-  return `v2-atom::${atomId}::menuListItem::${index}`
-}
-
-export function getMenuItemType(atom: MenuAtom): 'text' | 'image' {
-  if (atom.itemType === 'image')
-    return 'image'
-
-  if (atom.itemType === 'text')
-    return 'text'
-
-  const first = atom.items[0]
-  return first?.type === 'image' ? 'image' : 'text'
-}
-
-export function toMenuListToolValue(atom: MenuAtom): MultiTool['value'] {
-  const itemType = getMenuItemType(atom)
-
-  return atom.items.map((item, index) => ({
-    id: menuItemGroupId(atom.id, index),
-    tools:
-      itemType === 'image'
-        ? [
-            {
-              id: menuItemFieldToolId(atom.id, index, 'name'),
-              key: 'name',
-              label: 'Name',
-              type: 'input',
-              value: item.type === 'image' ? item.name : '',
-            },
-            {
-              id: menuItemFieldToolId(atom.id, index, 'link'),
-              key: 'link',
-              label: 'Link',
-              type: 'input',
-              value: item.link,
-            },
-            {
-              id: menuItemFieldToolId(atom.id, index, 'url'),
-              key: 'url',
-              label: 'URL',
-              type: 'input',
-              value: item.type === 'image' ? item.url : '',
-            },
-            {
-              id: menuItemFieldToolId(atom.id, index, 'width'),
-              key: 'width',
-              label: 'Width',
-              type: 'inputNumber',
-              value: item.type === 'image' ? (item.width ?? 0) : 0,
-            },
-            {
-              id: menuItemFieldToolId(atom.id, index, 'height'),
-              key: 'height',
-              label: 'Height',
-              type: 'inputNumber',
-              value: item.type === 'image' ? (item.height ?? 0) : 0,
-            },
-            {
-              id: menuItemFieldToolId(atom.id, index, 'alt'),
-              key: 'alt',
-              label: 'Alt',
-              type: 'input',
-              value: item.type === 'image' ? item.alt : '',
-            },
-          ]
-        : [
-            {
-              id: menuItemFieldToolId(atom.id, index, 'text'),
-              key: 'name',
-              label: 'Name',
-              type: 'input',
-              value: item.type === 'text' ? item.text : '',
-            },
-            {
-              id: menuItemFieldToolId(atom.id, index, 'link'),
-              key: 'link',
-              label: 'Link',
-              type: 'input',
-              value: item.link,
-            },
-            {
-              id: menuItemFieldToolId(atom.id, index, 'color'),
-              key: 'color',
-              label: 'Color',
-              type: 'colorPicker',
-              value: item.type === 'text' ? item.color : '#000000',
-            },
-            {
-              id: menuItemFieldToolId(atom.id, index, 'fontSize'),
-              key: 'fontSize',
-              label: 'Font Size',
-              type: 'inputNumber',
-              value: item.type === 'text' ? item.fontSize : 16,
-            },
-          ],
-  }))
 }
 
 export function settingToolId(level: 'block' | 'row' | 'cell', id: string, field: string) {
@@ -263,6 +153,17 @@ export function useSettingsTools() {
       return []
 
     return [
+      {
+        id: settingToolId('row', selectedRow.value.id, 'widthMode'),
+        key: 'widthMode',
+        label: 'Width',
+        type: 'select',
+        value: selectedRow.value.settings.widthMode,
+        options: [
+          { label: 'Fill', value: 'fill' },
+          { label: 'Hug content', value: 'hug' },
+        ],
+      },
       {
         id: settingToolId('row', selectedRow.value.id, 'gap'),
         key: 'gap',
@@ -453,42 +354,6 @@ export function useSettingsTools() {
             width: selectedAtom.value.width,
             height: selectedAtom.value.height,
           }),
-        },
-      ]
-    }
-
-    if (selectedAtom.value.type === 'menu') {
-      return [
-        {
-          id: atomToolId(atomId, 'gap'),
-          key: 'gap',
-          label: 'Gap',
-          type: 'inputNumber',
-          value: selectedAtom.value.gap ?? 10,
-        },
-        {
-          id: atomToolId(atomId, 'menuItemType'),
-          key: 'menuItemType',
-          label: 'Item Type',
-          type: 'select',
-          value: getMenuItemType(selectedAtom.value),
-          options: [
-            {
-              label: 'Text',
-              value: 'text',
-            },
-            {
-              label: 'Image',
-              value: 'image',
-            },
-          ],
-        },
-        {
-          id: atomToolId(atomId, 'menuList'),
-          key: 'list',
-          label: 'List',
-          type: 'multi',
-          value: toMenuListToolValue(selectedAtom.value),
         },
       ]
     }

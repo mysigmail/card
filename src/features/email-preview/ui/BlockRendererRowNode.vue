@@ -5,11 +5,13 @@ import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-c
 import { sanitizeTextEditorHtml } from '@/entities/template'
 import { useSelection } from '@/features/editor'
 import { useInlineTextEditing } from '@/features/editor/components/tools/text/composables/use-inline-text-editing'
+import { textOffsetAtCoords } from '@/features/editor/components/tools/text/inline-text-session'
 import InlineTextEditor from '@/features/editor/components/tools/text/InlineTextEditor.vue'
 
 interface Props {
   blockId: string
   row: RowNode
+  horizontalAlign?: CellNode['settings']['horizontalAlign']
 }
 
 const props = defineProps<Props>()
@@ -91,38 +93,6 @@ function imageLinkStyle(): CSSProperties {
   }
 }
 
-function menuItemLinkBaseStyle(gap: number, isLast: boolean): CSSProperties {
-  return {
-    display: 'inline-block',
-    marginRight: isLast ? '0' : `${gap}px`,
-  }
-}
-
-function menuTextLinkStyle(color: string, fontSize: number): CSSProperties {
-  return {
-    color,
-    fontSize: `${fontSize}px`,
-  }
-}
-
-function menuImageStyle(item: Extract<Atom, { type: 'menu' }>['items'][number]): CSSProperties {
-  if (item.type !== 'image')
-    return {}
-
-  return {
-    display: 'block',
-    width: item.width ? `${item.width}px` : undefined,
-    height: item.height ? `${item.height}px` : undefined,
-    maxWidth: '100%',
-  }
-}
-
-function menuAtomStyle(horizontalAlign?: CellNode['settings']['horizontalAlign']): CSSProperties {
-  return {
-    textAlign: horizontalAlign || 'left',
-  }
-}
-
 function normalizeGap(value: unknown) {
   const gap = Number(value)
   return Number.isFinite(gap) && gap > 0 ? gap : 0
@@ -131,8 +101,8 @@ function normalizeGap(value: unknown) {
 function rowStyle(row: RowNode): CSSProperties {
   const s = row.settings
   const style: CSSProperties & Record<string, string> = {
-    width: '100%',
-    tableLayout: 'fixed',
+    width: s.widthMode === 'hug' ? 'auto' : '100%',
+    tableLayout: s.widthMode === 'hug' ? 'auto' : 'fixed',
   }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
@@ -155,7 +125,35 @@ function rowStyle(row: RowNode): CSSProperties {
 
   style['--e-row-gap'] = `${normalizeGap(s.gap)}px`
 
+  if (s.widthMode === 'hug') {
+    style.marginLeft
+      = props.horizontalAlign === 'right' || props.horizontalAlign === 'center' ? 'auto' : '0'
+    style.marginRight = props.horizontalAlign === 'center' ? 'auto' : '0'
+  }
+
   return style
+}
+
+function rowAlign(row: RowNode) {
+  return row.settings.widthMode === 'hug' ? undefined : 'center'
+}
+
+function nestedRowWrapperStyle(): CSSProperties {
+  return {
+    width: '100%',
+    tableLayout: 'fixed',
+  }
+}
+
+function nestedRowWrapperCellStyle(
+  row: RowNode,
+  horizontalAlign?: CellNode['settings']['horizontalAlign'],
+): CSSProperties {
+  const padding = tupleToCss(row.settings.spacing?.margin)
+  return {
+    ...(padding ? { padding } : {}),
+    textAlign: horizontalAlign || 'left',
+  }
 }
 
 function isRowHiddenOnMobile(row: RowNode) {
@@ -329,7 +327,17 @@ function selectAtomNode(rowId: string, cellId: string, atomId: string, event?: M
 
 function startTextEditing(rowId: string, cellId: string, atomId: string, event?: MouseEvent) {
   selectAtom(props.blockId, rowId, cellId, atomId)
-  startEditing(atomId, event ? { left: event.clientX, top: event.clientY } : undefined)
+  const pointerPosition = event
+    ? {
+        left: event.clientX,
+        top: event.clientY,
+        textOffset:
+          event.currentTarget instanceof HTMLElement
+            ? textOffsetAtCoords(event.currentTarget, { left: event.clientX, top: event.clientY })
+            : undefined,
+      }
+    : undefined
+  startEditing(atomId, pointerPosition)
 }
 
 function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
@@ -343,6 +351,7 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
 
 <template>
   <MRow
+    :align="rowAlign(row)"
     :class="rowClass(row)"
     :style="rowStyle(row)"
     :data-node-id="`row:${row.id}`"
@@ -360,7 +369,7 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
       >
         <div class="p-grid-gap">
           <MLink
-            v-if="cell.settings.link && cell.atoms.length === 0 && cell.rows.length === 0"
+            v-if="cell.settings.link && cell.children.length === 0"
             :href="cell.settings.link"
             :style="emptyLinkedItemStyle(cell)"
           >
@@ -368,57 +377,72 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
           </MLink>
 
           <template
-            v-for="atom in cell.atoms"
-            :key="atom.id"
+            v-for="child in cell.children"
+            :key="child.id"
           >
+            <MRow
+              v-if="child.type === 'row'"
+              :style="nestedRowWrapperStyle()"
+            >
+              <MColumn
+                :align="cell.settings.horizontalAlign || 'left'"
+                :style="nestedRowWrapperCellStyle(child, cell.settings.horizontalAlign)"
+              >
+                <BlockRendererRowNode
+                  :block-id="blockId"
+                  :row="child"
+                  :horizontal-align="cell.settings.horizontalAlign"
+                />
+              </MColumn>
+            </MRow>
             <div
-              v-if="atom.type === 'text'"
-              :class="atomWrapperClass(atom)"
-              :data-node-id="`atom:${atom.id}`"
-              :style="textAtomStyle(atom)"
-              :tabindex="editingAtomId === atom.id ? -1 : 0"
-              @click.stop="selectAtomNode(row.id, cell.id, atom.id, $event)"
-              @dblclick.stop="startTextEditing(row.id, cell.id, atom.id, $event)"
-              @keydown="onTextAtomKeydown($event, atom.id)"
+              v-else-if="child.type === 'text'"
+              :class="atomWrapperClass(child)"
+              :data-node-id="`atom:${child.id}`"
+              :style="textAtomStyle(child)"
+              :tabindex="editingAtomId === child.id ? -1 : 0"
+              @click.stop="selectAtomNode(row.id, cell.id, child.id, $event)"
+              @dblclick.stop="startTextEditing(row.id, cell.id, child.id, $event)"
+              @keydown="onTextAtomKeydown($event, child.id)"
             >
               <InlineTextEditor
-                v-if="editingAtomId === atom.id"
-                :atom-id="atom.id"
-                :value="atom.value"
+                v-if="editingAtomId === child.id"
+                :atom-id="child.id"
+                :value="child.value"
               />
               <div
                 v-else
                 class="p-text-atom-content"
-                v-html="sanitizeTextEditorHtml(atom.value) || '&nbsp;'"
+                v-html="sanitizeTextEditorHtml(child.value) || '&nbsp;'"
               />
             </div>
 
             <div
-              v-else-if="atom.type === 'button'"
-              :class="atomWrapperClass(atom)"
-              :data-node-id="`atom:${atom.id}`"
-              :style="atomSpacingStyle(atom, { includePadding: false })"
-              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
+              v-else-if="child.type === 'button'"
+              :class="atomWrapperClass(child)"
+              :data-node-id="`atom:${child.id}`"
+              :style="atomSpacingStyle(child, { includePadding: false })"
+              @click.stop="selectAtomNode(row.id, cell.id, child.id)"
             >
               <MButton
-                :href="atom.link"
-                :style="buttonStyle(atom)"
+                :href="child.link"
+                :style="buttonStyle(child)"
               >
-                {{ atom.text }}
+                {{ child.text }}
               </MButton>
             </div>
 
             <div
-              v-else-if="atom.type === 'divider'"
-              :class="atomWrapperClass(atom)"
-              :data-node-id="`atom:${atom.id}`"
-              :style="atomSpacingStyle(atom)"
-              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
+              v-else-if="child.type === 'divider'"
+              :class="atomWrapperClass(child)"
+              :data-node-id="`atom:${child.id}`"
+              :style="atomSpacingStyle(child)"
+              @click.stop="selectAtomNode(row.id, cell.id, child.id)"
             >
               <MHr
                 :style="{
-                  borderColor: atom.color,
-                  borderWidth: `${atom.height}px`,
+                  borderColor: child.color,
+                  borderWidth: `${child.height}px`,
                   borderStyle: 'solid',
                   borderTop: 'none',
                   borderLeft: 'none',
@@ -428,63 +452,24 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
             </div>
 
             <div
-              v-else-if="atom.type === 'image'"
-              :class="atomWrapperClass(atom)"
-              :data-node-id="`atom:${atom.id}`"
-              :style="atomSpacingStyle(atom)"
-              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
+              v-else-if="child.type === 'image'"
+              :class="atomWrapperClass(child)"
+              :data-node-id="`atom:${child.id}`"
+              :style="atomSpacingStyle(child)"
+              @click.stop="selectAtomNode(row.id, cell.id, child.id)"
             >
               <MLink
-                :href="atom.link"
+                :href="child.link"
                 :style="imageLinkStyle()"
               >
                 <MImg
-                  :src="atom.src"
-                  :alt="atom.alt"
-                  :style="imageStyle(atom, cell.settings.horizontalAlign)"
+                  :src="child.src"
+                  :alt="child.alt"
+                  :style="imageStyle(child, cell.settings.horizontalAlign)"
                 />
               </MLink>
             </div>
-
-            <div
-              v-else-if="atom.type === 'menu'"
-              :class="atomWrapperClass(atom)"
-              :data-node-id="`atom:${atom.id}`"
-              :style="atomSpacingStyle(atom)"
-              @click.stop="selectAtomNode(row.id, cell.id, atom.id)"
-            >
-              <div :style="menuAtomStyle(cell.settings.horizontalAlign)">
-                <MLink
-                  v-for="(menuItem, menuIndex) in atom.items"
-                  :key="`menu_${menuIndex}`"
-                  :href="menuItem.link"
-                  :style="
-                    menuItemLinkBaseStyle(atom.gap ?? 10, atom.items.length === menuIndex + 1)
-                  "
-                >
-                  <template v-if="menuItem.type === 'image'">
-                    <MImg
-                      :src="menuItem.url"
-                      :alt="menuItem.alt"
-                      :style="menuImageStyle(menuItem)"
-                    />
-                  </template>
-                  <template v-else>
-                    <span :style="menuTextLinkStyle(menuItem.color, menuItem.fontSize)">
-                      {{ menuItem.text }}
-                    </span>
-                  </template>
-                </MLink>
-              </div>
-            </div>
           </template>
-
-          <BlockRendererRowNode
-            v-for="nestedRow in cell.rows"
-            :key="nestedRow.id"
-            :block-id="blockId"
-            :row="nestedRow"
-          />
         </div>
       </MColumn>
 

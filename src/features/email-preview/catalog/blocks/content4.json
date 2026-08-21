@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "content4",
   "label": "Content 4",
   "type": "content",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 24
+          "gap": 24,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -45,7 +46,7 @@
               "horizontalAlign": "left",
               "width": 58
             },
-            "atoms": [
+            "children": [
               {
                 "id": "RHZkxc3v",
                 "type": "text",
@@ -95,8 +96,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "ERpnkH7d",
@@ -115,7 +115,7 @@
               "borderRadius": 18,
               "width": 42
             },
-            "atoms": [
+            "children": [
               {
                 "id": "mO-3-790",
                 "type": "image",
@@ -138,10 +138,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "feature7",
   "label": "Feature 7",
   "type": "feature",
@@ -33,7 +33,8 @@
           "backgroundColor": "#1F1712",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -52,7 +53,7 @@
               "horizontalAlign": "left",
               "width": 62
             },
-            "atoms": [
+            "children": [
               {
                 "id": "PfVfez8T",
                 "type": "text",
@@ -102,8 +103,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "mdFDfTtt",
@@ -122,7 +122,7 @@
               "borderRadius": 18,
               "width": 38
             },
-            "atoms": [
+            "children": [
               {
                 "id": "mu7prwhQ",
                 "type": "image",
@@ -144,10 +144,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "1XusRo4M",
@@ -163,7 +163,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 18
+          "gap": 18,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -175,7 +176,7 @@
               "horizontalAlign": "left",
               "width": 33
             },
-            "atoms": [
+            "children": [
               {
                 "id": "pPDzrwdI",
                 "type": "text",
@@ -195,8 +196,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "ZlYguK3B",
@@ -207,7 +207,7 @@
               "horizontalAlign": "left",
               "width": 33
             },
-            "atoms": [
+            "children": [
               {
                 "id": "_5AcZGDd",
                 "type": "text",
@@ -227,8 +227,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "uVXcE1ZS",
@@ -239,7 +238,7 @@
               "horizontalAlign": "left",
               "width": 33
             },
-            "atoms": [
+            "children": [
               {
                 "id": "Dg1KJr_S",
                 "type": "text",
@@ -259,10 +258,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

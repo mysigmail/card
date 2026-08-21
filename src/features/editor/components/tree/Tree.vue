@@ -17,6 +17,8 @@ const {
   insertCellToRow,
   insertAtomToCell,
   insertRowToCell,
+  insertMenuToCell,
+  insertSocialToCell,
 } = useCanvas()
 
 const {
@@ -88,7 +90,17 @@ function handleSelect(type: TreeInsertType) {
         selectCell(blockId, rowId, cell.id)
     }
   }
-  else if (blockId && rowId && cellId) {
+  else if (type === 'menu' && blockId && rowId && cellId) {
+    const menu = insertMenuToCell(blockId, rowId, cellId, index)
+    if (menu)
+      selectRow(blockId, menu.id)
+  }
+  else if (type === 'social' && blockId && rowId && cellId) {
+    const social = insertSocialToCell(blockId, rowId, cellId, index)
+    if (social)
+      selectRow(blockId, social.id)
+  }
+  else if (type !== 'menu' && type !== 'social' && blockId && rowId && cellId) {
     const atom = insertAtomToCell(blockId, rowId, cellId, type, index)
     if (atom)
       selectAtom(blockId, rowId, cellId, atom.id)

@@ -39,36 +39,10 @@ export interface ImageAtom extends BaseAtom {
   borderRadius?: number
 }
 
-export interface MenuAtomTextItem {
-  type: 'text'
-  text: string
-  link: string
-  color: string
-  fontSize: number
-}
+export type AtomType = 'text' | 'button' | 'divider' | 'image'
 
-export interface MenuAtomImageItem {
-  type: 'image'
-  name: string
-  link: string
-  url: string
-  width?: number
-  height?: number
-  alt: string
-}
-
-export type MenuAtomItem = MenuAtomTextItem | MenuAtomImageItem
-
-export interface MenuAtom extends BaseAtom {
-  type: 'menu'
-  itemType?: 'text' | 'image'
-  gap?: number
-  items: MenuAtomItem[]
-}
-
-export type AtomType = 'text' | 'button' | 'divider' | 'image' | 'menu'
-
-export type Atom = TextAtom | ButtonAtom | DividerAtom | ImageAtom | MenuAtom
+export type Atom = TextAtom | ButtonAtom | DividerAtom | ImageAtom
+export type CellChild = Atom | RowNode
 
 export interface BlockSettings {
   spacing: SpacingValue
@@ -84,6 +58,7 @@ export interface RowSettings {
   collapseOnMobile?: boolean
   height?: number
   gap: number
+  widthMode: 'fill' | 'hug'
 }
 
 export interface CellSettings {
@@ -100,6 +75,7 @@ export interface CellSettings {
 }
 
 export interface RowNode {
+  type: 'row'
   id: string
   settings: RowSettings
   cells: CellNode[]
@@ -108,8 +84,7 @@ export interface RowNode {
 export interface CellNode {
   id: string
   settings: CellSettings
-  atoms: Atom[]
-  rows: RowNode[]
+  children: CellChild[]
 }
 
 export interface BlockNode {

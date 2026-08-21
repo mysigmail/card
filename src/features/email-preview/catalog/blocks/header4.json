@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "header4",
   "label": "Header 4",
   "type": "header",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "middle",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "3KBRQAq_",
                 "type": "text",
@@ -109,10 +110,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

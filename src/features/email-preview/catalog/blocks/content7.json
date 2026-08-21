@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "content7",
   "label": "Content 7",
   "type": "content",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "left"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "BiP9yJb7",
                 "type": "text",
@@ -57,10 +58,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "1_W5gh_S",
@@ -76,7 +77,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 14
+          "gap": 14,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -96,7 +98,7 @@
               "borderRadius": 16,
               "width": 33
             },
-            "atoms": [
+            "children": [
               {
                 "id": "trfDWQ5D",
                 "type": "text",
@@ -116,8 +118,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "4piDPUUK",
@@ -136,7 +137,7 @@
               "borderRadius": 16,
               "width": 33
             },
-            "atoms": [
+            "children": [
               {
                 "id": "-WC2btDJ",
                 "type": "text",
@@ -156,8 +157,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "CafRzuBt",
@@ -176,7 +176,7 @@
               "borderRadius": 16,
               "width": 33
             },
-            "atoms": [
+            "children": [
               {
                 "id": "bRmm9rD8",
                 "type": "text",
@@ -196,10 +196,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

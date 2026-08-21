@@ -5,9 +5,10 @@ import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-c
 
 interface Props {
   row: RowNode
+  horizontalAlign?: CellNode['settings']['horizontalAlign']
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 function tupleToCss(value?: [number, number, number, number]) {
   if (!value || value.length !== 4)
@@ -83,38 +84,6 @@ function imageLinkStyle(): CSSProperties {
   }
 }
 
-function menuItemLinkBaseStyle(gap: number, isLast: boolean): CSSProperties {
-  return {
-    display: 'inline-block',
-    marginRight: isLast ? '0' : `${gap}px`,
-  }
-}
-
-function menuTextLinkStyle(color: string, fontSize: number): CSSProperties {
-  return {
-    color,
-    fontSize: `${fontSize}px`,
-  }
-}
-
-function menuImageStyle(item: Extract<Atom, { type: 'menu' }>['items'][number]): CSSProperties {
-  if (item.type !== 'image')
-    return {}
-
-  return {
-    display: 'block',
-    width: item.width ? `${item.width}px` : undefined,
-    height: item.height ? `${item.height}px` : undefined,
-    maxWidth: '100%',
-  }
-}
-
-function menuAtomStyle(horizontalAlign?: CellNode['settings']['horizontalAlign']): CSSProperties {
-  return {
-    textAlign: horizontalAlign || 'left',
-  }
-}
-
 function normalizeGap(value: unknown) {
   const gap = Number(value)
   return Number.isFinite(gap) && gap > 0 ? gap : 0
@@ -123,8 +92,8 @@ function normalizeGap(value: unknown) {
 function rowStyle(row: RowNode): CSSProperties {
   const s = row.settings
   const style: CSSProperties & Record<string, string> = {
-    width: '100%',
-    tableLayout: 'fixed',
+    width: s.widthMode === 'hug' ? 'auto' : '100%',
+    tableLayout: s.widthMode === 'hug' ? 'auto' : 'fixed',
   }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
@@ -147,7 +116,35 @@ function rowStyle(row: RowNode): CSSProperties {
 
   style['--e-row-gap'] = `${normalizeGap(s.gap)}px`
 
+  if (s.widthMode === 'hug') {
+    style.marginLeft
+      = props.horizontalAlign === 'right' || props.horizontalAlign === 'center' ? 'auto' : '0'
+    style.marginRight = props.horizontalAlign === 'center' ? 'auto' : '0'
+  }
+
   return style
+}
+
+function rowAlign(row: RowNode) {
+  return row.settings.widthMode === 'hug' ? undefined : 'center'
+}
+
+function nestedRowWrapperStyle(): CSSProperties {
+  return {
+    width: '100%',
+    tableLayout: 'fixed',
+  }
+}
+
+function nestedRowWrapperCellStyle(
+  row: RowNode,
+  horizontalAlign?: CellNode['settings']['horizontalAlign'],
+): CSSProperties {
+  const padding = tupleToCss(row.settings.spacing?.margin)
+  return {
+    ...(padding ? { padding } : {}),
+    textAlign: horizontalAlign || 'left',
+  }
 }
 
 function isRowHiddenOnMobile(row: RowNode) {
@@ -307,6 +304,7 @@ function atomWrapperClass(atom: Atom) {
 
 <template>
   <MRow
+    :align="rowAlign(row)"
     :class="rowClass(row)"
     :style="rowStyle(row)"
   >
@@ -319,7 +317,7 @@ function atomWrapperClass(atom: Atom) {
         :style="itemStyle(cell, row.cells, row.settings.gap)"
       >
         <MLink
-          v-if="cell.settings.link && cell.atoms.length === 0 && cell.rows.length === 0"
+          v-if="cell.settings.link && cell.children.length === 0"
           :href="cell.settings.link"
           :style="emptyLinkedItemStyle(cell)"
         >
@@ -327,38 +325,52 @@ function atomWrapperClass(atom: Atom) {
         </MLink>
 
         <template
-          v-for="atom in cell.atoms"
-          :key="atom.id"
+          v-for="child in cell.children"
+          :key="child.id"
         >
+          <MRow
+            v-if="child.type === 'row'"
+            :style="nestedRowWrapperStyle()"
+          >
+            <MColumn
+              :align="cell.settings.horizontalAlign || 'left'"
+              :style="nestedRowWrapperCellStyle(child, cell.settings.horizontalAlign)"
+            >
+              <ExportBlockRendererRowNode
+                :row="child"
+                :horizontal-align="cell.settings.horizontalAlign"
+              />
+            </MColumn>
+          </MRow>
           <div
-            v-if="atom.type === 'text'"
-            :class="atomWrapperClass(atom)"
-            :style="textAtomStyle(atom)"
-            v-html="atom.value || '&nbsp;'"
+            v-else-if="child.type === 'text'"
+            :class="atomWrapperClass(child)"
+            :style="textAtomStyle(child)"
+            v-html="child.value || '&nbsp;'"
           />
 
           <div
-            v-else-if="atom.type === 'button'"
-            :class="atomWrapperClass(atom)"
-            :style="atomSpacingStyle(atom, { includePadding: false })"
+            v-else-if="child.type === 'button'"
+            :class="atomWrapperClass(child)"
+            :style="atomSpacingStyle(child, { includePadding: false })"
           >
             <MButton
-              :href="atom.link"
-              :style="buttonStyle(atom)"
+              :href="child.link"
+              :style="buttonStyle(child)"
             >
-              {{ atom.text }}
+              {{ child.text }}
             </MButton>
           </div>
 
           <div
-            v-else-if="atom.type === 'divider'"
-            :class="atomWrapperClass(atom)"
-            :style="atomSpacingStyle(atom)"
+            v-else-if="child.type === 'divider'"
+            :class="atomWrapperClass(child)"
+            :style="atomSpacingStyle(child)"
           >
             <MHr
               :style="{
-                borderColor: atom.color,
-                borderWidth: `${atom.height}px`,
+                borderColor: child.color,
+                borderWidth: `${child.height}px`,
                 borderStyle: 'solid',
                 borderTop: 'none',
                 borderLeft: 'none',
@@ -368,56 +380,22 @@ function atomWrapperClass(atom: Atom) {
           </div>
 
           <div
-            v-else-if="atom.type === 'image'"
-            :class="atomWrapperClass(atom)"
-            :style="atomSpacingStyle(atom)"
+            v-else-if="child.type === 'image'"
+            :class="atomWrapperClass(child)"
+            :style="atomSpacingStyle(child)"
           >
             <MLink
-              :href="atom.link"
+              :href="child.link"
               :style="imageLinkStyle()"
             >
               <MImg
-                :src="atom.src"
-                :alt="atom.alt"
-                :style="imageStyle(atom, cell.settings.horizontalAlign)"
+                :src="child.src"
+                :alt="child.alt"
+                :style="imageStyle(child, cell.settings.horizontalAlign)"
               />
             </MLink>
           </div>
-
-          <div
-            v-else-if="atom.type === 'menu'"
-            :class="atomWrapperClass(atom)"
-            :style="atomSpacingStyle(atom)"
-          >
-            <div :style="menuAtomStyle(cell.settings.horizontalAlign)">
-              <MLink
-                v-for="(menuItem, menuIndex) in atom.items"
-                :key="`menu_${menuIndex}`"
-                :href="menuItem.link"
-                :style="menuItemLinkBaseStyle(atom.gap ?? 10, atom.items.length === menuIndex + 1)"
-              >
-                <template v-if="menuItem.type === 'image'">
-                  <MImg
-                    :src="menuItem.url"
-                    :alt="menuItem.alt"
-                    :style="menuImageStyle(menuItem)"
-                  />
-                </template>
-                <template v-else>
-                  <span :style="menuTextLinkStyle(menuItem.color, menuItem.fontSize)">
-                    {{ menuItem.text }}
-                  </span>
-                </template>
-              </MLink>
-            </div>
-          </div>
         </template>
-
-        <ExportBlockRendererRowNode
-          v-for="nestedRow in cell.rows"
-          :key="nestedRow.id"
-          :row="nestedRow"
-        />
       </MColumn>
 
       <MColumn

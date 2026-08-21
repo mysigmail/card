@@ -1,11 +1,11 @@
 import type { CanvasBlockInstance } from '../types'
-import type { Atom, BlockNode, CellNode, RowNode } from '@/entities/block'
+import type { Atom, BlockNode, CellChild, CellNode, RowNode } from '@/entities/block'
 import { nanoid } from 'nanoid'
 
 export function isCanvasBlockInstance(
   canvasBlock: CanvasBlockInstance,
 ): canvasBlock is CanvasBlockInstance {
-  return canvasBlock.version === 2
+  return canvasBlock.version === 3
 }
 
 export function findRowInRows(rows: RowNode[], rowId: string): RowNode | undefined {
@@ -14,7 +14,10 @@ export function findRowInRows(rows: RowNode[], rowId: string): RowNode | undefin
       return row
 
     for (const cell of row.cells) {
-      const nested = findRowInRows(cell.rows, rowId)
+      const nested = findRowInRows(
+        cell.children.filter(child => child.type === 'row'),
+        rowId,
+      )
       if (nested)
         return nested
     }
@@ -27,7 +30,7 @@ export function findRowContainerInRows(
   rows: RowNode[],
   rowId: string,
   isTopLevel = false,
-): { container: RowNode[], index: number, isTopLevel: boolean } | undefined {
+): { container: RowNode[] | CellChild[], index: number, isTopLevel: boolean } | undefined {
   for (const [index, row] of rows.entries()) {
     if (row.id === rowId) {
       return {
@@ -38,9 +41,15 @@ export function findRowContainerInRows(
     }
 
     for (const cell of row.cells) {
-      const nested = findRowContainerInRows(cell.rows, rowId, false)
-      if (nested)
-        return nested
+      for (const [childIndex, child] of cell.children.entries()) {
+        if (child.type !== 'row')
+          continue
+        if (child.id === rowId)
+          return { container: cell.children, index: childIndex, isTopLevel: false }
+        const nested = findRowContainerInRows([child], rowId, false)
+        if (nested)
+          return nested
+      }
     }
   }
 
@@ -54,7 +63,10 @@ export function findCellInRows(rows: RowNode[], cellId: string): CellNode | unde
       return found
 
     for (const cell of row.cells) {
-      const nested = findCellInRows(cell.rows, cellId)
+      const nested = findCellInRows(
+        cell.children.filter(child => child.type === 'row'),
+        cellId,
+      )
       if (nested)
         return nested
     }
@@ -65,11 +77,10 @@ export function findCellInRows(rows: RowNode[], cellId: string): CellNode | unde
 
 export function regenerateCellNodeIds(cell: CellNode) {
   cell.id = nanoid(8)
-  cell.atoms.forEach((atom) => {
-    regenerateAtomId(atom)
-  })
-  cell.rows.forEach((row) => {
-    regenerateRowNodeIds(row)
+  cell.children.forEach((child) => {
+    if (child.type === 'row')
+      regenerateRowNodeIds(child)
+    else regenerateAtomId(child)
   })
 }
 

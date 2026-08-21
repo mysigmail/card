@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "ecommerce4",
   "label": "E-Commerce 4",
   "type": "ecommerce",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -38,7 +39,7 @@
               "horizontalAlign": "center",
               "width": 18
             },
-            "atoms": [
+            "children": [
               {
                 "id": "01wa3S7E",
                 "type": "image",
@@ -62,8 +63,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "crNJJIbn",
@@ -74,7 +74,7 @@
               "horizontalAlign": "left",
               "width": 82
             },
-            "atoms": [
+            "children": [
               {
                 "id": "ULzXEh65",
                 "type": "text",
@@ -94,10 +94,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "aXY6SoIl",
@@ -113,7 +113,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 18
+          "gap": 18,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -134,7 +135,7 @@
               "width": 34,
               "height": 150
             },
-            "atoms": [
+            "children": [
               {
                 "id": "KZN4JpOJ",
                 "type": "image",
@@ -157,8 +158,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "LgHsKh1T",
@@ -169,7 +169,7 @@
               "horizontalAlign": "left",
               "width": 66
             },
-            "atoms": [
+            "children": [
               {
                 "id": "aRGaoXZO",
                 "type": "text",
@@ -219,10 +219,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "wXieO2an",
@@ -231,7 +231,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 18
+          "gap": 18,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -252,7 +253,7 @@
               "width": 34,
               "height": 150
             },
-            "atoms": [
+            "children": [
               {
                 "id": "Qp4ljJeV",
                 "type": "image",
@@ -275,8 +276,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "11YNQlrS",
@@ -287,7 +287,7 @@
               "horizontalAlign": "left",
               "width": 66
             },
-            "atoms": [
+            "children": [
               {
                 "id": "y57T2Wkb",
                 "type": "text",
@@ -337,10 +337,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

@@ -26,6 +26,7 @@ export function useSelectionOverlay(surfaceRef: Ref<HTMLElement | undefined>) {
   let overlayRafId: number | undefined
   let overlayMutationObserver: MutationObserver | undefined
   let overlayResizeObserver: ResizeObserver | undefined
+  let observedSelectionTarget: HTMLElement | undefined
 
   const selectedNodeId = computed(() => {
     switch (selectionLevel.value) {
@@ -78,20 +79,36 @@ export function useSelectionOverlay(surfaceRef: Ref<HTMLElement | undefined>) {
     selectionOverlay.label = ''
   }
 
+  function observeSelectionTarget(target?: HTMLElement) {
+    if (observedSelectionTarget === target)
+      return
+
+    if (observedSelectionTarget)
+      overlayResizeObserver?.unobserve(observedSelectionTarget)
+
+    observedSelectionTarget = target
+    if (target)
+      overlayResizeObserver?.observe(target)
+  }
+
   function measureSelectionOverlay() {
     const surface = surfaceRef.value
     const nodeId = selectedNodeId.value
 
     if (!surface || !nodeId) {
+      observeSelectionTarget()
       resetSelectionOverlay()
       return
     }
 
     const target = surface.querySelector<HTMLElement>(`[data-node-id="${nodeId}"]`)
     if (!target) {
+      observeSelectionTarget()
       resetSelectionOverlay()
       return
     }
+
+    observeSelectionTarget(target)
 
     const surfaceRect = surface.getBoundingClientRect()
     const targetRect = target.getBoundingClientRect()
@@ -153,6 +170,7 @@ export function useSelectionOverlay(surfaceRef: Ref<HTMLElement | undefined>) {
     overlayResizeObserver?.disconnect()
     overlayMutationObserver = undefined
     overlayResizeObserver = undefined
+    observedSelectionTarget = undefined
 
     if (overlayRafId !== undefined) {
       window.cancelAnimationFrame(overlayRafId)

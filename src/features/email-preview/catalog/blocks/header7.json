@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "header7",
   "label": "Header 7",
   "type": "header",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "left"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "yjTzXq8X",
                 "type": "text",
@@ -57,10 +58,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "knh5Q25U",
@@ -76,7 +77,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -95,7 +97,7 @@
               "horizontalAlign": "center",
               "borderRadius": 20
             },
-            "atoms": [
+            "children": [
               {
                 "id": "S3OiIN42",
                 "type": "image",
@@ -118,10 +120,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "Mzhhut9d",
@@ -130,7 +132,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 12
+          "gap": 12,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -142,7 +145,7 @@
               "horizontalAlign": "center",
               "width": 18
             },
-            "atoms": [
+            "children": [
               {
                 "id": "Gh7Ggzky",
                 "type": "image",
@@ -166,8 +169,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "hvLtvww0",
@@ -178,7 +180,7 @@
               "horizontalAlign": "left",
               "width": 82
             },
-            "atoms": [
+            "children": [
               {
                 "id": "x5D2zIH7",
                 "type": "text",
@@ -198,10 +200,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "header9",
   "label": "Header 9",
   "type": "header",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 24
+          "gap": 24,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -38,7 +39,7 @@
               "horizontalAlign": "left",
               "width": 58
             },
-            "atoms": [
+            "children": [
               {
                 "id": "k131YWQ-",
                 "type": "text",
@@ -118,8 +119,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "Crwaih_5",
@@ -138,7 +138,7 @@
               "borderRadius": 20,
               "width": 42
             },
-            "atoms": [
+            "children": [
               {
                 "id": "qX3wGNkN",
                 "type": "image",
@@ -161,10 +161,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

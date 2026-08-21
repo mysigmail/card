@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "header5",
   "label": "Header 5",
   "type": "header",
@@ -33,7 +33,8 @@
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
           "gap": 0,
-          "height": 360
+          "height": 360,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -47,7 +48,7 @@
               "borderRadius": 20,
               "width": 100
             },
-            "atoms": [
+            "children": [
               {
                 "id": "BbeNVD6u",
                 "type": "text",
@@ -117,10 +118,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

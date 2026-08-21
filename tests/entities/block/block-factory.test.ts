@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createTextAtom } from '@/entities/block'
+import { createSocialRow, createTextAtom } from '@/entities/block'
 
 describe('block factory', () => {
   it('stores the default text color inside default and custom HTML values', () => {
@@ -14,5 +14,22 @@ describe('block factory', () => {
     )
     expect(defaultAtom).not.toHaveProperty('color')
     expect(customAtom).not.toHaveProperty('color')
+  })
+
+  it('builds the social preset from ordinary image atoms', () => {
+    const row = createSocialRow()
+
+    expect(row.type).toBe('row')
+    expect(row.settings).toMatchObject({
+      widthMode: 'hug',
+      collapseOnMobile: false,
+      gap: 10,
+    })
+    expect(row.cells).toHaveLength(3)
+    expect(row.cells.map(cell => cell.children[0])).toEqual([
+      expect.objectContaining({ type: 'image', alt: 'Facebook', width: 16, height: 16 }),
+      expect.objectContaining({ type: 'image', alt: 'X', width: 16, height: 16 }),
+      expect.objectContaining({ type: 'image', alt: 'Instagram', width: 16, height: 16 }),
+    ])
   })
 })

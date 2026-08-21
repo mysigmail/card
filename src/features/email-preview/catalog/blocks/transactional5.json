@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "transactional5",
   "label": "Transactional 5",
   "type": "transactional",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -40,7 +41,7 @@
               "width": 25,
               "height": 138
             },
-            "atoms": [
+            "children": [
               {
                 "id": "iAIbf0lw",
                 "type": "text",
@@ -60,8 +61,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "Q6zG6fM5",
@@ -72,7 +72,7 @@
               "horizontalAlign": "left",
               "width": 51
             },
-            "atoms": [
+            "children": [
               {
                 "id": "wrXDHKIF",
                 "type": "text",
@@ -92,8 +92,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "-upL7OLY",
@@ -112,7 +111,7 @@
               "borderRadius": 16,
               "width": 24
             },
-            "atoms": [
+            "children": [
               {
                 "id": "U6_VGmuF",
                 "type": "text",
@@ -162,10 +161,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

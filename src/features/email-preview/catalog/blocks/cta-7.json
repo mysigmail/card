@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "cta-7",
   "label": "CTA 7",
   "type": "cta",
@@ -33,7 +33,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 22
+          "gap": 22,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -60,7 +61,7 @@
               "width": 46,
               "height": 250
             },
-            "atoms": [
+            "children": [
               {
                 "id": "pKAr_VcY",
                 "type": "button",
@@ -91,8 +92,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "6ctLZdmI",
@@ -110,7 +110,7 @@
               "horizontalAlign": "left",
               "width": 54
             },
-            "atoms": [
+            "children": [
               {
                 "id": "KmDA4bNP",
                 "type": "text",
@@ -160,10 +160,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

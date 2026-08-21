@@ -2,7 +2,7 @@ import type { BlockPreset as CatalogBlock, ComponentType } from '@/entities/temp
 import { nanoid } from 'nanoid'
 
 interface CatalogBlockJsonData {
-  version: 2
+  version: 3
   name: string
   label: string
   type: ComponentType
@@ -121,7 +121,7 @@ function resolvePreview(relativePath: string): string {
 function toCatalogBlock(data: CatalogBlockJsonData): CatalogBlock {
   return {
     id: nanoid(8),
-    version: 2,
+    version: 3,
     name: data.name,
     label: data.label,
     type: data.type,

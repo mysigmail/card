@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "content2",
   "label": "Content 2",
   "type": "content",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 26
+          "gap": 26,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -38,7 +39,7 @@
               "horizontalAlign": "left",
               "width": 44
             },
-            "atoms": [
+            "children": [
               {
                 "id": "hlfy2pKz",
                 "type": "text",
@@ -88,8 +89,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "gmmMQXL3",
@@ -108,7 +108,7 @@
               "borderRadius": 18,
               "width": 56
             },
-            "atoms": [
+            "children": [
               {
                 "id": "CNgnWMkL",
                 "type": "image",
@@ -131,10 +131,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

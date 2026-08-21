@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "feature5",
   "label": "Feature 5",
   "type": "feature",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "zm56tK7v",
                 "type": "text",
@@ -57,10 +58,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "v06AvquA",
@@ -76,7 +77,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -96,7 +98,7 @@
               "borderRadius": 18,
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "6OB5WFT7",
                 "type": "text",
@@ -116,8 +118,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "JRpvoDe7",
@@ -136,7 +137,7 @@
               "borderRadius": 18,
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "3msE1Ei7",
                 "type": "text",
@@ -156,10 +157,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

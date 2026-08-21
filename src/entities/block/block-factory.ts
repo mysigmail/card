@@ -8,7 +8,6 @@ import type {
   CellSettings,
   DividerAtom,
   ImageAtom,
-  MenuAtom,
   RowNode,
   RowSettings,
   TextAtom,
@@ -29,6 +28,7 @@ export function createDefaultRowSettings(): RowSettings {
     hiddenOnMobile: false,
     collapseOnMobile: true,
     gap: 0,
+    widthMode: 'fill',
   }
 }
 
@@ -100,39 +100,6 @@ export function createImageAtom(): ImageAtom {
   }
 }
 
-export function createMenuAtom(): MenuAtom {
-  return {
-    id: nanoid(8),
-    type: 'menu',
-    itemType: 'text',
-    gap: 10,
-    items: [
-      {
-        type: 'text',
-        text: 'Specs',
-        link: 'https://example',
-        color: '#000000',
-        fontSize: 16,
-      },
-      {
-        type: 'text',
-        text: 'Feature',
-        link: 'https://example',
-        color: '#000000',
-        fontSize: 16,
-      },
-      {
-        type: 'text',
-        text: 'Price',
-        link: 'https://example',
-        color: '#000000',
-        fontSize: 16,
-      },
-    ],
-    spacing: createAtomSpacing(),
-  }
-}
-
 export function createAtom(type: AtomType): Atom {
   switch (type) {
     case 'text':
@@ -143,26 +110,104 @@ export function createAtom(type: AtomType): Atom {
       return createDividerAtom()
     case 'image':
       return createImageAtom()
-    case 'menu':
-      return createMenuAtom()
   }
 }
 
-export function createCellNode(atoms?: Atom[]): CellNode {
+export function createCellNode(children?: CellNode['children']): CellNode {
   return {
     id: nanoid(8),
     settings: createDefaultCellSettings(),
-    atoms: atoms ?? [createTextAtom()],
-    rows: [],
+    children: children ?? [createTextAtom()],
   }
 }
 
 export function createRowNode(cells?: CellNode[]): RowNode {
   return {
     id: nanoid(8),
+    type: 'row',
     settings: createDefaultRowSettings(),
     cells: cells ?? [createCellNode()],
   }
+}
+
+export interface TextMenuRecipeItem {
+  text: string
+  link: string
+  color?: string
+  fontSize?: number
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+}
+
+export function createTextMenuRow(
+  items: Array<string | TextMenuRecipeItem> = [
+    { text: 'Specs', link: 'https://example.com' },
+    { text: 'Feature', link: 'https://example.com' },
+    { text: 'Price', link: 'https://example.com' },
+  ],
+): RowNode {
+  const cells = items.map((item) => {
+    const normalized = typeof item === 'string' ? { text: item, link: 'https://example.com' } : item
+    const color = normalized.color || '#000000'
+    const fontSize = normalized.fontSize || 16
+    const value = `<p><a href="${escapeHtml(normalized.link)}"><span style="color:${escapeHtml(color)};font-size:${fontSize}px">${escapeHtml(normalized.text)}</span></a></p>`
+    return createCellNode([createTextAtom(value)])
+  })
+  const row = createRowNode(cells)
+  row.settings.widthMode = 'hug'
+  row.settings.collapseOnMobile = false
+  row.settings.gap = 10
+  return row
+}
+
+export interface SocialRecipeItem {
+  src: string
+  link: string
+  alt: string
+  width?: number
+  height?: number
+}
+
+export function createSocialRow(
+  items: SocialRecipeItem[] = [
+    {
+      src: '/img/system/social/menu/facebook-black.png',
+      link: 'https://example.com',
+      alt: 'Facebook',
+    },
+    {
+      src: '/img/system/social/menu/twitter-x-black.png',
+      link: 'https://example.com',
+      alt: 'X',
+    },
+    {
+      src: '/img/system/social/menu/instagram-black.png',
+      link: 'https://example.com',
+      alt: 'Instagram',
+    },
+  ],
+  gap = 10,
+): RowNode {
+  const cells = items.map((item) => {
+    const image = createImageAtom()
+    image.src = item.src
+    image.link = item.link
+    image.alt = item.alt
+    image.width = item.width ?? 16
+    image.height = item.height ?? 16
+    return createCellNode([image])
+  })
+  const row = createRowNode(cells)
+  row.settings.widthMode = 'hug'
+  row.settings.collapseOnMobile = false
+  row.settings.gap = gap
+  return row
 }
 
 export function createBlockNode(label = 'Block', rows?: RowNode[]): BlockNode {

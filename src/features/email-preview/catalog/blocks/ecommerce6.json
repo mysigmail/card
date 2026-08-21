@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "ecommerce6",
   "label": "E-Commerce 6",
   "type": "ecommerce",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "left"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "m7EZZkv6",
                 "type": "text",
@@ -57,10 +58,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "5DWJ3UZj",
@@ -76,7 +77,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 12
+          "gap": 12,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -96,7 +98,7 @@
               "borderRadius": 16,
               "width": 20
             },
-            "atoms": [
+            "children": [
               {
                 "id": "dltZDY0n",
                 "type": "image",
@@ -119,8 +121,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "hqPaykYb",
@@ -139,7 +140,7 @@
               "borderRadius": 16,
               "width": 20
             },
-            "atoms": [
+            "children": [
               {
                 "id": "ZgTnP1TC",
                 "type": "image",
@@ -162,8 +163,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "mEZXcBnD",
@@ -182,7 +182,7 @@
               "borderRadius": 16,
               "width": 20
             },
-            "atoms": [
+            "children": [
               {
                 "id": "ZPM7q_9F",
                 "type": "image",
@@ -205,8 +205,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "6DCXe4ky",
@@ -224,7 +223,7 @@
               "horizontalAlign": "left",
               "width": 40
             },
-            "atoms": [
+            "children": [
               {
                 "id": "KTq5wxOY",
                 "type": "text",
@@ -274,10 +273,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

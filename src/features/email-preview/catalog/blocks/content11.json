@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "content11",
   "label": "Content 11",
   "type": "content",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "ETpBmbTv",
                 "type": "text",
@@ -57,10 +58,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "bPwHSCJ7",
@@ -76,7 +77,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 12
+          "gap": 12,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -88,8 +90,7 @@
               "horizontalAlign": "left",
               "width": 50
             },
-            "atoms": [],
-            "rows": [
+            "children": [
               {
                 "id": "RpriisxG",
                 "settings": {
@@ -97,7 +98,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": false,
-                  "gap": 12
+                  "gap": 12,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -118,7 +120,7 @@
                       "width": 50,
                       "height": 78
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "r02J_c1b",
                         "type": "image",
@@ -141,8 +143,7 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   },
                   {
                     "id": "WkcXz0eO",
@@ -162,7 +163,7 @@
                       "width": 50,
                       "height": 78
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "FyjwVw8A",
                         "type": "image",
@@ -185,10 +186,10 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               }
             ]
           },
@@ -201,8 +202,7 @@
               "horizontalAlign": "left",
               "width": 50
             },
-            "atoms": [],
-            "rows": [
+            "children": [
               {
                 "id": "gO4ByaD3",
                 "settings": {
@@ -210,7 +210,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": false,
-                  "gap": 12
+                  "gap": 12,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -231,7 +232,7 @@
                       "width": 50,
                       "height": 78
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "Jn3X2XmW",
                         "type": "image",
@@ -254,8 +255,7 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   },
                   {
                     "id": "WZewx3dU",
@@ -275,7 +275,7 @@
                       "width": 50,
                       "height": 78
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "2EVvGFPu",
                         "type": "image",
@@ -298,14 +298,15 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               }
             ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "9Fp7Ok19",
@@ -321,7 +322,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 12
+          "gap": 12,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -333,8 +335,7 @@
               "horizontalAlign": "left",
               "width": 50
             },
-            "atoms": [],
-            "rows": [
+            "children": [
               {
                 "id": "lj4_w8JL",
                 "settings": {
@@ -342,7 +343,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": false,
-                  "gap": 12
+                  "gap": 12,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -363,7 +365,7 @@
                       "width": 50,
                       "height": 78
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "2lVgUszr",
                         "type": "image",
@@ -386,8 +388,7 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   },
                   {
                     "id": "MWIWxAGH",
@@ -407,7 +408,7 @@
                       "width": 50,
                       "height": 78
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "gFwYZHnT",
                         "type": "image",
@@ -430,10 +431,10 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               }
             ]
           },
@@ -446,8 +447,7 @@
               "horizontalAlign": "left",
               "width": 50
             },
-            "atoms": [],
-            "rows": [
+            "children": [
               {
                 "id": "vrxmRFnO",
                 "settings": {
@@ -455,7 +455,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": false,
-                  "gap": 12
+                  "gap": 12,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -476,7 +477,7 @@
                       "width": 50,
                       "height": 78
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "UyEfWapf",
                         "type": "image",
@@ -499,8 +500,7 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   },
                   {
                     "id": "j_oHWCyQ",
@@ -520,7 +520,7 @@
                       "width": 50,
                       "height": 78
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "CzIPwC1c",
                         "type": "image",
@@ -543,14 +543,15 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               }
             ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }
