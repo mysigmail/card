@@ -36,7 +36,7 @@ const bodyStyle = computed<CSSProperties>(() => {
 })
 
 function isCanvasBlockInstance(component: CanvasBlockInstance): component is CanvasBlockInstance {
-  return component.version === 3
+  return component.version === 1
 }
 </script>
 

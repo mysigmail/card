@@ -35,17 +35,18 @@
 Ключевые сущности:
 - `BlockNode` содержит `rows`, `settings` (`BlockSettings`) и `label`.
 - `RowNode` содержит `cells` и `settings` (`RowSettings` с `gap`, optional `height`, optional `hiddenOnMobile`, optional `collapseOnMobile`).
-- `CellNode` содержит `atoms`, `rows` (вложенность поддерживается рекурсивно) и `settings` (`CellSettings` с `verticalAlign`, `horizontalAlign`, `borderRadius`, `width`, `height`, `link`, optional `hiddenOnMobile`).
-- `Atom` — контентный узел (`text`, `button`, `divider`, `image`, `menu`). Базовый `BaseAtom` имеет `id`, `type`, optional `spacing`, optional `hiddenOnMobile`.
-- `CanvasBlockInstance` — элемент канваса с `id`, `version: 2`, `block`.
+- `CellNode` содержит единый ordered-массив `children: Array<Atom | RowNode>` и `settings` (`CellSettings` с `verticalAlign`, `horizontalAlign`, `borderRadius`, `width`, `height`, `link`, optional `hiddenOnMobile`).
+- `Atom` — leaf-контентный узел (`text`, `button`, `divider`, `image`). Базовый `BaseAtom` имеет `id`, `type`, optional `spacing`, optional `hiddenOnMobile`.
+- `CanvasBlockInstance` — элемент канваса с `id`, `version: 1`, `block`.
 - `BlockPreset` — расширяет `CanvasBlockInstance`, добавляет `name`, `label`, `type` (`ComponentType`), `preview`.
 
 Типы атомов:
-- `TextAtom` — `value` (HTML), `color`.
+- `TextAtom` — `value` (санитизированный HTML).
 - `ButtonAtom` — `text`, `link`, `backgroundColor`, `color`, `fontSize`, `borderRadius`, `padding`.
 - `DividerAtom` — `color`, `height`.
 - `ImageAtom` — `src`, `link`, `alt`, optional `width`, `height`, `borderRadius`.
-- `MenuAtom` — `items` (`MenuAtomItem[]`), optional `itemType` (`text` | `image`), `gap`. Элементы: `MenuAtomTextItem` или `MenuAtomImageItem`.
+
+Menu и Social являются recipes над обычными Row/Cell/Text/Image, а не persisted atom-типами.
 
 ID-правила:
 - В данных узлов хранятся "сырые" id (`nanoid(8)`), без префиксов.
@@ -58,7 +59,7 @@ ID-правила:
 | Типы дерева блока (`BlockNode`, `RowNode`, `CellNode`, `Atom`) | `src/entities/block/types.ts` |
 | Фабрики узлов/атомов | `src/entities/block/block-factory.ts` |
 | Типы spacing/background | `src/entities/style/types.ts` |
-| Контракт шаблона (`TemplateExportV2`, `CanvasBlockInstance`, `BlockPreset`, `Tool`, `GeneralTool`, лимиты) | `src/entities/template/types.ts` |
+| Контракт шаблона (`TemplateExportV1`, `CanvasBlockInstance`, `BlockPreset`, `Tool`, `GeneralTool`, лимиты) | `src/entities/template/types.ts` |
 | Валидация/санитизация/migration/remap id шаблона | `src/entities/template/template-io.ts` |
 | Barrel-export модели редактора | `src/features/editor/model/index.ts` |
 | Типы модели редактора (`BlockSelectionLevel`, `SidebarTab`, re-export entities) | `src/features/editor/model/types.ts` |
@@ -140,15 +141,15 @@ ID-правила:
 Источник: `src/entities/template/types.ts`, `src/entities/template/template-io.ts`.
 
 Обязательные константы/ограничения:
-- `TEMPLATE_EXPORT_VERSION = 2`
-- `TEMPLATE_LOCAL_STORAGE_KEY = "card.template.v2"`
+- `TEMPLATE_EXPORT_VERSION = 1`
+- `TEMPLATE_LOCAL_STORAGE_KEY = "card.template.v1"`
 - `TEMPLATE_MAX_COMPONENTS = 200`
 - `TEMPLATE_MAX_JSON_BYTES = 2 * 1024 * 1024`
 
 Скелет экспорта:
 ```ts
-TemplateExportV2 {
-  version: 2
+TemplateExportV1 {
+  version: 1
   meta: { id, title, createdAt, updatedAt, appVersion? }
   editor: { general: GeneralTool }
   canvas: { components: CanvasBlockInstance[] }
@@ -157,6 +158,7 @@ TemplateExportV2 {
 
 Поведение:
 - Импорт обязан проходить через `parseTemplateExportPayload` / `parseTemplateExportJson`.
+- Версии, отличные от `1`, и legacy-структуры отклоняются с validation issues; runtime migration отсутствует до первого публичного релиза.
 - HTML (text editor) должен проходить санитизацию через доменный `template-io`.
 - При runtime-импорте id блоков/узлов/атомов ремапятся в новые значения.
 - `template-io.ts` содержит полную валидацию всей структуры: `validateAtom`, `validateCellNode`, `validateRowNode`, `validateCanvasBlockInstance`, `validateGeneral`.

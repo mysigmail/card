@@ -28,6 +28,7 @@ const {
   importModeValue,
   previewModeValue,
   visibleImportIssues,
+  hiddenImportIssueCount,
   canImport,
   canUndo,
   canRedo,
@@ -219,6 +220,7 @@ const {
 
         <div
           v-if="importStatus === 'error'"
+          role="alert"
           class="rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm text-destructive"
         >
           {{ importMessage }}
@@ -235,6 +237,13 @@ const {
             <code>{{ issue.path }}</code>: {{ issue.message }}
           </li>
         </ul>
+
+        <p
+          v-if="hiddenImportIssueCount"
+          class="text-xs text-destructive"
+        >
+          And {{ hiddenImportIssueCount }} more validation issue(s).
+        </p>
       </div>
 
       <DialogFooter>

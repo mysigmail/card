@@ -1,5 +1,5 @@
 import type {
-  TemplateExportV3,
+  TemplateExportV1,
   TemplateImportMode,
   TemplateValidationIssue,
 } from '@/entities/template'
@@ -55,7 +55,7 @@ function _createTemplateIO() {
   }
 
   function applyImportedTemplate(
-    payload: TemplateExportV3,
+    payload: TemplateExportV1,
     mode: TemplateImportMode,
     applyOptions?: {
       applyGeneralInAppend?: boolean

@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid'
 export function isCanvasBlockInstance(
   canvasBlock: CanvasBlockInstance,
 ): canvasBlock is CanvasBlockInstance {
-  return canvasBlock.version === 3
+  return canvasBlock.version === 1
 }
 
 export function findRowInRows(rows: RowNode[], rowId: string): RowNode | undefined {

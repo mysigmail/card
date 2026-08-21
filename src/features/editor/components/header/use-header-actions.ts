@@ -50,6 +50,9 @@ export function useHeaderActions() {
 
     return templateImportIssues.value.slice(0, 10)
   })
+  const hiddenImportIssueCount = computed(() => {
+    return Math.max(0, templateImportIssues.value.length - visibleImportIssues.value.length)
+  })
 
   const canImport = computed(() => Boolean(pendingImportRaw.value))
 
@@ -94,6 +97,7 @@ export function useHeaderActions() {
     importMessage.value = ''
     pendingImportRaw.value = ''
     pendingImportFileName.value = ''
+    templateImportIssues.value = []
     importMode.value = 'replace'
     applyGeneralInAppend.value = false
 
@@ -127,16 +131,27 @@ export function useHeaderActions() {
     if (!file) {
       pendingImportRaw.value = ''
       pendingImportFileName.value = ''
+      templateImportIssues.value = []
       return
     }
+
+    pendingImportRaw.value = ''
+    pendingImportFileName.value = ''
+    templateImportIssues.value = []
+    importStatus.value = 'idle'
+    importMessage.value = ''
 
     try {
       pendingImportRaw.value = await file.text()
       pendingImportFileName.value = file.name
       importStatus.value = 'idle'
       importMessage.value = ''
+      templateImportIssues.value = []
     }
     catch {
+      pendingImportRaw.value = ''
+      pendingImportFileName.value = ''
+      templateImportIssues.value = []
       importStatus.value = 'error'
       importMessage.value = 'Failed to read selected file.'
     }
@@ -153,7 +168,8 @@ export function useHeaderActions() {
     }
 
     importStatus.value = 'error'
-    importMessage.value = 'Import failed. Check validation errors below.'
+    importMessage.value
+      = 'Import failed. This file is not a valid Card template v1. The current template was not changed.'
   }
 
   function onUndo() {
@@ -210,6 +226,7 @@ export function useHeaderActions() {
     importModeValue,
     previewModeValue,
     visibleImportIssues,
+    hiddenImportIssueCount,
     canImport,
     canUndo,
     canRedo,

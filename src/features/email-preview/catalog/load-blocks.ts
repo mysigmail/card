@@ -2,7 +2,7 @@ import type { BlockPreset as CatalogBlock, ComponentType } from '@/entities/temp
 import { nanoid } from 'nanoid'
 
 interface CatalogBlockJsonData {
-  version: 3
+  version: 1
   name: string
   label: string
   type: ComponentType
@@ -119,9 +119,12 @@ function resolvePreview(relativePath: string): string {
 }
 
 function toCatalogBlock(data: CatalogBlockJsonData): CatalogBlock {
+  if (data.version !== 1)
+    throw new Error(`Unsupported catalog block version: ${String(data.version)}`)
+
   return {
     id: nanoid(8),
-    version: 3,
+    version: 1,
     name: data.name,
     label: data.label,
     type: data.type,
