@@ -30,7 +30,7 @@ function findCanvasBlockInstance(
   items: CanvasBlockInstance[],
   blockId: string,
 ): CanvasBlockInstance | undefined {
-  return items.find(i => i.version === 3 && i.block.id === blockId)
+  return items.find(i => i.version === 1 && i.block.id === blockId)
 }
 
 function hasCanvasInstanceById(items: CanvasBlockInstance[], id: string) {

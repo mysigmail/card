@@ -53,7 +53,7 @@ function _createCanvas() {
 
     const cloned: CanvasBlockInstance = {
       id: nanoid(8),
-      version: 3,
+      version: 1,
       block: clonedBlock,
     }
 
@@ -66,7 +66,7 @@ function _createCanvas() {
     const block = createBlockNode(label)
     const blockComponent: CanvasBlockInstance = {
       id: nanoid(8),
-      version: 3,
+      version: 1,
       block,
     }
 
@@ -431,7 +431,7 @@ function _createCanvas() {
 
     const cloned: CanvasBlockInstance = {
       id: nanoid(8),
-      version: 3,
+      version: 1,
       block: clonedBlock,
     }
 

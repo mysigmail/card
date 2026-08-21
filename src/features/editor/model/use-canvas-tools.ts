@@ -38,7 +38,7 @@ function _createCanvasTools() {
     }
 
     for (const component of installed.value) {
-      if (component.version !== 3)
+      if (component.version !== 1)
         continue
       target = visitRows(component.block.rows)
       if (target)

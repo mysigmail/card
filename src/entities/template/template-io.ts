@@ -3,7 +3,7 @@ import type {
   CanvasBlockInstance,
   GeneralTool,
   TemplateExportMeta,
-  TemplateExportV3,
+  TemplateExportV1,
   TemplateValidationIssue,
   Tool,
   ToolCollectionItem,
@@ -27,7 +27,7 @@ interface ParseTemplateExportPayloadOptions {
 }
 
 interface ParseTemplateExportPayloadResult {
-  payload?: TemplateExportV3
+  payload?: TemplateExportV1
   issues: TemplateValidationIssue[]
 }
 
@@ -150,12 +150,18 @@ function pushIssue(issues: TemplateValidationIssue[], path: string, message: str
   issues.push({ path, message })
 }
 
-function normalizeGeneralBackgroundPosition(general: UnknownRecord) {
-  if (!isRecord(general.background))
-    return
+function validateAllowedProperties(
+  value: UnknownRecord,
+  path: string,
+  allowedProperties: readonly string[],
+  issues: TemplateValidationIssue[],
+) {
+  const allowed = new Set(allowedProperties)
 
-  if (general.background.position === 'button')
-    general.background.position = 'bottom'
+  Object.keys(value).forEach((property) => {
+    if (!allowed.has(property))
+      pushIssue(issues, `${path}.${property}`, `Unknown property "${property}"`)
+  })
 }
 
 function createTemplateMeta(title?: string): TemplateExportMeta {
@@ -394,6 +400,8 @@ function validateGeneral(general: unknown, path: string, issues: TemplateValidat
     return
   }
 
+  validateAllowedProperties(general, path, ['padding', 'background', 'font', 'previewText'], issues)
+
   if (
     !Array.isArray(general.padding)
     || general.padding.length !== 4
@@ -407,6 +415,13 @@ function validateGeneral(general: unknown, path: string, issues: TemplateValidat
   }
   else {
     const background = general.background
+
+    validateAllowedProperties(
+      background,
+      `${path}.background`,
+      ['color', 'image', 'repeat', 'size', 'position'],
+      issues,
+    )
 
     if (!isString(background.color))
       pushIssue(issues, `${path}.background.color`, 'background.color must be a string')
@@ -471,6 +486,8 @@ function validateSpacingValue(value: unknown, path: string, issues: TemplateVali
     return
   }
 
+  validateAllowedProperties(value, path, ['padding', 'margin'], issues)
+
   validateSpacingTuple(value.padding, path, issues, 'padding')
   validateSpacingTuple(value.margin, path, issues, 'margin')
 }
@@ -487,6 +504,8 @@ function validateBackgroundImageValue(
     pushIssue(issues, path, 'backgroundImage must be an object')
     return
   }
+
+  validateAllowedProperties(value, path, ['url', 'repeat', 'size', 'position'], issues)
 
   if (!isString(value.url))
     pushIssue(issues, `${path}.url`, 'backgroundImage.url must be a string')
@@ -525,6 +544,13 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
   }
 
   if (value.type === 'text') {
+    validateAllowedProperties(
+      value,
+      path,
+      ['id', 'type', 'value', 'spacing', 'hiddenOnMobile'],
+      issues,
+    )
+
     if (!isString(value.value))
       pushIssue(issues, `${path}.value`, 'text atom value must be a string')
 
@@ -535,6 +561,25 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
   }
 
   if (value.type === 'button') {
+    validateAllowedProperties(
+      value,
+      path,
+      [
+        'id',
+        'type',
+        'text',
+        'link',
+        'backgroundColor',
+        'color',
+        'fontSize',
+        'borderRadius',
+        'padding',
+        'spacing',
+        'hiddenOnMobile',
+      ],
+      issues,
+    )
+
     if (!isString(value.text))
       pushIssue(issues, `${path}.text`, 'button atom text must be a string')
     if (!isString(value.link))
@@ -559,6 +604,13 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
   }
 
   if (value.type === 'divider') {
+    validateAllowedProperties(
+      value,
+      path,
+      ['id', 'type', 'color', 'height', 'spacing', 'hiddenOnMobile'],
+      issues,
+    )
+
     if (!isString(value.color))
       pushIssue(issues, `${path}.color`, 'divider atom color must be a string')
     if (!isFiniteNumber(value.height)) {
@@ -572,14 +624,32 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
   }
 
   if (value.type === 'image') {
+    validateAllowedProperties(
+      value,
+      path,
+      [
+        'id',
+        'type',
+        'src',
+        'link',
+        'alt',
+        'width',
+        'height',
+        'borderRadius',
+        'spacing',
+        'hiddenOnMobile',
+      ],
+      issues,
+    )
+
     if (!isString(value.src))
       pushIssue(issues, `${path}.src`, 'image atom src must be a string')
 
-    if (value.link !== undefined && !isString(value.link)) {
+    if (!isString(value.link)) {
       pushIssue(issues, `${path}.link`, 'image atom link must be a string')
     }
 
-    if (value.alt !== undefined && !isString(value.alt)) {
+    if (!isString(value.alt)) {
       pushIssue(issues, `${path}.alt`, 'image atom alt must be a string')
     }
 
@@ -601,6 +671,8 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
     return
   }
 
+  validateAllowedProperties(value, path, ['id', 'type', 'spacing', 'hiddenOnMobile'], issues)
+
   pushIssue(issues, `${path}.type`, 'Unsupported atom type')
 }
 
@@ -610,6 +682,13 @@ function validateCellNode(value: unknown, path: string, issues: TemplateValidati
     return
   }
 
+  validateAllowedProperties(value, path, ['id', 'settings', 'children', 'atoms', 'rows'], issues)
+
+  if ('atoms' in value)
+    pushIssue(issues, `${path}.atoms`, 'Legacy cell.atoms is not supported; use cell.children')
+  if ('rows' in value)
+    pushIssue(issues, `${path}.rows`, 'Legacy cell.rows is not supported; use cell.children')
+
   if (!isString(value.id))
     pushIssue(issues, `${path}.id`, 'cell.id must be a string')
 
@@ -617,6 +696,25 @@ function validateCellNode(value: unknown, path: string, issues: TemplateValidati
     pushIssue(issues, `${path}.settings`, 'cell.settings must be an object')
   }
   else {
+    validateAllowedProperties(
+      value.settings,
+      `${path}.settings`,
+      [
+        'spacing',
+        'backgroundColor',
+        'backgroundImage',
+        'link',
+        'hiddenOnMobile',
+        'verticalAlign',
+        'horizontalAlign',
+        'borderRadius',
+        'width',
+        'height',
+        'collapseOnMobile',
+      ],
+      issues,
+    )
+
     validateSpacingValue(value.settings.spacing, `${path}.settings.spacing`, issues)
 
     if (!isString(value.settings.backgroundColor)) {
@@ -715,6 +813,8 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
     return
   }
 
+  validateAllowedProperties(value, path, ['id', 'type', 'settings', 'cells'], issues)
+
   if (!isString(value.id))
     pushIssue(issues, `${path}.id`, 'row.id must be a string')
 
@@ -725,6 +825,22 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
     pushIssue(issues, `${path}.settings`, 'row.settings must be an object')
   }
   else {
+    validateAllowedProperties(
+      value.settings,
+      `${path}.settings`,
+      [
+        'spacing',
+        'backgroundColor',
+        'backgroundImage',
+        'hiddenOnMobile',
+        'collapseOnMobile',
+        'height',
+        'gap',
+        'widthMode',
+      ],
+      issues,
+    )
+
     validateSpacingValue(value.settings.spacing, `${path}.settings.spacing`, issues)
 
     if (!isString(value.settings.backgroundColor)) {
@@ -798,12 +914,16 @@ function validateCanvasBlockInstance(
   path: string,
   issues: TemplateValidationIssue[],
 ) {
+  validateAllowedProperties(value, path, ['id', 'version', 'block'], issues)
+
   if (!isRecord(value.block)) {
     pushIssue(issues, `${path}.block`, 'block must be an object')
     return
   }
 
   const block = value.block
+
+  validateAllowedProperties(block, `${path}.block`, ['id', 'label', 'settings', 'rows'], issues)
 
   if (!isString(block.id))
     pushIssue(issues, `${path}.block.id`, 'block.id must be a string')
@@ -814,6 +934,13 @@ function validateCanvasBlockInstance(
     pushIssue(issues, `${path}.block.settings`, 'block.settings must be an object')
   }
   else {
+    validateAllowedProperties(
+      block.settings,
+      `${path}.block.settings`,
+      ['spacing', 'backgroundColor', 'backgroundImage'],
+      issues,
+    )
+
     validateSpacingValue(block.settings.spacing, `${path}.block.settings.spacing`, issues)
 
     if (!isString(block.settings.backgroundColor)) {
@@ -1036,8 +1163,8 @@ function sanitizeBlock(block: BlockNode): BlockNode {
   }
 }
 
-function sanitizeTemplatePayload(payload: TemplateExportV3): TemplateExportV3 {
-  const sanitized = clone<TemplateExportV3>(payload)
+function sanitizeTemplatePayload(payload: TemplateExportV1): TemplateExportV1 {
+  const sanitized = clone<TemplateExportV1>(payload)
 
   sanitized.canvas.components = sanitized.canvas.components.map((component) => {
     return {
@@ -1060,13 +1187,31 @@ function validateTemplatePayload(
   }
 
   if (value.version !== TEMPLATE_EXPORT_VERSION) {
-    pushIssue(issues, '$.version', `Unsupported version. Expected ${TEMPLATE_EXPORT_VERSION}`)
+    const received
+      = typeof value.version === 'number' || typeof value.version === 'string'
+        ? String(value.version)
+        : 'missing'
+    pushIssue(
+      issues,
+      '$.version',
+      `Unsupported template version ${received}. Expected ${TEMPLATE_EXPORT_VERSION}`,
+    )
+    return
   }
+
+  validateAllowedProperties(value, '$', ['version', 'meta', 'editor', 'canvas'], issues)
 
   if (!isRecord(value.meta)) {
     pushIssue(issues, '$.meta', 'meta must be an object')
   }
   else {
+    validateAllowedProperties(
+      value.meta,
+      '$.meta',
+      ['id', 'title', 'createdAt', 'updatedAt', 'appVersion'],
+      issues,
+    )
+
     if (!isString(value.meta.id))
       pushIssue(issues, '$.meta.id', 'meta.id must be a string')
     if (!isString(value.meta.title))
@@ -1084,6 +1229,7 @@ function validateTemplatePayload(
     pushIssue(issues, '$.editor', 'editor must be an object')
   }
   else {
+    validateAllowedProperties(value.editor, '$.editor', ['general'], issues)
     validateGeneral(value.editor.general, '$.editor.general', issues)
   }
 
@@ -1091,6 +1237,8 @@ function validateTemplatePayload(
     pushIssue(issues, '$.canvas', 'canvas must be an object')
     return
   }
+
+  validateAllowedProperties(value.canvas, '$.canvas', ['components'], issues)
 
   if (!Array.isArray(value.canvas.components)) {
     pushIssue(issues, '$.canvas.components', 'canvas.components must be an array')
@@ -1113,186 +1261,17 @@ function validateTemplatePayload(
     if (!isString(component.id))
       pushIssue(issues, `${currentPath}.id`, 'component.id must be a string')
 
-    if (component.version !== 3) {
+    if (component.version !== TEMPLATE_EXPORT_VERSION) {
       pushIssue(
         issues,
         `${currentPath}.version`,
-        'Only block-v3 components are supported (component.version must be 3)',
+        `Only block-v${TEMPLATE_EXPORT_VERSION} components are supported (component.version must be ${TEMPLATE_EXPORT_VERSION})`,
       )
       return
     }
 
     validateCanvasBlockInstance(component, currentPath, issues)
   })
-}
-
-function escapeLegacyText(value: unknown) {
-  return String(value ?? '')
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-}
-
-function migrateLegacyMenuAtom(atom: UnknownRecord): UnknownRecord {
-  const items = Array.isArray(atom.items) ? atom.items : undefined
-  const validItems = items?.every((rawItem) => {
-    if (!isRecord(rawItem) || !isString(rawItem.link))
-      return false
-    const itemType = rawItem.type ?? atom.itemType ?? 'text'
-    if (itemType === 'image') {
-      return (
-        isString(rawItem.name)
-        && isString(rawItem.url)
-        && isString(rawItem.alt)
-        && (rawItem.width === undefined || isFiniteNumber(rawItem.width))
-        && (rawItem.height === undefined || isFiniteNumber(rawItem.height))
-      )
-    }
-    return (
-      (rawItem.type === undefined || rawItem.type === 'text')
-      && isString(rawItem.text)
-      && isString(rawItem.color)
-      && isFiniteNumber(rawItem.fontSize)
-    )
-  })
-  if (
-    !isString(atom.id)
-    || !items
-    || !validItems
-    || (atom.itemType !== undefined && atom.itemType !== 'text' && atom.itemType !== 'image')
-    || (atom.gap !== undefined && !isFiniteNumber(atom.gap))
-  ) {
-    return atom
-  }
-
-  return {
-    id: atom.id,
-    type: 'row',
-    settings: {
-      spacing: isRecord(atom.spacing) ? atom.spacing : {},
-      backgroundColor: 'transparent',
-      hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
-      collapseOnMobile: false,
-      gap: isFiniteNumber(atom.gap) && atom.gap >= 0 ? atom.gap : 10,
-      widthMode: 'hug',
-    },
-    cells: items.map((rawItem) => {
-      const item = isRecord(rawItem) ? rawItem : {}
-      const image = item.type === 'image' || (item.type === undefined && atom.itemType === 'image')
-      const child: UnknownRecord = image
-        ? {
-            id: nanoid(8),
-            type: 'image',
-            src: isString(item.url) ? item.url : '',
-            link: isString(item.link) ? item.link : '',
-            alt: isString(item.alt) ? item.alt : '',
-            width: isFiniteNumber(item.width) ? item.width : undefined,
-            height: isFiniteNumber(item.height) ? item.height : undefined,
-            borderRadius: 0,
-            spacing: { margin: [0, 0, 0, 0], padding: [0, 0, 0, 0] },
-          }
-        : {
-            id: nanoid(8),
-            type: 'text',
-            value: `<p><a href="${escapeLegacyText(item.link)}"><span style="color:${escapeLegacyText(item.color || '#000000')};font-size:${isFiniteNumber(item.fontSize) ? item.fontSize : 16}px">${escapeLegacyText(item.text)}</span></a></p>`,
-            spacing: { margin: [0, 0, 0, 0], padding: [0, 0, 0, 0] },
-          }
-      return {
-        id: nanoid(8),
-        settings: {
-          spacing: {},
-          backgroundColor: 'transparent',
-          hiddenOnMobile: false,
-          verticalAlign: 'top',
-          horizontalAlign: 'left',
-        },
-        children: [child],
-      }
-    }),
-  }
-}
-
-function migrateV2Cell(value: unknown): unknown {
-  if (!isRecord(value))
-    return value
-
-  if (!Array.isArray(value.atoms))
-    return { ...value, children: value.atoms }
-
-  const atoms = value.atoms
-  const rows = value.rows === undefined ? [] : value.rows
-  if (!Array.isArray(rows))
-    return { ...value, children: [...atoms, rows] }
-  return {
-    ...value,
-    children: [
-      ...atoms.map(atom =>
-        isRecord(atom) && atom.type === 'menu' ? migrateLegacyMenuAtom(atom) : atom,
-      ),
-      ...rows.map(migrateV2Row),
-    ],
-    atoms: undefined,
-    rows: undefined,
-  }
-}
-
-function migrateV2Row(value: unknown): unknown {
-  if (!isRecord(value))
-    return value
-
-  return {
-    ...value,
-    type: 'row',
-    settings: isRecord(value.settings) ? { ...value.settings, widthMode: 'fill' } : value.settings,
-    cells: Array.isArray(value.cells) ? value.cells.map(migrateV2Cell) : value.cells,
-  }
-}
-
-function migrateLegacyBlock(block: unknown): BlockNode {
-  if (!isRecord(block))
-    throw new TypeError('Legacy catalog block must be an object')
-
-  return {
-    ...clone<UnknownRecord>(block),
-    rows: Array.isArray(block.rows) ? block.rows.map(migrateV2Row) : block.rows,
-  } as unknown as BlockNode
-}
-
-function migrateTemplatePayload(value: unknown): unknown {
-  if (!isRecord(value))
-    return value
-
-  if (value.version === TEMPLATE_EXPORT_VERSION) {
-    const normalized = clone<UnknownRecord>(value)
-
-    if (isRecord(normalized.editor) && isRecord(normalized.editor.general))
-      normalizeGeneralBackgroundPosition(normalized.editor.general)
-
-    return normalized
-  }
-
-  if (value.version === 2) {
-    const migrated = clone<UnknownRecord>(value)
-    migrated.version = TEMPLATE_EXPORT_VERSION
-    if (isRecord(migrated.editor) && isRecord(migrated.editor.general))
-      normalizeGeneralBackgroundPosition(migrated.editor.general)
-    if (isRecord(migrated.canvas) && Array.isArray(migrated.canvas.components)) {
-      migrated.canvas.components = migrated.canvas.components.map((rawComponent) => {
-        if (!isRecord(rawComponent))
-          return rawComponent
-        const block = isRecord(rawComponent.block) ? rawComponent.block : rawComponent.block
-        return {
-          ...rawComponent,
-          version: rawComponent.version === 2 ? 3 : rawComponent.version,
-          block: isRecord(block) ? migrateLegacyBlock(block) : block,
-        }
-      })
-    }
-    return migrated
-  }
-
-  return value
 }
 
 function _remapToolIds(tools: Tool[]): Tool[] {
@@ -1350,23 +1329,18 @@ function remapBlockIds(block: BlockNode): BlockNode {
 }
 
 export function createRuntimeComponents(components: CanvasBlockInstance[]) {
-  return components
-    .filter(
-      (component): component is Extract<CanvasBlockInstance, { version: 3 }> =>
-        component.version === 3,
-    )
-    .map((component) => {
-      return {
-        ...component,
-        id: nanoid(8),
-        block: remapBlockIds(component.block),
-      }
-    })
+  return components.map((component) => {
+    return {
+      ...component,
+      id: nanoid(8),
+      block: remapBlockIds(component.block),
+    }
+  })
 }
 
 export function createTemplateExportPayload(
   options: CreateTemplateExportPayloadOptions,
-): TemplateExportV3 {
+): TemplateExportV1 {
   return {
     version: TEMPLATE_EXPORT_VERSION,
     meta: createTemplateMeta(options.title),
@@ -1398,15 +1372,14 @@ export function parseTemplateExportPayload(
     }
   }
 
-  const migrated = migrateTemplatePayload(payload)
-  validateTemplatePayload(migrated, issues, options)
+  validateTemplatePayload(payload, issues, options)
 
   if (issues.length)
     return { issues }
 
   return {
     issues,
-    payload: sanitizeTemplatePayload(migrated as TemplateExportV3),
+    payload: sanitizeTemplatePayload(payload as TemplateExportV1),
   }
 }
 

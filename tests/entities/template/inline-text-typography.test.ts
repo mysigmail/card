@@ -54,10 +54,10 @@ describe('inline text typography contract', () => {
     secondEditor.destroy()
   })
 
-  it('drops legacy top-level text color from the canonical payload', () => {
+  it('rejects legacy and unknown top-level text properties', () => {
     const component = {
       id: 'component',
-      version: 3 as const,
+      version: 1 as const,
       block: createBlockNode('Text'),
     }
     const atom = component.block.rows[0]!.cells[0]!.children[0]!
@@ -88,13 +88,19 @@ describe('inline text typography contract', () => {
       canvas: { components: [component] },
     })
 
-    expect(result.issues).toEqual([])
-    expect(
-      result.payload?.canvas.components[0]!.block.rows[0]!.cells[0]!.children[0],
-    ).not.toHaveProperty('color')
-    expect(
-      result.payload?.canvas.components[0]!.block.rows[0]!.cells[0]!.children[0],
-    ).not.toHaveProperty('unknown')
+    expect(result.payload).toBeUndefined()
+    expect(result.issues).toEqual(
+      expect.arrayContaining([
+        {
+          path: '$.canvas.components[0].block.rows[0].cells[0].children[0].color',
+          message: 'Unknown property "color"',
+        },
+        {
+          path: '$.canvas.components[0].block.rows[0].cells[0].children[0].unknown',
+          message: 'Unknown property "unknown"',
+        },
+      ]),
+    )
   })
 
   it('keeps legacy HTML and accepted typography while removing unsafe content', () => {
@@ -219,10 +225,10 @@ describe('inline text typography contract', () => {
     editor.destroy()
   })
 
-  it('keeps template v3 and remaps every runtime id', () => {
+  it('keeps template v1 and remaps every runtime id', () => {
     const component = {
       id: 'component-id',
-      version: 3 as const,
+      version: 1 as const,
       block: createBlockNode('Typography'),
     }
     const sourceIds = [
@@ -242,8 +248,8 @@ describe('inline text typography contract', () => {
       runtime!.block.rows[0]!.cells[0]!.children[0]!.id,
     ]
 
-    expect(TEMPLATE_EXPORT_VERSION).toBe(3)
-    expect(runtime!.version).toBe(3)
+    expect(TEMPLATE_EXPORT_VERSION).toBe(1)
+    expect(runtime!.version).toBe(1)
     expect(runtimeIds).not.toEqual(sourceIds)
   })
 
@@ -252,7 +258,7 @@ describe('inline text typography contract', () => {
     const templateIO = useTemplateIO()
     const block = createBlockNode('Inline text')
     const atom = block.rows[0]!.cells[0]!.children[0]!
-    canvas.installed.value = [{ id: 'source-component', version: 3, block }]
+    canvas.installed.value = [{ id: 'source-component', version: 1, block }]
 
     expect(canvas.updateTextAtomValue(atom.id, '<p onclick="bad()"><sup>Safe</sup></p>')).toBe(true)
     expect(atom.type === 'text' ? atom.value : '').toBe('<p><sup>Safe</sup></p>')
@@ -276,7 +282,7 @@ describe('inline text typography contract', () => {
     const block = createBlockNode('Undo')
     const atom = block.rows[0]!.cells[0]!.children[0]!
     const originalValue = atom.type === 'text' ? atom.value : ''
-    canvas.installed.value = [{ id: 'undo-component', version: 3, block }]
+    canvas.installed.value = [{ id: 'undo-component', version: 1, block }]
     history.resetHistory()
 
     const staleEditorValue = '<p>Typed value</p>'
