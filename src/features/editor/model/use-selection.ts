@@ -14,7 +14,10 @@ function findRowInRows(rows: RowNode[], rowId: string): RowNode | undefined {
       return row
 
     for (const cell of row.cells) {
-      const nested = findRowInRows(cell.rows, rowId)
+      const nested = findRowInRows(
+        cell.children.filter(child => child.type === 'row'),
+        rowId,
+      )
       if (nested)
         return nested
     }
@@ -27,7 +30,7 @@ function findCanvasBlockInstance(
   items: CanvasBlockInstance[],
   blockId: string,
 ): CanvasBlockInstance | undefined {
-  return items.find(i => i.version === 2 && i.block.id === blockId)
+  return items.find(i => i.version === 3 && i.block.id === blockId)
 }
 
 function hasCanvasInstanceById(items: CanvasBlockInstance[], id: string) {
@@ -208,7 +211,9 @@ function _createSelection() {
     ) {
       const row = findRowInRows(block.block.rows, selectedRowId.value)
       const cell = row?.cells.find(i => i.id === selectedCellId.value)
-      const atom = cell?.atoms.find(item => item.id === snapshot.selectedAtomId)
+      const atom = cell?.children.find(
+        item => item.type !== 'row' && item.id === snapshot.selectedAtomId,
+      )
       if (!atom)
         return
 
@@ -245,7 +250,9 @@ function _createSelection() {
     if (!selectedCell.value || !selectedAtomId.value)
       return undefined
 
-    return selectedCell.value.atoms.find(atom => atom.id === selectedAtomId.value)
+    return selectedCell.value.children.find(
+      (child): child is Atom => child.type !== 'row' && child.id === selectedAtomId.value,
+    )
   })
 
   return {

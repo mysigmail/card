@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "menu2-light",
   "label": "Menu 6",
   "type": "menu",
@@ -25,7 +25,8 @@
           "spacing": {},
           "backgroundColor": "transparent",
           "gap": 0,
-          "collapseOnMobile": false
+          "collapseOnMobile": false,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -36,7 +37,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "tdZNb30u",
                 "type": "image",
@@ -80,52 +81,128 @@
                 }
               },
               {
+                "type": "row",
                 "id": "8x3yM58F",
-                "type": "menu",
-                "itemType": "text",
-                "gap": 10,
-                "items": [
+                "settings": {
+                  "spacing": {
+                    "margin": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "padding": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "collapseOnMobile": false,
+                  "gap": 10,
+                  "widthMode": "hug"
+                },
+                "cells": [
                   {
-                    "type": "text",
-                    "text": "Specs",
-                    "link": "https://example",
-                    "color": "#222222",
-                    "fontSize": 16
+                    "id": "7orfqPda",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "XaCN4D21",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example\"><span style=\"color:#222222;font-size:16px\">Specs</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "text",
-                    "text": "Feature",
-                    "link": "https://example",
-                    "color": "#222222",
-                    "fontSize": 16
+                    "id": "ky81SEB9",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "dAiLEU7M",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example\"><span style=\"color:#222222;font-size:16px\">Feature</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "text",
-                    "text": "Price",
-                    "link": "https://example",
-                    "color": "#222222",
-                    "fontSize": 16
+                    "id": "fEmTLcCy",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "V31D-MWo",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example\"><span style=\"color:#222222;font-size:16px\">Price</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   }
-                ],
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
+                ]
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

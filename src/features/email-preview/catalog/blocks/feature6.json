@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "feature6",
   "label": "Feature 6",
   "type": "feature",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "left"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "XtwCHrMd",
                 "type": "text",
@@ -57,10 +58,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "82zg_6Lo",
@@ -76,7 +77,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -96,7 +98,7 @@
               "borderRadius": 16,
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "MWIwIzdG",
                 "type": "text",
@@ -116,8 +118,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "uVIj88Mv",
@@ -136,7 +137,7 @@
               "borderRadius": 16,
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "HpBN9vJV",
                 "type": "text",
@@ -156,10 +157,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "ynlsycj1",
@@ -175,7 +176,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -195,7 +197,7 @@
               "borderRadius": 16,
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "AGjqRs6M",
                 "type": "text",
@@ -215,8 +217,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "a9XFijt6",
@@ -235,7 +236,7 @@
               "borderRadius": 16,
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "AThJ6Cr_",
                 "type": "text",
@@ -255,10 +256,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

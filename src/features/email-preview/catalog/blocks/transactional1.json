@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "transactional1",
   "label": "Transactional 1",
   "type": "transactional",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 18
+          "gap": 18,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -38,7 +39,7 @@
               "horizontalAlign": "left",
               "width": 64
             },
-            "atoms": [
+            "children": [
               {
                 "id": "LvYO-BY-",
                 "type": "text",
@@ -58,8 +59,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "YKqVypMC",
@@ -78,7 +78,7 @@
               "borderRadius": 16,
               "width": 36
             },
-            "atoms": [
+            "children": [
               {
                 "id": "lhq1W0Ia",
                 "type": "text",
@@ -98,10 +98,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "471A10R1",
@@ -117,7 +117,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -138,7 +139,7 @@
               "width": 30,
               "height": 128
             },
-            "atoms": [
+            "children": [
               {
                 "id": "BuygKcLR",
                 "type": "image",
@@ -161,8 +162,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "gow4Noxy",
@@ -173,7 +173,7 @@
               "horizontalAlign": "left",
               "width": 42
             },
-            "atoms": [
+            "children": [
               {
                 "id": "IP8FFa3_",
                 "type": "text",
@@ -193,8 +193,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "lV-Uc3Zv",
@@ -205,7 +204,7 @@
               "horizontalAlign": "right",
               "width": 28
             },
-            "atoms": [
+            "children": [
               {
                 "id": "aYQ3lRrc",
                 "type": "button",
@@ -236,10 +235,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

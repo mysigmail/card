@@ -153,7 +153,7 @@ export type ComponentType
 
 export interface CanvasBlockInstance {
   id: string
-  version: 2
+  version: 3
   block: BlockNode
 }
 
@@ -184,8 +184,9 @@ export interface GeneralTool {
   previewText: string
 }
 
-export const TEMPLATE_EXPORT_VERSION = 2 as const
-export const TEMPLATE_LOCAL_STORAGE_KEY = 'card.template.v2'
+export const TEMPLATE_EXPORT_VERSION = 3 as const
+export const TEMPLATE_LOCAL_STORAGE_KEY = 'card.template.v3'
+export const TEMPLATE_LEGACY_LOCAL_STORAGE_KEY = 'card.template.v2'
 export const TEMPLATE_MAX_COMPONENTS = 200
 export const TEMPLATE_MAX_JSON_BYTES = 2 * 1024 * 1024
 
@@ -207,14 +208,14 @@ export interface TemplateExportCanvas {
   components: CanvasBlockInstance[]
 }
 
-export interface TemplateExportV2 {
+export interface TemplateExportV3 {
   version: typeof TEMPLATE_EXPORT_VERSION
   meta: TemplateExportMeta
   editor: TemplateExportEditor
   canvas: TemplateExportCanvas
 }
 
-export type TemplateExportPayload = TemplateExportV2
+export type TemplateExportPayload = TemplateExportV3
 
 export interface TemplateValidationIssue {
   path: string

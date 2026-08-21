@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "content5",
   "label": "Content 5",
   "type": "content",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 14
+          "gap": 14,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -46,8 +47,7 @@
               "borderRadius": 16,
               "width": 33
             },
-            "atoms": [],
-            "rows": [
+            "children": [
               {
                 "id": "36AF1xyD",
                 "settings": {
@@ -55,7 +55,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": true,
-                  "gap": 0
+                  "gap": 0,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -67,7 +68,7 @@
                       "horizontalAlign": "center",
                       "height": 135
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "oXjspwGA",
                         "type": "image",
@@ -90,10 +91,10 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               },
               {
                 "id": "GLTIWDbp",
@@ -109,7 +110,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": true,
-                  "gap": 0
+                  "gap": 0,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -121,7 +123,7 @@
                       "horizontalAlign": "center",
                       "height": 118
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "CDVXqxUj",
                         "type": "text",
@@ -141,10 +143,10 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               }
             ]
           },
@@ -165,8 +167,7 @@
               "borderRadius": 16,
               "width": 33
             },
-            "atoms": [],
-            "rows": [
+            "children": [
               {
                 "id": "JSCRQp2h",
                 "settings": {
@@ -174,7 +175,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": true,
-                  "gap": 0
+                  "gap": 0,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -186,7 +188,7 @@
                       "horizontalAlign": "center",
                       "height": 135
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "x4t9OjZa",
                         "type": "image",
@@ -209,10 +211,10 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               },
               {
                 "id": "vIf5SPH_",
@@ -228,7 +230,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": true,
-                  "gap": 0
+                  "gap": 0,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -240,7 +243,7 @@
                       "horizontalAlign": "center",
                       "height": 118
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "4RoalX-C",
                         "type": "text",
@@ -260,10 +263,10 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               }
             ]
           },
@@ -284,8 +287,7 @@
               "borderRadius": 16,
               "width": 33
             },
-            "atoms": [],
-            "rows": [
+            "children": [
               {
                 "id": "gkp3G06v",
                 "settings": {
@@ -293,7 +295,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": true,
-                  "gap": 0
+                  "gap": 0,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -305,7 +308,7 @@
                       "horizontalAlign": "center",
                       "height": 135
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "WTACQUmp",
                         "type": "image",
@@ -328,10 +331,10 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               },
               {
                 "id": "hsp4ZrxP",
@@ -347,7 +350,8 @@
                   "backgroundColor": "transparent",
                   "hiddenOnMobile": false,
                   "collapseOnMobile": true,
-                  "gap": 0
+                  "gap": 0,
+                  "widthMode": "fill"
                 },
                 "cells": [
                   {
@@ -359,7 +363,7 @@
                       "horizontalAlign": "center",
                       "height": 118
                     },
-                    "atoms": [
+                    "children": [
                       {
                         "id": "-GOgtYo1",
                         "type": "text",
@@ -379,14 +383,15 @@
                           ]
                         }
                       }
-                    ],
-                    "rows": []
+                    ]
                   }
-                ]
+                ],
+                "type": "row"
               }
             ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

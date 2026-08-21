@@ -29,9 +29,9 @@ const isAtomActive = computed(() => selectedAtomId.value === props.atom.id)
 
 <template>
   <div
-    data-atom-sortable-item="true"
+    data-cell-child-sortable-item="true"
     :data-name="atomMeta.label"
-    class="pl-2"
+    class="pl-3"
   >
     <div
       :data-tree-id="`atom:${atom.id}`"
@@ -47,36 +47,49 @@ const isAtomActive = computed(() => selectedAtomId.value === props.atom.id)
       :style="{ '--tree-node-left-offset': `${indentPx}px` }"
       @click="selectAtom(blockId, rowId, cellId, atom.id, { syncTree: false })"
     >
-      <div class="flex min-w-0 flex-1 items-center gap-1.5">
+      <div
+        class="grid min-w-0 flex-1 grid-cols-[0.75rem_0.75rem_minmax(0,1fr)] items-center gap-0.5"
+      >
+        <span
+          aria-hidden="true"
+          class="size-3"
+        />
+        <div
+          class="col-span-2 grid min-w-0 grid-cols-[0.75rem_minmax(0,1fr)] items-center gap-0.5"
+          :data-cell-child-drag-handle="atomsCount > 1 ? '' : undefined"
+        >
+          <component
+            :is="atomMeta.icon"
+            class="size-3 shrink-0"
+          />
+          <span class="truncate">{{ atomMeta.label }}</span>
+        </div>
+      </div>
+      <div class="flex shrink-0 items-center gap-0.5">
         <GripVertical
           v-if="atomsCount > 1"
-          data-atom-drag-handle
-          class="size-3.5 shrink-0 cursor-grab text-muted-foreground/80"
+          data-cell-child-drag-handle
+          class="size-3 shrink-0 cursor-grab text-muted-foreground/80"
         />
-        <component
-          :is="atomMeta.icon"
-          class="size-3.5 shrink-0"
-        />
-        <span class="truncate">{{ atomMeta.label }}</span>
+        <ButtonGroup>
+          <Button
+            variant="outline"
+            size="icon-xs"
+            aria-label="Copy Atom"
+            @click.stop="duplicateAtom(blockId, rowId, cellId, atom.id)"
+          >
+            <Copy class="size-3" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon-xs"
+            aria-label="Remove Atom"
+            @click.stop="removeAtom(blockId, rowId, cellId, atom.id)"
+          >
+            <Trash2 class="size-3 text-destructive" />
+          </Button>
+        </ButtonGroup>
       </div>
-      <ButtonGroup>
-        <Button
-          variant="outline"
-          size="icon-xs"
-          aria-label="Copy Atom"
-          @click.stop="duplicateAtom(blockId, rowId, cellId, atom.id)"
-        >
-          <Copy class="size-3" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon-xs"
-          aria-label="Remove Atom"
-          @click.stop="removeAtom(blockId, rowId, cellId, atom.id)"
-        >
-          <Trash2 class="size-3 text-destructive" />
-        </Button>
-      </ButtonGroup>
     </div>
   </div>
 </template>

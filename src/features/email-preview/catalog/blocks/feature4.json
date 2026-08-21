@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "feature4",
   "label": "Feature 4",
   "type": "feature",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 20
+          "gap": 20,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -45,7 +46,7 @@
               "horizontalAlign": "left",
               "width": 62
             },
-            "atoms": [
+            "children": [
               {
                 "id": "af-jXkbc",
                 "type": "text",
@@ -182,8 +183,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "pdW0aJQi",
@@ -202,7 +202,7 @@
               "borderRadius": 18,
               "width": 38
             },
-            "atoms": [
+            "children": [
               {
                 "id": "JXfTAJYI",
                 "type": "image",
@@ -225,10 +225,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

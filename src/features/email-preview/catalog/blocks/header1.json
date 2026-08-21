@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "header1",
   "label": "Header 1",
   "type": "header",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "left"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "ddaBopcy",
                 "type": "text",
@@ -77,10 +78,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "M4zhuhfA",
@@ -89,7 +90,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 28
+          "gap": 28,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -101,7 +103,7 @@
               "horizontalAlign": "left",
               "width": 28
             },
-            "atoms": [
+            "children": [
               {
                 "id": "qJfNrUJ3",
                 "type": "text",
@@ -121,8 +123,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "PABMo7UZ",
@@ -133,7 +134,7 @@
               "horizontalAlign": "left",
               "width": 72
             },
-            "atoms": [
+            "children": [
               {
                 "id": "Dr82ex7P",
                 "type": "text",
@@ -153,10 +154,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

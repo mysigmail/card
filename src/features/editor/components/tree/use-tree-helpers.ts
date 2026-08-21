@@ -8,11 +8,12 @@ import {
   List,
   Minus,
   MousePointerClick,
+  Share2,
   Text,
 } from 'lucide-vue-next'
 import { nextTick, watch } from 'vue'
 
-export type TreeInsertType = AtomType | 'row' | 'cell' | 'block'
+export type TreeInsertType = AtomType | 'menu' | 'social' | 'row' | 'cell' | 'block'
 
 export interface InsertionPath {
   blockId?: string
@@ -47,10 +48,8 @@ export const TREE_INSERTION_ACTIVATION_X = {
 } as const
 
 export const TREE_NODE_INDENT_PX = {
-  topLevelRow: 4,
-  nestedRow: 8,
-  cell: 24,
-  atom: 8,
+  root: 4,
+  level: 12,
 } as const
 
 interface TreeInsertTypeMeta {
@@ -66,6 +65,7 @@ const treeInsertTypeMetaByType: Record<TreeInsertType, TreeInsertTypeMeta> = {
   button: { label: 'Button', icon: MousePointerClick },
   image: { label: 'Image', icon: ImageIcon },
   menu: { label: 'Menu', icon: List },
+  social: { label: 'Social', icon: Share2 },
   divider: { label: 'Divider', icon: Minus },
 }
 
@@ -81,7 +81,9 @@ export function hasRowInTree(row: RowNode, rowId: string): boolean {
   if (row.id === rowId)
     return true
 
-  return row.cells.some(cell => cell.rows.some(nested => hasRowInTree(nested, rowId)))
+  return row.cells.some(cell =>
+    cell.children.some(child => child.type === 'row' && hasRowInTree(child, rowId)),
+  )
 }
 
 export function hasCellInTree(row: RowNode, cellId: string): boolean {
@@ -89,16 +91,16 @@ export function hasCellInTree(row: RowNode, cellId: string): boolean {
     if (cell.id === cellId)
       return true
 
-    return cell.rows.some(nested => hasCellInTree(nested, cellId))
+    return cell.children.some(child => child.type === 'row' && hasCellInTree(child, cellId))
   })
 }
 
 export function hasAtomInTree(row: RowNode, atomId: string): boolean {
   return row.cells.some((cell) => {
-    if (cell.atoms.some(atom => atom.id === atomId))
+    if (cell.children.some(child => child.type !== 'row' && child.id === atomId))
       return true
 
-    return cell.rows.some(nested => hasAtomInTree(nested, atomId))
+    return cell.children.some(child => child.type === 'row' && hasAtomInTree(child, atomId))
   })
 }
 

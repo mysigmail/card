@@ -6,6 +6,7 @@ import { useSelection } from '@/features/editor/model'
 export interface InlineTextPointerPosition {
   left: number
   top: number
+  textOffset?: number
 }
 
 const editingAtomId = ref<string>()
@@ -39,9 +40,9 @@ export function useInlineTextEditing() {
     if (editingPointerPosition?.atomId !== atomId)
       return undefined
 
-    const { left, top } = editingPointerPosition
+    const { left, textOffset, top } = editingPointerPosition
     editingPointerPosition = undefined
-    return { left, top }
+    return { left, textOffset, top }
   }
 
   function stopEditing(atomId?: string) {

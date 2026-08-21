@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "cta-8",
   "label": "CTA 8",
   "type": "cta",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 12
+          "gap": 12,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -38,7 +39,7 @@
               "horizontalAlign": "left",
               "width": 52
             },
-            "atoms": [
+            "children": [
               {
                 "id": "jwa-b8We",
                 "type": "text",
@@ -58,8 +59,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "IKeDNocG",
@@ -70,7 +70,7 @@
               "horizontalAlign": "center",
               "width": 19
             },
-            "atoms": [
+            "children": [
               {
                 "id": "dpM9KlW0",
                 "type": "button",
@@ -101,8 +101,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "dfcZt74p",
@@ -113,7 +112,7 @@
               "horizontalAlign": "center",
               "width": 25
             },
-            "atoms": [
+            "children": [
               {
                 "id": "GglarEDw",
                 "type": "button",
@@ -144,10 +143,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

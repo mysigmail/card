@@ -39,7 +39,7 @@ export function useTreeInsertion(options: UseTreeInsertionOptions) {
     if (type === 'cell')
       return ['cell', 'row']
 
-    return ['text', 'button', 'divider', 'image', 'menu', 'row']
+    return ['text', 'button', 'divider', 'image', 'menu', 'social', 'row']
   })
 
   function setTreeHovering(value: boolean) {

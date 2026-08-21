@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "menu4-dark",
   "label": "Menu 4",
   "type": "menu",
@@ -25,7 +25,8 @@
           "spacing": {},
           "backgroundColor": "transparent",
           "gap": 0,
-          "collapseOnMobile": false
+          "collapseOnMobile": false,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -36,7 +37,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "left"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "px5Xydnv",
                 "type": "image",
@@ -60,52 +61,128 @@
                 }
               },
               {
+                "type": "row",
                 "id": "c6bp9mtl",
-                "type": "menu",
-                "itemType": "text",
-                "gap": 10,
-                "items": [
+                "settings": {
+                  "spacing": {
+                    "margin": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "padding": [
+                      20,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "collapseOnMobile": false,
+                  "gap": 10,
+                  "widthMode": "hug"
+                },
+                "cells": [
                   {
-                    "type": "text",
-                    "text": "Specs",
-                    "link": "https://example",
-                    "color": "#FFFFFF",
-                    "fontSize": 16
+                    "id": "9Q7MiVqy",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "Qd4XyyZM",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example\"><span style=\"color:#FFFFFF;font-size:16px\">Specs</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "text",
-                    "text": "Feature",
-                    "link": "https://example",
-                    "color": "#FFFFFF",
-                    "fontSize": 16
+                    "id": "8J3ugmuL",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "WkXS9TBA",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example\"><span style=\"color:#FFFFFF;font-size:16px\">Feature</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "text",
-                    "text": "Price",
-                    "link": "https://example",
-                    "color": "#FFFFFF",
-                    "fontSize": 16
+                    "id": "JFV_pyJJ",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "5jgTURa0",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example\"><span style=\"color:#FFFFFF;font-size:16px\">Price</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   }
-                ],
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    20,
-                    0,
-                    0,
-                    0
-                  ]
-                }
+                ]
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

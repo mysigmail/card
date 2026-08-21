@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "footer1-dark",
   "label": "Footer 1",
   "type": "footer",
@@ -25,7 +25,8 @@
           "spacing": {},
           "backgroundColor": "transparent",
           "gap": 0,
-          "collapseOnMobile": true
+          "collapseOnMobile": true,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -36,7 +37,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "F1DAddrA",
                 "type": "text",
@@ -56,10 +57,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "F1DMenuR",
@@ -74,7 +75,8 @@
           },
           "backgroundColor": "transparent",
           "gap": 0,
-          "collapseOnMobile": true
+          "collapseOnMobile": true,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -85,54 +87,130 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
+                "type": "row",
                 "id": "F1DMenuA",
-                "type": "menu",
-                "itemType": "text",
-                "gap": 20,
-                "items": [
+                "settings": {
+                  "spacing": {
+                    "margin": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "padding": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "collapseOnMobile": false,
+                  "gap": 20,
+                  "widthMode": "hug"
+                },
+                "cells": [
                   {
-                    "type": "text",
-                    "text": "Update preferences",
-                    "link": "https://example.com",
-                    "color": "#FFFFFF",
-                    "fontSize": 14
+                    "id": "OwwQCGD5",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "0X9YB4jd",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example.com\"><span style=\"color:#FFFFFF;font-size:14px\">Update preferences</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "text",
-                    "text": "Unsubscribe",
-                    "link": "https://example.com",
-                    "color": "#FFFFFF",
-                    "fontSize": 14
+                    "id": "hiWOadOo",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "BEqAV4WZ",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example.com\"><span style=\"color:#FFFFFF;font-size:14px\">Unsubscribe</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "text",
-                    "text": "Policies",
-                    "link": "https://example.com",
-                    "color": "#FFFFFF",
-                    "fontSize": 14
+                    "id": "USZ_CPf6",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "7BgIb-bA",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example.com\"><span style=\"color:#FFFFFF;font-size:14px\">Policies</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   }
-                ],
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
+                ]
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

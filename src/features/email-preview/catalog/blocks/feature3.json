@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "feature3",
   "label": "Feature 3",
   "type": "feature",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -52,7 +53,7 @@
               },
               "width": 48
             },
-            "atoms": [
+            "children": [
               {
                 "id": "zuB8-I3P",
                 "type": "image",
@@ -75,8 +76,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "xlF46-Jv",
@@ -88,7 +88,7 @@
               "borderRadius": 16,
               "width": 52
             },
-            "atoms": [
+            "children": [
               {
                 "id": "NlZ9_EtI",
                 "type": "text",
@@ -108,10 +108,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "0R9kX9Qn",
@@ -127,7 +127,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -147,7 +148,7 @@
               "borderRadius": 16,
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "zgfcMbAG",
                 "type": "text",
@@ -167,8 +168,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "WfRdlUPM",
@@ -187,7 +187,7 @@
               "borderRadius": 16,
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "N15GSkl_",
                 "type": "text",
@@ -207,10 +207,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

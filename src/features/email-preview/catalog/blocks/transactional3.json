@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "transactional3",
   "label": "Transactional 3",
   "type": "transactional",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 18
+          "gap": 18,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -38,7 +39,7 @@
               "horizontalAlign": "left",
               "width": 68
             },
-            "atoms": [
+            "children": [
               {
                 "id": "68pFlYxU",
                 "type": "text",
@@ -58,8 +59,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "EiOcOWBy",
@@ -78,7 +78,7 @@
               "borderRadius": 16,
               "width": 32
             },
-            "atoms": [
+            "children": [
               {
                 "id": "GZrVRcqa",
                 "type": "image",
@@ -101,10 +101,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "diEGcZRp",
@@ -120,7 +120,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": false,
-          "gap": 12
+          "gap": 12,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -141,7 +142,7 @@
               "width": 33,
               "height": 112
             },
-            "atoms": [
+            "children": [
               {
                 "id": "U4PSDoft",
                 "type": "text",
@@ -161,8 +162,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "VI1yP628",
@@ -182,7 +182,7 @@
               "width": 33,
               "height": 112
             },
-            "atoms": [
+            "children": [
               {
                 "id": "-KhaQaFA",
                 "type": "text",
@@ -202,8 +202,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "DXV9gGmp",
@@ -223,7 +222,7 @@
               "width": 33,
               "height": 112
             },
-            "atoms": [
+            "children": [
               {
                 "id": "knn3c3UQ",
                 "type": "text",
@@ -243,10 +242,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "4-KXzCpS",
@@ -262,7 +261,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -273,7 +273,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "bQJVMfco",
                 "type": "button",
@@ -304,10 +304,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

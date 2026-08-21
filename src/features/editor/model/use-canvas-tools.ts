@@ -4,15 +4,8 @@ import { sanitizeTextEditorHtml } from '@/entities/template'
 import { findCanvasBlockInstance, findCellById, findRowById } from './lib/canvas-state-utils'
 import { general, installed } from './state'
 import {
-  DEFAULT_MENU_ATOM_GAP,
-  DEFAULT_MENU_IMAGE_ITEM,
-  DEFAULT_MENU_TEXT_ITEM,
-  getMenuAtomItemType,
-  parseMenuListField,
   toBackgroundImageValue,
   toImageValue,
-  toMenuImageItem,
-  toMenuTextItem,
   toNonNegativeFiniteNumber,
   toOptionalPositiveNumber,
   toSpacingValue,
@@ -30,14 +23,14 @@ function _createCanvasTools() {
     function visitRows(rows: RowNode[]): TextAtom | undefined {
       for (const row of rows) {
         for (const cell of row.cells) {
-          const atom = cell.atoms.find(
+          const atom = cell.children.find(
             (candidate): candidate is TextAtom =>
               candidate.id === atomId && candidate.type === 'text',
           )
           if (atom)
             return atom
 
-          const nested = visitRows(cell.rows)
+          const nested = visitRows(cell.children.filter(child => child.type === 'row'))
           if (nested)
             return nested
         }
@@ -45,7 +38,7 @@ function _createCanvasTools() {
     }
 
     for (const component of installed.value) {
-      if (component.version !== 2)
+      if (component.version !== 3)
         continue
       target = visitRows(component.block.rows)
       if (target)
@@ -106,6 +99,11 @@ function _createCanvasTools() {
 
       if (field === 'gap') {
         row.settings.gap = Number(value) || 0
+        return true
+      }
+
+      if (field === 'widthMode') {
+        row.settings.widthMode = value === 'hug' ? 'hug' : 'fill'
         return true
       }
 
@@ -292,109 +290,6 @@ function _createCanvasTools() {
       return false
     }
 
-    if (atom.type === 'menu') {
-      if (field === 'menuItemType') {
-        const nextType = value === 'image' ? 'image' : 'text'
-        atom.itemType = nextType
-
-        atom.items = atom.items.map((item) => {
-          return nextType === 'image' ? toMenuImageItem(item) : toMenuTextItem(item)
-        })
-
-        if (!atom.items.length) {
-          atom.items.push(
-            nextType === 'image' ? { ...DEFAULT_MENU_IMAGE_ITEM } : { ...DEFAULT_MENU_TEXT_ITEM },
-          )
-        }
-
-        return true
-      }
-
-      if (field === 'gap') {
-        atom.gap = toNonNegativeFiniteNumber(value) ?? DEFAULT_MENU_ATOM_GAP
-        return true
-      }
-
-      if (field === 'spacing') {
-        atom.spacing = toSpacingValue(value)
-        return true
-      }
-
-      const parsed = parseMenuListField(field)
-      if (!parsed)
-        return false
-
-      const item = atom.items[parsed.index]
-      if (!item)
-        return false
-
-      const itemType = getMenuAtomItemType(atom)
-      if (itemType === 'image') {
-        const imageItem = item.type === 'image' ? item : toMenuImageItem(item)
-
-        if (item.type !== 'image')
-          atom.items[parsed.index] = imageItem
-
-        if (parsed.itemField === 'name') {
-          imageItem.name = String(value ?? '')
-          return true
-        }
-
-        if (parsed.itemField === 'link') {
-          imageItem.link = String(value ?? '')
-          return true
-        }
-
-        if (parsed.itemField === 'url') {
-          imageItem.url = String(value ?? '')
-          return true
-        }
-
-        if (parsed.itemField === 'width') {
-          imageItem.width = toOptionalPositiveNumber(value)
-          return true
-        }
-
-        if (parsed.itemField === 'height') {
-          imageItem.height = toOptionalPositiveNumber(value)
-          return true
-        }
-
-        if (parsed.itemField === 'alt') {
-          imageItem.alt = String(value ?? '')
-          return true
-        }
-
-        return false
-      }
-
-      const textItem = item.type === 'text' ? item : toMenuTextItem(item)
-      if (item.type !== 'text')
-        atom.items[parsed.index] = textItem
-
-      if (parsed.itemField === 'text') {
-        textItem.text = String(value ?? '')
-        return true
-      }
-
-      if (parsed.itemField === 'link') {
-        textItem.link = String(value ?? '')
-        return true
-      }
-
-      if (parsed.itemField === 'color') {
-        textItem.color = String(value ?? '')
-        return true
-      }
-
-      if (parsed.itemField === 'fontSize') {
-        textItem.fontSize = Number(value) || 16
-        return true
-      }
-
-      return true
-    }
-
     return false
   }
 
@@ -409,37 +304,12 @@ function _createCanvasTools() {
   }
 
   function addNewToolToMultiTool(id: string) {
-    const [scope, atomId, field] = id.split('::')
-    if (scope === 'v2-atom' && field === 'menuList') {
-      const atom = selection.selectedAtom.value
-      if (!atom || atom.id !== atomId || atom.type !== 'menu')
-        return
-
-      const itemType = getMenuAtomItemType(atom)
-      const lastItem = atom.items[atom.items.length - 1]
-      if (itemType === 'image') {
-        atom.items.push(
-          lastItem?.type === 'image' ? { ...lastItem } : { ...DEFAULT_MENU_IMAGE_ITEM },
-        )
-      }
-      else {
-        atom.items.push(lastItem?.type === 'text' ? { ...lastItem } : { ...DEFAULT_MENU_TEXT_ITEM })
-      }
-    }
+    void id
   }
 
   function deleteMultiToolItem(id: string, index: number) {
-    const [scope, atomId, field] = id.split('::')
-    if (scope === 'v2-atom' && field === 'menuList') {
-      const atom = selection.selectedAtom.value
-      if (!atom || atom.id !== atomId || atom.type !== 'menu')
-        return
-
-      if (atom.items.length <= 1)
-        return
-
-      atom.items.splice(index, 1)
-    }
+    void id
+    void index
   }
 
   function updateTextAtomValue(atomId: string, html: string) {

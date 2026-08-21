@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "transactional6",
   "label": "Transactional 6",
   "type": "transactional",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "FaXd6YW5",
                 "type": "text",
@@ -57,10 +58,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "sZGafOyv",
@@ -76,7 +77,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -87,7 +89,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "jen7UgoI",
                 "type": "button",
@@ -118,10 +120,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "JihRDryg",
@@ -137,7 +139,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -148,7 +151,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "g7sUPOE8",
                 "type": "text",
@@ -168,10 +171,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

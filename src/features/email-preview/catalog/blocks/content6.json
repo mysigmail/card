@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "content6",
   "label": "Content 6",
   "type": "content",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -46,7 +47,7 @@
               "borderRadius": 16,
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "x438dJl8",
                 "type": "image",
@@ -69,8 +70,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "UqhhrqCs",
@@ -81,7 +81,7 @@
               "horizontalAlign": "left",
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "dwPYQxnq",
                 "type": "text",
@@ -101,10 +101,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "O52N-mQt",
@@ -120,7 +120,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -132,7 +133,7 @@
               "horizontalAlign": "left",
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "JQRpFzd9",
                 "type": "text",
@@ -152,8 +153,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "C_rZRav0",
@@ -172,7 +172,7 @@
               "borderRadius": 16,
               "width": 50
             },
-            "atoms": [
+            "children": [
               {
                 "id": "sE-ARzi6",
                 "type": "image",
@@ -195,10 +195,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

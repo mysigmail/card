@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "content13",
   "label": "Content 13",
   "type": "content",
@@ -26,7 +26,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 0
+          "gap": 0,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -37,7 +38,7 @@
               "verticalAlign": "top",
               "horizontalAlign": "left"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "OM92n8zu",
                 "type": "text",
@@ -57,10 +58,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "usMIhi5p",
@@ -76,7 +77,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 20
+          "gap": 20,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -88,7 +90,7 @@
               "horizontalAlign": "left",
               "width": 33
             },
-            "atoms": [
+            "children": [
               {
                 "id": "XzLaYl1L",
                 "type": "text",
@@ -108,8 +110,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "ElCBbTUt",
@@ -120,7 +121,7 @@
               "horizontalAlign": "left",
               "width": 33
             },
-            "atoms": [
+            "children": [
               {
                 "id": "xZVvqweg",
                 "type": "text",
@@ -140,8 +141,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "IftQ944L",
@@ -152,7 +152,7 @@
               "horizontalAlign": "left",
               "width": 33
             },
-            "atoms": [
+            "children": [
               {
                 "id": "Ko73sYfm",
                 "type": "text",
@@ -172,10 +172,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

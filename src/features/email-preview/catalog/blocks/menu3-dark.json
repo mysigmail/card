@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "menu3-dark",
   "label": "Menu 3",
   "type": "menu",
@@ -25,7 +25,8 @@
           "spacing": {},
           "backgroundColor": "transparent",
           "gap": 0,
-          "collapseOnMobile": false
+          "collapseOnMobile": false,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -36,7 +37,7 @@
               "verticalAlign": "middle",
               "horizontalAlign": "left"
             },
-            "atoms": [
+            "children": [
               {
                 "id": "idSRsagR",
                 "type": "image",
@@ -59,8 +60,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "x4iTZ7EA",
@@ -70,60 +70,142 @@
               "verticalAlign": "middle",
               "horizontalAlign": "right"
             },
-            "atoms": [
+            "children": [
               {
+                "type": "row",
                 "id": "nt1ZUZrI",
-                "type": "menu",
-                "itemType": "image",
-                "gap": 18,
-                "items": [
+                "settings": {
+                  "spacing": {
+                    "margin": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "padding": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "collapseOnMobile": false,
+                  "gap": 18,
+                  "widthMode": "hug"
+                },
+                "cells": [
                   {
-                    "type": "image",
-                    "name": "Facebook",
-                    "link": "https://example",
-                    "url": "img/system/social/menu/facebook-white.png",
-                    "width": 16,
-                    "height": 16,
-                    "alt": "Some alt"
+                    "id": "oeZ3BF-W",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "eVhWXtkj",
+                        "type": "image",
+                        "src": "img/system/social/menu/facebook-white.png",
+                        "link": "https://example",
+                        "alt": "Some alt",
+                        "width": 16,
+                        "height": 16,
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "image",
-                    "name": "Twitter",
-                    "link": "https://example",
-                    "url": "img/system/social/menu/twitter-x-white.png",
-                    "width": 16,
-                    "height": 16,
-                    "alt": "Some alt"
+                    "id": "YmXukc_i",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "972sWSy5",
+                        "type": "image",
+                        "src": "img/system/social/menu/twitter-x-white.png",
+                        "link": "https://example",
+                        "alt": "Some alt",
+                        "width": 16,
+                        "height": 16,
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "image",
-                    "name": "Instagram",
-                    "link": "https://example",
-                    "url": "img/system/social/menu/instagram-white.png",
-                    "width": 16,
-                    "height": 16,
-                    "alt": "Some alt"
+                    "id": "kLMFse-v",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "S5V8XR9x",
+                        "type": "image",
+                        "src": "img/system/social/menu/instagram-white.png",
+                        "link": "https://example",
+                        "alt": "Some alt",
+                        "width": 16,
+                        "height": 16,
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   }
-                ],
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
+                ]
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "header6",
   "label": "Header 6",
   "type": "header",
@@ -32,7 +32,8 @@
           "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
-          "gap": 16
+          "gap": 16,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -51,7 +52,7 @@
               "horizontalAlign": "left",
               "width": 58
             },
-            "atoms": [
+            "children": [
               {
                 "id": "CzYxqrlH",
                 "type": "text",
@@ -101,8 +102,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "d5mk868D",
@@ -113,7 +113,7 @@
               "horizontalAlign": "center",
               "width": 42
             },
-            "atoms": [
+            "children": [
               {
                 "id": "LA_0qSkx",
                 "type": "image",
@@ -135,10 +135,10 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

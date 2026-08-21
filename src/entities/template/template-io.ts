@@ -3,7 +3,7 @@ import type {
   CanvasBlockInstance,
   GeneralTool,
   TemplateExportMeta,
-  TemplateExportV2,
+  TemplateExportV3,
   TemplateValidationIssue,
   Tool,
   ToolCollectionItem,
@@ -27,7 +27,7 @@ interface ParseTemplateExportPayloadOptions {
 }
 
 interface ParseTemplateExportPayloadResult {
-  payload?: TemplateExportV2
+  payload?: TemplateExportV3
   issues: TemplateValidationIssue[]
 }
 
@@ -54,7 +54,6 @@ const TOOL_TYPES = new Set([
 const BACKGROUND_REPEAT_VALUES = new Set(['repeat', 'no-repeat'])
 const BACKGROUND_SIZE_VALUES = new Set(['unset', 'cover', 'contain'])
 const BACKGROUND_POSITION_VALUES = new Set(['top', 'center', 'bottom', 'left', 'right'])
-const MENU_ITEM_TYPE_VALUES = new Set(['text', 'image'])
 const EMAIL_TEXT_ALLOWED_TAGS = [
   'a',
   'b',
@@ -602,83 +601,6 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
     return
   }
 
-  if (value.type === 'menu') {
-    if (
-      value.itemType !== undefined
-      && (!isString(value.itemType) || !MENU_ITEM_TYPE_VALUES.has(value.itemType))
-    ) {
-      pushIssue(issues, `${path}.itemType`, 'menu atom itemType must be "text" or "image"')
-    }
-
-    if (value.gap !== undefined && !isFiniteNumber(value.gap)) {
-      pushIssue(issues, `${path}.gap`, 'menu atom gap must be a finite number')
-    }
-
-    if (!Array.isArray(value.items)) {
-      pushIssue(issues, `${path}.items`, 'menu atom items must be an array')
-      return
-    }
-
-    value.items.forEach((item, index) => {
-      const itemPath = `${path}.items[${index}]`
-
-      if (!isRecord(item)) {
-        pushIssue(issues, itemPath, 'menu atom item must be an object')
-        return
-      }
-
-      if (
-        item.type !== undefined
-        && (!isString(item.type) || !MENU_ITEM_TYPE_VALUES.has(item.type))
-      ) {
-        pushIssue(issues, `${itemPath}.type`, 'menu atom item type must be "text" or "image"')
-        return
-      }
-
-      const normalizedType
-        = item.type === 'image'
-          ? 'image'
-          : item.type === 'text'
-            ? 'text'
-            : value.itemType === 'image'
-              ? 'image'
-              : 'text'
-
-      if (!isString(item.link)) {
-        pushIssue(issues, `${itemPath}.link`, 'menu atom item link must be a string')
-      }
-
-      if (normalizedType === 'image') {
-        if (!isString(item.name))
-          pushIssue(issues, `${itemPath}.name`, 'menu atom item name must be a string')
-        if (!isString(item.url))
-          pushIssue(issues, `${itemPath}.url`, 'menu atom item url must be a string')
-        if (!isString(item.alt))
-          pushIssue(issues, `${itemPath}.alt`, 'menu atom item alt must be a string')
-        if (item.width !== undefined && !isFiniteNumber(item.width)) {
-          pushIssue(issues, `${itemPath}.width`, 'menu atom item width must be a finite number')
-        }
-        if (item.height !== undefined && !isFiniteNumber(item.height)) {
-          pushIssue(issues, `${itemPath}.height`, 'menu atom item height must be a finite number')
-        }
-        return
-      }
-
-      if (!isString(item.text))
-        pushIssue(issues, `${itemPath}.text`, 'menu atom item text must be a string')
-      if (!isString(item.color))
-        pushIssue(issues, `${itemPath}.color`, 'menu atom item color must be a string')
-      if (!isFiniteNumber(item.fontSize)) {
-        pushIssue(issues, `${itemPath}.fontSize`, 'menu atom item fontSize must be a finite number')
-      }
-    })
-
-    if (value.spacing !== undefined)
-      validateSpacingValue(value.spacing, `${path}.spacing`, issues)
-
-    return
-  }
-
   pushIssue(issues, `${path}.type`, 'Unsupported atom type')
 }
 
@@ -774,25 +696,16 @@ function validateCellNode(value: unknown, path: string, issues: TemplateValidati
     )
   }
 
-  if (!Array.isArray(value.atoms)) {
-    pushIssue(issues, `${path}.atoms`, 'cell.atoms must be an array')
+  if (!Array.isArray(value.children)) {
+    pushIssue(issues, `${path}.children`, 'cell.children must be an array')
     return
   }
 
-  value.atoms.forEach((atom, atomIndex) => {
-    validateAtom(atom, `${path}.atoms[${atomIndex}]`, issues)
-  })
-
-  if (value.rows === undefined)
-    return
-
-  if (!Array.isArray(value.rows)) {
-    pushIssue(issues, `${path}.rows`, 'cell.rows must be an array')
-    return
-  }
-
-  value.rows.forEach((row, rowIndex) => {
-    validateRowNode(row, `${path}.rows[${rowIndex}]`, issues)
+  value.children.forEach((child, childIndex) => {
+    const childPath = `${path}.children[${childIndex}]`
+    if (isRecord(child) && child.type === 'row')
+      validateRowNode(child, childPath, issues)
+    else validateAtom(child, childPath, issues)
   })
 }
 
@@ -804,6 +717,9 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
 
   if (!isString(value.id))
     pushIssue(issues, `${path}.id`, 'row.id must be a string')
+
+  if (value.type !== 'row')
+    pushIssue(issues, `${path}.type`, 'row.type must be "row"')
 
   if (!isRecord(value.settings)) {
     pushIssue(issues, `${path}.settings`, 'row.settings must be an object')
@@ -825,6 +741,17 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
 
     if (!isFiniteNumber(value.settings.gap)) {
       pushIssue(issues, `${path}.settings.gap`, 'row.settings.gap must be a number')
+    }
+
+    if (
+      !isString(value.settings.widthMode)
+      || !['fill', 'hug'].includes(value.settings.widthMode)
+    ) {
+      pushIssue(
+        issues,
+        `${path}.settings.widthMode`,
+        'row.settings.widthMode must be "fill" or "hug"',
+      )
     }
 
     if (
@@ -1055,71 +982,6 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
       }
     }
 
-    if (atom.type === 'menu') {
-      const normalizedItemType
-        = atom.itemType === 'image'
-          ? 'image'
-          : atom.itemType === 'text'
-            ? 'text'
-            : atom.items[0]?.type === 'image'
-              ? 'image'
-              : 'text'
-
-      return {
-        ...atom,
-        hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
-        itemType: normalizedItemType,
-        gap: isFiniteNumber(atom.gap) && atom.gap >= 0 ? atom.gap : 10,
-        items: Array.isArray(atom.items)
-          ? atom.items.map((item) => {
-              if (normalizedItemType === 'image') {
-                return {
-                  type: 'image' as const,
-                  name:
-                    item?.type === 'image'
-                      ? typeof item.name === 'string'
-                        ? item.name
-                        : ''
-                      : typeof item?.text === 'string'
-                        ? item.text
-                        : '',
-                  link: typeof item?.link === 'string' ? item.link : '',
-                  url: item?.type === 'image' ? (typeof item.url === 'string' ? item.url : '') : '',
-                  width:
-                    item?.type === 'image' && isFiniteNumber(item.width) && item.width > 0
-                      ? item.width
-                      : undefined,
-                  height:
-                    item?.type === 'image' && isFiniteNumber(item.height) && item.height > 0
-                      ? item.height
-                      : undefined,
-                  alt: item?.type === 'image' ? (typeof item.alt === 'string' ? item.alt : '') : '',
-                }
-              }
-
-              return {
-                type: 'text' as const,
-                text:
-                  item?.type === 'text'
-                    ? typeof item.text === 'string'
-                      ? item.text
-                      : ''
-                    : typeof item?.name === 'string'
-                      ? item.name
-                      : '',
-                link: typeof item?.link === 'string' ? item.link : '',
-                color:
-                  item?.type === 'text' && typeof item.color === 'string' ? item.color : '#000000',
-                fontSize:
-                  item?.type === 'text' && isFiniteNumber(item.fontSize) && item.fontSize > 0
-                    ? item.fontSize
-                    : 16,
-              }
-            })
-          : [],
-      }
-    }
-
     return {
       ...atom,
       hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
@@ -1143,22 +1005,25 @@ function sanitizeCellNodes(cells: CellNode[]): CellNode[] {
     delete (settings as Record<string, unknown>).collapseOnMobile
 
     return {
-      ...cell,
+      id: cell.id,
       settings,
-      atoms: sanitizeAtoms(cell.atoms),
-      rows: sanitizeRowNodes(cell.rows || []),
+      children: cell.children.map(child =>
+        child.type === 'row' ? sanitizeRowNodes([child])[0]! : sanitizeAtoms([child])[0]!,
+      ),
     }
   })
 }
 
 function sanitizeRowNodes(rows: RowNode[]): RowNode[] {
   return rows.map(row => ({
-    ...row,
+    id: row.id,
+    type: 'row',
     settings: {
       ...row.settings,
       hiddenOnMobile: toOptionalBoolean(row.settings?.hiddenOnMobile),
       collapseOnMobile:
         typeof row.settings?.collapseOnMobile === 'boolean' ? row.settings.collapseOnMobile : true,
+      widthMode: row.settings?.widthMode === 'hug' ? 'hug' : 'fill',
     },
     cells: sanitizeCellNodes(row.cells),
   }))
@@ -1171,8 +1036,8 @@ function sanitizeBlock(block: BlockNode): BlockNode {
   }
 }
 
-function sanitizeTemplatePayload(payload: TemplateExportV2): TemplateExportV2 {
-  const sanitized = clone<TemplateExportV2>(payload)
+function sanitizeTemplatePayload(payload: TemplateExportV3): TemplateExportV3 {
+  const sanitized = clone<TemplateExportV3>(payload)
 
   sanitized.canvas.components = sanitized.canvas.components.map((component) => {
     return {
@@ -1248,17 +1113,150 @@ function validateTemplatePayload(
     if (!isString(component.id))
       pushIssue(issues, `${currentPath}.id`, 'component.id must be a string')
 
-    if (component.version !== 2) {
+    if (component.version !== 3) {
       pushIssue(
         issues,
         `${currentPath}.version`,
-        'Only block-v2 components are supported (component.version must be 2)',
+        'Only block-v3 components are supported (component.version must be 3)',
       )
       return
     }
 
     validateCanvasBlockInstance(component, currentPath, issues)
   })
+}
+
+function escapeLegacyText(value: unknown) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+}
+
+function migrateLegacyMenuAtom(atom: UnknownRecord): UnknownRecord {
+  const items = Array.isArray(atom.items) ? atom.items : undefined
+  const validItems = items?.every((rawItem) => {
+    if (!isRecord(rawItem) || !isString(rawItem.link))
+      return false
+    const itemType = rawItem.type ?? atom.itemType ?? 'text'
+    if (itemType === 'image') {
+      return (
+        isString(rawItem.name)
+        && isString(rawItem.url)
+        && isString(rawItem.alt)
+        && (rawItem.width === undefined || isFiniteNumber(rawItem.width))
+        && (rawItem.height === undefined || isFiniteNumber(rawItem.height))
+      )
+    }
+    return (
+      (rawItem.type === undefined || rawItem.type === 'text')
+      && isString(rawItem.text)
+      && isString(rawItem.color)
+      && isFiniteNumber(rawItem.fontSize)
+    )
+  })
+  if (
+    !isString(atom.id)
+    || !items
+    || !validItems
+    || (atom.itemType !== undefined && atom.itemType !== 'text' && atom.itemType !== 'image')
+    || (atom.gap !== undefined && !isFiniteNumber(atom.gap))
+  ) {
+    return atom
+  }
+
+  return {
+    id: atom.id,
+    type: 'row',
+    settings: {
+      spacing: isRecord(atom.spacing) ? atom.spacing : {},
+      backgroundColor: 'transparent',
+      hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+      collapseOnMobile: false,
+      gap: isFiniteNumber(atom.gap) && atom.gap >= 0 ? atom.gap : 10,
+      widthMode: 'hug',
+    },
+    cells: items.map((rawItem) => {
+      const item = isRecord(rawItem) ? rawItem : {}
+      const image = item.type === 'image' || (item.type === undefined && atom.itemType === 'image')
+      const child: UnknownRecord = image
+        ? {
+            id: nanoid(8),
+            type: 'image',
+            src: isString(item.url) ? item.url : '',
+            link: isString(item.link) ? item.link : '',
+            alt: isString(item.alt) ? item.alt : '',
+            width: isFiniteNumber(item.width) ? item.width : undefined,
+            height: isFiniteNumber(item.height) ? item.height : undefined,
+            borderRadius: 0,
+            spacing: { margin: [0, 0, 0, 0], padding: [0, 0, 0, 0] },
+          }
+        : {
+            id: nanoid(8),
+            type: 'text',
+            value: `<p><a href="${escapeLegacyText(item.link)}"><span style="color:${escapeLegacyText(item.color || '#000000')};font-size:${isFiniteNumber(item.fontSize) ? item.fontSize : 16}px">${escapeLegacyText(item.text)}</span></a></p>`,
+            spacing: { margin: [0, 0, 0, 0], padding: [0, 0, 0, 0] },
+          }
+      return {
+        id: nanoid(8),
+        settings: {
+          spacing: {},
+          backgroundColor: 'transparent',
+          hiddenOnMobile: false,
+          verticalAlign: 'top',
+          horizontalAlign: 'left',
+        },
+        children: [child],
+      }
+    }),
+  }
+}
+
+function migrateV2Cell(value: unknown): unknown {
+  if (!isRecord(value))
+    return value
+
+  if (!Array.isArray(value.atoms))
+    return { ...value, children: value.atoms }
+
+  const atoms = value.atoms
+  const rows = value.rows === undefined ? [] : value.rows
+  if (!Array.isArray(rows))
+    return { ...value, children: [...atoms, rows] }
+  return {
+    ...value,
+    children: [
+      ...atoms.map(atom =>
+        isRecord(atom) && atom.type === 'menu' ? migrateLegacyMenuAtom(atom) : atom,
+      ),
+      ...rows.map(migrateV2Row),
+    ],
+    atoms: undefined,
+    rows: undefined,
+  }
+}
+
+function migrateV2Row(value: unknown): unknown {
+  if (!isRecord(value))
+    return value
+
+  return {
+    ...value,
+    type: 'row',
+    settings: isRecord(value.settings) ? { ...value.settings, widthMode: 'fill' } : value.settings,
+    cells: Array.isArray(value.cells) ? value.cells.map(migrateV2Cell) : value.cells,
+  }
+}
+
+function migrateLegacyBlock(block: unknown): BlockNode {
+  if (!isRecord(block))
+    throw new TypeError('Legacy catalog block must be an object')
+
+  return {
+    ...clone<UnknownRecord>(block),
+    rows: Array.isArray(block.rows) ? block.rows.map(migrateV2Row) : block.rows,
+  } as unknown as BlockNode
 }
 
 function migrateTemplatePayload(value: unknown): unknown {
@@ -1272,6 +1270,26 @@ function migrateTemplatePayload(value: unknown): unknown {
       normalizeGeneralBackgroundPosition(normalized.editor.general)
 
     return normalized
+  }
+
+  if (value.version === 2) {
+    const migrated = clone<UnknownRecord>(value)
+    migrated.version = TEMPLATE_EXPORT_VERSION
+    if (isRecord(migrated.editor) && isRecord(migrated.editor.general))
+      normalizeGeneralBackgroundPosition(migrated.editor.general)
+    if (isRecord(migrated.canvas) && Array.isArray(migrated.canvas.components)) {
+      migrated.canvas.components = migrated.canvas.components.map((rawComponent) => {
+        if (!isRecord(rawComponent))
+          return rawComponent
+        const block = isRecord(rawComponent.block) ? rawComponent.block : rawComponent.block
+        return {
+          ...rawComponent,
+          version: rawComponent.version === 2 ? 3 : rawComponent.version,
+          block: isRecord(block) ? migrateLegacyBlock(block) : block,
+        }
+      })
+    }
+    return migrated
   }
 
   return value
@@ -1309,8 +1327,9 @@ function remapCellNodeIds(cells: CellNode[]): CellNode[] {
   return cells.map(cell => ({
     ...cell,
     id: nanoid(8),
-    atoms: remapAtomIds(cell.atoms),
-    rows: remapRowNodeIds(cell.rows || []),
+    children: cell.children.map(child =>
+      child.type === 'row' ? remapRowNodeIds([child])[0]! : remapAtomIds([child])[0]!,
+    ),
   }))
 }
 
@@ -1333,8 +1352,8 @@ function remapBlockIds(block: BlockNode): BlockNode {
 export function createRuntimeComponents(components: CanvasBlockInstance[]) {
   return components
     .filter(
-      (component): component is Extract<CanvasBlockInstance, { version: 2 }> =>
-        component.version === 2,
+      (component): component is Extract<CanvasBlockInstance, { version: 3 }> =>
+        component.version === 3,
     )
     .map((component) => {
       return {
@@ -1347,7 +1366,7 @@ export function createRuntimeComponents(components: CanvasBlockInstance[]) {
 
 export function createTemplateExportPayload(
   options: CreateTemplateExportPayloadOptions,
-): TemplateExportV2 {
+): TemplateExportV3 {
   return {
     version: TEMPLATE_EXPORT_VERSION,
     meta: createTemplateMeta(options.title),
@@ -1387,7 +1406,7 @@ export function parseTemplateExportPayload(
 
   return {
     issues,
-    payload: sanitizeTemplatePayload(migrated as TemplateExportV2),
+    payload: sanitizeTemplatePayload(migrated as TemplateExportV3),
   }
 }
 

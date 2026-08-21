@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "name": "footer2-dark",
   "label": "Footer 2",
   "type": "footer",
@@ -32,7 +32,8 @@
           },
           "backgroundColor": "transparent",
           "gap": 0,
-          "collapseOnMobile": true
+          "collapseOnMobile": true,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -43,57 +44,139 @@
               "verticalAlign": "top",
               "horizontalAlign": "center"
             },
-            "atoms": [
+            "children": [
               {
+                "type": "row",
                 "id": "bBEW7SlM",
-                "type": "menu",
-                "itemType": "image",
-                "gap": 20,
-                "items": [
+                "settings": {
+                  "spacing": {
+                    "margin": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "padding": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "collapseOnMobile": false,
+                  "gap": 20,
+                  "widthMode": "hug"
+                },
+                "cells": [
                   {
-                    "type": "image",
-                    "name": "Facebook",
-                    "link": "https://example.com",
-                    "url": "img/system/social/footer/footer-facebook-white.png",
-                    "width": 16,
-                    "alt": "Facebook"
+                    "id": "WsmMcs6i",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "qJww6pB5",
+                        "type": "image",
+                        "src": "img/system/social/footer/footer-facebook-white.png",
+                        "link": "https://example.com",
+                        "alt": "Facebook",
+                        "width": 16,
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "image",
-                    "name": "Twitter",
-                    "link": "https://example.com",
-                    "url": "img/system/social/menu/twitter-x-white.png",
-                    "width": 16,
-                    "alt": "Twitter"
+                    "id": "wBG6wX6z",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "coOe-iln",
+                        "type": "image",
+                        "src": "img/system/social/menu/twitter-x-white.png",
+                        "link": "https://example.com",
+                        "alt": "Twitter",
+                        "width": 16,
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "image",
-                    "name": "Instagram",
-                    "link": "https://example.com",
-                    "url": "img/system/social/footer/footer-instagram-white.png",
-                    "width": 16,
-                    "alt": "Instagram"
+                    "id": "_2e1JZdZ",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "QkphNA8f",
+                        "type": "image",
+                        "src": "img/system/social/footer/footer-instagram-white.png",
+                        "link": "https://example.com",
+                        "alt": "Instagram",
+                        "width": 16,
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   }
-                ],
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ]
-                }
+                ]
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       },
       {
         "id": "PrPnm4eO",
@@ -101,7 +184,8 @@
           "spacing": {},
           "backgroundColor": "transparent",
           "gap": 0,
-          "collapseOnMobile": true
+          "collapseOnMobile": true,
+          "widthMode": "fill"
         },
         "cells": [
           {
@@ -113,7 +197,7 @@
               "horizontalAlign": "left",
               "width": 21
             },
-            "atoms": [
+            "children": [
               {
                 "id": "o6dvm6r_",
                 "type": "image",
@@ -136,8 +220,7 @@
                   ]
                 }
               }
-            ],
-            "rows": []
+            ]
           },
           {
             "id": "pl_hzwwV",
@@ -155,7 +238,7 @@
               "horizontalAlign": "left",
               "width": 79
             },
-            "atoms": [
+            "children": [
               {
                 "id": "VZ179NCb",
                 "type": "text",
@@ -176,52 +259,128 @@
                 }
               },
               {
+                "type": "row",
                 "id": "eDCSkkbh",
-                "type": "menu",
-                "itemType": "text",
-                "gap": 20,
-                "items": [
+                "settings": {
+                  "spacing": {
+                    "margin": [
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "padding": [
+                      2,
+                      0,
+                      0,
+                      0
+                    ]
+                  },
+                  "backgroundColor": "transparent",
+                  "collapseOnMobile": false,
+                  "gap": 20,
+                  "widthMode": "hug"
+                },
+                "cells": [
                   {
-                    "type": "text",
-                    "text": "Update preferences",
-                    "link": "https://example.com",
-                    "color": "#FFFFFF",
-                    "fontSize": 14
+                    "id": "uGdnC4O7",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "NdMFWmnp",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example.com\"><span style=\"color:#FFFFFF;font-size:14px\">Update preferences</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "text",
-                    "text": "Unsubscribe",
-                    "link": "https://example.com",
-                    "color": "#FFFFFF",
-                    "fontSize": 14
+                    "id": "cP2P54Pi",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "OwkBqAnx",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example.com\"><span style=\"color:#FFFFFF;font-size:14px\">Unsubscribe</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
-                    "type": "text",
-                    "text": "Policies",
-                    "link": "https://example.com",
-                    "color": "#FFFFFF",
-                    "fontSize": 14
+                    "id": "YrvBbK7U",
+                    "settings": {
+                      "spacing": {},
+                      "backgroundColor": "transparent",
+                      "hiddenOnMobile": false,
+                      "verticalAlign": "top",
+                      "horizontalAlign": "left"
+                    },
+                    "children": [
+                      {
+                        "id": "P3pvIU5L",
+                        "type": "text",
+                        "value": "<p><a href=\"https://example.com\"><span style=\"color:#FFFFFF;font-size:14px\">Policies</span></a></p>",
+                        "spacing": {
+                          "margin": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ],
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            0
+                          ]
+                        }
+                      }
+                    ]
                   }
-                ],
-                "spacing": {
-                  "margin": [
-                    0,
-                    0,
-                    0,
-                    0
-                  ],
-                  "padding": [
-                    2,
-                    0,
-                    0,
-                    0
-                  ]
-                }
+                ]
               }
-            ],
-            "rows": []
+            ]
           }
-        ]
+        ],
+        "type": "row"
       }
     ]
   }

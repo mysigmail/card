@@ -4,7 +4,12 @@ import { nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vu
 import { sanitizeTextEditorHtml } from '@/entities/template'
 import { useCanvas, useHistory } from '@/features/editor/model'
 import { useInlineTextEditing } from './composables/use-inline-text-editing'
-import { canPersistInlineTextOnUnmount, replaceEditorContent } from './inline-text-session'
+import {
+  canPersistInlineTextOnUnmount,
+  replaceEditorContent,
+  textSelectionPositionAtCoords,
+  textSelectionPositionAtOffset,
+} from './inline-text-session'
 import { createInlineTextExtensions, normalizeInlineEditorHtml } from './text-editor-core'
 
 interface Props {
@@ -26,7 +31,6 @@ const {
 } = useInlineTextEditing()
 let finished = false
 let lastModelValue = sanitizeTextEditorHtml(props.value)
-let initialFocusRafId: number | undefined
 
 function persistEditorValue() {
   if (!editor.value)
@@ -61,20 +65,19 @@ function focusInitialSelection() {
     return
 
   const pointerPosition = consumeEditingPointerPosition(props.atomId)
-  initialFocusRafId = window.requestAnimationFrame(() => {
-    initialFocusRafId = undefined
-    if (editor.value !== currentEditor)
-      return
+  const position
+    = pointerPosition?.textOffset !== undefined
+      ? textSelectionPositionAtOffset(currentEditor, pointerPosition.textOffset)
+      : pointerPosition
+        ? textSelectionPositionAtCoords(currentEditor, pointerPosition)
+        : undefined
 
-    const position = pointerPosition ? currentEditor.view.posAtCoords(pointerPosition) : null
+  if (position !== undefined) {
+    currentEditor.chain().setTextSelection(position).focus().run()
+    return
+  }
 
-    if (position) {
-      currentEditor.chain().setTextSelection(position.pos).focus().run()
-      return
-    }
-
-    currentEditor.commands.focus('end')
-  })
+  currentEditor.commands.focus('end')
 }
 
 onMounted(() => {
@@ -122,11 +125,6 @@ watch(
 )
 
 onBeforeUnmount(() => {
-  if (initialFocusRafId !== undefined) {
-    window.cancelAnimationFrame(initialFocusRafId)
-    initialFocusRafId = undefined
-  }
-
   if (
     canPersistInlineTextOnUnmount({
       currentModelValue: getTextAtomValue(props.atomId),

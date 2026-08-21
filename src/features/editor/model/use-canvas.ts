@@ -2,9 +2,16 @@ import type { BlockPreset, CanvasBlockInstance } from './types'
 import type { Atom, AtomType, CellNode, RowNode } from '@/entities/block'
 import { nanoid } from 'nanoid'
 import { computed } from 'vue'
-import { createAtom, createBlockNode, createCellNode, createRowNode } from '@/entities/block'
+import {
+  createAtom,
+  createBlockNode,
+  createCellNode,
+  createRowNode,
+  createSocialRow,
+  createTextMenuRow,
+} from '@/entities/block'
 import { clone } from '@/shared/lib/clone'
-import { findCanvasBlockInstance } from './lib/canvas-state-utils'
+import { findCanvasBlockInstance, findCellById, findRowById } from './lib/canvas-state-utils'
 import {
   findRowContainerInRows,
   findRowInRows,
@@ -46,7 +53,7 @@ function _createCanvas() {
 
     const cloned: CanvasBlockInstance = {
       id: nanoid(8),
-      version: 2,
+      version: 3,
       block: clonedBlock,
     }
 
@@ -59,7 +66,7 @@ function _createCanvas() {
     const block = createBlockNode(label)
     const blockComponent: CanvasBlockInstance = {
       id: nanoid(8),
-      version: 2,
+      version: 3,
       block,
     }
 
@@ -149,10 +156,42 @@ function _createCanvas() {
 
     const nestedRow = createRowNode()
     if (insertIndex !== undefined)
-      cell.rows.splice(insertIndex, 0, nestedRow)
-    else cell.rows.push(nestedRow)
+      cell.children.splice(insertIndex, 0, nestedRow)
+    else cell.children.push(nestedRow)
 
     return nestedRow
+  }
+
+  function insertRecipeToCell(
+    blockId: string,
+    rowId: string,
+    cellId: string,
+    recipe: RowNode,
+    insertIndex?: number,
+  ) {
+    const blockComponent = findCanvasBlockInstance(blockId)
+    const parentRow = blockComponent && findRowInRows(blockComponent.block.rows, rowId)
+    const cell = parentRow?.cells.find(item => item.id === cellId)
+    if (!cell)
+      return
+
+    if (insertIndex !== undefined)
+      cell.children.splice(insertIndex, 0, recipe)
+    else cell.children.push(recipe)
+    return recipe
+  }
+
+  function insertMenuToCell(blockId: string, rowId: string, cellId: string, insertIndex?: number) {
+    return insertRecipeToCell(blockId, rowId, cellId, createTextMenuRow(), insertIndex)
+  }
+
+  function insertSocialToCell(
+    blockId: string,
+    rowId: string,
+    cellId: string,
+    insertIndex?: number,
+  ) {
+    return insertRecipeToCell(blockId, rowId, cellId, createSocialRow(), insertIndex)
   }
 
   function insertCellToRow(blockId: string, rowId: string, insertIndex?: number) {
@@ -234,8 +273,8 @@ function _createCanvas() {
 
     const atom = createAtom(atomType)
     if (insertIndex !== undefined)
-      cell.atoms.splice(insertIndex, 0, atom)
-    else cell.atoms.push(atom)
+      cell.children.splice(insertIndex, 0, atom)
+    else cell.children.push(atom)
 
     return atom
   }
@@ -253,9 +292,11 @@ function _createCanvas() {
     if (!cell)
       return
 
-    const atomIndex = cell.atoms.findIndex(atom => atom.id === atomId)
+    const atomIndex = cell.children.findIndex(
+      child => child.type !== 'row' && child.id === atomId,
+    )
     if (atomIndex !== -1) {
-      cell.atoms.splice(atomIndex, 1)
+      cell.children.splice(atomIndex, 1)
       if (selection.selectedAtomId.value === atomId)
         selection.selectCell(blockId, rowId, cellId)
     }
@@ -274,17 +315,19 @@ function _createCanvas() {
     if (!cell)
       return
 
-    const atomIndex = cell.atoms.findIndex(atom => atom.id === atomId)
+    const atomIndex = cell.children.findIndex(
+      child => child.type !== 'row' && child.id === atomId,
+    )
     if (atomIndex === -1)
       return
 
-    const sourceAtom = cell.atoms[atomIndex]
-    if (!sourceAtom)
+    const sourceAtom = cell.children[atomIndex]
+    if (!sourceAtom || sourceAtom.type === 'row')
       return
 
     const clonedAtom = clone<Atom>(sourceAtom)
     regenerateAtomId(clonedAtom)
-    cell.atoms.splice(atomIndex + 1, 0, clonedAtom)
+    cell.children.splice(atomIndex + 1, 0, clonedAtom)
 
     return clonedAtom
   }
@@ -335,7 +378,7 @@ function _createCanvas() {
     if (!cell)
       return
 
-    const { atoms } = cell
+    const atoms = cell.children
     if (
       oldIndex === newIndex
       || oldIndex < 0
@@ -352,6 +395,8 @@ function _createCanvas() {
 
     atoms.splice(newIndex, 0, atom)
   }
+
+  const moveCellChild = moveAtom
 
   function moveRow(blockId: string, oldIndex: number, newIndex: number) {
     const blockComponent = findCanvasBlockInstance(blockId)
@@ -386,7 +431,7 @@ function _createCanvas() {
 
     const cloned: CanvasBlockInstance = {
       id: nanoid(8),
-      version: 2,
+      version: 3,
       block: clonedBlock,
     }
 
@@ -447,6 +492,9 @@ function _createCanvas() {
     templateImportIssues,
     editableIndex,
     isCanvasBlockInstance,
+    findCanvasBlockInstance,
+    findRowById,
+    findCellById,
     addComponent,
     addNewToolToMultiTool: canvasTools.addNewToolToMultiTool,
     deleteMultiToolItem: canvasTools.deleteMultiToolItem,
@@ -455,6 +503,8 @@ function _createCanvas() {
     renameBlock,
     insertRowToBlock,
     insertRowToCell,
+    insertMenuToCell,
+    insertSocialToCell,
     removeRow,
     duplicateRow,
     insertCellToRow,
@@ -465,6 +515,7 @@ function _createCanvas() {
     duplicateAtom,
     moveCell,
     moveAtom,
+    moveCellChild,
     moveRow,
     moveComponent,
     clearCanvas,
