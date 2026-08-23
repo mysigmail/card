@@ -2,6 +2,7 @@
 import type { CSSProperties } from 'vue'
 import type { Atom, CellNode, RowNode } from '@/entities/block'
 import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
+import { resolveBorderStyle } from '@/features/email-preview/lib/resolve-border-style'
 
 interface Props {
   row: RowNode
@@ -94,6 +95,7 @@ function rowStyle(row: RowNode): CSSProperties {
   const style: CSSProperties & Record<string, string> = {
     width: s.widthMode === 'hug' ? 'auto' : '100%',
     tableLayout: s.widthMode === 'hug' ? 'auto' : 'fixed',
+    ...resolveBorderStyle(s.border),
   }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
@@ -218,7 +220,7 @@ function shouldDistributeAutoWidth(items: CellNode[]) {
 
 function itemStyle(item: CellNode, items: CellNode[], rawGap: number): CSSProperties {
   const s = item.settings
-  const style: CSSProperties = {}
+  const style: CSSProperties = { ...resolveBorderStyle(s.border) }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
     style.backgroundColor = s.backgroundColor

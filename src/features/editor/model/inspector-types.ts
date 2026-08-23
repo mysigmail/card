@@ -8,7 +8,7 @@ import type {
   RowNode,
   TextAtom,
 } from '@/entities/block'
-import type { BackgroundImageValue, SpacingValue } from '@/entities/style'
+import type { BackgroundImageValue, BorderValue, SpacingValue } from '@/entities/style'
 
 export interface BlockRef {
   kind: 'block'
@@ -43,6 +43,7 @@ export interface BlockPropertyMap {
   spacing: SpacingValue
   backgroundColor: string
   backgroundImage: BackgroundImageValue
+  border: BorderValue | undefined
 }
 
 export interface RowPropertyMap extends BlockPropertyMap {

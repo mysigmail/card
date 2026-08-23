@@ -11,3 +11,18 @@ export interface BackgroundImageValue {
   size: 'unset' | 'cover' | 'contain'
   position: 'top' | 'center' | 'bottom' | 'left' | 'right'
 }
+
+export type BorderStyle = 'solid' | 'dashed' | 'dotted'
+
+export interface BorderSideValue {
+  width: number
+  style: BorderStyle
+  color: string
+}
+
+export interface BorderValue {
+  top?: BorderSideValue
+  right?: BorderSideValue
+  bottom?: BorderSideValue
+  left?: BorderSideValue
+}

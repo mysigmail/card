@@ -1,4 +1,4 @@
-import type { BackgroundImageValue, SpacingValue } from '@/entities/style'
+import type { BackgroundImageValue, BorderValue, SpacingValue } from '@/entities/style'
 
 export interface BaseAtom {
   id: string
@@ -48,12 +48,14 @@ export interface BlockSettings {
   spacing: SpacingValue
   backgroundColor: string
   backgroundImage?: BackgroundImageValue
+  border?: BorderValue
 }
 
 export interface RowSettings {
   spacing: SpacingValue
   backgroundColor: string
   backgroundImage?: BackgroundImageValue
+  border?: BorderValue
   hiddenOnMobile?: boolean
   collapseOnMobile?: boolean
   height?: number
@@ -65,6 +67,7 @@ export interface CellSettings {
   spacing: SpacingValue
   backgroundColor: string
   backgroundImage?: BackgroundImageValue
+  border?: BorderValue
   link?: string
   hiddenOnMobile?: boolean
   verticalAlign: 'top' | 'middle' | 'bottom'

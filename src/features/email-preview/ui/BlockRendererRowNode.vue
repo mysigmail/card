@@ -7,6 +7,7 @@ import { useSelection } from '@/features/editor'
 import { useInlineTextEditing } from '@/features/editor/components/tools/text/composables/use-inline-text-editing'
 import { textOffsetAtCoords } from '@/features/editor/components/tools/text/inline-text-session'
 import InlineTextEditor from '@/features/editor/components/tools/text/InlineTextEditor.vue'
+import { resolveBorderStyle } from '@/features/email-preview/lib/resolve-border-style'
 
 interface Props {
   blockId: string
@@ -103,6 +104,7 @@ function rowStyle(row: RowNode): CSSProperties {
   const style: CSSProperties & Record<string, string> = {
     width: s.widthMode === 'hug' ? 'auto' : '100%',
     tableLayout: s.widthMode === 'hug' ? 'auto' : 'fixed',
+    ...resolveBorderStyle(s.border),
   }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
@@ -227,7 +229,7 @@ function shouldDistributeAutoWidth(items: CellNode[]) {
 
 function itemStyle(item: CellNode, items: CellNode[], rawGap: number): CSSProperties {
   const s = item.settings
-  const style: CSSProperties = {}
+  const style: CSSProperties = { ...resolveBorderStyle(s.border) }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
     style.backgroundColor = s.backgroundColor

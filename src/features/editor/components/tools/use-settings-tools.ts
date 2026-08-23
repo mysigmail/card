@@ -1,3 +1,4 @@
+import type { BorderValue } from '@/entities/style'
 import type {
   AtomRef,
   BackgroundImageTool,
@@ -14,11 +15,22 @@ import { useCanvas, useSelection } from '@/features/editor/model'
 
 export type DimensionMode = 'auto' | 'manual'
 type InspectorControlOf<T extends Tool> = T & { onUpdate: (value: T['value']) => void }
-export type InspectorControl = Tool extends infer T
+type ToolInspectorControl = Tool extends infer T
   ? T extends Tool
     ? InspectorControlOf<T>
     : never
   : never
+
+export interface BorderInspectorControl {
+  id: string
+  key: 'border'
+  label: string
+  type: 'border'
+  value: BorderValue | undefined
+  onUpdate: (value: BorderValue | undefined) => void
+}
+
+export type InspectorControl = ToolInspectorControl | BorderInspectorControl
 
 export const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   url: '',
@@ -152,6 +164,14 @@ export function useSettingsTools() {
         value: normalizeBackgroundImage(block.settings.backgroundImage),
         onUpdate: value => update({ ref, property: 'backgroundImage', value }),
       },
+      {
+        id: 'block-border',
+        key: 'border',
+        label: 'Border',
+        type: 'border',
+        value: block.settings.border,
+        onUpdate: value => update({ ref, property: 'border', value }),
+      },
     ]
   })
 
@@ -226,6 +246,14 @@ export function useSettingsTools() {
         value: normalizeBackgroundImage(row.settings.backgroundImage),
         onUpdate: value => update({ ref, property: 'backgroundImage', value }),
       },
+      {
+        id: 'row-border',
+        key: 'border',
+        label: 'Border',
+        type: 'border',
+        value: row.settings.border,
+        onUpdate: value => update({ ref, property: 'border', value }),
+      },
     ]
   })
 
@@ -262,6 +290,14 @@ export function useSettingsTools() {
         value: cell.settings.borderRadius ?? 0,
         onUpdate: value =>
           update({ ref, property: 'borderRadius', value: Math.max(0, Number(value) || 0) }),
+      },
+      {
+        id: 'cell-border',
+        key: 'border',
+        label: 'Border',
+        type: 'border',
+        value: cell.settings.border,
+        onUpdate: value => update({ ref, property: 'border', value }),
       },
       {
         id: 'cell-background-color',
@@ -449,7 +485,6 @@ export function useSettingsTools() {
     () => selection.selectedCell.value?.settings.hiddenOnMobile ?? false,
   )
   const atomHiddenOnMobile = computed(() => selection.selectedAtom.value?.hiddenOnMobile ?? false)
-
   return {
     cellWidthMode,
     cellHeightMode,

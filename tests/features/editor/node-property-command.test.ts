@@ -67,11 +67,12 @@ function createFixture() {
 describe('typed inspector registry and mutation gateway', () => {
   it('publishes the closed capability keys for all seven node variants', () => {
     expect(inspectorCapabilities).toEqual({
-      block: ['spacing', 'backgroundColor', 'backgroundImage'],
+      block: ['spacing', 'backgroundColor', 'backgroundImage', 'border'],
       row: [
         'spacing',
         'backgroundColor',
         'backgroundImage',
+        'border',
         'widthMode',
         'gap',
         'height',
@@ -82,6 +83,7 @@ describe('typed inspector registry and mutation gateway', () => {
         'spacing',
         'backgroundColor',
         'backgroundImage',
+        'border',
         'link',
         'hiddenOnMobile',
         'verticalAlign',
@@ -185,6 +187,73 @@ describe('typed inspector registry and mutation gateway', () => {
       ok: false,
       reason: 'invalid-value',
     })
+  })
+
+  it('normalizes valid borders and rejects invalid border batches atomically', () => {
+    const fixture = createFixture()
+    const rowRef: RowRef = { kind: 'row', blockId: fixture.block.id, rowId: fixture.row.id }
+    const blockRef = { kind: 'block' as const, blockId: fixture.block.id }
+    const cellRef: CellRef = {
+      kind: 'cell',
+      blockId: fixture.block.id,
+      rowId: fixture.row.id,
+      cellId: fixture.row.cells[0]!.id,
+    }
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: blockRef,
+        property: 'border',
+        value: { left: { width: 1, style: 'solid', color: '#000' } },
+      }),
+    ).toEqual({ ok: true, changed: true })
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: cellRef,
+        property: 'border',
+        value: { bottom: { width: 3, style: 'dotted', color: '#fff' } },
+      }),
+    ).toEqual({ ok: true, changed: true })
+    expect(getNodePropertyState(fixture.items, blockRef, 'border')).toEqual({
+      kind: 'value',
+      value: { left: { width: 1, style: 'solid', color: '#000000' } },
+    })
+    expect(getNodePropertyState(fixture.items, cellRef, 'border')).toEqual({
+      kind: 'value',
+      value: { bottom: { width: 3, style: 'dotted', color: '#FFFFFF' } },
+    })
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: rowRef,
+        property: 'border',
+        value: { top: { width: 2, style: 'dashed', color: '#abc' } },
+      }),
+    ).toEqual({ ok: true, changed: true })
+    expect(fixture.row.settings.border).toEqual({
+      top: { width: 2, style: 'dashed', color: '#AABBCC' },
+    })
+
+    const before = structuredClone(fixture.row.settings.border)
+    expect(
+      updateNodeProperties(fixture.items, [
+        { ref: rowRef, property: 'gap', value: 12 },
+        {
+          ref: rowRef,
+          property: 'border',
+          value: { left: { width: 0, style: 'solid', color: '#000000' } },
+        },
+      ]),
+    ).toEqual({ ok: false, reason: 'invalid-value' })
+    expect(fixture.row.settings.gap).toBe(0)
+    expect(fixture.row.settings.border).toEqual(before)
+
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: rowRef,
+        property: 'border',
+        value: undefined,
+      }),
+    ).toEqual({ ok: true, changed: true })
+    expect(fixture.row.settings.border).toBeUndefined()
   })
 
   it('preflights a batch atomically and applies a valid image batch', () => {

@@ -5,7 +5,8 @@ import type {
   RowPropertyMap,
 } from './inspector-types'
 import type { Atom, AtomType, BlockNode, CellNode, RowNode } from '@/entities/block'
-import type { BackgroundImageValue, Insets, SpacingValue } from '@/entities/style'
+import type { BackgroundImageValue, BorderValue, Insets, SpacingValue } from '@/entities/style'
+import { normalizeBorderValue } from '@/entities/style'
 import { sanitizeTextEditorHtml } from '@/entities/template'
 
 interface Normalized<T> {
@@ -139,6 +140,22 @@ function jsonEqual<T>(current: T, next: T) {
   return JSON.stringify(current) === JSON.stringify(next)
 }
 
+function borderDescriptor<N extends BlockNode | RowNode | CellNode>() {
+  return defineDescriptor<N, BorderValue | undefined>({
+    read: node => node.settings.border,
+    normalize: (value) => {
+      if (value === undefined)
+        return normalized(undefined)
+      const border = normalizeBorderValue(value)
+      return border ? normalized(border) : invalid()
+    },
+    equal: jsonEqual,
+    apply: (node, value) => {
+      node.settings.border = value
+    },
+  })
+}
+
 function strictEqual<T>(current: T, next: T) {
   return current === next
 }
@@ -220,6 +237,7 @@ export const blockPropertyRegistry = {
       node.settings.backgroundImage = value
     },
   }),
+  border: borderDescriptor<BlockNode>(),
 } satisfies PropertyRegistry<BlockNode, BlockPropertyMap>
 
 export const rowPropertyRegistry = {
@@ -246,6 +264,7 @@ export const rowPropertyRegistry = {
       node.settings.backgroundImage = value
     },
   }),
+  border: borderDescriptor<RowNode>(),
   widthMode: defineDescriptor<RowNode, 'fill' | 'hug'>({
     read: node => node.settings.widthMode,
     normalize: value => (value === 'fill' || value === 'hug' ? normalized(value) : invalid()),
@@ -312,6 +331,7 @@ export const cellPropertyRegistry = {
       node.settings.backgroundImage = value
     },
   }),
+  border: borderDescriptor<CellNode>(),
   link: defineDescriptor<CellNode, string>({
     read: node => node.settings.link ?? '',
     normalize: normalizeTrimmedString,
