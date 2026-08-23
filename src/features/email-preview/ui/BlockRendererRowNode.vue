@@ -405,7 +405,6 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
               :data-node-id="`atom:${child.id}`"
               :tabindex="editingAtomId === child.id ? -1 : 0"
               @click.stop="selectAtomNode(row.id, cell.id, child.id, $event)"
-              @dblclick.stop="startTextEditing(row.id, cell.id, child.id, $event)"
               @keydown="onTextAtomKeydown($event, child.id)"
             >
               <InlineTextEditor
@@ -423,6 +422,8 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
               <div
                 v-else
                 class="p-text-atom-content"
+                data-selection-content
+                @dblclick.stop.prevent="startTextEditing(row.id, cell.id, child.id, $event)"
                 v-html="renderTextAtomHtml(child) || '&nbsp;'"
               />
             </EmailTextBox>
@@ -437,6 +438,7 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
               <MButton
                 :href="child.link"
                 :style="buttonStyle(child)"
+                data-selection-owner
               >
                 {{ child.text }}
               </MButton>
@@ -450,6 +452,7 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
               @click.stop="selectAtomNode(row.id, cell.id, child.id)"
             >
               <MHr
+                data-selection-owner
                 :style="{
                   borderColor: child.color,
                   borderWidth: `${child.height}px`,
@@ -476,6 +479,7 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
                   :src="child.src"
                   :alt="child.alt"
                   :style="imageStyle(child, cell.settings.horizontalAlign)"
+                  data-selection-owner
                 />
               </MLink>
             </div>

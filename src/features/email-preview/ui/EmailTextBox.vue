@@ -17,6 +17,10 @@ interface Props {
 
 defineOptions({ inheritAttrs: false })
 defineProps<Props>()
+const emit = defineEmits<{
+  click: [event: MouseEvent]
+  keydown: [event: KeyboardEvent]
+}>()
 
 function cellStyle(atom: TextAtom, preview = false) {
   const style = {
@@ -33,9 +37,12 @@ function cellStyle(atom: TextAtom, preview = false) {
     v-bind="$attrs"
     data-slot="email-text-box"
     :style="resolveTextBoxRootStyle(atom)"
+    @click="emit('click', $event)"
+    @keydown="emit('keydown', $event)"
   >
     <MRow
       v-if="isTextBoxEnabled(atom)"
+      :data-selection-owner="preview ? '' : undefined"
       :style="resolveTextBoxTableStyle(atom, horizontalAlign)"
     >
       <MColumn

@@ -293,6 +293,10 @@ describe('strict v1 borders', () => {
       expect(imageOwner.style.borderBottomWidth).toBe('4px')
       expect(imageOwner.style.borderBottomStyle).toBe('dotted')
       expect(imageOwner.style.borderBottomColor).toBe('rgb(119, 136, 153)')
+      expect(textTable.hasAttribute('data-selection-owner')).toBe(kind === 'preview')
+      expect(buttonOwner.hasAttribute('data-selection-owner')).toBe(kind === 'preview')
+      expect(imageOwner.hasAttribute('data-selection-owner')).toBe(kind === 'preview')
+      expect(document.querySelector('[data-selection-content]') !== null).toBe(kind === 'preview')
 
       expect(buttonOwner.parentElement?.style.cssText ?? '').not.toMatch(
         /border-(?:top|right|bottom|left):/,

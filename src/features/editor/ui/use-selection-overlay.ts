@@ -2,6 +2,60 @@ import type { CSSProperties, Ref } from 'vue'
 import { computed, nextTick, onBeforeUnmount, onMounted, reactive, watch } from 'vue'
 import { useCanvas, useSelection } from '@/features/editor/model'
 
+interface SelectionRect {
+  top: number
+  right: number
+  bottom: number
+  left: number
+  width: number
+  height: number
+}
+
+const TEXT_BLOCK_SELECTOR = 'p,h1,h2,h3,h4,h5,h6,blockquote,li'
+
+function measureTextContent(container: HTMLElement): SelectionRect | undefined {
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT)
+  let bounds: SelectionRect | undefined
+  let current = walker.nextNode()
+
+  while (current) {
+    if (current.textContent?.trim()) {
+      const range = document.createRange()
+      range.selectNodeContents(current)
+      for (const rect of Array.from(range.getClientRects())) {
+        if (rect.width <= 0 || rect.height <= 0)
+          continue
+        const block = current.parentElement?.closest<HTMLElement>(TEXT_BLOCK_SELECTOR)
+        const blockRect = block?.getBoundingClientRect()
+        const top = blockRect?.top ?? rect.top
+        const bottom = blockRect?.bottom ?? rect.bottom
+        bounds = bounds
+          ? {
+              top: Math.min(bounds.top, top),
+              right: Math.max(bounds.right, rect.right),
+              bottom: Math.max(bounds.bottom, bottom),
+              left: Math.min(bounds.left, rect.left),
+              width: 0,
+              height: 0,
+            }
+          : {
+              top,
+              right: rect.right,
+              bottom,
+              left: rect.left,
+              width: 0,
+              height: 0,
+            }
+        bounds.width = bounds.right - bounds.left
+        bounds.height = bounds.bottom - bounds.top
+      }
+    }
+    current = walker.nextNode()
+  }
+
+  return bounds
+}
+
 export function useSelectionOverlay(surfaceRef: Ref<HTMLElement | undefined>) {
   const { installed } = useCanvas()
   const {
@@ -101,17 +155,26 @@ export function useSelectionOverlay(surfaceRef: Ref<HTMLElement | undefined>) {
       return
     }
 
-    const target = surface.querySelector<HTMLElement>(`[data-node-id="${nodeId}"]`)
-    if (!target) {
+    const nodeTarget = surface.querySelector<HTMLElement>(`[data-node-id="${nodeId}"]`)
+    if (!nodeTarget) {
       observeSelectionTarget()
       resetSelectionOverlay()
       return
     }
 
-    observeSelectionTarget(target)
+    const visualTarget
+      = nodeTarget.querySelector<HTMLElement>('[data-selection-owner]') || nodeTarget
+    observeSelectionTarget(visualTarget)
 
     const surfaceRect = surface.getBoundingClientRect()
-    const targetRect = target.getBoundingClientRect()
+    const textContent
+      = selectionLevel.value === 'atom' && selectedAtom.value?.type === 'text'
+        ? nodeTarget.querySelector<HTMLElement>('[data-selection-content]')
+        : undefined
+    const targetRect
+      = visualTarget === nodeTarget && textContent
+        ? measureTextContent(textContent) || nodeTarget.getBoundingClientRect()
+        : visualTarget.getBoundingClientRect()
 
     if (targetRect.width <= 0 || targetRect.height <= 0) {
       resetSelectionOverlay()
