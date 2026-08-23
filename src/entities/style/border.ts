@@ -1,4 +1,5 @@
 import type { BorderSideValue, BorderStyle, BorderValue } from './types'
+import { normalizeEmailColor } from './email-color'
 
 export const BORDER_SIDES = ['top', 'right', 'bottom', 'left'] as const
 export const BORDER_STYLES: readonly BorderStyle[] = ['solid', 'dashed', 'dotted']
@@ -44,7 +45,7 @@ export function normalizeBorderSide(value: unknown): BorderSideValue | undefined
     return undefined
   if (typeof value.color !== 'string')
     return undefined
-  const color = normalizeOpaqueHex(value.color)
+  const color = normalizeEmailColor(value.color)
   if (!color)
     return undefined
   return { width: value.width as number, style: value.style as BorderStyle, color }

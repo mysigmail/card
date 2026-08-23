@@ -11,6 +11,7 @@ import {
   parseTemplateExportJson,
   parseTemplateExportPayload,
 } from '@/entities/template'
+import { addEmailColorFallbacksToHtml } from '@/features/email-preview/lib/email-color-fallback'
 import EmailExportDocument from '@/features/email-preview/ui/EmailExportDocument.vue'
 import { clone } from '@/shared/lib/clone'
 import { general, installed, templateImportIssues } from './state'
@@ -104,7 +105,7 @@ function _createTemplateIO() {
       },
     })
 
-    const html = renderEmailHtml(ExportRoot)
+    const html = addEmailColorFallbacksToHtml(renderEmailHtml(ExportRoot))
     return sanitizeExportedHtml(html)
   }
 

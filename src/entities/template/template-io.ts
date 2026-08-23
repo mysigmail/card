@@ -17,9 +17,10 @@ import {
   BORDER_STYLES,
   normalizeBorderRadiusValue,
   normalizeBorderValue,
-  normalizeOpaqueHex,
+  normalizeEmailColor,
 } from '@/entities/style'
 import { clone } from '@/shared/lib/clone'
+import { splitCssDeclarations, splitCssProperty } from '@/shared/lib/css-style'
 import { TEMPLATE_EXPORT_VERSION, TEMPLATE_MAX_COMPONENTS, TEMPLATE_MAX_JSON_BYTES } from './types'
 
 interface CreateTemplateExportPayloadOptions {
@@ -445,8 +446,8 @@ function validateGeneral(general: unknown, path: string, issues: TemplateValidat
       issues,
     )
 
-    if (!isString(background.color))
-      pushIssue(issues, `${path}.background.color`, 'background.color must be a string')
+    if (!normalizeEmailColor(background.color))
+      pushIssue(issues, `${path}.background.color`, 'background.color must be an email color')
 
     if (background.image !== undefined && !isString(background.image)) {
       pushIssue(issues, `${path}.background.image`, 'background.image must be a string')
@@ -579,8 +580,8 @@ function validateBorderValue(value: unknown, path: string, issues: TemplateValid
     ) {
       pushIssue(issues, `${sidePath}.style`, 'border style must be "solid", "dashed" or "dotted"')
     }
-    if (typeof sideValue.color !== 'string' || !normalizeOpaqueHex(sideValue.color)) {
-      pushIssue(issues, `${sidePath}.color`, 'border color must be an opaque hex color')
+    if (!normalizeEmailColor(sideValue.color)) {
+      pushIssue(issues, `${sidePath}.color`, 'border color must be an email color')
     }
   }
 }
@@ -676,11 +677,15 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
       pushIssue(issues, `${path}.text`, 'button atom text must be a string')
     if (!isString(value.link))
       pushIssue(issues, `${path}.link`, 'button atom link must be a string')
-    if (!isString(value.backgroundColor)) {
-      pushIssue(issues, `${path}.backgroundColor`, 'button atom backgroundColor must be a string')
+    if (!normalizeEmailColor(value.backgroundColor)) {
+      pushIssue(
+        issues,
+        `${path}.backgroundColor`,
+        'button atom backgroundColor must be an email color',
+      )
     }
-    if (!isString(value.color))
-      pushIssue(issues, `${path}.color`, 'button atom color must be a string')
+    if (!normalizeEmailColor(value.color))
+      pushIssue(issues, `${path}.color`, 'button atom color must be an email color')
     if (!isFiniteNumber(value.fontSize)) {
       pushIssue(issues, `${path}.fontSize`, 'button atom fontSize must be a finite number')
     }
@@ -703,8 +708,8 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
       issues,
     )
 
-    if (!isString(value.color))
-      pushIssue(issues, `${path}.color`, 'divider atom color must be a string')
+    if (!normalizeEmailColor(value.color))
+      pushIssue(issues, `${path}.color`, 'divider atom color must be an email color')
     if (!isFiniteNumber(value.height)) {
       pushIssue(issues, `${path}.height`, 'divider atom height must be a finite number')
     }
@@ -812,11 +817,11 @@ function validateCellNode(value: unknown, path: string, issues: TemplateValidati
 
     validateSpacingValue(value.settings.spacing, `${path}.settings.spacing`, issues)
 
-    if (!isString(value.settings.backgroundColor)) {
+    if (!normalizeEmailColor(value.settings.backgroundColor, { allowTransparent: true })) {
       pushIssue(
         issues,
         `${path}.settings.backgroundColor`,
-        'cell.settings.backgroundColor must be a string',
+        'cell.settings.backgroundColor must be an email color',
       )
     }
 
@@ -940,11 +945,11 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
 
     validateSpacingValue(value.settings.spacing, `${path}.settings.spacing`, issues)
 
-    if (!isString(value.settings.backgroundColor)) {
+    if (!normalizeEmailColor(value.settings.backgroundColor, { allowTransparent: true })) {
       pushIssue(
         issues,
         `${path}.settings.backgroundColor`,
-        'row.settings.backgroundColor must be a string',
+        'row.settings.backgroundColor must be an email color',
       )
     }
 
@@ -1048,11 +1053,11 @@ function validateCanvasBlockInstance(
 
     validateSpacingValue(block.settings.spacing, `${path}.block.settings.spacing`, issues)
 
-    if (!isString(block.settings.backgroundColor)) {
+    if (!normalizeEmailColor(block.settings.backgroundColor, { allowTransparent: true })) {
       pushIssue(
         issues,
         `${path}.block.settings.backgroundColor`,
-        'block.settings.backgroundColor must be a string',
+        'block.settings.backgroundColor must be an email color',
       )
     }
 
@@ -1167,8 +1172,21 @@ function _validateTool(
   })
 }
 
+function normalizeTextStyleColors(value: string) {
+  return value.replace(/style=(['"])(.*?)\1/gi, (_attribute, quote: string, style: string) => {
+    const declarations = splitCssDeclarations(style).flatMap((declaration) => {
+      const parsed = splitCssProperty(declaration)
+      if (!parsed || !['color', 'background-color'].includes(parsed.property.toLowerCase()))
+        return declaration
+      const color = normalizeEmailColor(parsed.value)
+      return color ? `${parsed.property}:${color}` : []
+    })
+    return declarations.length > 0 ? `style=${quote}${declarations.join(';')}${quote}` : ''
+  })
+}
+
 export function sanitizeTextEditorHtml(value: string) {
-  return sanitizeHtmlLib(value, EMAIL_TEXT_SANITIZE_OPTIONS)
+  return sanitizeHtmlLib(normalizeTextStyleColors(value), EMAIL_TEXT_SANITIZE_OPTIONS)
 }
 
 function _sanitizeTools(tools: Tool[]): Tool[] {
@@ -1233,16 +1251,23 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
       const { border: _border, ...button } = atom
       return {
         ...button,
+        backgroundColor: normalizeEmailColor(atom.backgroundColor)!,
+        color: normalizeEmailColor(atom.color)!,
         borderRadius: normalizeBorderRadiusValue(atom.borderRadius)!,
         hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
         ...sanitizeBorderProperty(atom.border),
       }
     }
 
-    return {
-      ...atom,
-      hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+    if (atom.type === 'divider') {
+      return {
+        ...atom,
+        color: normalizeEmailColor(atom.color)!,
+        hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+      }
     }
+
+    return atom
   })
 }
 
@@ -1265,6 +1290,9 @@ function sanitizeCellNodes(cells: CellNode[]): CellNode[] {
     const { border: _border, borderRadius: _borderRadius, ...cellSettings } = cell.settings
     const settings = {
       ...cellSettings,
+      backgroundColor: normalizeEmailColor(cell.settings.backgroundColor, {
+        allowTransparent: true,
+      })!,
       link: typeof cell.settings?.link === 'string' ? cell.settings.link : undefined,
       hiddenOnMobile: toOptionalBoolean(cell.settings?.hiddenOnMobile),
       ...sanitizeBorderRadiusProperty(cell.settings?.borderRadius),
@@ -1292,6 +1320,9 @@ function sanitizeRowNodes(rows: RowNode[]): RowNode[] {
       type: 'row',
       settings: {
         ...rowSettings,
+        backgroundColor: normalizeEmailColor(row.settings.backgroundColor, {
+          allowTransparent: true,
+        })!,
         hiddenOnMobile: toOptionalBoolean(row.settings?.hiddenOnMobile),
         collapseOnMobile:
           typeof row.settings?.collapseOnMobile === 'boolean'
@@ -1312,6 +1343,9 @@ function sanitizeBlock(block: BlockNode): BlockNode {
     ...block,
     settings: {
       ...blockSettings,
+      backgroundColor: normalizeEmailColor(block.settings.backgroundColor, {
+        allowTransparent: true,
+      })!,
       ...sanitizeBorderRadiusProperty(block.settings?.borderRadius),
       ...sanitizeBorderProperty(block.settings?.border),
     },
@@ -1321,6 +1355,10 @@ function sanitizeBlock(block: BlockNode): BlockNode {
 
 function sanitizeTemplatePayload(payload: TemplateExportV1): TemplateExportV1 {
   const sanitized = clone<TemplateExportV1>(payload)
+
+  sanitized.editor.general.background.color = normalizeEmailColor(
+    sanitized.editor.general.background.color,
+  )!
 
   sanitized.canvas.components = sanitized.canvas.components.map((component) => {
     return {
