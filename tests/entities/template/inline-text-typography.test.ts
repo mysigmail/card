@@ -45,8 +45,8 @@ describe('inline text typography contract', () => {
     const output = sanitizeTextEditorHtml(editor.getHTML())
     editor.destroy()
 
-    expect(output).toContain('<div style="color:rgb(31, 23, 18)">')
-    expect(output).toContain('<span style="color:rgb(255, 107, 0)">accent</span>')
+    expect(output).toContain('<div style="color:#1F1712">')
+    expect(output).toContain('<span style="color:#FF6B00">accent</span>')
     expect(output).toContain('<ul><li><p>List item</p></li></ul>')
 
     const secondEditor = new Editor({ content: output, extensions: createInlineTextExtensions() })

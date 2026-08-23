@@ -153,7 +153,7 @@ describe('strict v1 borders', () => {
     [{ top: { width: 0, style: 'solid', color: '#000000' } }, 'border width'],
     [{ top: { width: 1.5, style: 'solid', color: '#000000' } }, 'border width'],
     [{ top: { width: 1, style: 'double', color: '#000000' } }, 'border style'],
-    [{ top: { width: 1, style: 'solid', color: '#00000080' } }, 'border color'],
+    [{ top: { width: 1, style: 'solid', color: 'rgba(0,0,0,2)' } }, 'border color'],
     [{ top: { width: 1, style: 'solid', color: '#000000', future: true } }, 'Unknown property'],
     [{ top: { width: 1, style: 'solid', color: '#000000' }, future: {} }, 'Unknown property'],
   ])('rejects an invalid border %#', (border, message) => {

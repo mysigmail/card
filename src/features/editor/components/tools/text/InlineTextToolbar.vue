@@ -21,7 +21,7 @@ import UilArrowsHAlt from '~icons/uil/arrows-h-alt'
 import UilArrowsVAlt from '~icons/uil/arrows-v-alt'
 import UilText from '~icons/uil/text'
 import UilTextFields from '~icons/uil/text-fields'
-import { useCanvas } from '@/features/editor/model'
+import { useCanvas, useColorPalettes } from '@/features/editor/model'
 import { Button } from '@/shared/ui/button'
 import { ColorPicker } from '@/shared/ui/color-picker'
 import { Input } from '@/shared/ui/input'
@@ -45,6 +45,7 @@ const props = defineProps<Props>()
 const toolbar = ref<HTMLElement>()
 const { toolbarPosition } = useInlineToolbarPosition(props.editor, toolbar)
 const { general } = useCanvas()
+const { documentColors, recentColors, rememberColor } = useColorPalettes()
 
 const DEFAULT_STYLE_VALUE = '__default__'
 const MIXED_STYLE_VALUE = '__mixed__'
@@ -551,7 +552,10 @@ function stringValue(value: unknown) {
     <ColorPicker
       :model-value="textStyleValue('color') || '#000000'"
       :presets="COLOR_PRESETS"
+      :recent-colors="recentColors"
+      :document-colors="documentColors"
       size="sm"
+      @commit="rememberColor"
       @update:model-value="setTextColor"
     />
   </div>

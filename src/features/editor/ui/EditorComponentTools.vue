@@ -56,6 +56,7 @@ function update(tool: Tool | InspectorControl, value: unknown) {
         :id="i.id"
         :value="i.value"
         :title="i.label"
+        :reset-value="i.resetValue"
         @update:value="(value) => update(i, value)"
       />
       <BorderSettings

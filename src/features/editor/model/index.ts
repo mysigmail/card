@@ -8,6 +8,7 @@ export {
 } from './node-property-command'
 export * from './types'
 export { useCanvas } from './use-canvas'
+export { useColorPalettes } from './use-color-palettes'
 export { useHistory } from './use-history'
 export { usePersistence } from './use-persistence'
 export { useSelection } from './use-selection'

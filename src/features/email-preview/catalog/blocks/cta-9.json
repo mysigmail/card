@@ -23,7 +23,7 @@
         "id": "GxT6wjo4",
         "settings": {
           "spacing": {},
-          "backgroundColor": "",
+          "backgroundColor": "transparent",
           "hiddenOnMobile": false,
           "collapseOnMobile": true,
           "gap": 0,

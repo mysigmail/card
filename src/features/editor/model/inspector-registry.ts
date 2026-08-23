@@ -16,6 +16,7 @@ import {
   createBorderRadiusValue,
   normalizeBorderRadiusValue,
   normalizeBorderValue,
+  normalizeEmailColor,
 } from '@/entities/style'
 import { sanitizeTextEditorHtml } from '@/entities/template'
 
@@ -56,6 +57,11 @@ function normalized<T>(value: T): Normalized<T> {
 
 function invalid(): Invalid {
   return { ok: false }
+}
+
+function normalizeColor(value: unknown, allowTransparent = false): NormalizeResult<string> {
+  const color = normalizeEmailColor(value, { allowTransparent })
+  return color ? normalized(color) : invalid()
 }
 
 function isInsets(value: unknown): value is Insets {
@@ -248,7 +254,7 @@ export const blockPropertyRegistry = {
   spacing: blockSpacing,
   backgroundColor: defineDescriptor<BlockNode, string>({
     read: node => node.settings.backgroundColor,
-    normalize: normalizeString,
+    normalize: value => normalizeColor(value, true),
     equal: strictEqual,
     apply: (node, value) => {
       node.settings.backgroundColor = value
@@ -283,7 +289,7 @@ export const rowPropertyRegistry = {
   spacing: rowSpacing,
   backgroundColor: defineDescriptor<RowNode, string>({
     read: node => node.settings.backgroundColor,
-    normalize: normalizeString,
+    normalize: value => normalizeColor(value, true),
     equal: strictEqual,
     apply: (node, value) => {
       node.settings.backgroundColor = value
@@ -358,7 +364,7 @@ export const cellPropertyRegistry = {
   spacing: cellSpacing,
   backgroundColor: defineDescriptor<CellNode, string>({
     read: node => node.settings.backgroundColor,
-    normalize: normalizeString,
+    normalize: value => normalizeColor(value, true),
     equal: strictEqual,
     apply: (node, value) => {
       node.settings.backgroundColor = value
@@ -521,7 +527,7 @@ export const atomPropertyRegistry = {
     }),
     backgroundColor: defineDescriptor<ButtonAtom, string>({
       read: node => node.backgroundColor,
-      normalize: normalizeString,
+      normalize: value => normalizeColor(value),
       equal: strictEqual,
       apply: (node, value) => {
         node.backgroundColor = value
@@ -529,7 +535,7 @@ export const atomPropertyRegistry = {
     }),
     color: defineDescriptor<ButtonAtom, string>({
       read: node => node.color,
-      normalize: normalizeString,
+      normalize: value => normalizeColor(value),
       equal: strictEqual,
       apply: (node, value) => {
         node.color = value
@@ -557,7 +563,7 @@ export const atomPropertyRegistry = {
     hiddenOnMobile: atomVisibility<DividerAtom>(),
     color: defineDescriptor<DividerAtom, string>({
       read: node => node.color,
-      normalize: normalizeString,
+      normalize: value => normalizeColor(value),
       equal: strictEqual,
       apply: (node, value) => {
         node.color = value

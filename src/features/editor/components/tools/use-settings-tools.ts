@@ -168,6 +168,7 @@ export function useSettingsTools() {
         label: 'Background Color',
         type: 'colorPicker',
         value: block.settings.backgroundColor,
+        resetValue: 'transparent',
         onUpdate: value => update({ ref, property: 'backgroundColor', value }),
       },
       {
@@ -258,6 +259,7 @@ export function useSettingsTools() {
         label: 'Background Color',
         type: 'colorPicker',
         value: row.settings.backgroundColor,
+        resetValue: 'transparent',
         onUpdate: value => update({ ref, property: 'backgroundColor', value }),
       },
       {
@@ -334,6 +336,7 @@ export function useSettingsTools() {
         label: 'Background Color',
         type: 'colorPicker',
         value: cell.settings.backgroundColor,
+        resetValue: 'transparent',
         onUpdate: value => update({ ref, property: 'backgroundColor', value }),
       },
       {
