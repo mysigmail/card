@@ -269,6 +269,14 @@ export function normalizeColorPickerInput(value: unknown): string | undefined {
   return normalizeEmailColorChannels(hslToEmailColorChannels({ hue, saturation, lightness, alpha }))
 }
 
+export function normalizeHexColorPickerInput(value: unknown): string | undefined {
+  if (typeof value !== 'string')
+    return undefined
+  const trimmed = value.trim()
+  const hex = trimmed.startsWith('#') ? trimmed : `#${trimmed}`
+  return HEX_PATTERN.test(hex) ? normalizeEmailColor(hex) : undefined
+}
+
 export function resolveOpaqueEmailColor(value: string) {
   if (value === 'transparent')
     return '#FFFFFF'
@@ -288,6 +296,12 @@ export function toPickerHexAlpha(value: string) {
   if (!color)
     return '#000000FF'
   return `#${byteToHex(color.red)}${byteToHex(color.green)}${byteToHex(color.blue)}${byteToHex(color.alpha * 255)}`
+}
+
+export function toPickerHexInput(value: string) {
+  if (value === 'transparent')
+    return '#000000'
+  return toPickerHexAlpha(value).slice(0, 7)
 }
 
 export function formatColorChannel(value: number) {

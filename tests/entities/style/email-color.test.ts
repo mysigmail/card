@@ -15,9 +15,11 @@ import {
   hsvToHslColorChannels,
   normalizeColorPickerInput,
   normalizeEmailColor,
+  normalizeHexColorPickerInput,
   parseEmailColor,
   resolveOpaqueEmailColor,
   toPickerHexAlpha,
+  toPickerHexInput,
 } from '@/entities/style'
 import { parseTemplateExportPayload, sanitizeTextEditorHtml } from '@/entities/template'
 import { addEmailColorFallbacksToHtml } from '@/features/email-preview/lib/email-color-fallback'
@@ -70,6 +72,15 @@ describe('email color', () => {
     expect(toPickerHexAlpha('rgba(17,34,51,0.5)')).toBe('#11223380')
     expect(resolveOpaqueEmailColor('rgba(17,34,51,0.5)')).toBe('#112233')
     expect(parseEmailColor('#112233')).toEqual({ red: 17, green: 34, blue: 51, alpha: 1 })
+  })
+
+  it('normalizes quick HEX input and presents canonical picker HEX', () => {
+    expect(normalizeHexColorPickerInput('abc')).toBe('#AABBCC')
+    expect(normalizeHexColorPickerInput('#11223380')).toBe('rgba(17,34,51,0.502)')
+    expect(normalizeHexColorPickerInput('rgba(1,2,3,.5)')).toBeUndefined()
+    expect(toPickerHexInput('#112233')).toBe('#112233')
+    expect(toPickerHexInput('rgba(17,34,51,0.502)')).toBe('#112233')
+    expect(toPickerHexInput('transparent')).toBe('#000000')
   })
 
   it('proves Vue style arrays collapse duplicate declarations', () => {
