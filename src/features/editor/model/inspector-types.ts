@@ -8,7 +8,12 @@ import type {
   RowNode,
   TextAtom,
 } from '@/entities/block'
-import type { BackgroundImageValue, BorderValue, SpacingValue } from '@/entities/style'
+import type {
+  BackgroundImageValue,
+  BorderRadiusValue,
+  BorderValue,
+  SpacingValue,
+} from '@/entities/style'
 
 export interface BlockRef {
   kind: 'block'
@@ -43,6 +48,7 @@ export interface BlockPropertyMap {
   spacing: SpacingValue
   backgroundColor: string
   backgroundImage: BackgroundImageValue
+  borderRadius: BorderRadiusValue
   border: BorderValue | undefined
 }
 
@@ -59,7 +65,7 @@ export interface CellPropertyMap extends BlockPropertyMap {
   hiddenOnMobile: boolean
   verticalAlign: 'top' | 'middle' | 'bottom'
   horizontalAlign: 'left' | 'center' | 'right'
-  borderRadius: number
+  borderRadius: BorderRadiusValue
   width: number | undefined
   height: number | undefined
 }
@@ -70,6 +76,7 @@ export interface TextAtomPropertyMap {
   value: string
   widthMode: 'fill' | 'hug' | undefined
   paragraphSpacing: number | undefined
+  borderRadius: BorderRadiusValue
   border: BorderValue | undefined
 }
 
@@ -83,7 +90,7 @@ export interface ButtonAtomPropertyMap {
   backgroundColor: string
   color: string
   fontSize: number
-  borderRadius: number
+  borderRadius: BorderRadiusValue
   border: BorderValue | undefined
 }
 
@@ -102,7 +109,7 @@ export interface ImageAtomPropertyMap {
   link: string
   width: number | undefined
   height: number | undefined
-  borderRadius: number
+  borderRadius: BorderRadiusValue
   border: BorderValue | undefined
 }
 

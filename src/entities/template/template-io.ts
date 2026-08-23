@@ -15,6 +15,7 @@ import sanitizeHtmlLib from 'sanitize-html'
 import {
   BORDER_SIDES,
   BORDER_STYLES,
+  normalizeBorderRadiusValue,
   normalizeBorderValue,
   normalizeOpaqueHex,
 } from '@/entities/style'
@@ -143,6 +144,20 @@ function isRecord(value: unknown): value is UnknownRecord {
 
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value)
+}
+
+function validateBorderRadiusValue(
+  value: unknown,
+  path: string,
+  issues: TemplateValidationIssue[],
+) {
+  if (normalizeBorderRadiusValue(value) === undefined) {
+    pushIssue(
+      issues,
+      path,
+      'borderRadius must be a strict four-corner object with non-negative finite values',
+    )
+  }
 }
 
 function isString(value: unknown): value is string {
@@ -596,6 +611,7 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
         'value',
         'widthMode',
         'paragraphSpacing',
+        'borderRadius',
         'border',
         'spacing',
         'hiddenOnMobile',
@@ -626,6 +642,9 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
         'text atom paragraphSpacing must be a non-negative finite number',
       )
     }
+
+    if (value.borderRadius !== undefined)
+      validateBorderRadiusValue(value.borderRadius, `${path}.borderRadius`, issues)
 
     validateBorderValue(value.border, `${path}.border`, issues)
 
@@ -665,9 +684,7 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
     if (!isFiniteNumber(value.fontSize)) {
       pushIssue(issues, `${path}.fontSize`, 'button atom fontSize must be a finite number')
     }
-    if (!isFiniteNumber(value.borderRadius)) {
-      pushIssue(issues, `${path}.borderRadius`, 'button atom borderRadius must be a finite number')
-    }
+    validateBorderRadiusValue(value.borderRadius, `${path}.borderRadius`, issues)
     validateSpacingTuple(value.padding, path, issues, 'padding')
 
     if (value.spacing !== undefined)
@@ -737,9 +754,8 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
       pushIssue(issues, `${path}.height`, 'image atom height must be a finite number')
     }
 
-    if (value.borderRadius !== undefined && !isFiniteNumber(value.borderRadius)) {
-      pushIssue(issues, `${path}.borderRadius`, 'image atom borderRadius must be a finite number')
-    }
+    if (value.borderRadius !== undefined)
+      validateBorderRadiusValue(value.borderRadius, `${path}.borderRadius`, issues)
 
     if (value.spacing !== undefined)
       validateSpacingValue(value.spacing, `${path}.spacing`, issues)
@@ -781,12 +797,12 @@ function validateCellNode(value: unknown, path: string, issues: TemplateValidati
         'spacing',
         'backgroundColor',
         'backgroundImage',
+        'borderRadius',
         'border',
         'link',
         'hiddenOnMobile',
         'verticalAlign',
         'horizontalAlign',
-        'borderRadius',
         'width',
         'height',
         'collapseOnMobile',
@@ -858,19 +874,18 @@ function validateCellNode(value: unknown, path: string, issues: TemplateValidati
       pushIssue(issues, `${path}.settings.height`, 'cell.settings.height must be a number')
     }
 
-    if (value.settings.borderRadius !== undefined && !isFiniteNumber(value.settings.borderRadius)) {
-      pushIssue(
-        issues,
-        `${path}.settings.borderRadius`,
-        'cell.settings.borderRadius must be a number',
-      )
-    }
-
     validateBackgroundImageValue(
       value.settings.backgroundImage,
       `${path}.settings.backgroundImage`,
       issues,
     )
+    if (value.settings.borderRadius !== undefined) {
+      validateBorderRadiusValue(
+        value.settings.borderRadius,
+        `${path}.settings.borderRadius`,
+        issues,
+      )
+    }
     validateBorderValue(value.settings.border, `${path}.settings.border`, issues)
   }
 
@@ -912,6 +927,7 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
         'spacing',
         'backgroundColor',
         'backgroundImage',
+        'borderRadius',
         'border',
         'hiddenOnMobile',
         'collapseOnMobile',
@@ -978,6 +994,13 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
       `${path}.settings.backgroundImage`,
       issues,
     )
+    if (value.settings.borderRadius !== undefined) {
+      validateBorderRadiusValue(
+        value.settings.borderRadius,
+        `${path}.settings.borderRadius`,
+        issues,
+      )
+    }
     validateBorderValue(value.settings.border, `${path}.settings.border`, issues)
   }
 
@@ -1019,7 +1042,7 @@ function validateCanvasBlockInstance(
     validateAllowedProperties(
       block.settings,
       `${path}.block.settings`,
-      ['spacing', 'backgroundColor', 'backgroundImage', 'border'],
+      ['spacing', 'backgroundColor', 'backgroundImage', 'borderRadius', 'border'],
       issues,
     )
 
@@ -1038,6 +1061,13 @@ function validateCanvasBlockInstance(
       `${path}.block.settings.backgroundImage`,
       issues,
     )
+    if (block.settings.borderRadius !== undefined) {
+      validateBorderRadiusValue(
+        block.settings.borderRadius,
+        `${path}.block.settings.borderRadius`,
+        issues,
+      )
+    }
     validateBorderValue(block.settings.border, `${path}.block.settings.border`, issues)
   }
 
@@ -1179,23 +1209,22 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
           : {}),
         spacing: atom.spacing,
         hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+        ...sanitizeBorderRadiusProperty(atom.borderRadius),
         ...sanitizeBorderProperty(atom.border),
       }
     }
 
     if (atom.type === 'image') {
+      const { border: _border, borderRadius: _borderRadius, ...image } = atom
       return {
-        ...atom,
+        ...image,
         hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
         src: typeof atom.src === 'string' ? atom.src : '',
         link: typeof atom.link === 'string' ? atom.link : '',
         alt: typeof atom.alt === 'string' ? atom.alt : '',
         width: isFiniteNumber(atom.width) && atom.width > 0 ? atom.width : undefined,
         height: isFiniteNumber(atom.height) && atom.height > 0 ? atom.height : undefined,
-        borderRadius:
-          isFiniteNumber(atom.borderRadius) && atom.borderRadius >= 0
-            ? atom.borderRadius
-            : undefined,
+        ...sanitizeBorderRadiusProperty(atom.borderRadius),
         ...sanitizeBorderProperty(atom.border),
       }
     }
@@ -1204,6 +1233,7 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
       const { border: _border, ...button } = atom
       return {
         ...button,
+        borderRadius: normalizeBorderRadiusValue(atom.borderRadius)!,
         hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
         ...sanitizeBorderProperty(atom.border),
       }
@@ -1223,17 +1253,21 @@ function sanitizeBorderProperty(border: unknown): {
   return normalized ? { border: normalized } : {}
 }
 
+function sanitizeBorderRadiusProperty(borderRadius: unknown): {
+  borderRadius?: ReturnType<typeof normalizeBorderRadiusValue>
+} {
+  const normalized = normalizeBorderRadiusValue(borderRadius)
+  return normalized ? { borderRadius: normalized } : {}
+}
+
 function sanitizeCellNodes(cells: CellNode[]): CellNode[] {
   return cells.map((cell) => {
-    const { border: _border, ...cellSettings } = cell.settings
+    const { border: _border, borderRadius: _borderRadius, ...cellSettings } = cell.settings
     const settings = {
       ...cellSettings,
       link: typeof cell.settings?.link === 'string' ? cell.settings.link : undefined,
       hiddenOnMobile: toOptionalBoolean(cell.settings?.hiddenOnMobile),
-      borderRadius:
-        isFiniteNumber(cell.settings?.borderRadius) && cell.settings.borderRadius >= 0
-          ? cell.settings.borderRadius
-          : undefined,
+      ...sanitizeBorderRadiusProperty(cell.settings?.borderRadius),
       ...sanitizeBorderProperty(cell.settings?.border),
     }
 
@@ -1252,7 +1286,7 @@ function sanitizeCellNodes(cells: CellNode[]): CellNode[] {
 
 function sanitizeRowNodes(rows: RowNode[]): RowNode[] {
   return rows.map((row) => {
-    const { border: _border, ...rowSettings } = row.settings
+    const { border: _border, borderRadius: _borderRadius, ...rowSettings } = row.settings
     return {
       id: row.id,
       type: 'row',
@@ -1264,6 +1298,7 @@ function sanitizeRowNodes(rows: RowNode[]): RowNode[] {
             ? row.settings.collapseOnMobile
             : true,
         widthMode: row.settings?.widthMode === 'hug' ? 'hug' : 'fill',
+        ...sanitizeBorderRadiusProperty(row.settings?.borderRadius),
         ...sanitizeBorderProperty(row.settings?.border),
       },
       cells: sanitizeCellNodes(row.cells),
@@ -1272,11 +1307,12 @@ function sanitizeRowNodes(rows: RowNode[]): RowNode[] {
 }
 
 function sanitizeBlock(block: BlockNode): BlockNode {
-  const { border: _border, ...blockSettings } = block.settings
+  const { border: _border, borderRadius: _borderRadius, ...blockSettings } = block.settings
   return {
     ...block,
     settings: {
       ...blockSettings,
+      ...sanitizeBorderRadiusProperty(block.settings?.borderRadius),
       ...sanitizeBorderProperty(block.settings?.border),
     },
     rows: sanitizeRowNodes(block.rows),

@@ -95,7 +95,12 @@
               "backgroundColor": "#FFD9B8",
               "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "borderRadius": 20
+              "borderRadius": {
+                "topLeft": 20,
+                "topRight": 20,
+                "bottomRight": 20,
+                "bottomLeft": 20
+              }
             },
             "children": [
               {
@@ -153,7 +158,12 @@
                 "link": "https://card.email/authors",
                 "alt": "Portrait of issue editor Maya Chen",
                 "width": 66,
-                "borderRadius": 999,
+                "borderRadius": {
+                  "topLeft": 999,
+                  "topRight": 999,
+                  "bottomRight": 999,
+                  "bottomLeft": 999
+                },
                 "spacing": {
                   "padding": [
                     0,

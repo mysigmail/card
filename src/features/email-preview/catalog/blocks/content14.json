@@ -65,7 +65,12 @@
                 "link": "https://card.email/authors",
                 "alt": "Portrait of customer Alex Morgan",
                 "width": 104,
-                "borderRadius": 999,
+                "borderRadius": {
+                  "topLeft": 999,
+                  "topRight": 999,
+                  "bottomRight": 999,
+                  "bottomLeft": 999
+                },
                 "spacing": {
                   "padding": [
                     0,

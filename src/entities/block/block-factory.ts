@@ -13,11 +13,13 @@ import type {
   TextAtom,
 } from './types'
 import { nanoid } from 'nanoid'
+import { createBorderRadiusValue } from '@/entities/style'
 
 export function createDefaultBlockSettings(): BlockSettings {
   return {
     spacing: { padding: [30, 35, 30, 35] },
     backgroundColor: '#FFFFFF',
+    borderRadius: undefined,
   }
 }
 
@@ -25,6 +27,7 @@ export function createDefaultRowSettings(): RowSettings {
   return {
     spacing: {},
     backgroundColor: 'transparent',
+    borderRadius: undefined,
     hiddenOnMobile: false,
     collapseOnMobile: true,
     gap: 0,
@@ -58,6 +61,7 @@ export function createTextAtom(value = '<p>Text</p>'): TextAtom {
     value: `<div style="color:#111827">${value}</div>`,
     widthMode: 'hug',
     paragraphSpacing: 0,
+    borderRadius: undefined,
     spacing: createAtomSpacing(),
   }
 }
@@ -73,7 +77,7 @@ export function createButtonAtom(): ButtonAtom {
     backgroundColor: '#4F46E5',
     color: '#FFFFFF',
     fontSize: 16,
-    borderRadius: 4,
+    borderRadius: createBorderRadiusValue(4),
     padding,
     spacing: createAtomSpacing(padding),
   }
@@ -97,7 +101,7 @@ export function createImageAtom(): ImageAtom {
     link: 'https://example.com',
     alt: 'Image',
     width: 120,
-    borderRadius: 0,
+    borderRadius: createBorderRadiusValue(0),
     spacing: createAtomSpacing(),
   }
 }

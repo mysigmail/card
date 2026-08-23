@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'vue'
 import type { CellNode, TextAtom } from '@/entities/block'
+import { hasPositiveBorderRadius, resolveBorderRadiusStyle } from '@/entities/style'
 import { sanitizeTextEditorHtml } from '@/entities/template'
 import { resolveBorderStyle } from './resolve-border-style'
 
@@ -11,7 +12,10 @@ function tupleToCss(value?: [number, number, number, number]) {
 
 export function isTextBoxEnabled(atom: TextAtom) {
   return (
-    atom.widthMode !== undefined || atom.paragraphSpacing !== undefined || atom.border !== undefined
+    atom.widthMode !== undefined
+    || atom.paragraphSpacing !== undefined
+    || atom.borderRadius !== undefined
+    || atom.border !== undefined
   )
 }
 
@@ -49,6 +53,8 @@ export function resolveTextBoxCellStyle(atom: TextAtom): CSSProperties {
   const padding = tupleToCss(atom.spacing?.padding)
   return {
     ...(padding ? { padding } : {}),
+    borderRadius: resolveBorderRadiusStyle(atom.borderRadius),
+    overflow: hasPositiveBorderRadius(atom.borderRadius) ? 'hidden' : undefined,
     ...resolveBorderStyle(atom.border),
   }
 }

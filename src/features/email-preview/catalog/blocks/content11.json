@@ -116,7 +116,12 @@
                       "backgroundColor": "#302E2C",
                       "verticalAlign": "middle",
                       "horizontalAlign": "center",
-                      "borderRadius": 16,
+                      "borderRadius": {
+                        "topLeft": 16,
+                        "topRight": 16,
+                        "bottomRight": 16,
+                        "bottomLeft": 16
+                      },
                       "width": 50,
                       "height": 78
                     },
@@ -159,7 +164,12 @@
                       "backgroundColor": "#302E2C",
                       "verticalAlign": "middle",
                       "horizontalAlign": "center",
-                      "borderRadius": 16,
+                      "borderRadius": {
+                        "topLeft": 16,
+                        "topRight": 16,
+                        "bottomRight": 16,
+                        "bottomLeft": 16
+                      },
                       "width": 50,
                       "height": 78
                     },
@@ -228,7 +238,12 @@
                       "backgroundColor": "#302E2C",
                       "verticalAlign": "middle",
                       "horizontalAlign": "center",
-                      "borderRadius": 16,
+                      "borderRadius": {
+                        "topLeft": 16,
+                        "topRight": 16,
+                        "bottomRight": 16,
+                        "bottomLeft": 16
+                      },
                       "width": 50,
                       "height": 78
                     },
@@ -271,7 +286,12 @@
                       "backgroundColor": "#302E2C",
                       "verticalAlign": "middle",
                       "horizontalAlign": "center",
-                      "borderRadius": 16,
+                      "borderRadius": {
+                        "topLeft": 16,
+                        "topRight": 16,
+                        "bottomRight": 16,
+                        "bottomLeft": 16
+                      },
                       "width": 50,
                       "height": 78
                     },
@@ -361,7 +381,12 @@
                       "backgroundColor": "#302E2C",
                       "verticalAlign": "middle",
                       "horizontalAlign": "center",
-                      "borderRadius": 16,
+                      "borderRadius": {
+                        "topLeft": 16,
+                        "topRight": 16,
+                        "bottomRight": 16,
+                        "bottomLeft": 16
+                      },
                       "width": 50,
                       "height": 78
                     },
@@ -404,7 +429,12 @@
                       "backgroundColor": "#302E2C",
                       "verticalAlign": "middle",
                       "horizontalAlign": "center",
-                      "borderRadius": 16,
+                      "borderRadius": {
+                        "topLeft": 16,
+                        "topRight": 16,
+                        "bottomRight": 16,
+                        "bottomLeft": 16
+                      },
                       "width": 50,
                       "height": 78
                     },
@@ -473,7 +503,12 @@
                       "backgroundColor": "#302E2C",
                       "verticalAlign": "middle",
                       "horizontalAlign": "center",
-                      "borderRadius": 16,
+                      "borderRadius": {
+                        "topLeft": 16,
+                        "topRight": 16,
+                        "bottomRight": 16,
+                        "bottomLeft": 16
+                      },
                       "width": 50,
                       "height": 78
                     },
@@ -516,7 +551,12 @@
                       "backgroundColor": "#302E2C",
                       "verticalAlign": "middle",
                       "horizontalAlign": "center",
-                      "borderRadius": 16,
+                      "borderRadius": {
+                        "topLeft": 16,
+                        "topRight": 16,
+                        "bottomRight": 16,
+                        "bottomLeft": 16
+                      },
                       "width": 50,
                       "height": 78
                     },

@@ -37,7 +37,12 @@
               "backgroundColor": "#FF6B00",
               "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "borderRadius": 0,
+              "borderRadius": {
+                "topLeft": 0,
+                "topRight": 0,
+                "bottomRight": 0,
+                "bottomLeft": 0
+              },
               "width": 7,
               "height": 72
             },
@@ -128,7 +133,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "top",
               "horizontalAlign": "left",
-              "borderRadius": 14,
+              "borderRadius": {
+                "topLeft": 14,
+                "topRight": 14,
+                "bottomRight": 14,
+                "bottomLeft": 14
+              },
               "width": 62
             },
             "children": [
@@ -401,7 +411,12 @@
                 "backgroundColor": "#1F1712",
                 "color": "#FFFFFF",
                 "fontSize": 15,
-                "borderRadius": 10,
+                "borderRadius": {
+                  "topLeft": 10,
+                  "topRight": 10,
+                  "bottomRight": 10,
+                  "bottomLeft": 10
+                },
                 "padding": [
                   13,
                   20,

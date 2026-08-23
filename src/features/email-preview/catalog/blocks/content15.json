@@ -111,7 +111,12 @@
                 "link": "https://card.email/authors",
                 "alt": "Portrait of editorial author Amir Cole",
                 "width": 96,
-                "borderRadius": 999,
+                "borderRadius": {
+                  "topLeft": 999,
+                  "topRight": 999,
+                  "bottomRight": 999,
+                  "bottomLeft": 999
+                },
                 "spacing": {
                   "padding": [
                     0,

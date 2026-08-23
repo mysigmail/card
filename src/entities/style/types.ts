@@ -26,3 +26,10 @@ export interface BorderValue {
   bottom?: BorderSideValue
   left?: BorderSideValue
 }
+
+export interface BorderRadiusValue {
+  topLeft: number
+  topRight: number
+  bottomRight: number
+  bottomLeft: number
+}

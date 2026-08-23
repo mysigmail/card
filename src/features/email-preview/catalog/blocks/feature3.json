@@ -44,7 +44,12 @@
               "backgroundColor": "transparent",
               "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "borderRadius": 18,
+              "borderRadius": {
+                "topLeft": 18,
+                "topRight": 18,
+                "bottomRight": 18,
+                "bottomLeft": 18
+              },
               "backgroundImage": {
                 "url": "img/catalog/backgrounds/gradient-ribbons.png",
                 "repeat": "no-repeat",
@@ -85,7 +90,12 @@
               "backgroundColor": "#1F1712",
               "verticalAlign": "middle",
               "horizontalAlign": "left",
-              "borderRadius": 16,
+              "borderRadius": {
+                "topLeft": 16,
+                "topRight": 16,
+                "bottomRight": 16,
+                "bottomLeft": 16
+              },
               "width": 52
             },
             "children": [
@@ -145,7 +155,12 @@
               "backgroundColor": "#FFD9B8",
               "verticalAlign": "top",
               "horizontalAlign": "left",
-              "borderRadius": 16,
+              "borderRadius": {
+                "topLeft": 16,
+                "topRight": 16,
+                "bottomRight": 16,
+                "bottomLeft": 16
+              },
               "width": 50
             },
             "children": [
@@ -184,7 +199,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "top",
               "horizontalAlign": "left",
-              "borderRadius": 16,
+              "borderRadius": {
+                "topLeft": 16,
+                "topRight": 16,
+                "bottomRight": 16,
+                "bottomLeft": 16
+              },
               "width": 50
             },
             "children": [

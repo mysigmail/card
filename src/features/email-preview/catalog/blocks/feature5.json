@@ -95,7 +95,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "top",
               "horizontalAlign": "left",
-              "borderRadius": 18,
+              "borderRadius": {
+                "topLeft": 18,
+                "topRight": 18,
+                "bottomRight": 18,
+                "bottomLeft": 18
+              },
               "width": 50
             },
             "children": [
@@ -134,7 +139,12 @@
               "backgroundColor": "#FF6B00",
               "verticalAlign": "top",
               "horizontalAlign": "left",
-              "borderRadius": 18,
+              "borderRadius": {
+                "topLeft": 18,
+                "topRight": 18,
+                "bottomRight": 18,
+                "bottomLeft": 18
+              },
               "width": 50
             },
             "children": [
