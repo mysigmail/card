@@ -45,7 +45,12 @@
               "hiddenOnMobile": false,
               "verticalAlign": "middle",
               "horizontalAlign": "left",
-              "borderRadius": 20,
+              "borderRadius": {
+                "topLeft": 20,
+                "topRight": 20,
+                "bottomRight": 20,
+                "bottomLeft": 20
+              },
               "width": 100
             },
             "children": [
@@ -96,7 +101,12 @@
                 "backgroundColor": "#FFFFFF",
                 "color": "#1F1712",
                 "fontSize": 15,
-                "borderRadius": 10,
+                "borderRadius": {
+                  "topLeft": 10,
+                  "topRight": 10,
+                  "bottomRight": 10,
+                  "bottomLeft": 10
+                },
                 "padding": [
                   13,
                   20,

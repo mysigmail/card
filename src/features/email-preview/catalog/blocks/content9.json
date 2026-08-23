@@ -44,7 +44,12 @@
               "backgroundColor": "#FF6B00",
               "verticalAlign": "bottom",
               "horizontalAlign": "center",
-              "borderRadius": 18,
+              "borderRadius": {
+                "topLeft": 18,
+                "topRight": 18,
+                "bottomRight": 18,
+                "bottomLeft": 18
+              },
               "width": 38
             },
             "children": [

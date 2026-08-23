@@ -1,4 +1,4 @@
-import type { BorderValue } from '@/entities/style'
+import type { BorderRadiusValue, BorderValue } from '@/entities/style'
 import type {
   AtomRef,
   BackgroundImageTool,
@@ -12,6 +12,7 @@ import type {
 } from '@/features/editor/model'
 import { computed } from 'vue'
 import { resolveLegacyTextBoxDefaults } from '@/entities/block'
+import { createBorderRadiusValue } from '@/entities/style'
 import { useCanvas, useSelection } from '@/features/editor/model'
 
 export type DimensionMode = 'auto' | 'manual'
@@ -31,7 +32,19 @@ export interface BorderInspectorControl {
   onUpdate: (value: BorderValue | undefined) => void
 }
 
-export type InspectorControl = ToolInspectorControl | BorderInspectorControl
+export interface RadiusInspectorControl {
+  id: string
+  key: 'borderRadius'
+  label: string
+  type: 'radius'
+  value: BorderRadiusValue
+  onUpdate: (value: BorderRadiusValue) => void
+}
+
+export type InspectorControl
+  = | ToolInspectorControl
+    | BorderInspectorControl
+    | RadiusInspectorControl
 
 export const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   url: '',
@@ -166,6 +179,14 @@ export function useSettingsTools() {
         onUpdate: value => update({ ref, property: 'backgroundImage', value }),
       },
       {
+        id: 'block-border-radius',
+        key: 'borderRadius',
+        label: 'Border Radius',
+        type: 'radius',
+        value: block.settings.borderRadius ?? createBorderRadiusValue(0),
+        onUpdate: value => update({ ref, property: 'borderRadius', value }),
+      },
+      {
         id: 'block-border',
         key: 'border',
         label: 'Border',
@@ -248,6 +269,14 @@ export function useSettingsTools() {
         onUpdate: value => update({ ref, property: 'backgroundImage', value }),
       },
       {
+        id: 'row-border-radius',
+        key: 'borderRadius',
+        label: 'Border Radius',
+        type: 'radius',
+        value: row.settings.borderRadius ?? createBorderRadiusValue(0),
+        onUpdate: value => update({ ref, property: 'borderRadius', value }),
+      },
+      {
         id: 'row-border',
         key: 'border',
         label: 'Border',
@@ -287,10 +316,9 @@ export function useSettingsTools() {
         id: 'cell-border-radius',
         key: 'borderRadius',
         label: 'Border Radius',
-        type: 'inputNumber',
-        value: cell.settings.borderRadius ?? 0,
-        onUpdate: value =>
-          update({ ref, property: 'borderRadius', value: Math.max(0, Number(value) || 0) }),
+        type: 'radius',
+        value: cell.settings.borderRadius ?? createBorderRadiusValue(0),
+        onUpdate: value => update({ ref, property: 'borderRadius', value }),
       },
       {
         id: 'cell-border',
@@ -416,6 +444,19 @@ export function useSettingsTools() {
           },
         },
         {
+          id: 'text-border-radius',
+          key: 'borderRadius',
+          label: 'Border Radius',
+          type: 'radius',
+          value: atom.borderRadius ?? createBorderRadiusValue(0),
+          onUpdate: (value) => {
+            const commands: NodePropertyCommand[] = []
+            materializeLegacyTextBox(commands, 'hug')
+            commands.push({ ref: textRef, property: 'borderRadius', value })
+            updateNodeProperties(commands)
+          },
+        },
+        {
           id: 'text-border',
           key: 'border',
           label: 'Border',
@@ -437,14 +478,9 @@ export function useSettingsTools() {
           id: 'button-border-radius',
           key: 'borderRadius',
           label: 'Border Radius',
-          type: 'inputNumber',
+          type: 'radius',
           value: atom.borderRadius,
-          onUpdate: value =>
-            update({
-              ref: buttonRef,
-              property: 'borderRadius',
-              value: Math.max(0, Number(value) || 0),
-            }),
+          onUpdate: value => update({ ref: buttonRef, property: 'borderRadius', value }),
         },
         {
           id: 'button-border',
@@ -504,14 +540,9 @@ export function useSettingsTools() {
           id: 'image-border-radius',
           key: 'borderRadius',
           label: 'Border Radius',
-          type: 'inputNumber',
-          value: atom.borderRadius ?? 0,
-          onUpdate: value =>
-            update({
-              ref: imageRef,
-              property: 'borderRadius',
-              value: Math.max(0, Number(value) || 0),
-            }),
+          type: 'radius',
+          value: atom.borderRadius ?? createBorderRadiusValue(0),
+          onUpdate: value => update({ ref: imageRef, property: 'borderRadius', value }),
         },
         {
           id: 'image-border',

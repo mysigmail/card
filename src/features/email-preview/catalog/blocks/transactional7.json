@@ -88,7 +88,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "borderRadius": 12,
+              "borderRadius": {
+                "topLeft": 12,
+                "topRight": 12,
+                "bottomRight": 12,
+                "bottomLeft": 12
+              },
               "width": 16,
               "height": 62
             },
@@ -121,7 +126,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "borderRadius": 12,
+              "borderRadius": {
+                "topLeft": 12,
+                "topRight": 12,
+                "bottomRight": 12,
+                "bottomLeft": 12
+              },
               "width": 16,
               "height": 62
             },
@@ -154,7 +164,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "borderRadius": 12,
+              "borderRadius": {
+                "topLeft": 12,
+                "topRight": 12,
+                "bottomRight": 12,
+                "bottomLeft": 12
+              },
               "width": 16,
               "height": 62
             },
@@ -187,7 +202,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "borderRadius": 12,
+              "borderRadius": {
+                "topLeft": 12,
+                "topRight": 12,
+                "bottomRight": 12,
+                "bottomLeft": 12
+              },
               "width": 16,
               "height": 62
             },
@@ -220,7 +240,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "borderRadius": 12,
+              "borderRadius": {
+                "topLeft": 12,
+                "topRight": 12,
+                "bottomRight": 12,
+                "bottomLeft": 12
+              },
               "width": 16,
               "height": 62
             },
@@ -253,7 +278,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "borderRadius": 12,
+              "borderRadius": {
+                "topLeft": 12,
+                "topRight": 12,
+                "bottomRight": 12,
+                "bottomLeft": 12
+              },
               "width": 16,
               "height": 62
             },

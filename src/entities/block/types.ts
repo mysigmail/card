@@ -1,4 +1,9 @@
-import type { BackgroundImageValue, BorderValue, SpacingValue } from '@/entities/style'
+import type {
+  BackgroundImageValue,
+  BorderRadiusValue,
+  BorderValue,
+  SpacingValue,
+} from '@/entities/style'
 
 export interface BaseAtom {
   id: string
@@ -12,6 +17,7 @@ export interface TextAtom extends BaseAtom {
   value: string
   widthMode?: 'fill' | 'hug'
   paragraphSpacing?: number
+  borderRadius?: BorderRadiusValue
   border?: BorderValue
 }
 
@@ -22,7 +28,7 @@ export interface ButtonAtom extends BaseAtom {
   backgroundColor: string
   color: string
   fontSize: number
-  borderRadius: number
+  borderRadius: BorderRadiusValue
   padding: [number, number, number, number]
   border?: BorderValue
 }
@@ -40,7 +46,7 @@ export interface ImageAtom extends BaseAtom {
   alt: string
   width?: number
   height?: number
-  borderRadius?: number
+  borderRadius?: BorderRadiusValue
   border?: BorderValue
 }
 
@@ -53,6 +59,7 @@ export interface BlockSettings {
   spacing: SpacingValue
   backgroundColor: string
   backgroundImage?: BackgroundImageValue
+  borderRadius?: BorderRadiusValue
   border?: BorderValue
 }
 
@@ -60,6 +67,7 @@ export interface RowSettings {
   spacing: SpacingValue
   backgroundColor: string
   backgroundImage?: BackgroundImageValue
+  borderRadius?: BorderRadiusValue
   border?: BorderValue
   hiddenOnMobile?: boolean
   collapseOnMobile?: boolean
@@ -77,7 +85,7 @@ export interface CellSettings {
   hiddenOnMobile?: boolean
   verticalAlign: 'top' | 'middle' | 'bottom'
   horizontalAlign?: 'left' | 'center' | 'right'
-  borderRadius?: number
+  borderRadius?: BorderRadiusValue
   width?: number // процент (0-100)
   height?: number
 }

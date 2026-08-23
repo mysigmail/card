@@ -98,7 +98,12 @@
                 "backgroundColor": "#FF6B00",
                 "color": "#FFFFFF",
                 "fontSize": 15,
-                "borderRadius": 10,
+                "borderRadius": {
+                  "topLeft": 10,
+                  "topRight": 10,
+                  "bottomRight": 10,
+                  "bottomLeft": 10
+                },
                 "padding": [
                   13,
                   20,

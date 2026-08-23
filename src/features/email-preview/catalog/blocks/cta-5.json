@@ -47,7 +47,12 @@
                 "link": "https://card.email/catalog",
                 "alt": "Portrait of live session host Maya Chen",
                 "width": 78,
-                "borderRadius": 999,
+                "borderRadius": {
+                  "topLeft": 999,
+                  "topRight": 999,
+                  "bottomRight": 999,
+                  "bottomLeft": 999
+                },
                 "spacing": {
                   "padding": [
                     0,
@@ -114,7 +119,12 @@
                 "backgroundColor": "#FF6B00",
                 "color": "#FFFFFF",
                 "fontSize": 15,
-                "borderRadius": 10,
+                "borderRadius": {
+                  "topLeft": 10,
+                  "topRight": 10,
+                  "bottomRight": 10,
+                  "bottomLeft": 10
+                },
                 "padding": [
                   13,
                   20,

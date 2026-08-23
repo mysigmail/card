@@ -2,6 +2,7 @@
 import type { CSSProperties } from 'vue'
 import type { Atom, CellNode, RowNode } from '@/entities/block'
 import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
+import { hasPositiveBorderRadius, resolveBorderRadiusStyle } from '@/entities/style'
 import { resolveBorderStyle } from '@/features/email-preview/lib/resolve-border-style'
 import { renderTextAtomHtml } from '@/features/email-preview/lib/text-box'
 import EmailTextBox from '@/features/email-preview/ui/EmailTextBox.vue'
@@ -45,7 +46,7 @@ function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {
     backgroundColor: atom.backgroundColor,
     color: atom.color,
     fontSize: `${atom.fontSize}px`,
-    borderRadius: `${atom.borderRadius}px`,
+    borderRadius: resolveBorderRadiusStyle(atom.borderRadius),
     ...(padding ? { padding } : {}),
     display: 'inline-block',
     textDecoration: 'none',
@@ -66,10 +67,7 @@ function imageStyle(
     maxWidth: '100%',
     width: atom.width ? `${atom.width}px` : undefined,
     height: atom.height ? `${atom.height}px` : undefined,
-    borderRadius:
-      atom.borderRadius !== undefined && Number.isFinite(atom.borderRadius)
-        ? `${Math.max(0, atom.borderRadius)}px`
-        : undefined,
+    borderRadius: resolveBorderRadiusStyle(atom.borderRadius),
     marginLeft: align === 'center' || align === 'right' ? 'auto' : '0',
     marginRight: align === 'center' ? 'auto' : '0',
     ...resolveBorderStyle(atom.border),
@@ -92,9 +90,11 @@ function normalizeGap(value: unknown) {
 
 function rowStyle(row: RowNode): CSSProperties {
   const s = row.settings
-  const style: CSSProperties & Record<string, string> = {
+  const style: CSSProperties = {
     width: s.widthMode === 'hug' ? 'auto' : '100%',
     tableLayout: s.widthMode === 'hug' ? 'auto' : 'fixed',
+    borderRadius: resolveBorderRadiusStyle(s.borderRadius),
+    overflow: hasPositiveBorderRadius(s.borderRadius) ? 'hidden' : undefined,
     ...resolveBorderStyle(s.border),
   }
 
@@ -236,9 +236,10 @@ function itemStyle(item: CellNode, items: CellNode[], rawGap: number): CSSProper
   if (s.horizontalAlign)
     style.textAlign = s.horizontalAlign
 
-  if (s.borderRadius !== undefined && Number.isFinite(s.borderRadius) && s.borderRadius >= 0) {
-    style.borderRadius = `${s.borderRadius}px`
-    style.overflow = s.borderRadius > 0 ? 'hidden' : undefined
+  const borderRadius = resolveBorderRadiusStyle(s.borderRadius)
+  if (borderRadius) {
+    style.borderRadius = borderRadius
+    style.overflow = hasPositiveBorderRadius(s.borderRadius) ? 'hidden' : undefined
   }
 
   if (s.width !== undefined) {

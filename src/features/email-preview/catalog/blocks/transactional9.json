@@ -95,7 +95,12 @@
               "backgroundColor": "#FFD9B8",
               "verticalAlign": "middle",
               "horizontalAlign": "center",
-              "borderRadius": 14,
+              "borderRadius": {
+                "topLeft": 14,
+                "topRight": 14,
+                "bottomRight": 14,
+                "bottomLeft": 14
+              },
               "width": 27,
               "height": 118
             },
@@ -221,7 +226,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "top",
               "horizontalAlign": "left",
-              "borderRadius": 12,
+              "borderRadius": {
+                "topLeft": 12,
+                "topRight": 12,
+                "bottomRight": 12,
+                "bottomLeft": 12
+              },
               "width": 33
             },
             "children": [
@@ -260,7 +270,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "top",
               "horizontalAlign": "left",
-              "borderRadius": 12,
+              "borderRadius": {
+                "topLeft": 12,
+                "topRight": 12,
+                "bottomRight": 12,
+                "bottomLeft": 12
+              },
               "width": 33
             },
             "children": [
@@ -299,7 +314,12 @@
               "backgroundColor": "#FFF3E6",
               "verticalAlign": "top",
               "horizontalAlign": "left",
-              "borderRadius": 12,
+              "borderRadius": {
+                "topLeft": 12,
+                "topRight": 12,
+                "bottomRight": 12,
+                "bottomLeft": 12
+              },
               "width": 33
             },
             "children": [

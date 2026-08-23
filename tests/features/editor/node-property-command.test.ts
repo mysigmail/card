@@ -67,11 +67,12 @@ function createFixture() {
 describe('typed inspector registry and mutation gateway', () => {
   it('publishes the closed capability keys for all seven node variants', () => {
     expect(inspectorCapabilities).toEqual({
-      block: ['spacing', 'backgroundColor', 'backgroundImage', 'border'],
+      block: ['spacing', 'backgroundColor', 'backgroundImage', 'borderRadius', 'border'],
       row: [
         'spacing',
         'backgroundColor',
         'backgroundImage',
+        'borderRadius',
         'border',
         'widthMode',
         'gap',
@@ -92,7 +93,15 @@ describe('typed inspector registry and mutation gateway', () => {
         'width',
         'height',
       ],
-      text: ['spacing', 'hiddenOnMobile', 'border', 'widthMode', 'paragraphSpacing', 'value'],
+      text: [
+        'spacing',
+        'hiddenOnMobile',
+        'borderRadius',
+        'border',
+        'widthMode',
+        'paragraphSpacing',
+        'value',
+      ],
       button: [
         'spacing',
         'hiddenOnMobile',
@@ -400,6 +409,61 @@ describe('typed inspector registry and mutation gateway', () => {
     expect(fixture.button.padding).toEqual([2, 4, 6, 8])
   })
 
+  it('updates strict per-corner radius values and rejects scalar or malformed commands', () => {
+    const fixture = createFixture()
+    const radius = { topLeft: 1, topRight: 2, bottomRight: 3, bottomLeft: 4 }
+
+    const blockRef: BlockRef = { kind: 'block', blockId: fixture.block.id }
+    const rowRef: RowRef = { kind: 'row', blockId: fixture.block.id, rowId: fixture.row.id }
+    const cellRef: CellRef = {
+      kind: 'cell',
+      blockId: fixture.block.id,
+      rowId: fixture.row.id,
+      cellId: fixture.row.cells[0]!.id,
+    }
+    for (const ref of [blockRef, rowRef, cellRef, fixture.textRef] as const) {
+      expect(
+        updateNodeProperty(fixture.items, {
+          ref,
+          property: 'borderRadius',
+          value: radius,
+        }),
+      ).toEqual({ ok: true, changed: true })
+      expect(getNodePropertyState(fixture.items, ref, 'borderRadius')).toEqual({
+        kind: 'value',
+        value: radius,
+      })
+    }
+
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: fixture.buttonRef,
+        property: 'borderRadius',
+        value: radius,
+      }),
+    ).toEqual({ ok: true, changed: true })
+    expect(fixture.button.borderRadius).toEqual(radius)
+    expect(getNodePropertyState(fixture.items, fixture.buttonRef, 'borderRadius')).toEqual({
+      kind: 'value',
+      value: radius,
+    })
+
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: fixture.imageRef,
+        property: 'borderRadius',
+        value: 4 as never,
+      }),
+    ).toEqual({ ok: false, reason: 'invalid-value' })
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: fixture.imageRef,
+        property: 'borderRadius',
+        value: { ...radius, future: 5 } as never,
+      }),
+    ).toEqual({ ok: false, reason: 'invalid-value' })
+  })
+
   it('sanitizes text and exposes current single-selection defaults', () => {
     const fixture = createFixture()
     updateNodeProperty(fixture.items, {
@@ -438,7 +502,7 @@ describe('typed inspector registry and mutation gateway', () => {
     })
     expect(getNodePropertyState(fixture.items, cellRef, 'borderRadius')).toEqual({
       kind: 'value',
-      value: 0,
+      value: { topLeft: 0, topRight: 0, bottomRight: 0, bottomLeft: 0 },
     })
     expect(getNodePropertyState(fixture.items, cellRef, 'width')).toEqual({
       kind: 'value',

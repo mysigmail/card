@@ -5,8 +5,18 @@ import type {
   RowPropertyMap,
 } from './inspector-types'
 import type { Atom, AtomType, BlockNode, CellNode, RowNode } from '@/entities/block'
-import type { BackgroundImageValue, BorderValue, Insets, SpacingValue } from '@/entities/style'
-import { normalizeBorderValue } from '@/entities/style'
+import type {
+  BackgroundImageValue,
+  BorderRadiusValue,
+  BorderValue,
+  Insets,
+  SpacingValue,
+} from '@/entities/style'
+import {
+  createBorderRadiusValue,
+  normalizeBorderRadiusValue,
+  normalizeBorderValue,
+} from '@/entities/style'
 import { sanitizeTextEditorHtml } from '@/entities/template'
 
 interface Normalized<T> {
@@ -126,6 +136,11 @@ function normalizeNonNegative(value: unknown): NormalizeResult<number> {
   return typeof value === 'number' && Number.isFinite(value) && value >= 0
     ? normalized(value)
     : invalid()
+}
+
+function normalizeBorderRadius(value: unknown): NormalizeResult<BorderRadiusValue> {
+  const radius = normalizeBorderRadiusValue(value)
+  return radius === undefined ? invalid() : normalized(radius)
 }
 
 function normalizePositiveOptional(value: unknown): NormalizeResult<number | undefined> {
@@ -253,6 +268,14 @@ export const blockPropertyRegistry = {
       node.settings.backgroundImage = value
     },
   }),
+  borderRadius: defineDescriptor<BlockNode, BorderRadiusValue>({
+    read: node => node.settings.borderRadius ?? createBorderRadiusValue(0),
+    normalize: normalizeBorderRadius,
+    equal: jsonEqual,
+    apply: (node, value) => {
+      node.settings.borderRadius = value
+    },
+  }),
   border: borderDescriptor<BlockNode>(),
 } satisfies PropertyRegistry<BlockNode, BlockPropertyMap>
 
@@ -278,6 +301,14 @@ export const rowPropertyRegistry = {
     equal: jsonEqual,
     apply: (node, value) => {
       node.settings.backgroundImage = value
+    },
+  }),
+  borderRadius: defineDescriptor<RowNode, BorderRadiusValue>({
+    read: node => node.settings.borderRadius ?? createBorderRadiusValue(0),
+    normalize: normalizeBorderRadius,
+    equal: jsonEqual,
+    apply: (node, value) => {
+      node.settings.borderRadius = value
     },
   }),
   border: borderDescriptor<RowNode>(),
@@ -382,10 +413,10 @@ export const cellPropertyRegistry = {
       node.settings.horizontalAlign = value
     },
   }),
-  borderRadius: defineDescriptor<CellNode, number>({
-    read: node => node.settings.borderRadius ?? 0,
-    normalize: normalizeNonNegative,
-    equal: strictEqual,
+  borderRadius: defineDescriptor<CellNode, BorderRadiusValue>({
+    read: node => node.settings.borderRadius ?? createBorderRadiusValue(0),
+    normalize: normalizeBorderRadius,
+    equal: jsonEqual,
     apply: (node, value) => {
       node.settings.borderRadius = value
     },
@@ -417,6 +448,14 @@ export const atomPropertyRegistry = {
   text: {
     spacing: atomSpacing<TextAtom>(),
     hiddenOnMobile: atomVisibility<TextAtom>(),
+    borderRadius: defineDescriptor<TextAtom, BorderRadiusValue>({
+      read: node => node.borderRadius ?? createBorderRadiusValue(0),
+      normalize: normalizeBorderRadius,
+      equal: jsonEqual,
+      apply: (node, value) => {
+        node.borderRadius = value
+      },
+    }),
     border: atomBorderDescriptor<TextAtom>(),
     widthMode: defineDescriptor<TextAtom, 'fill' | 'hug' | undefined>({
       read: node => node.widthMode,
@@ -504,10 +543,10 @@ export const atomPropertyRegistry = {
         node.fontSize = value
       },
     }),
-    borderRadius: defineDescriptor<ButtonAtom, number>({
+    borderRadius: defineDescriptor<ButtonAtom, BorderRadiusValue>({
       read: node => node.borderRadius,
-      normalize: normalizeNonNegative,
-      equal: strictEqual,
+      normalize: normalizeBorderRadius,
+      equal: jsonEqual,
       apply: (node, value) => {
         node.borderRadius = value
       },
@@ -577,10 +616,10 @@ export const atomPropertyRegistry = {
         node.height = value
       },
     }),
-    borderRadius: defineDescriptor<ImageAtom, number>({
-      read: node => node.borderRadius ?? 0,
-      normalize: normalizeNonNegative,
-      equal: strictEqual,
+    borderRadius: defineDescriptor<ImageAtom, BorderRadiusValue>({
+      read: node => node.borderRadius ?? createBorderRadiusValue(0),
+      normalize: normalizeBorderRadius,
+      equal: jsonEqual,
       apply: (node, value) => {
         node.borderRadius = value
       },
