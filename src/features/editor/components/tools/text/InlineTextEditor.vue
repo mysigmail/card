@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { AtomRef } from '@/features/editor/model'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import { nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 import { sanitizeTextEditorHtml } from '@/entities/template'
@@ -13,14 +14,14 @@ import {
 import { createInlineTextExtensions, normalizeInlineEditorHtml } from './text-editor-core'
 
 interface Props {
-  atomId: string
+  atomRef: AtomRef<'text'>
   value: string
 }
 
 const props = defineProps<Props>()
 const editor = shallowRef<Editor>()
 const root = ref<HTMLElement>()
-const { getTextAtomValue, updateTextAtomValue } = useCanvas()
+const { getNodePropertyState, updateNodeProperty } = useCanvas()
 const { flushPendingSnapshot } = useHistory()
 const {
   consumeEditingPointerPosition,
@@ -32,12 +33,21 @@ const {
 let finished = false
 let lastModelValue = sanitizeTextEditorHtml(props.value)
 
+function getTextAtomValue() {
+  const state = getNodePropertyState(props.atomRef, 'value')
+  return state.kind === 'value' ? state.value : undefined
+}
+
+function updateTextAtomValue(html: string) {
+  return updateNodeProperty({ ref: props.atomRef, property: 'value', value: html })
+}
+
 function persistEditorValue() {
   if (!editor.value)
     return
 
   const value = sanitizeTextEditorHtml(editor.value.getHTML())
-  updateTextAtomValue(props.atomId, value)
+  updateTextAtomValue(value)
   lastModelValue = value
 }
 
@@ -48,7 +58,7 @@ function finishEditing() {
   persistEditorValue()
   flushPendingSnapshot()
   finished = true
-  stopEditing(props.atomId)
+  stopEditing(props.atomRef.atomId)
 }
 
 function onRootKeydown(event: KeyboardEvent) {
@@ -64,7 +74,7 @@ function focusInitialSelection() {
   if (!currentEditor)
     return
 
-  const pointerPosition = consumeEditingPointerPosition(props.atomId)
+  const pointerPosition = consumeEditingPointerPosition(props.atomRef.atomId)
   const position
     = pointerPosition?.textOffset !== undefined
       ? textSelectionPositionAtOffset(currentEditor, pointerPosition.textOffset)
@@ -100,14 +110,14 @@ onMounted(() => {
     },
     onUpdate: ({ editor: currentEditor }) => {
       requestToolbarUpdate()
-      updateTextAtomValue(props.atomId, currentEditor.getHTML())
+      updateTextAtomValue(currentEditor.getHTML())
     },
     onSelectionUpdate: () => {
       requestToolbarUpdate()
     },
   })
 
-  registerEditor(props.atomId, editor.value)
+  registerEditor(props.atomRef.atomId, editor.value)
 
   nextTick(focusInitialSelection)
 })
@@ -127,7 +137,7 @@ watch(
 onBeforeUnmount(() => {
   if (
     canPersistInlineTextOnUnmount({
-      currentModelValue: getTextAtomValue(props.atomId),
+      currentModelValue: getTextAtomValue(),
       finished,
       lastModelValue,
     })

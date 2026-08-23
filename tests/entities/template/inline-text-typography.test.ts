@@ -258,9 +258,23 @@ describe('inline text typography contract', () => {
     const templateIO = useTemplateIO()
     const block = createBlockNode('Inline text')
     const atom = block.rows[0]!.cells[0]!.children[0]!
+    const atomRef = {
+      kind: 'atom' as const,
+      blockId: block.id,
+      rowId: block.rows[0]!.id,
+      cellId: block.rows[0]!.cells[0]!.id,
+      atomId: atom.id,
+      atomType: 'text' as const,
+    }
     canvas.installed.value = [{ id: 'source-component', version: 1, block }]
 
-    expect(canvas.updateTextAtomValue(atom.id, '<p onclick="bad()"><sup>Safe</sup></p>')).toBe(true)
+    expect(
+      canvas.updateNodeProperty({
+        ref: atomRef,
+        property: 'value',
+        value: '<p onclick="bad()"><sup>Safe</sup></p>',
+      }),
+    ).toEqual({ ok: true, changed: true })
     expect(atom.type === 'text' ? atom.value : '').toBe('<p><sup>Safe</sup></p>')
 
     const payload = templateIO.exportTemplate('Inline text fixture')
@@ -281,26 +295,38 @@ describe('inline text typography contract', () => {
     const history = useHistory()
     const block = createBlockNode('Undo')
     const atom = block.rows[0]!.cells[0]!.children[0]!
+    const atomRef = {
+      kind: 'atom' as const,
+      blockId: block.id,
+      rowId: block.rows[0]!.id,
+      cellId: block.rows[0]!.cells[0]!.id,
+      atomId: atom.id,
+      atomType: 'text' as const,
+    }
     const originalValue = atom.type === 'text' ? atom.value : ''
     canvas.installed.value = [{ id: 'undo-component', version: 1, block }]
     history.resetHistory()
 
     const staleEditorValue = '<p>Typed value</p>'
-    canvas.updateTextAtomValue(atom.id, staleEditorValue)
+    canvas.updateNodeProperty({ ref: atomRef, property: 'value', value: staleEditorValue })
     vi.advanceTimersByTime(301)
     expect(history.undo()).toBe(true)
-    expect(canvas.getTextAtomValue(atom.id)).toBe(originalValue)
+    const currentValue = () => {
+      const state = canvas.getNodePropertyState(atomRef, 'value')
+      return state.kind === 'value' ? state.value : undefined
+    }
+    expect(currentValue()).toBe(originalValue)
 
     const canPersist = canPersistInlineTextOnUnmount({
-      currentModelValue: canvas.getTextAtomValue(atom.id),
+      currentModelValue: currentValue(),
       finished: false,
       lastModelValue: staleEditorValue,
     })
     if (canPersist)
-      canvas.updateTextAtomValue(atom.id, staleEditorValue)
+      canvas.updateNodeProperty({ ref: atomRef, property: 'value', value: staleEditorValue })
 
     expect(canPersist).toBe(false)
-    expect(canvas.getTextAtomValue(atom.id)).toBe(originalValue)
+    expect(currentValue()).toBe(originalValue)
     canvas.installed.value = []
     history.resetHistory()
     vi.useRealTimers()

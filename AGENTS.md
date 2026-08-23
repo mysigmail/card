@@ -68,7 +68,9 @@ ID-правила:
 | Выделение block/row/cell/atom, sidebar tab, tree scroll | `src/features/editor/model/use-selection.ts` (`useSelection`) |
 | Template IO интеграция со store | `src/features/editor/model/use-template-io.ts` (`useTemplateIO`) |
 | Persist/Hydrate localStorage | `src/features/editor/model/use-persistence.ts` (`usePersistence`) |
-| Tool-утилиты (трансформации, defaults) | `src/features/editor/model/tools.ts` |
+| Typed Inspector Registry (capabilities/read/normalize/apply) | `src/features/editor/model/inspector-registry.ts` |
+| Typed inspector refs/commands/states | `src/features/editor/model/inspector-types.ts` |
+| Единый gateway свойств узлов | `src/features/editor/model/node-property-command.ts` через `useCanvas()` |
 | Главный рендер блока (preview) | `src/features/email-preview/ui/BlockRenderer.vue` |
 | Рендер row/cell/atom (preview) | `src/features/email-preview/ui/BlockRendererRowNode.vue` |
 | Главный рендер блока (export) | `src/features/email-preview/ui/ExportBlockRenderer.vue` |
@@ -92,7 +94,8 @@ ID-правила:
   - Ячейки: `insertCellToRow`, `removeCell`.
   - Атомы: `insertAtomToCell`, `removeAtom`.
   - Поиск: `findCanvasBlockInstance`, `findRowById`, `findCellById`.
-  - Инструменты: `updateToolById`, `updateV2SettingsToolById`, `updateV2AtomToolById`, `addNewToolToMultiTool`, `deleteMultiToolItem`.
+  - Inspector: `updateNodeProperty`, атомарный `updateNodeProperties`, `getNodePropertyState`.
+  - Инструменты legacy-коллекций: `addNewToolToMultiTool`, `deleteMultiToolItem`.
 
 - **`useSelection()`** — выделение: `selectBlock`, `selectRow`, `selectCell`, `selectAtom`, `resetSelection`. Computed: `selectedBlock`, `selectedRow`, `selectedCell`, `selectedAtom`. Управление UI: `sidebarActiveTab`, `treeScrollTarget`, `treeScrollRequestId`, `requestTreeScroll`, `openTreeAndScroll`, `selectionLevel`.
 
@@ -169,7 +172,7 @@ TemplateExportV1 {
 
 1. Добавить тип в `src/entities/block/types.ts` (interface + включить в union `Atom` и `AtomType`).
 2. Добавить фабрику в `src/entities/block/block-factory.ts`.
-3. Поддержать операции в `src/features/editor/model/use-canvas.ts`: ветки в `insertAtomToCell`, `updateV2AtomToolById`.
+3. Добавить typed property descriptors в `inspector-registry.ts` и команды в `inspector-types.ts`.
 4. Добавить UI-настройки в `src/features/editor/components/tools/`.
 5. Подключить настройки в `src/features/editor/components/tools/BlockSettingsPanel.vue`.
 6. Добавить рендер в `src/features/email-preview/ui/BlockRendererRowNode.vue`.
@@ -182,7 +185,7 @@ TemplateExportV1 {
 
 1. Добавить поле в соответствующий `*Settings` интерфейс в `src/entities/block/types.ts`.
 2. Добавить дефолтное значение в фабрику `src/entities/block/block-factory.ts`.
-3. Обновить `updateV2SettingsToolById` в `src/features/editor/model/use-canvas.ts`.
+3. Обновить typed property descriptor в `src/features/editor/model/inspector-registry.ts`.
 4. Добавить UI-контрол в `src/features/editor/components/tools/BlockSettingsPanel.vue`.
 5. Обновить рендеринг в `BlockRenderer.vue` или `BlockRendererRowNode.vue`.
 6. Обновить валидацию в `src/entities/template/template-io.ts`.

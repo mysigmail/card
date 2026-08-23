@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import type { InspectorControl } from './use-settings-tools'
 import type { BlockNode } from '@/entities/block'
-import type { Tool } from '@/features/editor/model'
 
 interface Props {
   block: BlockNode
-  tools: Tool[]
+  tools: InspectorControl[]
 }
 
 defineProps<Props>()

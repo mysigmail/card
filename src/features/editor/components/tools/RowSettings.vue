@@ -1,16 +1,20 @@
 <script setup lang="ts">
-import type { Tool } from '@/features/editor/model'
+import type { InspectorControl } from './use-settings-tools'
 import { Switch } from '@/shared/ui/switch'
 
 interface Props {
-  spacingTools: Tool[]
-  appearanceTools: Tool[]
+  spacingTools: InspectorControl[]
+  appearanceTools: InspectorControl[]
+  hiddenOnMobile: boolean
+  collapseOnMobile: boolean
 }
 
 defineProps<Props>()
 
-const rowHiddenOnMobile = defineModel<boolean>('hiddenOnMobile', { required: true })
-const rowCollapseOnMobile = defineModel<boolean>('collapseOnMobile', { required: true })
+const emit = defineEmits<{
+  (e: 'update:hiddenOnMobile', value: boolean): void
+  (e: 'update:collapseOnMobile', value: boolean): void
+}>()
 </script>
 
 <template>
@@ -29,13 +33,19 @@ const rowCollapseOnMobile = defineModel<boolean>('collapseOnMobile', { required:
               <EditorToolLabel type="secondary">
                 Hide on Mobile
               </EditorToolLabel>
-              <Switch v-model="rowHiddenOnMobile" />
+              <Switch
+                :model-value="hiddenOnMobile"
+                @update:model-value="(value) => emit('update:hiddenOnMobile', value)"
+              />
             </div>
             <div>
               <EditorToolLabel type="secondary">
                 Collapse on Mobile
               </EditorToolLabel>
-              <Switch v-model="rowCollapseOnMobile" />
+              <Switch
+                :model-value="collapseOnMobile"
+                @update:model-value="(value) => emit('update:collapseOnMobile', value)"
+              />
             </div>
           </div>
         </div>

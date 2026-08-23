@@ -13,12 +13,10 @@ import { Editor } from '@tiptap/vue-3'
 import { computed, inject, onBeforeUnmount, onMounted, provide, ref } from 'vue'
 import { FontSize } from '@/features/editor/components/tools/text/extensions/font-size'
 import { Strike } from '@/features/editor/components/tools/text/extensions/strike'
-import { useCanvas } from '@/features/editor/model'
 
 const editorContextKey = Symbol('text-editor-context')
 
 function createEditorContext() {
-  const { updateToolById } = useCanvas()
   const editor = ref<Editor>()
 
   const link = computed({
@@ -76,7 +74,7 @@ function createEditorContext() {
     editor.value?.chain().focus().setTextAlign(align).run()
   }
 
-  function init(toolId: string, content: string) {
+  function init(content: string, onUpdate?: (value: string) => void) {
     onMounted(() => {
       editor.value = new Editor({
         extensions: [
@@ -102,7 +100,7 @@ function createEditorContext() {
       })
 
       editor.value.on('update', () => {
-        updateToolById(toolId, 'value', editor.value?.getHTML() ?? '')
+        onUpdate?.(editor.value?.getHTML() ?? '')
       })
     })
 

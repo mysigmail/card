@@ -1,3 +1,4 @@
+import type { NodePropertyCommand, NodeRef, PropertyMapForRef } from './inspector-types'
 import type { BlockPreset, CanvasBlockInstance } from './types'
 import type { Atom, AtomType, CellNode, RowNode } from '@/entities/block'
 import { nanoid } from 'nanoid'
@@ -21,6 +22,12 @@ import {
   regenerateCellNodeIds,
   regenerateRowNodeIds,
 } from './lib/canvas-tree-utils'
+
+import {
+  getNodePropertyState as getPropertyState,
+  updateNodeProperties as updateProperties,
+  updateNodeProperty as updateProperty,
+} from './node-property-command'
 import {
   editableId,
   general,
@@ -30,15 +37,35 @@ import {
   previewMode,
   templateImportIssues,
 } from './state'
-
-import { useCanvasTools } from './use-canvas-tools'
 import { useSelection } from './use-selection'
 
 let _instance: ReturnType<typeof _createCanvas> | null = null
 
 function _createCanvas() {
   const selection = useSelection()
-  const canvasTools = useCanvasTools()
+  function updateNodeProperty(command: NodePropertyCommand) {
+    return updateProperty(installed.value, command)
+  }
+
+  function updateNodeProperties(commands: readonly NodePropertyCommand[]) {
+    return updateProperties(installed.value, commands)
+  }
+
+  function getNodePropertyState<R extends NodeRef, K extends keyof PropertyMapForRef<R>>(
+    ref: R,
+    property: K,
+  ) {
+    return getPropertyState(installed.value, ref, property)
+  }
+
+  function addNewToolToMultiTool(id: string) {
+    void id
+  }
+
+  function deleteMultiToolItem(id: string, index: number) {
+    void id
+    void index
+  }
 
   const editableIndex = computed(() => {
     if (!installed.value.length)
@@ -496,8 +523,8 @@ function _createCanvas() {
     findRowById,
     findCellById,
     addComponent,
-    addNewToolToMultiTool: canvasTools.addNewToolToMultiTool,
-    deleteMultiToolItem: canvasTools.deleteMultiToolItem,
+    addNewToolToMultiTool,
+    deleteMultiToolItem,
     duplicateComponentById,
     insertBlockToCanvas,
     renameBlock,
@@ -520,9 +547,9 @@ function _createCanvas() {
     moveComponent,
     clearCanvas,
     removeComponentById,
-    updateToolById: canvasTools.updateToolById,
-    updateTextAtomValue: canvasTools.updateTextAtomValue,
-    getTextAtomValue: canvasTools.getTextAtomValue,
+    updateNodeProperty,
+    updateNodeProperties,
+    getNodePropertyState,
   }
 }
 

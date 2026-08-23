@@ -407,7 +407,14 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
             >
               <InlineTextEditor
                 v-if="editingAtomId === child.id"
-                :atom-id="child.id"
+                :atom-ref="{
+                  kind: 'atom',
+                  blockId,
+                  rowId: row.id,
+                  cellId: cell.id,
+                  atomId: child.id,
+                  atomType: 'text',
+                }"
                 :value="child.value"
               />
               <div

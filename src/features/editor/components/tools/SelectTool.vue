@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { SelectTool } from '@/features/editor/model'
-import { ref, watch } from 'vue'
-import { useCanvas } from '@/features/editor/model'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
 
 interface Props {
@@ -13,19 +11,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { updateToolById } = useCanvas()
-const localValue = ref(props.value)
-
-watch(
-  () => props.value,
-  () => {
-    localValue.value = props.value
-  },
-)
-
-watch(localValue, () => {
-  updateToolById<SelectTool>(props.id, 'value', localValue.value)
-})
+const emit = defineEmits<{ (e: 'update:value', value: string): void }>()
 </script>
 
 <template>
@@ -34,7 +20,10 @@ watch(localValue, () => {
       {{ title }}
     </EditorToolLabel>
     <div class="flex">
-      <Select v-model="localValue">
+      <Select
+        :model-value="props.value"
+        @update:model-value="(value) => emit('update:value', String(value))"
+      >
         <SelectTrigger size="sm">
           <SelectValue />
         </SelectTrigger>

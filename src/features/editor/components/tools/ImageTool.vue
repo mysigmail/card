@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { BackgroundImageTool, ImageTool } from '@/features/editor/model'
-import { computed, reactive, watch } from 'vue'
-import { useCanvas } from '@/features/editor/model'
+import { computed, nextTick, reactive, watch } from 'vue'
 import { Input } from '@/shared/ui/input'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 
@@ -15,11 +14,10 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-
-const { updateToolById } = useCanvas()
-
-const localValue = reactive<UnifiedImageValue>(props.value)
+const emit = defineEmits<{ (e: 'update:value', value: UnifiedImageValue): void }>()
+const localValue = reactive<UnifiedImageValue>({ ...props.value })
 const isBackground = computed(() => props.type === 'bgImage')
+let syncing = false
 
 const imageValue = localValue as ImageTool['value']
 const backgroundValue = localValue as BackgroundImageTool['value']
@@ -27,12 +25,21 @@ const backgroundValue = localValue as BackgroundImageTool['value']
 watch(
   localValue,
   () => {
-    if (isBackground.value) {
-      updateToolById<BackgroundImageTool>(props.id, 'value', backgroundValue)
+    if (syncing)
       return
-    }
+    emit('update:value', { ...localValue })
+  },
+  { deep: true },
+)
 
-    updateToolById<ImageTool>(props.id, 'value', imageValue)
+watch(
+  () => props.value,
+  async (value) => {
+    syncing = true
+    for (const key of Object.keys(localValue)) delete (localValue as Record<string, unknown>)[key]
+    Object.assign(localValue, value)
+    await nextTick()
+    syncing = false
   },
   { deep: true },
 )
