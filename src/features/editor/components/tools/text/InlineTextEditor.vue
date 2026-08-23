@@ -30,6 +30,7 @@ const {
   stopEditing,
   unregisterEditor,
 } = useInlineTextEditing()
+let initialSelectionRafId: number | undefined
 let finished = false
 let lastModelValue = sanitizeTextEditorHtml(props.value)
 
@@ -119,7 +120,12 @@ onMounted(() => {
 
   registerEditor(props.atomRef.atomId, editor.value)
 
-  nextTick(focusInitialSelection)
+  nextTick(() => {
+    initialSelectionRafId = window.requestAnimationFrame(() => {
+      initialSelectionRafId = undefined
+      focusInitialSelection()
+    })
+  })
 })
 
 watch(
@@ -135,6 +141,9 @@ watch(
 )
 
 onBeforeUnmount(() => {
+  if (initialSelectionRafId !== undefined)
+    window.cancelAnimationFrame(initialSelectionRafId)
+
   if (
     canPersistInlineTextOnUnmount({
       currentModelValue: getTextAtomValue(),
@@ -157,6 +166,7 @@ onBeforeUnmount(() => {
     ref="root"
     data-slot="inline-text-editor"
     data-inline-text-editor
+    data-selection-content
     class="p-inline-text-editor"
     @click.stop
     @dblclick.stop

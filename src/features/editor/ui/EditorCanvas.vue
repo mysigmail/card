@@ -125,12 +125,13 @@ onMounted(() => {
           </div>
 
           <div
-            v-if="selectionOverlay.visible && !editingAtomId"
+            v-if="selectionOverlay.visible"
             class="p-selection-overlay"
+            :class="{ 'p-selection-overlay--editing': editingAtomId }"
             :style="selectionOverlayStyle"
           >
             <div
-              v-if="selectionOverlay.label"
+              v-if="selectionOverlay.label && !editingAtomId"
               class="p-selection-overlay__labels"
             >
               <div class="p-selection-overlay__label">
