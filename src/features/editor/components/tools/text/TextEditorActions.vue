@@ -13,12 +13,14 @@ import {
 } from 'lucide-vue-next'
 import { computed } from 'vue'
 import { useEditor } from '@/features/editor/components/tools/text/composables'
+import { useColorPalettes } from '@/features/editor/model'
 import { ColorPicker } from '@/shared/ui/color-picker'
 import { Input } from '@/shared/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 
 const { align, bold, editor, fontSize, italic, link, strike, textColor, underline } = useEditor()
+const { documentColors, recentColors, rememberColor } = useColorPalettes()
 
 const pressets = ['#F56C6C', '#E6A23C', '#67C23A', '#396BDD', '#000000', '#FFFFFF']
 
@@ -146,7 +148,10 @@ const linkValue = computed<string>({
       <ColorPicker
         v-model="textColor"
         :presets="pressets"
+        :recent-colors="recentColors"
+        :document-colors="documentColors"
         size="sm"
+        @commit="rememberColor"
       />
 
       <div

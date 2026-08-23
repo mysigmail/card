@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { BorderSideValue, BorderStyle } from '@/entities/style'
-import { BORDER_STYLES, normalizeOpaqueHex } from '@/entities/style'
+import { BORDER_STYLES, normalizeEmailColor } from '@/entities/style'
+import { useColorPalettes } from '@/features/editor/model'
 import { ColorPicker } from '@/shared/ui/color-picker'
 import { Input } from '@/shared/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
@@ -14,6 +15,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (event: 'update:value', value: Partial<BorderSideValue>): void
 }>()
+const { documentColors, recentColors, rememberColor } = useColorPalettes()
 
 function updateWidth(value: string | number) {
   if (value === '')
@@ -25,7 +27,7 @@ function updateWidth(value: string | number) {
 }
 
 function updateColor(value: string) {
-  const color = normalizeOpaqueHex(value)
+  const color = normalizeEmailColor(value)
   if (color)
     emit('update:value', { color })
 }
@@ -94,6 +96,9 @@ function updateColor(value: string) {
         :model-value="value.color"
         :show-reset="false"
         :show-input="false"
+        :recent-colors="recentColors"
+        :document-colors="documentColors"
+        @commit="rememberColor"
         @update:model-value="updateColor"
       />
     </div>

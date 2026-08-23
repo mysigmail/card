@@ -69,6 +69,7 @@ export interface ImageTool extends BaseTool {
 export interface ColorPickerTool extends BaseTool {
   type: 'colorPicker'
   value: string
+  resetValue?: string
 }
 
 export interface BackgroundImageTool extends BaseTool {

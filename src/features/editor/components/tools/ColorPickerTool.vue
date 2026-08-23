@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useColorPalettes } from '@/features/editor/model'
 import { ColorPicker } from '@/shared/ui/color-picker'
 
 interface Props {
@@ -6,6 +7,7 @@ interface Props {
   value: string
   title: string
   pressets?: string[]
+  resetValue?: string
 }
 
 interface Emits {
@@ -17,6 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<Emits>()
+const { documentColors, recentColors, rememberColor } = useColorPalettes()
 </script>
 
 <template>
@@ -25,6 +28,11 @@ const emit = defineEmits<Emits>()
     <ColorPicker
       :model-value="props.value"
       :presets="props.pressets"
+      :show-reset="props.resetValue !== undefined"
+      :reset-value="props.resetValue"
+      :recent-colors="recentColors"
+      :document-colors="documentColors"
+      @commit="rememberColor"
       @update:model-value="(value) => emit('update:value', value)"
     />
   </div>
