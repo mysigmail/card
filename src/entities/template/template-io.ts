@@ -590,7 +590,16 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
     validateAllowedProperties(
       value,
       path,
-      ['id', 'type', 'value', 'spacing', 'hiddenOnMobile'],
+      [
+        'id',
+        'type',
+        'value',
+        'widthMode',
+        'paragraphSpacing',
+        'border',
+        'spacing',
+        'hiddenOnMobile',
+      ],
       issues,
     )
 
@@ -599,6 +608,26 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
 
     if (value.spacing !== undefined)
       validateSpacingValue(value.spacing, `${path}.spacing`, issues)
+
+    if (
+      value.widthMode !== undefined
+      && (typeof value.widthMode !== 'string' || !['fill', 'hug'].includes(value.widthMode))
+    ) {
+      pushIssue(issues, `${path}.widthMode`, 'text atom widthMode must be "fill" or "hug"')
+    }
+
+    if (
+      value.paragraphSpacing !== undefined
+      && (!isFiniteNumber(value.paragraphSpacing) || value.paragraphSpacing < 0)
+    ) {
+      pushIssue(
+        issues,
+        `${path}.paragraphSpacing`,
+        'text atom paragraphSpacing must be a non-negative finite number',
+      )
+    }
+
+    validateBorderValue(value.border, `${path}.border`, issues)
 
     return
   }
@@ -616,6 +645,7 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
         'color',
         'fontSize',
         'borderRadius',
+        'border',
         'padding',
         'spacing',
         'hiddenOnMobile',
@@ -642,6 +672,8 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
 
     if (value.spacing !== undefined)
       validateSpacingValue(value.spacing, `${path}.spacing`, issues)
+
+    validateBorderValue(value.border, `${path}.border`, issues)
 
     return
   }
@@ -679,6 +711,7 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
         'width',
         'height',
         'borderRadius',
+        'border',
         'spacing',
         'hiddenOnMobile',
       ],
@@ -710,6 +743,8 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
 
     if (value.spacing !== undefined)
       validateSpacingValue(value.spacing, `${path}.spacing`, issues)
+
+    validateBorderValue(value.border, `${path}.border`, issues)
 
     return
   }
@@ -1136,8 +1171,15 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
         id: atom.id,
         type: atom.type,
         value: sanitizeTextEditorHtml(atom.value),
+        ...(atom.widthMode === 'fill' || atom.widthMode === 'hug'
+          ? { widthMode: atom.widthMode }
+          : {}),
+        ...(isFiniteNumber(atom.paragraphSpacing) && atom.paragraphSpacing >= 0
+          ? { paragraphSpacing: atom.paragraphSpacing }
+          : {}),
         spacing: atom.spacing,
         hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+        ...sanitizeBorderProperty(atom.border),
       }
     }
 
@@ -1154,6 +1196,16 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
           isFiniteNumber(atom.borderRadius) && atom.borderRadius >= 0
             ? atom.borderRadius
             : undefined,
+        ...sanitizeBorderProperty(atom.border),
+      }
+    }
+
+    if (atom.type === 'button') {
+      const { border: _border, ...button } = atom
+      return {
+        ...button,
+        hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+        ...sanitizeBorderProperty(atom.border),
       }
     }
 

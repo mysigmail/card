@@ -10,6 +10,9 @@ export interface BaseAtom {
 export interface TextAtom extends BaseAtom {
   type: 'text'
   value: string
+  widthMode?: 'fill' | 'hug'
+  paragraphSpacing?: number
+  border?: BorderValue
 }
 
 export interface ButtonAtom extends BaseAtom {
@@ -21,6 +24,7 @@ export interface ButtonAtom extends BaseAtom {
   fontSize: number
   borderRadius: number
   padding: [number, number, number, number]
+  border?: BorderValue
 }
 
 export interface DividerAtom extends BaseAtom {
@@ -37,6 +41,7 @@ export interface ImageAtom extends BaseAtom {
   width?: number
   height?: number
   borderRadius?: number
+  border?: BorderValue
 }
 
 export type AtomType = 'text' | 'button' | 'divider' | 'image'

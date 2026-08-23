@@ -92,10 +92,11 @@ describe('typed inspector registry and mutation gateway', () => {
         'width',
         'height',
       ],
-      text: ['spacing', 'hiddenOnMobile', 'value'],
+      text: ['spacing', 'hiddenOnMobile', 'border', 'widthMode', 'paragraphSpacing', 'value'],
       button: [
         'spacing',
         'hiddenOnMobile',
+        'border',
         'text',
         'link',
         'backgroundColor',
@@ -104,7 +105,17 @@ describe('typed inspector registry and mutation gateway', () => {
         'borderRadius',
       ],
       divider: ['spacing', 'hiddenOnMobile', 'color', 'height'],
-      image: ['spacing', 'hiddenOnMobile', 'src', 'alt', 'link', 'width', 'height', 'borderRadius'],
+      image: [
+        'spacing',
+        'hiddenOnMobile',
+        'border',
+        'src',
+        'alt',
+        'link',
+        'width',
+        'height',
+        'borderRadius',
+      ],
     })
   })
 
@@ -232,6 +243,28 @@ describe('typed inspector registry and mutation gateway', () => {
       top: { width: 2, style: 'dashed', color: '#AABBCC' },
     })
 
+    for (const ref of [fixture.textRef, fixture.buttonRef, fixture.imageRef]) {
+      expect(
+        updateNodeProperty(fixture.items, {
+          ref,
+          property: 'border',
+          value: { right: { width: 4, style: 'solid', color: '#456' } },
+        }),
+      ).toEqual({ ok: true, changed: true })
+      expect(getNodePropertyState(fixture.items, ref, 'border')).toEqual({
+        kind: 'value',
+        value: { right: { width: 4, style: 'solid', color: '#445566' } },
+      })
+    }
+
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: fixture.dividerRef,
+        property: 'border',
+        value: { top: { width: 1, style: 'solid', color: '#000000' } },
+      } as unknown as NodePropertyCommand),
+    ).toEqual({ ok: false, reason: 'unsupported-property' })
+
     const before = structuredClone(fixture.row.settings.border)
     expect(
       updateNodeProperties(fixture.items, [
@@ -285,6 +318,38 @@ describe('typed inspector registry and mutation gateway', () => {
       width: 240,
     })
     expect(fixture.image.height).toBeUndefined()
+  })
+
+  it('updates Text box geometry atomically and rejects invalid paragraph spacing', () => {
+    const fixture = createFixture()
+    fixture.text.widthMode = undefined
+    fixture.text.paragraphSpacing = undefined
+
+    expect(
+      updateNodeProperties(fixture.items, [
+        { ref: fixture.textRef, property: 'widthMode', value: 'hug' },
+        { ref: fixture.textRef, property: 'paragraphSpacing', value: 18 },
+        {
+          ref: fixture.textRef,
+          property: 'border',
+          value: { top: { width: 1, style: 'solid', color: '#123' } },
+        },
+      ]),
+    ).toEqual({ ok: true, changed: true })
+    expect(fixture.text).toMatchObject({
+      widthMode: 'hug',
+      paragraphSpacing: 18,
+      border: { top: { width: 1, style: 'solid', color: '#112233' } },
+    })
+
+    const before = structuredClone(fixture.text)
+    expect(
+      updateNodeProperties(fixture.items, [
+        { ref: fixture.textRef, property: 'widthMode', value: 'fill' },
+        { ref: fixture.textRef, property: 'paragraphSpacing', value: -1 },
+      ]),
+    ).toEqual({ ok: false, reason: 'invalid-value' })
+    expect(fixture.text).toEqual(before)
   })
 
   it('rejects duplicate target properties before applying a batch', () => {

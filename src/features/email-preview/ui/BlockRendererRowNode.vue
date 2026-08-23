@@ -2,12 +2,13 @@
 import type { CSSProperties } from 'vue'
 import type { Atom, CellNode, RowNode } from '@/entities/block'
 import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
-import { sanitizeTextEditorHtml } from '@/entities/template'
 import { useSelection } from '@/features/editor'
 import { useInlineTextEditing } from '@/features/editor/components/tools/text/composables/use-inline-text-editing'
 import { textOffsetAtCoords } from '@/features/editor/components/tools/text/inline-text-session'
 import InlineTextEditor from '@/features/editor/components/tools/text/InlineTextEditor.vue'
 import { resolveBorderStyle } from '@/features/email-preview/lib/resolve-border-style'
+import { renderTextAtomHtml } from '@/features/email-preview/lib/text-box'
+import EmailTextBox from '@/features/email-preview/ui/EmailTextBox.vue'
 
 interface Props {
   blockId: string
@@ -45,10 +46,6 @@ function atomSpacingStyle(atom: Atom, options: { includePadding?: boolean } = {}
   return style
 }
 
-function textAtomStyle(atom: Extract<Atom, { type: 'text' }>): CSSProperties {
-  return atomSpacingStyle(atom)
-}
-
 function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {
   const padding = tupleToCss(atom.spacing?.padding) || tupleToCss(atom.padding)
 
@@ -62,6 +59,7 @@ function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {
     textDecoration: 'none',
     textAlign: 'center',
     cursor: 'pointer',
+    ...resolveBorderStyle(atom.border),
   }
 }
 
@@ -82,6 +80,7 @@ function imageStyle(
         : undefined,
     marginLeft: align === 'center' || align === 'right' ? 'auto' : '0',
     marginRight: align === 'center' ? 'auto' : '0',
+    ...resolveBorderStyle(atom.border),
   }
 }
 
@@ -397,11 +396,13 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
                 />
               </MColumn>
             </MRow>
-            <div
+            <EmailTextBox
               v-else-if="child.type === 'text'"
+              :atom="child"
+              :horizontal-align="cell.settings.horizontalAlign"
+              preview
               :class="atomWrapperClass(child)"
               :data-node-id="`atom:${child.id}`"
-              :style="textAtomStyle(child)"
               :tabindex="editingAtomId === child.id ? -1 : 0"
               @click.stop="selectAtomNode(row.id, cell.id, child.id, $event)"
               @dblclick.stop="startTextEditing(row.id, cell.id, child.id, $event)"
@@ -422,9 +423,9 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
               <div
                 v-else
                 class="p-text-atom-content"
-                v-html="sanitizeTextEditorHtml(child.value) || '&nbsp;'"
+                v-html="renderTextAtomHtml(child) || '&nbsp;'"
               />
-            </div>
+            </EmailTextBox>
 
             <div
               v-else-if="child.type === 'button'"

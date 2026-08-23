@@ -68,6 +68,9 @@ export interface TextAtomPropertyMap {
   spacing: SpacingValue
   hiddenOnMobile: boolean
   value: string
+  widthMode: 'fill' | 'hug' | undefined
+  paragraphSpacing: number | undefined
+  border: BorderValue | undefined
 }
 
 export type AtomCommonPropertyMap = Pick<TextAtomPropertyMap, 'spacing' | 'hiddenOnMobile'>
@@ -81,6 +84,7 @@ export interface ButtonAtomPropertyMap {
   color: string
   fontSize: number
   borderRadius: number
+  border: BorderValue | undefined
 }
 
 export interface DividerAtomPropertyMap {
@@ -99,6 +103,7 @@ export interface ImageAtomPropertyMap {
   width: number | undefined
   height: number | undefined
   borderRadius: number
+  border: BorderValue | undefined
 }
 
 export interface AtomPropertyMap {

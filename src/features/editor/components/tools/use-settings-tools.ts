@@ -11,6 +11,7 @@ import type {
   Tool,
 } from '@/features/editor/model'
 import { computed } from 'vue'
+import { resolveLegacyTextBoxDefaults } from '@/entities/block'
 import { useCanvas, useSelection } from '@/features/editor/model'
 
 export type DimensionMode = 'auto' | 'manual'
@@ -348,8 +349,87 @@ export function useSettingsTools() {
   const atomTools = computed<InspectorControl[]>(() => {
     const atom = selection.selectedAtom.value
     const ref = atomRef.value
-    if (!atom || !ref || atom.type === 'text')
+    if (!atom || !ref)
       return []
+    if (atom.type === 'text' && ref.atomType === 'text') {
+      const textRef = ref as AtomRef<'text'>
+      const legacyDefaults = resolveLegacyTextBoxDefaults(atom)
+      const materializeLegacyTextBox = (
+        commands: NodePropertyCommand[],
+        widthMode: 'fill' | 'hug',
+      ) => {
+        if (atom.widthMode === undefined)
+          commands.push({ ref: textRef, property: 'widthMode', value: widthMode })
+        if (atom.paragraphSpacing === undefined) {
+          commands.push({
+            ref: textRef,
+            property: 'paragraphSpacing',
+            value: legacyDefaults.paragraphSpacing,
+          })
+          if (legacyDefaults.spacing) {
+            commands.push({ ref: textRef, property: 'spacing', value: legacyDefaults.spacing })
+          }
+        }
+      }
+      return [
+        {
+          id: 'text-width-mode',
+          key: 'widthMode',
+          label: 'Width',
+          type: 'select',
+          value: atom.widthMode ?? 'fill',
+          options: [
+            { label: 'Fill', value: 'fill' },
+            { label: 'Hug content', value: 'hug' },
+          ],
+          onUpdate: (value) => {
+            const widthMode = value === 'hug' ? 'hug' : 'fill'
+            const commands: NodePropertyCommand[] = []
+            materializeLegacyTextBox(commands, widthMode)
+            if (atom.widthMode !== undefined)
+              commands.push({ ref: textRef, property: 'widthMode', value: widthMode })
+            updateNodeProperties(commands)
+          },
+        },
+        {
+          id: 'text-paragraph-spacing',
+          key: 'paragraphSpacing',
+          label: 'Paragraph Spacing',
+          type: 'inputNumber',
+          value: atom.paragraphSpacing ?? legacyDefaults.paragraphSpacing,
+          onUpdate: (value) => {
+            const commands: NodePropertyCommand[] = []
+            materializeLegacyTextBox(commands, 'fill')
+            const paragraphSpacing = Math.max(0, Number(value) || 0)
+            const index = commands.findIndex(command => command.property === 'paragraphSpacing')
+            if (index >= 0) {
+              commands[index] = {
+                ref: textRef,
+                property: 'paragraphSpacing',
+                value: paragraphSpacing,
+              }
+            }
+            else {
+              commands.push({ ref: textRef, property: 'paragraphSpacing', value: paragraphSpacing })
+            }
+            updateNodeProperties(commands)
+          },
+        },
+        {
+          id: 'text-border',
+          key: 'border',
+          label: 'Border',
+          type: 'border',
+          value: atom.border,
+          onUpdate: (value) => {
+            const commands: NodePropertyCommand[] = [{ ref: textRef, property: 'border', value }]
+            if (value)
+              materializeLegacyTextBox(commands, 'hug')
+            updateNodeProperties(commands)
+          },
+        },
+      ]
+    }
     if (atom.type === 'button' && ref.atomType === 'button') {
       const buttonRef = ref as AtomRef<'button'>
       return [
@@ -365,6 +445,14 @@ export function useSettingsTools() {
               property: 'borderRadius',
               value: Math.max(0, Number(value) || 0),
             }),
+        },
+        {
+          id: 'button-border',
+          key: 'border',
+          label: 'Border',
+          type: 'border',
+          value: atom.border,
+          onUpdate: value => update({ ref: buttonRef, property: 'border', value }),
         },
         {
           id: 'button-background-color',
@@ -424,6 +512,14 @@ export function useSettingsTools() {
               property: 'borderRadius',
               value: Math.max(0, Number(value) || 0),
             }),
+        },
+        {
+          id: 'image-border',
+          key: 'border',
+          label: 'Border',
+          type: 'border',
+          value: atom.border,
+          onUpdate: value => update({ ref: imageRef, property: 'border', value }),
         },
         {
           id: 'image-content',

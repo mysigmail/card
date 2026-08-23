@@ -56,6 +56,8 @@ export function createTextAtom(value = '<p>Text</p>'): TextAtom {
     id: nanoid(8),
     type: 'text',
     value: `<div style="color:#111827">${value}</div>`,
+    widthMode: 'hug',
+    paragraphSpacing: 0,
     spacing: createAtomSpacing(),
   }
 }
