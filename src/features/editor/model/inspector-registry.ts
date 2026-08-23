@@ -5,7 +5,8 @@ import type {
   RowPropertyMap,
 } from './inspector-types'
 import type { Atom, AtomType, BlockNode, CellNode, RowNode } from '@/entities/block'
-import type { BackgroundImageValue, Insets, SpacingValue } from '@/entities/style'
+import type { BackgroundImageValue, BorderValue, Insets, SpacingValue } from '@/entities/style'
+import { normalizeBorderValue } from '@/entities/style'
 import { sanitizeTextEditorHtml } from '@/entities/template'
 
 interface Normalized<T> {
@@ -139,6 +140,38 @@ function jsonEqual<T>(current: T, next: T) {
   return JSON.stringify(current) === JSON.stringify(next)
 }
 
+function borderDescriptor<N extends BlockNode | RowNode | CellNode>() {
+  return defineDescriptor<N, BorderValue | undefined>({
+    read: node => node.settings.border,
+    normalize: (value) => {
+      if (value === undefined)
+        return normalized(undefined)
+      const border = normalizeBorderValue(value)
+      return border ? normalized(border) : invalid()
+    },
+    equal: jsonEqual,
+    apply: (node, value) => {
+      node.settings.border = value
+    },
+  })
+}
+
+function atomBorderDescriptor<N extends TextAtom | ButtonAtom | ImageAtom>() {
+  return defineDescriptor<N, BorderValue | undefined>({
+    read: node => node.border,
+    normalize: (value) => {
+      if (value === undefined)
+        return normalized(undefined)
+      const border = normalizeBorderValue(value)
+      return border ? normalized(border) : invalid()
+    },
+    equal: jsonEqual,
+    apply: (node, value) => {
+      node.border = value
+    },
+  })
+}
+
 function strictEqual<T>(current: T, next: T) {
   return current === next
 }
@@ -220,6 +253,7 @@ export const blockPropertyRegistry = {
       node.settings.backgroundImage = value
     },
   }),
+  border: borderDescriptor<BlockNode>(),
 } satisfies PropertyRegistry<BlockNode, BlockPropertyMap>
 
 export const rowPropertyRegistry = {
@@ -246,6 +280,7 @@ export const rowPropertyRegistry = {
       node.settings.backgroundImage = value
     },
   }),
+  border: borderDescriptor<RowNode>(),
   widthMode: defineDescriptor<RowNode, 'fill' | 'hug'>({
     read: node => node.settings.widthMode,
     normalize: value => (value === 'fill' || value === 'hug' ? normalized(value) : invalid()),
@@ -312,6 +347,7 @@ export const cellPropertyRegistry = {
       node.settings.backgroundImage = value
     },
   }),
+  border: borderDescriptor<CellNode>(),
   link: defineDescriptor<CellNode, string>({
     read: node => node.settings.link ?? '',
     normalize: normalizeTrimmedString,
@@ -381,6 +417,30 @@ export const atomPropertyRegistry = {
   text: {
     spacing: atomSpacing<TextAtom>(),
     hiddenOnMobile: atomVisibility<TextAtom>(),
+    border: atomBorderDescriptor<TextAtom>(),
+    widthMode: defineDescriptor<TextAtom, 'fill' | 'hug' | undefined>({
+      read: node => node.widthMode,
+      normalize: value =>
+        value === undefined || value === 'fill' || value === 'hug' ? normalized(value) : invalid(),
+      equal: strictEqual,
+      apply: (node, value) => {
+        node.widthMode = value
+      },
+    }),
+    paragraphSpacing: defineDescriptor<TextAtom, number | undefined>({
+      read: node => node.paragraphSpacing,
+      normalize: (value) => {
+        if (value === undefined)
+          return normalized(undefined)
+        return typeof value === 'number' && Number.isFinite(value) && value >= 0
+          ? normalized(value)
+          : invalid()
+      },
+      equal: strictEqual,
+      apply: (node, value) => {
+        node.paragraphSpacing = value
+      },
+    }),
     value: defineDescriptor<TextAtom, string>({
       read: node => node.value,
       normalize: value =>
@@ -403,6 +463,7 @@ export const atomPropertyRegistry = {
       },
     }),
     hiddenOnMobile: atomVisibility<ButtonAtom>(),
+    border: atomBorderDescriptor<ButtonAtom>(),
     text: defineDescriptor<ButtonAtom, string>({
       read: node => node.text,
       normalize: normalizeString,
@@ -475,6 +536,7 @@ export const atomPropertyRegistry = {
   image: {
     spacing: atomSpacing<ImageAtom>(),
     hiddenOnMobile: atomVisibility<ImageAtom>(),
+    border: atomBorderDescriptor<ImageAtom>(),
     src: defineDescriptor<ImageAtom, string>({
       read: node => node.src,
       normalize: normalizeString,

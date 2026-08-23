@@ -9,8 +9,15 @@ import type {
   ToolCollectionItem,
 } from './types'
 import type { Atom, BlockNode, CellNode, RowNode } from '@/entities/block'
+import type { BorderStyle } from '@/entities/style'
 import { nanoid } from 'nanoid'
 import sanitizeHtmlLib from 'sanitize-html'
+import {
+  BORDER_SIDES,
+  BORDER_STYLES,
+  normalizeBorderValue,
+  normalizeOpaqueHex,
+} from '@/entities/style'
 import { clone } from '@/shared/lib/clone'
 import { TEMPLATE_EXPORT_VERSION, TEMPLATE_MAX_COMPONENTS, TEMPLATE_MAX_JSON_BYTES } from './types'
 
@@ -527,6 +534,42 @@ function validateBackgroundImageValue(
   }
 }
 
+function validateBorderValue(value: unknown, path: string, issues: TemplateValidationIssue[]) {
+  if (value === undefined)
+    return
+  if (!isRecord(value)) {
+    pushIssue(issues, path, 'border must be an object')
+    return
+  }
+
+  validateAllowedProperties(value, path, BORDER_SIDES, issues)
+  const presentSides = BORDER_SIDES.filter(side => side in value)
+  if (presentSides.length === 0)
+    pushIssue(issues, path, 'border must contain at least one side')
+
+  for (const side of presentSides) {
+    const sidePath = `${path}.${side}`
+    const sideValue = value[side]
+    if (!isRecord(sideValue)) {
+      pushIssue(issues, sidePath, `border.${side} must be an object`)
+      continue
+    }
+    validateAllowedProperties(sideValue, sidePath, ['width', 'style', 'color'], issues)
+    if (!Number.isInteger(sideValue.width) || (sideValue.width as number) < 1) {
+      pushIssue(issues, `${sidePath}.width`, 'border width must be a positive integer')
+    }
+    if (
+      typeof sideValue.style !== 'string'
+      || !BORDER_STYLES.includes(sideValue.style as BorderStyle)
+    ) {
+      pushIssue(issues, `${sidePath}.style`, 'border style must be "solid", "dashed" or "dotted"')
+    }
+    if (typeof sideValue.color !== 'string' || !normalizeOpaqueHex(sideValue.color)) {
+      pushIssue(issues, `${sidePath}.color`, 'border color must be an opaque hex color')
+    }
+  }
+}
+
 function validateAtom(value: unknown, path: string, issues: TemplateValidationIssue[]) {
   if (!isRecord(value)) {
     pushIssue(issues, path, 'atom must be an object')
@@ -547,7 +590,16 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
     validateAllowedProperties(
       value,
       path,
-      ['id', 'type', 'value', 'spacing', 'hiddenOnMobile'],
+      [
+        'id',
+        'type',
+        'value',
+        'widthMode',
+        'paragraphSpacing',
+        'border',
+        'spacing',
+        'hiddenOnMobile',
+      ],
       issues,
     )
 
@@ -556,6 +608,26 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
 
     if (value.spacing !== undefined)
       validateSpacingValue(value.spacing, `${path}.spacing`, issues)
+
+    if (
+      value.widthMode !== undefined
+      && (typeof value.widthMode !== 'string' || !['fill', 'hug'].includes(value.widthMode))
+    ) {
+      pushIssue(issues, `${path}.widthMode`, 'text atom widthMode must be "fill" or "hug"')
+    }
+
+    if (
+      value.paragraphSpacing !== undefined
+      && (!isFiniteNumber(value.paragraphSpacing) || value.paragraphSpacing < 0)
+    ) {
+      pushIssue(
+        issues,
+        `${path}.paragraphSpacing`,
+        'text atom paragraphSpacing must be a non-negative finite number',
+      )
+    }
+
+    validateBorderValue(value.border, `${path}.border`, issues)
 
     return
   }
@@ -573,6 +645,7 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
         'color',
         'fontSize',
         'borderRadius',
+        'border',
         'padding',
         'spacing',
         'hiddenOnMobile',
@@ -599,6 +672,8 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
 
     if (value.spacing !== undefined)
       validateSpacingValue(value.spacing, `${path}.spacing`, issues)
+
+    validateBorderValue(value.border, `${path}.border`, issues)
 
     return
   }
@@ -636,6 +711,7 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
         'width',
         'height',
         'borderRadius',
+        'border',
         'spacing',
         'hiddenOnMobile',
       ],
@@ -667,6 +743,8 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
 
     if (value.spacing !== undefined)
       validateSpacingValue(value.spacing, `${path}.spacing`, issues)
+
+    validateBorderValue(value.border, `${path}.border`, issues)
 
     return
   }
@@ -703,6 +781,7 @@ function validateCellNode(value: unknown, path: string, issues: TemplateValidati
         'spacing',
         'backgroundColor',
         'backgroundImage',
+        'border',
         'link',
         'hiddenOnMobile',
         'verticalAlign',
@@ -792,6 +871,7 @@ function validateCellNode(value: unknown, path: string, issues: TemplateValidati
       `${path}.settings.backgroundImage`,
       issues,
     )
+    validateBorderValue(value.settings.border, `${path}.settings.border`, issues)
   }
 
   if (!Array.isArray(value.children)) {
@@ -832,6 +912,7 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
         'spacing',
         'backgroundColor',
         'backgroundImage',
+        'border',
         'hiddenOnMobile',
         'collapseOnMobile',
         'height',
@@ -897,6 +978,7 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
       `${path}.settings.backgroundImage`,
       issues,
     )
+    validateBorderValue(value.settings.border, `${path}.settings.border`, issues)
   }
 
   if (!Array.isArray(value.cells)) {
@@ -937,7 +1019,7 @@ function validateCanvasBlockInstance(
     validateAllowedProperties(
       block.settings,
       `${path}.block.settings`,
-      ['spacing', 'backgroundColor', 'backgroundImage'],
+      ['spacing', 'backgroundColor', 'backgroundImage', 'border'],
       issues,
     )
 
@@ -956,6 +1038,7 @@ function validateCanvasBlockInstance(
       `${path}.block.settings.backgroundImage`,
       issues,
     )
+    validateBorderValue(block.settings.border, `${path}.block.settings.border`, issues)
   }
 
   if (!Array.isArray(block.rows)) {
@@ -1088,8 +1171,15 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
         id: atom.id,
         type: atom.type,
         value: sanitizeTextEditorHtml(atom.value),
+        ...(atom.widthMode === 'fill' || atom.widthMode === 'hug'
+          ? { widthMode: atom.widthMode }
+          : {}),
+        ...(isFiniteNumber(atom.paragraphSpacing) && atom.paragraphSpacing >= 0
+          ? { paragraphSpacing: atom.paragraphSpacing }
+          : {}),
         spacing: atom.spacing,
         hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+        ...sanitizeBorderProperty(atom.border),
       }
     }
 
@@ -1106,6 +1196,16 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
           isFiniteNumber(atom.borderRadius) && atom.borderRadius >= 0
             ? atom.borderRadius
             : undefined,
+        ...sanitizeBorderProperty(atom.border),
+      }
+    }
+
+    if (atom.type === 'button') {
+      const { border: _border, ...button } = atom
+      return {
+        ...button,
+        hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+        ...sanitizeBorderProperty(atom.border),
       }
     }
 
@@ -1116,16 +1216,25 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
   })
 }
 
+function sanitizeBorderProperty(border: unknown): {
+  border?: ReturnType<typeof normalizeBorderValue>
+} {
+  const normalized = normalizeBorderValue(border)
+  return normalized ? { border: normalized } : {}
+}
+
 function sanitizeCellNodes(cells: CellNode[]): CellNode[] {
   return cells.map((cell) => {
+    const { border: _border, ...cellSettings } = cell.settings
     const settings = {
-      ...cell.settings,
+      ...cellSettings,
       link: typeof cell.settings?.link === 'string' ? cell.settings.link : undefined,
       hiddenOnMobile: toOptionalBoolean(cell.settings?.hiddenOnMobile),
       borderRadius:
         isFiniteNumber(cell.settings?.borderRadius) && cell.settings.borderRadius >= 0
           ? cell.settings.borderRadius
           : undefined,
+      ...sanitizeBorderProperty(cell.settings?.border),
     }
 
     // Hard-drop legacy per-cell collapse to keep exported schema clean.
@@ -1142,23 +1251,34 @@ function sanitizeCellNodes(cells: CellNode[]): CellNode[] {
 }
 
 function sanitizeRowNodes(rows: RowNode[]): RowNode[] {
-  return rows.map(row => ({
-    id: row.id,
-    type: 'row',
-    settings: {
-      ...row.settings,
-      hiddenOnMobile: toOptionalBoolean(row.settings?.hiddenOnMobile),
-      collapseOnMobile:
-        typeof row.settings?.collapseOnMobile === 'boolean' ? row.settings.collapseOnMobile : true,
-      widthMode: row.settings?.widthMode === 'hug' ? 'hug' : 'fill',
-    },
-    cells: sanitizeCellNodes(row.cells),
-  }))
+  return rows.map((row) => {
+    const { border: _border, ...rowSettings } = row.settings
+    return {
+      id: row.id,
+      type: 'row',
+      settings: {
+        ...rowSettings,
+        hiddenOnMobile: toOptionalBoolean(row.settings?.hiddenOnMobile),
+        collapseOnMobile:
+          typeof row.settings?.collapseOnMobile === 'boolean'
+            ? row.settings.collapseOnMobile
+            : true,
+        widthMode: row.settings?.widthMode === 'hug' ? 'hug' : 'fill',
+        ...sanitizeBorderProperty(row.settings?.border),
+      },
+      cells: sanitizeCellNodes(row.cells),
+    }
+  })
 }
 
 function sanitizeBlock(block: BlockNode): BlockNode {
+  const { border: _border, ...blockSettings } = block.settings
   return {
     ...block,
+    settings: {
+      ...blockSettings,
+      ...sanitizeBorderProperty(block.settings?.border),
+    },
     rows: sanitizeRowNodes(block.rows),
   }
 }

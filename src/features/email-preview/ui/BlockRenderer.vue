@@ -4,6 +4,7 @@ import type { BlockNode } from '@/entities/block'
 import { MContainer } from '@mysigmail/vue-email-components'
 import { computed } from 'vue'
 import { useCanvas, useSelection } from '@/features/editor'
+import { resolveBorderStyle } from '@/features/email-preview/lib/resolve-border-style'
 import BlockRendererRowNode from '@/features/email-preview/ui/BlockRendererRowNode.vue'
 
 interface Props {
@@ -60,7 +61,7 @@ function selectBlockNode() {
     :class="{
       'is-editable': editableIndex === props.index,
     }"
-    :style="{ position: 'relative' }"
+    :style="{ position: 'relative', ...resolveBorderStyle(block.settings.border) }"
     @click.capture="onPreviewClick"
   >
     <div

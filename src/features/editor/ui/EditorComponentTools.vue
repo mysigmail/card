@@ -58,6 +58,13 @@ function update(tool: Tool | InspectorControl, value: unknown) {
         :title="i.label"
         @update:value="(value) => update(i, value)"
       />
+      <BorderSettings
+        v-if="i.type === 'border'"
+        :id="i.id"
+        :value="i.value"
+        :title="i.label"
+        @update:value="(value) => update(i, value)"
+      />
       <ToggleTool
         v-if="i.type === 'toggle'"
         :id="i.id"

@@ -1,3 +1,4 @@
+import type { BorderValue } from '@/entities/style'
 import type {
   AtomRef,
   BackgroundImageTool,
@@ -10,15 +11,27 @@ import type {
   Tool,
 } from '@/features/editor/model'
 import { computed } from 'vue'
+import { resolveLegacyTextBoxDefaults } from '@/entities/block'
 import { useCanvas, useSelection } from '@/features/editor/model'
 
 export type DimensionMode = 'auto' | 'manual'
 type InspectorControlOf<T extends Tool> = T & { onUpdate: (value: T['value']) => void }
-export type InspectorControl = Tool extends infer T
+type ToolInspectorControl = Tool extends infer T
   ? T extends Tool
     ? InspectorControlOf<T>
     : never
   : never
+
+export interface BorderInspectorControl {
+  id: string
+  key: 'border'
+  label: string
+  type: 'border'
+  value: BorderValue | undefined
+  onUpdate: (value: BorderValue | undefined) => void
+}
+
+export type InspectorControl = ToolInspectorControl | BorderInspectorControl
 
 export const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   url: '',
@@ -152,6 +165,14 @@ export function useSettingsTools() {
         value: normalizeBackgroundImage(block.settings.backgroundImage),
         onUpdate: value => update({ ref, property: 'backgroundImage', value }),
       },
+      {
+        id: 'block-border',
+        key: 'border',
+        label: 'Border',
+        type: 'border',
+        value: block.settings.border,
+        onUpdate: value => update({ ref, property: 'border', value }),
+      },
     ]
   })
 
@@ -226,6 +247,14 @@ export function useSettingsTools() {
         value: normalizeBackgroundImage(row.settings.backgroundImage),
         onUpdate: value => update({ ref, property: 'backgroundImage', value }),
       },
+      {
+        id: 'row-border',
+        key: 'border',
+        label: 'Border',
+        type: 'border',
+        value: row.settings.border,
+        onUpdate: value => update({ ref, property: 'border', value }),
+      },
     ]
   })
 
@@ -262,6 +291,14 @@ export function useSettingsTools() {
         value: cell.settings.borderRadius ?? 0,
         onUpdate: value =>
           update({ ref, property: 'borderRadius', value: Math.max(0, Number(value) || 0) }),
+      },
+      {
+        id: 'cell-border',
+        key: 'border',
+        label: 'Border',
+        type: 'border',
+        value: cell.settings.border,
+        onUpdate: value => update({ ref, property: 'border', value }),
       },
       {
         id: 'cell-background-color',
@@ -312,8 +349,87 @@ export function useSettingsTools() {
   const atomTools = computed<InspectorControl[]>(() => {
     const atom = selection.selectedAtom.value
     const ref = atomRef.value
-    if (!atom || !ref || atom.type === 'text')
+    if (!atom || !ref)
       return []
+    if (atom.type === 'text' && ref.atomType === 'text') {
+      const textRef = ref as AtomRef<'text'>
+      const legacyDefaults = resolveLegacyTextBoxDefaults(atom)
+      const materializeLegacyTextBox = (
+        commands: NodePropertyCommand[],
+        widthMode: 'fill' | 'hug',
+      ) => {
+        if (atom.widthMode === undefined)
+          commands.push({ ref: textRef, property: 'widthMode', value: widthMode })
+        if (atom.paragraphSpacing === undefined) {
+          commands.push({
+            ref: textRef,
+            property: 'paragraphSpacing',
+            value: legacyDefaults.paragraphSpacing,
+          })
+          if (legacyDefaults.spacing) {
+            commands.push({ ref: textRef, property: 'spacing', value: legacyDefaults.spacing })
+          }
+        }
+      }
+      return [
+        {
+          id: 'text-width-mode',
+          key: 'widthMode',
+          label: 'Width',
+          type: 'select',
+          value: atom.widthMode ?? 'fill',
+          options: [
+            { label: 'Fill', value: 'fill' },
+            { label: 'Hug content', value: 'hug' },
+          ],
+          onUpdate: (value) => {
+            const widthMode = value === 'hug' ? 'hug' : 'fill'
+            const commands: NodePropertyCommand[] = []
+            materializeLegacyTextBox(commands, widthMode)
+            if (atom.widthMode !== undefined)
+              commands.push({ ref: textRef, property: 'widthMode', value: widthMode })
+            updateNodeProperties(commands)
+          },
+        },
+        {
+          id: 'text-paragraph-spacing',
+          key: 'paragraphSpacing',
+          label: 'Paragraph Spacing',
+          type: 'inputNumber',
+          value: atom.paragraphSpacing ?? legacyDefaults.paragraphSpacing,
+          onUpdate: (value) => {
+            const commands: NodePropertyCommand[] = []
+            materializeLegacyTextBox(commands, 'fill')
+            const paragraphSpacing = Math.max(0, Number(value) || 0)
+            const index = commands.findIndex(command => command.property === 'paragraphSpacing')
+            if (index >= 0) {
+              commands[index] = {
+                ref: textRef,
+                property: 'paragraphSpacing',
+                value: paragraphSpacing,
+              }
+            }
+            else {
+              commands.push({ ref: textRef, property: 'paragraphSpacing', value: paragraphSpacing })
+            }
+            updateNodeProperties(commands)
+          },
+        },
+        {
+          id: 'text-border',
+          key: 'border',
+          label: 'Border',
+          type: 'border',
+          value: atom.border,
+          onUpdate: (value) => {
+            const commands: NodePropertyCommand[] = [{ ref: textRef, property: 'border', value }]
+            if (value)
+              materializeLegacyTextBox(commands, 'hug')
+            updateNodeProperties(commands)
+          },
+        },
+      ]
+    }
     if (atom.type === 'button' && ref.atomType === 'button') {
       const buttonRef = ref as AtomRef<'button'>
       return [
@@ -329,6 +445,14 @@ export function useSettingsTools() {
               property: 'borderRadius',
               value: Math.max(0, Number(value) || 0),
             }),
+        },
+        {
+          id: 'button-border',
+          key: 'border',
+          label: 'Border',
+          type: 'border',
+          value: atom.border,
+          onUpdate: value => update({ ref: buttonRef, property: 'border', value }),
         },
         {
           id: 'button-background-color',
@@ -390,6 +514,14 @@ export function useSettingsTools() {
             }),
         },
         {
+          id: 'image-border',
+          key: 'border',
+          label: 'Border',
+          type: 'border',
+          value: atom.border,
+          onUpdate: value => update({ ref: imageRef, property: 'border', value }),
+        },
+        {
           id: 'image-content',
           key: 'image',
           label: 'Image',
@@ -449,7 +581,6 @@ export function useSettingsTools() {
     () => selection.selectedCell.value?.settings.hiddenOnMobile ?? false,
   )
   const atomHiddenOnMobile = computed(() => selection.selectedAtom.value?.hiddenOnMobile ?? false)
-
   return {
     cellWidthMode,
     cellHeightMode,

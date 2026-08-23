@@ -2,6 +2,9 @@
 import type { CSSProperties } from 'vue'
 import type { Atom, CellNode, RowNode } from '@/entities/block'
 import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
+import { resolveBorderStyle } from '@/features/email-preview/lib/resolve-border-style'
+import { renderTextAtomHtml } from '@/features/email-preview/lib/text-box'
+import EmailTextBox from '@/features/email-preview/ui/EmailTextBox.vue'
 
 interface Props {
   row: RowNode
@@ -35,10 +38,6 @@ function atomSpacingStyle(atom: Atom, options: { includePadding?: boolean } = {}
   return style
 }
 
-function textAtomStyle(atom: Extract<Atom, { type: 'text' }>): CSSProperties {
-  return atomSpacingStyle(atom)
-}
-
 function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {
   const padding = tupleToCss(atom.spacing?.padding) || tupleToCss(atom.padding)
 
@@ -52,6 +51,7 @@ function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {
     textDecoration: 'none',
     textAlign: 'center',
     cursor: 'pointer',
+    ...resolveBorderStyle(atom.border),
   }
 }
 
@@ -72,6 +72,7 @@ function imageStyle(
         : undefined,
     marginLeft: align === 'center' || align === 'right' ? 'auto' : '0',
     marginRight: align === 'center' ? 'auto' : '0',
+    ...resolveBorderStyle(atom.border),
   }
 }
 
@@ -94,6 +95,7 @@ function rowStyle(row: RowNode): CSSProperties {
   const style: CSSProperties & Record<string, string> = {
     width: s.widthMode === 'hug' ? 'auto' : '100%',
     tableLayout: s.widthMode === 'hug' ? 'auto' : 'fixed',
+    ...resolveBorderStyle(s.border),
   }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
@@ -218,7 +220,7 @@ function shouldDistributeAutoWidth(items: CellNode[]) {
 
 function itemStyle(item: CellNode, items: CellNode[], rawGap: number): CSSProperties {
   const s = item.settings
-  const style: CSSProperties = {}
+  const style: CSSProperties = { ...resolveBorderStyle(s.border) }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
     style.backgroundColor = s.backgroundColor
@@ -342,12 +344,14 @@ function atomWrapperClass(atom: Atom) {
               />
             </MColumn>
           </MRow>
-          <div
+          <EmailTextBox
             v-else-if="child.type === 'text'"
+            :atom="child"
+            :horizontal-align="cell.settings.horizontalAlign"
             :class="atomWrapperClass(child)"
-            :style="textAtomStyle(child)"
-            v-html="child.value || '&nbsp;'"
-          />
+          >
+            <div v-html="renderTextAtomHtml(child) || '&nbsp;'" />
+          </EmailTextBox>
 
           <div
             v-else-if="child.type === 'button'"

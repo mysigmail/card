@@ -3,6 +3,7 @@ import type { CSSProperties } from 'vue'
 import type { BlockNode } from '@/entities/block'
 import { MContainer } from '@mysigmail/vue-email-components'
 import { computed } from 'vue'
+import { resolveBorderStyle } from '@/features/email-preview/lib/resolve-border-style'
 import ExportBlockRendererRowNode from '@/features/email-preview/ui/ExportBlockRendererRowNode.vue'
 
 interface Props {
@@ -35,7 +36,7 @@ const blockStyle = computed<CSSProperties>(() => {
 </script>
 
 <template>
-  <MContainer>
+  <MContainer :style="resolveBorderStyle(block.settings.border)">
     <div :style="blockStyle">
       <ExportBlockRendererRowNode
         v-for="row in block.rows"
