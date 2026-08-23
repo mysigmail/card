@@ -13,6 +13,15 @@ interface SelectionRect {
 
 const TEXT_BLOCK_SELECTOR = 'p,h1,h2,h3,h4,h5,h6,blockquote,li'
 
+export function resolveSelectionVisualTarget(
+  nodeTarget: HTMLElement,
+  selectionLevel?: 'block' | 'row' | 'cell' | 'atom',
+) {
+  return selectionLevel === 'atom'
+    ? nodeTarget.querySelector<HTMLElement>('[data-selection-owner]') || nodeTarget
+    : nodeTarget
+}
+
 function measureTextContent(container: HTMLElement): SelectionRect | undefined {
   const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT)
   let bounds: SelectionRect | undefined
@@ -162,8 +171,7 @@ export function useSelectionOverlay(surfaceRef: Ref<HTMLElement | undefined>) {
       return
     }
 
-    const visualTarget
-      = nodeTarget.querySelector<HTMLElement>('[data-selection-owner]') || nodeTarget
+    const visualTarget = resolveSelectionVisualTarget(nodeTarget, selectionLevel.value)
     observeSelectionTarget(visualTarget)
 
     const surfaceRect = surface.getBoundingClientRect()
