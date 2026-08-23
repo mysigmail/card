@@ -9,10 +9,11 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits<{ (e: 'update:value', value: string): void }>()
 
 const { editor, init } = useEditor({ provide: true })
 
-init(props.id, props.value)
+init(props.value, value => emit('update:value', value))
 </script>
 
 <template>

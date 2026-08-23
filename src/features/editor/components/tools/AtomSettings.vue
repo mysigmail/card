@@ -1,17 +1,18 @@
 <script setup lang="ts">
+import type { InspectorControl } from './use-settings-tools'
 import type { Atom } from '@/entities/block'
-import type { Tool } from '@/features/editor/model'
 import { Switch } from '@/shared/ui/switch'
 
 interface Props {
   atom: Atom
-  spacingTools: Tool[]
-  tools: Tool[]
+  spacingTools: InspectorControl[]
+  tools: InspectorControl[]
+  hiddenOnMobile: boolean
 }
 
 defineProps<Props>()
 
-const atomHiddenOnMobile = defineModel<boolean>('hiddenOnMobile', { required: true })
+const emit = defineEmits<{ (e: 'update:hiddenOnMobile', value: boolean): void }>()
 </script>
 
 <template>
@@ -32,7 +33,10 @@ const atomHiddenOnMobile = defineModel<boolean>('hiddenOnMobile', { required: tr
             <EditorToolLabel type="secondary">
               Hide on Mobile
             </EditorToolLabel>
-            <Switch v-model="atomHiddenOnMobile" />
+            <Switch
+              :model-value="hiddenOnMobile"
+              @update:model-value="(value) => emit('update:hiddenOnMobile', value)"
+            />
           </div>
         </div>
 

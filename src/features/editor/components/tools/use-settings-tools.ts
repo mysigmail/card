@@ -1,8 +1,24 @@
-import type { BackgroundImageTool, ImageTool, SpacingTool, Tool } from '@/features/editor/model'
-import { computed, ref, watch } from 'vue'
-import { useSelection } from '@/features/editor/model'
+import type {
+  AtomRef,
+  BackgroundImageTool,
+  BlockRef,
+  CellRef,
+  ImageTool,
+  NodePropertyCommand,
+  RowRef,
+  SpacingTool,
+  Tool,
+} from '@/features/editor/model'
+import { computed } from 'vue'
+import { useCanvas, useSelection } from '@/features/editor/model'
 
 export type DimensionMode = 'auto' | 'manual'
+type InspectorControlOf<T extends Tool> = T & { onUpdate: (value: T['value']) => void }
+export type InspectorControl = Tool extends infer T
+  ? T extends Tool
+    ? InspectorControlOf<T>
+    : never
+  : never
 
 export const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   url: '',
@@ -10,66 +26,37 @@ export const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   size: 'cover',
   position: 'center',
 }
+export const DEFAULT_IMAGE_VALUE: ImageTool['value'] = { src: '', alt: '', link: '' }
 
-export const DEFAULT_IMAGE_VALUE: ImageTool['value'] = {
-  src: '',
-  alt: '',
-  link: '',
-}
-
-export function normalizeBackgroundImage(
-  value?: BackgroundImageTool['value'],
-): BackgroundImageTool['value'] {
-  return {
-    ...DEFAULT_BACKGROUND_IMAGE,
-    ...(value || {}),
-  }
+export function normalizeBackgroundImage(value?: BackgroundImageTool['value']) {
+  return { ...DEFAULT_BACKGROUND_IMAGE, ...(value || {}) }
 }
 
 export function normalizeImageValue(value?: Partial<ImageTool['value']>): ImageTool['value'] {
+  const width = Number(value?.width)
+  const height = Number(value?.height)
   return {
     ...DEFAULT_IMAGE_VALUE,
     ...(value || {}),
     src: typeof value?.src === 'string' ? value.src : '',
     alt: typeof value?.alt === 'string' ? value.alt : '',
     link: typeof value?.link === 'string' ? value.link : '',
-    width: typeof value?.width === 'number' ? value.width : undefined,
-    height: typeof value?.height === 'number' ? value.height : undefined,
+    width: Number.isFinite(width) && width > 0 ? width : undefined,
+    height: Number.isFinite(height) && height > 0 ? height : undefined,
   }
 }
 
 export function normalizeSpacingValue(
   value?: SpacingTool['value'],
   fallbackPadding: [number, number, number, number] = [0, 0, 0, 0],
-  options: {
-    includeMargin?: boolean
-    includePadding?: boolean
-  } = {},
+  options: { includeMargin?: boolean, includePadding?: boolean } = {},
 ): SpacingTool['value'] {
-  const includeMargin = options.includeMargin !== false
-  const includePadding = options.includePadding !== false
-
   const normalized: SpacingTool['value'] = {}
-
-  if (includeMargin) {
-    normalized.margin
-      = Array.isArray(value?.margin) && value.margin.length === 4
-        ? (value.margin.map(i => Number(i) || 0) as [number, number, number, number])
-        : ([0, 0, 0, 0] as [number, number, number, number])
-  }
-
-  if (includePadding) {
-    normalized.padding
-      = Array.isArray(value?.padding) && value.padding.length === 4
-        ? (value.padding.map(i => Number(i) || 0) as [number, number, number, number])
-        : ([...fallbackPadding] as [number, number, number, number])
-  }
-
+  if (options.includeMargin !== false)
+    normalized.margin = value?.margin ? [...value.margin] : [0, 0, 0, 0]
+  if (options.includePadding !== false)
+    normalized.padding = value?.padding ? [...value.padding] : [...fallbackPadding]
   return normalized
-}
-
-export function settingToolId(level: 'block' | 'row' | 'cell', id: string, field: string) {
-  return `v2-settings::${level}::${id}::${field}`
 }
 
 export function toOptionalNumber(value: string | number) {
@@ -81,382 +68,387 @@ export function toDimensionMode(value?: number): DimensionMode {
   return value === undefined ? 'auto' : 'manual'
 }
 
-export function atomToolId(atomId: string, field: string) {
-  return `v2-atom::${atomId}::${field}`
-}
-
 export function useSettingsTools() {
-  const { selectedBlock, selectedRow, selectedCell, selectedAtom } = useSelection()
+  const selection = useSelection()
+  const { updateNodeProperty, updateNodeProperties } = useCanvas()
 
-  const cellWidthMode = ref<DimensionMode>('auto')
-  const cellHeightMode = ref<DimensionMode>('auto')
-
-  watch(
-    () => selectedCell.value?.id,
-    () => {
-      cellWidthMode.value = toDimensionMode(selectedCell.value?.settings.width)
-      cellHeightMode.value = toDimensionMode(selectedCell.value?.settings.height)
-    },
-    { immediate: true },
+  const blockRef = computed<BlockRef | undefined>(() =>
+    selection.selectedBlockId.value
+      ? { kind: 'block', blockId: selection.selectedBlockId.value }
+      : undefined,
   )
+  const rowRef = computed<RowRef | undefined>(() =>
+    selection.selectedBlockId.value && selection.selectedRowId.value
+      ? {
+          kind: 'row',
+          blockId: selection.selectedBlockId.value,
+          rowId: selection.selectedRowId.value,
+        }
+      : undefined,
+  )
+  const cellRef = computed<CellRef | undefined>(() =>
+    selection.selectedBlockId.value
+    && selection.selectedRowId.value
+    && selection.selectedCellId.value
+      ? {
+          kind: 'cell',
+          blockId: selection.selectedBlockId.value,
+          rowId: selection.selectedRowId.value,
+          cellId: selection.selectedCellId.value,
+        }
+      : undefined,
+  )
+  const atomRef = computed<AtomRef | undefined>(() => {
+    const atom = selection.selectedAtom.value
+    if (
+      !atom
+      || !selection.selectedBlockId.value
+      || !selection.selectedRowId.value
+      || !selection.selectedCellId.value
+    ) {
+      return undefined
+    }
+    return {
+      kind: 'atom',
+      blockId: selection.selectedBlockId.value,
+      rowId: selection.selectedRowId.value,
+      cellId: selection.selectedCellId.value,
+      atomId: atom.id,
+      atomType: atom.type,
+    }
+  })
 
-  const blockAppearanceTools = computed<Tool[]>(() => {
-    if (!selectedBlock.value)
+  const update = (command: NodePropertyCommand) => updateNodeProperty(command)
+
+  const blockAppearanceTools = computed<InspectorControl[]>(() => {
+    const block = selection.selectedBlock.value
+    const ref = blockRef.value
+    if (!block || !ref)
       return []
-
     return [
       {
-        id: settingToolId('block', selectedBlock.value.id, 'spacing'),
+        id: 'block-spacing',
         key: 'padding',
         label: 'Spacing',
         type: 'spacing',
-        value: normalizeSpacingValue(selectedBlock.value.settings.spacing, [0, 0, 0, 0], {
+        value: normalizeSpacingValue(block.settings.spacing, [0, 0, 0, 0], {
           includeMargin: false,
         }),
+        onUpdate: value => update({ ref, property: 'spacing', value }),
       },
       {
-        id: settingToolId('block', selectedBlock.value.id, 'backgroundColor'),
+        id: 'block-background-color',
         key: 'backgroundColor',
         label: 'Background Color',
         type: 'colorPicker',
-        value: selectedBlock.value.settings.backgroundColor,
+        value: block.settings.backgroundColor,
+        onUpdate: value => update({ ref, property: 'backgroundColor', value }),
       },
       {
-        id: settingToolId('block', selectedBlock.value.id, 'backgroundImage'),
+        id: 'block-background-image',
         key: 'backgroundImage',
         label: 'Background Image',
         type: 'bgImage',
-        value: normalizeBackgroundImage(selectedBlock.value.settings.backgroundImage),
+        value: normalizeBackgroundImage(block.settings.backgroundImage),
+        onUpdate: value => update({ ref, property: 'backgroundImage', value }),
       },
     ]
   })
 
-  const rowSpacingTools = computed<Tool[]>(() => {
-    if (!selectedRow.value)
-      return []
-
-    return [
-      {
-        id: settingToolId('row', selectedRow.value.id, 'spacing'),
-        key: 'padding',
-        label: 'Spacing',
-        type: 'spacing',
-        value: normalizeSpacingValue(selectedRow.value.settings.spacing, [0, 0, 0, 0], {
-          includeMargin: false,
-        }),
-      },
-    ]
+  const rowSpacingTools = computed<InspectorControl[]>(() => {
+    const row = selection.selectedRow.value
+    const ref = rowRef.value
+    return row && ref
+      ? [
+          {
+            id: 'row-spacing',
+            key: 'padding',
+            label: 'Spacing',
+            type: 'spacing',
+            value: normalizeSpacingValue(row.settings.spacing, [0, 0, 0, 0], {
+              includeMargin: false,
+            }),
+            onUpdate: value => update({ ref, property: 'spacing', value }),
+          },
+        ]
+      : []
   })
 
-  const rowAppearanceTools = computed<Tool[]>(() => {
-    if (!selectedRow.value)
+  const rowAppearanceTools = computed<InspectorControl[]>(() => {
+    const row = selection.selectedRow.value
+    const ref = rowRef.value
+    if (!row || !ref)
       return []
-
     return [
       {
-        id: settingToolId('row', selectedRow.value.id, 'widthMode'),
+        id: 'row-width-mode',
         key: 'widthMode',
         label: 'Width',
         type: 'select',
-        value: selectedRow.value.settings.widthMode,
+        value: row.settings.widthMode,
         options: [
           { label: 'Fill', value: 'fill' },
           { label: 'Hug content', value: 'hug' },
         ],
+        onUpdate: value =>
+          update({ ref, property: 'widthMode', value: value === 'hug' ? 'hug' : 'fill' }),
       },
       {
-        id: settingToolId('row', selectedRow.value.id, 'gap'),
+        id: 'row-gap',
         key: 'gap',
         label: 'Gap',
         type: 'inputNumber',
-        value: selectedRow.value.settings.gap,
+        value: row.settings.gap,
+        onUpdate: value =>
+          update({ ref, property: 'gap', value: Math.max(0, Number(value) || 0) }),
       },
       {
-        id: settingToolId('row', selectedRow.value.id, 'height'),
+        id: 'row-height',
         key: 'height',
         label: 'Min Height',
         type: 'inputNumber',
-        value: selectedRow.value.settings.height ?? 0,
+        value: row.settings.height ?? 0,
+        onUpdate: value => update({ ref, property: 'height', value: toOptionalNumber(value) }),
       },
       {
-        id: settingToolId('row', selectedRow.value.id, 'backgroundColor'),
+        id: 'row-background-color',
         key: 'backgroundColor',
         label: 'Background Color',
         type: 'colorPicker',
-        value: selectedRow.value.settings.backgroundColor,
+        value: row.settings.backgroundColor,
+        onUpdate: value => update({ ref, property: 'backgroundColor', value }),
       },
       {
-        id: settingToolId('row', selectedRow.value.id, 'backgroundImage'),
+        id: 'row-background-image',
         key: 'backgroundImage',
         label: 'Background Image',
         type: 'bgImage',
-        value: normalizeBackgroundImage(selectedRow.value.settings.backgroundImage),
+        value: normalizeBackgroundImage(row.settings.backgroundImage),
+        onUpdate: value => update({ ref, property: 'backgroundImage', value }),
       },
     ]
   })
 
-  const cellSpacingTools = computed<Tool[]>(() => {
-    if (!selectedCell.value)
-      return []
-
-    return [
-      {
-        id: settingToolId('cell', selectedCell.value.id, 'spacing'),
-        key: 'padding',
-        label: 'Spacing',
-        type: 'spacing',
-        value: normalizeSpacingValue(selectedCell.value.settings.spacing, [0, 0, 0, 0], {
-          includeMargin: false,
-        }),
-      },
-    ]
+  const cellSpacingTools = computed<InspectorControl[]>(() => {
+    const cell = selection.selectedCell.value
+    const ref = cellRef.value
+    return cell && ref
+      ? [
+          {
+            id: 'cell-spacing',
+            key: 'padding',
+            label: 'Spacing',
+            type: 'spacing',
+            value: normalizeSpacingValue(cell.settings.spacing, [0, 0, 0, 0], {
+              includeMargin: false,
+            }),
+            onUpdate: value => update({ ref, property: 'spacing', value }),
+          },
+        ]
+      : []
   })
 
-  const cellAppearanceTools = computed<Tool[]>(() => {
-    if (!selectedCell.value)
+  const cellAppearanceTools = computed<InspectorControl[]>(() => {
+    const cell = selection.selectedCell.value
+    const ref = cellRef.value
+    if (!cell || !ref)
       return []
-
     return [
       {
-        id: settingToolId('cell', selectedCell.value.id, 'borderRadius'),
+        id: 'cell-border-radius',
         key: 'borderRadius',
         label: 'Border Radius',
         type: 'inputNumber',
-        value: selectedCell.value.settings.borderRadius ?? 0,
+        value: cell.settings.borderRadius ?? 0,
+        onUpdate: value =>
+          update({ ref, property: 'borderRadius', value: Math.max(0, Number(value) || 0) }),
       },
       {
-        id: settingToolId('cell', selectedCell.value.id, 'backgroundColor'),
+        id: 'cell-background-color',
         key: 'backgroundColor',
         label: 'Background Color',
         type: 'colorPicker',
-        value: selectedCell.value.settings.backgroundColor,
+        value: cell.settings.backgroundColor,
+        onUpdate: value => update({ ref, property: 'backgroundColor', value }),
       },
       {
-        id: settingToolId('cell', selectedCell.value.id, 'backgroundImage'),
+        id: 'cell-background-image',
         key: 'backgroundImage',
         label: 'Background Image',
         type: 'bgImage',
-        value: normalizeBackgroundImage(selectedCell.value.settings.backgroundImage),
+        value: normalizeBackgroundImage(cell.settings.backgroundImage),
+        onUpdate: value => update({ ref, property: 'backgroundImage', value }),
       },
       {
-        id: settingToolId('cell', selectedCell.value.id, 'link'),
+        id: 'cell-link',
         key: 'link',
         label: 'Link',
         type: 'input',
-        value: selectedCell.value.settings.link || '',
+        value: cell.settings.link || '',
+        onUpdate: value => update({ ref, property: 'link', value }),
       },
     ]
   })
 
-  const atomSpacingTools = computed<Tool[]>(() => {
-    if (!selectedAtom.value)
+  const atomSpacingTools = computed<InspectorControl[]>(() => {
+    const atom = selection.selectedAtom.value
+    const ref = atomRef.value
+    if (!atom || !ref)
       return []
-
-    const id = atomToolId(selectedAtom.value.id, 'spacing')
-
-    if (selectedAtom.value.type === 'button') {
-      return [
-        {
-          id,
-          key: 'spacing',
-          label: 'Spacing',
-          type: 'spacing',
-          value: normalizeSpacingValue(selectedAtom.value.spacing, selectedAtom.value.padding),
-        },
-      ]
-    }
-
+    const fallback: [number, number, number, number]
+      = atom.type === 'button' ? atom.padding : [0, 0, 0, 0]
     return [
       {
-        id,
+        id: 'atom-spacing',
         key: 'spacing',
         label: 'Spacing',
         type: 'spacing',
-        value: normalizeSpacingValue(selectedAtom.value.spacing),
+        value: normalizeSpacingValue(atom.spacing, fallback),
+        onUpdate: value => update({ ref, property: 'spacing', value }),
       },
     ]
   })
 
-  const atomTools = computed<Tool[]>(() => {
-    if (!selectedAtom.value)
+  const atomTools = computed<InspectorControl[]>(() => {
+    const atom = selection.selectedAtom.value
+    const ref = atomRef.value
+    if (!atom || !ref || atom.type === 'text')
       return []
-
-    const atomId = selectedAtom.value.id
-
-    if (selectedAtom.value.type === 'text')
-      return []
-
-    if (selectedAtom.value.type === 'button') {
+    if (atom.type === 'button' && ref.atomType === 'button') {
+      const buttonRef = ref as AtomRef<'button'>
       return [
         {
-          id: atomToolId(atomId, 'borderRadius'),
+          id: 'button-border-radius',
           key: 'borderRadius',
           label: 'Border Radius',
           type: 'inputNumber',
-          value: selectedAtom.value.borderRadius,
+          value: atom.borderRadius,
+          onUpdate: value =>
+            update({
+              ref: buttonRef,
+              property: 'borderRadius',
+              value: Math.max(0, Number(value) || 0),
+            }),
         },
         {
-          id: atomToolId(atomId, 'backgroundColor'),
+          id: 'button-background-color',
           key: 'backgroundColor',
           label: 'Background Color',
           type: 'colorPicker',
-          value: selectedAtom.value.backgroundColor,
+          value: atom.backgroundColor,
+          onUpdate: value => update({ ref: buttonRef, property: 'backgroundColor', value }),
         },
         {
-          id: atomToolId(atomId, 'color'),
+          id: 'button-color',
           key: 'color',
           label: 'Color',
           type: 'colorPicker',
-          value: selectedAtom.value.color,
+          value: atom.color,
+          onUpdate: value => update({ ref: buttonRef, property: 'color', value }),
         },
         {
-          id: atomToolId(atomId, 'fontSize'),
+          id: 'button-font-size',
           key: 'fontSize',
           label: 'Font Size',
           type: 'inputNumber',
-          value: selectedAtom.value.fontSize,
+          value: atom.fontSize,
+          onUpdate: value =>
+            update({ ref: buttonRef, property: 'fontSize', value: Number(value) || 14 }),
         },
         {
-          id: atomToolId(atomId, 'text'),
+          id: 'button-text',
           key: 'text',
           label: 'Text',
           type: 'input',
-          value: selectedAtom.value.text,
+          value: atom.text,
+          onUpdate: value => update({ ref: buttonRef, property: 'text', value }),
         },
         {
-          id: atomToolId(atomId, 'link'),
+          id: 'button-link',
           key: 'link',
           label: 'Link',
           type: 'input',
-          value: selectedAtom.value.link,
+          value: atom.link,
+          onUpdate: value => update({ ref: buttonRef, property: 'link', value }),
         },
       ]
     }
-
-    if (selectedAtom.value.type === 'image') {
+    if (atom.type === 'image' && ref.atomType === 'image') {
+      const imageRef = ref as AtomRef<'image'>
       return [
         {
-          id: atomToolId(atomId, 'borderRadius'),
+          id: 'image-border-radius',
           key: 'borderRadius',
           label: 'Border Radius',
           type: 'inputNumber',
-          value: selectedAtom.value.borderRadius ?? 0,
+          value: atom.borderRadius ?? 0,
+          onUpdate: value =>
+            update({
+              ref: imageRef,
+              property: 'borderRadius',
+              value: Math.max(0, Number(value) || 0),
+            }),
         },
         {
-          id: atomToolId(atomId, 'image'),
+          id: 'image-content',
           key: 'image',
           label: 'Image',
           type: 'image',
-          value: normalizeImageValue({
-            src: selectedAtom.value.src,
-            alt: selectedAtom.value.alt,
-            link: selectedAtom.value.link,
-            width: selectedAtom.value.width,
-            height: selectedAtom.value.height,
-          }),
+          value: normalizeImageValue(atom),
+          onUpdate: (value) => {
+            const image = normalizeImageValue(value)
+            updateNodeProperties([
+              { ref: imageRef, property: 'src', value: image.src },
+              { ref: imageRef, property: 'alt', value: image.alt || '' },
+              { ref: imageRef, property: 'link', value: image.link || '' },
+              { ref: imageRef, property: 'width', value: image.width },
+              { ref: imageRef, property: 'height', value: image.height },
+            ])
+          },
         },
       ]
     }
-
-    return [
-      {
-        id: atomToolId(atomId, 'height'),
-        key: 'height',
-        label: 'Height',
-        type: 'inputNumber',
-        value: selectedAtom.value.height,
-      },
-      {
-        id: atomToolId(atomId, 'color'),
-        key: 'color',
-        label: 'Color',
-        type: 'colorPicker',
-        value: selectedAtom.value.color,
-      },
-    ]
+    if (atom.type === 'divider' && ref.atomType === 'divider') {
+      const dividerRef = ref as AtomRef<'divider'>
+      return [
+        {
+          id: 'divider-height',
+          key: 'height',
+          label: 'Height',
+          type: 'inputNumber',
+          value: atom.height,
+          onUpdate: value =>
+            update({ ref: dividerRef, property: 'height', value: Number(value) || 1 }),
+        },
+        {
+          id: 'divider-color',
+          key: 'color',
+          label: 'Color',
+          type: 'colorPicker',
+          value: atom.color,
+          onUpdate: value => update({ ref: dividerRef, property: 'color', value }),
+        },
+      ]
+    }
+    return []
   })
 
-  const rowHiddenOnMobile = computed<boolean>({
-    get: () => selectedRow.value?.settings.hiddenOnMobile ?? false,
-    set: (next) => {
-      if (!selectedRow.value)
-        return
-      selectedRow.value.settings.hiddenOnMobile = Boolean(next)
-    },
-  })
-
-  const rowCollapseOnMobile = computed<boolean>({
-    get: () => selectedRow.value?.settings.collapseOnMobile !== false,
-    set: (next) => {
-      if (!selectedRow.value)
-        return
-      selectedRow.value.settings.collapseOnMobile = Boolean(next)
-    },
-  })
-
-  const cellHiddenOnMobile = computed<boolean>({
-    get: () => selectedCell.value?.settings.hiddenOnMobile ?? false,
-    set: (next) => {
-      if (!selectedCell.value)
-        return
-      selectedCell.value.settings.hiddenOnMobile = Boolean(next)
-    },
-  })
-
-  const atomHiddenOnMobile = computed<boolean>({
-    get: () => selectedAtom.value?.hiddenOnMobile ?? false,
-    set: (next) => {
-      if (!selectedAtom.value)
-        return
-      selectedAtom.value.hiddenOnMobile = Boolean(next)
-    },
-  })
-
-  function onItemWidthModeChange(mode: string) {
-    if (!selectedCell.value)
-      return
-
-    const nextMode: DimensionMode = mode === 'manual' ? 'manual' : 'auto'
-    cellWidthMode.value = nextMode
-    selectedCell.value.settings.width
-      = nextMode === 'manual' ? (selectedCell.value.settings.width ?? 50) : undefined
-  }
-
-  function onItemWidthChange(value: string | number) {
-    if (!selectedCell.value)
-      return
-    selectedCell.value.settings.width = toOptionalNumber(value)
-  }
-
-  function onItemHeightModeChange(mode: string) {
-    if (!selectedCell.value)
-      return
-
-    const nextMode: DimensionMode = mode === 'manual' ? 'manual' : 'auto'
-    cellHeightMode.value = nextMode
-    selectedCell.value.settings.height
-      = nextMode === 'manual' ? (selectedCell.value.settings.height ?? 120) : undefined
-  }
-
-  function onItemHeightChange(value: string | number) {
-    if (!selectedCell.value)
-      return
-    selectedCell.value.settings.height = toOptionalNumber(value)
-  }
-
-  function onItemVerticalAlignChange(value: string) {
-    if (!selectedCell.value)
-      return
-    selectedCell.value.settings.verticalAlign
-      = value === 'middle' || value === 'bottom' ? value : 'top'
-  }
-
-  function onItemHorizontalAlignChange(value: string) {
-    if (!selectedCell.value)
-      return
-    selectedCell.value.settings.horizontalAlign
-      = value === 'center' || value === 'right' ? value : 'left'
-  }
+  const cellWidthMode = computed(() =>
+    toDimensionMode(selection.selectedCell.value?.settings.width),
+  )
+  const cellHeightMode = computed(() =>
+    toDimensionMode(selection.selectedCell.value?.settings.height),
+  )
+  const rowHiddenOnMobile = computed(
+    () => selection.selectedRow.value?.settings.hiddenOnMobile ?? false,
+  )
+  const rowCollapseOnMobile = computed(
+    () => selection.selectedRow.value?.settings.collapseOnMobile !== false,
+  )
+  const cellHiddenOnMobile = computed(
+    () => selection.selectedCell.value?.settings.hiddenOnMobile ?? false,
+  )
+  const atomHiddenOnMobile = computed(() => selection.selectedAtom.value?.hiddenOnMobile ?? false)
 
   return {
     cellWidthMode,
@@ -472,11 +464,48 @@ export function useSettingsTools() {
     rowCollapseOnMobile,
     cellHiddenOnMobile,
     atomHiddenOnMobile,
-    onItemWidthModeChange,
-    onItemWidthChange,
-    onItemHeightModeChange,
-    onItemHeightChange,
-    onItemVerticalAlignChange,
-    onItemHorizontalAlignChange,
+    onRowHiddenOnMobileChange: (value: boolean) =>
+      rowRef.value && update({ ref: rowRef.value, property: 'hiddenOnMobile', value }),
+    onRowCollapseOnMobileChange: (value: boolean) =>
+      rowRef.value && update({ ref: rowRef.value, property: 'collapseOnMobile', value }),
+    onCellHiddenOnMobileChange: (value: boolean) =>
+      cellRef.value && update({ ref: cellRef.value, property: 'hiddenOnMobile', value }),
+    onAtomHiddenOnMobileChange: (value: boolean) =>
+      atomRef.value && update({ ref: atomRef.value, property: 'hiddenOnMobile', value }),
+    onItemWidthModeChange: (mode: string) =>
+      cellRef.value
+      && update({
+        ref: cellRef.value,
+        property: 'width',
+        value: mode === 'manual' ? (selection.selectedCell.value?.settings.width ?? 50) : undefined,
+      }),
+    onItemWidthChange: (value: string | number) =>
+      cellRef.value
+      && update({ ref: cellRef.value, property: 'width', value: toOptionalNumber(value) }),
+    onItemHeightModeChange: (mode: string) =>
+      cellRef.value
+      && update({
+        ref: cellRef.value,
+        property: 'height',
+        value:
+          mode === 'manual' ? (selection.selectedCell.value?.settings.height ?? 120) : undefined,
+      }),
+    onItemHeightChange: (value: string | number) =>
+      cellRef.value
+      && update({ ref: cellRef.value, property: 'height', value: toOptionalNumber(value) }),
+    onItemVerticalAlignChange: (value: string) =>
+      cellRef.value
+      && update({
+        ref: cellRef.value,
+        property: 'verticalAlign',
+        value: value === 'middle' || value === 'bottom' ? value : 'top',
+      }),
+    onItemHorizontalAlignChange: (value: string) =>
+      cellRef.value
+      && update({
+        ref: cellRef.value,
+        property: 'horizontalAlign',
+        value: value === 'center' || value === 'right' ? value : 'left',
+      }),
   }
 }

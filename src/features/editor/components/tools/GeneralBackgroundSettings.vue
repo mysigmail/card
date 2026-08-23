@@ -35,7 +35,6 @@ const positionOptions = [
       id="bgColor"
       v-model:value="general.background.color"
       title="Color"
-      :auto-update="false"
     />
     <EditorToolLabel> Image </EditorToolLabel>
     <Input

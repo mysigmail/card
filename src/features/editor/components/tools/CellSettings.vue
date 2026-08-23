@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import type { DimensionMode } from './use-settings-tools'
+import type { DimensionMode, InspectorControl } from './use-settings-tools'
 import type { CellNode } from '@/entities/block'
-import type { Tool } from '@/features/editor/model'
 import {
   AlignCenter,
   AlignLeft,
@@ -17,10 +16,11 @@ import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 
 interface Props {
   cell: CellNode
-  spacingTools: Tool[]
-  appearanceTools: Tool[]
+  spacingTools: InspectorControl[]
+  appearanceTools: InspectorControl[]
   widthMode: DimensionMode
   heightMode: DimensionMode
+  hiddenOnMobile: boolean
 }
 
 defineProps<Props>()
@@ -32,9 +32,8 @@ const emit = defineEmits<{
   (e: 'update:height', value: string | number): void
   (e: 'update:verticalAlign', value: string): void
   (e: 'update:horizontalAlign', value: string): void
+  (e: 'update:hiddenOnMobile', value: boolean): void
 }>()
-
-const cellHiddenOnMobile = defineModel<boolean>('hiddenOnMobile', { required: true })
 </script>
 
 <template>
@@ -51,7 +50,10 @@ const cellHiddenOnMobile = defineModel<boolean>('hiddenOnMobile', { required: tr
             <EditorToolLabel type="secondary">
               Hide on Mobile
             </EditorToolLabel>
-            <Switch v-model="cellHiddenOnMobile" />
+            <Switch
+              :model-value="hiddenOnMobile"
+              @update:model-value="(value) => emit('update:hiddenOnMobile', value)"
+            />
           </div>
         </div>
 

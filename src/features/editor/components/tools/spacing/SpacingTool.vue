@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SpacingTool } from '@/features/editor/model'
-import { ref, watch } from 'vue'
-import { useCanvas } from '@/features/editor/model'
+import { nextTick, ref, watch } from 'vue'
+import { createSpacingPatch } from './spacing-patch'
 
 interface Props {
   id: string
@@ -11,7 +11,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { updateToolById } = useCanvas()
+const emit = defineEmits<{ (e: 'update:value', value: SpacingTool['value']): void }>()
+let syncing = false
 
 const localMarginTop = ref(props.value.margin?.[0] || 0)
 const localMarginRight = ref(props.value.margin?.[1] || 0)
@@ -31,19 +32,12 @@ watch(
     localPaddingLeft.value,
   ],
   (v) => {
-    const margin = props.value.margin
-      ? ([
-          localMarginTop.value,
-          localMarginRight.value,
-          localMarginBottom.value,
-          localMarginLeft.value,
-        ] as SpacingTool['value']['margin'])
-      : props.value.margin
-
-    updateToolById<SpacingTool>(props.id, 'value', {
-      padding: v as SpacingTool['value']['padding'],
-      margin,
-    })
+    if (syncing)
+      return
+    emit(
+      'update:value',
+      createSpacingPatch(props.value, 'padding', v as NonNullable<SpacingTool['value']['padding']>),
+    )
   },
 )
 
@@ -55,22 +49,34 @@ watch(
     localMarginLeft.value,
   ],
   (v) => {
-    const margin = props.value.margin ? (v as SpacingTool['value']['margin']) : props.value.margin
+    if (syncing)
+      return
+    if (!props.value.margin)
+      return
 
-    const padding = props.value.padding
-      ? ([
-          localPaddingTop.value,
-          localPaddingRight.value,
-          localPaddingBottom.value,
-          localPaddingLeft.value,
-        ] as SpacingTool['value']['padding'])
-      : props.value.padding
-
-    updateToolById<SpacingTool>(props.id, 'value', {
-      padding,
-      margin,
-    })
+    emit(
+      'update:value',
+      createSpacingPatch(props.value, 'margin', v as NonNullable<SpacingTool['value']['margin']>),
+    )
   },
+)
+
+watch(
+  () => props.value,
+  async (value) => {
+    syncing = true
+    localMarginTop.value = value.margin?.[0] || 0
+    localMarginRight.value = value.margin?.[1] || 0
+    localMarginBottom.value = value.margin?.[2] || 0
+    localMarginLeft.value = value.margin?.[3] || 0
+    localPaddingTop.value = value.padding?.[0] || 0
+    localPaddingRight.value = value.padding?.[1] || 0
+    localPaddingBottom.value = value.padding?.[2] || 0
+    localPaddingLeft.value = value.padding?.[3] || 0
+    await nextTick()
+    syncing = false
+  },
+  { deep: true },
 )
 </script>
 

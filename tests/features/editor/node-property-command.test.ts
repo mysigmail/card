@@ -1,0 +1,338 @@
+import type { AtomRef, CellRef, NodePropertyCommand, RowRef } from '@/features/editor/model'
+import { describe, expect, it } from 'vitest'
+import {
+  createBlockNode,
+  createButtonAtom,
+  createCellNode,
+  createDividerAtom,
+  createImageAtom,
+  createRowNode,
+  createTextAtom,
+} from '@/entities/block'
+import { createSpacingPatch } from '@/features/editor/components/tools/spacing/spacing-patch'
+import { normalizeSpacingValue } from '@/features/editor/components/tools/use-settings-tools'
+import {
+  getNodePropertyState,
+  inspectorCapabilities,
+  updateNodeProperties,
+  updateNodeProperty,
+} from '@/features/editor/model'
+
+function createFixture() {
+  const text = createTextAtom()
+  const button = createButtonAtom()
+  const divider = createDividerAtom()
+  const image = createImageAtom()
+  const row = createRowNode([
+    createCellNode([text]),
+    createCellNode([button]),
+    createCellNode([divider]),
+    createCellNode([image]),
+  ])
+  const nestedText = createTextAtom('<p>Nested</p>')
+  const nestedRow = createRowNode([createCellNode([nestedText])])
+  row.cells[0]!.children.push(nestedRow)
+  const block = createBlockNode('Registry', [row])
+  const items = [{ id: 'component', version: 1 as const, block }]
+
+  const atomRef = <T extends 'text' | 'button' | 'divider' | 'image'>(
+    atom: { id: string, type: T },
+    cellIndex: number,
+  ): AtomRef<T> => ({
+    kind: 'atom',
+    blockId: block.id,
+    rowId: row.id,
+    cellId: row.cells[cellIndex]!.id,
+    atomId: atom.id,
+    atomType: atom.type,
+  })
+
+  return {
+    items,
+    block,
+    row,
+    text,
+    button,
+    divider,
+    image,
+    nestedRow,
+    nestedText,
+    textRef: atomRef(text, 0),
+    buttonRef: atomRef(button, 1),
+    dividerRef: atomRef(divider, 2),
+    imageRef: atomRef(image, 3),
+  }
+}
+
+describe('typed inspector registry and mutation gateway', () => {
+  it('publishes the closed capability keys for all seven node variants', () => {
+    expect(inspectorCapabilities).toEqual({
+      block: ['spacing', 'backgroundColor', 'backgroundImage'],
+      row: [
+        'spacing',
+        'backgroundColor',
+        'backgroundImage',
+        'widthMode',
+        'gap',
+        'height',
+        'hiddenOnMobile',
+        'collapseOnMobile',
+      ],
+      cell: [
+        'spacing',
+        'backgroundColor',
+        'backgroundImage',
+        'link',
+        'hiddenOnMobile',
+        'verticalAlign',
+        'horizontalAlign',
+        'borderRadius',
+        'width',
+        'height',
+      ],
+      text: ['spacing', 'hiddenOnMobile', 'value'],
+      button: [
+        'spacing',
+        'hiddenOnMobile',
+        'text',
+        'link',
+        'backgroundColor',
+        'color',
+        'fontSize',
+        'borderRadius',
+      ],
+      divider: ['spacing', 'hiddenOnMobile', 'color', 'height'],
+      image: ['spacing', 'hiddenOnMobile', 'src', 'alt', 'link', 'width', 'height', 'borderRadius'],
+    })
+  })
+
+  it('resolves nested ancestry and rejects wrong ancestry or atom type', () => {
+    const fixture = createFixture()
+    const nestedRef: AtomRef<'text'> = {
+      kind: 'atom',
+      blockId: fixture.block.id,
+      rowId: fixture.nestedRow.id,
+      cellId: fixture.nestedRow.cells[0]!.id,
+      atomId: fixture.nestedText.id,
+      atomType: 'text',
+    }
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: nestedRef,
+        property: 'value',
+        value: '<p>Changed</p>',
+      }),
+    ).toEqual({ ok: true, changed: true })
+    expect(fixture.nestedText.value).toBe('<p>Changed</p>')
+
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: { ...nestedRef, rowId: fixture.row.id },
+        property: 'value',
+        value: '<p>Wrong path</p>',
+      }),
+    ).toEqual({ ok: false, reason: 'node-path-mismatch' })
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: { ...fixture.textRef, atomType: 'image' },
+        property: 'src',
+        value: '/wrong.png',
+      }),
+    ).toEqual({ ok: false, reason: 'node-type-mismatch' })
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: { ...fixture.textRef, atomId: 'missing' },
+        property: 'value',
+        value: '<p>Missing</p>',
+      }),
+    ).toEqual({ ok: false, reason: 'node-not-found' })
+  })
+
+  it('rejects unknown properties and invalid values without mutation', () => {
+    const fixture = createFixture()
+    const before = fixture.row.settings.gap
+    const unknown = {
+      ref: { kind: 'row', blockId: fixture.block.id, rowId: fixture.row.id },
+      property: 'futureBorder',
+      value: 1,
+    } as unknown as NodePropertyCommand
+    expect(updateNodeProperty(fixture.items, unknown)).toEqual({
+      ok: false,
+      reason: 'unsupported-property',
+    })
+    expect(
+      getNodePropertyState(
+        fixture.items,
+        { kind: 'row', blockId: fixture.block.id, rowId: fixture.row.id },
+        'futureBorder' as never,
+      ),
+    ).toEqual({ kind: 'inapplicable', reason: 'unsupported-property' })
+    expect(
+      updateNodeProperty(fixture.items, {
+        ref: { kind: 'row', blockId: fixture.block.id, rowId: fixture.row.id },
+        property: 'gap',
+        value: Number.NaN,
+      }),
+    ).toEqual({ ok: false, reason: 'invalid-value' })
+    expect(fixture.row.settings.gap).toBe(before)
+
+    const invalidBackground = {
+      ref: { kind: 'row', blockId: fixture.block.id, rowId: fixture.row.id },
+      property: 'backgroundImage',
+      value: { url: '', repeat: 'tile', size: 'cover', position: 'center' },
+    } as unknown as NodePropertyCommand
+    expect(updateNodeProperty(fixture.items, invalidBackground)).toEqual({
+      ok: false,
+      reason: 'invalid-value',
+    })
+  })
+
+  it('preflights a batch atomically and applies a valid image batch', () => {
+    const fixture = createFixture()
+    const originalSrc = fixture.image.src
+    const invalidBatch = [
+      { ref: fixture.imageRef, property: 'src', value: '/new.png' },
+      { ref: fixture.imageRef, property: 'width', value: -1 },
+    ] as NodePropertyCommand[]
+    expect(updateNodeProperties(fixture.items, invalidBatch)).toEqual({
+      ok: false,
+      reason: 'invalid-value',
+    })
+    expect(fixture.image.src).toBe(originalSrc)
+
+    expect(
+      updateNodeProperties(fixture.items, [
+        { ref: fixture.imageRef, property: 'src', value: '/new.png' },
+        { ref: fixture.imageRef, property: 'alt', value: 'New' },
+        { ref: fixture.imageRef, property: 'link', value: 'https://example.test' },
+        { ref: fixture.imageRef, property: 'width', value: 240 },
+        { ref: fixture.imageRef, property: 'height', value: undefined },
+      ]),
+    ).toEqual({ ok: true, changed: true })
+    expect(fixture.image).toMatchObject({
+      src: '/new.png',
+      alt: 'New',
+      link: 'https://example.test',
+      width: 240,
+    })
+    expect(fixture.image.height).toBeUndefined()
+  })
+
+  it('rejects duplicate target properties before applying a batch', () => {
+    const fixture = createFixture()
+    const rowRef: RowRef = { kind: 'row', blockId: fixture.block.id, rowId: fixture.row.id }
+
+    expect(
+      updateNodeProperties(fixture.items, [
+        { ref: rowRef, property: 'gap', value: 10 },
+        { ref: rowRef, property: 'gap', value: 0 },
+      ]),
+    ).toEqual({ ok: false, reason: 'invalid-value' })
+    expect(fixture.row.settings.gap).toBe(0)
+
+    fixture.row.settings.spacing = { padding: [1, 1, 1, 1], margin: [2, 2, 2, 2] }
+    expect(
+      updateNodeProperties(fixture.items, [
+        { ref: rowRef, property: 'spacing', value: { padding: [3, 3, 3, 3] } },
+        { ref: rowRef, property: 'spacing', value: { margin: [4, 4, 4, 4] } },
+      ]),
+    ).toEqual({ ok: false, reason: 'invalid-value' })
+    expect(fixture.row.settings.spacing).toEqual({ padding: [1, 1, 1, 1], margin: [2, 2, 2, 2] })
+  })
+
+  it('preserves an unedited spacing side and synchronizes button padding', () => {
+    const fixture = createFixture()
+    fixture.row.settings.spacing = { padding: [1, 2, 3, 4], margin: [5, 6, 7, 8] }
+    const rowRef: RowRef = { kind: 'row', blockId: fixture.block.id, rowId: fixture.row.id }
+    const controlValue = normalizeSpacingValue(fixture.row.settings.spacing, [0, 0, 0, 0], {
+      includeMargin: false,
+    })
+    const controlPayload = createSpacingPatch(controlValue, 'padding', [9, 9, 9, 9])
+    expect(controlPayload).toEqual({ padding: [9, 9, 9, 9] })
+    expect(controlPayload).not.toHaveProperty('margin')
+
+    updateNodeProperty(fixture.items, { ref: rowRef, property: 'spacing', value: controlPayload })
+    expect(fixture.row.settings.spacing).toEqual({ padding: [9, 9, 9, 9], margin: [5, 6, 7, 8] })
+
+    const atomControlValue = normalizeSpacingValue(fixture.button.spacing, fixture.button.padding)
+    const atomControlPayload = createSpacingPatch(atomControlValue, 'padding', [2, 4, 6, 8])
+    expect(atomControlPayload.margin).toEqual(atomControlValue.margin)
+    updateNodeProperty(fixture.items, {
+      ref: fixture.buttonRef,
+      property: 'spacing',
+      value: atomControlPayload,
+    })
+    expect(fixture.button.spacing?.padding).toEqual([2, 4, 6, 8])
+    expect(fixture.button.padding).toEqual([2, 4, 6, 8])
+  })
+
+  it('sanitizes text and exposes current single-selection defaults', () => {
+    const fixture = createFixture()
+    updateNodeProperty(fixture.items, {
+      ref: fixture.textRef,
+      property: 'value',
+      value: '<p onclick="bad()">Safe</p>',
+    })
+    expect(fixture.text.value).toBe('<p>Safe</p>')
+
+    fixture.row.settings.collapseOnMobile = undefined
+    fixture.row.settings.hiddenOnMobile = undefined
+    const rowRef: RowRef = { kind: 'row', blockId: fixture.block.id, rowId: fixture.row.id }
+    expect(getNodePropertyState(fixture.items, rowRef, 'collapseOnMobile')).toEqual({
+      kind: 'value',
+      value: true,
+    })
+    expect(getNodePropertyState(fixture.items, rowRef, 'hiddenOnMobile')).toEqual({
+      kind: 'value',
+      value: false,
+    })
+
+    const cell = fixture.row.cells[0]!
+    cell.settings.horizontalAlign = undefined
+    cell.settings.borderRadius = undefined
+    cell.settings.width = undefined
+    cell.settings.height = undefined
+    const cellRef: CellRef = {
+      kind: 'cell',
+      blockId: fixture.block.id,
+      rowId: fixture.row.id,
+      cellId: cell.id,
+    }
+    expect(getNodePropertyState(fixture.items, cellRef, 'horizontalAlign')).toEqual({
+      kind: 'value',
+      value: 'left',
+    })
+    expect(getNodePropertyState(fixture.items, cellRef, 'borderRadius')).toEqual({
+      kind: 'value',
+      value: 0,
+    })
+    expect(getNodePropertyState(fixture.items, cellRef, 'width')).toEqual({
+      kind: 'value',
+      value: undefined,
+    })
+    expect(getNodePropertyState(fixture.items, cellRef, 'height')).toEqual({
+      kind: 'value',
+      value: undefined,
+    })
+    expect(getNodePropertyState(fixture.items, cellRef, 'hiddenOnMobile')).toEqual({
+      kind: 'value',
+      value: false,
+    })
+    expect(getNodePropertyState(fixture.items, fixture.textRef, 'hiddenOnMobile')).toEqual({
+      kind: 'value',
+      value: false,
+    })
+  })
+
+  it('does not assign on a semantic no-op', () => {
+    const fixture = createFixture()
+    const spacing = fixture.block.settings.spacing
+    const result = updateNodeProperty(fixture.items, {
+      ref: { kind: 'block', blockId: fixture.block.id },
+      property: 'spacing',
+      value: { padding: spacing.padding ? [...spacing.padding] : undefined },
+    })
+    expect(result).toEqual({ ok: true, changed: false })
+    expect(fixture.block.settings.spacing).toBe(spacing)
+  })
+})

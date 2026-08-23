@@ -8,6 +8,7 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const emit = defineEmits<{ (e: 'update:value', value: BackgroundImageTool['value']): void }>()
 </script>
 
 <template>
@@ -16,5 +17,6 @@ const props = defineProps<Props>()
     type="bgImage"
     :title="props.title"
     :value="props.value"
+    @update:value="(value) => emit('update:value', value as BackgroundImageTool['value'])"
   />
 </template>

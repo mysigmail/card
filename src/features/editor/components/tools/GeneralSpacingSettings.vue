@@ -11,9 +11,14 @@ const { general } = useCanvas()
     type="opened"
   >
     <SpacingTool
-      id="layoutPadding"
+      id="general-padding"
       :value="{ padding: general.padding }"
       title="Spacing"
+      @update:value="
+        (value) => {
+          if (value.padding) general.padding = value.padding
+        }
+      "
     />
   </EditorPanelItem>
 </template>

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { AlignTool } from '@/features/editor/model'
 import { AlignCenter, AlignLeft, AlignRight } from 'lucide-vue-next'
-import { ref, watch } from 'vue'
-import { useCanvas } from '@/features/editor/model'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 
 interface Props {
@@ -13,31 +11,19 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const localValue = ref(props.value)
-
-const { updateToolById } = useCanvas()
-
-watch(
-  () => props.value,
-  () => {
-    localValue.value = props.value
-  },
-)
-
-watch(localValue, () => {
-  updateToolById<AlignTool>(props.id, 'value', localValue.value)
-})
+const emit = defineEmits<{ (e: 'update:value', value: AlignTool['value']): void }>()
 </script>
 
 <template>
   <div data-slot="align-tool">
     <EditorToolLabel>{{ title }}</EditorToolLabel>
     <ToggleGroup
-      v-model="localValue"
+      :model-value="props.value"
       :spacing="0"
       type="single"
       size="sm"
       variant="outline"
+      @update:model-value="(value) => emit('update:value', value as AlignTool['value'])"
     >
       <ToggleGroupItem value="left">
         <AlignLeft :size="16" />

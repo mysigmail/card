@@ -28,6 +28,10 @@ const {
   onItemHeightChange,
   onItemVerticalAlignChange,
   onItemHorizontalAlignChange,
+  onRowHiddenOnMobileChange,
+  onRowCollapseOnMobileChange,
+  onCellHiddenOnMobileChange,
+  onAtomHiddenOnMobileChange,
 } = useSettingsTools()
 </script>
 
@@ -41,15 +45,17 @@ const {
 
     <RowSettings
       v-if="selectionLevel === 'row' && selectedRow && selectedBlock"
-      v-model:hidden-on-mobile="rowHiddenOnMobile"
-      v-model:collapse-on-mobile="rowCollapseOnMobile"
+      :hidden-on-mobile="rowHiddenOnMobile"
+      :collapse-on-mobile="rowCollapseOnMobile"
       :spacing-tools="rowSpacingTools"
       :appearance-tools="rowAppearanceTools"
+      @update:hidden-on-mobile="onRowHiddenOnMobileChange"
+      @update:collapse-on-mobile="onRowCollapseOnMobileChange"
     />
 
     <CellSettings
       v-if="selectionLevel === 'cell' && selectedCell && selectedBlock"
-      v-model:hidden-on-mobile="cellHiddenOnMobile"
+      :hidden-on-mobile="cellHiddenOnMobile"
       :cell="selectedCell"
       :spacing-tools="cellSpacingTools"
       :appearance-tools="cellAppearanceTools"
@@ -61,14 +67,16 @@ const {
       @update:height="onItemHeightChange"
       @update:vertical-align="onItemVerticalAlignChange"
       @update:horizontal-align="onItemHorizontalAlignChange"
+      @update:hidden-on-mobile="onCellHiddenOnMobileChange"
     />
 
     <AtomSettings
       v-if="selectionLevel === 'atom' && selectedAtom"
-      v-model:hidden-on-mobile="atomHiddenOnMobile"
+      :hidden-on-mobile="atomHiddenOnMobile"
       :atom="selectedAtom"
       :spacing-tools="atomSpacingTools"
       :tools="atomTools"
+      @update:hidden-on-mobile="onAtomHiddenOnMobileChange"
     />
   </div>
 </template>
