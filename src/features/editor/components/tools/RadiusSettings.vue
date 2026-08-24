@@ -4,6 +4,7 @@ import { Radius, Scan } from 'lucide-vue-next'
 import { computed, ref, watch } from 'vue'
 import { BORDER_RADIUS_CORNERS, createBorderRadiusValue } from '@/entities/style'
 import { Button } from '@/shared/ui/button'
+import NumberFieldPrefixLabel from './number/NumberFieldPrefixLabel.vue'
 import ScrubbableNumberField from './number/ScrubbableNumberField.vue'
 
 const props = defineProps<{
@@ -121,7 +122,7 @@ const UI_CORNER_ORDER: Array<keyof BorderRadiusValue> = [
 
     <div
       v-if="advanced"
-      class="grid grid-cols-2 gap-2 pt-1"
+      class="grid grid-cols-2 gap-2"
     >
       <div
         v-for="corner in UI_CORNER_ORDER"
@@ -138,7 +139,7 @@ const UI_CORNER_ORDER: Array<keyof BorderRadiusValue> = [
           @update:model-value="(value) => value !== undefined && updateCorner(corner, value)"
         >
           <template #prefix>
-            <span class="text-[9px] font-semibold">{{ CORNER_SHORT_LABELS[corner] }}</span>
+            <NumberFieldPrefixLabel :label="CORNER_SHORT_LABELS[corner]" />
           </template>
         </ScrubbableNumberField>
       </div>
