@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createApp, nextTick } from 'vue'
+import { createGoogleFontStack, googleFontFamilies } from '@/entities/font'
 import GeneralFontSettings from '@/features/editor/components/tools/GeneralFontSettings.vue'
 import { useCanvas } from '@/features/editor/model'
 
@@ -11,7 +12,12 @@ async function flushUi() {
 }
 
 describe('general font settings keyboard flow', () => {
+  beforeEach(() => {
+    vi.spyOn(window, 'scrollTo').mockImplementation(() => {})
+  })
+
   afterEach(() => {
+    vi.restoreAllMocks()
     document.body.innerHTML = ''
     Reflect.deleteProperty(Element.prototype, 'scrollIntoView')
   })
@@ -78,6 +84,38 @@ describe('general font settings keyboard flow', () => {
       .dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, key: 'Escape' }))
     await flushUi()
     expect(document.body.querySelector('[role="listbox"]')).toBeNull()
+    app.unmount()
+  })
+
+  it('keeps the complete Google Fonts result set keyboard-accessible', async () => {
+    const canvas = useCanvas()
+    Object.defineProperty(Element.prototype, 'scrollIntoView', {
+      configurable: true,
+      value() {},
+    })
+    canvas.general.font = 'Arial, Helvetica, sans-serif'
+    const lastMatchingFont = googleFontFamilies
+      .filter((font) => {
+        return font.family.toLocaleLowerCase().includes('a')
+      })
+      .at(-1)!
+    const host = document.createElement('div')
+    document.body.append(host)
+    const app = createApp(GeneralFontSettings)
+    app.mount(host)
+
+    host.querySelector<HTMLButtonElement>('[role="combobox"]')!.click()
+    await flushUi()
+    const input = document.body.querySelector<HTMLInputElement>('[data-slot="command-input"]')!
+    input.value = 'a'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
+    await flushUi()
+
+    input.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, key: 'ArrowUp' }))
+    input.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, key: 'Enter' }))
+    await flushUi()
+
+    expect(canvas.general.font).toBe(createGoogleFontStack(lastMatchingFont))
     app.unmount()
   })
 })

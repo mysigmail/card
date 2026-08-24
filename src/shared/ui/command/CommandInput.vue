@@ -20,6 +20,7 @@ const props = defineProps<
 
 const emits = defineEmits<{
   (event: 'update:modelValue', value: string): void
+  (event: 'keydown', value: KeyboardEvent): void
 }>()
 
 const delegatedProps = reactiveOmit(props, 'class', 'modelValue')
@@ -60,6 +61,7 @@ watch(
           props.class,
         )
       "
+      @keydown.capture="emits('keydown', $event)"
     />
   </div>
 </template>

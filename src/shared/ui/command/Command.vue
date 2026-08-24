@@ -7,14 +7,23 @@ import { reactive, ref, watch } from 'vue'
 import { cn } from '@/shared/lib/utils'
 import { provideCommandContext } from '.'
 
-const props = withDefaults(defineProps<ListboxRootProps & { class?: HTMLAttributes['class'] }>(), {
-  modelValue: '',
-  highlightOnHover: true,
-})
+const props = withDefaults(
+  defineProps<
+    ListboxRootProps & {
+      class?: HTMLAttributes['class']
+      shouldFilter?: boolean
+    }
+  >(),
+  {
+    modelValue: '',
+    highlightOnHover: true,
+    shouldFilter: true,
+  },
+)
 
 const emits = defineEmits<ListboxRootEmits>()
 
-const delegatedProps = reactiveOmit(props, 'class')
+const delegatedProps = reactiveOmit(props, 'class', 'shouldFilter')
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
 
@@ -35,6 +44,13 @@ const filterState = reactive({
 })
 
 function filterItems() {
+  if (!props.shouldFilter) {
+    filterState.filtered.count = allItems.value.size
+    filterState.filtered.items = new Map([...allItems.value.keys()].map(id => [id, 1]))
+    filterState.filtered.groups = new Set(allGroups.value.keys())
+    return
+  }
+
   if (!filterState.search) {
     filterState.filtered.count = allItems.value.size
     // Do nothing, each item will know to show itself because search is empty

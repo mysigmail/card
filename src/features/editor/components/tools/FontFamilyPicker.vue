@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
+import type { RecycleScrollerExposed } from 'vue-virtual-scroller'
 import type { FontOption } from '@/entities/font'
 import { Check, ChevronsUpDown } from 'lucide-vue-next'
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
+import { RecycleScroller } from 'vue-virtual-scroller'
 import {
   createGoogleFontStack,
   googleFontFamilies,
@@ -20,9 +22,14 @@ import {
   CommandList,
 } from '@/shared/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
+import 'vue-virtual-scroller/index.css'
 
 interface PickerOption extends FontOption {
   disabled?: boolean
+}
+
+interface KeyboardFontOption extends PickerOption {
+  googleIndex?: number
 }
 
 const props = withDefaults(
@@ -44,11 +51,10 @@ const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void
 }>()
 
-const INITIAL_GOOGLE_FONT_LIMIT = 40
-const SEARCH_RESULT_LIMIT = 100
-
 const open = ref(false)
 const query = ref('')
+const highlightedValue = ref<string>()
+const googleFontScroller = ref<RecycleScrollerExposed>()
 const normalizedQuery = computed(() => query.value.trim().toLocaleLowerCase())
 const selectedGoogleFamily = computed(() => resolveGoogleFontFromStack(props.modelValue)?.family)
 
@@ -86,10 +92,63 @@ const visibleGoogleFonts = computed(() => {
   const matching = normalizedQuery.value
     ? googleFontFamilies.filter(font => matchesQuery(font.family))
     : googleFontFamilies
-  return matching
-    .filter(font => font.family !== selectedGoogleFamily.value)
-    .slice(0, normalizedQuery.value ? SEARCH_RESULT_LIMIT : INITIAL_GOOGLE_FONT_LIMIT)
+  return matching.filter(font => font.family !== selectedGoogleFamily.value)
 })
+
+const keyboardOptions = computed<KeyboardFontOption[]>(() => {
+  const options: KeyboardFontOption[] = [
+    ...(visibleSelectedOption.value ? [selectedOption.value] : []),
+    ...visibleSpecialOptions.value,
+    ...visibleSystemFonts.value,
+    ...visibleGoogleFonts.value.map((font, googleIndex) => ({
+      label: font.family,
+      value: createGoogleFontStack(font),
+      googleIndex,
+    })),
+  ]
+  return options.filter(option => !option.disabled)
+})
+
+watch(query, () => {
+  highlightedValue.value = undefined
+})
+
+function highlightOption(option: KeyboardFontOption) {
+  highlightedValue.value = option.value
+  if (option.googleIndex !== undefined) {
+    void nextTick(() => {
+      googleFontScroller.value?.scrollToItem(option.googleIndex!, { align: 'nearest' })
+    })
+  }
+}
+
+function handleSearchKeydown(event: KeyboardEvent) {
+  if (!['ArrowDown', 'ArrowUp', 'Enter'].includes(event.key))
+    return
+
+  event.preventDefault()
+  event.stopPropagation()
+  event.stopImmediatePropagation()
+
+  const options = keyboardOptions.value
+  if (!options.length)
+    return
+
+  const currentIndex = options.findIndex(option => option.value === highlightedValue.value)
+  if (event.key === 'Enter') {
+    selectFont(options[Math.max(currentIndex, 0)]!.value)
+    return
+  }
+
+  const direction = event.key === 'ArrowDown' ? 1 : -1
+  const nextIndex
+    = currentIndex < 0
+      ? direction > 0
+        ? 0
+        : options.length - 1
+      : (currentIndex + direction + options.length) % options.length
+  highlightOption(options[nextIndex]!)
+}
 
 function selectFont(value: string) {
   emit('update:modelValue', value)
@@ -121,11 +180,12 @@ function selectFont(value: string) {
         align="start"
         class="w-(--reka-popover-trigger-width) min-w-72 p-2"
       >
-        <Command>
+        <Command :should-filter="false">
           <CommandInput
             v-model="query"
             placeholder="Search fonts…"
             aria-label="Search fonts"
+            @keydown="handleSearchKeydown"
           />
           <CommandList class="max-h-64">
             <CommandEmpty>No fonts found</CommandEmpty>
@@ -138,6 +198,11 @@ function selectFont(value: string) {
                 :disabled="selectedOption.disabled"
                 data-current-font
                 aria-current="true"
+                :class="
+                  highlightedValue === selectedOption.value
+                    ? 'bg-accent text-accent-foreground'
+                    : ''
+                "
                 @select="selectFont(selectedOption.value)"
               >
                 <Check class="mr-2 size-4" />
@@ -153,6 +218,7 @@ function selectFont(value: string) {
                 :key="option.value"
                 :value="option.value"
                 :disabled="option.disabled"
+                :class="highlightedValue === option.value ? 'bg-accent text-accent-foreground' : ''"
                 @select="selectFont(option.value)"
               >
                 <Check
@@ -170,6 +236,7 @@ function selectFont(value: string) {
                 v-for="option in visibleSystemFonts"
                 :key="option.value"
                 :value="option.value"
+                :class="highlightedValue === option.value ? 'bg-accent text-accent-foreground' : ''"
                 @select="selectFont(option.value)"
               >
                 <Check
@@ -183,18 +250,34 @@ function selectFont(value: string) {
               v-if="visibleGoogleFonts.length"
               heading="Google Fonts"
             >
-              <CommandItem
-                v-for="font in visibleGoogleFonts"
-                :key="font.family"
-                :value="createGoogleFontStack(font)"
-                @select="selectFont(createGoogleFontStack(font))"
+              <RecycleScroller
+                v-slot="{ item: font }"
+                ref="googleFontScroller"
+                class="font-family-scroller"
+                :items="visibleGoogleFonts"
+                :item-size="32"
+                key-field="family"
+                page-mode
+                :buffer="320"
+                :prerender="12"
               >
-                <Check
-                  class="mr-2 size-4"
-                  :class="selectedGoogleFamily === font.family ? 'opacity-100' : 'opacity-0'"
-                />
-                {{ font.family }}
-              </CommandItem>
+                <CommandItem
+                  class="h-8"
+                  :value="createGoogleFontStack(font)"
+                  :class="
+                    highlightedValue === createGoogleFontStack(font)
+                      ? 'bg-accent text-accent-foreground'
+                      : ''
+                  "
+                  @select="selectFont(createGoogleFontStack(font))"
+                >
+                  <Check
+                    class="mr-2 size-4"
+                    :class="selectedGoogleFamily === font.family ? 'opacity-100' : 'opacity-0'"
+                  />
+                  {{ font.family }}
+                </CommandItem>
+              </RecycleScroller>
             </CommandGroup>
           </CommandList>
         </Command>
