@@ -4,6 +4,7 @@ import type { CanvasBlockInstance, GeneralTool } from '@/entities/template'
 import { MBody, MContainer, MHead, MHtml, MPreview } from '@mysigmail/vue-email-components'
 import { computed } from 'vue'
 import { EMAIL_RESPONSIVE_CSS } from '@/features/email-preview/constants'
+import { getTemplateGoogleFontsCssUrls } from '@/features/email-preview/lib/google-font-resources'
 import ExportBlockRenderer from '@/features/email-preview/ui/ExportBlockRenderer.vue'
 
 interface Props {
@@ -15,6 +16,9 @@ const props = defineProps<Props>()
 
 const EMAIL_TEMPLATE_WIDTH = 600
 const HEAD_STYLE_TAG = 'style'
+const googleFontsCssUrls = computed(() =>
+  getTemplateGoogleFontsCssUrls(props.components, props.general.font),
+)
 
 const container: CSSProperties = {
   width: `${EMAIL_TEMPLATE_WIDTH}px`,
@@ -43,6 +47,12 @@ function isCanvasBlockInstance(component: CanvasBlockInstance): component is Can
 <template>
   <MHtml>
     <MHead>
+      <link
+        v-for="url in googleFontsCssUrls"
+        :key="url"
+        rel="stylesheet"
+        :href="url"
+      >
       <component :is="HEAD_STYLE_TAG">
         {{ EMAIL_RESPONSIVE_CSS }}
       </component>
