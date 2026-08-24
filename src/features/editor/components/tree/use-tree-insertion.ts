@@ -1,20 +1,18 @@
 import type { Ref } from 'vue'
 import type { InsertionPath, InsertionPoint, TreeInsertType } from './use-tree-helpers'
-import type { CanvasBlockInstance, SidebarTab } from '@/features/editor/model'
+import type { SidebarTab } from '@/features/editor/model'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import {
-  TREE_ATOM_SIBLING_CELL_X_OFFSET_PX,
-  TREE_EMPTY_CELL_ATOM_X_OFFSET_PX,
   TREE_INSERTION_ACTIVATION_X,
   TREE_INSERTION_LINE_MIN_LEFT_PX,
   TREE_INSERTION_POINT_PRIORITY,
   TREE_INSERTION_RADIUS_PX,
   TREE_INSERTION_Y_TIE_THRESHOLD_PX,
+  TREE_NODE_INDENT_PX,
 } from './use-tree-helpers'
 
 interface UseTreeInsertionOptions {
   rootRef: Ref<HTMLElement | undefined>
-  installed: Ref<CanvasBlockInstance[]>
   sidebarActiveTab: Ref<SidebarTab>
 }
 
@@ -39,7 +37,7 @@ export function useTreeInsertion(options: UseTreeInsertionOptions) {
       return ['row']
 
     if (type === 'cell')
-      return ['cell', 'row']
+      return ['cell']
 
     return ['text', 'button', 'divider', 'image', 'menu', 'social', 'row']
   })
@@ -69,103 +67,44 @@ export function useTreeInsertion(options: UseTreeInsertionOptions) {
 
     const points: InsertionPoint[] = []
     const rootRect = options.rootRef.value.getBoundingClientRect()
-    const treeElements = Array.from(options.rootRef.value.querySelectorAll('[data-tree-id]'))
+    const atomElements = Array.from(
+      options.rootRef.value.querySelectorAll('[data-tree-id][data-type="atom"]'),
+    )
+    const blockScopeElements = Array.from(
+      options.rootRef.value.querySelectorAll('[data-block-scope-id]'),
+    )
+    const blockScopeEndElements = Array.from(
+      options.rootRef.value.querySelectorAll('[data-block-scope-end-index]'),
+    )
     const rowScopeElements = Array.from(
       options.rootRef.value.querySelectorAll('[data-row-scope-id]'),
     )
-    const blockIndexById = new Map<string, number>()
+    const cellScopeElements = Array.from(
+      options.rootRef.value.querySelectorAll('[data-cell-scope-id]'),
+    )
 
-    options.installed.value.forEach((item, index) => {
-      blockIndexById.set(item.block.id, index)
-    })
-
-    if (treeElements.length === 0)
-      return points
-
-    treeElements.forEach((el) => {
+    atomElements.forEach((el) => {
       const rect = el.getBoundingClientRect()
+      if (rect.height === 0)
+        return
+
       const left = rect.left - rootRect.left
-      const type = el.getAttribute('data-type') as InsertionPath['type']
       const blockId = el.getAttribute('data-block-id') || undefined
       const rowId = el.getAttribute('data-row-id') || undefined
       const cellId = el.getAttribute('data-cell-id') || undefined
       const index = Number.parseInt(el.getAttribute('data-index') || '0')
-      const atomCount = Number.parseInt(el.getAttribute('data-atom-count') || '0')
-      const parentCellIndex = Number.parseInt(el.getAttribute('data-parent-cell-index') || '-1')
 
       points.push({
         top: rect.top - rootRect.top,
         left,
         path: {
-          blockId: type === 'block' ? undefined : blockId,
+          blockId,
           rowId,
-          cellId: type === 'cell' ? undefined : cellId,
+          cellId,
           index,
-          type,
+          type: 'atom',
         },
       })
-
-      points.push({
-        top: rect.bottom - rootRect.top,
-        left,
-        path: {
-          blockId: type === 'block' ? undefined : blockId,
-          rowId,
-          cellId: type === 'cell' ? undefined : cellId,
-          index: index + 1,
-          type,
-        },
-      })
-
-      if (type !== 'block' && blockId) {
-        const blockIndex = blockIndexById.get(blockId)
-        if (blockIndex !== undefined) {
-          points.push({
-            top: rect.bottom - rootRect.top,
-            left: 0,
-            path: {
-              index: blockIndex + 1,
-              type: 'block',
-            },
-          })
-        }
-      }
-
-      if (type === 'cell' && blockId && rowId && cellId && atomCount === 0) {
-        points.push({
-          top: rect.bottom - rootRect.top,
-          left: left + TREE_EMPTY_CELL_ATOM_X_OFFSET_PX,
-          path: {
-            blockId,
-            rowId,
-            cellId,
-            index: 0,
-            type: 'atom',
-          },
-        })
-      }
-
-      if (type === 'atom' && blockId && rowId && parentCellIndex >= 0) {
-        points.push({
-          top: rect.bottom - rootRect.top,
-          left: Math.max(0, left - TREE_ATOM_SIBLING_CELL_X_OFFSET_PX),
-          path: {
-            blockId,
-            rowId,
-            index: parentCellIndex + 1,
-            type: 'cell',
-          },
-        })
-      }
-    })
-
-    rowScopeElements.forEach((el) => {
-      const rect = el.getBoundingClientRect()
-      const left = rect.left - rootRect.left
-      const blockId = el.getAttribute('data-row-scope-block-id') || undefined
-      const rowId = el.getAttribute('data-row-scope-row-id') || undefined
-      const cellId = el.getAttribute('data-row-scope-cell-id') || undefined
-      const index = Number.parseInt(el.getAttribute('data-row-scope-index') || '0')
 
       points.push({
         top: rect.bottom - rootRect.top,
@@ -175,9 +114,111 @@ export function useTreeInsertion(options: UseTreeInsertionOptions) {
           rowId,
           cellId,
           index: index + 1,
-          type: 'row',
+          type: 'atom',
         },
       })
+    })
+
+    blockScopeElements.forEach((el) => {
+      const rect = el.getBoundingClientRect()
+      if (rect.height === 0)
+        return
+
+      const index = Number.parseInt(el.getAttribute('data-block-scope-index') || '0')
+
+      points.push({
+        top: rect.top - rootRect.top,
+        left: 0,
+        path: { index, type: 'block' },
+      })
+    })
+
+    blockScopeEndElements.forEach((el) => {
+      const rect = el.getBoundingClientRect()
+      const index = Number.parseInt(el.getAttribute('data-block-scope-end-index') || '0')
+
+      points.push({
+        top: rect.top - rootRect.top,
+        left: 0,
+        path: { index: index + 1, type: 'block' },
+      })
+    })
+
+    cellScopeElements.forEach((el) => {
+      const rect = el.getBoundingClientRect()
+      if (rect.height === 0)
+        return
+
+      const left = rect.left - rootRect.left
+      const blockId = el.getAttribute('data-cell-scope-block-id') || undefined
+      const rowId = el.getAttribute('data-cell-scope-row-id') || undefined
+      const index = Number.parseInt(el.getAttribute('data-cell-scope-index') || '0')
+      const childCount = Number.parseInt(el.getAttribute('data-cell-scope-child-count') || '0')
+
+      points.push(
+        {
+          top: rect.top - rootRect.top,
+          left,
+          path: { blockId, rowId, index, type: 'cell' },
+        },
+        {
+          top: rect.bottom - rootRect.top,
+          left,
+          path: { blockId, rowId, index: index + 1, type: 'cell' },
+        },
+      )
+
+      if (childCount === 0) {
+        const cellId = el.getAttribute('data-cell-scope-id')?.replace('cell-scope:', '')
+        points.push({
+          top: rect.bottom - rootRect.top,
+          left: left + TREE_NODE_INDENT_PX.level,
+          path: {
+            blockId,
+            rowId,
+            cellId,
+            index: 0,
+            type: 'atom',
+          },
+        })
+      }
+    })
+
+    rowScopeElements.forEach((el) => {
+      const rect = el.getBoundingClientRect()
+      if (rect.height === 0)
+        return
+
+      const left = rect.left - rootRect.left
+      const blockId = el.getAttribute('data-row-scope-block-id') || undefined
+      const rowId = el.getAttribute('data-row-scope-row-id') || undefined
+      const cellId = el.getAttribute('data-row-scope-cell-id') || undefined
+      const index = Number.parseInt(el.getAttribute('data-row-scope-index') || '0')
+
+      points.push(
+        {
+          top: rect.top - rootRect.top,
+          left,
+          path: {
+            blockId,
+            rowId,
+            cellId,
+            index,
+            type: 'row',
+          },
+        },
+        {
+          top: rect.bottom - rootRect.top,
+          left,
+          path: {
+            blockId,
+            rowId,
+            cellId,
+            index: index + 1,
+            type: 'row',
+          },
+        },
+      )
     })
 
     return points
@@ -206,10 +247,18 @@ export function useTreeInsertion(options: UseTreeInsertionOptions) {
       item => item.yDistance <= minYDistance + TREE_INSERTION_Y_TIE_THRESHOLD_PX,
     )
 
-    const hasCandidateOnLeft = yConstrainedCandidates.some(item => !item.isRightOfCursor)
+    const uniqueCandidates = new Map<string, (typeof yConstrainedCandidates)[number]>()
+
+    yConstrainedCandidates.forEach((candidate) => {
+      const { blockId, rowId, cellId, index, type } = candidate.point.path
+      uniqueCandidates.set(`${type}:${blockId}:${rowId}:${cellId}:${index}`, candidate)
+    })
+
+    const deduplicatedCandidates = Array.from(uniqueCandidates.values())
+    const hasCandidateOnLeft = deduplicatedCandidates.some(item => !item.isRightOfCursor)
     const candidatePool = hasCandidateOnLeft
-      ? yConstrainedCandidates.filter(item => !item.isRightOfCursor)
-      : yConstrainedCandidates
+      ? deduplicatedCandidates.filter(item => !item.isRightOfCursor)
+      : deduplicatedCandidates
 
     const preferredTypeOrder: Array<InsertionPath['type']>
       = mouseX <= TREE_INSERTION_ACTIVATION_X.block

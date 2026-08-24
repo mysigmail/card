@@ -44,7 +44,6 @@ const {
   setTreeHovering,
 } = useTreeInsertion({
   rootRef,
-  installed,
   sidebarActiveTab,
 })
 
