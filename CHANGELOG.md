@@ -1,3 +1,31 @@
+## 0.17.0 (2026-08-24)
+
+### Features
+
+- add Google Fonts support (#71) ([8eb2697](https://github.com/mysigmail/card/commit/8eb2697a702fe2e276b6b661fd4ac4ad388c650b))
+- **tree:** make insertion boundaries structurally aware (#69) ([8ac1a71](https://github.com/mysigmail/card/commit/8ac1a71078a400c00b35b123897504e79cbcfead))
+- **editor:** reorganize sidebar inspector (#67) ([34a972f](https://github.com/mysigmail/card/commit/34a972f3020767eb65186ec1084baf785d189e82))
+- **editor:** edit button labels inline (#66) ([4b7a788](https://github.com/mysigmail/card/commit/4b7a788cb8e1b205e9d9634476ef45bb352da7f4))
+- **editor:** add opacity style primitive (#65) ([3dd1494](https://github.com/mysigmail/card/commit/3dd1494c76d4e6ae734898a05db42ded1e844f8c))
+- **editor:** add local color picker (#64) ([c215b8f](https://github.com/mysigmail/card/commit/c215b8f2d40c5c4c6b42c92c8e7fb096cc1ee112))
+- **editor:** add per-corner border radius ([b38627a](https://github.com/mysigmail/card/commit/b38627a4165748996d7f643eccb2cd15f175ad66))
+- **editor:** add border style primitive (#60) ([71263f6](https://github.com/mysigmail/card/commit/71263f6a587bbbd7a34a8b794c5a6fee17fdd396))
+- **editor:** introduce ordered cell children (#57) ([b1723b9](https://github.com/mysigmail/card/commit/b1723b97e0317030f5c1bb4b850e0751f32efaf7))
+
+### Bug Fixes
+
+- **inspector:** align compact field prefixes (#70) ([d848aa5](https://github.com/mysigmail/card/commit/d848aa566a986d1a0d7ec0c5d6999ec5682f4534))
+- **editor:** keep structural selection frames on nodes (#62) ([eb0af5f](https://github.com/mysigmail/card/commit/eb0af5fa4f0fa49ebd3351722192f94a7358800e))
+- **editor:** align selection overlay and text caret (#61) ([314ced3](https://github.com/mysigmail/card/commit/314ced3ce8e2af1755987f677a4ee384db6fab3c))
+
+### Other
+
+- **editor:** improve project support prompts ([ea77b37](https://github.com/mysigmail/card/commit/ea77b3799f87f1b16a4e3afe9c21c8fd61ef6b91))
+- **editor:** simplify inline edit discovery (#68) ([1c10b40](https://github.com/mysigmail/card/commit/1c10b404fd47709684c779bb21ad402d6df175f9))
+- update presets links ([0013eda](https://github.com/mysigmail/card/commit/0013eda8f159df15ee367d7672818993f1b90ee3))
+- **editor:** add typed inspector registry and mutation gateway (#59) ([3ff314a](https://github.com/mysigmail/card/commit/3ff314ad7cbf96c5d7e0d709c32d5f1c91a79c40))
+- **template:** establish strict v1 contract (#58) ([745e0d4](https://github.com/mysigmail/card/commit/745e0d41125f0bf76a43a836f0ae33aa60c5dcfd))
+
 ## 0.16.0 (2026-08-07)
 
 ### Features
