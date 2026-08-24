@@ -63,7 +63,7 @@
                 "id": "-kG4axiQ",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Download for macOS</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,
@@ -96,7 +96,7 @@
                 "id": "ox-hI32C",
                 "type": "button",
                 "value": "<span style=\"color:#1F1712;font-size:15px\">Get it for Windows</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FFD9B8",
                 "borderRadius": {
                   "topLeft": 10,
@@ -154,7 +154,7 @@
                 "id": "qX3wGNkN",
                 "type": "image",
                 "src": "img/catalog/devices/handheld-console.png",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "alt": "Orange handheld gaming console",
                 "width": 245,
                 "spacing": {

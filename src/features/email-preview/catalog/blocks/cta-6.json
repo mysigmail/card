@@ -57,7 +57,7 @@
                 "id": "dNk-hbxo",
                 "type": "image",
                 "src": "img/catalog/devices/mini-pc.png",
-                "link": "https://card.email/catalog",
+                "link": "https://card.mysigmail.com/catalog",
                 "alt": "Compact orange desktop computer",
                 "width": 78,
                 "spacing": {
@@ -122,7 +122,7 @@
                 "id": "S3hXsFlB",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">macOS</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,
@@ -167,7 +167,7 @@
                 "id": "tORguqoq",
                 "type": "button",
                 "value": "<span style=\"color:#1F1712;font-size:15px\">Windows</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FFD9B8",
                 "borderRadius": {
                   "topLeft": 10,

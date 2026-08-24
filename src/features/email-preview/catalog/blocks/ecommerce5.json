@@ -108,7 +108,7 @@
                 "id": "ZBtYrfDy",
                 "type": "image",
                 "src": "img/catalog/products/headphones.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange over-ear headphones",
                 "spacing": {
                   "padding": [
@@ -149,7 +149,7 @@
                 "id": "0CwAnutE",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Choose headphones</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,
@@ -207,7 +207,7 @@
                 "id": "KECX4VY-",
                 "type": "image",
                 "src": "img/catalog/products/wireless-speaker.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange wireless speaker",
                 "spacing": {
                   "padding": [
@@ -248,7 +248,7 @@
                 "id": "dm0Aa1hU",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Choose speaker</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#1F1712",
                 "borderRadius": {
                   "topLeft": 10,

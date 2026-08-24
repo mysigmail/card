@@ -75,7 +75,7 @@
                 "id": "OZAbBBTE",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Start now</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#1F1712",
                 "borderRadius": {
                   "topLeft": 10,

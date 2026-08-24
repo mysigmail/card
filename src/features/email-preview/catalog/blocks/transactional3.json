@@ -88,7 +88,7 @@
                 "id": "GZrVRcqa",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/carry-on-suitcase.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange carry-on suitcase",
                 "width": 120,
                 "spacing": {
@@ -298,7 +298,7 @@
                 "id": "bQJVMfco",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Track package</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,

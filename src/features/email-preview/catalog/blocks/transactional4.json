@@ -57,7 +57,7 @@
                 "id": "A3SBy0xb",
                 "type": "image",
                 "src": "img/catalog/products/travel-mug.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange travel mug",
                 "width": 190,
                 "spacing": {
@@ -233,7 +233,7 @@
                         "id": "t7IgiGn4",
                         "type": "button",
                         "value": "<span style=\"color:#FFFFFF;font-size:15px\">Report an issue</span>",
-                        "link": "https://card.email/start",
+                        "link": "https://card.mysigmail.com/start",
                         "backgroundColor": "#1F1712",
                         "borderRadius": {
                           "topLeft": 10,

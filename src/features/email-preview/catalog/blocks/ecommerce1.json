@@ -108,7 +108,7 @@
                 "id": "c-uVbdO2",
                 "type": "image",
                 "src": "img/catalog/products/headphones.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange over-ear headphones",
                 "width": 210,
                 "spacing": {
@@ -149,7 +149,7 @@
                 "id": "ZqTK_oUx",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Add to setup</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,
@@ -241,7 +241,7 @@
                         "id": "huamfjRJ",
                         "type": "image",
                         "src": "img/catalog/devices/webcam.png",
-                        "link": "https://card.email/features",
+                        "link": "https://card.mysigmail.com/features",
                         "alt": "Compact orange webcam",
                         "width": 112,
                         "spacing": {
@@ -307,7 +307,7 @@
                         "id": "5ZsCucmZ",
                         "type": "image",
                         "src": "img/catalog/fashion-travel/city-backpack.png",
-                        "link": "https://card.email/features",
+                        "link": "https://card.mysigmail.com/features",
                         "alt": "Orange city backpack",
                         "width": 112,
                         "spacing": {
@@ -413,7 +413,7 @@
                         "id": "-hi6cpng",
                         "type": "button",
                         "value": "<span style=\"color:#FFFFFF;font-size:15px\">Add microphone</span>",
-                        "link": "https://card.email/start",
+                        "link": "https://card.mysigmail.com/start",
                         "backgroundColor": "#1F1712",
                         "borderRadius": {
                           "topLeft": 10,

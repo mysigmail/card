@@ -57,7 +57,7 @@
                 "id": "jcr7-5Vv",
                 "type": "image",
                 "src": "img/catalog/products/headphones.png",
-                "link": "https://card.email/catalog",
+                "link": "https://card.mysigmail.com/catalog",
                 "alt": "Orange over-ear headphones",
                 "width": 105,
                 "spacing": {
@@ -104,7 +104,7 @@
                 "id": "FD66wBZG",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/tote-bag.png",
-                "link": "https://card.email/catalog",
+                "link": "https://card.mysigmail.com/catalog",
                 "alt": "Orange tote bag",
                 "width": 105,
                 "spacing": {
@@ -164,7 +164,7 @@
                 "id": "IdFctHx3",
                 "type": "button",
                 "value": "<span style=\"color:#1F1712;font-size:15px\">Browse the edit</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FFFFFF",
                 "borderRadius": {
                   "topLeft": 10,

@@ -70,7 +70,7 @@
                 "id": "AdCGM8rW",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Explore the collection</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,
@@ -128,7 +128,7 @@
                 "id": "NjwiNBsP",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/bomber-jacket.png",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "alt": "Orange bomber jacket",
                 "width": 185,
                 "spacing": {
@@ -175,7 +175,7 @@
                 "id": "sCStaqOr",
                 "type": "image",
                 "src": "img/catalog/products/skincare-bottle.png",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "alt": "Orange skincare bottle",
                 "width": 165,
                 "spacing": {

@@ -127,7 +127,7 @@
                 "id": "9hbB8hrl",
                 "type": "image",
                 "src": "img/catalog/presenters/beverage-can-presenter.png",
-                "link": "https://card.email/read",
+                "link": "https://card.mysigmail.com/read",
                 "alt": "Presenter demonstrating an orange beverage can",
                 "width": 165,
                 "spacing": {
@@ -187,7 +187,7 @@
                 "id": "LvDfmDtF",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:14px\">Read the interview</span>",
-                "link": "https://card.email/read",
+                "link": "https://card.mysigmail.com/read",
                 "backgroundColor": "#1F1712",
                 "borderRadius": {
                   "topLeft": 10,

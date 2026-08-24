@@ -76,7 +76,7 @@
                 "id": "FuuSpqrJ",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Reserve a place</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#1F1712",
                 "borderRadius": {
                   "topLeft": 10,
@@ -121,7 +121,7 @@
                 "id": "LA_0qSkx",
                 "type": "image",
                 "src": "img/catalog/presenters/speaker-presenter.png",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "alt": "Presenter demonstrating an orange wireless speaker",
                 "spacing": {
                   "padding": [

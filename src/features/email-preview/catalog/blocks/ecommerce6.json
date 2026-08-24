@@ -108,7 +108,7 @@
                 "id": "dltZDY0n",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/carry-on-suitcase.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange carry-on suitcase",
                 "width": 145,
                 "spacing": {
@@ -155,7 +155,7 @@
                 "id": "ZgTnP1TC",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/weekend-duffel.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange weekend duffel bag",
                 "width": 145,
                 "spacing": {
@@ -202,7 +202,7 @@
                 "id": "ZPM7q_9F",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/tote-bag.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange tote bag",
                 "width": 145,
                 "spacing": {
@@ -262,7 +262,7 @@
                 "id": "amQc5NUe",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Add the kit</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,

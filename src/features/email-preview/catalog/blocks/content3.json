@@ -57,7 +57,7 @@
                 "id": "irhC7Rig",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/city-backpack.png",
-                "link": "https://card.email/read",
+                "link": "https://card.mysigmail.com/read",
                 "alt": "Orange city backpack",
                 "width": 230,
                 "spacing": {
@@ -117,7 +117,7 @@
                 "id": "rBFV3ZBA",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:14px\">Continue reading</span>",
-                "link": "https://card.email/read",
+                "link": "https://card.mysigmail.com/read",
                 "backgroundColor": "#1F1712",
                 "borderRadius": {
                   "topLeft": 10,

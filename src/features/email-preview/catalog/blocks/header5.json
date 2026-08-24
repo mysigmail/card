@@ -97,7 +97,7 @@
                 "id": "Vwg9ETr9",
                 "type": "button",
                 "value": "<span style=\"color:#1F1712;font-size:15px\">Enter the story</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FFFFFF",
                 "borderRadius": {
                   "topLeft": 10,

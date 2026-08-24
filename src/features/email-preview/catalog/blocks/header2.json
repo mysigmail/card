@@ -63,7 +63,7 @@
                 "id": "en1yAtxk",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Meet the speaker</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,
@@ -121,7 +121,7 @@
                 "id": "E1acDCTp",
                 "type": "image",
                 "src": "img/catalog/products/wireless-speaker.png",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "alt": "Orange wireless speaker",
                 "width": 240,
                 "spacing": {

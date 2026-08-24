@@ -142,7 +142,7 @@
                         "id": "oyMqgRM_",
                         "type": "image",
                         "src": "img/catalog/fashion-travel/bomber-jacket.png",
-                        "link": "https://card.email/features",
+                        "link": "https://card.mysigmail.com/features",
                         "alt": "Orange bomber jacket",
                         "width": 165,
                         "spacing": {
@@ -275,7 +275,7 @@
                         "id": "lWm1fpIg",
                         "type": "button",
                         "value": "<span style=\"color:#FFFFFF;font-size:15px\">View jacket</span>",
-                        "link": "https://card.email/start",
+                        "link": "https://card.mysigmail.com/start",
                         "backgroundColor": "#FF6B00",
                         "borderRadius": {
                           "topLeft": 10,
@@ -372,7 +372,7 @@
                         "id": "qcwDuT7B",
                         "type": "image",
                         "src": "img/catalog/devices/handheld-console.png",
-                        "link": "https://card.email/features",
+                        "link": "https://card.mysigmail.com/features",
                         "alt": "Orange handheld game console",
                         "width": 165,
                         "spacing": {
@@ -505,7 +505,7 @@
                         "id": "MvSx77Ej",
                         "type": "button",
                         "value": "<span style=\"color:#FFFFFF;font-size:15px\">View console</span>",
-                        "link": "https://card.email/start",
+                        "link": "https://card.mysigmail.com/start",
                         "backgroundColor": "#FF6B00",
                         "borderRadius": {
                           "topLeft": 10,
@@ -602,7 +602,7 @@
                         "id": "vwefrL4K",
                         "type": "image",
                         "src": "img/catalog/products/skincare-bottle.png",
-                        "link": "https://card.email/features",
+                        "link": "https://card.mysigmail.com/features",
                         "alt": "Orange skincare pump bottle",
                         "width": 135,
                         "spacing": {
@@ -735,7 +735,7 @@
                         "id": "a8Payt2f",
                         "type": "button",
                         "value": "<span style=\"color:#FFFFFF;font-size:15px\">View serum</span>",
-                        "link": "https://card.email/start",
+                        "link": "https://card.mysigmail.com/start",
                         "backgroundColor": "#FF6B00",
                         "borderRadius": {
                           "topLeft": 10,

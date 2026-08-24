@@ -77,7 +77,7 @@
                 "id": "wDtgpfcV",
                 "type": "button",
                 "value": "<span style=\"color:#1F1712;font-size:15px\">See the editor</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FFFFFF",
                 "borderRadius": {
                   "topLeft": 10,
@@ -135,7 +135,7 @@
                 "id": "mu7prwhQ",
                 "type": "image",
                 "src": "img/catalog/devices/mechanical-keyboard.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange mechanical keyboard",
                 "spacing": {
                   "padding": [

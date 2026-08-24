@@ -154,7 +154,7 @@
                 "id": "BuygKcLR",
                 "type": "image",
                 "src": "img/catalog/products/headphones.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange over-ear headphones",
                 "width": 130,
                 "spacing": {
@@ -219,7 +219,7 @@
                 "id": "aYQ3lRrc",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">View order</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#1F1712",
                 "borderRadius": {
                   "topLeft": 10,

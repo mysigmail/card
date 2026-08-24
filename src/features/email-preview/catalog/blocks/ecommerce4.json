@@ -44,7 +44,7 @@
                 "id": "01wa3S7E",
                 "type": "image",
                 "src": "img/catalog/avatars/sneaker-presenter-avatar.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Portrait of collection curator Lena Park",
                 "width": 94,
                 "borderRadius": {
@@ -150,7 +150,7 @@
                 "id": "KZN4JpOJ",
                 "type": "image",
                 "src": "img/catalog/products/sneaker.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange and cream lifestyle sneaker",
                 "width": 180,
                 "spacing": {
@@ -203,7 +203,7 @@
                 "id": "wFHjLpL6",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Shop the pair</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,
@@ -276,7 +276,7 @@
                 "id": "Qp4ljJeV",
                 "type": "image",
                 "src": "img/catalog/products/beverage-can.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange sparkling beverage can",
                 "width": 96,
                 "spacing": {
@@ -329,7 +329,7 @@
                 "id": "9RC_0NgS",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Add the pack</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#1F1712",
                 "borderRadius": {
                   "topLeft": 10,

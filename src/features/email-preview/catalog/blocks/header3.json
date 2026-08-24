@@ -57,7 +57,7 @@
                 "id": "f7G-pNNq",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/trench-coat.png",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "alt": "Orange trench coat",
                 "width": 235,
                 "spacing": {
@@ -117,7 +117,7 @@
                 "id": "NYZi5Zhe",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Explore the layer</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#1F1712",
                 "borderRadius": {
                   "topLeft": 10,

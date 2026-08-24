@@ -44,7 +44,7 @@
                 "id": "5xqvujCw",
                 "type": "image",
                 "src": "img/catalog/avatars/speaker-presenter-avatar.png",
-                "link": "https://card.email/catalog",
+                "link": "https://card.mysigmail.com/catalog",
                 "alt": "Portrait of live session host Maya Chen",
                 "width": 78,
                 "borderRadius": {
@@ -115,7 +115,7 @@
                 "id": "rDbZF-WK",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Save a seat</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,

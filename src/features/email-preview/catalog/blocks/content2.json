@@ -63,7 +63,7 @@
                 "id": "MsaQl6oM",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:14px\">Read the field notes</span>",
-                "link": "https://card.email/read",
+                "link": "https://card.mysigmail.com/read",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,
@@ -121,7 +121,7 @@
                 "id": "CNgnWMkL",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/weekend-duffel.png",
-                "link": "https://card.email/read",
+                "link": "https://card.mysigmail.com/read",
                 "alt": "Orange weekend duffel bag",
                 "width": 260,
                 "spacing": {

@@ -71,7 +71,7 @@
                 "id": "pKAr_VcY",
                 "type": "button",
                 "value": "<span style=\"color:#1F1712;font-size:15px\">▶  Play 2:14</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FFFFFF",
                 "borderRadius": {
                   "topLeft": 10,
@@ -142,7 +142,7 @@
                 "id": "yIfrAXSr",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Watch the film</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,

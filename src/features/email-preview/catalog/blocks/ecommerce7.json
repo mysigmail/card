@@ -109,7 +109,7 @@
                 "id": "zTkbBE0o",
                 "type": "image",
                 "src": "img/catalog/devices/mechanical-keyboard.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange mechanical keyboard",
                 "width": 120,
                 "spacing": {
@@ -174,7 +174,7 @@
                 "id": "0To58vcZ",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Browse desk</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,
@@ -254,7 +254,7 @@
                 "id": "s51Gqc5a",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/trench-coat.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange trench coat",
                 "width": 72,
                 "spacing": {
@@ -319,7 +319,7 @@
                 "id": "A4v7gjYo",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Browse travel</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#1F1712",
                 "borderRadius": {
                   "topLeft": 10,
@@ -392,7 +392,7 @@
                 "id": "pS6b5QWm",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/puffer-jacket.png",
-                "link": "https://card.email/features",
+                "link": "https://card.mysigmail.com/features",
                 "alt": "Orange puffer jacket",
                 "width": 120,
                 "spacing": {
@@ -457,7 +457,7 @@
                 "id": "NLDn7SPK",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Browse daily</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,

@@ -100,7 +100,7 @@
                 "id": "VGUC756S",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Download guide</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,

@@ -49,7 +49,7 @@
                 "id": "RT1qrGOJ",
                 "type": "image",
                 "src": "img/catalog/fashion-travel/puffer-jacket.png",
-                "link": "https://card.email/catalog",
+                "link": "https://card.mysigmail.com/catalog",
                 "alt": "Orange puffer jacket",
                 "spacing": {
                   "padding": [
@@ -108,7 +108,7 @@
                 "id": "BKOyvtyT",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Apply the offer</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#1F1712",
                 "borderRadius": {
                   "topLeft": 10,

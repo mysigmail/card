@@ -145,7 +145,7 @@
                 "id": "l5MqKRKI",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:15px\">Add to calendar</span>",
-                "link": "https://card.email/start",
+                "link": "https://card.mysigmail.com/start",
                 "backgroundColor": "#1F1712",
                 "borderRadius": {
                   "topLeft": 10,

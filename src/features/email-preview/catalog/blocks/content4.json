@@ -70,7 +70,7 @@
                 "id": "_kO98m3H",
                 "type": "button",
                 "value": "<span style=\"color:#FFFFFF;font-size:14px\">See the setup</span>",
-                "link": "https://card.email/read",
+                "link": "https://card.mysigmail.com/read",
                 "backgroundColor": "#FF6B00",
                 "borderRadius": {
                   "topLeft": 10,
@@ -128,7 +128,7 @@
                 "id": "mO-3-790",
                 "type": "image",
                 "src": "img/catalog/devices/webcam.png",
-                "link": "https://card.email/read",
+                "link": "https://card.mysigmail.com/read",
                 "alt": "Compact orange webcam",
                 "width": 220,
                 "spacing": {
