@@ -56,14 +56,3 @@ export function getTemplateGoogleFontsCssUrls(
     ),
   ]
 }
-
-export function createTemplateGoogleFontsCssImports(
-  components: CanvasBlockInstance[],
-  generalFont: string,
-): string | undefined {
-  const imports = getTemplateGoogleFontsCssUrls(components, generalFont).map(
-    url => `@import url("${url}");`,
-  )
-
-  return imports.length ? imports.join('\n') : undefined
-}

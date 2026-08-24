@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { createBlockNode } from '@/entities/block'
 import {
-  createTemplateGoogleFontsCssImports,
   extractFontFamilyStacksFromHtml,
   getTemplateGoogleFontsCssUrls,
 } from '@/features/email-preview/lib/google-font-resources'
@@ -32,8 +31,5 @@ describe('google font resources', () => {
     expect(urls).toHaveLength(2)
     expect(urls.some(url => url.includes('family=Inter:'))).toBe(true)
     expect(urls.some(url => url.includes('family=Roboto+Slab:'))).toBe(true)
-    expect(createTemplateGoogleFontsCssImports(components, 'Arial, sans-serif')).toContain(
-      'family=Roboto+Slab:',
-    )
   })
 })
