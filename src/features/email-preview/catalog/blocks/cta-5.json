@@ -114,11 +114,9 @@
               {
                 "id": "rDbZF-WK",
                 "type": "button",
-                "text": "Save a seat",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Save a seat</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

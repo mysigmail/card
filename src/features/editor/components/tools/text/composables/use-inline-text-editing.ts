@@ -1,4 +1,5 @@
 import type { Editor } from '@tiptap/vue-3'
+import type { InlineEditorProfile } from '../text-editor-core'
 import type { EditorSelectionSnapshot } from '@/features/editor/model'
 import { ref, shallowRef, watch } from 'vue'
 import { useSelection } from '@/features/editor/model'
@@ -11,6 +12,7 @@ export interface InlineTextPointerPosition {
 
 const editingAtomId = ref<string>()
 const activeEditor = shallowRef<Editor>()
+const activeEditorProfile = ref<InlineEditorProfile>()
 const editorRevision = ref(0)
 let editingSelection: EditorSelectionSnapshot | undefined
 let editingPointerPosition: (InlineTextPointerPosition & { atomId: string }) | undefined
@@ -48,16 +50,19 @@ export function useInlineTextEditing() {
   function stopEditing(atomId?: string) {
     if (!atomId || editingAtomId.value === atomId) {
       editingAtomId.value = undefined
+      activeEditor.value = undefined
+      activeEditorProfile.value = undefined
       editingSelection = undefined
       editingPointerPosition = undefined
     }
   }
 
-  function registerEditor(atomId: string, editor: Editor) {
+  function registerEditor(atomId: string, editor: Editor, profile: InlineEditorProfile) {
     if (editingAtomId.value !== atomId)
       return
 
     activeEditor.value = editor
+    activeEditorProfile.value = profile
     editorRevision.value += 1
   }
 
@@ -66,6 +71,7 @@ export function useInlineTextEditing() {
       return
 
     activeEditor.value = undefined
+    activeEditorProfile.value = undefined
   }
 
   function requestToolbarUpdate() {
@@ -74,6 +80,7 @@ export function useInlineTextEditing() {
 
   return {
     activeEditor,
+    activeEditorProfile,
     consumeEditingPointerPosition,
     editingAtomId,
     editorRevision,

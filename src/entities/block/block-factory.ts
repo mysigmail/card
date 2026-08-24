@@ -72,11 +72,9 @@ export function createButtonAtom(): ButtonAtom {
   return {
     id: nanoid(8),
     type: 'button',
-    text: 'Button',
+    value: '<span style="color:#FFFFFF;font-size:16px">Button</span>',
     link: 'https://example.com',
     backgroundColor: '#4F46E5',
-    color: '#FFFFFF',
-    fontSize: 16,
     borderRadius: createBorderRadiusValue(4),
     padding,
     spacing: createAtomSpacing(padding),

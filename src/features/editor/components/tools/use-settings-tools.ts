@@ -520,15 +520,6 @@ export function useSettingsTools() {
       const buttonRef = ref as AtomRef<'button'>
       return [
         {
-          id: 'button-font-size',
-          key: 'fontSize',
-          label: 'Font Size',
-          type: 'inputNumber',
-          value: atom.fontSize,
-          onUpdate: value =>
-            update({ ref: buttonRef, property: 'fontSize', value: Number(value) || 14 }),
-        },
-        {
           id: 'button-opacity',
           key: 'opacity',
           label: 'Opacity',
@@ -559,22 +550,6 @@ export function useSettingsTools() {
           type: 'colorPicker',
           value: atom.backgroundColor,
           onUpdate: value => update({ ref: buttonRef, property: 'backgroundColor', value }),
-        },
-        {
-          id: 'button-color',
-          key: 'color',
-          label: 'Color',
-          type: 'colorPicker',
-          value: atom.color,
-          onUpdate: value => update({ ref: buttonRef, property: 'color', value }),
-        },
-        {
-          id: 'button-text',
-          key: 'text',
-          label: 'Text',
-          type: 'input',
-          value: atom.text,
-          onUpdate: value => update({ ref: buttonRef, property: 'text', value }),
         },
         {
           id: 'button-link',

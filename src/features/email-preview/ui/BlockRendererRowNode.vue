@@ -8,6 +8,7 @@ import {
   resolveBorderRadiusStyle,
   resolveOpacityStyle,
 } from '@/entities/style'
+import { sanitizeButtonEditorHtml } from '@/entities/template'
 import { useSelection } from '@/features/editor'
 import { useInlineTextEditing } from '@/features/editor/components/tools/text/composables/use-inline-text-editing'
 import { textOffsetAtCoords } from '@/features/editor/components/tools/text/inline-text-session'
@@ -58,20 +59,21 @@ function atomSpacingStyle(atom: Atom, options: { includePadding?: boolean } = {}
 function buttonStyle(
   atom: Extract<Atom, { type: 'button' }>,
   opacityCompensation = 1,
+  forceOpaque = false,
 ): CSSProperties {
   const padding = tupleToCss(atom.spacing?.padding) || tupleToCss(atom.padding)
 
   return {
     backgroundColor: atom.backgroundColor,
-    color: atom.color,
-    fontSize: `${atom.fontSize}px`,
     borderRadius: resolveBorderRadiusStyle(atom.borderRadius),
     ...(padding ? { padding } : {}),
     display: 'inline-block',
     textDecoration: 'none',
     textAlign: 'center',
     cursor: 'pointer',
-    opacity: multiplyOpacityStyles(resolveOpacityStyle(atom.opacity), opacityCompensation),
+    opacity: forceOpaque
+      ? 1
+      : multiplyOpacityStyles(resolveOpacityStyle(atom.opacity), opacityCompensation),
     ...resolveBorderStyle(atom.border),
   }
 }
@@ -389,7 +391,7 @@ function selectAtomNode(rowId: string, cellId: string, atomId: string, event?: M
     event.currentTarget.focus()
 }
 
-function startTextEditing(rowId: string, cellId: string, atomId: string, event?: MouseEvent) {
+function startInlineEditing(rowId: string, cellId: string, atomId: string, event?: MouseEvent) {
   selectAtom(props.blockId, rowId, cellId, atomId)
   const pointerPosition = event
     ? {
@@ -404,7 +406,7 @@ function startTextEditing(rowId: string, cellId: string, atomId: string, event?:
   startEditing(atomId, pointerPosition)
 }
 
-function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
+function onInlineAtomKeydown(event: KeyboardEvent, atomId: string) {
   if (event.key !== 'Enter' || editingAtomId.value === atomId)
     return
 
@@ -471,7 +473,7 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
               :data-node-id="`atom:${child.id}`"
               :tabindex="editingAtomId === child.id ? -1 : 0"
               @click.stop="selectAtomNode(row.id, cell.id, child.id, $event)"
-              @keydown="onTextAtomKeydown($event, child.id)"
+              @keydown="onInlineAtomKeydown($event, child.id)"
             >
               <InlineTextEditor
                 v-if="editingAtomId === child.id"
@@ -489,7 +491,7 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
                 v-else
                 class="p-text-atom-content"
                 data-selection-content
-                @dblclick.stop.prevent="startTextEditing(row.id, cell.id, child.id, $event)"
+                @dblclick.stop.prevent="startInlineEditing(row.id, cell.id, child.id, $event)"
                 v-html="renderTextAtomHtml(child) || '&nbsp;'"
               />
             </EmailTextBox>
@@ -499,14 +501,35 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
               :class="atomWrapperClass(child)"
               :data-node-id="`atom:${child.id}`"
               :style="atomSpacingStyle(child, { includePadding: false })"
-              @click.stop="selectAtomNode(row.id, cell.id, child.id)"
+              :tabindex="editingAtomId === child.id ? -1 : 0"
+              @click.stop.prevent="selectAtomNode(row.id, cell.id, child.id, $event)"
+              @keydown="onInlineAtomKeydown($event, child.id)"
             >
               <MButton
-                :href="child.link"
-                :style="buttonStyle(child, cellChildOpacityCompensation(cell))"
+                :href="editingAtomId === child.id ? undefined : child.link"
+                :style="
+                  buttonStyle(child, cellChildOpacityCompensation(cell), editingAtomId === child.id)
+                "
                 data-selection-owner
               >
-                {{ child.text }}
+                <InlineTextEditor
+                  v-if="editingAtomId === child.id"
+                  :atom-ref="{
+                    kind: 'atom',
+                    blockId,
+                    rowId: row.id,
+                    cellId: cell.id,
+                    atomId: child.id,
+                    atomType: 'button',
+                  }"
+                  :value="child.value"
+                />
+                <span
+                  v-else
+                  data-selection-content
+                  @dblclick.stop.prevent="startInlineEditing(row.id, cell.id, child.id, $event)"
+                  v-html="sanitizeButtonEditorHtml(child.value) || '&nbsp;'"
+                />
               </MButton>
             </div>
 

@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest'
-import { createBlockNode } from '@/entities/block'
+import { createBlockNode, createButtonAtom } from '@/entities/block'
 import {
   collectDocumentColors,
   normalizeRecentColors,
@@ -40,6 +40,10 @@ describe('color palettes', () => {
     if (text.type !== 'text')
       throw new Error('Expected text atom')
     text.value = '<p><span style="color:rgba(1,2,3,.5)">Text</span></p>'
+    const button = createButtonAtom()
+    button.backgroundColor = '#445566'
+    button.value = '<span style="color:#778899;font-size:16px">Button</span>'
+    block.rows[0]!.cells[0]!.children.push(button)
     block.settings.backgroundColor = '#AABBCC'
     block.rows[0]!.settings.border = {
       top: { width: 1, style: 'solid', color: '#112233' },
@@ -58,6 +62,13 @@ describe('color palettes', () => {
       },
       [{ id: '#EEEEEE', version: 1, block }],
     )
-    expect(colors).toEqual(['#FFFFFF', '#AABBCC', '#112233', 'rgba(1,2,3,0.5)'])
+    expect(colors).toEqual([
+      '#FFFFFF',
+      '#AABBCC',
+      '#112233',
+      'rgba(1,2,3,0.5)',
+      '#445566',
+      '#778899',
+    ])
   })
 })

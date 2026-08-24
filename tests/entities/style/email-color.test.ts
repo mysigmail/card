@@ -133,7 +133,7 @@ describe('email color', () => {
     row.settings.backgroundColor = 'rgba(1,2,3,.25)'
     cell.settings.backgroundColor = 'transparent'
     button.backgroundColor = 'rgba(4,5,6,.5)'
-    button.color = '#AABBCC80'
+    button.value = '<span style="color:#AABBCC80;font-size:16px">Button</span>'
     divider.color = 'rgba(7,8,9,.75)'
     block.settings.border = { top: { width: 1, style: 'solid', color: '#01020380' } }
     text.value
@@ -176,7 +176,7 @@ describe('email color', () => {
     expect((children[0] as { value: string }).value).not.toContain('color:red')
     expect(children[1]).toMatchObject({
       backgroundColor: 'rgba(4,5,6,0.5)',
-      color: 'rgba(170,187,204,0.502)',
+      value: expect.stringContaining('color:rgba(170,187,204,0.502)'),
     })
     expect(children[2]).toMatchObject({ color: 'rgba(7,8,9,0.75)' })
   })

@@ -116,11 +116,9 @@
               {
                 "id": "NYZi5Zhe",
                 "type": "button",
-                "text": "Explore the layer",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Explore the layer</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#1F1712",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

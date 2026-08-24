@@ -25,6 +25,8 @@ import { LegacyDiv, LegacyInlineDiv } from './extensions/legacy-div'
 import { Strike } from './extensions/strike'
 import { Typography } from './extensions/typography'
 
+export type InlineEditorProfile = 'text' | 'button'
+
 export const INLINE_TEXT_FONT_FAMILIES = [
   { label: 'Default', value: '' },
   { label: 'Arial', value: 'Arial, Helvetica, sans-serif' },
@@ -144,6 +146,30 @@ export function createInlineTextExtensions() {
     Superscript,
     Text,
     TextAlign.configure({ types: ['paragraph', 'heading', 'legacyDiv', 'legacyInlineDiv'] }),
+    TextStyle,
+    Typography,
+    Underline,
+  ]
+}
+
+const InlineButtonDocument = Document.extend({
+  content: 'inline*',
+})
+
+export function createInlineButtonExtensions() {
+  return [
+    Bold,
+    Code,
+    Color.configure({ types: ['textStyle'] }),
+    InlineButtonDocument,
+    FontFamily.configure({ types: ['textStyle'] }),
+    FontSize,
+    History.configure({ newGroupDelay: 300 }),
+    Italic,
+    Strike,
+    Subscript,
+    Superscript,
+    Text,
     TextStyle,
     Typography,
     Underline,

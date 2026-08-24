@@ -148,11 +148,9 @@
               {
                 "id": "ZqTK_oUx",
                 "type": "button",
-                "text": "Add to setup",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Add to setup</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,
@@ -414,11 +412,9 @@
                       {
                         "id": "-hi6cpng",
                         "type": "button",
-                        "text": "Add microphone",
+                        "value": "<span style=\"color:#FFFFFF;font-size:15px\">Add microphone</span>",
                         "link": "https://card.email/start",
                         "backgroundColor": "#1F1712",
-                        "color": "#FFFFFF",
-                        "fontSize": 15,
                         "borderRadius": {
                           "topLeft": 10,
                           "topRight": 10,

@@ -81,11 +81,9 @@
               {
                 "id": "YA2fm2ye",
                 "type": "button",
-                "text": "Join the community",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Join the community</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

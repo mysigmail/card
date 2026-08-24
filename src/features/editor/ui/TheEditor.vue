@@ -11,7 +11,8 @@ const previewRef = ref()
 const { general } = useCanvas()
 const { resetSelection } = useSelection()
 const { hydrateTemplateFromLocalStorage } = usePersistence()
-const { activeEditor, editingAtomId, editorRevision, stopEditing } = useInlineTextEditing()
+const { activeEditor, activeEditorProfile, editingAtomId, editorRevision, stopEditing }
+  = useInlineTextEditing()
 
 function isInlineEditingSurface(event: PointerEvent) {
   return event.composedPath().some((target) => {
@@ -19,7 +20,8 @@ function isInlineEditingSurface(event: PointerEvent) {
       return false
 
     return Boolean(
-      target.dataset.inlineTextEditor !== undefined
+      target.dataset.inlineAtomEditor !== undefined
+      || target.dataset.inlineTextEditor !== undefined
       || target.dataset.inlineTextToolbar !== undefined
       || target.closest('[data-inline-text-toolbar]')
       || target.closest('[data-reka-popper-content-wrapper]')
@@ -72,9 +74,10 @@ onBeforeUnmount(() => {
     />
     <EditorTools />
     <InlineTextToolbar
-      v-if="activeEditor && editingAtomId"
+      v-if="activeEditor && activeEditorProfile && editingAtomId"
       :atom-id="editingAtomId"
       :editor="activeEditor"
+      :profile="activeEditorProfile"
       :revision="editorRevision"
     />
   </div>

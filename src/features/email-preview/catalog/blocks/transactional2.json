@@ -515,11 +515,9 @@
               {
                 "id": "Rw8PR51E",
                 "type": "button",
-                "text": "Download receipt",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Download receipt</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

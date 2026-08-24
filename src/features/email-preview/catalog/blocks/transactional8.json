@@ -406,11 +406,9 @@
               {
                 "id": "iUzNL0qf",
                 "type": "button",
-                "text": "Update payment",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Update payment</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#1F1712",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

@@ -116,11 +116,9 @@
               {
                 "id": "rBFV3ZBA",
                 "type": "button",
-                "text": "Continue reading",
+                "value": "<span style=\"color:#FFFFFF;font-size:14px\">Continue reading</span>",
                 "link": "https://card.email/read",
                 "backgroundColor": "#1F1712",
-                "color": "#FFFFFF",
-                "fontSize": 14,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

@@ -2,7 +2,7 @@
 import type { AtomRef } from '@/features/editor/model'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import { nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
-import { sanitizeTextEditorHtml } from '@/entities/template'
+import { sanitizeButtonEditorHtml, sanitizeTextEditorHtml } from '@/entities/template'
 import { useCanvas, useHistory } from '@/features/editor/model'
 import { useInlineTextEditing } from './composables/use-inline-text-editing'
 import {
@@ -11,10 +11,14 @@ import {
   textSelectionPositionAtCoords,
   textSelectionPositionAtOffset,
 } from './inline-text-session'
-import { createInlineTextExtensions, normalizeInlineEditorHtml } from './text-editor-core'
+import {
+  createInlineButtonExtensions,
+  createInlineTextExtensions,
+  normalizeInlineEditorHtml,
+} from './text-editor-core'
 
 interface Props {
-  atomRef: AtomRef<'text'>
+  atomRef: AtomRef<'text'> | AtomRef<'button'>
   value: string
 }
 
@@ -32,23 +36,30 @@ const {
 } = useInlineTextEditing()
 let initialSelectionRafId: number | undefined
 let finished = false
-let lastModelValue = sanitizeTextEditorHtml(props.value)
+const profile = props.atomRef.atomType
+const sanitizeEditorHtml = profile === 'button' ? sanitizeButtonEditorHtml : sanitizeTextEditorHtml
+let lastModelValue = sanitizeEditorHtml(props.value)
 
-function getTextAtomValue() {
-  const state = getNodePropertyState(props.atomRef, 'value')
+function getAtomValue() {
+  const state
+    = props.atomRef.atomType === 'button'
+      ? getNodePropertyState(props.atomRef, 'value')
+      : getNodePropertyState(props.atomRef, 'value')
   return state.kind === 'value' ? state.value : undefined
 }
 
-function updateTextAtomValue(html: string) {
-  return updateNodeProperty({ ref: props.atomRef, property: 'value', value: html })
+function updateAtomValue(html: string) {
+  return props.atomRef.atomType === 'button'
+    ? updateNodeProperty({ ref: props.atomRef, property: 'value', value: html })
+    : updateNodeProperty({ ref: props.atomRef, property: 'value', value: html })
 }
 
 function persistEditorValue() {
   if (!editor.value)
     return
 
-  const value = sanitizeTextEditorHtml(editor.value.getHTML())
-  updateTextAtomValue(value)
+  const value = sanitizeEditorHtml(editor.value.getHTML())
+  updateAtomValue(value)
   lastModelValue = value
 }
 
@@ -63,8 +74,13 @@ function finishEditing() {
 }
 
 function onRootKeydown(event: KeyboardEvent) {
-  if (event.key !== 'Escape' || event.defaultPrevented)
+  if (
+    event.defaultPrevented
+    || event.isComposing
+    || (event.key !== 'Escape' && (profile !== 'button' || event.key !== 'Enter'))
+  ) {
     return
+  }
 
   event.preventDefault()
   finishEditing()
@@ -93,16 +109,29 @@ function focusInitialSelection() {
 
 onMounted(() => {
   editor.value = new Editor({
-    content: normalizeInlineEditorHtml(sanitizeTextEditorHtml(props.value)),
-    extensions: createInlineTextExtensions(),
+    content:
+      profile === 'button'
+        ? sanitizeEditorHtml(props.value)
+        : normalizeInlineEditorHtml(sanitizeEditorHtml(props.value)),
+    extensions:
+      profile === 'button' ? createInlineButtonExtensions() : createInlineTextExtensions(),
     editorProps: {
       attributes: {
-        'class': 'p-inline-text-editor__content',
-        'aria-label': 'Inline text editor',
+        'class': [
+          'p-inline-text-editor__content',
+          profile === 'button' ? 'p-inline-text-editor__content--button' : '',
+        ]
+          .filter(Boolean)
+          .join(' '),
+        'aria-label': profile === 'button' ? 'Inline button text editor' : 'Inline text editor',
       },
       handleKeyDown: (_view, event) => {
-        if (event.key !== 'Escape')
+        if (
+          event.isComposing
+          || (event.key !== 'Escape' && (profile !== 'button' || event.key !== 'Enter'))
+        ) {
           return false
+        }
 
         event.preventDefault()
         finishEditing()
@@ -111,14 +140,14 @@ onMounted(() => {
     },
     onUpdate: ({ editor: currentEditor }) => {
       requestToolbarUpdate()
-      updateTextAtomValue(currentEditor.getHTML())
+      updateAtomValue(sanitizeEditorHtml(currentEditor.getHTML()))
     },
     onSelectionUpdate: () => {
       requestToolbarUpdate()
     },
   })
 
-  registerEditor(props.atomRef.atomId, editor.value)
+  registerEditor(props.atomRef.atomId, editor.value, profile)
 
   nextTick(() => {
     initialSelectionRafId = window.requestAnimationFrame(() => {
@@ -131,8 +160,8 @@ onMounted(() => {
 watch(
   () => props.value,
   (value) => {
-    const nextValue = sanitizeTextEditorHtml(value)
-    const currentValue = editor.value ? sanitizeTextEditorHtml(editor.value.getHTML()) : ''
+    const nextValue = sanitizeEditorHtml(value)
+    const currentValue = editor.value ? sanitizeEditorHtml(editor.value.getHTML()) : ''
     lastModelValue = nextValue
 
     if (editor.value && currentValue !== nextValue)
@@ -146,7 +175,7 @@ onBeforeUnmount(() => {
 
   if (
     canPersistInlineTextOnUnmount({
-      currentModelValue: getTextAtomValue(),
+      currentModelValue: getAtomValue(),
       finished,
       lastModelValue,
     })
@@ -166,6 +195,8 @@ onBeforeUnmount(() => {
     ref="root"
     data-slot="inline-text-editor"
     data-inline-text-editor
+    data-inline-atom-editor
+    :data-inline-editor-profile="profile"
     data-selection-content
     class="p-inline-text-editor"
     @click.stop

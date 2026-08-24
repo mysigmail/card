@@ -71,6 +71,26 @@ function envelope(component: unknown, version = 1) {
   }
 }
 
+function assertCanonicalCatalogButtons(value: unknown) {
+  if (Array.isArray(value)) {
+    value.forEach(assertCanonicalCatalogButtons)
+    return
+  }
+  if (typeof value !== 'object' || value === null)
+    return
+
+  const record = value as Record<string, unknown>
+  if (record.type === 'button') {
+    expect(record).not.toHaveProperty('text')
+    expect(record).not.toHaveProperty('color')
+    expect(record).not.toHaveProperty('fontSize')
+    expect(record.value).toEqual(
+      expect.stringMatching(/^<span style="color:#[0-9A-F]{6};font-size:\d+px">.+<\/span>$/),
+    )
+  }
+  Object.values(record).forEach(assertCanonicalCatalogButtons)
+}
+
 describe('ordered cell children v1', () => {
   beforeEach(() => {
     useCanvas().installed.value = []
@@ -387,6 +407,7 @@ describe('ordered cell children v1', () => {
     const presets = [content, cta, ecommerce, feature, footer, header, menu, transactional].flat()
     expect(presets).toHaveLength(78)
     for (const preset of presets) {
+      assertCanonicalCatalogButtons(preset.block)
       const result = parseTemplateExportPayload(
         envelope({
           id: preset.id,

@@ -148,11 +148,9 @@
               {
                 "id": "0CwAnutE",
                 "type": "button",
-                "text": "Choose headphones",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Choose headphones</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,
@@ -249,11 +247,9 @@
               {
                 "id": "dm0Aa1hU",
                 "type": "button",
-                "text": "Choose speaker",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Choose speaker</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#1F1712",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

@@ -76,11 +76,9 @@
               {
                 "id": "wDtgpfcV",
                 "type": "button",
-                "text": "See the editor",
+                "value": "<span style=\"color:#1F1712;font-size:15px\">See the editor</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FFFFFF",
-                "color": "#1F1712",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

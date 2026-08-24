@@ -20,7 +20,7 @@ import {
   normalizeOpacity,
   resolveOpacity,
 } from '@/entities/style'
-import { sanitizeTextEditorHtml } from '@/entities/template'
+import { sanitizeButtonEditorHtml, sanitizeTextEditorHtml } from '@/entities/template'
 
 interface Normalized<T> {
   ok: true
@@ -568,12 +568,13 @@ export const atomPropertyRegistry = {
       },
     ),
     border: atomBorderDescriptor<ButtonAtom>(),
-    text: defineDescriptor<ButtonAtom, string>({
-      read: node => node.text,
-      normalize: normalizeString,
+    value: defineDescriptor<ButtonAtom, string>({
+      read: node => node.value,
+      normalize: value =>
+        typeof value === 'string' ? normalized(sanitizeButtonEditorHtml(value)) : invalid(),
       equal: strictEqual,
       apply: (node, value) => {
-        node.text = value
+        node.value = value
       },
     }),
     link: defineDescriptor<ButtonAtom, string>({
@@ -590,22 +591,6 @@ export const atomPropertyRegistry = {
       equal: strictEqual,
       apply: (node, value) => {
         node.backgroundColor = value
-      },
-    }),
-    color: defineDescriptor<ButtonAtom, string>({
-      read: node => node.color,
-      normalize: value => normalizeColor(value),
-      equal: strictEqual,
-      apply: (node, value) => {
-        node.color = value
-      },
-    }),
-    fontSize: defineDescriptor<ButtonAtom, number>({
-      read: node => node.fontSize,
-      normalize: normalizeFinite,
-      equal: strictEqual,
-      apply: (node, value) => {
-        node.fontSize = value
       },
     }),
     borderRadius: defineDescriptor<ButtonAtom, BorderRadiusValue>({

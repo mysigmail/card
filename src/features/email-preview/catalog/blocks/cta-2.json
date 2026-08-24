@@ -74,11 +74,9 @@
               {
                 "id": "OZAbBBTE",
                 "type": "button",
-                "text": "Start now",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Start now</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#1F1712",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

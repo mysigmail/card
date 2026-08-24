@@ -107,11 +107,9 @@
               {
                 "id": "BKOyvtyT",
                 "type": "button",
-                "text": "Apply the offer",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Apply the offer</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#1F1712",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

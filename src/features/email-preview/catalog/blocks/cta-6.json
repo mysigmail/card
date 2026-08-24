@@ -121,11 +121,9 @@
               {
                 "id": "S3hXsFlB",
                 "type": "button",
-                "text": "macOS",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">macOS</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,
@@ -168,11 +166,9 @@
               {
                 "id": "tORguqoq",
                 "type": "button",
-                "text": "Windows",
+                "value": "<span style=\"color:#1F1712;font-size:15px\">Windows</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FFD9B8",
-                "color": "#1F1712",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

@@ -173,11 +173,9 @@
               {
                 "id": "0To58vcZ",
                 "type": "button",
-                "text": "Browse desk",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Browse desk</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,
@@ -320,11 +318,9 @@
               {
                 "id": "A4v7gjYo",
                 "type": "button",
-                "text": "Browse travel",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Browse travel</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#1F1712",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,
@@ -460,11 +456,9 @@
               {
                 "id": "NLDn7SPK",
                 "type": "button",
-                "text": "Browse daily",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Browse daily</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

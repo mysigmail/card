@@ -218,11 +218,9 @@
               {
                 "id": "aYQ3lRrc",
                 "type": "button",
-                "text": "View order",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">View order</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#1F1712",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

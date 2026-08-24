@@ -90,11 +90,9 @@ export type AtomCommonPropertyMap = Pick<
 export interface ButtonAtomPropertyMap {
   spacing: SpacingValue
   hiddenOnMobile: boolean
-  text: string
+  value: string
   link: string
   backgroundColor: string
-  color: string
-  fontSize: number
   borderRadius: BorderRadiusValue
   border: BorderValue | undefined
   opacity: number
