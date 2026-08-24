@@ -10,6 +10,7 @@ export interface BaseAtom {
   type: AtomType
   spacing?: SpacingValue
   hiddenOnMobile?: boolean
+  opacity?: number
 }
 
 export interface TextAtom extends BaseAtom {
@@ -61,6 +62,7 @@ export interface BlockSettings {
   backgroundImage?: BackgroundImageValue
   borderRadius?: BorderRadiusValue
   border?: BorderValue
+  opacity?: number
 }
 
 export interface RowSettings {
@@ -74,6 +76,7 @@ export interface RowSettings {
   height?: number
   gap: number
   widthMode: 'fill' | 'hug'
+  opacity?: number
 }
 
 export interface CellSettings {
@@ -88,6 +91,7 @@ export interface CellSettings {
   borderRadius?: BorderRadiusValue
   width?: number // процент (0-100)
   height?: number
+  opacity?: number
 }
 
 export interface RowNode {

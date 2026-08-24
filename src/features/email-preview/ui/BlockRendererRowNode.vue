@@ -2,7 +2,12 @@
 import type { CSSProperties } from 'vue'
 import type { Atom, CellNode, RowNode } from '@/entities/block'
 import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
-import { hasPositiveBorderRadius, resolveBorderRadiusStyle } from '@/entities/style'
+import {
+  hasPositiveBorderRadius,
+  multiplyOpacityStyles,
+  resolveBorderRadiusStyle,
+  resolveOpacityStyle,
+} from '@/entities/style'
 import { useSelection } from '@/features/editor'
 import { useInlineTextEditing } from '@/features/editor/components/tools/text/composables/use-inline-text-editing'
 import { textOffsetAtCoords } from '@/features/editor/components/tools/text/inline-text-session'
@@ -15,9 +20,12 @@ interface Props {
   blockId: string
   row: RowNode
   horizontalAlign?: CellNode['settings']['horizontalAlign']
+  inheritedOpacityCompensation?: number
 }
 
-const props = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  inheritedOpacityCompensation: 1,
+})
 
 const { selectRow, selectCell, selectAtom } = useSelection()
 const { editingAtomId, startEditing } = useInlineTextEditing()
@@ -47,7 +55,10 @@ function atomSpacingStyle(atom: Atom, options: { includePadding?: boolean } = {}
   return style
 }
 
-function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {
+function buttonStyle(
+  atom: Extract<Atom, { type: 'button' }>,
+  opacityCompensation = 1,
+): CSSProperties {
   const padding = tupleToCss(atom.spacing?.padding) || tupleToCss(atom.padding)
 
   return {
@@ -60,6 +71,7 @@ function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {
     textDecoration: 'none',
     textAlign: 'center',
     cursor: 'pointer',
+    opacity: multiplyOpacityStyles(resolveOpacityStyle(atom.opacity), opacityCompensation),
     ...resolveBorderStyle(atom.border),
   }
 }
@@ -67,6 +79,7 @@ function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {
 function imageStyle(
   atom: Extract<Atom, { type: 'image' }>,
   horizontalAlign?: CellNode['settings']['horizontalAlign'],
+  opacityCompensation = 1,
 ): CSSProperties {
   const align = horizontalAlign || 'left'
 
@@ -78,6 +91,7 @@ function imageStyle(
     borderRadius: resolveBorderRadiusStyle(atom.borderRadius),
     marginLeft: align === 'center' || align === 'right' ? 'auto' : '0',
     marginRight: align === 'center' ? 'auto' : '0',
+    opacity: multiplyOpacityStyles(resolveOpacityStyle(atom.opacity), opacityCompensation),
     ...resolveBorderStyle(atom.border),
   }
 }
@@ -96,6 +110,50 @@ function normalizeGap(value: unknown) {
   return Number.isFinite(gap) && gap > 0 ? gap : 0
 }
 
+function cellContainsAtom(cell: CellNode, atomId?: string): boolean {
+  if (!atomId)
+    return false
+  return cell.children.some(child =>
+    child.type === 'row' ? rowContainsAtom(child, atomId) : child.id === atomId,
+  )
+}
+
+function rowContainsAtom(row: RowNode, atomId?: string): boolean {
+  return row.cells.some(cell => cellContainsAtom(cell, atomId))
+}
+
+function rowOpacity(row: RowNode) {
+  const ownOpacity = resolveOpacityStyle(row.settings.opacity)
+  return rowContainsAtom(row, editingAtomId.value)
+    ? 1
+    : multiplyOpacityStyles(ownOpacity, props.inheritedOpacityCompensation)
+}
+
+function rowChildOpacityCompensation(row: RowNode) {
+  return rowContainsAtom(row, editingAtomId.value)
+    ? multiplyOpacityStyles(
+        props.inheritedOpacityCompensation,
+        resolveOpacityStyle(row.settings.opacity),
+      )
+    : 1
+}
+
+function cellOpacity(cell: CellNode) {
+  const ownOpacity = resolveOpacityStyle(cell.settings.opacity)
+  return cellContainsAtom(cell, editingAtomId.value)
+    ? 1
+    : multiplyOpacityStyles(ownOpacity, rowChildOpacityCompensation(props.row))
+}
+
+function cellChildOpacityCompensation(cell: CellNode) {
+  return cellContainsAtom(cell, editingAtomId.value)
+    ? multiplyOpacityStyles(
+        rowChildOpacityCompensation(props.row),
+        resolveOpacityStyle(cell.settings.opacity),
+      )
+    : 1
+}
+
 function rowStyle(row: RowNode): CSSProperties {
   const s = row.settings
   const style: CSSProperties = {
@@ -104,6 +162,7 @@ function rowStyle(row: RowNode): CSSProperties {
     borderRadius: resolveBorderRadiusStyle(s.borderRadius),
     overflow: hasPositiveBorderRadius(s.borderRadius) ? 'hidden' : undefined,
     ...resolveBorderStyle(s.border),
+    opacity: rowOpacity(row),
   }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
@@ -228,7 +287,10 @@ function shouldDistributeAutoWidth(items: CellNode[]) {
 
 function itemStyle(item: CellNode, items: CellNode[], rawGap: number): CSSProperties {
   const s = item.settings
-  const style: CSSProperties = { ...resolveBorderStyle(s.border) }
+  const style: CSSProperties = {
+    ...resolveBorderStyle(s.border),
+    opacity: cellOpacity(item),
+  }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
     style.backgroundColor = s.backgroundColor
@@ -394,6 +456,7 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
                   :block-id="blockId"
                   :row="child"
                   :horizontal-align="cell.settings.horizontalAlign"
+                  :inherited-opacity-compensation="cellChildOpacityCompensation(cell)"
                 />
               </MColumn>
             </MRow>
@@ -402,6 +465,8 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
               :atom="child"
               :horizontal-align="cell.settings.horizontalAlign"
               preview
+              :force-opaque="editingAtomId === child.id"
+              :opacity-compensation="cellChildOpacityCompensation(cell)"
               :class="atomWrapperClass(child)"
               :data-node-id="`atom:${child.id}`"
               :tabindex="editingAtomId === child.id ? -1 : 0"
@@ -438,7 +503,7 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
             >
               <MButton
                 :href="child.link"
-                :style="buttonStyle(child)"
+                :style="buttonStyle(child, cellChildOpacityCompensation(cell))"
                 data-selection-owner
               >
                 {{ child.text }}
@@ -461,6 +526,10 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
                   borderTop: 'none',
                   borderLeft: 'none',
                   borderRight: 'none',
+                  opacity: multiplyOpacityStyles(
+                    resolveOpacityStyle(child.opacity),
+                    cellChildOpacityCompensation(cell),
+                  ),
                 }"
               />
             </div>
@@ -479,7 +548,13 @@ function onTextAtomKeydown(event: KeyboardEvent, atomId: string) {
                 <MImg
                   :src="child.src"
                   :alt="child.alt"
-                  :style="imageStyle(child, cell.settings.horizontalAlign)"
+                  :style="
+                    imageStyle(
+                      child,
+                      cell.settings.horizontalAlign,
+                      cellChildOpacityCompensation(cell),
+                    )
+                  "
                   data-selection-owner
                 />
               </MLink>

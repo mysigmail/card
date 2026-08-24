@@ -3,7 +3,11 @@ import type { CSSProperties } from 'vue'
 import type { BlockNode } from '@/entities/block'
 import { MContainer } from '@mysigmail/vue-email-components'
 import { computed } from 'vue'
-import { hasPositiveBorderRadius, resolveBorderRadiusStyle } from '@/entities/style'
+import {
+  hasPositiveBorderRadius,
+  resolveBorderRadiusStyle,
+  resolveOpacityStyle,
+} from '@/entities/style'
 import { resolveBorderStyle } from '@/features/email-preview/lib/resolve-border-style'
 import ExportBlockRendererRowNode from '@/features/email-preview/ui/ExportBlockRendererRowNode.vue'
 
@@ -37,19 +41,21 @@ const blockStyle = computed<CSSProperties>(() => {
 </script>
 
 <template>
-  <MContainer
-    :style="{
-      borderRadius: resolveBorderRadiusStyle(block.settings.borderRadius),
-      overflow: hasPositiveBorderRadius(block.settings.borderRadius) ? 'hidden' : undefined,
-      ...resolveBorderStyle(block.settings.border),
-    }"
-  >
-    <div :style="blockStyle">
-      <ExportBlockRendererRowNode
-        v-for="row in block.rows"
-        :key="row.id"
-        :row="row"
-      />
-    </div>
-  </MContainer>
+  <div :style="{ opacity: resolveOpacityStyle(block.settings.opacity) }">
+    <MContainer
+      :style="{
+        borderRadius: resolveBorderRadiusStyle(block.settings.borderRadius),
+        overflow: hasPositiveBorderRadius(block.settings.borderRadius) ? 'hidden' : undefined,
+        ...resolveBorderStyle(block.settings.border),
+      }"
+    >
+      <div :style="blockStyle">
+        <ExportBlockRendererRowNode
+          v-for="row in block.rows"
+          :key="row.id"
+          :row="row"
+        />
+      </div>
+    </MContainer>
+  </div>
 </template>

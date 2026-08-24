@@ -50,6 +50,7 @@ export interface BlockPropertyMap {
   backgroundImage: BackgroundImageValue
   borderRadius: BorderRadiusValue
   border: BorderValue | undefined
+  opacity: number
 }
 
 export interface RowPropertyMap extends BlockPropertyMap {
@@ -78,9 +79,13 @@ export interface TextAtomPropertyMap {
   paragraphSpacing: number | undefined
   borderRadius: BorderRadiusValue
   border: BorderValue | undefined
+  opacity: number
 }
 
-export type AtomCommonPropertyMap = Pick<TextAtomPropertyMap, 'spacing' | 'hiddenOnMobile'>
+export type AtomCommonPropertyMap = Pick<
+  TextAtomPropertyMap,
+  'spacing' | 'hiddenOnMobile' | 'opacity'
+>
 
 export interface ButtonAtomPropertyMap {
   spacing: SpacingValue
@@ -92,6 +97,7 @@ export interface ButtonAtomPropertyMap {
   fontSize: number
   borderRadius: BorderRadiusValue
   border: BorderValue | undefined
+  opacity: number
 }
 
 export interface DividerAtomPropertyMap {
@@ -99,6 +105,7 @@ export interface DividerAtomPropertyMap {
   hiddenOnMobile: boolean
   color: string
   height: number
+  opacity: number
 }
 
 export interface ImageAtomPropertyMap {
@@ -111,6 +118,7 @@ export interface ImageAtomPropertyMap {
   height: number | undefined
   borderRadius: BorderRadiusValue
   border: BorderValue | undefined
+  opacity: number
 }
 
 export interface AtomPropertyMap {
