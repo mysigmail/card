@@ -22,6 +22,7 @@ import UilArrowsHAlt from '~icons/uil/arrows-h-alt'
 import UilArrowsVAlt from '~icons/uil/arrows-v-alt'
 import UilText from '~icons/uil/text'
 import UilTextFields from '~icons/uil/text-fields'
+import { resolveGoogleFontFromStack } from '@/entities/font'
 import { useCanvas, useColorPalettes } from '@/features/editor/model'
 import { Button } from '@/shared/ui/button'
 import { ColorPicker } from '@/shared/ui/color-picker'
@@ -30,6 +31,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
 import { Separator } from '@/shared/ui/separator'
 import { Toggle } from '@/shared/ui/toggle'
+import FontFamilyPicker from '../FontFamilyPicker.vue'
 import ScrubbableNumberField from '../number/ScrubbableNumberField.vue'
 import { useInlineToolbarPosition } from './composables/use-inline-toolbar-position'
 import { INLINE_TEXT_FONT_FAMILIES } from './text-editor-core'
@@ -115,7 +117,9 @@ function formatStyleValue(name: SelectTextStyleName, value: string) {
     return (
       INLINE_TEXT_FONT_FAMILIES.find(
         font => font.value === effectiveValue || font.label === effectiveValue,
-      )?.label ?? effectiveValue
+      )?.label
+      ?? resolveGoogleFontFromStack(effectiveValue)?.family
+      ?? effectiveValue
     )
   }
 
@@ -136,6 +140,13 @@ const fontFamilyOptions = computed(() => {
     return Boolean(font.value) && font.label !== inheritedFont && font.value !== general.font
   })
 })
+
+const fontFamilySpecialOptions = computed(() => [
+  ...(selectStyleValue('fontFamily') === MIXED_STYLE_VALUE
+    ? [{ label: 'Mixed', value: MIXED_STYLE_VALUE, disabled: true }]
+    : []),
+  { label: defaultStyleLabel('fontFamily'), value: DEFAULT_STYLE_VALUE },
+])
 
 function numericStyleValue(name: NumericTextStyleName, fallback?: number) {
   const value = selectedTextStyleValue(name)
@@ -451,43 +462,18 @@ function stringValue(value: unknown) {
       aria-hidden="true"
     />
 
-    <Select
+    <FontFamilyPicker
       :model-value="selectStyleValue('fontFamily')"
+      :special-options="fontFamilySpecialOptions"
+      :system-options="fontFamilyOptions"
+      trigger-class="w-[160px] gap-1.5 px-2 text-xs"
+      aria-label="Font family"
       @update:model-value="setTextStyle('fontFamily', stringValue($event))"
     >
-      <SelectTrigger
-        size="sm"
-        class="w-[120px] gap-1.5 px-2 text-xs"
-        aria-label="Font family"
-      >
-        <UilText class="size-4 text-muted-foreground" />
-        <SelectValue>
-          {{ displayedStyleValue('fontFamily') }}
-        </SelectValue>
-      </SelectTrigger>
-      <SelectContent
-        :body-lock="false"
-        :disable-outside-pointer-events="false"
-      >
-        <SelectItem
-          v-if="selectStyleValue('fontFamily') === MIXED_STYLE_VALUE"
-          :value="MIXED_STYLE_VALUE"
-          disabled
-        >
-          Mixed
-        </SelectItem>
-        <SelectItem :value="DEFAULT_STYLE_VALUE">
-          {{ defaultStyleLabel('fontFamily') }}
-        </SelectItem>
-        <SelectItem
-          v-for="font in fontFamilyOptions"
-          :key="font.label"
-          :value="font.value"
-        >
-          {{ font.label }}
-        </SelectItem>
-      </SelectContent>
-    </Select>
+      <template #prefix>
+        <UilText class="size-4 shrink-0 text-muted-foreground" />
+      </template>
+    </FontFamilyPicker>
 
     <ScrubbableNumberField
       class="w-[76px]"
