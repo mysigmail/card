@@ -14,11 +14,7 @@ const { general } = useCanvas()
       id="general-padding"
       :value="{ padding: general.padding }"
       title="Padding"
-      @update:value="
-        (value) => {
-          if (value.padding) general.padding = value.padding
-        }
-      "
+      @update:value="general.padding = $event.padding ?? general.padding"
     />
   </EditorPanelItem>
 </template>
