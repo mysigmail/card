@@ -11,13 +11,16 @@ const { selectionLevel, selectedBlock, selectedRow, selectedCell, selectedAtom }
 const {
   cellWidthMode,
   cellHeightMode,
+  blockLayoutTools,
   blockAppearanceTools,
-  rowSpacingTools,
+  rowLayoutTools,
   rowAppearanceTools,
-  cellSpacingTools,
+  cellLayoutTools,
   cellAppearanceTools,
-  atomSpacingTools,
-  atomTools,
+  cellLinkTools,
+  atomContentTools,
+  atomLayoutTools,
+  atomAppearanceTools,
   rowHiddenOnMobile,
   rowCollapseOnMobile,
   cellHiddenOnMobile,
@@ -40,14 +43,15 @@ const {
     <BlockSettings
       v-if="selectionLevel === 'block' && selectedBlock"
       :block="selectedBlock"
-      :tools="blockAppearanceTools"
+      :layout-tools="blockLayoutTools"
+      :appearance-tools="blockAppearanceTools"
     />
 
     <RowSettings
       v-if="selectionLevel === 'row' && selectedRow && selectedBlock"
       :hidden-on-mobile="rowHiddenOnMobile"
       :collapse-on-mobile="rowCollapseOnMobile"
-      :spacing-tools="rowSpacingTools"
+      :layout-tools="rowLayoutTools"
       :appearance-tools="rowAppearanceTools"
       @update:hidden-on-mobile="onRowHiddenOnMobileChange"
       @update:collapse-on-mobile="onRowCollapseOnMobileChange"
@@ -57,8 +61,9 @@ const {
       v-if="selectionLevel === 'cell' && selectedCell && selectedBlock"
       :hidden-on-mobile="cellHiddenOnMobile"
       :cell="selectedCell"
-      :spacing-tools="cellSpacingTools"
+      :layout-tools="cellLayoutTools"
       :appearance-tools="cellAppearanceTools"
+      :link-tools="cellLinkTools"
       :width-mode="cellWidthMode"
       :height-mode="cellHeightMode"
       @update:width-mode="onItemWidthModeChange"
@@ -74,8 +79,9 @@ const {
       v-if="selectionLevel === 'atom' && selectedAtom"
       :hidden-on-mobile="atomHiddenOnMobile"
       :atom="selectedAtom"
-      :spacing-tools="atomSpacingTools"
-      :tools="atomTools"
+      :content-tools="atomContentTools"
+      :layout-tools="atomLayoutTools"
+      :appearance-tools="atomAppearanceTools"
       @update:hidden-on-mobile="onAtomHiddenOnMobileChange"
     />
   </div>

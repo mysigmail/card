@@ -117,6 +117,7 @@ const linkValue = computed<string>({
         <PopoverContent>
           <Input
             v-model="link"
+            size="sm"
             placeholder="Type a link"
           />
         </PopoverContent>
@@ -154,22 +155,19 @@ const linkValue = computed<string>({
         @commit="rememberColor"
       />
 
-      <div
-        class="flex h-8 w-[172px] items-center rounded-md border border-input bg-background px-2"
+      <ScrubbableNumberField
+        v-model="fontSize"
+        class="w-[172px]"
+        :default-value="16"
+        label="Font size"
+        :min="1"
+        :max="9999"
+        :step="1"
       >
-        <Type
-          :size="14"
-          class="mr-2 text-muted-foreground"
-        />
-        <input
-          v-model.number="fontSize"
-          class="h-full w-full bg-transparent text-xs outline-none"
-          min="1"
-          step="1"
-          type="number"
-        >
-        <span class="ml-2 text-xs text-muted-foreground">px</span>
-      </div>
+        <template #prefix>
+          <Type />
+        </template>
+      </ScrubbableNumberField>
     </div>
   </div>
 </template>

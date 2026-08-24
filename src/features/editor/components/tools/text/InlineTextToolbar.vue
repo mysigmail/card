@@ -30,8 +30,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/shared/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
 import { Separator } from '@/shared/ui/separator'
 import { Toggle } from '@/shared/ui/toggle'
+import ScrubbableNumberField from '../number/ScrubbableNumberField.vue'
 import { useInlineToolbarPosition } from './composables/use-inline-toolbar-position'
-import ScrubbableNumberField from './ScrubbableNumberField.vue'
 import { INLINE_TEXT_FONT_FAMILIES } from './text-editor-core'
 
 interface Props {

@@ -28,63 +28,76 @@ const positionOptions = [
 <template>
   <EditorPanelItem
     data-slot="general-background-settings"
-    title="Background"
-    type="opened"
+    title="Appearance"
+    state-key="main:appearance"
   >
     <ColorPickerTool
       id="bgColor"
       v-model:value="general.background.color"
       title="Color"
     />
-    <EditorToolLabel> Image </EditorToolLabel>
+    <GeneralFontSettings />
+    <EditorToolLabel> Background Image </EditorToolLabel>
     <Input
       v-model="general.background.image"
+      size="sm"
       placeholder="Image URL"
     />
-    <EditorToolLabel> Background Repeat </EditorToolLabel>
-    <ToggleGroup
-      v-model="general.background.repeat"
-      type="single"
-      variant="outline"
-    >
-      <ToggleGroupItem
-        v-for="option in repeatOptions"
-        :key="option.value"
-        :value="option.value"
+    <template v-if="general.background.image">
+      <EditorToolLabel level="parameter">
+        Background Repeat
+      </EditorToolLabel>
+      <ToggleGroup
+        v-model="general.background.repeat"
+        type="single"
+        size="sm"
         variant="outline"
       >
-        {{ option.label }}
-      </ToggleGroupItem>
-    </ToggleGroup>
+        <ToggleGroupItem
+          v-for="option in repeatOptions"
+          :key="option.value"
+          :value="option.value"
+          variant="outline"
+        >
+          {{ option.label }}
+        </ToggleGroupItem>
+      </ToggleGroup>
 
-    <EditorToolLabel> Background Size </EditorToolLabel>
-    <ToggleGroup
-      v-model="general.background.size"
-      type="single"
-    >
-      <ToggleGroupItem
-        v-for="option in sizeOptions"
-        :key="option.value"
-        :value="option.value"
-        variant="outline"
+      <EditorToolLabel level="parameter">
+        Background Size
+      </EditorToolLabel>
+      <ToggleGroup
+        v-model="general.background.size"
+        type="single"
+        size="sm"
       >
-        {{ option.label }}
-      </ToggleGroupItem>
-    </ToggleGroup>
+        <ToggleGroupItem
+          v-for="option in sizeOptions"
+          :key="option.value"
+          :value="option.value"
+          variant="outline"
+        >
+          {{ option.label }}
+        </ToggleGroupItem>
+      </ToggleGroup>
 
-    <EditorToolLabel> Background Position </EditorToolLabel>
-    <ToggleGroup
-      v-model="general.background.position"
-      type="single"
-    >
-      <ToggleGroupItem
-        v-for="option in positionOptions"
-        :key="option.value"
-        :value="option.value"
-        variant="outline"
+      <EditorToolLabel level="parameter">
+        Background Position
+      </EditorToolLabel>
+      <ToggleGroup
+        v-model="general.background.position"
+        type="single"
+        size="sm"
       >
-        {{ option.label }}
-      </ToggleGroupItem>
-    </ToggleGroup>
+        <ToggleGroupItem
+          v-for="option in positionOptions"
+          :key="option.value"
+          :value="option.value"
+          variant="outline"
+        >
+          {{ option.label }}
+        </ToggleGroupItem>
+      </ToggleGroup>
+    </template>
   </EditorPanelItem>
 </template>

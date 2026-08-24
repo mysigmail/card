@@ -7,13 +7,13 @@ const { general } = useCanvas()
 <template>
   <EditorPanelItem
     data-slot="general-spacing-settings"
-    title="Spacing"
-    type="opened"
+    title="Layout"
+    state-key="main:layout"
   >
     <SpacingTool
       id="general-padding"
       :value="{ padding: general.padding }"
-      title="Spacing"
+      title="Padding"
       @update:value="
         (value) => {
           if (value.padding) general.padding = value.padding

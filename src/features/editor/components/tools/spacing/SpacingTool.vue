@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { SpacingTool } from '@/features/editor/model'
+import { Box, Scan } from 'lucide-vue-next'
 import { nextTick, ref, watch } from 'vue'
+import { Button } from '@/shared/ui/button'
+import ScrubbableNumberField from '../number/ScrubbableNumberField.vue'
 import { createSpacingPatch } from './spacing-patch'
 
 interface Props {
@@ -23,6 +26,13 @@ const localPaddingTop = ref(props.value.padding?.[0] || 0)
 const localPaddingRight = ref(props.value.padding?.[1] || 0)
 const localPaddingBottom = ref(props.value.padding?.[2] || 0)
 const localPaddingLeft = ref(props.value.padding?.[3] || 0)
+
+function hasIndependentValues(value?: [number, number, number, number]) {
+  return value ? value.some(item => item !== value[0]) : false
+}
+
+const paddingIndependent = ref(hasIndependentValues(props.value.padding))
+const marginIndependent = ref(hasIndependentValues(props.value.margin))
 
 watch(
   () => [
@@ -73,93 +83,169 @@ watch(
     localPaddingRight.value = value.padding?.[1] || 0
     localPaddingBottom.value = value.padding?.[2] || 0
     localPaddingLeft.value = value.padding?.[3] || 0
+    if (hasIndependentValues(value.margin))
+      marginIndependent.value = true
+    if (hasIndependentValues(value.padding))
+      paddingIndependent.value = true
     await nextTick()
     syncing = false
   },
   { deep: true },
 )
+
+function updatePaddingAll(value: number | undefined) {
+  if (value === undefined)
+    return
+  localPaddingTop.value = value
+  localPaddingRight.value = value
+  localPaddingBottom.value = value
+  localPaddingLeft.value = value
+}
+
+function updateMarginAll(value: number | undefined) {
+  if (value === undefined)
+    return
+  localMarginTop.value = value
+  localMarginRight.value = value
+  localMarginBottom.value = value
+  localMarginLeft.value = value
+}
+
+function updatePaddingSide(index: number, value: number | undefined) {
+  if (value === undefined)
+    return
+  const refs = [localPaddingTop, localPaddingRight, localPaddingBottom, localPaddingLeft]
+  const target = refs[index]
+  if (target)
+    target.value = value
+}
+
+function updateMarginSide(index: number, value: number | undefined) {
+  if (value === undefined)
+    return
+  const refs = [localMarginTop, localMarginRight, localMarginBottom, localMarginLeft]
+  const target = refs[index]
+  if (target)
+    target.value = value
+}
+
+const SIDE_LABELS = ['T', 'R', 'B', 'L']
 </script>
 
 <template>
   <div data-slot="spacing-tool">
-    <EditorToolLabel>
-      {{ title }}
-    </EditorToolLabel>
-    <div class="relative flex h-[120px] flex-col rounded-sm border border-border">
-      <div class="absolute inset-0">
-        <div class="absolute left-1.5 top-0.5 select-none text-xs text-muted-foreground">
-          Margin
+    <div class="space-y-3">
+      <div v-if="value.padding">
+        <div class="mb-1 flex items-center justify-between">
+          <EditorToolLabel> Padding </EditorToolLabel>
+          <Button
+            variant="ghost"
+            size="icon-xs"
+            :aria-pressed="paddingIndependent"
+            aria-label="Show individual padding sides"
+            title="Show individual padding sides"
+            @click="paddingIndependent = !paddingIndependent"
+          >
+            <Scan class="size-3.5" />
+          </Button>
         </div>
-        <div
-          class="absolute left-1/2 flex h-6 w-[50px] -translate-x-1/2 items-center justify-center p-2"
+        <ScrubbableNumberField
+          v-if="!paddingIndependent"
+          :model-value="hasIndependentValues(value.padding) ? 'mixed' : localPaddingTop"
+          :default-value="0"
+          label="Padding"
+          :min="0"
+          :max="9999"
+          :step="1"
+          :precision="1"
+          @update:model-value="updatePaddingAll"
         >
-          <SpacingInput
-            v-model="localMarginTop"
-            :disabled="!value.margin"
-          />
-        </div>
+          <template #prefix>
+            <Box />
+          </template>
+        </ScrubbableNumberField>
         <div
-          class="absolute right-0 top-1/2 flex h-6 w-[50px] -translate-y-1/2 items-center justify-center p-2"
+          v-else
+          class="grid grid-cols-2 gap-2"
         >
-          <SpacingInput
-            v-model="localMarginRight"
-            :disabled="!value.margin"
-          />
-        </div>
-        <div
-          class="absolute bottom-0 left-1/2 flex h-6 w-[50px] -translate-x-1/2 items-center justify-center p-2"
-        >
-          <SpacingInput
-            v-model="localMarginBottom"
-            :disabled="!value.margin"
-          />
-        </div>
-        <div
-          class="absolute left-0 top-1/2 flex h-6 w-[50px] -translate-y-1/2 items-center justify-center p-2"
-        >
-          <SpacingInput
-            v-model="localMarginLeft"
-            :disabled="!value.margin"
-          />
+          <ScrubbableNumberField
+            v-for="(sideValue, index) in [
+              localPaddingTop,
+              localPaddingRight,
+              localPaddingBottom,
+              localPaddingLeft,
+            ]"
+            :key="`padding-${index}`"
+            :model-value="sideValue"
+            :default-value="0"
+            :label="`${SIDE_LABELS[index]} padding`"
+            :min="0"
+            :max="9999"
+            :step="1"
+            :precision="1"
+            @update:model-value="(next) => updatePaddingSide(index, next)"
+          >
+            <template #prefix>
+              <span class="text-[9px] font-semibold">{{ SIDE_LABELS[index] }}</span>
+            </template>
+          </ScrubbableNumberField>
         </div>
       </div>
-      <div
-        class="absolute top-[25px] right-[50px] bottom-[25px] left-[50px] border border-border bg-background rounded-sm"
-      >
-        <div class="absolute left-1.5 top-0.5 select-none text-xs text-muted-foreground">
-          Padding
+
+      <div v-if="value.margin">
+        <div class="mb-1 flex items-center justify-between">
+          <EditorToolLabel> Margin </EditorToolLabel>
+          <Button
+            variant="ghost"
+            size="icon-xs"
+            :aria-pressed="marginIndependent"
+            aria-label="Show individual margin sides"
+            title="Show individual margin sides"
+            @click="marginIndependent = !marginIndependent"
+          >
+            <Scan class="size-3.5" />
+          </Button>
         </div>
-        <div
-          class="absolute left-1/2 flex h-6 w-[50px] -translate-x-1/2 items-center justify-center p-2"
+        <ScrubbableNumberField
+          v-if="!marginIndependent"
+          :model-value="hasIndependentValues(value.margin) ? 'mixed' : localMarginTop"
+          :default-value="0"
+          label="Margin"
+          :min="-9999"
+          :max="9999"
+          :step="1"
+          :precision="1"
+          @update:model-value="updateMarginAll"
         >
-          <SpacingInput
-            v-model="localPaddingTop"
-            :disabled="!value.padding"
-          />
-        </div>
+          <template #prefix>
+            <Box />
+          </template>
+        </ScrubbableNumberField>
         <div
-          class="absolute right-0 top-1/2 flex h-6 w-[50px] -translate-y-1/2 items-center justify-center p-2"
+          v-else
+          class="grid grid-cols-2 gap-2"
         >
-          <SpacingInput
-            v-model="localPaddingRight"
-            :disabled="!value.padding"
-          />
-        </div>
-        <div
-          class="absolute bottom-0 left-1/2 flex h-6 w-[50px] -translate-x-1/2 items-center justify-center p-2"
-        >
-          <SpacingInput
-            v-model="localPaddingBottom"
-            :disabled="!value.padding"
-          />
-        </div>
-        <div
-          class="absolute left-0 top-1/2 flex h-6 w-[50px] -translate-y-1/2 items-center justify-center p-2"
-        >
-          <SpacingInput
-            v-model="localPaddingLeft"
-            :disabled="!value.padding"
-          />
+          <ScrubbableNumberField
+            v-for="(sideValue, index) in [
+              localMarginTop,
+              localMarginRight,
+              localMarginBottom,
+              localMarginLeft,
+            ]"
+            :key="`margin-${index}`"
+            :model-value="sideValue"
+            :default-value="0"
+            :label="`${SIDE_LABELS[index]} margin`"
+            :min="-9999"
+            :max="9999"
+            :step="1"
+            :precision="1"
+            @update:model-value="(next) => updateMarginSide(index, next)"
+          >
+            <template #prefix>
+              <span class="text-[9px] font-semibold">{{ SIDE_LABELS[index] }}</span>
+            </template>
+          </ScrubbableNumberField>
         </div>
       </div>
     </div>

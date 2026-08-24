@@ -50,11 +50,21 @@ export interface OpacityInspectorControl {
   onUpdate: (value: number) => void
 }
 
+export interface ImageInspectorControl {
+  id: string
+  key: 'image'
+  label: string
+  type: 'imageContent' | 'imageDimensions'
+  value: ImageTool['value']
+  onUpdate: (value: ImageTool['value']) => void
+}
+
 export type InspectorControl
   = | ToolInspectorControl
     | BorderInspectorControl
     | RadiusInspectorControl
     | OpacityInspectorControl
+    | ImageInspectorControl
 
 export const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   url: '',
@@ -102,6 +112,16 @@ export function toOptionalNumber(value: string | number) {
 
 export function toDimensionMode(value?: number): DimensionMode {
   return value === undefined ? 'auto' : 'manual'
+}
+
+function pickControls(controls: InspectorControl[], ids: string[]) {
+  const allowed = new Set(ids)
+  return controls.filter(control => allowed.has(control.id))
+}
+
+function omitControls(controls: InspectorControl[], ids: string[]) {
+  const omitted = new Set(ids)
+  return controls.filter(control => !omitted.has(control.id))
 }
 
 export function useSettingsTools() {
@@ -156,7 +176,7 @@ export function useSettingsTools() {
 
   const update = (command: NodePropertyCommand) => updateNodeProperty(command)
 
-  const blockAppearanceTools = computed<InspectorControl[]>(() => {
+  const blockTools = computed<InspectorControl[]>(() => {
     const block = selection.selectedBlock.value
     const ref = blockRef.value
     if (!block || !ref)
@@ -235,7 +255,7 @@ export function useSettingsTools() {
       : []
   })
 
-  const rowAppearanceTools = computed<InspectorControl[]>(() => {
+  const rowTools = computed<InspectorControl[]>(() => {
     const row = selection.selectedRow.value
     const ref = rowRef.value
     if (!row || !ref)
@@ -334,7 +354,7 @@ export function useSettingsTools() {
       : []
   })
 
-  const cellAppearanceTools = computed<InspectorControl[]>(() => {
+  const cellTools = computed<InspectorControl[]>(() => {
     const cell = selection.selectedCell.value
     const ref = cellRef.value
     if (!cell || !ref)
@@ -568,7 +588,24 @@ export function useSettingsTools() {
           id: 'image-content',
           key: 'image',
           label: 'Image',
-          type: 'image',
+          type: 'imageContent',
+          value: normalizeImageValue(atom),
+          onUpdate: (value) => {
+            const image = normalizeImageValue(value)
+            updateNodeProperties([
+              { ref: imageRef, property: 'src', value: image.src },
+              { ref: imageRef, property: 'alt', value: image.alt || '' },
+              { ref: imageRef, property: 'link', value: image.link || '' },
+              { ref: imageRef, property: 'width', value: image.width },
+              { ref: imageRef, property: 'height', value: image.height },
+            ])
+          },
+        },
+        {
+          id: 'image-dimensions',
+          key: 'image',
+          label: 'Size',
+          type: 'imageDimensions',
           value: normalizeImageValue(atom),
           onUpdate: (value) => {
             const image = normalizeImageValue(value)
@@ -640,6 +677,36 @@ export function useSettingsTools() {
     return []
   })
 
+  const blockLayoutTools = computed(() => pickControls(blockTools.value, ['block-spacing']))
+  const blockAppearanceTools = computed(() => omitControls(blockTools.value, ['block-spacing']))
+
+  const rowLayoutIds = ['row-spacing', 'row-width-mode', 'row-gap', 'row-height']
+  const rowLayoutTools = computed(() => [
+    ...rowSpacingTools.value,
+    ...pickControls(rowTools.value, rowLayoutIds),
+  ])
+  const rowAppearanceTools = computed(() => omitControls(rowTools.value, rowLayoutIds))
+
+  const cellLayoutTools = computed(() => cellSpacingTools.value)
+  const cellLinkTools = computed(() => pickControls(cellTools.value, ['cell-link']))
+  const cellAppearanceTools = computed(() => omitControls(cellTools.value, ['cell-link']))
+
+  const atomContentIds = ['button-link', 'image-content']
+  const atomLayoutIds = [
+    'text-width-mode',
+    'text-paragraph-spacing',
+    'divider-height',
+    'image-dimensions',
+  ]
+  const atomContentTools = computed(() => pickControls(atomTools.value, atomContentIds))
+  const atomLayoutTools = computed(() => [
+    ...atomSpacingTools.value,
+    ...pickControls(atomTools.value, atomLayoutIds),
+  ])
+  const atomAppearanceTools = computed(() =>
+    omitControls(atomTools.value, [...atomContentIds, ...atomLayoutIds]),
+  )
+
   const cellWidthMode = computed(() =>
     toDimensionMode(selection.selectedCell.value?.settings.width),
   )
@@ -659,13 +726,16 @@ export function useSettingsTools() {
   return {
     cellWidthMode,
     cellHeightMode,
+    blockLayoutTools,
     blockAppearanceTools,
-    rowSpacingTools,
+    rowLayoutTools,
     rowAppearanceTools,
-    cellSpacingTools,
+    cellLayoutTools,
     cellAppearanceTools,
-    atomSpacingTools,
-    atomTools,
+    cellLinkTools,
+    atomContentTools,
+    atomLayoutTools,
+    atomAppearanceTools,
     rowHiddenOnMobile,
     rowCollapseOnMobile,
     cellHiddenOnMobile,

@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { Blend } from 'lucide-vue-next'
 import { ref, watch } from 'vue'
 import { normalizeOpacity } from '@/entities/style'
 import { Input } from '@/shared/ui/input'
+import ScrubbableNumberField from './number/ScrubbableNumberField.vue'
 
-const props = defineProps<{ id: string, title: string, value: number }>()
+const props = defineProps<{ compact?: boolean, id: string, title: string, value: number }>()
 const emit = defineEmits<{ (event: 'update:value', value: number): void }>()
 
 const draft = ref<string | number>(props.value)
@@ -32,18 +34,44 @@ function restoreInvalidDraft() {
   if (parseDraft(draft.value) === undefined)
     draft.value = props.value
 }
+
+function updateScrubbed(value: number | undefined) {
+  const opacity = normalizeOpacity(value)
+  if (opacity !== undefined)
+    emit('update:value', opacity)
+}
 </script>
 
 <template>
   <div
     data-slot="opacity-settings"
-    class="space-y-2"
+    :class="compact ? 'space-y-1' : 'space-y-2'"
   >
-    <EditorToolLabel>{{ title }}</EditorToolLabel>
-    <div class="relative">
+    <EditorToolLabel>
+      {{ title }}
+    </EditorToolLabel>
+    <ScrubbableNumberField
+      v-if="compact"
+      :model-value="value"
+      :default-value="100"
+      :label="title"
+      :min="0"
+      :max="100"
+      :step="1"
+      @update:model-value="updateScrubbed"
+    >
+      <template #prefix>
+        <Blend />
+      </template>
+    </ScrubbableNumberField>
+    <div
+      v-else
+      class="relative"
+    >
       <Input
         :id="id"
         v-model="draft"
+        size="sm"
         type="number"
         min="0"
         max="100"
