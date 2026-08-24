@@ -2,7 +2,11 @@
 import type { CSSProperties } from 'vue'
 import type { Atom, CellNode, RowNode } from '@/entities/block'
 import { MButton, MColumn, MHr, MImg, MLink, MRow } from '@mysigmail/vue-email-components'
-import { hasPositiveBorderRadius, resolveBorderRadiusStyle } from '@/entities/style'
+import {
+  hasPositiveBorderRadius,
+  resolveBorderRadiusStyle,
+  resolveOpacityStyle,
+} from '@/entities/style'
 import { resolveBorderStyle } from '@/features/email-preview/lib/resolve-border-style'
 import { renderTextAtomHtml } from '@/features/email-preview/lib/text-box'
 import EmailTextBox from '@/features/email-preview/ui/EmailTextBox.vue'
@@ -52,6 +56,7 @@ function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {
     textDecoration: 'none',
     textAlign: 'center',
     cursor: 'pointer',
+    opacity: resolveOpacityStyle(atom.opacity),
     ...resolveBorderStyle(atom.border),
   }
 }
@@ -70,6 +75,7 @@ function imageStyle(
     borderRadius: resolveBorderRadiusStyle(atom.borderRadius),
     marginLeft: align === 'center' || align === 'right' ? 'auto' : '0',
     marginRight: align === 'center' ? 'auto' : '0',
+    opacity: resolveOpacityStyle(atom.opacity),
     ...resolveBorderStyle(atom.border),
   }
 }
@@ -96,6 +102,7 @@ function rowStyle(row: RowNode): CSSProperties {
     borderRadius: resolveBorderRadiusStyle(s.borderRadius),
     overflow: hasPositiveBorderRadius(s.borderRadius) ? 'hidden' : undefined,
     ...resolveBorderStyle(s.border),
+    opacity: resolveOpacityStyle(s.opacity),
   }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
@@ -220,7 +227,10 @@ function shouldDistributeAutoWidth(items: CellNode[]) {
 
 function itemStyle(item: CellNode, items: CellNode[], rawGap: number): CSSProperties {
   const s = item.settings
-  const style: CSSProperties = { ...resolveBorderStyle(s.border) }
+  const style: CSSProperties = {
+    ...resolveBorderStyle(s.border),
+    opacity: resolveOpacityStyle(s.opacity),
+  }
 
   if (s.backgroundColor && s.backgroundColor !== 'transparent')
     style.backgroundColor = s.backgroundColor
@@ -380,6 +390,7 @@ function atomWrapperClass(atom: Atom) {
                 borderTop: 'none',
                 borderLeft: 'none',
                 borderRight: 'none',
+                opacity: resolveOpacityStyle(child.opacity),
               }"
             />
           </div>

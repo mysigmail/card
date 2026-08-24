@@ -18,6 +18,7 @@ import {
   normalizeBorderRadiusValue,
   normalizeBorderValue,
   normalizeEmailColor,
+  normalizeOpacity,
 } from '@/entities/style'
 import { clone } from '@/shared/lib/clone'
 import { splitCssDeclarations, splitCssProperty } from '@/shared/lib/css-style'
@@ -602,6 +603,10 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
     pushIssue(issues, `${path}.hiddenOnMobile`, 'atom.hiddenOnMobile must be a boolean')
   }
 
+  if (value.opacity !== undefined && normalizeOpacity(value.opacity) === undefined) {
+    pushIssue(issues, `${path}.opacity`, 'atom.opacity must be an integer between 0 and 100')
+  }
+
   if (value.type === 'text') {
     validateAllowedProperties(
       value,
@@ -616,6 +621,7 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
         'border',
         'spacing',
         'hiddenOnMobile',
+        'opacity',
       ],
       issues,
     )
@@ -669,6 +675,7 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
         'padding',
         'spacing',
         'hiddenOnMobile',
+        'opacity',
       ],
       issues,
     )
@@ -704,7 +711,7 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
     validateAllowedProperties(
       value,
       path,
-      ['id', 'type', 'color', 'height', 'spacing', 'hiddenOnMobile'],
+      ['id', 'type', 'color', 'height', 'spacing', 'hiddenOnMobile', 'opacity'],
       issues,
     )
 
@@ -736,6 +743,7 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
         'border',
         'spacing',
         'hiddenOnMobile',
+        'opacity',
       ],
       issues,
     )
@@ -770,7 +778,12 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
     return
   }
 
-  validateAllowedProperties(value, path, ['id', 'type', 'spacing', 'hiddenOnMobile'], issues)
+  validateAllowedProperties(
+    value,
+    path,
+    ['id', 'type', 'spacing', 'hiddenOnMobile', 'opacity'],
+    issues,
+  )
 
   pushIssue(issues, `${path}.type`, 'Unsupported atom type')
 }
@@ -811,6 +824,7 @@ function validateCellNode(value: unknown, path: string, issues: TemplateValidati
         'width',
         'height',
         'collapseOnMobile',
+        'opacity',
       ],
       issues,
     )
@@ -892,6 +906,16 @@ function validateCellNode(value: unknown, path: string, issues: TemplateValidati
       )
     }
     validateBorderValue(value.settings.border, `${path}.settings.border`, issues)
+    if (
+      value.settings.opacity !== undefined
+      && normalizeOpacity(value.settings.opacity) === undefined
+    ) {
+      pushIssue(
+        issues,
+        `${path}.settings.opacity`,
+        'cell.settings.opacity must be an integer between 0 and 100',
+      )
+    }
   }
 
   if (!Array.isArray(value.children)) {
@@ -939,6 +963,7 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
         'height',
         'gap',
         'widthMode',
+        'opacity',
       ],
       issues,
     )
@@ -1007,6 +1032,16 @@ function validateRowNode(value: unknown, path: string, issues: TemplateValidatio
       )
     }
     validateBorderValue(value.settings.border, `${path}.settings.border`, issues)
+    if (
+      value.settings.opacity !== undefined
+      && normalizeOpacity(value.settings.opacity) === undefined
+    ) {
+      pushIssue(
+        issues,
+        `${path}.settings.opacity`,
+        'row.settings.opacity must be an integer between 0 and 100',
+      )
+    }
   }
 
   if (!Array.isArray(value.cells)) {
@@ -1047,7 +1082,7 @@ function validateCanvasBlockInstance(
     validateAllowedProperties(
       block.settings,
       `${path}.block.settings`,
-      ['spacing', 'backgroundColor', 'backgroundImage', 'borderRadius', 'border'],
+      ['spacing', 'backgroundColor', 'backgroundImage', 'borderRadius', 'border', 'opacity'],
       issues,
     )
 
@@ -1074,6 +1109,16 @@ function validateCanvasBlockInstance(
       )
     }
     validateBorderValue(block.settings.border, `${path}.block.settings.border`, issues)
+    if (
+      block.settings.opacity !== undefined
+      && normalizeOpacity(block.settings.opacity) === undefined
+    ) {
+      pushIssue(
+        issues,
+        `${path}.block.settings.opacity`,
+        'block.settings.opacity must be an integer between 0 and 100',
+      )
+    }
   }
 
   if (!Array.isArray(block.rows)) {
@@ -1227,16 +1272,18 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
           : {}),
         spacing: atom.spacing,
         hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+        ...sanitizeOpacityProperty(atom.opacity),
         ...sanitizeBorderRadiusProperty(atom.borderRadius),
         ...sanitizeBorderProperty(atom.border),
       }
     }
 
     if (atom.type === 'image') {
-      const { border: _border, borderRadius: _borderRadius, ...image } = atom
+      const { border: _border, borderRadius: _borderRadius, opacity: _opacity, ...image } = atom
       return {
         ...image,
         hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+        ...sanitizeOpacityProperty(atom.opacity),
         src: typeof atom.src === 'string' ? atom.src : '',
         link: typeof atom.link === 'string' ? atom.link : '',
         alt: typeof atom.alt === 'string' ? atom.alt : '',
@@ -1248,27 +1295,35 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
     }
 
     if (atom.type === 'button') {
-      const { border: _border, ...button } = atom
+      const { border: _border, opacity: _opacity, ...button } = atom
       return {
         ...button,
         backgroundColor: normalizeEmailColor(atom.backgroundColor)!,
         color: normalizeEmailColor(atom.color)!,
         borderRadius: normalizeBorderRadiusValue(atom.borderRadius)!,
         hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+        ...sanitizeOpacityProperty(atom.opacity),
         ...sanitizeBorderProperty(atom.border),
       }
     }
 
     if (atom.type === 'divider') {
+      const { opacity: _opacity, ...divider } = atom
       return {
-        ...atom,
+        ...divider,
         color: normalizeEmailColor(atom.color)!,
         hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
+        ...sanitizeOpacityProperty(atom.opacity),
       }
     }
 
     return atom
   })
+}
+
+function sanitizeOpacityProperty(opacity: unknown): { opacity?: number } {
+  const normalized = normalizeOpacity(opacity)
+  return normalized === undefined || normalized === 100 ? {} : { opacity: normalized }
 }
 
 function sanitizeBorderProperty(border: unknown): {
@@ -1287,7 +1342,12 @@ function sanitizeBorderRadiusProperty(borderRadius: unknown): {
 
 function sanitizeCellNodes(cells: CellNode[]): CellNode[] {
   return cells.map((cell) => {
-    const { border: _border, borderRadius: _borderRadius, ...cellSettings } = cell.settings
+    const {
+      border: _border,
+      borderRadius: _borderRadius,
+      opacity: _opacity,
+      ...cellSettings
+    } = cell.settings
     const settings = {
       ...cellSettings,
       backgroundColor: normalizeEmailColor(cell.settings.backgroundColor, {
@@ -1297,6 +1357,7 @@ function sanitizeCellNodes(cells: CellNode[]): CellNode[] {
       hiddenOnMobile: toOptionalBoolean(cell.settings?.hiddenOnMobile),
       ...sanitizeBorderRadiusProperty(cell.settings?.borderRadius),
       ...sanitizeBorderProperty(cell.settings?.border),
+      ...sanitizeOpacityProperty(cell.settings?.opacity),
     }
 
     // Hard-drop legacy per-cell collapse to keep exported schema clean.
@@ -1314,7 +1375,12 @@ function sanitizeCellNodes(cells: CellNode[]): CellNode[] {
 
 function sanitizeRowNodes(rows: RowNode[]): RowNode[] {
   return rows.map((row) => {
-    const { border: _border, borderRadius: _borderRadius, ...rowSettings } = row.settings
+    const {
+      border: _border,
+      borderRadius: _borderRadius,
+      opacity: _opacity,
+      ...rowSettings
+    } = row.settings
     return {
       id: row.id,
       type: 'row',
@@ -1331,6 +1397,7 @@ function sanitizeRowNodes(rows: RowNode[]): RowNode[] {
         widthMode: row.settings?.widthMode === 'hug' ? 'hug' : 'fill',
         ...sanitizeBorderRadiusProperty(row.settings?.borderRadius),
         ...sanitizeBorderProperty(row.settings?.border),
+        ...sanitizeOpacityProperty(row.settings?.opacity),
       },
       cells: sanitizeCellNodes(row.cells),
     }
@@ -1338,7 +1405,12 @@ function sanitizeRowNodes(rows: RowNode[]): RowNode[] {
 }
 
 function sanitizeBlock(block: BlockNode): BlockNode {
-  const { border: _border, borderRadius: _borderRadius, ...blockSettings } = block.settings
+  const {
+    border: _border,
+    borderRadius: _borderRadius,
+    opacity: _opacity,
+    ...blockSettings
+  } = block.settings
   return {
     ...block,
     settings: {
@@ -1348,6 +1420,7 @@ function sanitizeBlock(block: BlockNode): BlockNode {
       })!,
       ...sanitizeBorderRadiusProperty(block.settings?.borderRadius),
       ...sanitizeBorderProperty(block.settings?.border),
+      ...sanitizeOpacityProperty(block.settings?.opacity),
     },
     rows: sanitizeRowNodes(block.rows),
   }

@@ -13,6 +13,8 @@ interface Props {
   atom: TextAtom
   horizontalAlign?: 'left' | 'center' | 'right'
   preview?: boolean
+  forceOpaque?: boolean
+  opacityCompensation?: number
 }
 
 defineOptions({ inheritAttrs: false })
@@ -36,7 +38,7 @@ function cellStyle(atom: TextAtom, preview = false) {
   <div
     v-bind="$attrs"
     data-slot="email-text-box"
-    :style="resolveTextBoxRootStyle(atom)"
+    :style="resolveTextBoxRootStyle(atom, forceOpaque, opacityCompensation)"
     @click="emit('click', $event)"
     @keydown="emit('keydown', $event)"
   >

@@ -1,6 +1,11 @@
 import type { CSSProperties } from 'vue'
 import type { CellNode, TextAtom } from '@/entities/block'
-import { hasPositiveBorderRadius, resolveBorderRadiusStyle } from '@/entities/style'
+import {
+  hasPositiveBorderRadius,
+  multiplyOpacityStyles,
+  resolveBorderRadiusStyle,
+  resolveOpacityStyle,
+} from '@/entities/style'
 import { sanitizeTextEditorHtml } from '@/entities/template'
 import { resolveBorderStyle } from './resolve-border-style'
 
@@ -19,12 +24,19 @@ export function isTextBoxEnabled(atom: TextAtom) {
   )
 }
 
-export function resolveTextBoxRootStyle(atom: TextAtom): CSSProperties {
+export function resolveTextBoxRootStyle(
+  atom: TextAtom,
+  forceOpaque = false,
+  opacityCompensation = 1,
+): CSSProperties {
   const margin = tupleToCss(atom.spacing?.margin)
   const padding = isTextBoxEnabled(atom) ? undefined : tupleToCss(atom.spacing?.padding)
   return {
     ...(margin ? { margin } : {}),
     ...(padding ? { padding } : {}),
+    opacity: forceOpaque
+      ? 1
+      : multiplyOpacityStyles(resolveOpacityStyle(atom.opacity), opacityCompensation),
   }
 }
 

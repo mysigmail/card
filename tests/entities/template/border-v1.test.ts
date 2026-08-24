@@ -181,7 +181,8 @@ describe('strict v1 borders', () => {
       ['export', renderEmailHtml(ExportRoot)],
     ] as const) {
       const document = new DOMParser().parseFromString(html, 'text/html')
-      const container = document.body.firstElementChild as HTMLTableElement
+      const visualWrapper = document.body.firstElementChild as HTMLElement
+      const container = visualWrapper.querySelector('table') as HTMLTableElement
       const innerBlock = container.tBodies[0]!.rows[0]!.cells[0]!.firstElementChild as HTMLElement
       const rowOwner
         = kind === 'preview'

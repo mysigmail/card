@@ -67,9 +67,10 @@ function createFixture() {
 describe('typed inspector registry and mutation gateway', () => {
   it('publishes the closed capability keys for all seven node variants', () => {
     expect(inspectorCapabilities).toEqual({
-      block: ['spacing', 'backgroundColor', 'backgroundImage', 'borderRadius', 'border'],
+      block: ['spacing', 'opacity', 'backgroundColor', 'backgroundImage', 'borderRadius', 'border'],
       row: [
         'spacing',
+        'opacity',
         'backgroundColor',
         'backgroundImage',
         'borderRadius',
@@ -82,6 +83,7 @@ describe('typed inspector registry and mutation gateway', () => {
       ],
       cell: [
         'spacing',
+        'opacity',
         'backgroundColor',
         'backgroundImage',
         'border',
@@ -96,6 +98,7 @@ describe('typed inspector registry and mutation gateway', () => {
       text: [
         'spacing',
         'hiddenOnMobile',
+        'opacity',
         'borderRadius',
         'border',
         'widthMode',
@@ -105,6 +108,7 @@ describe('typed inspector registry and mutation gateway', () => {
       button: [
         'spacing',
         'hiddenOnMobile',
+        'opacity',
         'border',
         'text',
         'link',
@@ -113,10 +117,11 @@ describe('typed inspector registry and mutation gateway', () => {
         'fontSize',
         'borderRadius',
       ],
-      divider: ['spacing', 'hiddenOnMobile', 'color', 'height'],
+      divider: ['spacing', 'hiddenOnMobile', 'opacity', 'color', 'height'],
       image: [
         'spacing',
         'hiddenOnMobile',
+        'opacity',
         'border',
         'src',
         'alt',
@@ -126,6 +131,66 @@ describe('typed inspector registry and mutation gateway', () => {
         'borderRadius',
       ],
     })
+  })
+
+  it('applies canonical opacity to every node kind and rejects invalid batches atomically', () => {
+    const fixture = createFixture()
+    const blockRef = { kind: 'block' as const, blockId: fixture.block.id }
+    const rowRef: RowRef = {
+      kind: 'row',
+      blockId: fixture.block.id,
+      rowId: fixture.row.id,
+    }
+    const cellRef: CellRef = {
+      kind: 'cell',
+      blockId: fixture.block.id,
+      rowId: fixture.row.id,
+      cellId: fixture.row.cells[0]!.id,
+    }
+
+    expect(getNodePropertyState(fixture.items, blockRef, 'opacity')).toEqual({
+      kind: 'value',
+      value: 100,
+    })
+    expect(getNodePropertyState(fixture.items, fixture.textRef, 'opacity')).toEqual({
+      kind: 'value',
+      value: 100,
+    })
+    expect(
+      updateNodeProperties(fixture.items, [
+        { ref: blockRef, property: 'opacity', value: 0 },
+        { ref: rowRef, property: 'opacity', value: 20 },
+        { ref: cellRef, property: 'opacity', value: 30 },
+        { ref: fixture.textRef, property: 'opacity', value: 45 },
+      ]),
+    ).toEqual({ ok: true, changed: true })
+    expect(fixture.block.settings.opacity).toBe(0)
+    expect(fixture.row.settings.opacity).toBe(20)
+    expect(fixture.row.cells[0]!.settings.opacity).toBe(30)
+    expect(fixture.text.opacity).toBe(45)
+
+    expect(
+      updateNodeProperties(fixture.items, [
+        { ref: blockRef, property: 'opacity', value: 25 },
+        { ref: fixture.imageRef, property: 'opacity', value: 1.5 },
+      ]),
+    ).toEqual({ ok: false, reason: 'invalid-value' })
+    expect(fixture.block.settings.opacity).toBe(0)
+    expect(fixture.image.opacity).toBeUndefined()
+
+    expect(
+      updateNodeProperty(fixture.items, { ref: blockRef, property: 'opacity', value: 100 }),
+    ).toEqual({ ok: true, changed: true })
+    expect(fixture.block.settings).not.toHaveProperty('opacity')
+
+    expect(
+      updateNodeProperties(fixture.items, [
+        { ref: rowRef, property: 'opacity', value: 100 },
+        { ref: cellRef, property: 'opacity', value: 100 },
+      ]),
+    ).toEqual({ ok: true, changed: true })
+    expect(fixture.row.settings).not.toHaveProperty('opacity')
+    expect(fixture.row.cells[0]!.settings).not.toHaveProperty('opacity')
   })
 
   it('resolves nested ancestry and rejects wrong ancestry or atom type', () => {

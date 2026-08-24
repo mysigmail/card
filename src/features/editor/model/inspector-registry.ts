@@ -17,6 +17,8 @@ import {
   normalizeBorderRadiusValue,
   normalizeBorderValue,
   normalizeEmailColor,
+  normalizeOpacity,
+  resolveOpacity,
 } from '@/entities/style'
 import { sanitizeTextEditorHtml } from '@/entities/template'
 
@@ -250,8 +252,33 @@ function atomVisibility<T extends Atom>() {
   })
 }
 
+function opacityDescriptor<N extends BlockNode | RowNode | CellNode | Atom>(
+  readValue: (node: N) => number | undefined,
+  applyValue: (node: N, value: number | undefined) => void,
+) {
+  return defineDescriptor<N, number>({
+    read: node => resolveOpacity(readValue(node)),
+    normalize: (value) => {
+      const opacity = normalizeOpacity(value)
+      return opacity === undefined ? invalid() : normalized(opacity)
+    },
+    equal: strictEqual,
+    apply: (node, value) => {
+      applyValue(node, value === 100 ? undefined : value)
+    },
+  })
+}
+
 export const blockPropertyRegistry = {
   spacing: blockSpacing,
+  opacity: opacityDescriptor<BlockNode>(
+    node => node.settings.opacity,
+    (node, value) => {
+      if (value === undefined)
+        delete node.settings.opacity
+      else node.settings.opacity = value
+    },
+  ),
   backgroundColor: defineDescriptor<BlockNode, string>({
     read: node => node.settings.backgroundColor,
     normalize: value => normalizeColor(value, true),
@@ -287,6 +314,14 @@ export const blockPropertyRegistry = {
 
 export const rowPropertyRegistry = {
   spacing: rowSpacing,
+  opacity: opacityDescriptor<RowNode>(
+    node => node.settings.opacity,
+    (node, value) => {
+      if (value === undefined)
+        delete node.settings.opacity
+      else node.settings.opacity = value
+    },
+  ),
   backgroundColor: defineDescriptor<RowNode, string>({
     read: node => node.settings.backgroundColor,
     normalize: value => normalizeColor(value, true),
@@ -362,6 +397,14 @@ export const rowPropertyRegistry = {
 
 export const cellPropertyRegistry = {
   spacing: cellSpacing,
+  opacity: opacityDescriptor<CellNode>(
+    node => node.settings.opacity,
+    (node, value) => {
+      if (value === undefined)
+        delete node.settings.opacity
+      else node.settings.opacity = value
+    },
+  ),
   backgroundColor: defineDescriptor<CellNode, string>({
     read: node => node.settings.backgroundColor,
     normalize: value => normalizeColor(value, true),
@@ -454,6 +497,14 @@ export const atomPropertyRegistry = {
   text: {
     spacing: atomSpacing<TextAtom>(),
     hiddenOnMobile: atomVisibility<TextAtom>(),
+    opacity: opacityDescriptor<TextAtom>(
+      node => node.opacity,
+      (node, value) => {
+        if (value === undefined)
+          delete node.opacity
+        else node.opacity = value
+      },
+    ),
     borderRadius: defineDescriptor<TextAtom, BorderRadiusValue>({
       read: node => node.borderRadius ?? createBorderRadiusValue(0),
       normalize: normalizeBorderRadius,
@@ -508,6 +559,14 @@ export const atomPropertyRegistry = {
       },
     }),
     hiddenOnMobile: atomVisibility<ButtonAtom>(),
+    opacity: opacityDescriptor<ButtonAtom>(
+      node => node.opacity,
+      (node, value) => {
+        if (value === undefined)
+          delete node.opacity
+        else node.opacity = value
+      },
+    ),
     border: atomBorderDescriptor<ButtonAtom>(),
     text: defineDescriptor<ButtonAtom, string>({
       read: node => node.text,
@@ -561,6 +620,14 @@ export const atomPropertyRegistry = {
   divider: {
     spacing: atomSpacing<DividerAtom>(),
     hiddenOnMobile: atomVisibility<DividerAtom>(),
+    opacity: opacityDescriptor<DividerAtom>(
+      node => node.opacity,
+      (node, value) => {
+        if (value === undefined)
+          delete node.opacity
+        else node.opacity = value
+      },
+    ),
     color: defineDescriptor<DividerAtom, string>({
       read: node => node.color,
       normalize: value => normalizeColor(value),
@@ -581,6 +648,14 @@ export const atomPropertyRegistry = {
   image: {
     spacing: atomSpacing<ImageAtom>(),
     hiddenOnMobile: atomVisibility<ImageAtom>(),
+    opacity: opacityDescriptor<ImageAtom>(
+      node => node.opacity,
+      (node, value) => {
+        if (value === undefined)
+          delete node.opacity
+        else node.opacity = value
+      },
+    ),
     border: atomBorderDescriptor<ImageAtom>(),
     src: defineDescriptor<ImageAtom, string>({
       read: node => node.src,

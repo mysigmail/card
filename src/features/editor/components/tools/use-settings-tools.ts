@@ -41,10 +41,20 @@ export interface RadiusInspectorControl {
   onUpdate: (value: BorderRadiusValue) => void
 }
 
+export interface OpacityInspectorControl {
+  id: string
+  key: 'opacity'
+  label: string
+  type: 'opacity'
+  value: number
+  onUpdate: (value: number) => void
+}
+
 export type InspectorControl
   = | ToolInspectorControl
     | BorderInspectorControl
     | RadiusInspectorControl
+    | OpacityInspectorControl
 
 export const DEFAULT_BACKGROUND_IMAGE: BackgroundImageTool['value'] = {
   url: '',
@@ -163,6 +173,14 @@ export function useSettingsTools() {
         onUpdate: value => update({ ref, property: 'spacing', value }),
       },
       {
+        id: 'block-opacity',
+        key: 'opacity',
+        label: 'Opacity',
+        type: 'opacity',
+        value: block.settings.opacity ?? 100,
+        onUpdate: value => update({ ref, property: 'opacity', value }),
+      },
+      {
         id: 'block-background-color',
         key: 'backgroundColor',
         label: 'Background Color',
@@ -254,6 +272,14 @@ export function useSettingsTools() {
         onUpdate: value => update({ ref, property: 'height', value: toOptionalNumber(value) }),
       },
       {
+        id: 'row-opacity',
+        key: 'opacity',
+        label: 'Opacity',
+        type: 'opacity',
+        value: row.settings.opacity ?? 100,
+        onUpdate: value => update({ ref, property: 'opacity', value }),
+      },
+      {
         id: 'row-background-color',
         key: 'backgroundColor',
         label: 'Background Color',
@@ -314,6 +340,14 @@ export function useSettingsTools() {
     if (!cell || !ref)
       return []
     return [
+      {
+        id: 'cell-opacity',
+        key: 'opacity',
+        label: 'Opacity',
+        type: 'opacity',
+        value: cell.settings.opacity ?? 100,
+        onUpdate: value => update({ ref, property: 'opacity', value }),
+      },
       {
         id: 'cell-border-radius',
         key: 'borderRadius',
@@ -447,6 +481,14 @@ export function useSettingsTools() {
           },
         },
         {
+          id: 'text-opacity',
+          key: 'opacity',
+          label: 'Opacity',
+          type: 'opacity',
+          value: atom.opacity ?? 100,
+          onUpdate: value => update({ ref: textRef, property: 'opacity', value }),
+        },
+        {
           id: 'text-border-radius',
           key: 'borderRadius',
           label: 'Border Radius',
@@ -477,6 +519,23 @@ export function useSettingsTools() {
     if (atom.type === 'button' && ref.atomType === 'button') {
       const buttonRef = ref as AtomRef<'button'>
       return [
+        {
+          id: 'button-font-size',
+          key: 'fontSize',
+          label: 'Font Size',
+          type: 'inputNumber',
+          value: atom.fontSize,
+          onUpdate: value =>
+            update({ ref: buttonRef, property: 'fontSize', value: Number(value) || 14 }),
+        },
+        {
+          id: 'button-opacity',
+          key: 'opacity',
+          label: 'Opacity',
+          type: 'opacity',
+          value: atom.opacity ?? 100,
+          onUpdate: value => update({ ref: buttonRef, property: 'opacity', value }),
+        },
         {
           id: 'button-border-radius',
           key: 'borderRadius',
@@ -510,15 +569,6 @@ export function useSettingsTools() {
           onUpdate: value => update({ ref: buttonRef, property: 'color', value }),
         },
         {
-          id: 'button-font-size',
-          key: 'fontSize',
-          label: 'Font Size',
-          type: 'inputNumber',
-          value: atom.fontSize,
-          onUpdate: value =>
-            update({ ref: buttonRef, property: 'fontSize', value: Number(value) || 14 }),
-        },
-        {
           id: 'button-text',
           key: 'text',
           label: 'Text',
@@ -540,22 +590,6 @@ export function useSettingsTools() {
       const imageRef = ref as AtomRef<'image'>
       return [
         {
-          id: 'image-border-radius',
-          key: 'borderRadius',
-          label: 'Border Radius',
-          type: 'radius',
-          value: atom.borderRadius ?? createBorderRadiusValue(0),
-          onUpdate: value => update({ ref: imageRef, property: 'borderRadius', value }),
-        },
-        {
-          id: 'image-border',
-          key: 'border',
-          label: 'Border',
-          type: 'border',
-          value: atom.border,
-          onUpdate: value => update({ ref: imageRef, property: 'border', value }),
-        },
-        {
           id: 'image-content',
           key: 'image',
           label: 'Image',
@@ -572,6 +606,30 @@ export function useSettingsTools() {
             ])
           },
         },
+        {
+          id: 'image-opacity',
+          key: 'opacity',
+          label: 'Opacity',
+          type: 'opacity',
+          value: atom.opacity ?? 100,
+          onUpdate: value => update({ ref: imageRef, property: 'opacity', value }),
+        },
+        {
+          id: 'image-border-radius',
+          key: 'borderRadius',
+          label: 'Border Radius',
+          type: 'radius',
+          value: atom.borderRadius ?? createBorderRadiusValue(0),
+          onUpdate: value => update({ ref: imageRef, property: 'borderRadius', value }),
+        },
+        {
+          id: 'image-border',
+          key: 'border',
+          label: 'Border',
+          type: 'border',
+          value: atom.border,
+          onUpdate: value => update({ ref: imageRef, property: 'border', value }),
+        },
       ]
     }
     if (atom.type === 'divider' && ref.atomType === 'divider') {
@@ -585,6 +643,14 @@ export function useSettingsTools() {
           value: atom.height,
           onUpdate: value =>
             update({ ref: dividerRef, property: 'height', value: Number(value) || 1 }),
+        },
+        {
+          id: 'divider-opacity',
+          key: 'opacity',
+          label: 'Opacity',
+          type: 'opacity',
+          value: atom.opacity ?? 100,
+          onUpdate: value => update({ ref: dividerRef, property: 'opacity', value }),
         },
         {
           id: 'divider-color',
