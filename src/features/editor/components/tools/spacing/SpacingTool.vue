@@ -3,6 +3,7 @@ import type { SpacingTool } from '@/features/editor/model'
 import { Box, Scan } from 'lucide-vue-next'
 import { nextTick, ref, watch } from 'vue'
 import { Button } from '@/shared/ui/button'
+import NumberFieldPrefixLabel from '../number/NumberFieldPrefixLabel.vue'
 import ScrubbableNumberField from '../number/ScrubbableNumberField.vue'
 import { createSpacingPatch } from './spacing-patch'
 
@@ -186,7 +187,7 @@ const SIDE_LABELS = ['T', 'R', 'B', 'L']
             @update:model-value="(next) => updatePaddingSide(index, next)"
           >
             <template #prefix>
-              <span class="text-[9px] font-semibold">{{ SIDE_LABELS[index] }}</span>
+              <NumberFieldPrefixLabel :label="SIDE_LABELS[index]" />
             </template>
           </ScrubbableNumberField>
         </div>
@@ -243,7 +244,7 @@ const SIDE_LABELS = ['T', 'R', 'B', 'L']
             @update:model-value="(next) => updateMarginSide(index, next)"
           >
             <template #prefix>
-              <span class="text-[9px] font-semibold">{{ SIDE_LABELS[index] }}</span>
+              <NumberFieldPrefixLabel :label="SIDE_LABELS[index]" />
             </template>
           </ScrubbableNumberField>
         </div>
