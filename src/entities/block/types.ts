@@ -24,11 +24,9 @@ export interface TextAtom extends BaseAtom {
 
 export interface ButtonAtom extends BaseAtom {
   type: 'button'
-  text: string
+  value: string
   link: string
   backgroundColor: string
-  color: string
-  fontSize: number
   borderRadius: BorderRadiusValue
   padding: [number, number, number, number]
   border?: BorderValue

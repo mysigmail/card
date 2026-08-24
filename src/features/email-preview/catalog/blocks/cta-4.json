@@ -163,11 +163,9 @@
               {
                 "id": "IdFctHx3",
                 "type": "button",
-                "text": "Browse the edit",
+                "value": "<span style=\"color:#1F1712;font-size:15px\">Browse the edit</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FFFFFF",
-                "color": "#1F1712",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

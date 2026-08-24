@@ -58,7 +58,7 @@ function initSortable() {
     animation: 150,
     ghostClass: 'p-ghost',
     swapThreshold: 0.5,
-    filter: '.p-inline-text-editor',
+    filter: '[data-inline-atom-editor]',
     preventOnFilter: false,
     onStart() {
       isDragging.value = true

@@ -69,11 +69,9 @@
               {
                 "id": "_kO98m3H",
                 "type": "button",
-                "text": "See the setup",
+                "value": "<span style=\"color:#FFFFFF;font-size:14px\">See the setup</span>",
                 "link": "https://card.email/read",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 14,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

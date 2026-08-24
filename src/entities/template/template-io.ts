@@ -140,6 +140,29 @@ const EMAIL_TEXT_SANITIZE_OPTIONS: IOptions = {
   parseStyleAttributes: true,
 }
 
+const EMAIL_BUTTON_ALLOWED_TAGS = ['b', 'code', 'em', 'i', 'span', 'strong', 'sub', 'sup', 'u']
+
+const EMAIL_BUTTON_ALLOWED_STYLES: NonNullable<IOptions['allowedStyles']> = {
+  '*': {
+    'color': EMAIL_TEXT_ALLOWED_STYLES['*']!.color!,
+    'font-family': EMAIL_TEXT_ALLOWED_STYLES['*']!['font-family']!,
+    'font-size': EMAIL_TEXT_ALLOWED_STYLES['*']!['font-size']!,
+    'font-style': EMAIL_TEXT_ALLOWED_STYLES['*']!['font-style']!,
+    'font-weight': EMAIL_TEXT_ALLOWED_STYLES['*']!['font-weight']!,
+    'letter-spacing': EMAIL_TEXT_ALLOWED_STYLES['*']!['letter-spacing']!,
+    'line-height': EMAIL_TEXT_ALLOWED_STYLES['*']!['line-height']!,
+    'text-decoration': EMAIL_TEXT_ALLOWED_STYLES['*']!['text-decoration']!,
+  },
+}
+
+const EMAIL_BUTTON_SANITIZE_OPTIONS: IOptions = {
+  allowedAttributes: { '*': ['style'] },
+  allowedStyles: EMAIL_BUTTON_ALLOWED_STYLES,
+  allowedTags: EMAIL_BUTTON_ALLOWED_TAGS,
+  disallowedTagsMode: 'discard',
+  parseStyleAttributes: true,
+}
+
 function isRecord(value: unknown): value is UnknownRecord {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
@@ -665,11 +688,9 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
       [
         'id',
         'type',
-        'text',
+        'value',
         'link',
         'backgroundColor',
-        'color',
-        'fontSize',
         'borderRadius',
         'border',
         'padding',
@@ -680,8 +701,8 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
       issues,
     )
 
-    if (!isString(value.text))
-      pushIssue(issues, `${path}.text`, 'button atom text must be a string')
+    if (!isString(value.value))
+      pushIssue(issues, `${path}.value`, 'button atom value must be a string')
     if (!isString(value.link))
       pushIssue(issues, `${path}.link`, 'button atom link must be a string')
     if (!normalizeEmailColor(value.backgroundColor)) {
@@ -690,11 +711,6 @@ function validateAtom(value: unknown, path: string, issues: TemplateValidationIs
         `${path}.backgroundColor`,
         'button atom backgroundColor must be an email color',
       )
-    }
-    if (!normalizeEmailColor(value.color))
-      pushIssue(issues, `${path}.color`, 'button atom color must be an email color')
-    if (!isFiniteNumber(value.fontSize)) {
-      pushIssue(issues, `${path}.fontSize`, 'button atom fontSize must be a finite number')
     }
     validateBorderRadiusValue(value.borderRadius, `${path}.borderRadius`, issues)
     validateSpacingTuple(value.padding, path, issues, 'padding')
@@ -1234,6 +1250,10 @@ export function sanitizeTextEditorHtml(value: string) {
   return sanitizeHtmlLib(normalizeTextStyleColors(value), EMAIL_TEXT_SANITIZE_OPTIONS)
 }
 
+export function sanitizeButtonEditorHtml(value: string) {
+  return sanitizeHtmlLib(normalizeTextStyleColors(value), EMAIL_BUTTON_SANITIZE_OPTIONS)
+}
+
 function _sanitizeTools(tools: Tool[]): Tool[] {
   return tools.map((tool) => {
     if (tool.type === 'textEditor') {
@@ -1298,8 +1318,8 @@ function sanitizeAtoms(atoms: Atom[]): Atom[] {
       const { border: _border, opacity: _opacity, ...button } = atom
       return {
         ...button,
+        value: sanitizeButtonEditorHtml(atom.value),
         backgroundColor: normalizeEmailColor(atom.backgroundColor)!,
-        color: normalizeEmailColor(atom.color)!,
         borderRadius: normalizeBorderRadiusValue(atom.borderRadius)!,
         hiddenOnMobile: toOptionalBoolean(atom.hiddenOnMobile),
         ...sanitizeOpacityProperty(atom.opacity),

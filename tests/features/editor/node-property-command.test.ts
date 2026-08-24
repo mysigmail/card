@@ -110,11 +110,9 @@ describe('typed inspector registry and mutation gateway', () => {
         'hiddenOnMobile',
         'opacity',
         'border',
-        'text',
+        'value',
         'link',
         'backgroundColor',
-        'color',
-        'fontSize',
         'borderRadius',
       ],
       divider: ['spacing', 'hiddenOnMobile', 'opacity', 'color', 'height'],
@@ -537,6 +535,12 @@ describe('typed inspector registry and mutation gateway', () => {
       value: '<p onclick="bad()">Safe</p>',
     })
     expect(fixture.text.value).toBe('<p>Safe</p>')
+    updateNodeProperty(fixture.items, {
+      ref: fixture.buttonRef,
+      property: 'value',
+      value: '<p><a href="https://nested.example"><strong>Buy</strong></a></p>',
+    })
+    expect(fixture.button.value).toBe('<strong>Buy</strong>')
 
     fixture.row.settings.collapseOnMobile = undefined
     fixture.row.settings.hiddenOnMobile = undefined

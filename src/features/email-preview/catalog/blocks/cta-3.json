@@ -111,11 +111,9 @@
               {
                 "id": "ZgRYVo3F",
                 "type": "button",
-                "text": "Remind me",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Remind me</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

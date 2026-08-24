@@ -62,11 +62,9 @@
               {
                 "id": "-kG4axiQ",
                 "type": "button",
-                "text": "Download for macOS",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Download for macOS</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,
@@ -97,11 +95,9 @@
               {
                 "id": "ox-hI32C",
                 "type": "button",
-                "text": "Get it for Windows",
+                "value": "<span style=\"color:#1F1712;font-size:15px\">Get it for Windows</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FFD9B8",
-                "color": "#1F1712",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

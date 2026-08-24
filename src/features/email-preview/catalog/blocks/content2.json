@@ -62,11 +62,9 @@
               {
                 "id": "MsaQl6oM",
                 "type": "button",
-                "text": "Read the field notes",
+                "value": "<span style=\"color:#FFFFFF;font-size:14px\">Read the field notes</span>",
                 "link": "https://card.email/read",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 14,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

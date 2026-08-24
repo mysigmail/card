@@ -62,11 +62,9 @@
               {
                 "id": "en1yAtxk",
                 "type": "button",
-                "text": "Meet the speaker",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Meet the speaker</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

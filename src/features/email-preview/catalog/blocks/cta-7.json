@@ -70,11 +70,9 @@
               {
                 "id": "pKAr_VcY",
                 "type": "button",
-                "text": "▶  Play 2:14",
+                "value": "<span style=\"color:#1F1712;font-size:15px\">▶  Play 2:14</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FFFFFF",
-                "color": "#1F1712",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,
@@ -143,11 +141,9 @@
               {
                 "id": "yIfrAXSr",
                 "type": "button",
-                "text": "Watch the film",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Watch the film</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

@@ -297,11 +297,9 @@
               {
                 "id": "bQJVMfco",
                 "type": "button",
-                "text": "Track package",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Track package</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

@@ -83,11 +83,9 @@
               {
                 "id": "tq4kP3MU",
                 "type": "button",
-                "text": "Shop the pair",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Shop the pair</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

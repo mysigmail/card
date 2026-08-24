@@ -186,11 +186,9 @@
               {
                 "id": "LvDfmDtF",
                 "type": "button",
-                "text": "Read the interview",
+                "value": "<span style=\"color:#FFFFFF;font-size:14px\">Read the interview</span>",
                 "link": "https://card.email/read",
                 "backgroundColor": "#1F1712",
-                "color": "#FFFFFF",
-                "fontSize": 14,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

@@ -274,11 +274,9 @@
                       {
                         "id": "lWm1fpIg",
                         "type": "button",
-                        "text": "View jacket",
+                        "value": "<span style=\"color:#FFFFFF;font-size:15px\">View jacket</span>",
                         "link": "https://card.email/start",
                         "backgroundColor": "#FF6B00",
-                        "color": "#FFFFFF",
-                        "fontSize": 15,
                         "borderRadius": {
                           "topLeft": 10,
                           "topRight": 10,
@@ -506,11 +504,9 @@
                       {
                         "id": "MvSx77Ej",
                         "type": "button",
-                        "text": "View console",
+                        "value": "<span style=\"color:#FFFFFF;font-size:15px\">View console</span>",
                         "link": "https://card.email/start",
                         "backgroundColor": "#FF6B00",
-                        "color": "#FFFFFF",
-                        "fontSize": 15,
                         "borderRadius": {
                           "topLeft": 10,
                           "topRight": 10,
@@ -738,11 +734,9 @@
                       {
                         "id": "a8Payt2f",
                         "type": "button",
-                        "text": "View serum",
+                        "value": "<span style=\"color:#FFFFFF;font-size:15px\">View serum</span>",
                         "link": "https://card.email/start",
                         "backgroundColor": "#FF6B00",
-                        "color": "#FFFFFF",
-                        "fontSize": 15,
                         "borderRadius": {
                           "topLeft": 10,
                           "topRight": 10,

@@ -155,11 +155,9 @@
               {
                 "id": "LNx_EYfF",
                 "type": "button",
-                "text": "Choose this case",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Choose this case</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

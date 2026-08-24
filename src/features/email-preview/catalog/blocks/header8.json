@@ -117,11 +117,9 @@
               {
                 "id": "Um9lTZi3",
                 "type": "button",
-                "text": "Register",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Register</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#1F1712",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

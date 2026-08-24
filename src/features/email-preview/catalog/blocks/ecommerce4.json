@@ -202,11 +202,9 @@
               {
                 "id": "wFHjLpL6",
                 "type": "button",
-                "text": "Shop the pair",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Shop the pair</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,
@@ -330,11 +328,9 @@
               {
                 "id": "9RC_0NgS",
                 "type": "button",
-                "text": "Add the pack",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Add the pack</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#1F1712",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

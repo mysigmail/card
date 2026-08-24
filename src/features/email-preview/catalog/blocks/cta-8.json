@@ -74,11 +74,9 @@
               {
                 "id": "dpM9KlW0",
                 "type": "button",
-                "text": "Start free",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Start free</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,
@@ -121,11 +119,9 @@
               {
                 "id": "GglarEDw",
                 "type": "button",
-                "text": "Book a demo",
+                "value": "<span style=\"color:#1F1712;font-size:15px\">Book a demo</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FFF3E6",
-                "color": "#1F1712",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,

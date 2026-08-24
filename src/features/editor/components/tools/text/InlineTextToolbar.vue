@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Editor } from '@tiptap/vue-3'
+import type { InlineEditorProfile } from './text-editor-core'
 import {
   AlignCenter,
   AlignJustify,
@@ -37,6 +38,7 @@ interface Props {
   atomId: string
   editor: Editor
   revision: number
+  profile: InlineEditorProfile
 }
 
 defineOptions({ inheritAttrs: false })
@@ -202,7 +204,10 @@ function setLink(href: string) {
 }
 
 function clearFormatting() {
-  props.editor.chain().focus().unsetAllMarks().unsetTextAlign().clearNodes().run()
+  const chain = props.editor.chain().focus().unsetAllMarks()
+  if (props.profile === 'text')
+    chain.unsetTextAlign().clearNodes()
+  chain.run()
 }
 
 function setTextColor(color: string) {
@@ -279,71 +284,95 @@ function stringValue(value: unknown) {
     </Toggle>
 
     <Separator
+      v-if="profile === 'text'"
       orientation="vertical"
       class="mx-0.5 h-5"
     />
 
-    <Toggle
-      v-for="item in [
-        {
-          label: 'Align left',
-          active: editor.isActive({ textAlign: 'left' }),
-          icon: AlignLeft,
-          value: 'left',
-        },
-        {
-          label: 'Align center',
-          active: editor.isActive({ textAlign: 'center' }),
-          icon: AlignCenter,
-          value: 'center',
-        },
-        {
-          label: 'Align right',
-          active: editor.isActive({ textAlign: 'right' }),
-          icon: AlignRight,
-          value: 'right',
-        },
-        {
-          label: 'Justify',
-          active: editor.isActive({ textAlign: 'justify' }),
-          icon: AlignJustify,
-          value: 'justify',
-        },
-      ]"
-      :key="item.value"
-      variant="outline"
-      size="sm"
-      :model-value="item.active"
-      :aria-label="item.label"
-      :title="item.label"
-      @mousedown.prevent
-      @update:model-value="editor.chain().focus().setTextAlign(item.value).run()"
-    >
-      <component
-        :is="item.icon"
-        :size="14"
-      />
-    </Toggle>
+    <template v-if="profile === 'text'">
+      <Toggle
+        v-for="item in [
+          {
+            label: 'Align left',
+            active: editor.isActive({ textAlign: 'left' }),
+            icon: AlignLeft,
+            value: 'left',
+          },
+          {
+            label: 'Align center',
+            active: editor.isActive({ textAlign: 'center' }),
+            icon: AlignCenter,
+            value: 'center',
+          },
+          {
+            label: 'Align right',
+            active: editor.isActive({ textAlign: 'right' }),
+            icon: AlignRight,
+            value: 'right',
+          },
+          {
+            label: 'Justify',
+            active: editor.isActive({ textAlign: 'justify' }),
+            icon: AlignJustify,
+            value: 'justify',
+          },
+        ]"
+        :key="item.value"
+        variant="outline"
+        size="sm"
+        :model-value="item.active"
+        :aria-label="item.label"
+        :title="item.label"
+        @mousedown.prevent
+        @update:model-value="editor.chain().focus().setTextAlign(item.value).run()"
+      >
+        <component
+          :is="item.icon"
+          :size="14"
+        />
+      </Toggle>
+    </template>
 
     <Separator
+      v-if="profile === 'text'"
       orientation="vertical"
       class="mx-0.5 h-5"
     />
 
+    <template v-if="profile === 'text'">
+      <Toggle
+        v-for="item in [
+          {
+            label: 'Bullet list',
+            active: editor.isActive('bulletList'),
+            icon: List,
+            command: () => editor.chain().focus().toggleBulletList().run(),
+          },
+          {
+            label: 'Ordered list',
+            active: editor.isActive('orderedList'),
+            icon: ListOrdered,
+            command: () => editor.chain().focus().toggleOrderedList().run(),
+          },
+        ]"
+        :key="item.label"
+        variant="outline"
+        size="sm"
+        :model-value="item.active"
+        :aria-label="item.label"
+        :title="item.label"
+        @mousedown.prevent
+        @update:model-value="item.command()"
+      >
+        <component
+          :is="item.icon"
+          :size="14"
+        />
+      </Toggle>
+    </template>
+
     <Toggle
       v-for="item in [
-        {
-          label: 'Bullet list',
-          active: editor.isActive('bulletList'),
-          icon: List,
-          command: () => editor.chain().focus().toggleBulletList().run(),
-        },
-        {
-          label: 'Ordered list',
-          active: editor.isActive('orderedList'),
-          icon: ListOrdered,
-          command: () => editor.chain().focus().toggleOrderedList().run(),
-        },
         {
           label: 'Superscript',
           active: editor.isActive('superscript'),
@@ -372,7 +401,7 @@ function stringValue(value: unknown) {
       />
     </Toggle>
 
-    <Popover>
+    <Popover v-if="profile === 'text'">
       <PopoverTrigger as-child>
         <Button
           variant="outline"

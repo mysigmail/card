@@ -57,7 +57,7 @@ function collectAtomColors(output: Set<string>, atom: Atom) {
     collectTextColors(output, atom.value)
   if (atom.type === 'button') {
     addColor(output, atom.backgroundColor)
-    addColor(output, atom.color)
+    collectTextColors(output, atom.value)
   }
   if (atom.type === 'divider')
     addColor(output, atom.color)

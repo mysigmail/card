@@ -7,6 +7,7 @@ import {
   resolveBorderRadiusStyle,
   resolveOpacityStyle,
 } from '@/entities/style'
+import { sanitizeButtonEditorHtml } from '@/entities/template'
 import { resolveBorderStyle } from '@/features/email-preview/lib/resolve-border-style'
 import { renderTextAtomHtml } from '@/features/email-preview/lib/text-box'
 import EmailTextBox from '@/features/email-preview/ui/EmailTextBox.vue'
@@ -48,8 +49,6 @@ function buttonStyle(atom: Extract<Atom, { type: 'button' }>): CSSProperties {
 
   return {
     backgroundColor: atom.backgroundColor,
-    color: atom.color,
-    fontSize: `${atom.fontSize}px`,
     borderRadius: resolveBorderRadiusStyle(atom.borderRadius),
     ...(padding ? { padding } : {}),
     display: 'inline-block',
@@ -373,7 +372,7 @@ function atomWrapperClass(atom: Atom) {
               :href="child.link"
               :style="buttonStyle(child)"
             >
-              {{ child.text }}
+              <span v-html="sanitizeButtonEditorHtml(child.value) || '&nbsp;'" />
             </MButton>
           </div>
 

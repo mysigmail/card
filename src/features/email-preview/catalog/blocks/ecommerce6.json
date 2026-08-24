@@ -261,11 +261,9 @@
               {
                 "id": "amQc5NUe",
                 "type": "button",
-                "text": "Add the kit",
+                "value": "<span style=\"color:#FFFFFF;font-size:15px\">Add the kit</span>",
                 "link": "https://card.email/start",
                 "backgroundColor": "#FF6B00",
-                "color": "#FFFFFF",
-                "fontSize": 15,
                 "borderRadius": {
                   "topLeft": 10,
                   "topRight": 10,
