@@ -52,6 +52,13 @@ export const TREE_NODE_INDENT_PX = {
   level: 12,
 } as const
 
+export const TREE_INSERTION_LINE_MIN_LEFT_PX: Record<InsertionPath['type'], number> = {
+  block: 0,
+  row: TREE_NODE_INDENT_PX.root,
+  cell: TREE_NODE_INDENT_PX.root + TREE_NODE_INDENT_PX.level,
+  atom: TREE_NODE_INDENT_PX.root + TREE_NODE_INDENT_PX.level * 2,
+}
+
 interface TreeInsertTypeMeta {
   label: string
   icon: Component

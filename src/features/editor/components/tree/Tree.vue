@@ -37,13 +37,13 @@ const {
   activeInsertionPoint,
   allowedTypes,
   handleOpenChange,
+  insertionLineLeft,
   insertionLineTop,
   insertionLineVisible,
   resetInsertionState,
   setTreeHovering,
 } = useTreeInsertion({
   rootRef,
-  installed,
   sidebarActiveTab,
 })
 
@@ -128,6 +128,7 @@ function handleSelect(type: TreeInsertType) {
     <TreeInsertLine
       :visible="insertionLineVisible"
       :allowed-types="allowedTypes"
+      :left="insertionLineLeft"
       :style="{ top: `${insertionLineTop}px` }"
       @select="handleSelect"
       @open-change="handleOpenChange"

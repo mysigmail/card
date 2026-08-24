@@ -76,6 +76,11 @@ watch(
 <template>
   <div
     :data-cell-sortable-item="cellSortableItemId"
+    :data-cell-scope-id="`cell-scope:${cell.id}`"
+    :data-cell-scope-block-id="blockId"
+    :data-cell-scope-row-id="rowId"
+    :data-cell-scope-index="index"
+    :data-cell-scope-child-count="cell.children.length"
     :data-name="`Cell ${index + 1}`"
     class="pl-3"
   >
