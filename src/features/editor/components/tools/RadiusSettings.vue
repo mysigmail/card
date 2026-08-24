@@ -121,7 +121,7 @@ const UI_CORNER_ORDER: Array<keyof BorderRadiusValue> = [
 
     <div
       v-if="advanced"
-      class="grid grid-cols-2 gap-2 pt-1"
+      class="grid grid-cols-2 gap-2"
     >
       <div
         v-for="corner in UI_CORNER_ORDER"
