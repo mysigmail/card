@@ -125,6 +125,8 @@ function applyRename() {
 <template>
   <div
     data-slot="tree-block"
+    :data-block-scope-id="`block-scope:${block.id}`"
+    :data-block-scope-index="index"
     class="relative select-none"
     :class="
       selectedBlockId === block.id
@@ -218,6 +220,11 @@ function applyRename() {
         :index="rowIndex"
         top-level
       />
+      <div :data-block-scope-end-index="index" />
     </div>
+    <div
+      v-else
+      :data-block-scope-end-index="index"
+    />
   </div>
 </template>
