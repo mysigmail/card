@@ -489,7 +489,7 @@ function onInlineAtomKeydown(event: KeyboardEvent, atomId: string) {
               />
               <div
                 v-else
-                class="p-text-atom-content"
+                class="p-inline-editable-content p-text-atom-content"
                 data-selection-content
                 @dblclick.stop.prevent="startInlineEditing(row.id, cell.id, child.id, $event)"
                 v-html="renderTextAtomHtml(child) || '&nbsp;'"
@@ -526,6 +526,7 @@ function onInlineAtomKeydown(event: KeyboardEvent, atomId: string) {
                 />
                 <span
                   v-else
+                  class="p-inline-editable-content"
                   data-selection-content
                   @dblclick.stop.prevent="startInlineEditing(row.id, cell.id, child.id, $event)"
                   v-html="sanitizeButtonEditorHtml(child.value) || '&nbsp;'"

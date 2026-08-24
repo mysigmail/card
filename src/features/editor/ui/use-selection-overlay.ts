@@ -124,13 +124,6 @@ export function useSelectionOverlay(surfaceRef: Ref<HTMLElement | undefined>) {
     }
   })
 
-  const showInlineEditHint = computed(() => {
-    return (
-      selectionLevel.value === 'atom'
-      && (selectedAtom.value?.type === 'text' || selectedAtom.value?.type === 'button')
-    )
-  })
-
   const selectionOverlayStyle = computed<CSSProperties>(() => {
     return {
       top: `${selectionOverlay.top}px`,
@@ -282,6 +275,5 @@ export function useSelectionOverlay(surfaceRef: Ref<HTMLElement | undefined>) {
   return {
     selectionOverlay,
     selectionOverlayStyle,
-    showInlineEditHint,
   }
 }
