@@ -9,6 +9,7 @@ export {
 export * from './types'
 export { useCanvas } from './use-canvas'
 export { useColorPalettes } from './use-color-palettes'
+export { useExportSupportDialog } from './use-export-support-dialog'
 export { useHistory } from './use-history'
 export { usePersistence } from './use-persistence'
 export { useSelection } from './use-selection'

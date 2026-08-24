@@ -1,7 +1,13 @@
 import type { TemplateImportMode } from '@/entities/template'
 import { useEventListener } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
-import { useCanvas, useColorPalettes, useHistory, useTemplateIO } from '@/features/editor/model'
+import {
+  useCanvas,
+  useColorPalettes,
+  useExportSupportDialog,
+  useHistory,
+  useTemplateIO,
+} from '@/features/editor/model'
 
 function isTextInputElement(target: EventTarget | null) {
   if (!(target instanceof HTMLElement))
@@ -17,6 +23,7 @@ export function useHeaderActions() {
   const { exportTemplateHtml, exportTemplateJson, importTemplateFromJson } = useTemplateIO()
   const { templateImportIssues, clearCanvas, previewMode } = useCanvas()
   const { clearRecentColors } = useColorPalettes()
+  const { recordExportAndMaybeShowDialog } = useExportSupportDialog()
   const { canUndo, canRedo, undo, redo, resetHistory } = useHistory()
 
   const importDialogVisible = ref(false)
@@ -73,6 +80,7 @@ export function useHeaderActions() {
 
     importStatus.value = 'idle'
     importMessage.value = ''
+    recordExportAndMaybeShowDialog()
   }
 
   function exportTemplateHtmlToFile() {
@@ -91,6 +99,7 @@ export function useHeaderActions() {
 
     importStatus.value = 'idle'
     importMessage.value = ''
+    recordExportAndMaybeShowDialog()
   }
 
   function resetImportDialog() {

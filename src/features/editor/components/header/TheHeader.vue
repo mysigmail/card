@@ -14,6 +14,7 @@ import {
 import { Separator } from '@/shared/ui/separator'
 import { Switch } from '@/shared/ui/switch'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
+import ExportSupportDialog from './ExportSupportDialog.vue'
 import { useHeaderActions } from './use-header-actions'
 
 const {
@@ -287,4 +288,6 @@ const {
       </DialogFooter>
     </DialogContent>
   </Dialog>
+
+  <ExportSupportDialog />
 </template>
