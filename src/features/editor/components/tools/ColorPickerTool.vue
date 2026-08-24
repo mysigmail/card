@@ -94,6 +94,7 @@ function applyAlphaInput() {
     <EditorToolLabel>{{ title }}</EditorToolLabel>
     <div class="flex items-center gap-2">
       <ColorPicker
+        size="sm"
         :model-value="props.value"
         :presets="props.pressets"
         :show-reset="props.resetValue !== undefined"
@@ -105,6 +106,7 @@ function applyAlphaInput() {
       />
       <Input
         v-model="hexInput"
+        size="sm"
         class="min-w-0 flex-1 font-mono uppercase"
         aria-label="Quick hex color"
         autocomplete="off"
@@ -118,6 +120,7 @@ function applyAlphaInput() {
       <div class="relative w-[72px] shrink-0">
         <Input
           v-model="alphaInput"
+          size="sm"
           type="number"
           class="pr-6"
           aria-label="Quick color opacity"

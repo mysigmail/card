@@ -17,13 +17,10 @@ const fontOptions = [
 </script>
 
 <template>
-  <EditorPanelItem
-    data-slot="general-font-settings"
-    title="Font"
-    type="opened"
-  >
+  <div data-slot="general-font-settings">
+    <EditorToolLabel>Font</EditorToolLabel>
     <Select v-model="general.font">
-      <SelectTrigger>
+      <SelectTrigger size="sm">
         <SelectValue placeholder="Select font" />
       </SelectTrigger>
       <SelectContent>
@@ -36,5 +33,5 @@ const fontOptions = [
         </SelectItem>
       </SelectContent>
     </Select>
-  </EditorPanelItem>
+  </div>
 </template>
