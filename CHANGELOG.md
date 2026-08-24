@@ -1,3 +1,9 @@
+## 0.17.1 (2026-08-24)
+
+### Bug Fixes
+
+- **editor:** load Google Fonts outside Shadow DOM (#73) ([e6baf77](https://github.com/mysigmail/card/commit/e6baf777e171f7a226d9d4055e353968cef29ca0))
+
 ## 0.17.0 (2026-08-24)
 
 ### Features
