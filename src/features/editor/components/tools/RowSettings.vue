@@ -3,7 +3,7 @@ import type { InspectorControl } from './use-settings-tools'
 import { Switch } from '@/shared/ui/switch'
 
 interface Props {
-  spacingTools: InspectorControl[]
+  layoutTools: InspectorControl[]
   appearanceTools: InspectorControl[]
   hiddenOnMobile: boolean
   collapseOnMobile: boolean
@@ -19,38 +19,44 @@ const emit = defineEmits<{
 
 <template>
   <EditorPanel data-slot="row-settings">
+    <EditorInspectorHeader title="Row" />
     <EditorPanelItem
-      type="opened"
-      title="Row"
+      title="Layout"
+      state-key="row:layout"
+      default-open
     >
       <div class="space-y-3 pb-2">
-        <EditorComponentTools :tools="spacingTools" />
-
-        <div class="space-y-3">
-          <EditorToolLabel>View</EditorToolLabel>
-          <div class="flex gap-6 -mt-2">
-            <div>
-              <EditorToolLabel type="secondary">
-                Hide on Mobile
-              </EditorToolLabel>
-              <Switch
-                :model-value="hiddenOnMobile"
-                @update:model-value="(value) => emit('update:hiddenOnMobile', value)"
-              />
-            </div>
-            <div>
-              <EditorToolLabel type="secondary">
-                Collapse on Mobile
-              </EditorToolLabel>
-              <Switch
-                :model-value="collapseOnMobile"
-                @update:model-value="(value) => emit('update:collapseOnMobile', value)"
-              />
-            </div>
-          </div>
+        <InspectorLayoutTools :tools="layoutTools" />
+      </div>
+    </EditorPanelItem>
+    <EditorPanelItem
+      title="Appearance"
+      state-key="row:appearance"
+    >
+      <div class="space-y-3 pb-2">
+        <InspectorAppearanceTools :tools="appearanceTools" />
+      </div>
+    </EditorPanelItem>
+    <EditorPanelItem
+      title="Mobile"
+      state-key="row:mobile"
+      :summary="hiddenOnMobile ? 'Hidden' : collapseOnMobile ? 'Visible · Stacks' : 'Visible'"
+    >
+      <div class="flex gap-6 pb-2">
+        <div>
+          <EditorToolLabel> Hide on Mobile </EditorToolLabel>
+          <Switch
+            :model-value="hiddenOnMobile"
+            @update:model-value="(value) => emit('update:hiddenOnMobile', value)"
+          />
         </div>
-
-        <EditorComponentTools :tools="appearanceTools" />
+        <div>
+          <EditorToolLabel> Stack Columns </EditorToolLabel>
+          <Switch
+            :model-value="collapseOnMobile"
+            @update:model-value="(value) => emit('update:collapseOnMobile', value)"
+          />
+        </div>
       </div>
     </EditorPanelItem>
   </EditorPanel>

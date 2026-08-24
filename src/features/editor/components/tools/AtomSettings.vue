@@ -5,8 +5,9 @@ import { Switch } from '@/shared/ui/switch'
 
 interface Props {
   atom: Atom
-  spacingTools: InspectorControl[]
-  tools: InspectorControl[]
+  contentTools: InspectorControl[]
+  layoutTools: InspectorControl[]
+  appearanceTools: InspectorControl[]
   hiddenOnMobile: boolean
 }
 
@@ -17,32 +18,51 @@ const emit = defineEmits<{ (e: 'update:hiddenOnMobile', value: boolean): void }>
 
 <template>
   <EditorPanel data-slot="atom-settings">
+    <EditorInspectorHeader :title="atom.type.charAt(0).toUpperCase() + atom.type.slice(1)" />
     <EditorPanelItem
-      type="opened"
-      :title="atom.type.charAt(0).toUpperCase() + atom.type.slice(1)"
+      v-if="contentTools.length"
+      :key="`${atom.type}-content`"
+      title="Content"
+      :state-key="`${atom.type}:content`"
+      default-open
     >
       <div class="space-y-3 pb-2">
-        <EditorComponentTools
-          v-if="spacingTools.length"
-          :tools="spacingTools"
-        />
+        <EditorComponentTools :tools="contentTools" />
+      </div>
+    </EditorPanelItem>
 
-        <div class="space-y-3">
-          <EditorToolLabel>View</EditorToolLabel>
-          <div>
-            <EditorToolLabel type="secondary">
-              Hide on Mobile
-            </EditorToolLabel>
-            <Switch
-              :model-value="hiddenOnMobile"
-              @update:model-value="(value) => emit('update:hiddenOnMobile', value)"
-            />
-          </div>
-        </div>
-
-        <EditorComponentTools
-          v-if="tools.length"
-          :tools="tools"
+    <EditorPanelItem
+      v-if="layoutTools.length"
+      :key="`${atom.type}-layout`"
+      title="Layout"
+      :state-key="`${atom.type}:layout`"
+      :default-open="!contentTools.length"
+    >
+      <div class="space-y-3 pb-2">
+        <InspectorLayoutTools :tools="layoutTools" />
+      </div>
+    </EditorPanelItem>
+    <EditorPanelItem
+      v-if="appearanceTools.length"
+      :key="`${atom.type}-appearance`"
+      title="Appearance"
+      :state-key="`${atom.type}:appearance`"
+    >
+      <div class="space-y-3 pb-2">
+        <InspectorAppearanceTools :tools="appearanceTools" />
+      </div>
+    </EditorPanelItem>
+    <EditorPanelItem
+      :key="`${atom.type}-mobile`"
+      title="Mobile"
+      :state-key="`${atom.type}:mobile`"
+      :summary="hiddenOnMobile ? 'Hidden' : 'Visible'"
+    >
+      <div class="pb-2">
+        <EditorToolLabel> Hide on Mobile </EditorToolLabel>
+        <Switch
+          :model-value="hiddenOnMobile"
+          @update:model-value="(value) => emit('update:hiddenOnMobile', value)"
         />
       </div>
     </EditorPanelItem>

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { BorderSideValue, BorderStyle } from '@/entities/style'
+import { PanelTop } from 'lucide-vue-next'
 import { BORDER_STYLES, normalizeEmailColor } from '@/entities/style'
 import { useColorPalettes } from '@/features/editor/model'
 import { ColorPicker } from '@/shared/ui/color-picker'
-import { Input } from '@/shared/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
+import ScrubbableNumberField from './number/ScrubbableNumberField.vue'
 
 const props = defineProps<{
   id: string
@@ -36,33 +37,27 @@ function updateColor(value: string) {
 <template>
   <div
     data-slot="border-value-controls"
-    class="grid grid-cols-[72px_minmax(0,1fr)_auto] items-end gap-2"
+    class="grid grid-cols-3 items-end gap-2"
   >
-    <div>
-      <EditorToolLabel type="secondary">
-        Width
+    <div :class="allowZero && value.width === 0 ? 'pointer-events-none opacity-50' : ''">
+      <EditorToolLabel level="parameter">
+        Color
       </EditorToolLabel>
-      <div class="relative">
-        <Input
-          :id="`${id}-width`"
-          type="number"
-          :min="allowZero ? 0 : 1"
-          step="1"
-          class="pr-7"
-          :model-value="value.width"
-          aria-label="Border width"
-          @update:model-value="updateWidth"
-        />
-        <span
-          class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-xs text-muted-foreground"
-        >
-          px
-        </span>
-      </div>
+      <ColorPicker
+        class="w-full justify-between"
+        size="sm"
+        :model-value="value.color"
+        :show-reset="false"
+        :show-input="false"
+        :recent-colors="recentColors"
+        :document-colors="documentColors"
+        @commit="rememberColor"
+        @update:model-value="updateColor"
+      />
     </div>
 
     <div :class="allowZero && value.width === 0 ? 'pointer-events-none opacity-50' : ''">
-      <EditorToolLabel type="secondary">
+      <EditorToolLabel level="parameter">
         Style
       </EditorToolLabel>
       <Select
@@ -71,6 +66,7 @@ function updateColor(value: string) {
       >
         <SelectTrigger
           :id="`${id}-style`"
+          size="sm"
           class="w-full"
           aria-label="Border style"
         >
@@ -88,19 +84,23 @@ function updateColor(value: string) {
       </Select>
     </div>
 
-    <div :class="allowZero && value.width === 0 ? 'pointer-events-none opacity-50' : ''">
-      <EditorToolLabel type="secondary">
-        Color
+    <div>
+      <EditorToolLabel level="parameter">
+        Width
       </EditorToolLabel>
-      <ColorPicker
-        :model-value="value.color"
-        :show-reset="false"
-        :show-input="false"
-        :recent-colors="recentColors"
-        :document-colors="documentColors"
-        @commit="rememberColor"
-        @update:model-value="updateColor"
-      />
+      <ScrubbableNumberField
+        :model-value="value.width"
+        :default-value="1"
+        label="Border width"
+        :min="allowZero ? 0 : 1"
+        :max="9999"
+        :step="1"
+        @update:model-value="(width) => width !== undefined && updateWidth(width)"
+      >
+        <template #prefix>
+          <PanelTop />
+        </template>
+      </ScrubbableNumberField>
     </div>
   </div>
 </template>

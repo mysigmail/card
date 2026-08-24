@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import type { BorderRadiusValue } from '@/entities/style'
+import { Radius, Scan } from 'lucide-vue-next'
 import { computed, ref, watch } from 'vue'
 import { BORDER_RADIUS_CORNERS, createBorderRadiusValue } from '@/entities/style'
-import { Input } from '@/shared/ui/input'
-import { Switch } from '@/shared/ui/switch'
+import { Button } from '@/shared/ui/button'
+import ScrubbableNumberField from './number/ScrubbableNumberField.vue'
 
-const props = defineProps<{ id: string, title: string, value: BorderRadiusValue }>()
+const props = defineProps<{
+  compact?: boolean
+  id: string
+  title: string
+  value: BorderRadiusValue
+}>()
 const emit = defineEmits<{ (event: 'update:value', value: BorderRadiusValue): void }>()
 
 function hasIndependentCorners(value: BorderRadiusValue) {
@@ -14,6 +20,9 @@ function hasIndependentCorners(value: BorderRadiusValue) {
 
 const advanced = ref(hasIndependentCorners(props.value))
 const corners = computed(() => props.value)
+const unifiedValue = computed(() =>
+  hasIndependentCorners(props.value) ? 'mixed' : corners.value.topLeft,
+)
 
 watch(
   () => props.value,
@@ -31,16 +40,13 @@ function parseNonNegative(value: string | number) {
   return Number.isFinite(parsed) && parsed >= 0 ? parsed : undefined
 }
 
-function updateGlobal(value: string | number) {
-  const parsed = parseNonNegative(value)
-  if (parsed !== undefined)
-    emit('update:value', createBorderRadiusValue(parsed))
+function updateScrubbedGlobal(value: number | undefined) {
+  if (value !== undefined)
+    emit('update:value', createBorderRadiusValue(value))
 }
 
 function setAdvanced(value: boolean) {
   advanced.value = value
-  if (!value)
-    emit('update:value', createBorderRadiusValue(corners.value.topLeft))
 }
 
 function updateCorner(corner: keyof BorderRadiusValue, value: string | number) {
@@ -56,72 +62,85 @@ const CORNER_LABELS: Record<keyof BorderRadiusValue, string> = {
   bottomRight: 'Bottom right',
   bottomLeft: 'Bottom left',
 }
+
+const CORNER_SHORT_LABELS: Record<keyof BorderRadiusValue, string> = {
+  topLeft: 'TL',
+  topRight: 'TR',
+  bottomRight: 'BR',
+  bottomLeft: 'BL',
+}
+
+const UI_CORNER_ORDER: Array<keyof BorderRadiusValue> = [
+  'topLeft',
+  'topRight',
+  'bottomLeft',
+  'bottomRight',
+]
 </script>
 
 <template>
   <div
     data-slot="radius-settings"
-    class="space-y-3"
+    class="space-y-1"
+    :class="{ 'col-span-2': compact && advanced }"
   >
     <div class="flex items-center justify-between gap-3">
-      <EditorToolLabel>{{ title }}</EditorToolLabel>
-      <div class="ml-auto flex items-center gap-2">
-        <span class="text-xs text-muted-foreground">Advanced</span>
-        <Switch
-          :model-value="advanced"
-          aria-label="Advanced border radius corners"
-          @update:model-value="setAdvanced"
-        />
-      </div>
+      <EditorToolLabel>
+        {{ title }}
+      </EditorToolLabel>
+      <Button
+        variant="ghost"
+        size="icon-xs"
+        :aria-pressed="advanced"
+        aria-label="Use separate border radius corners"
+        :title="advanced ? 'Use one corner radius' : 'Use separate corner radii'"
+        @click="setAdvanced(!advanced)"
+      >
+        <Scan class="size-3.5" />
+      </Button>
     </div>
 
     <div
       v-if="!advanced"
       class="relative"
     >
-      <Input
-        :id="id"
-        type="number"
-        min="0"
-        :model-value="corners.topLeft"
-        class="pr-7"
-        aria-label="Border radius"
-        @update:model-value="updateGlobal"
-      />
-      <span
-        class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-xs text-muted-foreground"
+      <ScrubbableNumberField
+        :model-value="unifiedValue"
+        :default-value="0"
+        :label="title"
+        :min="0"
+        :max="9999"
+        :step="1"
+        @update:model-value="updateScrubbedGlobal"
       >
-        px
-      </span>
+        <template #prefix>
+          <Radius />
+        </template>
+      </ScrubbableNumberField>
     </div>
 
     <div
       v-if="advanced"
-      class="grid grid-cols-2 gap-2"
+      class="grid grid-cols-2 gap-2 pt-1"
     >
       <div
-        v-for="corner in BORDER_RADIUS_CORNERS"
+        v-for="corner in UI_CORNER_ORDER"
         :key="corner"
       >
-        <EditorToolLabel type="secondary">
-          {{ CORNER_LABELS[corner] }}
-        </EditorToolLabel>
-        <div class="relative">
-          <Input
-            :id="`${id}-${corner}`"
-            type="number"
-            min="0"
-            :model-value="corners[corner]"
-            class="pr-7"
-            :aria-label="`${CORNER_LABELS[corner]} border radius`"
-            @update:model-value="(value) => updateCorner(corner, value)"
-          />
-          <span
-            class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-xs text-muted-foreground"
-          >
-            px
-          </span>
-        </div>
+        <ScrubbableNumberField
+          :model-value="corners[corner]"
+          :default-value="0"
+          :label="`${CORNER_LABELS[corner]} border radius`"
+          :min="0"
+          :max="9999"
+          :step="1"
+          :precision="1"
+          @update:model-value="(value) => value !== undefined && updateCorner(corner, value)"
+        >
+          <template #prefix>
+            <span class="text-[9px] font-semibold">{{ CORNER_SHORT_LABELS[corner] }}</span>
+          </template>
+        </ScrubbableNumberField>
       </div>
     </div>
   </div>

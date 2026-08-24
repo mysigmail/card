@@ -8,16 +8,19 @@ import {
   AlignVerticalJustifyCenter,
   AlignVerticalJustifyEnd,
   AlignVerticalJustifyStart,
+  MoveHorizontal,
+  MoveVertical,
 } from 'lucide-vue-next'
-import { Input } from '@/shared/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select'
 import { Switch } from '@/shared/ui/switch'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
+import ScrubbableNumberField from './number/ScrubbableNumberField.vue'
 
 interface Props {
   cell: CellNode
-  spacingTools: InspectorControl[]
+  layoutTools: InspectorControl[]
   appearanceTools: InspectorControl[]
+  linkTools: InspectorControl[]
   widthMode: DimensionMode
   heightMode: DimensionMode
   hiddenOnMobile: boolean
@@ -38,33 +41,26 @@ const emit = defineEmits<{
 
 <template>
   <EditorPanel data-slot="cell-settings">
+    <EditorInspectorHeader title="Cell" />
     <EditorPanelItem
-      type="opened"
-      title="Cell"
+      title="Layout"
+      state-key="cell:layout"
+      default-open
     >
       <div class="space-y-3 pb-2">
-        <EditorComponentTools :tools="spacingTools" />
-        <div class="space-y-3">
-          <EditorToolLabel>View</EditorToolLabel>
-          <div>
-            <EditorToolLabel type="secondary">
-              Hide on Mobile
-            </EditorToolLabel>
-            <Switch
-              :model-value="hiddenOnMobile"
-              @update:model-value="(value) => emit('update:hiddenOnMobile', value)"
-            />
-          </div>
-        </div>
+        <InspectorLayoutTools :tools="layoutTools" />
 
-        <div class="grid grid-cols-[minmax(0,120px)_minmax(0,1fr)] gap-4">
-          <div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="space-y-2">
             <EditorToolLabel>Width</EditorToolLabel>
             <Select
               :model-value="widthMode"
               @update:model-value="(v) => emit('update:widthMode', String(v))"
             >
-              <SelectTrigger class="w-full">
+              <SelectTrigger
+                size="sm"
+                class="w-full"
+              >
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -76,27 +72,36 @@ const emit = defineEmits<{
                 </SelectItem>
               </SelectContent>
             </Select>
+            <template v-if="widthMode === 'manual'">
+              <EditorToolLabel level="parameter">
+                Width (%)
+              </EditorToolLabel>
+              <ScrubbableNumberField
+                :model-value="cell.settings.width"
+                :default-value="50"
+                label="Width (%)"
+                :min="1"
+                :max="100"
+                :step="1"
+                @update:model-value="(v) => v !== undefined && emit('update:width', v)"
+              >
+                <template #prefix>
+                  <MoveHorizontal />
+                </template>
+              </ScrubbableNumberField>
+            </template>
           </div>
-          <div>
-            <EditorToolLabel>Width (%)</EditorToolLabel>
-            <Input
-              type="number"
-              :disabled="widthMode !== 'manual'"
-              :placeholder="widthMode === 'manual' ? '50' : 'Auto'"
-              :model-value="cell.settings.width ?? ''"
-              @update:model-value="(v: string | number) => emit('update:width', v)"
-            />
-          </div>
-        </div>
 
-        <div class="grid grid-cols-[minmax(0,120px)_minmax(0,1fr)] gap-4">
-          <div>
+          <div class="space-y-2">
             <EditorToolLabel>Height</EditorToolLabel>
             <Select
               :model-value="heightMode"
               @update:model-value="(v) => emit('update:heightMode', String(v))"
             >
-              <SelectTrigger class="w-full">
+              <SelectTrigger
+                size="sm"
+                class="w-full"
+              >
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -108,16 +113,24 @@ const emit = defineEmits<{
                 </SelectItem>
               </SelectContent>
             </Select>
-          </div>
-          <div>
-            <EditorToolLabel>Height (px)</EditorToolLabel>
-            <Input
-              type="number"
-              :disabled="heightMode !== 'manual'"
-              :placeholder="heightMode === 'manual' ? '120' : 'Auto'"
-              :model-value="cell.settings.height ?? ''"
-              @update:model-value="(v: string | number) => emit('update:height', v)"
-            />
+            <template v-if="heightMode === 'manual'">
+              <EditorToolLabel level="parameter">
+                Height (px)
+              </EditorToolLabel>
+              <ScrubbableNumberField
+                :model-value="cell.settings.height"
+                :default-value="120"
+                label="Height (px)"
+                :min="1"
+                :max="9999"
+                :step="1"
+                @update:model-value="(v) => v !== undefined && emit('update:height', v)"
+              >
+                <template #prefix>
+                  <MoveVertical />
+                </template>
+              </ScrubbableNumberField>
+            </template>
           </div>
         </div>
 
@@ -185,8 +198,36 @@ const emit = defineEmits<{
             </ToggleGroup>
           </div>
         </div>
-
-        <EditorComponentTools :tools="appearanceTools" />
+      </div>
+    </EditorPanelItem>
+    <EditorPanelItem
+      title="Appearance"
+      state-key="cell:appearance"
+    >
+      <div class="space-y-3 pb-2">
+        <InspectorAppearanceTools :tools="appearanceTools" />
+      </div>
+    </EditorPanelItem>
+    <EditorPanelItem
+      v-if="linkTools.length"
+      title="Link"
+      state-key="cell:link"
+    >
+      <div class="space-y-3 pb-2">
+        <EditorComponentTools :tools="linkTools" />
+      </div>
+    </EditorPanelItem>
+    <EditorPanelItem
+      title="Mobile"
+      state-key="cell:mobile"
+      :summary="hiddenOnMobile ? 'Hidden' : 'Visible'"
+    >
+      <div class="pb-2">
+        <EditorToolLabel> Hide on Mobile </EditorToolLabel>
+        <Switch
+          :model-value="hiddenOnMobile"
+          @update:model-value="(value) => emit('update:hiddenOnMobile', value)"
+        />
       </div>
     </EditorPanelItem>
   </EditorPanel>

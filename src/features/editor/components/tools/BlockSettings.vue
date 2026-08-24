@@ -4,7 +4,8 @@ import type { BlockNode } from '@/entities/block'
 
 interface Props {
   block: BlockNode
-  tools: InspectorControl[]
+  layoutTools: InspectorControl[]
+  appearanceTools: InspectorControl[]
 }
 
 defineProps<Props>()
@@ -12,12 +13,22 @@ defineProps<Props>()
 
 <template>
   <EditorPanel data-slot="block-settings">
+    <EditorInspectorHeader :title="block.label || 'Block'" />
     <EditorPanelItem
-      type="opened"
-      :title="block.label || 'Block'"
+      title="Layout"
+      state-key="block:layout"
+      default-open
     >
       <div class="space-y-3 pb-2">
-        <EditorComponentTools :tools="tools" />
+        <InspectorLayoutTools :tools="layoutTools" />
+      </div>
+    </EditorPanelItem>
+    <EditorPanelItem
+      title="Appearance"
+      state-key="block:appearance"
+    >
+      <div class="space-y-3 pb-2">
+        <InspectorAppearanceTools :tools="appearanceTools" />
       </div>
     </EditorPanelItem>
   </EditorPanel>

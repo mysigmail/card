@@ -88,7 +88,12 @@ function update(tool: Tool | InspectorControl, value: unknown) {
         @update:value="(value) => update(i, value)"
       />
       <ImageTool
-        v-if="i.type === 'image' || i.type === 'bgImage'"
+        v-if="
+          i.type === 'image'
+            || i.type === 'bgImage'
+            || i.type === 'imageContent'
+            || i.type === 'imageDimensions'
+        "
         :id="i.id"
         :type="i.type"
         :title="i.label"

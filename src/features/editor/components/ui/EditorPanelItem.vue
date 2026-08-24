@@ -1,15 +1,20 @@
 <script setup lang="ts">
 import { ChevronRight, Trash2 } from 'lucide-vue-next'
-import { computed, inject, ref } from 'vue'
+import { computed, inject, toRef } from 'vue'
 import { Button } from '@/shared/ui/button'
+import { useInspectorSectionState } from './use-inspector-section-state'
 
 interface Props {
+  defaultOpen?: boolean
+  summary?: string
   title: string
   showActions?: boolean
+  stateKey?: string
   type?: 'collapsed' | 'opened'
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  defaultOpen: false,
   showActions: false,
   type: 'collapsed',
 })
@@ -22,7 +27,7 @@ interface Emits {
 
 const rootType = inject<'default' | 'bordered'>('type')
 
-const isOpen = ref(false)
+const isOpen = useInspectorSectionState(toRef(props, 'stateKey'), toRef(props, 'defaultOpen'))
 
 const isShow = computed(() => {
   if (props.type === 'collapsed')
@@ -32,6 +37,9 @@ const isShow = computed(() => {
 })
 
 function onOpen() {
+  if (props.type !== 'collapsed')
+    return
+
   isOpen.value = !isOpen.value
 }
 
@@ -50,12 +58,32 @@ function onClick(action: string) {
         : 'border-b border-border px-4'
     "
   >
-    <div
-      :data-type="type"
-      class="flex items-center cursor-pointer select-none pt-4 pb-1 data-[type=collapsed]:py-2"
-      @click="onOpen"
-    >
-      <div class="grow font-bold text-foreground uppercase">
+    <div class="flex items-center">
+      <button
+        v-if="type === 'collapsed'"
+        type="button"
+        class="flex min-w-0 grow cursor-pointer items-center py-3 text-left select-none"
+        :aria-expanded="isOpen"
+        @click="onOpen"
+      >
+        <span class="grow font-bold text-foreground uppercase">
+          {{ title }}
+        </span>
+        <span
+          v-if="summary && !isOpen"
+          class="mr-2 truncate text-xs font-normal text-muted-foreground normal-case"
+        >
+          {{ summary }}
+        </span>
+        <ChevronRight
+          class="size-4 shrink-0 text-muted-foreground transition-transform"
+          :class="{ 'rotate-90': isOpen }"
+        />
+      </button>
+      <div
+        v-else
+        class="min-w-0 grow pt-4 pb-1 font-bold text-foreground uppercase"
+      >
         {{ title }}
       </div>
       <div
@@ -70,11 +98,6 @@ function onClick(action: string) {
           <Trash2 class="size-4 text-muted-foreground hover:text-destructive" />
         </Button>
       </div>
-      <ChevronRight
-        v-if="type === 'collapsed'"
-        class="size-4 text-muted-foreground transition-transform"
-        :class="{ 'rotate-90': isOpen }"
-      />
     </div>
     <div
       v-if="isShow"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { BorderSideValue, BorderValue } from '@/entities/style'
-import { PanelBottom, PanelLeft, PanelRight, PanelTop } from 'lucide-vue-next'
+import { PanelBottom, PanelLeft, PanelRight, PanelTop, Scan } from 'lucide-vue-next'
 import { computed, ref, watch } from 'vue'
 import {
   BORDER_SIDES,
@@ -8,6 +8,7 @@ import {
   createDefaultBorderSide,
   normalizeBorderValue,
 } from '@/entities/style'
+import { Button } from '@/shared/ui/button'
 import { Switch } from '@/shared/ui/switch'
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group'
 
@@ -45,6 +46,7 @@ const selectedControlValue = computed<BorderSideValue>(
       width: 0,
     },
 )
+const mixed = computed(() => hasAdvancedConfiguration(props.value))
 
 watch(
   () => props.value,
@@ -75,12 +77,6 @@ function setEnabled(value: boolean) {
 
 function setAdvanced(value: boolean) {
   advanced.value = value
-  const fallback = selectedSideValue.value ?? representative.value
-  if (!value && fallback) {
-    const border: BorderValue = {}
-    for (const side of BORDER_SIDES) border[side] = { ...fallback }
-    emitBorder(border)
-  }
 }
 
 function isBorderSide(value: unknown): value is BorderSide {
@@ -132,9 +128,14 @@ const SIDE_ICONS = {
     data-slot="border-settings"
     class="space-y-3"
   >
-    <div class="flex items-center justify-between gap-3">
-      <EditorToolLabel>{{ title }}</EditorToolLabel>
+    <div class="flex items-center gap-2">
+      <div class="flex min-w-0 grow items-center gap-2">
+        <EditorToolLabel class="grow">
+          {{ title }}
+        </EditorToolLabel>
+      </div>
       <Switch
+        class="ml-2"
         :model-value="enabled"
         aria-label="Enable border"
         @update:model-value="setEnabled"
@@ -143,60 +144,74 @@ const SIDE_ICONS = {
 
     <div
       v-if="enabled"
-      class="flex items-center justify-between gap-3"
-    >
-      <span class="text-xs text-muted-foreground">Advanced</span>
-      <Switch
-        :model-value="advanced"
-        aria-label="Advanced border sides"
-        @update:model-value="setAdvanced"
-      />
-    </div>
-
-    <BorderValueControls
-      v-if="enabled && representative && !advanced"
-      :id="id"
-      :value="representative"
-      @update:value="updateGlobalValue"
-    />
-
-    <div
-      v-if="enabled && advanced"
       class="space-y-3"
     >
-      <EditorToolLabel type="secondary">
-        Side
-      </EditorToolLabel>
-      <ToggleGroup
-        type="single"
-        variant="outline"
-        size="sm"
-        :spacing="0"
-        class="w-full"
-        :model-value="selectedSide"
-        aria-label="Border side"
-        @update:model-value="setSelectedSide"
-      >
-        <ToggleGroupItem
-          v-for="side in BORDER_SIDES"
-          :key="side"
-          :value="side"
-          :aria-label="`Border ${side}`"
-          class="flex-1"
+      <div class="flex items-center justify-between gap-2">
+        <EditorToolLabel level="parameter">
+          {{ advanced ? 'Individual sides' : 'All sides' }}
+        </EditorToolLabel>
+        <Button
+          variant="ghost"
+          size="icon-xs"
+          :aria-pressed="advanced"
+          aria-label="Edit individual border sides"
+          :title="advanced ? 'Use one border style' : 'Edit individual border sides'"
+          @click="setAdvanced(!advanced)"
         >
-          <component
-            :is="SIDE_ICONS[side]"
-            class="size-4"
-          />
-        </ToggleGroupItem>
-      </ToggleGroup>
+          <Scan class="size-3.5" />
+        </Button>
+      </div>
 
       <BorderValueControls
-        :id="`${id}-${selectedSide}`"
-        :value="selectedControlValue"
-        allow-zero
-        @update:value="updateSelectedSideValue"
+        v-if="representative && !advanced && !mixed"
+        :id="id"
+        :value="representative"
+        @update:value="updateGlobalValue"
       />
+
+      <Button
+        v-if="!advanced && mixed"
+        variant="secondary"
+        size="sm"
+        class="w-full justify-between text-xs text-muted-foreground"
+        @click="setAdvanced(true)"
+      >
+        <span>Mixed sides</span>
+        <span>Edit sides</span>
+      </Button>
+
+      <template v-if="advanced">
+        <ToggleGroup
+          type="single"
+          variant="outline"
+          size="sm"
+          :spacing="0"
+          class="w-full"
+          :model-value="selectedSide"
+          aria-label="Border side"
+          @update:model-value="setSelectedSide"
+        >
+          <ToggleGroupItem
+            v-for="side in BORDER_SIDES"
+            :key="side"
+            :value="side"
+            :aria-label="`Border ${side}`"
+            class="flex-1"
+          >
+            <component
+              :is="SIDE_ICONS[side]"
+              class="size-4"
+            />
+          </ToggleGroupItem>
+        </ToggleGroup>
+
+        <BorderValueControls
+          :id="`${id}-${selectedSide}`"
+          :value="selectedControlValue"
+          allow-zero
+          @update:value="updateSelectedSideValue"
+        />
+      </template>
     </div>
   </div>
 </template>
