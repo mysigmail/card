@@ -3,7 +3,7 @@ import {
   formatScrubbableNumber,
   parseScrubbableNumber,
   scrubNumber,
-} from '@/features/editor/components/tools/text/scrubbable-number'
+} from '@/features/editor/components/tools/number/scrubbable-number'
 
 describe('scrubbable number field', () => {
   it('uses Auto for an unset value and parses localized numbers', () => {
