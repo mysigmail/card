@@ -123,8 +123,7 @@ a {
   z-index: 9;
 }
 
-.p-selection-overlay__label,
-.p-selection-overlay__hint {
+.p-selection-overlay__label {
   display: flex;
   align-items: center;
   background-color: var(--primary);
@@ -134,11 +133,6 @@ a {
   font-weight: 500;
   line-height: 1;
   padding: 4px 6px;
-  border-radius: 4px 4px 0 0;
-}
-
-.p-selection-overlay__hint {
-  background-color: color-mix(in srgb, var(--primary) 72%, white);
   border-radius: 4px 4px 0 0;
 }
 
@@ -155,6 +149,10 @@ a {
   cursor: text;
   outline: none;
   z-index: 10;
+}
+
+.p-inline-editable-content {
+  cursor: text;
 }
 
 .p-inline-text-editor__content--button {
