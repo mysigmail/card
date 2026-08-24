@@ -6,9 +6,11 @@ import TreeInsertMenu from '@/features/editor/components/tree/TreeInsertMenu.vue
 interface Props {
   visible?: boolean
   allowedTypes: TreeInsertType[]
+  left?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
+  left: 0,
   visible: false,
 })
 
@@ -46,9 +48,16 @@ function handleQuickInsert() {
 
 <template>
   <div
-    class="absolute left-0 right-0 z-10 -translate-y-1/2 transition-opacity duration-200"
+    data-slot="tree-insert-line"
+    class="group pointer-events-none absolute left-0 right-0 z-10 h-6 -translate-y-1/2 transition-opacity duration-200"
     :class="props.visible ? 'opacity-100' : 'opacity-0'"
   >
+    <span
+      v-if="props.allowedTypes.length"
+      class="absolute top-1/2 right-0 h-0.5 -translate-y-1/2 bg-primary/40 transition-[left,background-color] group-hover:bg-primary/60"
+      :style="{ left: `${props.left}px` }"
+    />
+
     <TreeInsertMenu
       v-if="props.allowedTypes.length && shouldOpenMenu"
       :allowed-types="props.allowedTypes"
@@ -57,19 +66,17 @@ function handleQuickInsert() {
     >
       <button
         type="button"
-        class="group flex h-6 w-full cursor-pointer items-center"
+        :aria-label="buttonLabel"
+        class="absolute inset-0 z-10 h-6 w-full cursor-pointer"
         :class="props.visible ? 'pointer-events-auto' : 'pointer-events-none'"
       >
         <span
-          class="h-0.5 min-w-2 flex-1 bg-primary/40 transition-colors group-hover:bg-primary/60"
+          class="absolute inset-x-0 top-0 h-1.5"
+          @mousemove.stop
         />
         <span
-          class="inline-flex h-6 items-center whitespace-nowrap rounded-full border border-primary/40 bg-background px-2 text-[10px] font-bold uppercase tracking-wider text-primary shadow-sm"
-        >
-          {{ buttonLabel }}
-        </span>
-        <span
-          class="h-0.5 min-w-2 flex-1 bg-primary/40 transition-colors group-hover:bg-primary/60"
+          class="absolute inset-x-0 bottom-0 h-1.5"
+          @mousemove.stop
         />
       </button>
     </TreeInsertMenu>
@@ -77,21 +84,27 @@ function handleQuickInsert() {
     <button
       v-else-if="props.allowedTypes.length"
       type="button"
-      class="group flex h-6 w-full cursor-pointer items-center"
+      :aria-label="buttonLabel"
+      class="absolute inset-0 z-10 h-6 w-full cursor-pointer"
       :class="props.visible ? 'pointer-events-auto' : 'pointer-events-none'"
       @click="handleQuickInsert"
     >
       <span
-        class="h-0.5 min-w-2 flex-1 bg-primary/40 transition-colors group-hover:bg-primary/60"
+        class="absolute inset-x-0 top-0 h-1.5"
+        @mousemove.stop
       />
       <span
-        class="inline-flex h-6 items-center whitespace-nowrap rounded-full border border-primary/40 bg-background px-2 text-[10px] font-bold uppercase tracking-wider text-primary shadow-sm"
-      >
-        {{ buttonLabel }}
-      </span>
-      <span
-        class="h-0.5 min-w-2 flex-1 bg-primary/40 transition-colors group-hover:bg-primary/60"
+        class="absolute inset-x-0 bottom-0 h-1.5"
+        @mousemove.stop
       />
     </button>
+
+    <span
+      v-if="props.allowedTypes.length"
+      aria-hidden="true"
+      class="pointer-events-none absolute top-1/2 left-1/2 z-20 inline-flex h-6 -translate-x-1/2 -translate-y-1/2 items-center whitespace-nowrap rounded-full border border-primary/40 bg-background px-2 text-[10px] font-bold uppercase tracking-wider text-primary shadow-sm"
+    >
+      {{ buttonLabel }}
+    </span>
   </div>
 </template>

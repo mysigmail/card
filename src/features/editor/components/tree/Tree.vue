@@ -37,6 +37,7 @@ const {
   activeInsertionPoint,
   allowedTypes,
   handleOpenChange,
+  insertionLineLeft,
   insertionLineTop,
   insertionLineVisible,
   resetInsertionState,
@@ -128,6 +129,7 @@ function handleSelect(type: TreeInsertType) {
     <TreeInsertLine
       :visible="insertionLineVisible"
       :allowed-types="allowedTypes"
+      :left="insertionLineLeft"
       :style="{ top: `${insertionLineTop}px` }"
       @select="handleSelect"
       @open-change="handleOpenChange"

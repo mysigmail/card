@@ -6,6 +6,7 @@ import {
   TREE_ATOM_SIBLING_CELL_X_OFFSET_PX,
   TREE_EMPTY_CELL_ATOM_X_OFFSET_PX,
   TREE_INSERTION_ACTIVATION_X,
+  TREE_INSERTION_LINE_MIN_LEFT_PX,
   TREE_INSERTION_POINT_PRIORITY,
   TREE_INSERTION_RADIUS_PX,
   TREE_INSERTION_Y_TIE_THRESHOLD_PX,
@@ -20,6 +21,7 @@ interface UseTreeInsertionOptions {
 export function useTreeInsertion(options: UseTreeInsertionOptions) {
   const insertionLineVisible = ref(false)
   const insertionLineTop = ref(0)
+  const insertionLineLeft = ref(0)
   const isHoveringTree = ref(false)
   const activeInsertionPoint = ref<InsertionPoint | null>(null)
   const isMenuOpen = ref(false)
@@ -279,6 +281,10 @@ export function useTreeInsertion(options: UseTreeInsertionOptions) {
 
     activeInsertionPoint.value = nearest
     insertionLineTop.value = nearest.top
+    insertionLineLeft.value = Math.max(
+      nearest.left,
+      TREE_INSERTION_LINE_MIN_LEFT_PX[nearest.path.type],
+    )
     insertionLineVisible.value = true
   }
 
@@ -295,6 +301,7 @@ export function useTreeInsertion(options: UseTreeInsertionOptions) {
     allowedTypes,
     handleOpenChange,
     insertionLineTop,
+    insertionLineLeft,
     insertionLineVisible,
     isHoveringTree,
     resetInsertionState,
