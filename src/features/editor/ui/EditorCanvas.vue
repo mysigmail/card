@@ -7,7 +7,8 @@ import { useInlineTextEditing } from '@/features/editor/components/tools/text/co
 import { useCanvas } from '@/features/editor/model'
 import { addGhost, BlockRenderer, removeGhost } from '@/features/email-preview'
 import { EMAIL_RESPONSIVE_CSS } from '@/features/email-preview/constants'
-import { createTemplateGoogleFontsCssImports } from '@/features/email-preview/lib/google-font-resources'
+import { getTemplateGoogleFontsCssUrls } from '@/features/email-preview/lib/google-font-resources'
+import { useGoogleFontStylesheets } from './use-google-font-stylesheets'
 import { useSelectionOverlay } from './use-selection-overlay'
 
 const { installed, isDragging, moveComponent, general, previewMode, isCanvasBlockInstance }
@@ -22,9 +23,11 @@ const { selectionOverlay, selectionOverlayStyle } = useSelectionOverlay(surfaceR
 const DESKTOP_TEMPLATE_WIDTH = 600
 const MOBILE_TEMPLATE_WIDTH = 375
 const HEAD_STYLE_TAG = 'style'
-const googleFontsCssImport = computed(() =>
-  createTemplateGoogleFontsCssImports(installed.value, general.font),
+const googleFontsCssUrls = computed(() =>
+  getTemplateGoogleFontsCssUrls(installed.value, general.font),
 )
+
+useGoogleFontStylesheets(googleFontsCssUrls)
 
 const containerStyle = computed<CSSProperties>(() => {
   return {
@@ -93,12 +96,6 @@ onMounted(() => {
     class="p-html"
   >
     <MHead>
-      <component
-        :is="HEAD_STYLE_TAG"
-        v-if="googleFontsCssImport"
-      >
-        {{ googleFontsCssImport }}
-      </component>
       <component :is="HEAD_STYLE_TAG">
         {{ EMAIL_RESPONSIVE_CSS }}
       </component>

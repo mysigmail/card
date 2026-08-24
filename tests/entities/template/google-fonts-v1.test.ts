@@ -2,7 +2,7 @@
 import type { CanvasBlockInstance } from '@/entities/template'
 import { render as renderEmailHtml } from '@mysigmail/vue-email-components'
 import { describe, expect, it, vi } from 'vitest'
-import { defineComponent, h } from 'vue'
+import { createApp, defineComponent, h, nextTick } from 'vue'
 import { createBlockNode } from '@/entities/block'
 import { parseTemplateExportJson, TEMPLATE_EXPORT_VERSION } from '@/entities/template'
 import { useCanvas, useTemplateIO } from '@/features/editor/model'
@@ -35,7 +35,7 @@ function render(font: string, components: CanvasBlockInstance[] = []) {
 }
 
 describe('google Fonts template v1 integration', () => {
-  it('renders a Google CSS import inside the Shadow DOM preview document', () => {
+  it('loads a Google stylesheet in the document head for the Shadow DOM preview', async () => {
     vi.stubGlobal(
       'ResizeObserver',
       class {
@@ -46,17 +46,27 @@ describe('google Fonts template v1 integration', () => {
     const canvas = useCanvas()
     const previousFont = canvas.general.font
     canvas.general.font = googleFontStack
-    const Root = defineComponent({ setup: () => () => h(EditorCanvas) })
+    const host = document.createElement('div')
+    document.body.append(host)
+    const app = createApp(EditorCanvas)
 
     try {
-      expect(renderEmailHtml(Root)).toContain(
-        '@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap");',
+      app.mount(host)
+      await nextTick()
+
+      const link = document.head.querySelector<HTMLLinkElement>('link[data-card-google-font]')
+      expect(link?.href).toBe(
+        'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap',
       )
     }
     finally {
+      app.unmount()
+      host.remove()
       canvas.general.font = previousFont
       vi.unstubAllGlobals()
     }
+
+    expect(document.head.querySelector('link[data-card-google-font]')).toBeNull()
   })
 
   it('exports a Google stylesheet resource while preserving the inline fallback stack', () => {
