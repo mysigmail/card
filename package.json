@@ -9,6 +9,7 @@
     "build": "vue-tsc --noEmit --skipLibCheck && vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "fonts:update": "node scripts/update-google-fonts.mjs",
     "lint": "vue-tsc --noEmit && eslint .",
     "lint:fix": "eslint . --fix",
     "release": "bumpy release",
